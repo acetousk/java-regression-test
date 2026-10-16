@@ -88,7 +88,7 @@ Observed theme resource counts:
 
 Approval covers these shipped UI seed differences only, not arbitrary future
 changes to the table, timestamps on shared rows, or unrelated templates.
-`approved-startup-differences.json` records the exact expected values/absence at
+`approved-differences.json` records the exact expected values/absence at
 17 resource keys. Both sides must match the reviewed values and multiplicities
 before a rule applies. Approved absent resources are exempt as whole rows,
 including their timestamps (which have no counterpart). Shared resource rows
@@ -119,7 +119,7 @@ are in `unapproved-schema.diff`.
 ### Approved differences: statistics timing
 
 User approval: “timing differing okay.” Only the explicitly listed fields in
-`statistics_timing` in `approved-startup-differences.json` are normalized in the
+`statistics_timing` in `approved-differences.json` are normalized in the
 comparison copy:
 
 - `public.artifact_hit_bin`: bin start/end, total/squared/min/max elapsed time,
@@ -133,8 +133,13 @@ Missing/malformed metrics do not qualify. Operation identities, ordinary hit
 counts, ids, host values, duplicate/missing rows, sequence states, unknown
 columns, and schema are still strict. This does not approve timing differences
 in any other table or whole missing/extra statistics bins/hits. Raw evidence
-remains unchanged. Timing-dependent bin splitting can still cause a strict
-failure; bins are not merged to manufacture matching counts.
+remains unchanged. User approval now also covers timing-dependent bin boundaries via
+`statistics_bin_boundaries`. After the existing exceptions and timing validation,
+split bins may be collapsed only when their aggregate hit
+counts and every other non-timing field (except bin id) match. Only id gaps caused
+by these removed bins are closed. Duplicate ids, malformed timing, changed total
+counts, operation/host changes, unrelated id changes, and sequence-state changes
+remain strict. Raw snapshots and byte differences remain unchanged.
 
 ### Persisted data differences still failing (historical first run)
 
@@ -340,7 +345,7 @@ Rust PR: https://github.com/moqui/mr-moqui/pull/16 (includes #11).
 
 ### Approved differences (user decisions)
 
-| Difference | Rule in `approved-startup-differences.json` | Treatment |
+| Difference | Rule in `approved-differences.json` | Treatment |
 | --- | --- | --- |
 | Rust FK existence reads before a write (Java leaves them to the database) | `rust_only_statistics` | Counted by Rust under sub type `fk-check` |
 | Rust load report Enumeration/UserGroupPermission counts | `rust_only_statistics` | Counted by Rust under sub type `load-report` |
@@ -406,10 +411,14 @@ Statistics are done (above). For the rest of the database:
    exception above; test search behavior separately.
 3. Align shared seed/configuration values without deleting Rust additions or
    copying one engine's database over the other.
-4. Implement coordinated deterministic time, entropy, and startup/shutdown
-   barriers in both engines. The current harness has none of these adapters;
-   ordinary independent wall-clock startups cannot produce identical timestamp,
-   ciphertext, generated-ID, and timing-statistics bytes.
+4. Deterministic transaction-clock adapters and a strict paired hook coordinator
+   now exist in isolated engine worktrees; see `DETERMINISTIC.md` and
+   `DETERMINISTIC-RESULTS.md`. The first cross-engine run assigned the same initial
+   timestamp, then correctly failed at event 2 on different startup operations.
+   Align transaction topology before claiming per-step database parity. Entropy
+   and arbitrary third-party clocks remain outside the adapter; ordinary
+   independent wall-clock startups cannot produce identical timestamp,
+   generated-ID, and timing-statistics bytes.
 5. Re-run fresh databases. Keep the strict gate failing until all differences are
    fixed or individually reviewed; merely labeling something Rust-only does not
    prove it was intentionally added or semantically equivalent.

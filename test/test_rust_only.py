@@ -7,11 +7,13 @@ import tempfile
 import unittest
 import xml.etree.ElementTree as ET
 
-from rust_only import filter_snapshots, source_records
 from test_java_regression import controller
 
+filter_snapshots = controller.filter_snapshots
+source_records = controller.source_records
 
-MANIFEST = Path(__file__).with_name("rust-only-sources.json")
+
+MANIFEST = controller.RUST_ONLY_SOURCES
 
 
 class RustOnlyTests(unittest.TestCase):
@@ -19,7 +21,7 @@ class RustOnlyTests(unittest.TestCase):
         self.tmp = tempfile.TemporaryDirectory()
         self.addCleanup(self.tmp.cleanup)
         self.root = Path(self.tmp.name)
-        self.manifest = json.loads(MANIFEST.read_text())
+        self.manifest = copy.deepcopy(MANIFEST)
         # Small source-tree fixtures, no initialized submodules or private runtime.
         basic = '<entities>'
         for name, fields in (("Enumeration", ("enumId", "enumTypeId", "description", "optionValue")),

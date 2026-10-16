@@ -1,4 +1,37 @@
 {
+  "rust_only_tables": [
+    "public.auth_flow",
+    "public.auth_flow_field_map",
+    "public.auth_flow_role_map",
+    "public.cluster_member",
+    "public.cluster_message",
+    "public.data_feed_pending",
+    "public.http_session",
+    "public.oauth_flow",
+    "public.oidc_flow",
+    "public.saml_flow",
+    "public.user_ssh_key",
+    "search.document_index",
+    "search.moqui_http_log",
+    "search.moqui_logs"
+  ],
+  "rust_only_columns": [
+    {"table": "public.data_document_field", "name": "search_role", "type": "character varying(63)"},
+    {"table": "public.data_document_field", "name": "search_weight", "type": "character(1)"},
+    {"table": "public.system_message_remote", "name": "ssh_host_key_fingerprint", "type": "text"}
+  ],
+  "rust_only_ddl": [
+    {"kind": "SCHEMA", "name": "search", "blocks": ["--\n-- Name: search; Type: SCHEMA; Schema: -; Owner: moqui\n--\n\nCREATE SCHEMA search;\n\n\nALTER SCHEMA search OWNER TO moqui;\n\n"]},
+    {"kind": "EXTENSION", "name": "pg_trgm", "blocks": ["--\n-- Name: pg_trgm; Type: EXTENSION; Schema: -; Owner: -\n--\n\nCREATE EXTENSION IF NOT EXISTS pg_trgm WITH SCHEMA public;\n\n\n", "--\n-- Name: EXTENSION pg_trgm; Type: COMMENT; Schema: -; Owner: \n--\n\nCOMMENT ON EXTENSION pg_trgm IS 'text similarity measurement and index searching based on trigrams';\n\n\n"]}
+  ],
+  "template_differences": [
+    {"table": "public.localized_message", "key": {"original": "StatusFlowTransitionNotFoundTemplate", "locale": "default"}, "field": "localized", "validator": "elvis_or", "java": "Status change not allowed from ${lookedUpStatusName?:lookedUpStatusId} to ${parameterStatusName?:parameterStatusId}"},
+    {"table": "public.localized_message", "key": {"original": "UomNameTemplate", "locale": "default"}, "field": "localized", "validator": "elvis_or", "java": "${description?:''} (${abbreviation?:uomId})"},
+    {"table": "public.localized_message", "key": {"original": "UsernameTemplate", "locale": "default"}, "field": "localized", "validator": "elvis_or", "java": "${userFullName ?: (lastName ? (firstName ? firstName + ' ' : '') + lastName : '')} [${username?:userId?:''}]"},
+    {"table": "public.notification_topic", "key": {"topic": "ServiceJobError"}, "field": "title_template", "validator": "elvis_or", "java": "Job Error ${serviceCallRun.jobName?:''} [${serviceCallRun.jobRunId?:''}] ${serviceCallRun.errors?:'N/A'}"},
+    {"table": "public.notification_topic", "key": {"topic": "WebServletError"}, "field": "title_template", "validator": "elvis_or", "java": "Web Error ${errorCode?:''} (${username?:'no user'}) ${path?:''} ${message?:'N/A'}"},
+    {"table": "public.notification_topic", "key": {"topic": "ServiceJobError"}, "field": "link_template", "java": "/vapps/system/ServiceJob/JobRuns/JobRunDetail?jobRunId=${serviceCallRun.jobRunId}", "rust": "/qapps/System/ServiceJob/JobRuns/JobRunDetail?jobRunId=${serviceCallRun.jobRunId}"}
+  ],
   "theme_resources": [
     {"theme": "DEFAULT", "sequence": 1, "java": ["STRT_STYLESHEET", null], "rust": ["STRT_STYLESHEET", "/libs/fontawesome/css/font-awesome.min.css"]},
     {"theme": "DEFAULT", "sequence": 2, "java": ["STRT_STYLESHEET", "/libs/font-awesome/css/font-awesome.min.css"], "rust": null},
@@ -18,6 +51,10 @@
     {"theme": "DEFAULT_QUASAR", "sequence": 3, "java": ["STRT_STYLESHEET", "https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons"], "rust": ["STRT_STYLESHEET", "/libs/material-icons/material-icons.css"]},
     {"theme": "DEFAULT_QUASAR", "sequence": 4, "java": ["STRT_STYLESHEET", "/libs/quasar/quasar.min.css"], "rust": ["STRT_STYLESHEET", "/libs/quasar/quasar.prod.css"]}
   ],
+  "statistics_bin_boundaries": {
+    "approved_by": "user",
+    "description": "Different time-based bin splits are okay when operation identities, host values, all other non-timing fields, and aggregate hit counts match. Collapse split bins in the comparison copy and close only the id gaps caused by those bins. Sequence states remain strict."
+  },
   "statistics_timing": [
     {"table": "public.artifact_hit_bin", "fields": ["bin_start_date_time", "bin_end_date_time", "total_time_millis", "total_squared_time", "min_time_millis", "max_time_millis", "slow_hit_count", "last_updated_stamp"]},
     {"table": "public.artifact_hit", "fields": ["start_date_time", "running_time_millis", "is_slow_hit", "last_updated_stamp"]}

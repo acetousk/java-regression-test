@@ -9,7 +9,7 @@ from test_java_regression import controller
 
 
 class SnapshotTests(unittest.TestCase):
-    def compare(self, left_rows, right_rows, left_schema="schema", right_schema="schema"):
+    def compare(self, left_rows, right_rows, left_schema="schema", right_schema="schema", **options):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             left, right = root / "left.json", root / "right.json"
@@ -17,7 +17,7 @@ class SnapshotTests(unittest.TestCase):
                 path.write_text(json.dumps({"schema": schema, "records": rows}))
             output = io.StringIO()
             with contextlib.redirect_stdout(output):
-                equal = controller.snapshot_compare(left, right, root)
+                equal = controller.snapshot_compare(left, right, root, **options)
             report = json.loads((root / "comparison.json").read_text())
             return equal, report, output.getvalue()
 

@@ -8,7 +8,7 @@ from unittest.mock import patch
 
 
 spec = importlib.util.spec_from_file_location(
-    "controller", Path(__file__).with_name("java-regression-test.py")
+    "controller", Path(__file__).resolve().parent.parent / "java-regression-test.py"
 )
 controller = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(controller)
@@ -46,6 +46,24 @@ class BuildTests(unittest.TestCase):
         self.assertNotEqual(manifest["java"]["runtime"], manifest["rust"]["runtime"])
         self.assertEqual(len(manifest["java"]["sha256"]), 64)
 
+    def test_explicit_worktrees_are_used_without_replacing_defaults(self):
+        from types import SimpleNamespace
+        directories = controller.engine_directories(SimpleNamespace(java_checkout=self.root / "java-worktree",
+                                                                   rust_checkout=self.root / "rust-worktree"))
+        for directory in directories.values():
+            (directory / "runtime/conf").mkdir(parents=True)
+            (directory / "runtime/conf/MoquiDevConf.xml").write_text("<moqui-conf/>")
+        with patch.object(controller.subprocess, "run", side_effect=self.fake_build) as run:
+            controller.build_engines(directories=directories)
+        self.assertEqual([call.kwargs["cwd"] for call in run.call_args_list], list(directories.values()))
+        self.assertEqual(controller.engine_directories()["java"], self.root / "moqui-framework")
+
+    def test_external_rust_target_directory_is_respected(self):
+        with patch.dict(controller.os.environ, {"CARGO_TARGET_DIR": "/test/rust-cache"}):
+            self.assertEqual(controller.rust_artifact(self.root / "rust"), Path("/test/rust-cache/debug/moqui"))
+        with patch.dict(controller.os.environ, {"CARGO_TARGET_DIR": "cache"}):
+            self.assertEqual(controller.rust_artifact(self.root / "rust"), self.root / "rust/cache/debug/moqui")
+
     def test_missing_artifact_fails(self):
         with patch.object(controller.subprocess, "run"), self.assertRaises(SystemExit):
             controller.build_engines()
@@ -59,6 +77,20 @@ class BuildTests(unittest.TestCase):
             with self.assertRaises(subprocess.CalledProcessError):
                 controller.build_engines()
         self.assertFalse(manifest.exists())
+
+
+class SnapshotCaptureTests(unittest.TestCase):
+    def test_capture_uses_read_only_transaction_and_bounded_schema_lock_wait(self):
+        with tempfile.TemporaryDirectory() as directory:
+            destination = Path(directory) / "snapshot.json"
+            with patch.object(controller.subprocess, "check_output", side_effect=["schema", '{"table":"t","row":{}}\n']) as run:
+                controller.capture_snapshot("isolated-test-container", destination)
+            self.assertIn("--lock-wait-timeout=5000", run.call_args_list[0].args[0])
+            self.assertIn("BEGIN ISOLATION LEVEL REPEATABLE READ READ ONLY", run.call_args.kwargs["input"])
+            self.assertIn("SET LOCAL statement_timeout = '10s'", run.call_args.kwargs["input"])
+            self.assertTrue(all(call.kwargs["timeout"] == 60 for call in run.call_args_list))
+            self.assertEqual(destination.stat().st_mode & 0o777, 0o600)
+            self.assertEqual(json.loads(destination.read_text())["schema"], "schema")
 
 
 class StartupTests(unittest.TestCase):

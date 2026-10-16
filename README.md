@@ -1,5 +1,10 @@
 # Java / Rust Moqui regression tests
 
+For the opt-in transaction-clock coordinator and worktree integration, see
+[Deterministic transaction comparison](DETERMINISTIC.md). This mode checks operation
+order and compares committed state after each paired transaction; it does not
+assume that the two startup transaction streams are already equivalent.
+
 ```text
 java-regression-test/
   java-regression-test.py
@@ -74,11 +79,15 @@ Differences fail the run and produce `comparison.json`, `schema.diff`, and
 empty tables), shared column/type/default/nullability differences, and unmatched
 row counts and differing column multisets per table. Column multisets are only
 diagnostics: equal column multisets do not imply equal rows. Rust-only does not
-mean approved. `approved-startup-differences.json` permits the exact reviewed
+mean approved. `approved-differences.json` permits the exact reviewed
 theme resource seeds, full-text storage designs, and explicitly listed statistics
 timing fields documented in `STARTUP-PARITY.md`. Statistics timing includes
 slow-hit classifications/counts, which depend on measured elapsed times; operation
-identities, hit counts, ids, host values, duplicate rows, and schema remain strict.
+identities, total hit counts, host values, duplicate rows, and schema remain strict.
+`statistics_bin_boundaries` also accepts different bin splits when the aggregate
+hit count and every non-timing field except the bin id match. Split bins are
+collapsed only in the comparison copy; only id gaps caused by removed bins are
+closed. Other id differences and sequence states remain strict.
 Missing indexes, changed source text, and unexpected resources still fail.
 Timestamps on shared theme rows and all other non-statistics rows remain compared.
 Resources explicitly approved as absent on one engine are exempt as whole rows
@@ -142,6 +151,29 @@ Override ports and timeout with:
 mise exec -- python java-regression-test.py --java-port 8080 --rust-port 8081 --boot-timeout 600 --shutdown-timeout 120
 ```
 
+Listed `rust_only_tables` are set aside with their rows, relation metadata, and
+owned table/index/constraint DDL only when absent from Java. Raw evidence remains;
+unlisted tables and shared columns are still compared.
+
+`rust_only_columns` approves the three listed Rust column definitions, including
+metadata and table DDL, only when absent from Java and nullable with no default.
+Non-null values are not discarded: they remain a comparison failure.
+`rust_only_ddl` approves only the exact `search` schema and `pg_trgm` extension
+creation/ownership/comment blocks. It does not approve other objects inside the
+schema, changed extension definitions, or objects also present in Java. All raw
+snapshots and raw differences remain intact.
+
+`template_differences` approves only the listed row keys and fields. Five reviewed
+expression templates use the bidirectional `elvis_or` validator: it tokenizes
+`${...}` expressions, converts Groovy `?:` to JavaScript `||` (and back), and
+requires both canonical token streams to match the pinned Java template. Quoted
+strings and literal text are preserved; expression whitespace is canonicalized.
+Unsupported syntax, changed operands/text, duplicate or missing rows, and
+unlisted templates remain strict. This is a bounded syntax validator, not a
+claim that Groovy and JavaScript truthiness are equivalent for arbitrary values.
+The listed job-detail URL uses an exact Java/Rust value pair instead. Approvals
+change only comparison copies; timestamps and all other fields stay strict.
+
 ### Optional Rust only comparison scope
 
 `--exclude-rust-only` enables the checked-in `rust-only-sources.json`; default
@@ -177,7 +209,7 @@ existing three positional comparator arguments:
 
 ```python
 snapshot_compare(java_snapshot, rust_snapshot, report_dir,
-                 rust_only_manifest=Path("rust-only-sources.json"),
+                 rust_only_manifest=controller.RUST_ONLY_SOURCES,
                  source_root=Path("/path/to/source-checkout-parent"))
 ```
 
@@ -189,13 +221,13 @@ filter. Unit tests build temporary source fixtures.
 
 Integration with the independent schema-mapping work: apply exclusions to raw
 snapshot dictionaries **before** any naming normalization, using
-`rust_only.filter_snapshots(java, rust, manifest_path, source_root)`; it returns
+`controller.filter_snapshots(java, rust, manifest, source_root)`; it returns
 `(java, filtered_rust, audit)`. Preserve `audit` in the combined report. Keep
 schema-mapping options independent; this change does not normalize schema or
 records and does not claim complete equivalence.
 
 Run controller unit tests with `mise run test` (or all tests with
-`python -m unittest discover -v`). End-to-end builds/startup have been exercised; see `STARTUP-PARITY.md` for the
+`python -m unittest discover -s test -v`). End-to-end builds/startup have been exercised; see `STARTUP-PARITY.md` for the
 remaining parity gaps.
 
 The parent Git submodule entries pin both framework commits. The Java framework's

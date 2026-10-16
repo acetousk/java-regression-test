@@ -12,4 +12,4 @@ run = "python java-regression-test.py"
 [tasks.test]
 description = "Run controller unit tests without building the engines"
 dir = "{{config_root}}"
-run = "python -m unittest discover -v"
+run = "python -m unittest discover -s test -v"

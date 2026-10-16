@@ -1,3 +1,4 @@
+from copy import deepcopy
 import json
 import unittest
 
@@ -7,7 +8,7 @@ from test_java_regression import controller
 
 class ApprovedDifferencesTests(unittest.TestCase):
     def setUp(self):
-        self.approved = json.loads((controller.ROOT / "approved-startup-differences.json").read_text())
+        self.approved = deepcopy(controller.APPROVED_STARTUP_DIFFERENCES)
 
     def theme(self, side, stamp="same"):
         rule = self.approved["theme_resources"][0]
@@ -64,6 +65,13 @@ class ApprovedDifferencesTests(unittest.TestCase):
                "slow_hit_count": offset}
         return {"table": table, "row": row}
 
+    def test_custom_differences_do_not_inherit_default_approvals(self):
+        equal, report, _ = test_database_compare.SnapshotTests().compare(
+            [json.dumps(self.statistic())], [json.dumps(self.statistic(offset=1))],
+            approved_differences={"theme_resources": [], "full_text_indexes": []})
+        self.assertFalse(equal)
+        self.assertEqual(report["approved_differences_applied"], [])
+
     def test_statistics_timing_passes_but_raw_evidence_remains(self):
         equal, report, _ = self.compare([self.statistic()], [self.statistic(offset=1)])
         self.assertTrue(equal)
@@ -81,6 +89,66 @@ class ApprovedDifferencesTests(unittest.TestCase):
                 self.assertFalse(self.compare([self.statistic()], [right])[0])
         self.assertFalse(self.compare([self.statistic()], [self.statistic()] * 2)[0])
         self.assertFalse(self.compare([self.statistic()], [])[0])
+
+    def split_statistics(self):
+        rows = [self.statistic(), self.statistic(offset=1)]
+        for index, item in enumerate(rows):
+            item["row"]["hit_bin_id"] = str(100000 + index)
+            item["row"]["hit_count"] = 1
+        return rows
+
+    def test_bin_splits_pass_and_keep_raw_evidence(self):
+        equal, report, _ = self.compare([self.statistic()], self.split_statistics())
+        self.assertTrue(equal)
+        self.assertFalse(report["row_and_sequence_values_equal"])
+        self.assertTrue(any(rule["kind"] == "statistics_bin_boundaries"
+                            for rule in report["approved_differences_applied"]))
+        self.assertTrue(self.compare(self.split_statistics(), [self.statistic()])[0])
+
+    def test_equal_bin_counts_with_different_partitions_pass(self):
+        left, right = self.split_statistics(), self.split_statistics()
+        left[0]["row"]["hit_count"] = 3
+        right[0]["row"]["hit_count"] = 2
+        right[1]["row"]["hit_count"] = 2
+        self.assertTrue(self.compare(left, right)[0])
+
+    def test_bin_splits_keep_sequence_states_strict(self):
+        def sequence(value):
+            return {"table": "public.sequence_value_item", "row": {
+                "seq_name": "moqui.server.ArtifactHitBin", "seq_num": value,
+                "last_updated_stamp": "same"}}
+        self.assertFalse(self.compare([self.statistic(), sequence(100100)],
+                                      self.split_statistics() + [sequence(100200)])[0])
+
+    def test_bin_splits_close_only_induced_id_gaps(self):
+        left_next, right_next = self.statistic(), self.statistic()
+        for item, identity in ((left_next, "100001"), (right_next, "100002")):
+            item["row"]["artifact_name"] = "other"
+            item["row"]["hit_bin_id"] = identity
+        self.assertTrue(self.compare([self.statistic(), left_next],
+                                     self.split_statistics() + [right_next])[0])
+        right_next["row"]["hit_bin_id"] = "100003"
+        self.assertFalse(self.compare([self.statistic(), left_next],
+                                      self.split_statistics() + [right_next])[0])
+
+    def test_bin_splits_do_not_hide_workload_host_or_invalid_data(self):
+        for field, value in (("hit_count", 2), ("server_host_name", "other"),
+                             ("artifact_name", "other"), ("unexpected_column", "anything"),
+                             ("hit_bin_id", "100000"), ("bin_end_date_time", "invalid"),
+                             ("slow_hit_count", 2)):
+            with self.subTest(field=field):
+                rows = self.split_statistics()
+                rows[1]["row"][field] = value
+                self.assertFalse(self.compare([self.statistic()], rows)[0])
+
+    def test_bin_splits_require_explicit_approval(self):
+        approved = deepcopy(self.approved)
+        approved.pop("statistics_bin_boundaries")
+        snapshots = [{"schema": "schema", "records": [json.dumps(row) for row in rows]}
+                     for rows in ([self.statistic()], self.split_statistics())]
+        normalized, applied = controller.apply_approved_differences(*snapshots, approved)
+        self.assertFalse(controller.statistics_equal(normalized))
+        self.assertFalse(any(rule["kind"] == "statistics_bin_boundaries" for rule in applied))
 
     def test_statistics_missing_or_invalid_timing_metrics_still_fail(self):
         for field, value in (("total_time_millis", -1), ("slow_hit_count", 3),
