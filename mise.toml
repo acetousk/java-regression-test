@@ -1,0 +1,15 @@
+[tools]
+java = "temurin-21.0.12+101.0.LTS"
+python = "3.14"
+rust = "1.94.0"
+
+# Gradle is supplied by moqui-framework/gradlew; Python uses only the stdlib.
+[tasks.build]
+description = "Initialize, build, and compare both engines after empty-database boot"
+dir = "{{config_root}}"
+run = "python java-regression-test.py"
+
+[tasks.test]
+description = "Run controller unit tests without building the engines"
+dir = "{{config_root}}"
+run = "python -m unittest discover -v"
