@@ -126,7 +126,7 @@ def wait_for_ports(processes, ports, timeout, boot_logs=None):
             time.sleep(0.1)
 
 
-def snapshot_compare(left, right, report_dir):
+def snapshot_compare(left, right, report_dir, *, rust_only_manifest=None, source_root=None):
     """Compare complete captured row multisets, retaining duplicate rows."""
     def canonical(value):
         if isinstance(value, dict):
@@ -142,6 +142,12 @@ def snapshot_compare(left, right, report_dir):
         return [type(value).__name__, value]
 
     java, rust = (json.loads(path.read_text()) for path in (left, right))
+    exclusions = None
+    if rust_only_manifest is not None:
+        from rust_only import filter_snapshots
+        java, rust, exclusions = filter_snapshots(
+            java, rust, rust_only_manifest, ROOT if source_root is None else source_root,
+        )
     rows = []
     for snapshot in (java, rust):
         rows.append(Counter(json.dumps(canonical(json.loads(
@@ -182,6 +188,8 @@ def snapshot_compare(left, right, report_dir):
         "rust_only_records": list((rust_rows - java_rows).elements()),
         "complete_logical_equivalence_verified": False,
     }
+    if exclusions is not None:
+        report["rust_only_exclusions"] = exclusions
     (report_dir / "comparison.json").write_text(json.dumps(report, indent=2) + "\n")
     (report_dir / "schema.diff").write_text("".join(difflib.unified_diff(
         java["schema"].splitlines(keepends=True), rust["schema"].splitlines(keepends=True),
@@ -351,7 +359,10 @@ COMMIT;
                     destination.touch(mode=0o600)
                     destination.write_text(json.dumps({"schema": schema, "records": records}, indent=2) + "\n")
                 if not snapshot_compare(evidence / "java-snapshot.json",
-                                        evidence / "rust-snapshot.json", evidence):
+                                        evidence / "rust-snapshot.json", evidence,
+                                        rust_only_manifest=(ROOT / "rust-only-sources.json"
+                                                            if args.exclude_rust_only else None),
+                                        source_root=args.source_root):
                     raise SystemExit(f"Startup snapshots differ; inspect {evidence / 'comparison.json'}")
                 print("Startup snapshots match (not a complete logical-equivalence proof).", flush=True)
         finally:
@@ -373,6 +384,10 @@ def main():
     parser.add_argument("--boot-timeout", type=float, default=600)
     parser.add_argument("--keep-databases", action="store_true",
                         help="Keep PostgreSQL containers after application shutdown for inspection")
+    parser.add_argument("--exclude-rust-only", action="store_true",
+                        help="Exclude manifest-classified Rust only rows during comparison, not capture")
+    parser.add_argument("--source-root", type=Path, default=ROOT,
+                        help="Parent of mr-moqui source checkout for Rust only source attribution")
     args = parser.parse_args()
     if args.java_port == args.rust_port or not all(1 <= p <= 65535 for p in (args.java_port, args.rust_port)):
         parser.error("Java and Rust need distinct valid HTTP ports")

@@ -97,6 +97,58 @@ Override ports and timeout with:
 mise exec -- python java-regression-test.py --java-port 8080 --rust-port 8081 --boot-timeout 600
 ```
 
+### Optional Rust only comparison scope
+
+`--exclude-rust-only` enables the checked-in `rust-only-sources.json`; default
+comparison is unchanged. Capture, runtime files, Java logging, and schema dumps
+are never modified. Schema differences (including operational DDL) still fail;
+this feature excludes **rows only**, not schema objects or sequences.
+
+Source-file exclusions resolve the five SFTP demo records (including nested job
+parameters) and the four named authentication enum groups from Rust XML plus
+entity PK metadata. There are 33 distinct Enumeration PKs and four types, but
+34 Enumeration source occurrences: `OctGoogle` occurs in both OAuth and OIDC.
+That source collision is retained, not silently assigned to either group.
+Only a single Rust row with the exact source values and all unset fields null
+can be excluded. Empty XML attributes load as null; only loader-generated
+`lastUpdatedStamp` is disregarded for seed matching. Edited rows, extra values,
+duplicate PKs, and keys present in Java remain visible. The manifest's narrow
+Java physical-PK guards detect shared keys without schema normalization.
+
+Explicit **operational** exclusions instead remove all Rust rows in precisely
+`search.moqui_logs`, `search.moqui_http_log`, and `search.document_index`.
+The manifest cites their Rust implementation. The last table is index registry
+metadata, including business-index metadata, not the documents themselves.
+Other search tables, artifact hits, cluster membership, and shared themes are
+not excluded. No PostgreSQL search logging is added to Java.
+
+`comparison.json` includes `rust_only_exclusions`: exact raw record/index,
+source entity/PK/values and XML locator (or operational table/reason), source and
+manifest SHA-256s, exclusion counts, and reasons for retaining seed candidates.
+Raw snapshots are unchanged; audit reports contain sensitive row values too.
+
+For offline integration, optional **keyword-only** arguments preserve the
+existing three positional comparator arguments:
+
+```python
+snapshot_compare(java_snapshot, rust_snapshot, report_dir,
+                 rust_only_manifest=Path("rust-only-sources.json"),
+                 source_root=Path("/path/to/source-checkout-parent"))
+```
+
+`source_root` defaults to this harness directory and must contain `mr-moqui/`.
+CLI equivalent: `--exclude-rust-only --source-root /path/to/source-checkout-parent`.
+Missing source files or unexpected source counts fail clearly; there is no
+implicit fallback to another worktree and no submodule initialization by the
+filter. Unit tests build temporary source fixtures.
+
+Integration with the independent schema-mapping work: apply exclusions to raw
+snapshot dictionaries **before** any naming normalization, using
+`rust_only.filter_snapshots(java, rust, manifest_path, source_root)`; it returns
+`(java, filtered_rust, audit)`. Preserve `audit` in the combined report. Keep
+schema-mapping options independent; this change does not normalize schema or
+records and does not claim complete equivalence.
+
 Run controller unit tests with `mise run test` (or all tests with
 `python -m unittest discover -v`). End-to-end startup has not yet been
 verified.
