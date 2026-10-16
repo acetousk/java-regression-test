@@ -14,6 +14,7 @@ import hashlib
 import json
 import os
 from pathlib import Path
+import re
 import secrets
 import signal
 import socket
@@ -22,6 +23,8 @@ import time
 import urllib.request
 import uuid
 import xml.etree.ElementTree as ET
+
+from startup_exceptions import apply_approved_differences
 
 
 ROOT = Path(__file__).resolve().parent
@@ -70,8 +73,8 @@ def build_engines(java_home=None):
     print(f"Both engines built; artifact/runtime paths recorded in {manifest}")
 
 
-def demo_conf(source, destination, db_port, password, http_port):
-    """Preserve each engine's dev/demo settings, overriding only test connectivity."""
+def demo_conf(source, destination, db_port, password, http_port, crypt_pass):
+    """Preserve dev/demo settings, overriding test connectivity and the shared test key."""
     tree = ET.parse(source)
     root = tree.getroot()
     properties = {
@@ -82,6 +85,7 @@ def demo_conf(source, destination, db_port, password, http_port):
         "entity_ds_schema": "public",
         "entity_ds_user": "moqui",
         "entity_ds_password": password,
+        "entity_ds_crypt_pass": crypt_pass,
         "entity_ds_sslmode": "disable",
         "entity_empty_db_load": "all",
         "webapp_http_port": str(http_port),
@@ -100,7 +104,7 @@ def demo_conf(source, destination, db_port, password, http_port):
 
 
 def wait_for_ports(processes, ports, timeout, boot_logs=None):
-    """Wait for demo loading to complete and both HTTP ports to listen."""
+    """Wait for completed application initialization and both HTTP ports to listen."""
     waiting = set(processes)
     deadline = time.monotonic() + timeout
     while waiting:
@@ -109,9 +113,14 @@ def wait_for_ports(processes, ports, timeout, boot_logs=None):
             if process.poll() is not None:
                 raise RuntimeError(f"{name} exited before readiness; see its boot log")
             if boot_logs:
-                marker = ("records (with types from empty-db-load:" if name == "java"
-                          else "Table check and empty-db load finished")
-                if marker not in boot_logs[name].read_text(errors="replace"):
+                markers = (("records (with types from empty-db-load:", "Moqui Framework initialized in")
+                           if name == "java" else
+                           ("Table check and empty-db load finished", "Listening for HTTP on"))
+                text = boot_logs[name].read_text(errors="replace")
+                if not all(marker in text for marker in markers):
+                    continue
+                # MoquiStart initializes the webapp before registering Jetty's shutdown hook.
+                if name == "java" and not re.search(r"Started (?:oejs\.)?Server@", text):
                     continue
             try:
                 with socket.create_connection(("127.0.0.1", ports[name]), timeout=0.2):
@@ -126,28 +135,166 @@ def wait_for_ports(processes, ports, timeout, boot_logs=None):
             time.sleep(0.1)
 
 
+def stop_engines(processes, boot_logs, timeout):
+    """Signal both engines first; verify only shutdown evidence written after SIGTERM."""
+    offsets = {name: path.stat().st_size for name, path in boot_logs.items()}
+    report = {}
+    deadline = time.monotonic() + timeout
+    for name, process in processes.items():
+        report[name] = {"forced_kill": False, "errors": []}
+        if process.poll() is not None:
+            report[name]["errors"].append("Engine exited before shutdown was requested")
+            continue
+        try:
+            os.killpg(process.pid, signal.SIGTERM)
+        except ProcessLookupError:
+            pass
+    for name, process in processes.items():
+        result = report[name]
+        try:
+            process.wait(timeout=max(0, deadline - time.monotonic()))
+        except subprocess.TimeoutExpired:
+            result["forced_kill"] = True
+            result["errors"].append("Graceful shutdown timed out; SIGKILL required")
+            try:
+                os.killpg(process.pid, signal.SIGKILL)
+            except ProcessLookupError:
+                pass
+            process.wait()
+        result["returncode"] = process.returncode
+        allowed_codes = (0, 128 + signal.SIGTERM, -signal.SIGTERM) if name == "java" else (0,)
+        if process.returncode not in allowed_codes:
+            result["errors"].append(f"Unexpected exit code: {process.returncode}")
+        with boot_logs[name].open("rb") as stream:
+            stream.seek(offsets[name])
+            text = stream.read().decode("utf-8", errors="replace")
+        markers = (("ArtifactHitBins stored", "Moqui ExecutionContextFactory Destroyed")
+                   if name == "java" else ("ArtifactHitBins stored",))
+        result["missing_shutdown_markers"] = [marker for marker in markers if marker not in text]
+        if result["missing_shutdown_markers"]:
+            result["errors"].append("Missing post-SIGTERM flush/completion evidence")
+    return report
+
+
+def canonical(value):
+    if isinstance(value, dict):
+        return ["object", [[key, canonical(item)] for key, item in sorted(value.items())]]
+    if isinstance(value, list):
+        return ["array", [canonical(item) for item in value]]
+    if isinstance(value, Decimal):
+        # normalize() can round large values under the default Decimal context.
+        number = format(value, "f")
+        if "." in number:
+            number = number.rstrip("0").rstrip(".")
+        return ["number", "0" if value == 0 else number]
+    return [type(value).__name__, value]
+
+
+def startup_summary(java, rust):
+    """Diagnostic inventory only: Rust-only objects are reported, never excluded."""
+    relations, tables = [], []
+    for snapshot in (java, rust):
+        inventory, rows = {}, {}
+        for record in snapshot["records"]:
+            item = json.loads(record, parse_int=Decimal, parse_float=Decimal)
+            if "relation" in item:
+                inventory[item["relation"]] = item
+            if "table" in item and "row" in item:
+                rows.setdefault(item["table"], []).append(item["row"])
+        relations.append(inventory)
+        tables.append(rows)
+
+    def counts(values):
+        return Counter(json.dumps(canonical(value), separators=(",", ":")) for value in values)
+
+    differing_tables = {}
+    for table in sorted(tables[0].keys() | tables[1].keys()):
+        left, right = (side.get(table, []) for side in tables)
+        left_counts, right_counts = counts(left), counts(right)
+        if left_counts == right_counts:
+            continue
+        columns = sorted(set().union(*(row.keys() for row in left + right)))
+        differing_tables[table] = {
+            "java_rows": len(left), "rust_rows": len(right),
+            "java_unmatched_rows": sum((left_counts - right_counts).values()),
+            "rust_unmatched_rows": sum((right_counts - left_counts).values()),
+            # Column multisets locate likely causes; they do not establish row equality.
+            "differing_column_multisets": [column for column in columns if
+                counts([column in row, row.get(column)] for row in left) !=
+                counts([column in row, row.get(column)] for row in right)],
+        }
+    # Diagnostics only: compare each operation's bin hit-count multiset without
+    # timing/sequence-id noise. Do not sum bins: that would conceal duplicates.
+    bin_groups = []
+    identity = ("artifact_type", "artifact_sub_type", "artifact_name")
+    for side in tables:
+        groups = {}
+        for row in side.get("public.artifact_hit_bin", []):
+            key = tuple(row.get(field) for field in identity)
+            groups.setdefault(key, []).append(str(row.get("hit_count")))
+        bin_groups.append({key: sorted(values) for key, values in groups.items()})
+    operation_differences = [
+        {**dict(zip(identity, key)), "java_hit_counts": bin_groups[0].get(key, []),
+         "rust_hit_counts": bin_groups[1].get(key, [])}
+        for key in sorted(bin_groups[0].keys() | bin_groups[1].keys(), key=repr)
+        if bin_groups[0].get(key, []) != bin_groups[1].get(key, [])
+    ]
+    return {
+        "artifact_bin_operations": {
+            "diagnostic_only": True,
+            "operation_bin_multisets_equal": not operation_differences,
+            "java_bins": sum(len(values) for values in bin_groups[0].values()),
+            "rust_bins": sum(len(values) for values in bin_groups[1].values()),
+            "differing_operations": operation_differences,
+        },
+        "relation_inventory_available": bool(relations[0]) and bool(relations[1]),
+        "java_only_relations": sorted(relations[0].keys() - relations[1].keys()),
+        "rust_only_relations": sorted(relations[1].keys() - relations[0].keys()),
+        "shared_relation_differences": {
+            name: {"java": relations[0][name], "rust": relations[1][name]}
+            for name in sorted(relations[0].keys() & relations[1].keys())
+            if relations[0][name] != relations[1][name]
+        },
+        "differing_tables": differing_tables,
+        "differences_excluded": False,
+    }
+
+
+STATISTICS_TABLES = ("public.artifact_hit_bin", "public.artifact_hit")
+
+
+def statistics_equal(normalized):
+    """The artifact statistics alone, after approved differences: every hit and bin row, and the hit bin
+    sequence position. Timestamps of other tables do not decide this verdict; the full gate still does."""
+    def rows(snapshot):
+        selected = []
+        for record in snapshot["records"]:
+            table, row = record.get("table"), record.get("row")
+            if table in STATISTICS_TABLES:
+                selected.append(record)
+            elif table == "public.sequence_value_item" and row.get("seq_name") in (
+                    "moqui.server.ArtifactHit", "moqui.server.ArtifactHitBin"):
+                selected.append({"table": table, "row": {"seq_name": row["seq_name"], "seq_num": row.get("seq_num")}})
+        return Counter(json.dumps(canonical(record), separators=(",", ":")) for record in selected)
+    return rows(normalized[0]) == rows(normalized[1])
+
+
 def snapshot_compare(left, right, report_dir):
     """Compare complete captured row multisets, retaining duplicate rows."""
-    def canonical(value):
-        if isinstance(value, dict):
-            return ["object", [[key, canonical(item)] for key, item in sorted(value.items())]]
-        if isinstance(value, list):
-            return ["array", [canonical(item) for item in value]]
-        if isinstance(value, Decimal):
-            # normalize() can round large values under the default Decimal context.
-            number = format(value, "f")
-            if "." in number:
-                number = number.rstrip("0").rstrip(".")
-            return ["number", "0" if value == 0 else number]
-        return [type(value).__name__, value]
-
     java, rust = (json.loads(path.read_text()) for path in (left, right))
+    (report_dir / "summary.json").write_text(json.dumps(startup_summary(java, rust), indent=2) + "\n")
     rows = []
     for snapshot in (java, rust):
         rows.append(Counter(json.dumps(canonical(json.loads(
             record, parse_int=Decimal, parse_float=Decimal,
         )), ensure_ascii=True, separators=(",", ":")) for record in snapshot["records"]))
     java_rows, rust_rows = rows
+    approved = json.loads((ROOT / "approved-startup-differences.json").read_text())
+    normalized, applied = apply_approved_differences(java, rust, approved)
+    accepted_rows = [Counter(json.dumps(canonical(record), ensure_ascii=True, separators=(",", ":"))
+                             for record in snapshot["records"]) for snapshot in normalized]
+    accepted_schema_equal = normalized[0]["schema"] == normalized[1]["schema"]
+    equal = accepted_schema_equal and accepted_rows[0] == accepted_rows[1]
     schema_equal = java["schema"] == rust["schema"]
     java_schema, rust_schema = (snapshot["schema"].encode("utf-8") for snapshot in (java, rust))
     schema_bytes = []
@@ -176,6 +323,17 @@ def snapshot_compare(left, right, report_dir):
             for side, differences in (("java", java_rows - rust_rows), ("rust", rust_rows - java_rows))
             for record, count in sorted(differences.items())
         ],
+        "approved_differences_applied": applied,
+        "unapproved_record_byte_differences": [
+            {"side": side, "count": count, "hex": record.encode("utf-8").hex()}
+            for side, differences in (("java", accepted_rows[0] - accepted_rows[1]),
+                                      ("rust", accepted_rows[1] - accepted_rows[0]))
+            for record, count in sorted(differences.items())
+        ],
+        "schema_equal_after_approved_differences": accepted_schema_equal,
+        "records_equal_after_approved_differences": accepted_rows[0] == accepted_rows[1],
+        "statistics_equal_after_approved_differences": statistics_equal(normalized),
+        "comparison_passed": equal,
         "schema_dump_equal": schema_equal,
         "row_and_sequence_values_equal": java_rows == rust_rows,
         "java_only_records": list((java_rows - rust_rows).elements()),
@@ -187,7 +345,10 @@ def snapshot_compare(left, right, report_dir):
         java["schema"].splitlines(keepends=True), rust["schema"].splitlines(keepends=True),
         fromfile="java-schema", tofile="rust-schema",
     )))
-    equal = schema_equal and java_rows == rust_rows
+    (report_dir / "unapproved-schema.diff").write_text("".join(difflib.unified_diff(
+        normalized[0]["schema"].splitlines(keepends=True), normalized[1]["schema"].splitlines(keepends=True),
+        fromfile="java-schema-after-approved-differences", tofile="rust-schema-after-approved-differences",
+    )))
     if not equal:
         print(json.dumps(report, indent=2), flush=True)
     return equal
@@ -211,6 +372,7 @@ def boot_and_stop(args):
     containers, processes, logs = {}, {}, []
     started = False
     password = secrets.token_hex(24)
+    crypt_pass = secrets.token_hex(32)
     environment = os.environ.copy()
     if args.java_home:
         environment["JAVA_HOME"] = str(Path(args.java_home).resolve())
@@ -256,7 +418,7 @@ def boot_and_stop(args):
                 raise RuntimeError(f"{name} database is not empty")
             runtime = ROOT / checkout / "runtime"
             conf = evidence / f"{name}-demo.xml"
-            demo_conf(runtime / "conf/MoquiDevConf.xml", conf, db_port, password, ports[name])
+            demo_conf(runtime / "conf/MoquiDevConf.xml", conf, db_port, password, ports[name], crypt_pass)
 
         if (evidence / "java-postgres-image.txt").read_bytes() != (evidence / "rust-postgres-image.txt").read_bytes():
             raise RuntimeError("PostgreSQL containers resolved to different image IDs")
@@ -296,22 +458,17 @@ def boot_and_stop(args):
         started = True
         print("Both engines started; stopping both processes.", flush=True)
     finally:
-        for process in processes.values():
-            if process.poll() is None:
-                try:
-                    os.killpg(process.pid, signal.SIGTERM)
-                    try:
-                        process.wait(timeout=15)
-                    except subprocess.TimeoutExpired:
-                        os.killpg(process.pid, signal.SIGKILL)
-                        process.wait()
-                except ProcessLookupError:
-                    process.wait()
+        shutdown = stop_engines(processes, {name: evidence / f"{name}-boot.log" for name in processes},
+                                args.shutdown_timeout)
         for log in logs:
             log.close()
+        (evidence / "shutdown.json").write_text(json.dumps(shutdown, indent=2) + "\n")
         try:
             if started:
-                # Step 4: Snapshot and compare only after both application processes stop.
+                if any(result["errors"] for result in shutdown.values()):
+                    raise RuntimeError(f"Graceful shutdown verification failed; inspect {evidence / 'shutdown.json'}")
+                print("Both engines shut down gracefully and flushed artifact bins.", flush=True)
+                # Step 4: Snapshot and compare only after verified graceful shutdown.
                 for name, container in containers.items():
                     # The stopped applications must be the only database writers.
                     # Schema capture is separate; sequences are not MVCC data.
@@ -325,6 +482,17 @@ SET LOCAL timezone = 'UTC';
 SET LOCAL datestyle = 'ISO, YMD';
 SET LOCAL intervalstyle = 'postgres';
 SET LOCAL extra_float_digits = 3;
+SELECT json_build_object(
+  'relation', n.nspname || '.' || c.relname, 'kind', c.relkind,
+  'columns', (SELECT json_agg(json_build_object(
+    'name', a.attname, 'type', format_type(a.atttypid, a.atttypmod),
+    'not_null', a.attnotnull, 'default', pg_get_expr(d.adbin, d.adrelid)) ORDER BY a.attnum)
+    FROM pg_attribute a LEFT JOIN pg_attrdef d ON d.adrelid=a.attrelid AND d.adnum=a.attnum
+    WHERE a.attrelid=c.oid AND a.attnum > 0 AND NOT a.attisdropped))
+FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace
+WHERE c.relkind IN ('r', 'p', 'm', 'v', 'f') AND n.nspname !~ '^pg_'
+  AND n.nspname <> 'information_schema'
+ORDER BY n.nspname, c.relname;
 SELECT format(
   'SELECT json_build_object(''table'', %L, ''row'', row_to_json(t)) FROM ONLY %I.%I t',
   n.nspname || '.' || c.relname, n.nspname, c.relname)
@@ -353,7 +521,7 @@ COMMIT;
                 if not snapshot_compare(evidence / "java-snapshot.json",
                                         evidence / "rust-snapshot.json", evidence):
                     raise SystemExit(f"Startup snapshots differ; inspect {evidence / 'comparison.json'}")
-                print("Startup snapshots match (not a complete logical-equivalence proof).", flush=True)
+                print("Startup snapshots match after approved differences (not a complete logical-equivalence proof).", flush=True)
         finally:
             for name, container in containers.items():
                 with (evidence / f"{name}-postgres.log").open("wb") as log:
@@ -371,13 +539,15 @@ def main():
     parser.add_argument("--java-port", type=int, default=8080)
     parser.add_argument("--rust-port", type=int, default=8081)
     parser.add_argument("--boot-timeout", type=float, default=600)
+    parser.add_argument("--shutdown-timeout", type=float, default=120,
+                        help="Seconds allowed for graceful shutdown and statistics flush (default: 120)")
     parser.add_argument("--keep-databases", action="store_true",
                         help="Keep PostgreSQL containers after application shutdown for inspection")
     args = parser.parse_args()
     if args.java_port == args.rust_port or not all(1 <= p <= 65535 for p in (args.java_port, args.rust_port)):
         parser.error("Java and Rust need distinct valid HTTP ports")
-    if args.boot_timeout <= 0:
-        parser.error("--boot-timeout must be positive")
+    if args.boot_timeout <= 0 or args.shutdown_timeout <= 0:
+        parser.error("--boot-timeout and --shutdown-timeout must be positive")
 
     # Step 1: Initialize the pinned framework submodules and Java's private runtime.
     git("-C", ROOT, "submodule", "update", "--init", "--recursive", "--", *REPOSITORIES)

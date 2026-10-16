@@ -68,13 +68,14 @@ class StartupTests(unittest.TestCase):
             destination = Path(directory) / "demo.xml"
             source.write_text('<moqui-conf><default-property name="entity_ds_db_conf" value="mysql8"/>'
                               '<cache-list warm-on-start="false"/></moqui-conf>')
-            controller.demo_conf(source, destination, 55432, "test-only-password", 8081)
+            controller.demo_conf(source, destination, 55432, "test-only-password", 8081, "test-only-key")
             root = controller.ET.parse(destination).getroot()
             values = {n.get("name"): n.get("value") for n in root.findall("default-property")}
             self.assertEqual(values["entity_ds_db_conf"], "postgres")
             self.assertEqual(values["entity_ds_port"], "55432")
             self.assertEqual(values["entity_empty_db_load"], "all")
             self.assertEqual(values["webapp_http_port"], "8081")
+            self.assertEqual(values["entity_ds_crypt_pass"], "test-only-key")
             self.assertIsNotNone(root.find("cache-list"))
             self.assertEqual(destination.stat().st_mode & 0o777, 0o600)
 
@@ -93,6 +94,72 @@ class StartupTests(unittest.TestCase):
         with patch.object(controller.socket, "create_connection"), patch.object(controller.os, "killpg") as kill:
             controller.wait_for_ports(processes, {"java": 8080, "rust": 8081}, 1)
         kill.assert_not_called()
+
+    def test_readiness_waits_for_completed_initialization_not_only_seed_load(self):
+        from unittest.mock import Mock
+        process = Mock(pid=123)
+        process.poll.return_value = None
+        log = Mock()
+        log.read_text.side_effect = [
+            "Loaded records (with types from empty-db-load: all)",
+            "Loaded records (with types from empty-db-load: all)\nMoqui Framework initialized in 1 seconds",
+            "Loaded records (with types from empty-db-load: all)\nMoqui Framework initialized in 1 seconds\n"
+            "Started oejs.Server@123{STARTING}",
+        ]
+        with patch.object(controller.socket, "create_connection") as connect, \
+                patch.object(controller.time, "sleep") as sleep:
+            controller.wait_for_ports({"java": process}, {"java": 8080}, 10, {"java": log})
+        self.assertEqual(sleep.call_count, 2)
+        connect.assert_called_once()
+
+    def test_shutdown_signals_both_before_waiting_and_verifies_new_flush_evidence(self):
+        from unittest.mock import Mock
+        with tempfile.TemporaryDirectory() as directory:
+            logs = {name: Path(directory) / name for name in ("java", "rust")}
+            processes = {name: Mock(pid=pid, returncode=code)
+                         for name, pid, code in (("java", 123, 143), ("rust", 456, 0))}
+            events = []
+            for name, process in processes.items():
+                logs[name].write_text("startup\n")
+                process.poll.return_value = None
+                process.wait.side_effect = lambda **kwargs: events.append("wait")
+            def signal_group(pid, signal):
+                events.append(pid)
+                name = "java" if pid == 123 else "rust"
+                with logs[name].open("a") as log:
+                    log.write("ArtifactHitBins stored\n")
+                    if name == "java":
+                        log.write("Moqui ExecutionContextFactory Destroyed\n")
+            with patch.object(controller.os, "killpg", side_effect=signal_group):
+                report = controller.stop_engines(processes, logs, 120)
+            self.assertEqual(events[:2], [123, 456])
+            self.assertTrue(all(not result["errors"] for result in report.values()))
+
+    def test_shutdown_does_not_accept_factory_restart_flush_as_final_shutdown(self):
+        from unittest.mock import Mock
+        with tempfile.TemporaryDirectory() as directory:
+            log = Path(directory) / "java.log"
+            log.write_text("ArtifactHitBins stored\nMoqui ExecutionContextFactory Destroyed\n")
+            process = Mock(pid=123, returncode=143)
+            process.poll.return_value = None
+            with patch.object(controller.os, "killpg"):
+                result = controller.stop_engines({"java": process}, {"java": log}, 120)["java"]
+            self.assertTrue(result["errors"])
+            self.assertEqual(len(result["missing_shutdown_markers"]), 2)
+
+    def test_forced_shutdown_fails_verification(self):
+        from unittest.mock import Mock
+        with tempfile.TemporaryDirectory() as directory:
+            log = Path(directory) / "rust.log"
+            log.write_text("")
+            process = Mock(pid=123, returncode=-9)
+            process.poll.return_value = None
+            process.wait.side_effect = [subprocess.TimeoutExpired("rust", 120), None]
+            with patch.object(controller.os, "killpg") as kill:
+                result = controller.stop_engines({"rust": process}, {"rust": log}, 120)["rust"]
+            self.assertTrue(result["forced_kill"])
+            self.assertTrue(result["errors"])
+            self.assertEqual(kill.call_args_list[-1].args, (123, controller.signal.SIGKILL))
 
     def test_readiness_timeout_fails(self):
         from unittest.mock import Mock
