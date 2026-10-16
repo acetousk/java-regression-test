@@ -23,6 +23,8 @@ import urllib.request
 import uuid
 import xml.etree.ElementTree as ET
 
+from schema_mapping import MappingCollision, NameMapping
+
 
 ROOT = Path(__file__).resolve().parent
 REPOSITORIES = ("moqui-framework", "mr-moqui")
@@ -142,12 +144,23 @@ def snapshot_compare(left, right, report_dir):
         return [type(value).__name__, value]
 
     java, rust = (json.loads(path.read_text()) for path in (left, right))
-    rows = []
-    for snapshot in (java, rust):
-        rows.append(Counter(json.dumps(canonical(json.loads(
-            record, parse_int=Decimal, parse_float=Decimal,
-        )), ensure_ascii=True, separators=(",", ":")) for record in snapshot["records"]))
+    def encoded(record):
+        return json.dumps(canonical(record), ensure_ascii=True, separators=(",", ":"))
+
+    rows, logical_rows, logical_schemas, mapping_errors = [], [], [], {}
+    for side, snapshot in (("java", java), ("rust", rust)):
+        records = [json.loads(record, parse_int=Decimal, parse_float=Decimal)
+                   for record in snapshot["records"]]
+        rows.append(Counter(encoded(record) for record in records))
+        mapping = NameMapping()  # Separate collision registries for each database.
+        try:
+            logical_schemas.append(mapping.schema(snapshot["schema"]))
+            logical_rows.append(Counter(encoded(mapping.record(record)) for record in records))
+        except MappingCollision as error:
+            mapping_errors[side] = str(error)
     java_rows, rust_rows = rows
+    logical_schema_equal = not mapping_errors and logical_schemas[0] == logical_schemas[1]
+    logical_rows_equal = not mapping_errors and logical_rows[0] == logical_rows[1]
     schema_equal = java["schema"] == rust["schema"]
     java_schema, rust_schema = (snapshot["schema"].encode("utf-8") for snapshot in (java, rust))
     schema_bytes = []
@@ -169,13 +182,25 @@ def snapshot_compare(left, right, report_dir):
             })
             start = None
     report = {
-        "byte_encoding": "UTF-8 schema text and canonical JSON records; hex is exact",
+        "byte_encoding": "Physical UTF-8 schema text and canonical JSON records; hex is exact",
         "schema_byte_differences": schema_bytes,
         "record_byte_differences": [
             {"side": side, "count": count, "hex": record.encode("utf-8").hex()}
             for side, differences in (("java", java_rows - rust_rows), ("rust", rust_rows - java_rows))
             for record, count in sorted(differences.items())
         ],
+        "physical_equal": schema_equal and java_rows == rust_rows,
+        "logical_comparison": {
+            "scope": "Conservative entity/field naming only; not complete database equivalence",
+            "schema_equal": logical_schema_equal,
+            "row_and_sequence_values_equal": logical_rows_equal,
+            "equal": logical_schema_equal and logical_rows_equal,
+            "mapping_errors": mapping_errors,
+            "java_only_records": (list((logical_rows[0] - logical_rows[1]).elements())
+                                  if not mapping_errors else None),
+            "rust_only_records": (list((logical_rows[1] - logical_rows[0]).elements())
+                                  if not mapping_errors else None),
+        },
         "schema_dump_equal": schema_equal,
         "row_and_sequence_values_equal": java_rows == rust_rows,
         "java_only_records": list((java_rows - rust_rows).elements()),
@@ -187,7 +212,15 @@ def snapshot_compare(left, right, report_dir):
         java["schema"].splitlines(keepends=True), rust["schema"].splitlines(keepends=True),
         fromfile="java-schema", tofile="rust-schema",
     )))
-    equal = schema_equal and java_rows == rust_rows
+    (report_dir / "logical-schema.diff").write_text(
+        "Mapping failed: " + json.dumps(mapping_errors) + "\n" if mapping_errors else
+        "".join(difflib.unified_diff(
+            [json.dumps(statement) + "\n" for statement in logical_schemas[0]],
+            [json.dumps(statement) + "\n" for statement in logical_schemas[1]],
+            fromfile="java-logical-schema", tofile="rust-logical-schema",
+        ))
+    )
+    equal = logical_schema_equal and logical_rows_equal
     if not equal:
         print(json.dumps(report, indent=2), flush=True)
     return equal
@@ -353,7 +386,8 @@ COMMIT;
                 if not snapshot_compare(evidence / "java-snapshot.json",
                                         evidence / "rust-snapshot.json", evidence):
                     raise SystemExit(f"Startup snapshots differ; inspect {evidence / 'comparison.json'}")
-                print("Startup snapshots match (not a complete logical-equivalence proof).", flush=True)
+                print("Startup snapshots match under conservative name mapping; see comparison.json "
+                      "for physical outcomes (not a complete logical-equivalence proof).", flush=True)
         finally:
             for name, container in containers.items():
                 with (evidence / f"{name}-postgres.log").open("wb") as log:

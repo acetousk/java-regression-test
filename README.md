@@ -58,15 +58,34 @@ rows, and sequence states. Rows use a typed JSON representation with exact numer
 precision and sorted object keys; comparison ignores row order but preserves
 duplicates. Row reads use a read-only repeatable-read transaction. Schema capture
 and sequence reads require idle databases: sequences are not MVCC-snapshot data.
-Differences fail the run and produce `comparison.json` and `schema.diff`.
-The complete comparison report is also printed on failure: every differing schema
+Logical differences fail the run and produce `comparison.json`, physical
+`schema.diff`, and `logical-schema.diff` (normalized token statements).
+The comparator maps simple entity/field identifiers using Java's underscore
+convention: `public.user_account.user_id` matches Rust's quoted
+`public."UserAccount"."userId"`. Each database has its own collision registry;
+ambiguous many-to-one mappings fail closed. Schema namespaces, nested JSON/data
+values, sequence names/state, and constraint names are not renamed. No rows or
+extra tables are excluded, including source-data or runtime-write differences.
+
+Mapping supports pg_dump's simple CREATE TABLE, ALTER TABLE OWNER, and separate
+PRIMARY/FOREIGN KEY/UNIQUE constraints. It changes identifier tokens only, never
+SQL expressions or strings. Unsupported DDL remains physical and may still fail;
+this is deliberately conservative. Comments/whitespace are ignored, and consecutive
+supported DDL statements are sorted; unsupported statements remain ordering barriers.
+`logical_comparison` reports the scoped logical outcome used for pass/fail;
+`physical_equal`, the existing top-level equality/byte/record fields, original
+snapshots, and `schema.diff` retain physical evidence even when logical comparison
+passes. This does not verify complete database equivalence.
+
+The complete comparison report is also printed on failure: every differing physical schema
 byte range includes both byte offsets and exact hex bytes, and every unmatched
 canonical row/sequence record includes exact UTF-8 hex bytes and its multiplicity.
 Nothing is truncated. These are comparison-encoding bytes, not storage-page bytes.
 Failure output contains database values; treat terminal/CI logs as sensitive.
 
 This is an initial snapshot comparator, **not the complete equivalence tool in the
-plan**. Schema dumps are compared textually; custom-type canonicalization, large
+plan**. Schema comparison only handles the conservative naming subset above;
+custom-type canonicalization, large
 objects, foreign-table contents, precise primary-key/column diagnostics, and
 incremental change tracking are not implemented. No equivalence baseline is
 established for incremental mode. TCP accessibility is not verified HTTP health.
