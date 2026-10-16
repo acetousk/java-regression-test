@@ -15,6 +15,10 @@ java-regression-test/
 There is no shared runtime, top-level runtime directory, or runtime symlink.
 Each engine is built and started from its own checkout using its own runtime.
 
+The target is identical schema and data after empty-database startup for the shared
+framework. Rust additions must be inventoried separately, not silently ignored.
+No application components are installed for this baseline.
+
 Install the toolchains and run all four steps using mise (requires Linux and a
 working Docker-compatible CLI):
 
@@ -44,11 +48,18 @@ verifies identical image IDs and empty databases, and starts both engines. Java
 uses port 8080 and Rust 8081. Neither runtime currently ships a dedicated demo
 configuration, so the controller copies each `MoquiDevConf.xml` to a private run
 configuration, retains its demo loading (`entity_empty_db_load=all`), and overrides
-PostgreSQL connectivity. It downloads PostgreSQL JDBC 42.7.7 into Java's runtime
+PostgreSQL connectivity. Both engines receive the same randomly generated,
+per-run field-encryption passphrase through their private configs and child
+process environments, overriding existing runtime keys without modifying `.env`. It downloads PostgreSQL JDBC 42.7.7 into Java's runtime
 when missing. It never resets or connects to a pre-existing database.
 
-Once both engines are listening on their TCP ports, step 3 stops both application
-process groups. Early exits and startup timeouts fail the run.
+Step 3 waits for seed loading and completed application initialization, including
+Java's final Jetty server-start event (after shutdown-hook registration), as well
+as listening TCP ports. It sends SIGTERM to both process groups before waiting
+up to 120 seconds for shutdown. Each engine must log a new artifact-bin flush
+after SIGTERM; Java must also report final factory destruction. Forced kills,
+unexpected exits, or missing shutdown evidence fail the run before snapshots.
+Shutdown verification is recorded in `shutdown.json`.
 
 Step 4 connects with container-local `psql` and creates snapshots inline in
 `java-regression-test.py`, then calls its `snapshot_compare()` function.
@@ -58,7 +69,41 @@ rows, and sequence states. Rows use a typed JSON representation with exact numer
 precision and sorted object keys; comparison ignores row order but preserves
 duplicates. Row reads use a read-only repeatable-read transaction. Schema capture
 and sequence reads require idle databases: sequences are not MVCC-snapshot data.
-Differences fail the run and produce `comparison.json` and `schema.diff`.
+Differences fail the run and produce `comparison.json`, `schema.diff`, and
+`summary.json`. The summary inventories Java-only/Rust-only relations (including
+empty tables), shared column/type/default/nullability differences, and unmatched
+row counts and differing column multisets per table. Column multisets are only
+diagnostics: equal column multisets do not imply equal rows. Rust-only does not
+mean approved. `approved-startup-differences.json` permits the exact reviewed
+theme resource seeds, full-text storage designs, and explicitly listed statistics
+timing fields documented in `STARTUP-PARITY.md`. Statistics timing includes
+slow-hit classifications/counts, which depend on measured elapsed times; operation
+identities, hit counts, ids, host values, duplicate rows, and schema remain strict.
+Missing indexes, changed source text, and unexpected resources still fail.
+Timestamps on shared theme rows and all other non-statistics rows remain compared.
+Resources explicitly approved as absent on one engine are exempt as whole rows
+(including their otherwise unmatchable timestamps). `summary.json` also reports
+per-operation bin hit-count multisets without timing/id noise as a diagnostic
+only; this does not relax the full snapshot gate.
+
+Rust seed rows for Rust-only features are accepted only as the exact keys in
+`rust_seed_additions`, and Java's LLM cleanup job rows only as the exact keys in
+`java_seed_additions`. The statistics they cause (one refresh and one create per
+row during the empty-database load) are accepted only when a bin differs by exactly
+that many hits. `comparison.json` reports `statistics_equal_after_approved_differences`
+for the artifact hit and bin rows and the hit sequence position; it is a separate
+verdict, not a pass of the full gate. Rust counts its FK existence reads,
+load-report counts, and create-or-update UPDATE probes that match no row under sub
+types of their own (`fk-check`, `load-report`, `update-probe`); those
+bins are set aside and listed (`rust_only_statistics`), not compared. The bins Java
+writes after its factory restart are set aside only as the exact listed bins
+(`java_restart`).
+
+Raw `comparison.json`, `schema.diff`, and `summary.json` retain all differences.
+`comparison.json` additionally lists applied approvals, remaining unapproved
+record differences, and gate results after approvals. `unapproved-schema.diff`
+contains the schema differences remaining after the exact approved FTS definitions
+are removed. These allowances do not establish equivalent search behavior.
 The complete comparison report is also printed on failure: every differing schema
 byte range includes both byte offsets and exact hex bytes, and every unmatched
 canonical row/sequence record includes exact UTF-8 hex bytes and its multiplicity.
@@ -69,7 +114,7 @@ This is an initial snapshot comparator, **not the complete equivalence tool in t
 plan**. Schema dumps are compared textually; custom-type canonicalization, large
 objects, foreign-table contents, precise primary-key/column diagnostics, and
 incremental change tracking are not implemented. No equivalence baseline is
-established for incremental mode. TCP accessibility is not verified HTTP health.
+established for incremental mode. Startup log events and TCP accessibility are not verified HTTP health.
 
 Snapshots, configs, reports, and logs remain under `.runs/<run-id>/`; the directory
 is private because it contains database contents and disposable credentials.
@@ -94,7 +139,7 @@ not stubbed yet. Use only isolated test environments.
 Override ports and timeout with:
 
 ```sh
-mise exec -- python java-regression-test.py --java-port 8080 --rust-port 8081 --boot-timeout 600
+mise exec -- python java-regression-test.py --java-port 8080 --rust-port 8081 --boot-timeout 600 --shutdown-timeout 120
 ```
 
 ### Optional Rust only comparison scope
@@ -150,8 +195,8 @@ schema-mapping options independent; this change does not normalize schema or
 records and does not claim complete equivalence.
 
 Run controller unit tests with `mise run test` (or all tests with
-`python -m unittest discover -v`). End-to-end startup has not yet been
-verified.
+`python -m unittest discover -v`). End-to-end builds/startup have been exercised; see `STARTUP-PARITY.md` for the
+remaining parity gaps.
 
 The parent Git submodule entries pin both framework commits. The Java framework's
 nested submodule entry pins its runtime; Rust's runtime is already tracked by its

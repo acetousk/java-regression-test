@@ -1,0 +1,58 @@
+{
+  "theme_resources": [
+    {"theme": "DEFAULT", "sequence": 1, "java": ["STRT_STYLESHEET", null], "rust": ["STRT_STYLESHEET", "/libs/fontawesome/css/font-awesome.min.css"]},
+    {"theme": "DEFAULT", "sequence": 2, "java": ["STRT_STYLESHEET", "/libs/font-awesome/css/font-awesome.min.css"], "rust": null},
+    {"theme": "DEFAULT", "sequence": 3, "java": ["STRT_STYLESHEET", "/libs/twitter-bootstrap/css/bootstrap.min.css"], "rust": null},
+    {"theme": "DEFAULT", "sequence": 4, "java": ["STRT_STYLESHEET", "/libs/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css"], "rust": null},
+    {"theme": "DEFAULT", "sequence": 5, "java": ["STRT_STYLESHEET", "/libs/select2/select2.min.css"], "rust": null},
+    {"theme": "DEFAULT", "sequence": 6, "java": ["STRT_STYLESHEET", "/libs/select2-bootstrap-theme/select2-bootstrap.min.css"], "rust": null},
+    {"theme": "DEFAULT", "sequence": 7, "java": ["STRT_STYLESHEET", "/libs/Selectivity.js/selectivity-full.min.css"], "rust": null},
+    {"theme": "DEFAULT", "sequence": 8, "java": ["STRT_STYLESHEET", "/libs/jstree/themes/default/style.min.css"], "rust": null},
+    {"theme": "DEFAULT", "sequence": 20, "java": ["STRT_STYLESHEET", "/css/webroot-layout.css"], "rust": ["STRT_STYLESHEET", "/css/moqui-html.css"]},
+    {"theme": "DEFAULT", "sequence": 21, "java": ["STRT_STYLESHEET", "/css/webroot-theme.css"], "rust": null},
+    {"theme": "DEFAULT", "sequence": 30, "java": null, "rust": ["STRT_SCRIPT", "/js/moqui-html.js"]},
+    {"theme": "DEFAULT", "sequence": 102, "java": ["STRT_BODY_CLASS", "bg-light"], "rust": null},
+    {"theme": "DEFAULT", "sequence": 201, "java": ["STRT_FOOTER_ITEM", "<p><a href=\"/vapps/ScreenTree\">${ec.l10n.localize('Site Map')}</a></p>"], "rust": ["STRT_FOOTER_ITEM", "<p><a href=\"/apps/ScreenTree\">${ec.l10n.localize('Site Map')}</a></p>"]},
+    {"theme": "DEFAULT_QUASAR", "sequence": 1, "java": ["STRT_STYLESHEET", null], "rust": ["STRT_STYLESHEET", "/libs/fontawesome/css/font-awesome.min.css"]},
+    {"theme": "DEFAULT_QUASAR", "sequence": 2, "java": ["STRT_STYLESHEET", "/libs/font-awesome/css/font-awesome.min.css"], "rust": null},
+    {"theme": "DEFAULT_QUASAR", "sequence": 3, "java": ["STRT_STYLESHEET", "https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons"], "rust": ["STRT_STYLESHEET", "/libs/material-icons/material-icons.css"]},
+    {"theme": "DEFAULT_QUASAR", "sequence": 4, "java": ["STRT_STYLESHEET", "/libs/quasar/quasar.min.css"], "rust": ["STRT_STYLESHEET", "/libs/quasar/quasar.prod.css"]}
+  ],
+  "statistics_timing": [
+    {"table": "public.artifact_hit_bin", "fields": ["bin_start_date_time", "bin_end_date_time", "total_time_millis", "total_squared_time", "min_time_millis", "max_time_millis", "slow_hit_count", "last_updated_stamp"]},
+    {"table": "public.artifact_hit", "fields": ["start_date_time", "running_time_millis", "is_slow_hit", "last_updated_stamp"]}
+  ],
+  "full_text_indexes": [
+    {"table": "public.llm_conversation", "field": "search_text", "java_index": "fts_llm_conversation_search_text", "rust_index": "llm_conversation_searchtext_fts"},
+    {"table": "public.llm_skill", "field": "description", "java_index": "fts_llm_skill_description", "rust_index": "llm_skill_description_fts"},
+    {"table": "public.llm_skill", "field": "body", "java_index": "fts_llm_skill_body", "rust_index": "llm_skill_body_fts"},
+    {"table": "public.test_fts", "field": "body", "java_index": "fts_test_fts_body", "rust_index": "test_fts_body_fts"}
+  ],
+  "rust_seed_additions": [
+    {"reason": "Rust SSO: authentication flow and client type enumerations for the Rust-only auth_flow/oauth_flow/oidc_flow/saml_flow tables", "table": "public.enumeration", "entity": "moqui.basic.Enumeration", "key": ["enum_id"], "values": [["AftOauth"], ["AftOidc"], ["AftSaml"], ["OctBitBucket"], ["OctDropBox"], ["OctFacebook"], ["OctFoursquare"], ["OctGitHub"], ["OctLinkedIn"], ["OctOauth10"], ["OctOauth20"], ["OctPaypal"], ["OctTwitter"], ["OctWordPress"], ["OctYahoo"], ["OctApple"], ["OctAzureAd"], ["OctGoogle"], ["OctKeycloak"], ["OctOther"], ["OjaEdDSA"], ["OjaES256"], ["OjaES384"], ["OjaES512"], ["OjaHS256"], ["OjaHS384"], ["OjaHS512"], ["OjaPS256"], ["OjaPS384"], ["OjaPS512"], ["OjaRS256"], ["OjaRS384"], ["OjaRS512"]]},
+    {"reason": "Rust SSO enumeration types", "table": "public.enumeration_type", "entity": "moqui.basic.EnumerationType", "key": ["enum_type_id"], "values": [["AuthFlowType"], ["OauthClientType"], ["OidcClientType"], ["OidcJwsAlgorithm"]]},
+    {"reason": "Rust built-in SSH server permissions", "table": "public.user_permission", "entity": "moqui.security.UserPermission", "key": ["user_permission_id"], "values": [["SSH_SFTP"], ["SSH_SHELL"]]},
+    {"reason": "Rust built-in SSH server permission grants", "table": "public.user_group_permission", "entity": "moqui.security.UserGroupPermission", "key": ["user_group_id", "user_permission_id"], "values": [["ADMIN", "SSH_SFTP"], ["ADMIN_ADV", "SSH_SHELL"]]},
+    {"reason": "Rust DataFeedPending delivery job and the moqui-sftp example job bundled in the Rust framework", "table": "public.service_job", "entity": "moqui.service.job.ServiceJob", "key": ["job_name"], "values": [["ExampleSftpLocal_poll"], ["process_DataFeedPending_frequent"]]},
+    {"reason": "moqui-sftp example job parameters bundled in the Rust framework", "table": "public.service_job_parameter", "entity": "moqui.service.job.ServiceJobParameter", "key": ["job_name", "parameter_name"], "values": [["ExampleSftpLocal_poll", "systemMessageRemoteId"], ["ExampleSftpLocal_poll", "systemMessageTypeId"]]},
+    {"reason": "moqui-sftp example message type bundled in the Rust framework", "table": "public.system_message_type", "entity": "moqui.service.message.SystemMessageType", "key": ["system_message_type_id"], "values": [["ExampleSftp"]]},
+    {"reason": "moqui-sftp example remote bundled in the Rust framework", "table": "public.system_message_remote", "entity": "moqui.service.message.SystemMessageRemote", "key": ["system_message_remote_id"], "values": [["ExampleSftpLocal"]]}
+  ],
+  "java_seed_additions": [
+    {"reason": "Java's LLM data cleanup job; Rust has no clean#LlmData service", "table": "public.service_job", "entity": "moqui.service.job.ServiceJob", "key": ["job_name"], "values": [["clean_LlmData_daily"]]},
+    {"reason": "Java's LLM data cleanup job parameters", "table": "public.service_job_parameter", "entity": "moqui.service.job.ServiceJobParameter", "key": ["job_name", "parameter_name"], "values": [["clean_LlmData_daily", "contentDaysToKeep"], ["clean_LlmData_daily", "daysToKeep"]]}
+  ],
+  "rust_only_statistics": {
+    "approved_by": "user",
+    "description": "Rust reads each related row to check a foreign key before a write (Java leaves that to the database), counts Enumeration and UserGroupPermission for its load report, and tries an UPDATE before create-or-update reads the row (Java reads first). Rust counts these as artifact hits under sub types of their own (an UPDATE probe only when it matched no row; one that updates a row is a real update); these bins are listed in the report and not compared with Java.",
+    "artifact_sub_types": ["fk-check", "load-report", "update-probe"]
+  },
+  "java_restart": {
+    "approved_by": "user",
+    "description": "Java restarts its factory after the empty-database load; Rust does not. The second Java factory checks DataFeeds again at start and takes a fresh ArtifactHitBin id bank.",
+    "post_restart_bins": [
+      {"artifact_type": "AT_ENTITY", "artifact_sub_type": "list", "artifact_name": "moqui.entity.feed.DataFeed", "hit_count": 1}
+    ],
+    "sequence": {"seq_name": "moqui.server.ArtifactHitBin", "java_ahead_by": 100}
+  }
+}
