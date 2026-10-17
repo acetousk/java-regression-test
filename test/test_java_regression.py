@@ -218,6 +218,30 @@ class CdcTests(unittest.TestCase):
             with self.assertRaisesRegex(RuntimeError, "inside a transaction"):
                 controller.read_cdc("container")
 
+    def test_approval_snapshots_refresh_dirty_peer_catalog_before_reading(self):
+        states = {side: controller.DatabaseState({"schema": "", "records": []})
+                  for side in ("java", "rust")}
+        containers = {"java": "java-db", "rust": "rust-db"}
+        states["java"].schema_dirty = True
+        with self.assertRaisesRegex(ValueError, "catalog refresh"):
+            states["java"].snapshot()
+        def refreshed(container, state, destination):
+            self.assertEqual(container, "java-db")
+            self.assertEqual(destination, Path("evidence/java-catalog.json"))
+            state.schema = "refreshed Java DDL"
+            state.schema_dirty = False
+        with patch.object(controller, "refresh_incremental_catalog", side_effect=refreshed) as refresh:
+            snapshots = controller.approval_snapshots(states, containers, Path("evidence"))
+            self.assertEqual(snapshots[0]["schema"], "refreshed Java DDL")
+            self.assertEqual(snapshots[1]["schema"], "")
+            refresh.assert_called_once()
+            controller.approval_snapshots(states, containers, Path("evidence"))
+            refresh.assert_called_once()
+        states["java"].schema_dirty = True
+        with patch.object(controller, "refresh_incremental_catalog", side_effect=RuntimeError("capture lost")):
+            with self.assertRaisesRegex(RuntimeError, "capture lost"):
+                controller.approval_snapshots(states, containers, Path("evidence"))
+
     def test_rust_only_statistics_exemption_uses_existing_snapshot_approval(self):
         from test.test_approvals import row_change
         approved = {"theme_resources": [], "full_text_indexes": [],
