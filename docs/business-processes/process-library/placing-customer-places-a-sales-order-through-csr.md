@@ -1,0 +1,21 @@
+# Placing Customer Places a Sales Order - Through CSR
+
+Source: [Business Process Library/Placing Customer Places a Sales Order - Through CSR](https://moqui.org/docs/mantle/Business%20Process%20Library/Placing%20Customer%20Places%20a%20Sales%20Order%20-%20Through%20CSR)
+
+Type: Business-process description; verify UI applicability.
+
+## Ideas to Incorporate
+
+## Story
+
+Customer contacts CSR through phone, fax, or email with a request for an order for specific products and quantities for each, plus where needed other details such as size, color, and so on. Customer specifies shipping and billing details, contact information. If Customer does not specify important details CSR contacts Customer to get additional information. CSR records order information and finalizes order.
+- visual test:
+- transition test:
+
+If Customer is a new organization that wants to purchase on credit, CSR creates Party (using new customer) for Customer and Billing Account with a beginning limit determined by Company. Customer sends copy of their internal Purchase Order by fax (possibly scan/email or mail) with certain required information/etc. If Customer does not specify email address CSR enters dummy address that will receive confirmations. CSR enters a sales order for the PO with the Billing Account instead of a payment method, and approves the order.
+- visual test:
+- transition test:
+
+If Customer wants to modify the order Customer contacts CSR. Customer may request to add items, remove items, change quantities, change sizes/colors, change address, change shipping method, change billing info, add gift message. If new order grand total is greater than the original (before the requested changes) and the order is paid by credit card, Company automatically cancels original authorization and authorizes the new grand total. If that authorization fails CSR is notified and contacts Customer to resolve. Customer may request other changes to resolve issue and CSR will "re-finalize" the order to do a new authorization.
+- visual test:
+- transition test:
