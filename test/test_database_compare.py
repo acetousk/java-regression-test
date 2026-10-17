@@ -114,7 +114,7 @@ class SnapshotTests(unittest.TestCase):
         self.assertFalse(self.compare(left["records"], snapshot([2], stamp="b")["records"])[0])
 
     def test_incremental_comparison_fails_without_tracking(self):
-        with self.assertRaises(NotImplementedError):
+        with self.assertRaisesRegex(ValueError, 'change-tracked baselines'):
             controller.diff_compare(None, None, None)
 
 

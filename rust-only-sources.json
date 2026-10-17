@@ -40,8 +40,8 @@
     {
       "path": "mr-moqui/runtime/base-component/framework/entity/SecurityEntities.xml",
       "mode": "enum-seeds",
-      "expected_records": 38,
-      "note": "Four types and 34 enum source occurrences, but only 33 enum PKs: OctGoogle occurs in both OauthClientType and OidcClientType. Preserve that collision rather than hiding the winning value.",
+      "expected_records": 37,
+      "note": "Four types and 33 enum PKs. A PK occurring in more than one source group is a collision: retain it rather than hiding the winning value.",
       "groups": ["AuthFlowType", "OauthClientType", "OidcClientType", "OidcJwsAlgorithm"]
     }
   ]

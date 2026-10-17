@@ -49,7 +49,7 @@ class RustOnlyTests(unittest.TestCase):
         </entity-facade-xml>''')
         security = ET.Element("entities")
         seed = ET.SubElement(security, "seed-data")
-        for group, count in zip(self.manifest["sources"][1]["groups"], (3, 13, 5, 13)):
+        for group, count in zip(self.manifest["sources"][1]["groups"], (3, 13, 4, 13)):
             ET.SubElement(seed, "moqui.basic.EnumerationType", enumTypeId=group, description=group)
             for i in range(count):
                 enum_id = "OctGoogle" if i == 0 and group in ("OauthClientType", "OidcClientType") else f"{group}{i}"
@@ -76,7 +76,7 @@ class RustOnlyTests(unittest.TestCase):
         return filter_snapshots(java, rust, MANIFEST, self.root)
 
     def test_exact_source_counts_pk_and_nested_attribution(self):
-        self.assertEqual(len(self.seeds), 43)  # 5 SFTP + 38 occurrences (37 distinct auth PKs).
+        self.assertEqual(len(self.seeds), 42)  # 5 SFTP + 37 occurrences (36 distinct auth PKs).
         nested = self.seeds[1]
         self.assertEqual(nested["pk"], {"jobName": "Sftp", "parameterName": "a"})
         java, rust = self.snapshot(), self.snapshot(self.row(nested))

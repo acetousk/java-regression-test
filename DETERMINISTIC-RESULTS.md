@@ -89,12 +89,62 @@ above into a pass.
 
 Detailed subagent reports are under `.runs/deterministic-agents/`.
 
+## Boot-operation logging update
+
+Operation observations are now instrumented in both isolated worktrees, below the
+transaction barrier: entity/service stack activity, metadata, read caches, loader
+files/records, and JDBC/PostgreSQL SQL including schema DDL. See
+[observation semantics and remaining coverage](DETERMINISTIC.md#boot-operation-observations).
+
+Validation:
+
+- Python: **85 tests passed** (including interleaved trace validation).
+- Java: **15 focused tests passed**, including actual H2 DDL, insert, failed SQL,
+  and loader evidence. Real WAR/fresh PostgreSQL smoke passed with 244 completed
+  operations, `/status` and `/Login` 200, and persisted statistics retained.
+  Preserved log: `.runs/boot-operation-logging-java/deterministic.log` — **16,140
+  observations**, including 164 successful table-creation calls and 1,319 loader
+  record attempts. This is an engine-local smoke, not paired equivalence.
+- Rust: **878 core tests passed, 1 ignored; 114 host unit tests passed**. Isolated
+  protocol suite passed with an additional real embedded-PostgreSQL child that
+  checks successful DDL/inserts, failed SQL, assigned timestamps and no logged
+  bound parameter values.
+- New paired run `.runs/7ca436ce95d74227aa2a586a95c32007/` still **fails event 2**.
+  Both local logs now retain rejected coordinator attempts; Java also shows the
+  attempted `DbViewEntity` entity operation and Rust its metadata loading.
+  Neither engine was allowed to proceed past the mismatch.
+
+These changes improve evidence; they do not complete semantic operation pairing
+or resolve the startup topology blocker.
+
+## PostgreSQL incremental verification implementation
+
+`incremental.py` now replays PostgreSQL-origin old/new row events carried by logical
+decoding. `diff_compare()` replaces per-write row snapshots; schema invalidation,
+targeted DDL row readback, native sequence checks, durable cursor/batch evidence,
+capture-integrity checks and final drain are wired into the controller.
+The harness gates committed write transactions, not JDBC outcomes or operation
+identity. Optional synchronous operation callbacks remain covered by focused tests.
+Open-transaction writes are not transaction-visible uncommitted-state verification.
+
+Validation includes the Python suite, focused Java/Rust engine-hook tests, and a
+real two-container PostgreSQL test of row changes, TOAST, rollback, DDL/rename/CTAS,
+truncation, sequence divergence, disabled capture and operation/write/final barriers.
+See [test commands](DETERMINISTIC.md#verification-tests).
+
+Actual rebuilt-engine evidence:
+`.runs/2026-10-17_00-15-38.312085Z/`. The initial incremental baselines match.
+That historical run enabled the optional operation gate and rejected **operation 1**:
+Rust executed `SELECT 1` while Java called JDBC `getTables` for `DB_VIEW_ENTITY`.
+It demonstrates rejection of different operation streams, **not a successful
+Java/Rust parity run**. The current harness disables that operation gate; CDC-only
+runs must not be interpreted as operation-order proof.
+
 ## Remaining acceptance requirement
 
-The requested full result—identical operation order and database state after
-every step, except reviewed differences—**has not been achieved**. Startup
-transaction topology/metadata must be aligned or explicitly redesigned. Loader
-transaction boundaries also differ (Java per-file versus Rust per-record).
-Changing timestamps cannot repair these differences. The gate must stay failed
-until the actual behavior is aligned; adding generic timing exceptions would not
-establish equivalence.
+A successful full Java/Rust startup run under the current committed-write contract
+**has not been demonstrated here**. Historical operation-order failures above are
+not the current acceptance gate, but transaction boundaries still need to align.
+Loader transaction boundaries have differed (Java per-file versus Rust per-record).
+Changing timestamps cannot repair boundary or state differences; adding generic
+timing exceptions would not establish equivalence.

@@ -8,7 +8,7 @@ Optional deterministic transaction barriers coordinate logical time and compare 
 import argparse
 from collections import Counter
 from copy import deepcopy
-from datetime import datetime
+from datetime import datetime, timezone
 from decimal import Decimal
 import difflib
 import fcntl
@@ -23,10 +23,10 @@ import socket
 import subprocess
 import time
 import urllib.request
-import uuid
 import xml.etree.ElementTree as ET
 
 from deterministic import DeterministicCoordinator
+from incremental import DatabaseState, EVENT_PREFIX, INSTALL_SQL, TRACKING_SCHEMA
 
 ROOT = Path(__file__).resolve().parent
 REPOSITORIES = ("moqui-framework", "mr-moqui")
@@ -992,17 +992,78 @@ def snapshot_compare(left, right, report_dir, *, rust_only_manifest=None, source
     return equal
 
 
-def diff_compare(left, right, report_dir):
-    """Incremental comparison requires a verified baseline and gap-free tracking."""
-    raise NotImplementedError("Incremental comparison requires change tracking; run snapshot_compare instead")
+def diff_compare(left, right, report_dir, *, approved_differences=None):
+    """Compare PostgreSQL-replayed state without recapturing user rows.
+
+    Rebuild canonical counters only for affected relations and approval dependencies.
+    """
+    if not all(isinstance(state, DatabaseState) and state.healthy for state in (left, right)):
+        raise ValueError("Incremental comparison requires healthy PostgreSQL change-tracked baselines")
+    approved = APPROVED_STARTUP_DIFFERENCES if approved_differences is None else approved_differences
+    normalized, applied = apply_approved_differences(left.snapshot(), right.snapshot(), approved)
+
+    def group(record):
+        return record.get("table") or record.get("relation") or record.get("sequence") or "__other__"
+
+    dependencies = {"public.artifact_hit_bin", "public.artifact_hit", "public.sequence_value_item"}
+    for rules in approved.values():
+        if isinstance(rules, list):
+            dependencies.update(rule["table"] for rule in rules if isinstance(rule, dict) and "table" in rule)
+    touched = left.dirty | right.dirty | dependencies
+    touched |= {json.loads(record)['sequence'] for state in (left, right) for record in state.catalog
+                if 'sequence' in json.loads(record)}
+    if any(not hasattr(state, "comparison_cache") or state.schema != getattr(state, "compared_schema", None)
+           for state in (left, right)):
+        touched |= {group(record) for snapshot in normalized for record in snapshot["records"]}
+        touched |= set(getattr(left, "comparison_cache", {})) | set(getattr(right, "comparison_cache", {}))
+    for state, snapshot in zip((left, right), normalized):
+        cache = getattr(state, "comparison_cache", {})
+        for name in touched:
+            cache[name] = Counter()
+        for record in snapshot["records"]:
+            name = group(record)
+            if name in touched:
+                cache[name][json.dumps(canonical(record), ensure_ascii=True, separators=(",", ":"))] += 1
+        state.comparison_cache = cache
+        state.compared_schema = state.schema
+    differences = []
+    for name in sorted(set(left.comparison_cache) | set(right.comparison_cache)):
+        java, rust = (state.comparison_cache.get(name, Counter()) for state in (left, right))
+        for side, items in (("java", java - rust), ("rust", rust - java)):
+            differences.extend({"relation": name, "side": side, "count": count,
+                                "hex": record.encode("utf-8").hex()} for record, count in sorted(items.items()))
+    schema_equal = normalized[0]["schema"] == normalized[1]["schema"]
+    equal = schema_equal and not differences
+    report_dir = Path(report_dir)
+    report_dir.mkdir(parents=True, exist_ok=True, mode=0o700)
+    report = {"mode": "postgresql-incremental", "comparison_passed": equal,
+              "compared_relations": sorted(touched), "schema_equal_after_approved_differences": schema_equal,
+              "unapproved_record_byte_differences": differences, "approved_differences_applied": applied,
+              "transactions_replayed": {side: state.transactions for side, state in (("java", left), ("rust", right))},
+              "uncommitted_state_verified": False}
+    (report_dir / "comparison.json").write_text(json.dumps(report, indent=2) + "\n")
+    if not schema_equal:
+        (report_dir / "unapproved-schema.diff").write_text("".join(difflib.unified_diff(
+            normalized[0]["schema"].splitlines(keepends=True), normalized[1]["schema"].splitlines(keepends=True),
+            fromfile="java", tofile="rust")))
+    left.dirty.clear()
+    right.dirty.clear()
+    if not equal:
+        print(json.dumps(report, indent=2), flush=True)
+    return equal
 
 
-def capture_snapshot(container, destination):
+def capture_snapshot(container, destination, *, include_rows=True):
     """Capture schema and committed records while application execution is paused."""
     schema = subprocess.check_output([
         "docker", "exec", container, "pg_dump", "-U", "moqui", "-d", "moqui",
         "--schema-only", "--restrict-key=MoquiRegression", "--lock-wait-timeout=5000",
+        f"--exclude-schema={TRACKING_SCHEMA}",
     ], text=True, timeout=60)
+    # Observation triggers are harness infrastructure, not application schema.
+    schema = ''.join(block for block in re.split(r'(?=--\n-- Name: )', schema)
+                     if not re.search(r'^CREATE TRIGGER moqui_regression_(?:row|truncate) .*'
+                                      r'EXECUTE FUNCTION moqui_regression\.row_change\(\);$', block, re.M))
     sql = r"""
 BEGIN ISOLATION LEVEL REPEATABLE READ READ ONLY;
 SET LOCAL statement_timeout = '10s';
@@ -1019,22 +1080,23 @@ SELECT json_build_object(
     WHERE a.attrelid=c.oid AND a.attnum > 0 AND NOT a.attisdropped))
 FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace
 WHERE c.relkind IN ('r', 'p', 'm', 'v', 'f') AND n.nspname !~ '^pg_'
-  AND n.nspname <> 'information_schema'
+  AND n.nspname NOT IN ('information_schema', 'moqui_regression')
 ORDER BY n.nspname, c.relname;
 SELECT format(
   'SELECT json_build_object(''table'', %L, ''row'', row_to_json(t)) FROM ONLY %I.%I t',
   n.nspname || '.' || c.relname, n.nspname, c.relname)
 FROM pg_class c JOIN pg_namespace n ON n.oid = c.relnamespace
 WHERE c.relkind IN ('r', 'm') AND n.nspname !~ '^pg_'
-  AND n.nspname <> 'information_schema'
+  AND n.nspname NOT IN ('information_schema', 'moqui_regression')
+  AND __INCLUDE_ROWS__
 ORDER BY n.nspname, c.relname
 \gexec
 SELECT format(
-  'SELECT json_build_object(''sequence'', %L, ''state'', row_to_json(t)) FROM %I.%I t',
+  'SELECT json_build_object(''sequence'', %L, ''state'', row_to_json(t)) FROM (SELECT * FROM %I.%I) t',
   n.nspname || '.' || c.relname, n.nspname, c.relname)
 FROM pg_class c JOIN pg_namespace n ON n.oid = c.relnamespace
 WHERE c.relkind = 'S' AND n.nspname !~ '^pg_'
-  AND n.nspname <> 'information_schema'
+  AND n.nspname NOT IN ('information_schema', 'moqui_regression')
 ORDER BY n.nspname, c.relname
 \gexec
 COMMIT;
@@ -1042,9 +1104,173 @@ COMMIT;
     records = subprocess.check_output([
         "docker", "exec", "-i", container, "psql", "-X", "-qAt",
         "--set", "ON_ERROR_STOP=1", "-U", "moqui", "-d", "moqui",
-    ], input=sql, text=True, timeout=60).splitlines()
+    ], input=sql.replace('__INCLUDE_ROWS__', 'true' if include_rows else 'false'), text=True, timeout=60).splitlines()
     destination.touch(mode=0o600)
     destination.write_text(json.dumps({"schema": schema, "records": records}, indent=2) + "\n")
+
+
+CDC_SLOT = "moqui_regression_cdc"
+CDC_COLUMN = re.compile(r"(\w+)\[[^\]]*\]:('(?:[^']|'')*'|\S+)")
+
+
+def rust_only_change(approved):
+    """A predicate for test_decoding change lines covered by an approved Rust-only difference:
+    any change to a Rust-only table, or the insert of a listed Rust seed row."""
+    tables = set(approved.get("rust_only_tables", ()))
+    seeds = {}
+    for rule in approved.get("rust_seed_additions", []):
+        for values in rule["values"]:
+            seeds.setdefault(rule["table"], set()).add(tuple(zip(rule["key"], values)))
+
+    def covered(change):
+        if change.startswith(EVENT_PREFIX):
+            # The original PostgreSQL row change must independently satisfy the
+            # approval predicate. Schema markers must never be skipped this way.
+            literal = change[len(EVENT_PREFIX):]
+            return json.loads(literal[1:-1].replace("''", "'"))["kind"] != "schema"
+        head, _, rest = change.partition(": ")
+        table = head.removeprefix("table ")
+        if table in tables:
+            return True
+        if not rest.startswith("INSERT: ") or table not in seeds:
+            return False
+        row = {name: (None if value == "null" else value[1:-1].replace("''", "'")
+                      if value.startswith("'") else value)
+               for name, value in CDC_COLUMN.findall(rest.removeprefix("INSERT: "))}
+        return any(all(row.get(field) == value for field, value in key) for key in seeds[table])
+
+    return covered
+
+
+def create_cdc_slot(container):
+    """Start logical decoding before either engine connects, so every committed change is captured."""
+    subprocess.run(["docker", "exec", "-i", container, "psql", "-X", "-qAt", "-v", "ON_ERROR_STOP=1",
+                    "-U", "moqui", "-d", "moqui"], input=INSTALL_SQL, text=True,
+                   check=True, stdout=subprocess.DEVNULL, timeout=60)
+    subprocess.run(["docker", "exec", container, "psql", "-X", "-qAt", "-v", "ON_ERROR_STOP=1",
+                    "-U", "moqui", "-d", "moqui", "-c",
+                    f"SELECT pg_create_logical_replication_slot('{CDC_SLOT}', 'test_decoding')"],
+                   check=True, stdout=subprocess.DEVNULL, timeout=60)
+
+
+def read_cdc(container, *, with_cursor=False):
+    """Consume committed transactions since the last read: one list of change lines per transaction.
+
+    A transaction with an assigned xid is always reported, including DDL-only ones (empty list);
+    reads and rollbacks never appear.
+    """
+    select = "json_build_object('lsn', lsn, 'data', data)::text" if with_cursor else 'data'
+    query = (f"SELECT {select} FROM pg_logical_slot_get_changes('{CDC_SLOT}', NULL, NULL, "
+             "'include-xids', '0', 'skip-empty-xacts', '0');")
+    if with_cursor:
+        def marker(phase):
+            return (f"SELECT json_build_object('phase','{phase}','lsn',confirmed_flush_lsn,'plugin',plugin,"
+                    f"'database',database,'wal_status',wal_status)::text FROM pg_replication_slots "
+                    f"WHERE slot_name='{CDC_SLOT}';")
+        query = marker('before') + query + marker('after')
+    output = subprocess.run(
+        ["docker", "exec", container, "psql", "-X", "-qAt", "-0", "-v", "ON_ERROR_STOP=1",
+         "-U", "moqui", "-d", "moqui", "-c", query],
+        check=True, capture_output=True, text=True, timeout=60).stdout
+    transactions, current = [], None
+    cursor = {}
+    for row in output.removesuffix("\n").split("\0"):
+        if not row:
+            continue
+        if with_cursor:
+            envelope = json.loads(row)
+            if 'phase' in envelope:
+                if (envelope['plugin'] != 'test_decoding' or envelope['database'] != 'moqui'
+                        or envelope['wal_status'] not in ('reserved', 'extended') or not envelope['lsn']):
+                    raise RuntimeError('PostgreSQL logical slot is missing, invalid, or has lost WAL')
+                cursor[envelope['phase']] = envelope['lsn']
+                continue
+            cursor['last_event'] = envelope['lsn']
+            row = envelope['data']
+        if row == "BEGIN":
+            if current is not None:
+                raise RuntimeError("Nested PostgreSQL decoding transaction")
+            current = []
+        elif row == "COMMIT":
+            if current is None:
+                raise RuntimeError("PostgreSQL COMMIT without BEGIN")
+            transactions.append(current)
+            current = None
+        elif current is not None:
+            current.append(row)
+        else:
+            raise RuntimeError(f"Change data outside a transaction: {row[:200]}")
+    if current is not None:
+        raise RuntimeError("Change data ended inside a transaction")
+    if with_cursor and not {'before', 'after'} <= cursor.keys():
+        raise RuntimeError('PostgreSQL logical slot disappeared during capture')
+    return (transactions, cursor) if with_cursor else transactions
+
+
+def refresh_incremental_catalog(container, state, destination):
+    """A capture/catalog failure invalidates the replayed baseline."""
+    try:
+        _refresh_incremental_catalog(container, state, destination)
+    except Exception:
+        state.healthy = False
+        raise
+
+
+def _refresh_incremental_catalog(container, state, destination):
+    """Refresh DDL metadata only when it changed; sequences are checked at every barrier."""
+    integrity = r"""
+DO $$ BEGIN
+  IF (SELECT count(*) FROM pg_event_trigger
+      WHERE evtenabled IN ('O','A') AND (
+        (evtname='moqui_regression_ddl' AND evtevent='ddl_command_end'
+         AND evtfoid='moqui_regression.schema_change'::regproc) OR
+        (evtname='moqui_regression_drop' AND evtevent='sql_drop'
+         AND evtfoid='moqui_regression.schema_drop'::regproc))) <> 2
+  THEN RAISE EXCEPTION 'Incremental DDL observation trigger missing or disabled'; END IF;
+  IF EXISTS (SELECT FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace
+    WHERE c.relkind IN ('r','p') AND n.nspname !~ '^pg_'
+      AND n.nspname NOT IN ('information_schema','moqui_regression')
+      AND (SELECT count(*) FROM pg_trigger t WHERE t.tgrelid=c.oid
+           AND t.tgname IN ('moqui_regression_row','moqui_regression_truncate')
+           AND t.tgenabled IN ('O','A') AND t.tgfoid='moqui_regression.row_change'::regproc) <> 2)
+  THEN RAISE EXCEPTION 'Incremental observation trigger missing or disabled'; END IF;
+END $$;
+"""
+    subprocess.run(['docker', 'exec', '-i', container, 'psql', '-X', '-qAt', '-v', 'ON_ERROR_STOP=1',
+                    '-U', 'moqui', '-d', 'moqui'], input=integrity, text=True, timeout=60, check=True,
+                   stdout=subprocess.DEVNULL)
+    if state.schema_dirty:
+        capture_snapshot(container, destination, include_rows=False)
+
+        def reload_rows(table):
+            schema, name = table.split('.', 1)
+            identifier = '.'.join('"' + part.replace('"', '""') + '"' for part in (schema, name))
+            sql = ("SET timezone='UTC'; SELECT json_build_object('table', "
+                   + "'" + table.replace("'", "''") + "', 'row', row_to_json(t)) FROM ONLY " + identifier + " t")
+            return subprocess.check_output(['docker', 'exec', container, 'psql', '-X', '-qAt', '-v',
+                                            'ON_ERROR_STOP=1', '-U', 'moqui', '-d', 'moqui', '-c', sql],
+                                           text=True, timeout=60).splitlines()
+
+        state.refresh_catalog(json.loads(destination.read_text()), reload_rows=reload_rows)
+    else:
+        sql = r"""
+BEGIN ISOLATION LEVEL REPEATABLE READ READ ONLY;
+SET LOCAL statement_timeout = '10s';
+SELECT format('SELECT json_build_object(''sequence'', %L, ''state'', row_to_json(t)) FROM (SELECT * FROM %I.%I) t',
+              n.nspname || '.' || c.relname, n.nspname, c.relname)
+FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace
+WHERE c.relkind='S' AND n.nspname !~ '^pg_' AND n.nspname NOT IN ('information_schema','moqui_regression')
+ORDER BY n.nspname,c.relname
+\gexec
+COMMIT;
+"""
+        sequences = subprocess.check_output(
+            ['docker', 'exec', '-i', container, 'psql', '-X', '-qAt', '-v', 'ON_ERROR_STOP=1',
+             '-U', 'moqui', '-d', 'moqui'], input=sql, text=True, timeout=60).splitlines()
+        old = [record for record in state.catalog if 'sequence' in json.loads(record)]
+        if old != sequences:
+            state.dirty.update(json.loads(record)['sequence'] for record in old + sequences)
+        state.catalog = [record for record in state.catalog if 'sequence' not in json.loads(record)] + sequences
 
 
 def boot_and_stop(args):
@@ -1053,7 +1279,7 @@ def boot_and_stop(args):
         with socket.socket() as probe:
             probe.bind(("127.0.0.1", port))
 
-    run_id = uuid.uuid4().hex
+    run_id = datetime.now(timezone.utc).strftime("%Y-%m-%d_%H-%M-%S.%fZ")
     evidence = ROOT / ".runs" / run_id
     evidence.mkdir(parents=True, mode=0o700)
     print(f"Startup evidence: {evidence}", flush=True)
@@ -1092,6 +1318,9 @@ def boot_and_stop(args):
                 "--env", "POSTGRES_USER=moqui", "--env", "POSTGRES_DB=moqui",
                 "--env", "POSTGRES_PASSWORD", "--env", "TZ=UTC",
                 POSTGRES_IMAGE, "-c", "timezone=UTC", "-c", "max_prepared_transactions=100",
+                "-c", "wal_level=logical", "-c", "max_replication_slots=4",
+                # Autoanalyze commits catalog-only transactions at arbitrary points in the CDC stream.
+                "-c", "autovacuum=off",
             ], env=container_environment, check=True, stdout=subprocess.DEVNULL)
             mapping = subprocess.check_output(
                 ["docker", "port", container, "5432/tcp"], text=True
@@ -1117,6 +1346,8 @@ def boot_and_stop(args):
             ], text=True).strip()
             if table_count != "0":
                 raise RuntimeError(f"{name} database is not empty")
+            if getattr(args, "deterministic", False):
+                create_cdc_slot(container)
             runtime = directories[name] / "runtime"
             conf = evidence / f"{name}-demo.xml"
             demo_conf(runtime / "conf/MoquiDevConf.xml", conf, db_port, password, ports[name], crypt_pass)
@@ -1136,17 +1367,46 @@ def boot_and_stop(args):
             driver.write_bytes(payload)
 
         if getattr(args, "deterministic", False):
-            def compare_transaction(operation_id, outcome):
-                step = evidence / "transactions" / operation_id
-                step.mkdir(parents=True, mode=0o700)
-                for side, container in containers.items():
-                    capture_snapshot(container, step / f"{side}-snapshot.json")
-                return snapshot_compare(step / "java-snapshot.json", step / "rust-snapshot.json", step,
-                                        rust_only_manifest=(RUST_ONLY_SOURCES if args.exclude_rust_only else None),
-                                        source_root=args.source_root, approved_differences=approved)
+            states = {}
+            for side, container in containers.items():
+                baseline = evidence / f"{side}-baseline.json"
+                capture_snapshot(container, baseline)
+                states[side] = DatabaseState(json.loads(baseline.read_text()))
+                initial_changes, cursor = read_cdc(container, with_cursor=True)
+                if initial_changes:
+                    raise RuntimeError('Database changed while establishing the incremental baseline')
+                states[side].capture_cursor = cursor['after']
+            if not diff_compare(states['java'], states['rust'], evidence / 'baseline-comparison',
+                                approved_differences=approved):
+                raise RuntimeError("Initial incremental baselines differ")
+
+            def changes(side):
+                transactions, cursor = read_cdc(containers[side], with_cursor=True)
+                # Persist consumed PostgreSQL evidence before replay. A failed run
+                # is never resumed with an already-advanced logical slot.
+                with (evidence / f"{side}-changes.jsonl").open('a') as journal:
+                    journal.write(json.dumps({'cursor': cursor, 'transactions': transactions}) + '\n')
+                    journal.flush()
+                    os.fsync(journal.fileno())
+                state = states[side]
+                previous = getattr(state, 'capture_cursor', None)
+                if previous is not None and cursor['before'] != previous:
+                    state.healthy = False
+                    raise RuntimeError(f'{side} PostgreSQL capture cursor changed outside the controller')
+                state.apply(transactions)
+                state.capture_cursor = cursor['after']
+                return transactions
+
+            def compare_transaction(write_id):
+                step = evidence / "transactions" / write_id
+                for side, state in states.items():
+                    refresh_incremental_catalog(containers[side], state, evidence / f"{side}-catalog.json")
+                return diff_compare(states['java'], states['rust'], step, approved_differences=approved)
 
             coordinator = DeterministicCoordinator(run_id, evidence, compare=compare_transaction,
-                                                   timeout=args.boot_timeout, require_logs=True)
+                                                   cdc=changes,
+                                                   rust_only=rust_only_change(approved),
+                                                   operation_checks=False, timeout=args.boot_timeout)
             hook_url = coordinator.start()
 
         for name, checkout in zip(("java", "rust"), REPOSITORIES):
@@ -1165,6 +1425,7 @@ def boot_and_stop(args):
                          for node in ET.parse(conf).getroot().findall("default-property")}
             deterministic_env = ({
                 "MOQUI_DETERMINISTIC": "true", "MOQUI_DETERMINISTIC_HOOK": hook_url,
+                "MOQUI_DETERMINISTIC_OPERATIONS": "false",
                 "MOQUI_DETERMINISTIC_ENGINE": name, "MOQUI_DETERMINISTIC_RUN": run_id,
                 "MOQUI_DETERMINISTIC_LOG": str(evidence / f"{name}-deterministic.log"),
             } if coordinator else {})
@@ -1187,7 +1448,7 @@ def boot_and_stop(args):
         if coordinator:
             coordinator.close()
             verification["deterministic"] = {key: value for key, value in coordinator.report().items()
-                                             if key != "events"}
+                                             if key != "pairs"}
         verification["shutdown_verified"] = started and all(not item["errors"] for item in shutdown.values())
         (evidence / "shutdown.json").write_text(json.dumps(shutdown, indent=2) + "\n")
         try:
