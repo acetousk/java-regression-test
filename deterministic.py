@@ -20,7 +20,7 @@ class DeterministicCoordinator:
     continues. A pair whose sides committed different numbers of transactions fails.
     """
     def __init__(self, run_id, evidence, compare=None, cdc=None, timeout=120, start_millis=None,
-                 rust_only=None, operation_checks=False):
+                 rust_only=None, operation_checks=False, exempt=None):
         self.run_id = run_id
         self.operation_checks = operation_checks
         self.operation_events = []
@@ -30,6 +30,8 @@ class DeterministicCoordinator:
         # rust_only(change) is true for a CDC change line covered by an approved Rust-only difference.
         # A Rust transaction made only of such changes has no Java peer.
         self.rust_only = rust_only
+        self.exempt = exempt
+        self.exempt_writes = {side: 0 for side in ('java', 'rust')}
         self.rust_only_writes = 0
         self.evidence = Path(evidence)
         self.compare = compare
@@ -101,11 +103,15 @@ class DeterministicCoordinator:
             return side, sequence, event
         raise ValueError("Unknown transaction event")
 
-    def _rust_only(self, transaction):
-        if transaction and self.rust_only is not None and all(map(self.rust_only, transaction)):
-            self.rust_only_writes += 1
-            return True
-        return False
+    def _exempt(self, side, transaction):
+        approved = (self.exempt(side, transaction) if self.exempt is not None else
+                    side == 'rust' and transaction and self.rust_only is not None
+                    and all(map(self.rust_only, transaction)))
+        if approved:
+            self.exempt_writes[side] += 1
+            if side == 'rust':
+                self.rust_only_writes += 1
+        return bool(approved)
 
     def _time(self):
         return self.start_millis + len(self.pairs)
@@ -137,7 +143,7 @@ class DeterministicCoordinator:
                 if self.error:
                     raise ValueError(self.error)
                 changes = [transaction for transaction in changes
-                           if not (side == "rust" and self._rust_only(transaction))]
+                           if not self._exempt(side, transaction)]
                 for transaction in changes:
                     self.pending[side].append({"operation_id": request["operation_id"],
                                                "outcome": request["outcome"], "changes": transaction})
@@ -167,7 +173,7 @@ class DeterministicCoordinator:
             finally:
                 self.condition.acquire()
             self.pending[side].extend({'operation_id': None, 'outcome': 'operation-boundary', 'changes': item}
-                                      for item in changes if not (side == 'rust' and self._rust_only(item)))
+                                      for item in changes if not self._exempt(side, item))
         # Arrival includes PostgreSQL capture, not merely receipt of the engine hook.
         event.setdefault('captured', set()).add(side)
         if len(event['captured']) == 2:
@@ -324,6 +330,7 @@ class DeterministicCoordinator:
                     "write_transactions": len(self.pairs), "database_comparisons": self.comparisons,
                     "error": self.error, "transaction_counts": deepcopy(self.counts),
                     "rust_only_writes": self.rust_only_writes,
+                    "exempt_writes": deepcopy(self.exempt_writes),
                     "unpaired_writes": {side: len(items) for side, items in self.pending.items()},
                     "operation_trace_counts": deepcopy(self.trace_counts),
                     "operation_checks_enabled": self.operation_checks,
@@ -369,7 +376,7 @@ class DeterministicCoordinator:
                 try:
                     self.pending[side].extend({"operation_id": None, "outcome": "unhooked", "changes": changes}
                                               for changes in self.cdc(side)
-                                              if not (side == "rust" and self._rust_only(changes)))
+                                              if not self._exempt(side, changes))
                 except Exception as exc:  # The database may be gone after a failed start.
                     self.fail(f"Could not read {side} change data: {exc}")
         with self.condition:

@@ -30,11 +30,21 @@ BEGIN
   RETURN NULL;
 END $$;
 CREATE FUNCTION moqui_regression.schema_change() RETURNS event_trigger LANGUAGE plpgsql AS $$
-DECLARE r record;
+DECLARE r record; affected_tables json; table_only boolean;
 BEGIN
   -- Do not recurse when attaching the observation triggers themselves.
   IF TG_TAG = 'CREATE TRIGGER' THEN RETURN; END IF;
+  SELECT json_agg(DISTINCT n.nspname || '.' || t.relname),
+         coalesce(bool_and(coalesce(c.relkind IN ('r','p','i','I') AND t.relkind IN ('r','p')
+           AND n.nspname !~ '^pg_' AND n.nspname NOT IN ('information_schema','moqui_regression'), false)), true)
+    INTO affected_tables, table_only
+    FROM pg_event_trigger_ddl_commands() d
+    LEFT JOIN pg_class c ON d.classid='pg_class'::regclass AND d.objid=c.oid
+    LEFT JOIN pg_index i ON i.indexrelid=c.oid
+    LEFT JOIN pg_class t ON t.oid=coalesce(i.indrelid,c.oid)
+    LEFT JOIN pg_namespace n ON n.oid=t.relnamespace;
   INSERT INTO moqui_regression.events VALUES (json_build_object('kind', 'schema', 'tag', TG_TAG,
+    'tables', affected_tables, 'table_only', table_only,
     'readback', CASE WHEN TG_TAG IN ('ALTER TABLE', 'CREATE TABLE AS', 'SELECT INTO') THEN
       (SELECT json_agg(DISTINCT n.nspname || '.' || c.relname)
        FROM pg_event_trigger_ddl_commands() d JOIN pg_class c ON d.objid=c.oid AND d.classid='pg_class'::regclass
