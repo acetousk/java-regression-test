@@ -1,0 +1,21 @@
+{
+  "engine": "rust",
+  "mode": "qapps",
+  "route": "marble/Accounting/Reports/ReportList",
+  "dialog": {
+    "label": "Income Statement",
+    "id": "IncomeStatementDialog",
+    "route": "Accounting/Reports/ReportList"
+  },
+  "authenticated": true,
+  "errors": [],
+  "failedRequests": [],
+  "httpErrors": [],
+  "consoleErrors": [],
+  "status": "captured",
+  "reused": false,
+  "requestedURL": "http://127.0.0.1:18092/qapps/marble/Accounting/Reports/ReportList",
+  "navigation": "dashboard-link",
+  "finalURL": "http://127.0.0.1:18092/qapps/marble/Accounting/Reports/ReportList",
+  "dialogOpened": true
+}

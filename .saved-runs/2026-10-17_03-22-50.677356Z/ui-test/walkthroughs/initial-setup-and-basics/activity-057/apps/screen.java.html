@@ -1,0 +1,1564 @@
+<!DOCTYPE html><html><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    
+    <title>Find Task</title>
+    <link rel="apple-touch-icon" href="/MoquiLogo100.png">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="http://127.0.0.1:18091/css/webroot-layout.css?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="http://127.0.0.1:18091/css/webroot-theme.css?v=1a147e2" rel="stylesheet" type="text/css">
+    <script src="#?v=1a147e2" type="text/javascript"></script>
+    <script src="#?v=1a147e2" type="text/javascript"></script>
+    <script src="#?v=1a147e2" type="text/javascript"></script>
+    <link rel="shortcut icon" href="http://127.0.0.1:18091/favicon.ico">
+</head>
+<body class="dev bg-light FindTask">
+        
+        
+        
+        
+    <!-- BEGIN screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+        <!-- BEGIN render-mode.text[inline][@template=true] -->
+<script>var notificationClient = new moqui.NotificationClient((location.protocol === 'https:' ? 'wss' : 'ws') + "://127.0.0.1:18091/notws");</script>        <!-- END   render-mode.text[inline][@template=true] -->
+    <!-- BEGIN section[@name=TopNavSection] -->
+        <!-- BEGIN screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+    <div id="top">
+        <!-- BEGIN render-mode.text[@location=component://webroot/screen/includes/navbar.html.ftl][@template=true] -->
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <header class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a href="http://127.0.0.1:18091/apps/AppList" class="navbar-brand"><img src="http://127.0.0.1:18091/images/MoquiLogoSmall.png" alt="Home"></a>
+        
+    </header>
+    <div id="navbar-buttons" class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul id="header-menus" class="nav navbar-nav">
+        </ul>
+        <div id="navbar-menu-crumbs">
+        </div>
+        <a class="navbar-text" href="http://127.0.0.1:18091/apps/marble/Task/FindTask">Find Task</a>
+        <a href="http://127.0.0.1:18091/Login/logout" data-toggle="tooltip" data-original-title="Logout John Doe" data-placement="bottom" class="btn btn-danger btn-sm navbar-btn navbar-right">
+            <i class="fa fa-power-off"></i>
+        </a>
+        <a href="#" onclick="switchDarkLight();" data-toggle="tooltip" data-original-title="Switch Dark/Light" data-placement="bottom" class="btn btn-default btn-sm navbar-btn navbar-right">
+            <i class="fa fa-adjust"></i>
+        </a>
+
+<div class="btn-group navbar-right">
+    <a href="/apps/my/User/Notifications" data-toggle="tooltip" data-container="body" data-original-title="Notifications" data-placement="bottom" class="btn btn-default btn-sm navbar-btn">
+        <i class="fa fa-info-circle"></i>
+        <span id="navbar_notification_count" class="label label-info">0</span>
+    </a>
+    <a href="/apps/my/User/Messages/FindMessage?statusId=CeReceived&amp;toPartyId=EX_JOHN_DOE" data-toggle="tooltip" data-container="body" data-original-title="Messages" data-placement="bottom" class="btn btn-default btn-sm navbar-btn">
+        <i class="fa fa-envelope"></i>
+        <span class="label label-warning">0</span>
+    </a>
+    <a href="/apps/my/User/Calendar/MyCalendar" data-toggle="tooltip" data-container="body" data-original-title="Events This Week" data-placement="bottom" class="btn btn-default btn-sm navbar-btn">
+        <i class="fa fa-calendar"></i>
+        <span class="label label-primary">0</span>
+    </a>
+    <a href="/apps/my/User/Task/MyTasks" data-toggle="tooltip" data-container="body" data-original-title="Open Tasks" data-placement="bottom" class="btn btn-default btn-sm navbar-btn">
+        <i class="fa fa-check"></i>
+        <span class="label label-success">0</span>
+    </a>
+</div>
+    <script>
+        var navbarNotificationListener = function(jsonObj, webSocket) {
+            if (jsonObj && jsonObj.persistOnSend === true) {
+                var countElement = $("#navbar_notification_count");
+                countElement.text((parseInt(countElement.text()) + 1).toString());
+            }
+            notificationClient.displayNotify(jsonObj, webSocket);
+        };
+        notificationClient.registerListener("ALL", navbarNotificationListener);
+    </script>
+        <div id="history-menu" class="nav navbar-right dropdown">
+            <a id="history-menu-link" href="#" class="dropdown-toggle btn btn-default btn-sm navbar-btn" data-toggle="dropdown" title="History">
+                <i class="fa fa-list"></i></a>
+            <ul class="dropdown-menu">
+                <li><a href="http://127.0.0.1:18091/apps/marble/dashboard">
+                            <i class="fa fa-dashboard" style="padding-right: 8px;"></i>
+                    Marble ERP - Dashboard
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Project/FindProject">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/project-business120.png" alt="Projects - Find Project" height="18" style="padding-right: 4px;">
+                    Projects - Find Project
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Customer/EditCustomer">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Customer.png" alt="Customers - Customer" height="18" style="padding-right: 4px;">
+                    Customers - Customer
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Customer/FindCustomer">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Customer.png" alt="Customers - Find Customer" height="18" style="padding-right: 4px;">
+                    Customers - Find Customer
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Party/EditParty">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Parties.png" alt="Parties - Party" height="18" style="padding-right: 4px;">
+                    Parties - Party
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Party/FindParty">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/dashboard">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/vapps/marble/Party/FindParty">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/vapps/marble/dashboard">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Party/FindParty">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Parties.png" alt="Parties - Find Party" height="18" style="padding-right: 4px;">
+                    Parties - Find Party
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Party/PaymentMethod/PaymentMethodTrans">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Party/PaymentMethod/PaymentMethodFiles">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Party/PaymentMethod/PaymentMethodFiles?partyId=ORG_ZIZI_RETAIL&amp;paymentMethodId=ZIRET_BA">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications (ORG_ZIZI_RETAIL, ZIRET_BA)
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Accounting/Payment/FindPayment">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Accounting/dashboard">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Party/FindParty?roleTypeId=OrgInternal">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications (OrgInternal)
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/vapps/marble/Party/PaymentMethod/PaymentMethodTrans">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/vapps/marble/Party/PaymentMethod/PaymentMethodFiles">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/vapps/marble/Party/PaymentMethod/PaymentMethodFiles?partyId=ORG_ZIZI_RETAIL&amp;paymentMethodId=ZIRET_BA">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications (ORG_ZIZI_RETAIL, ZIRET_BA)
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/vapps/marble/Accounting/Payment/FindPayment">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/vapps/marble/Accounting/dashboard">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/vapps/marble/Party/FindParty?roleTypeId=OrgInternal">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications (OrgInternal)
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Party/PaymentMethod/PaymentMethodTrans">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Parties.png" alt="Payment Method - Transactions" height="18" style="padding-right: 4px;">
+                    Payment Method - Transactions
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Party/PaymentMethod/PaymentMethodFiles">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Parties.png" alt="Payment Method - Files" height="18" style="padding-right: 4px;">
+                    Payment Method - Files
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Party/PaymentMethod/PaymentMethodFiles?paymentMethodId=ZIRET_BA&amp;partyId=ORG_ZIZI_RETAIL">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Parties.png" alt="Payment Method - Files (ZIRET_BA, ORG_ZIZI_RETAIL)" height="18" style="padding-right: 4px;">
+                    Payment Method - Files (ZIRET_BA, ORG_ZIZI_RETAIL)
+                </a></li>
+            </ul>
+        </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+    $('.navbar [data-toggle="tooltip"]').tooltip({ placement:'bottom', trigger:'hover' });
+    $('#history-menu-link').tooltip({ placement:'bottom', trigger:'hover' });
+    $('#document-menu-link').tooltip({ placement:'bottom', trigger:'hover' });
+    function switchDarkLight() {
+        $("body").toggleClass("bg-dark");
+        $("body").toggleClass("bg-light");
+        var currentStyle = $("body").hasClass("bg-dark") ? "bg-dark" : "bg-light";
+        $.ajax({ type:'POST', url:'http://127.0.0.1:18091/apps/setPreference', data:{ 'moquiSessionToken': '[REDACTED]','preferenceKey': 'OUTER_STYLE', 'preferenceValue': currentStyle }, dataType:'json' });
+    }
+</script>
+
+        <!-- END   render-mode.text[@location=component://webroot/screen/includes/navbar.html.ftl][@template=true] -->
+        <!-- BEGIN render-mode.text[inline][@template=true] -->
+        <!-- END   render-mode.text[inline][@template=true] -->
+        <li id="header-menu" class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Application <i class="fa fa-chevron-right"></i></a>
+            <ul class="dropdown-menu">
+                        <li class="active"><a href="http://127.0.0.1:18091/apps/marble/dashboard"><i class="fa fa-cogs" style="padding-right: 8px;"></i>Marble ERP</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/my"><i class="fa fa-user" style="padding-right: 8px;"></i>My Account</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/system"><i class="fa fa-cog" style="padding-right: 8px;"></i>System</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/tools"><i class="fa fa-wrench" style="padding-right: 8px;"></i>Tools</a></li>
+            </ul>
+        </li>
+        <script>$("#header-menus").append($("#header-menu"));</script>
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    <!-- END   screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+
+    <!-- END   section[@name=TopNavSection] -->
+    <div id="content">
+    <div class="inner">
+    <div class="container-fluid">
+    <!-- BEGIN section[@name=MessagesSection] -->
+        <!-- BEGIN screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+    <!-- BEGIN section-iterate[@name=headerMessageInfos] -->
+    
+    <!-- END   section-iterate[@name=headerMessageInfos] -->
+    <!-- BEGIN section-iterate[@name=headerErrors] -->
+    
+    <!-- END   section-iterate[@name=headerErrors] -->
+    <!-- BEGIN section-iterate[@name=headerValidationErrors] -->
+    
+    <!-- END   section-iterate[@name=headerValidationErrors] -->
+    <!-- BEGIN section-iterate[@name=headerSavedMessages] -->
+    
+    <!-- END   section-iterate[@name=headerSavedMessages] -->
+    <!-- BEGIN section-iterate[@name=headerSavedErrors] -->
+    
+    <!-- END   section-iterate[@name=headerSavedErrors] -->
+    <!-- BEGIN section-iterate[@name=headerSavedValidationErrors] -->
+    
+    <!-- END   section-iterate[@name=headerSavedValidationErrors] -->
+    <!-- END   screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+
+    <!-- END   section[@name=MessagesSection] -->
+        <!-- BEGIN screen[@location=component://MarbleERP/screen/marble.xml].widgets -->
+    <!-- BEGIN section[@name=OrgChooserSection] -->
+        <!-- BEGIN screen[@location=component://MarbleERP/screen/marble.xml].widgets -->
+        <!-- BEGIN render-mode.text[inline][@template=true] -->
+<div id="active-org-menu" class="nav navbar-right dropdown">
+                <a id="active-org-menu-link" href="#" class="dropdown-toggle btn btn-default btn-sm navbar-btn" data-toggle="dropdown" title="Organization">
+                    <i class="fa fa-globe"></i> </a>
+                <ul class="dropdown-menu">
+                        <li><a href="http://127.0.0.1:18091/apps/setPrefGoLast?preferenceKey=ACTIVE_ORGANIZATION&amp;preferenceValue=ORG_ZIZI_RETAIL">ZIRET: Ziziwork Retail &amp; Wholesale</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/setPrefGoLast?preferenceKey=ACTIVE_ORGANIZATION&amp;preferenceValue=ORG_ZIZI_SERVICES">ZISER: Ziziwork Services</a></li>
+                </ul>
+            </div>
+            <script>$("#navbar-buttons").append($("#active-org-menu")); $('#active-org-menu-link').tooltip({ placement:'bottom', trigger:'hover' });</script>        <!-- END   render-mode.text[inline][@template=true] -->
+    <!-- END   screen[@location=component://MarbleERP/screen/marble.xml].widgets -->
+
+    <!-- END   section[@name=OrgChooserSection] -->
+        <li id="MarbleErpPanel-menu" class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Marble ERP <i class="fa fa-chevron-right"></i></a>
+            <ul class="dropdown-menu">
+                        <li><a href="http://127.0.0.1:18091/apps/marble/dashboard"><i class="fa fa-dashboard" style="padding-right: 8px;"></i>Dashboard</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/QuickSearch"><i class="fa fa-search" style="padding-right: 8px;"></i>Quick Search</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Accounting/dashboard"><img src="http://127.0.0.1:18091/ssstatic/images/Accounting.png" alt="Accounting" height="18" style="padding-right: 4px;">Accounting</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Asset/dashboard"><img src="http://127.0.0.1:18091/ssstatic/images/Asset.png" alt="Asset" height="18" style="padding-right: 4px;">Asset</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Catalog/dashboard"><img src="http://127.0.0.1:18091/ssstatic/images/Catalog.png" alt="Catalog" height="18" style="padding-right: 4px;">Catalog</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Customer/FindCustomer"><img src="http://127.0.0.1:18091/ssstatic/images/Customer.png" alt="Customers" height="18" style="padding-right: 4px;">Customers</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Facility/FindFacility"><img src="http://127.0.0.1:18091/ssstatic/images/Facility.png" alt="Facility" height="18" style="padding-right: 4px;">Facility</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/HumanRes/dashboard"><i class="fa fa-user-plus" style="padding-right: 8px;"></i>Human Resources</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Manufacturing/dashboard"><i class="fa fa-industry" style="padding-right: 8px;"></i>Manufacturing</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Order/FindOrder"><img src="http://127.0.0.1:18091/ssstatic/images/Sales.png" alt="Orders" height="18" style="padding-right: 4px;">Orders</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Party/FindParty"><img src="http://127.0.0.1:18091/ssstatic/images/Parties.png" alt="Parties" height="18" style="padding-right: 4px;">Parties</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Project/FindProject"><img src="http://127.0.0.1:18091/ssstatic/images/project-business120.png" alt="Projects" height="18" style="padding-right: 4px;">Projects</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Request/FindRequest"><img src="http://127.0.0.1:18091/ssstatic/images/Request.png" alt="Requests" height="18" style="padding-right: 4px;">Requests</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Return/FindReturn"><img src="http://127.0.0.1:18091/ssstatic/images/Return.png" alt="Returns" height="18" style="padding-right: 4px;">Returns</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Shipment/FindShipment"><img src="http://127.0.0.1:18091/ssstatic/images/Shipping.png" alt="Shipments" height="18" style="padding-right: 4px;">Shipments</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Shipping/dashboard"><img src="http://127.0.0.1:18091/ssstatic/images/Picking.png" alt="Shipping" height="18" style="padding-right: 4px;">Shipping</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/ProductStore/FindProductStore"><img src="http://127.0.0.1:18091/ssstatic/images/ProductStore.png" alt="Stores" height="18" style="padding-right: 4px;">Stores</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Supplier/FindSupplier"><img src="http://127.0.0.1:18091/ssstatic/images/Supplier.png" alt="Suppliers" height="18" style="padding-right: 4px;">Suppliers</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Survey/FindSurvey"><i class="fa fa-pencil-square-o" style="padding-right: 8px;"></i>Survey</a></li>
+                        <li class="active"><a href="http://127.0.0.1:18091/apps/marble/Task/FindTask"><img src="http://127.0.0.1:18091/ssstatic/images/task-homework.png" alt="Tasks" height="18" style="padding-right: 4px;">Tasks</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Wiki/WikiSpaces"><img src="http://127.0.0.1:18091/ssstatic/images/Wiki.png" alt="Wiki/Content" height="18" style="padding-right: 4px;">Wiki/Content</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/QuickViewReport"><i class="fa fa-database" style="padding-right: 8px;"></i>Custom Reports</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/SimpleReport/FindReport"><i class="fa fa-database" style="padding-right: 8px;"></i>Report Builder</a></li>
+            </ul>
+        </li>
+        <script>$("#header-menus").append($("#MarbleErpPanel-menu"));</script>
+            <!-- BEGIN screen[@location=component://SimpleScreens/screen/SimpleScreens/Task.xml].widgets -->
+        <div id="task-panel-tabpanel">
+                <a id="task-panel-menu-crumb" class="navbar-text" href="http://127.0.0.1:18091/apps/marble/Task/FindTask">Tasks <i class="fa fa-chevron-right"></i></a>
+                <script>$("#navbar-menu-crumbs").append($("#task-panel-menu-crumb"));</script>
+                <!-- BEGIN screen[@location=component://SimpleScreens/screen/SimpleScreens/Task/FindTask.xml].widgets -->
+    <div class="row">
+            <div class=" col-md-6">
+    <!-- BEGIN form-single[@name=SearchOptions] -->
+    <form name="SearchOptions" id="SearchOptions" method="post" action="http://127.0.0.1:18091/apps/marble/Task/FindTask">
+        <input type="hidden" name="moquiFormName" value="SearchOptions" style="">
+        <input type="hidden" name="moquiSessionToken" value="[REDACTED]" style="">
+        
+        <fieldset class="form-horizontal">
+    <div class="form-group">
+        <div class="col-sm-12">
+            <div class="big-row-item">
+            <div class="form-group">
+    
+<input id="SearchOptions_queryString" type="text" name="queryString" value="" size="40" class="form-control" style="">
+        
+            </div><!-- /form-group -->
+        </div><!-- /field-row-item -->
+        <div class="big-row-item">
+            <div class="form-group">
+    
+    <button type="submit" name="submitButton" value="submitButton" id="SearchOptions_submitButton" class="btn btn-primary btn-sm">
+Text Search    </button>
+            </div><!-- /form-group -->
+        </div><!-- /field-row-item -->
+        </div>
+    </div>
+        </fieldset>
+    </form>
+        <script>
+            $("#SearchOptions").validate({ errorClass: 'help-block', errorElement: 'span',
+                highlight: function(element, errorClass, validClass) { $(element).parents('.form-group').removeClass('has-success').addClass('has-error'); },
+                unhighlight: function(element, errorClass, validClass) { $(element).parents('.form-group').removeClass('has-error').addClass('has-success'); }
+            });
+            $('#SearchOptions [data-toggle="tooltip"]').tooltip({placement:'auto top'});
+
+        </script>
+        <script>$("#SearchOptions").find('[name^="queryString"]').addClass('default-focus').focus();</script>
+    <!-- END   form-single[@name=SearchOptions] -->
+            </div>
+            <div class=" col-md-6 text-right">
+        <button id="NewTaskContainer-button" type="button" data-toggle="modal" data-target="#NewTaskContainer" data-original-title="New Task" data-placement="bottom" class="btn btn-primary btn-sm "><i class="fa fa-share"></i> New Task</button>
+
+        <div id="NewTaskContainer" class="modal container-dialog" aria-hidden="true" style="display: none;" tabindex="-1">
+            <div class="modal-dialog" style="width: 760px;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">New Task</h4>
+                    </div>
+                    <div class="modal-body">
+    <!-- BEGIN form-single[@name=NewTaskForm] -->
+    <form name="NewTaskForm" id="NewTaskForm" method="post" action="http://127.0.0.1:18091/apps/marble/Task/FindTask/createTask">
+        <input type="hidden" name="moquiFormName" value="NewTaskForm" style="">
+        <input type="hidden" name="moquiSessionToken" value="[REDACTED]" style="">
+        
+        <fieldset class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="NewTaskForm_rootWorkEffortId">Project</label>
+            <div class="col-sm-10">
+    
+    <select name="rootWorkEffortId" class="" id="NewTaskForm_rootWorkEffortId">
+            <option value="">&nbsp;</option>
+    </select>
+    
+    
+        <script>$("#NewTaskForm_rootWorkEffortId").select2({  });</script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="NewTaskForm_milestoneWorkEffortId">Milestone</label>
+            <div class="col-sm-10">
+    
+    <select name="milestoneWorkEffortId" class=" dynamic-options" id="NewTaskForm_milestoneWorkEffortId">
+            <option value="">&nbsp;</option>
+    </select>
+    
+    
+        <script>
+            var NewTaskForm_milestoneWorkEffortIdS2Opts = { 
+                
+                            };
+            $("#NewTaskForm_milestoneWorkEffortId").select2(NewTaskForm_milestoneWorkEffortIdS2Opts);
+            function populate_NewTaskForm_milestoneWorkEffortId(params) {
+                    var hasAllParms = true;
+                    if (!$('#NewTaskForm_rootWorkEffortId').val()) { hasAllParms = false; } 
+                    if (!hasAllParms) { $("#NewTaskForm_milestoneWorkEffortId").select2("destroy"); $('#NewTaskForm_milestoneWorkEffortId').html(""); $("#NewTaskForm_milestoneWorkEffortId").select2({ });  return; }
+                $.ajax({ type:"POST", url:"http://127.0.0.1:18091/apps/marble/Task/FindTask/getProjectMilestones", data:{ moquiSessionToken: "[REDACTED]", "rootWorkEffortId": $("#NewTaskForm_rootWorkEffortId").val(), term:((params && params.term) || '')}, dataType:"json"}).done(                    function(data) {
+                        var list = moqui.isArray(data) ? data : data.options;
+                        if (list) {
+                            var jqEl = $("#NewTaskForm_milestoneWorkEffortId");
+                            var bWasFocused = jqEl.next().hasClass('select2-container--focus');
+                            jqEl.select2("destroy");
+                            jqEl.html("");
+                            jqEl.append('<option value="">&nbsp;</option>');
+                            
+                            $.each(list, function(key, value) {
+                                var optionValue = value["workEffortId"];
+                                if (optionValue === "") {
+                                    jqEl.append("<option selected='selected' value='" + optionValue + "'>" + value["milestoneLabel"] + "</option>");
+                                } else {
+                                    jqEl.append("<option value='" + optionValue + "'>" + value["milestoneLabel"] + "</option>");
+                                }
+                            });
+                            $("#NewTaskForm_milestoneWorkEffortId").select2(NewTaskForm_milestoneWorkEffortIdS2Opts);
+                            if( bWasFocused ) jqEl.focus();
+                            setTimeout(function() { jqEl.trigger('change'); }, 50);
+                        }
+                    }
+                );
+            }
+            $("#NewTaskForm_rootWorkEffortId").on('change', function() { populate_NewTaskForm_milestoneWorkEffortId(); });
+            populate_NewTaskForm_milestoneWorkEffortId();
+
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="NewTaskForm_parentWorkEffortId">Parent Task</label>
+            <div class="col-sm-10">
+    
+    <select name="parentWorkEffortId" class=" dynamic-options noResetSelect2" style="min-width:200px;" id="NewTaskForm_parentWorkEffortId">
+            <option value="">&nbsp;</option>
+    </select>
+    
+    
+        <script>
+            var NewTaskForm_parentWorkEffortIdS2Opts = { 
+                
+                minimumResultsForSearch:0, width:"100%", minimumInputLength:2,
+                ajax:{ url:"http://127.0.0.1:18091/apps/marble/Task/FindTask/getTaskList", type:"POST", dataType:"json", cache:true, delay:300,
+                    data:function(params) { return { moquiSessionToken: "[REDACTED]", term:(params.term || ''), pageIndex:(params.page || 1) - 1
+                        , "rootWorkEffortId": $("#NewTaskForm_rootWorkEffortId").val()
+                        
+                    }},
+                    processResults:function(data, params) {
+                        var isDataArray = moqui.isArray(data);
+                        var list = isDataArray ? data : data.options;
+                        var newData = [];
+                        // funny case where select2 specifies no option.@value if empty so &nbsp; ends up passed with form submit; now filtered on server for \u00a0 only and set to null
+                        if (!params.page || params.page <= 1) newData.push({ id:'\u00a0', text:'\u00a0' });
+                        var labelField = "label"; var valueField = "value";
+                        $.each(list, function(idx, curObj) {
+                            var idVal = curObj[valueField]; if (!idVal) idVal = '\u00a0';
+                            newData.push({ id:idVal, text:curObj[labelField] })
+                        });
+                        var outObj = { results:newData };
+                        if (!isDataArray) {
+                            params.page = params.page || 1; // NOTE: 1 based index, is 0 based on server side
+                            var pageSize = data.pageSize || 20;
+                            outObj.pagination = { more: (data.count ? (params.page * pageSize) < data.count : false) };
+                        }
+                        return outObj;
+                    }
+                }
+            };
+            $("#NewTaskForm_parentWorkEffortId").select2(NewTaskForm_parentWorkEffortIdS2Opts);
+            function populate_NewTaskForm_parentWorkEffortId(params) {
+                $.ajax({ type:"POST", url:"http://127.0.0.1:18091/apps/marble/Task/FindTask/getTaskList", data:{ moquiSessionToken: "[REDACTED]", "rootWorkEffortId": $("#NewTaskForm_rootWorkEffortId").val(), term:((params && params.term) || '')}, dataType:"json"}).done(                    function(data) {
+                        var list = moqui.isArray(data) ? data : data.options;
+                        if (list) {
+                            var jqEl = $("#NewTaskForm_parentWorkEffortId");
+                            var bWasFocused = jqEl.next().hasClass('select2-container--focus');
+                            jqEl.select2("destroy");
+                            jqEl.html("");
+                            jqEl.append('<option value="">&nbsp;</option>');
+                            
+                            $.each(list, function(key, value) {
+                                var optionValue = value["value"];
+                                if (optionValue === "") {
+                                    jqEl.append("<option selected='selected' value='" + optionValue + "'>" + value["label"] + "</option>");
+                                } else {
+                                    jqEl.append("<option value='" + optionValue + "'>" + value["label"] + "</option>");
+                                }
+                            });
+                            $("#NewTaskForm_parentWorkEffortId").select2(NewTaskForm_parentWorkEffortIdS2Opts);
+                            if( bWasFocused ) jqEl.focus();
+                            setTimeout(function() { jqEl.trigger('change'); }, 50);
+                        }
+                    }
+                );
+            }
+            $("#NewTaskForm_rootWorkEffortId").on('change', function() { populate_NewTaskForm_parentWorkEffortId(); });
+            
+                
+
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="NewTaskForm_assignToPartyId">Assign To</label>
+            <div class="col-sm-10">
+    
+    <select name="assignToPartyId" class=" dynamic-options noResetSelect2" style="min-width:200px;" id="NewTaskForm_assignToPartyId">
+                <option selected="selected" value="EX_JOHN_DOE">EX_JOHN_DOE</option>            <option value="">&nbsp;</option>
+    </select>
+    
+    
+        <script>
+            var NewTaskForm_assignToPartyIdS2Opts = { 
+                
+                minimumResultsForSearch:0, width:"100%", minimumInputLength:0,
+                ajax:{ url:"http://127.0.0.1:18091/apps/marble/Task/FindTask/getProjectParties", type:"POST", dataType:"json", cache:true, delay:300,
+                    data:function(params) { return { moquiSessionToken: "[REDACTED]", term:(params.term || ''), pageIndex:(params.page || 1) - 1
+                        , "rootWorkEffortId": $("#NewTaskForm_rootWorkEffortId").val()
+                        , "searchPartyDocType":"MantleParty", "searchIndexName":"mantle", "addOptional":"false"
+                    }},
+                    processResults:function(data, params) {
+                        var isDataArray = moqui.isArray(data);
+                        var list = isDataArray ? data : data.options;
+                        var newData = [];
+                        // funny case where select2 specifies no option.@value if empty so &nbsp; ends up passed with form submit; now filtered on server for \u00a0 only and set to null
+                        if (!params.page || params.page <= 1) newData.push({ id:'\u00a0', text:'\u00a0' });
+                        var labelField = "name"; var valueField = "partyId";
+                        $.each(list, function(idx, curObj) {
+                            var idVal = curObj[valueField]; if (!idVal) idVal = '\u00a0';
+                            newData.push({ id:idVal, text:curObj[labelField] })
+                        });
+                        var outObj = { results:newData };
+                        if (!isDataArray) {
+                            params.page = params.page || 1; // NOTE: 1 based index, is 0 based on server side
+                            var pageSize = data.pageSize || 20;
+                            outObj.pagination = { more: (data.count ? (params.page * pageSize) < data.count : false) };
+                        }
+                        return outObj;
+                    }
+                }
+            };
+            $("#NewTaskForm_assignToPartyId").select2(NewTaskForm_assignToPartyIdS2Opts);
+            function populate_NewTaskForm_assignToPartyId(params) {
+                $.ajax({ type:"POST", url:"http://127.0.0.1:18091/apps/marble/Task/FindTask/getProjectParties", data:{ moquiSessionToken: "[REDACTED]", "rootWorkEffortId": $("#NewTaskForm_rootWorkEffortId").val(), "searchPartyDocType":"MantleParty", "searchIndexName":"mantle", "addOptional":"false", term:((params && params.term) || '')}, dataType:"json"}).done(                    function(data) {
+                        var list = moqui.isArray(data) ? data : data.options;
+                        if (list) {
+                            var jqEl = $("#NewTaskForm_assignToPartyId");
+                            var bWasFocused = jqEl.next().hasClass('select2-container--focus');
+                            jqEl.select2("destroy");
+                            jqEl.html("");
+                            jqEl.append('<option value="">&nbsp;</option>');
+                            
+                            $.each(list, function(key, value) {
+                                var optionValue = value["partyId"];
+                                if (optionValue === "EX_JOHN_DOE") {
+                                    jqEl.append("<option selected='selected' value='" + optionValue + "'>" + value["name"] + "</option>");
+                                } else {
+                                    jqEl.append("<option value='" + optionValue + "'>" + value["name"] + "</option>");
+                                }
+                            });
+                            $("#NewTaskForm_assignToPartyId").select2(NewTaskForm_assignToPartyIdS2Opts);
+                            if( bWasFocused ) jqEl.focus();
+                            setTimeout(function() { jqEl.trigger('change'); }, 50);
+                        }
+                    }
+                );
+            }
+            $("#NewTaskForm_rootWorkEffortId").on('change', function() { populate_NewTaskForm_assignToPartyId({term:"EX_JOHN_DOE"}); });
+            populate_NewTaskForm_assignToPartyId({term:"EX_JOHN_DOE"});
+                
+
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="NewTaskForm_workEffortName">Task Name</label>
+            <div class="col-sm-10">
+    
+<input id="NewTaskForm_workEffortName" type="text" name="workEffortName" value="" style="width: 100%;" class="form-control required" required="">
+        
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="NewTaskForm_priority">Priority</label>
+            <div class="col-sm-10">
+    
+    <select name="priority" class=" number" id="NewTaskForm_priority">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option selected="selected" value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+    </select>
+    
+    
+        <script>$("#NewTaskForm_priority").select2({  });</script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="NewTaskForm_purposeEnumId">Purpose</label>
+            <div class="col-sm-10">
+    
+    <select name="purposeEnumId" class="" id="NewTaskForm_purposeEnumId">
+            <option value="WepFix">Bug Fix</option>
+            <option value="WepCommunication">Communication</option>
+            <option value="WepDocument">Document</option>
+            <option value="WepFeatureEnhance">Feature Enhancement</option>
+            <option value="WepFeatureTest">Feature Test</option>
+            <option value="WepNewFeature">New Feature</option>
+            <option value="WepPlaceholder">Placeholder</option>
+            <option selected="selected" value="WepTask">Task</option>
+            <option value="WepToDo">To Do</option>
+    </select>
+    
+    
+        <script>$("#NewTaskForm_purposeEnumId").select2({  });</script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="NewTaskForm_statusId">Status</label>
+            <div class="col-sm-10">
+    
+    <select name="statusId" class=" " id="NewTaskForm_statusId">
+            <option selected="selected" value="WeInPlanning">In Planning</option>
+            <option value="WeApproved">Approved</option>
+            <option value="WeInProgress">In Progress</option>
+            <option value="WeOnHold">On Hold</option>
+            <option value="WeComplete">Complete</option>
+            <option value="WeClosed">Closed</option>
+            <option value="WeCancelled">Cancelled</option>
+    </select>
+    
+    
+        <script>$("#NewTaskForm_statusId").select2({  });</script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="NewTaskForm_estimatedCompletionDate">Due Date</label>
+            <div class="col-sm-10">
+    
+
+
+
+        <div class="input-group date" id="NewTaskForm_estimatedCompletionDate">
+            <input type="text" class="form-control" name="estimatedCompletionDate" value="" size="10" maxlength="10" style="">
+            <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+        </div>
+        <script>
+            $('#NewTaskForm_estimatedCompletionDate').datetimepicker({toolbarPlacement:'top', showClose:true, showClear:true, showTodayButton:true,
+                useStrict:true, defaultDate: '' && moment('','YYYY-MM-DD'),
+                format:'YYYY-MM-DD', extraFormats:['l', 'L', 'YYYY-MM-DD'], stepping:5, locale:"en-US",
+                keyBinds: {t: function() {this.date(moment());}, up: function () { this.date(this.date().clone().add(1, 'd')); }, down: function () { this.date(this.date().clone().subtract(1, 'd')); }, 'control up': function () { this.date(this.date().clone().add(1, 'd')); }, 'control down': function () { this.date(this.date().clone().subtract(1, 'd')); }}});
+            $('#NewTaskForm_estimatedCompletionDate').on("dp.change", function() { var jqEl = $('#NewTaskForm_estimatedCompletionDate'); jqEl.val(jqEl.find("input").first().val()); jqEl.trigger("change"); });
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="NewTaskForm_estimatedWorkTime">Estimated Hours</label>
+            <div class="col-sm-10">
+    
+<input id="NewTaskForm_estimatedWorkTime" type="text" name="estimatedWorkTime" value="" size="5" class="form-control number" style="">
+        
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="NewTaskForm_description">Description</label>
+            <div class="col-sm-10">
+    
+<textarea class="form-control" name="description" id="NewTaskForm_description" cols="60" rows="10" style=""></textarea>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <div class="col-sm-2 hidden-xs">&nbsp;</div>
+            <div class="col-sm-10">
+    
+    <button type="submit" name="submitButton" value="submitButton" id="NewTaskForm_submitButton" class="btn btn-primary btn-sm">
+Create    </button>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        </fieldset>
+    </form>
+        <script>
+            $("#NewTaskForm").validate({ errorClass: 'help-block', errorElement: 'span',
+                highlight: function(element, errorClass, validClass) { $(element).parents('.form-group').removeClass('has-success').addClass('has-error'); },
+                unhighlight: function(element, errorClass, validClass) { $(element).parents('.form-group').removeClass('has-error').addClass('has-success'); }
+            });
+            $('#NewTaskForm [data-toggle="tooltip"]').tooltip({placement:'auto top'});
+
+        </script>
+    <!-- END   form-single[@name=NewTaskForm] -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>$('#NewTaskContainer').on('shown.bs.modal', function() {
+            $("#NewTaskContainer :not(.noResetSelect2)>select:not(.noResetSelect2)").select2({ });
+            var defFocus = $("#NewTaskContainer .default-focus");
+            if (defFocus.length) { defFocus.focus(); } else { $("#NewTaskContainer form :input:visible:first").focus(); }
+        });</script>
+            </div>
+    </div>
+    <!-- BEGIN form-list[@name=ListTasks] -->
+
+        <div id="ListTasks_hdialog" class="modal" aria-hidden="true" style="display: none;" tabindex="-1">
+            <div class="modal-dialog" style="width: 800px;"><div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Find Options</h4>
+                </div>
+                <div class="modal-body">
+                <h4 style="margin-top: 0;">Saved Finds</h4>
+                        <p>No find parameters, choose some to save a new find or update existing</p>
+                <h4>Find Parameters</h4>
+                    <form name="ListTasks_header" id="ListTasks_header" method="post" action="http://127.0.0.1:18091/apps/marble/Task/FindTask">
+                        <input type="hidden" name="moquiSessionToken" value="[REDACTED]" style="">
+                        
+                        
+                        <fieldset class="form-horizontal">
+                            <div class="form-group"><div class="col-sm-2">&nbsp;</div><div class="col-sm-10">
+                                <button type="button" class="btn btn-primary btn-sm" onclick="ListTasks_header_clearForm()">Clear Parameters</button></div></div>
+
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="ListTasks_header_orderByField">Order By</label>
+                                <div class="col-sm-10">
+                                    <select name="orderBySelect" id="ListTasks_header_orderBySelect" multiple="multiple" style="width: 100%;" class="noResetSelect2">
+                                                <option value="priority">Pri (Asc)</option>
+                                                <option value="-priority">Pri (Desc)</option>
+                                                <option value="workEffortId">ID (Asc)</option>
+                                                <option value="-workEffortId">ID (Desc)</option>
+                                                <option value="workEffortName">Name (Asc)</option>
+                                                <option value="-workEffortName">Name (Desc)</option>
+                                                <option value="rootWorkEffortId">Project (Asc)</option>
+                                                <option value="-rootWorkEffortId">Project (Desc)</option>
+                                                <option value="parentWorkEffortId">Parent (Asc)</option>
+                                                <option value="-parentWorkEffortId">Parent (Desc)</option>
+                                                <option value="milestoneWorkEffortId">Milestone (Asc)</option>
+                                                <option value="-milestoneWorkEffortId">Milestone (Desc)</option>
+                                                <option value="purposeEnumId">Purpose (Asc)</option>
+                                                <option value="-purposeEnumId">Purpose (Desc)</option>
+                                                <option value="statusId">Status (Asc)</option>
+                                                <option value="-statusId">Status (Desc)</option>
+                                                <option value="resolutionEnumId">Resolution (Asc)</option>
+                                                <option value="-resolutionEnumId">Resolution (Desc)</option>
+                                                <option value="estimatedCompletionDate">Due Date (Asc)</option>
+                                                <option value="-estimatedCompletionDate">Due Date (Desc)</option>
+                                    </select>
+                                    <input type="hidden" id="ListTasks_header_orderByField" name="orderByField" value="priority,workEffortId" style="">
+                                </div>
+                            </div>
+                            <script>
+                                function ListTasks_header_clearForm() {
+                                    var jqEl = $("#ListTasks_header");
+                                    jqEl.find(':radio, :checkbox').removeAttr('checked');
+                                    jqEl.find('textarea, :text, select').val('').trigger('change');
+                                    return false;
+                                }
+                                $("#ListTasks_header_orderBySelect").selectivity({ positionDropdown: function(dropdownEl, selectEl) { dropdownEl.css("width", "300px"); } })[0].selectivity.filterResults = function(results) {
+                                    // Filter out asc and desc options if anyone selected.
+                                    return results.filter(function(item){return !this._data.some(function(data_item) {return data_item.id.substring(1) === item.id.substring(1);});}, this);
+                                };
+                                    $("#ListTasks_header_orderBySelect").selectivity("value", ['priority','workEffortId']);
+                                $("div#ListTasks_header_orderBySelect").on("change", function(evt) {
+                                    if (evt.value) $("#ListTasks_header_orderByField").val(evt.value.join(","));
+                                });
+                            </script>
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="ListTasks_header_queryString">Text Search</label>
+            <div class="col-sm-10">
+    
+<input id="ListTasks_header_queryString" type="text" name="queryString" value="" size="70" class="form-control" style="">
+        
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="ListTasks_header_priority">Pri</label>
+            <div class="col-sm-10">
+    
+<span class="form-range-find">
+    <span>From&nbsp;</span><input type="text" class="form-control" name="priority_from" value="" size="10" id="ListTasks_header_priority_from" style="">
+</span>
+<span class="form-range-find">
+    <span>Thru&nbsp;</span><input type="text" class="form-control" name="priority_thru" value="" size="10" id="ListTasks_header_priority_thru" style="">
+</span>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="ListTasks_header_workEffortId">ID</label>
+            <div class="col-sm-10">
+    
+<span class="form-text-find">
+        <span><input type="checkbox" class="form-control" name="workEffortId_not" value="Y" style="">&nbsp;Not</span>
+        <select name="workEffortId_op" class="form-control">
+            <option value="equals">Equals</option>
+            <option value="like">Like</option>
+            <option value="contains" selected="selected">Contains</option>
+            <option value="begins">Begins With</option>
+            <option value="empty">Empty</option>        </select>
+    <input type="text" class="form-control" name="workEffortId" value="" size="30" id="ListTasks_header_workEffortId" style="">
+        <span><input type="checkbox" class="form-control" name="workEffortId_ic" value="Y" checked="checked" style="">&nbsp;Ignore Case</span>
+</span>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="ListTasks_header_workEffortName">Name</label>
+            <div class="col-sm-10">
+    
+<span class="form-text-find">
+        <span><input type="checkbox" class="form-control" name="workEffortName_not" value="Y" style="">&nbsp;Not</span>
+        <select name="workEffortName_op" class="form-control">
+            <option value="equals">Equals</option>
+            <option value="like">Like</option>
+            <option value="contains" selected="selected">Contains</option>
+            <option value="begins">Begins With</option>
+            <option value="empty">Empty</option>        </select>
+    <input type="text" class="form-control" name="workEffortName" value="" size="30" id="ListTasks_header_workEffortName" style="">
+        <span><input type="checkbox" class="form-control" name="workEffortName_ic" value="Y" checked="checked" style="">&nbsp;Ignore Case</span>
+</span>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="ListTasks_header_rootWorkEffortId">Project</label>
+            <div class="col-sm-10">
+    
+    <select name="rootWorkEffortId" class="" id="ListTasks_header_rootWorkEffortId">
+            <option value="">&nbsp;</option>
+    </select>
+    
+    
+        <script>$("#ListTasks_header_rootWorkEffortId").select2({  });</script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="ListTasks_header_parentWorkEffortId">Parent</label>
+            <div class="col-sm-10">
+    
+    <select name="parentWorkEffortId" class=" dynamic-options noResetSelect2" style="min-width:200px;" id="ListTasks_header_parentWorkEffortId">
+            <option value="">&nbsp;</option>
+    </select>
+    
+    
+        <script>
+            var ListTasks_header_parentWorkEffortIdS2Opts = { 
+                
+                minimumResultsForSearch:0, width:"100%", minimumInputLength:2,
+                ajax:{ url:"http://127.0.0.1:18091/apps/marble/Task/FindTask/getTaskList", type:"POST", dataType:"json", cache:true, delay:300,
+                    data:function(params) { return { moquiSessionToken: "[REDACTED]", term:(params.term || ''), pageIndex:(params.page || 1) - 1
+                        , "rootWorkEffortId": $("#ListTasks_header_rootWorkEffortId").val()
+                        
+                    }},
+                    processResults:function(data, params) {
+                        var isDataArray = moqui.isArray(data);
+                        var list = isDataArray ? data : data.options;
+                        var newData = [];
+                        // funny case where select2 specifies no option.@value if empty so &nbsp; ends up passed with form submit; now filtered on server for \u00a0 only and set to null
+                        if (!params.page || params.page <= 1) newData.push({ id:'\u00a0', text:'\u00a0' });
+                        var labelField = "label"; var valueField = "value";
+                        $.each(list, function(idx, curObj) {
+                            var idVal = curObj[valueField]; if (!idVal) idVal = '\u00a0';
+                            newData.push({ id:idVal, text:curObj[labelField] })
+                        });
+                        var outObj = { results:newData };
+                        if (!isDataArray) {
+                            params.page = params.page || 1; // NOTE: 1 based index, is 0 based on server side
+                            var pageSize = data.pageSize || 20;
+                            outObj.pagination = { more: (data.count ? (params.page * pageSize) < data.count : false) };
+                        }
+                        return outObj;
+                    }
+                }
+            };
+            $("#ListTasks_header_parentWorkEffortId").select2(ListTasks_header_parentWorkEffortIdS2Opts);
+            function populate_ListTasks_header_parentWorkEffortId(params) {
+                $.ajax({ type:"POST", url:"http://127.0.0.1:18091/apps/marble/Task/FindTask/getTaskList", data:{ moquiSessionToken: "[REDACTED]", "rootWorkEffortId": $("#ListTasks_header_rootWorkEffortId").val(), term:((params && params.term) || '')}, dataType:"json"}).done(                    function(data) {
+                        var list = moqui.isArray(data) ? data : data.options;
+                        if (list) {
+                            var jqEl = $("#ListTasks_header_parentWorkEffortId");
+                            var bWasFocused = jqEl.next().hasClass('select2-container--focus');
+                            jqEl.select2("destroy");
+                            jqEl.html("");
+                            jqEl.append('<option value="">&nbsp;</option>');
+                            
+                            $.each(list, function(key, value) {
+                                var optionValue = value["value"];
+                                if (optionValue === "") {
+                                    jqEl.append("<option selected='selected' value='" + optionValue + "'>" + value["label"] + "</option>");
+                                } else {
+                                    jqEl.append("<option value='" + optionValue + "'>" + value["label"] + "</option>");
+                                }
+                            });
+                            $("#ListTasks_header_parentWorkEffortId").select2(ListTasks_header_parentWorkEffortIdS2Opts);
+                            if( bWasFocused ) jqEl.focus();
+                            setTimeout(function() { jqEl.trigger('change'); }, 50);
+                        }
+                    }
+                );
+            }
+            $("#ListTasks_header_rootWorkEffortId").on('change', function() { populate_ListTasks_header_parentWorkEffortId(); });
+            
+                
+
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="ListTasks_header_milestoneWorkEffortId">Milestone</label>
+            <div class="col-sm-10">
+    
+    <select name="milestoneWorkEffortId" class=" dynamic-options" id="ListTasks_header_milestoneWorkEffortId">
+            <option value="">&nbsp;</option>
+    </select>
+    
+    
+        <script>
+            var ListTasks_header_milestoneWorkEffortIdS2Opts = { 
+                
+                            };
+            $("#ListTasks_header_milestoneWorkEffortId").select2(ListTasks_header_milestoneWorkEffortIdS2Opts);
+            function populate_ListTasks_header_milestoneWorkEffortId(params) {
+                    var hasAllParms = true;
+                    if (!$('#ListTasks_header_rootWorkEffortId').val()) { hasAllParms = false; } 
+                    if (!hasAllParms) { $("#ListTasks_header_milestoneWorkEffortId").select2("destroy"); $('#ListTasks_header_milestoneWorkEffortId').html(""); $("#ListTasks_header_milestoneWorkEffortId").select2({ });  return; }
+                $.ajax({ type:"POST", url:"http://127.0.0.1:18091/apps/marble/Task/FindTask/getProjectMilestones", data:{ moquiSessionToken: "[REDACTED]", "rootWorkEffortId": $("#ListTasks_header_rootWorkEffortId").val(), term:((params && params.term) || '')}, dataType:"json"}).done(                    function(data) {
+                        var list = moqui.isArray(data) ? data : data.options;
+                        if (list) {
+                            var jqEl = $("#ListTasks_header_milestoneWorkEffortId");
+                            var bWasFocused = jqEl.next().hasClass('select2-container--focus');
+                            jqEl.select2("destroy");
+                            jqEl.html("");
+                            jqEl.append('<option value="">&nbsp;</option>');
+                            
+                            $.each(list, function(key, value) {
+                                var optionValue = value["workEffortId"];
+                                if (optionValue === "") {
+                                    jqEl.append("<option selected='selected' value='" + optionValue + "'>" + value["milestoneLabel"] + "</option>");
+                                } else {
+                                    jqEl.append("<option value='" + optionValue + "'>" + value["milestoneLabel"] + "</option>");
+                                }
+                            });
+                            $("#ListTasks_header_milestoneWorkEffortId").select2(ListTasks_header_milestoneWorkEffortIdS2Opts);
+                            if( bWasFocused ) jqEl.focus();
+                            setTimeout(function() { jqEl.trigger('change'); }, 50);
+                        }
+                    }
+                );
+            }
+            $("#ListTasks_header_rootWorkEffortId").on('change', function() { populate_ListTasks_header_milestoneWorkEffortId(); });
+            populate_ListTasks_header_milestoneWorkEffortId();
+
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="ListTasks_header_purposeEnumId">Purpose</label>
+            <div class="col-sm-10">
+    
+    <select name="purposeEnumId" class="  noResetSelect2" id="ListTasks_header_purposeEnumId" multiple="multiple">
+            <option value="WepFix">Bug Fix</option>
+            <option value="WepCommunication">Communication</option>
+            <option value="WepDocument">Document</option>
+            <option value="WepFeatureEnhance">Feature Enhancement</option>
+            <option value="WepFeatureTest">Feature Test</option>
+            <option value="WepNewFeature">New Feature</option>
+            <option value="WepPlaceholder">Placeholder</option>
+            <option value="WepTask">Task</option>
+            <option value="WepToDo">To Do</option>
+    </select>
+    
+    <input type="hidden" id="ListTasks_header_purposeEnumId_op" name="purposeEnumId_op" value="in" style="">
+        <script>$("#ListTasks_header_purposeEnumId").select2({ closeOnSelect:false, width:"100%",  });</script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="ListTasks_header_statusId">Status</label>
+            <div class="col-sm-10">
+    
+    <select name="statusId" class="  noResetSelect2" id="ListTasks_header_statusId" multiple="multiple">
+            <option selected="selected" value="WeInPlanning">In Planning</option>
+            <option selected="selected" value="WeApproved">Approved</option>
+            <option selected="selected" value="WeInProgress">In Progress</option>
+            <option selected="selected" value="WeOnHold">On Hold</option>
+            <option selected="selected" value="WeComplete">Complete</option>
+            <option value="WeClosed">Closed</option>
+            <option value="WeCancelled">Cancelled</option>
+    </select>
+    
+    <input type="hidden" id="ListTasks_header_statusId_op" name="statusId_op" value="in" style="">
+        <script>$("#ListTasks_header_statusId").select2({ closeOnSelect:false, width:"100%",  });</script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="ListTasks_header_resolutionEnumId">Resolution</label>
+            <div class="col-sm-10">
+    
+    <select name="resolutionEnumId" class="  noResetSelect2" id="ListTasks_header_resolutionEnumId" multiple="multiple">
+            <option value="WerCannotReproduce">Cannot Reproduce</option>
+            <option value="WerCompleted">Completed</option>
+            <option value="WerDuplicate">Duplicate</option>
+            <option value="WerIncomplete">Incomplete</option>
+            <option value="WerInsufficient">Insufficient Information</option>
+            <option value="WerUnresolved">Unresolved</option>
+            <option value="WerWontComplete">Won't Complete</option>
+    </select>
+    
+    <input type="hidden" id="ListTasks_header_resolutionEnumId_op" name="resolutionEnumId_op" value="in" style="">
+        <script>$("#ListTasks_header_resolutionEnumId").select2({ closeOnSelect:false, width:"100%",  });</script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="ListTasks_header_partyId">Assigned To</label>
+            <div class="col-sm-10">
+    
+    <select name="partyId" class=" dynamic-options noResetSelect2" style="min-width:200px;" id="ListTasks_header_partyId" multiple="multiple">
+    </select>
+    
+    <input type="hidden" id="ListTasks_header_partyId_op" name="partyId_op" value="in" style="">
+        <script>
+            var ListTasks_header_partyIdS2Opts = { 
+                closeOnSelect:false,
+                minimumResultsForSearch:0, width:"100%", minimumInputLength:0,
+                ajax:{ url:"http://127.0.0.1:18091/apps/marble/Task/FindTask/getProjectParties", type:"POST", dataType:"json", cache:true, delay:300,
+                    data:function(params) { return { moquiSessionToken: "[REDACTED]", term:(params.term || ''), pageIndex:(params.page || 1) - 1
+                        , "rootWorkEffortId": $("#ListTasks_header_rootWorkEffortId").val()
+                        , "searchPartyDocType":"MantleParty", "searchIndexName":"mantle", "addOptional":"false"
+                    }},
+                    processResults:function(data, params) {
+                        var isDataArray = moqui.isArray(data);
+                        var list = isDataArray ? data : data.options;
+                        var newData = [];
+                        // funny case where select2 specifies no option.@value if empty so &nbsp; ends up passed with form submit; now filtered on server for \u00a0 only and set to null
+                        if (!params.page || params.page <= 1) newData.push({ id:'\u00a0', text:'\u00a0' });
+                        var labelField = "name"; var valueField = "partyId";
+                        $.each(list, function(idx, curObj) {
+                            var idVal = curObj[valueField]; if (!idVal) idVal = '\u00a0';
+                            newData.push({ id:idVal, text:curObj[labelField] })
+                        });
+                        var outObj = { results:newData };
+                        if (!isDataArray) {
+                            params.page = params.page || 1; // NOTE: 1 based index, is 0 based on server side
+                            var pageSize = data.pageSize || 20;
+                            outObj.pagination = { more: (data.count ? (params.page * pageSize) < data.count : false) };
+                        }
+                        return outObj;
+                    }
+                }
+            };
+            $("#ListTasks_header_partyId").select2(ListTasks_header_partyIdS2Opts);
+            function populate_ListTasks_header_partyId(params) {
+                $.ajax({ type:"POST", url:"http://127.0.0.1:18091/apps/marble/Task/FindTask/getProjectParties", data:{ moquiSessionToken: "[REDACTED]", "rootWorkEffortId": $("#ListTasks_header_rootWorkEffortId").val(), "searchPartyDocType":"MantleParty", "searchIndexName":"mantle", "addOptional":"false", term:((params && params.term) || '')}, dataType:"json"}).done(                    function(data) {
+                        var list = moqui.isArray(data) ? data : data.options;
+                        if (list) {
+                            var jqEl = $("#ListTasks_header_partyId");
+                            var bWasFocused = jqEl.next().hasClass('select2-container--focus');
+                            jqEl.select2("destroy");
+                            jqEl.html("");
+                            jqEl.append('<option value="">&nbsp;</option>');
+                            var currentValues = [""];
+                            $.each(list, function(key, value) {
+                                var optionValue = value["partyId"];
+                                if (currentValues.indexOf(optionValue) >= 0) {
+                                    jqEl.append("<option selected='selected' value='" + optionValue + "'>" + value["name"] + "</option>");
+                                } else {
+                                    jqEl.append("<option value='" + optionValue + "'>" + value["name"] + "</option>");
+                                }
+                            });
+                            $("#ListTasks_header_partyId").select2(ListTasks_header_partyIdS2Opts);
+                            if( bWasFocused ) jqEl.focus();
+                            setTimeout(function() { jqEl.trigger('change'); }, 50);
+                        }
+                    }
+                );
+            }
+            $("#ListTasks_header_rootWorkEffortId").on('change', function() { populate_ListTasks_header_partyId(); });
+            
+                
+
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="ListTasks_header_teamPartyId">Assigned To Team</label>
+            <div class="col-sm-10">
+    
+    <select name="teamPartyId" class=" dynamic-options" id="ListTasks_header_teamPartyId">
+            <option value="">&nbsp;</option>
+    </select>
+    
+    
+        <script>
+            var ListTasks_header_teamPartyIdS2Opts = { 
+                
+                            };
+            $("#ListTasks_header_teamPartyId").select2(ListTasks_header_teamPartyIdS2Opts);
+            function populate_ListTasks_header_teamPartyId(params) {
+                    var hasAllParms = true;
+                    if (!$('#ListTasks_header_rootWorkEffortId').val()) { hasAllParms = false; } 
+                    if (!hasAllParms) { $("#ListTasks_header_teamPartyId").select2("destroy"); $('#ListTasks_header_teamPartyId').html(""); $("#ListTasks_header_teamPartyId").select2({ });  return; }
+                $.ajax({ type:"POST", url:"http://127.0.0.1:18091/apps/marble/Task/FindTask/getProjectTeams", data:{ moquiSessionToken: "[REDACTED]", "rootWorkEffortId": $("#ListTasks_header_rootWorkEffortId").val(), term:((params && params.term) || '')}, dataType:"json"}).done(                    function(data) {
+                        var list = moqui.isArray(data) ? data : data.options;
+                        if (list) {
+                            var jqEl = $("#ListTasks_header_teamPartyId");
+                            var bWasFocused = jqEl.next().hasClass('select2-container--focus');
+                            jqEl.select2("destroy");
+                            jqEl.html("");
+                            jqEl.append('<option value="">&nbsp;</option>');
+                            
+                            $.each(list, function(key, value) {
+                                var optionValue = value["partyId"];
+                                if (optionValue === "") {
+                                    jqEl.append("<option selected='selected' value='" + optionValue + "'>" + value["name"] + "</option>");
+                                } else {
+                                    jqEl.append("<option value='" + optionValue + "'>" + value["name"] + "</option>");
+                                }
+                            });
+                            $("#ListTasks_header_teamPartyId").select2(ListTasks_header_teamPartyIdS2Opts);
+                            if( bWasFocused ) jqEl.focus();
+                            setTimeout(function() { jqEl.trigger('change'); }, 50);
+                        }
+                    }
+                );
+            }
+            $("#ListTasks_header_rootWorkEffortId").on('change', function() { populate_ListTasks_header_teamPartyId(); });
+            populate_ListTasks_header_teamPartyId();
+
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="ListTasks_header_estimatedCompletionDate">Due Date</label>
+            <div class="col-sm-10">
+    
+    <div class="date-period">
+        <select name="estimatedCompletionDate_poffset" id="ListTasks_header_estimatedCompletionDate_poffset">
+                <option value="">&nbsp;</option>
+            <option value="0">This</option>
+            <option value="-1">Last</option>
+            <option value="1">Next</option>
+            <option value="-2">-2</option>
+            <option value="2">+2</option>
+            <option value="-3">-3</option>
+            <option value="-4">-4</option>
+            <option value="-6">-6</option>
+            <option value="-12">-12</option>
+        </select>
+        <select name="estimatedCompletionDate_period" id="ListTasks_header_estimatedCompletionDate_period">
+            <option value="">&nbsp;</option>
+            <option value="day">Day</option>
+            <option value="7d">7 Days</option>
+            <option value="30d">30 Days</option>
+            <option value="week">Week</option>
+            <option value="weeks">Weeks</option>
+            <option value="month">Month</option>
+            <option value="months">Months</option>
+            <option value="quarter">Quarter</option>
+            <option value="year">Year</option>
+            <option value="7r">+/-7d</option>
+            <option value="30r">+/-30d</option>
+        </select>
+        <div class="input-group date" id="ListTasks_header_estimatedCompletionDate_pdate">
+            <input type="text" class="form-control" name="estimatedCompletionDate_pdate" value="" size="10" maxlength="10" style="">
+            <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+        </div>
+        <script>
+            $("#ListTasks_header_estimatedCompletionDate_poffset").select2({ }); $("#ListTasks_header_estimatedCompletionDate_period").select2({ });
+            $('#ListTasks_header_estimatedCompletionDate_pdate').datetimepicker({toolbarPlacement:'top', showClose:true, showClear:true, showTodayButton:true, useStrict:true, defaultDate: '' && moment('','YYYY-MM-DD'), format:'YYYY-MM-DD', extraFormats:['l', 'L', 'YYYY-MM-DD'], locale:"en-US", keyBinds: {t: function() {this.date(moment());}, up: function () { this.date(this.date().clone().add(1, 'd')); }, down: function () { this.date(this.date().clone().subtract(1, 'd')); }, 'control up': function () { this.date(this.date().clone().add(1, 'd')); }, 'control down': function () { this.date(this.date().clone().subtract(1, 'd')); }}});
+        </script>
+    </div>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="ListTasks_header_lastUpdatedStamp">Last Updated</label>
+            <div class="col-sm-10">
+    
+    <div class="date-period">
+        <select name="lastUpdatedStamp_poffset" id="ListTasks_header_lastUpdatedStamp_poffset">
+                <option value="">&nbsp;</option>
+            <option value="0">This</option>
+            <option value="-1">Last</option>
+            <option value="1">Next</option>
+            <option value="-2">-2</option>
+            <option value="2">+2</option>
+            <option value="-3">-3</option>
+            <option value="-4">-4</option>
+            <option value="-6">-6</option>
+            <option value="-12">-12</option>
+        </select>
+        <select name="lastUpdatedStamp_period" id="ListTasks_header_lastUpdatedStamp_period">
+            <option value="">&nbsp;</option>
+            <option value="day">Day</option>
+            <option value="7d">7 Days</option>
+            <option value="30d">30 Days</option>
+            <option value="week">Week</option>
+            <option value="weeks">Weeks</option>
+            <option value="month">Month</option>
+            <option value="months">Months</option>
+            <option value="quarter">Quarter</option>
+            <option value="year">Year</option>
+            <option value="7r">+/-7d</option>
+            <option value="30r">+/-30d</option>
+        </select>
+        <div class="input-group date" id="ListTasks_header_lastUpdatedStamp_pdate">
+            <input type="text" class="form-control" name="lastUpdatedStamp_pdate" value="" size="10" maxlength="10" style="">
+            <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+        </div>
+        <script>
+            $("#ListTasks_header_lastUpdatedStamp_poffset").select2({ }); $("#ListTasks_header_lastUpdatedStamp_period").select2({ });
+            $('#ListTasks_header_lastUpdatedStamp_pdate').datetimepicker({toolbarPlacement:'top', showClose:true, showClear:true, showTodayButton:true, useStrict:true, defaultDate: '' && moment('','YYYY-MM-DD'), format:'YYYY-MM-DD', extraFormats:['l', 'L', 'YYYY-MM-DD'], locale:"en-US", keyBinds: {t: function() {this.date(moment());}, up: function () { this.date(this.date().clone().add(1, 'd')); }, down: function () { this.date(this.date().clone().subtract(1, 'd')); }, 'control up': function () { this.date(this.date().clone().add(1, 'd')); }, 'control down': function () { this.date(this.date().clone().subtract(1, 'd')); }}});
+        </script>
+    </div>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="ListTasks_header_estimatedWorkTime">Est</label>
+            <div class="col-sm-10">
+    
+<span class="form-range-find">
+    <span>From&nbsp;</span><input type="text" class="form-control" name="estimatedWorkTime_from" value="" size="10" id="ListTasks_header_estimatedWorkTime_from" style="">
+</span>
+<span class="form-range-find">
+    <span>Thru&nbsp;</span><input type="text" class="form-control" name="estimatedWorkTime_thru" value="" size="10" id="ListTasks_header_estimatedWorkTime_thru" style="">
+</span>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="ListTasks_header_remainingWorkTime">Rem</label>
+            <div class="col-sm-10">
+    
+<span class="form-range-find">
+    <span>From&nbsp;</span><input type="text" class="form-control" name="remainingWorkTime_from" value="" size="10" id="ListTasks_header_remainingWorkTime_from" style="">
+</span>
+<span class="form-range-find">
+    <span>Thru&nbsp;</span><input type="text" class="form-control" name="remainingWorkTime_thru" value="" size="10" id="ListTasks_header_remainingWorkTime_thru" style="">
+</span>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="ListTasks_header_actualWorkTime">Actual</label>
+            <div class="col-sm-10">
+    
+<span class="form-range-find">
+    <span>From&nbsp;</span><input type="text" class="form-control" name="actualWorkTime_from" value="" size="10" id="ListTasks_header_actualWorkTime_from" style="">
+</span>
+<span class="form-range-find">
+    <span>Thru&nbsp;</span><input type="text" class="form-control" name="actualWorkTime_thru" value="" size="10" id="ListTasks_header_actualWorkTime_thru" style="">
+</span>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="ListTasks_header_ownerPartyId">Owner Party ID</label>
+            <div class="col-sm-10">
+    
+    <select name="ownerPartyId" class=" noResetSelect2" id="ListTasks_header_ownerPartyId" multiple="multiple">
+    </select>
+    
+    <input type="hidden" id="ListTasks_header_ownerPartyId_op" name="ownerPartyId_op" value="in" style="">
+        <script>$("#ListTasks_header_ownerPartyId").select2({ closeOnSelect:false, width:"100%",  });</script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <div class="col-sm-2 hidden-xs">&nbsp;</div>
+            <div class="col-sm-10">
+    
+    <button type="submit" name="searchButton" value="searchButton" id="ListTasks_header_searchButton" class="btn btn-primary btn-sm">
+Find Tasks    </button>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+                        </fieldset>
+                    </form>
+                </div>
+            </div></div>
+        </div>
+        <script>$('#ListTasks_hdialog').on('shown.bs.modal', function() {
+            $("#ListTasks_hdialog :not(.noResetSelect2)>select:not(.noResetSelect2)").select2({ });
+        })</script>
+        <div id="ListTasks_SelColsDialog" class="modal" aria-hidden="true" style="display: none;" tabindex="-1">
+            <div class="modal-dialog" style="width: 600px;"><div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Column Fields</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Drag fields to the desired column or do not display</p>
+                    <ul id="ListTasks_SelColsSortable">
+                        <li id="hidden"><div>Do Not Display</div>
+                            <ul>
+                                <li id="ownerPartyId"><div>Owner Party ID</div></li>
+                            </ul>
+                        </li>
+                            <li id="column_0"><div>Column 1</div><ul>
+                                <li id="priority"><div>Pri</div></li>
+                            </ul></li>
+                            <li id="column_1"><div>Column 2</div><ul>
+                                <li id="workEffortId"><div>ID</div></li>
+                            </ul></li>
+                            <li id="column_2"><div>Column 3</div><ul>
+                                <li id="workEffortName"><div>Name</div></li>
+                            </ul></li>
+                            <li id="column_3"><div>Column 4</div><ul>
+                                <li id="rootWorkEffortId"><div>Project</div></li>
+                            </ul></li>
+                            <li id="column_4"><div>Column 5</div><ul>
+                                <li id="parentWorkEffortId"><div>Parent</div></li>
+                            </ul></li>
+                            <li id="column_5"><div>Column 6</div><ul>
+                                <li id="milestoneWorkEffortId"><div>Milestone</div></li>
+                            </ul></li>
+                            <li id="column_6"><div>Column 7</div><ul>
+                                <li id="purposeEnumId"><div>Purpose</div></li>
+                            </ul></li>
+                            <li id="column_7"><div>Column 8</div><ul>
+                                <li id="statusId"><div>Status</div></li>
+                            </ul></li>
+                            <li id="column_8"><div>Column 9</div><ul>
+                                <li id="resolutionEnumId"><div>Resolution</div></li>
+                            </ul></li>
+                            <li id="column_9"><div>Column 10</div><ul>
+                                <li id="assigned"><div>Assigned</div></li>
+                            </ul></li>
+                            <li id="column_10"><div>Column 11</div><ul>
+                                <li id="estimatedCompletionDate"><div>Due Date</div></li>
+                            </ul></li>
+                            <li id="column_11"><div>Column 12</div><ul>
+                                <li id="lastUpdatedStamp"><div>Last Updated</div></li>
+                            </ul></li>
+                            <li id="column_12"><div>Column 13</div><ul>
+                                <li id="estimatedWorkTime"><div>Est</div></li>
+                            </ul></li>
+                            <li id="column_13"><div>Column 14</div><ul>
+                                <li id="remainingWorkTime"><div>Rem</div></li>
+                            </ul></li>
+                            <li id="column_14"><div>Column 15</div><ul>
+                                <li id="actualWorkTime"><div>Actual</div></li>
+                            </ul></li>
+                            <li id="column_15"><div>Column 16</div></li>
+                            <li id="column_16"><div>Column 17</div></li>
+                            <li id="column_17"><div>Column 18</div></li>
+                    </ul>
+                    <form class="form-inline" id="ListTasks_SelColsForm" method="post" action="http://127.0.0.1:18091/apps/marble/Task/FindTask/formSelectColumns">
+                        <input type="hidden" name="moquiSessionToken" value="[REDACTED]" style="">
+                        <input type="hidden" name="formLocation" value="component://SimpleScreens/screen/SimpleScreens/Task/FindTask.xml.form_list$ListTasks" style="">
+                        <input type="hidden" id="ListTasks_SelColsForm_columnsTree" name="columnsTree" value="" style="">
+                        <input type="submit" name="SaveColumns" value="Save Columns" class="btn btn-primary btn-sm" style="">
+                        <input type="submit" name="ResetColumns" value="Reset to Default" class="btn btn-primary btn-sm" style="">
+                    </form>
+                </div>
+            </div></div>
+        </div>
+        <script>$('#ListTasks_SelColsDialog').on('shown.bs.modal', function() {
+            $("#ListTasks_SelColsSortable").sortableLists({
+                isAllowed: function(currEl, hint, target) {
+                    if (currEl.attr('id') === 'hidden' || currEl.attr('id').startsWith('column_')) {
+                        if (!target.attr('id') || (target.attr('id') != 'hidden' && !currEl.attr('id').startsWith('column_'))) { hint.css('background-color', '#99ff99'); return true; }
+                        else { hint.css('background-color', '#ff9999'); return false; }
+                    }
+                    if (target.attr('id') && (target.attr('id') === 'hidden' || target.attr('id').startsWith('column_'))) { hint.css('background-color', '#99ff99'); return true; }
+                    else { hint.css('background-color', '#ff9999'); return false; }
+                },
+                placeholderCss: {'background-color':'#999999'}, insertZone: 50,
+                opener: { active:false, as:'html', close:'', open:'' },
+                onChange: function(cEl) {
+                    var sortableHierarchy = $('#ListTasks_SelColsSortable').sortableListsToHierarchy();
+                    // console.log(sortableHierarchy); console.log(JSON.stringify(sortableHierarchy));
+                    $("#ListTasks_SelColsForm_columnsTree").val(JSON.stringify(sortableHierarchy));
+                }
+            });
+            $("#ListTasks_SelColsForm_columnsTree").val(JSON.stringify($('#ListTasks_SelColsSortable').sortableListsToHierarchy()));
+        })</script>
+        <div class="table-scroll-wrapper"><table class="table table-striped table-hover table-condensed" id="ListTasks_table">
+            <thead>
+        <tr class="form-list-nav-row"><th colspan="15">
+        <nav class="form-list-nav">
+            <button id="ListTasks_hdialog_button" type="button" data-toggle="modal" data-target="#ListTasks_hdialog" data-original-title="Find Options" data-placement="bottom" class="btn btn-default"><i class="fa fa-share"></i> Find Options</button>
+            <button id="ListTasks_SelColsDialog_button" type="button" data-toggle="modal" data-target="#ListTasks_SelColsDialog" data-original-title="Columns" data-placement="bottom" class="btn btn-default"><i class="fa fa-share"></i> Columns</button>
+
+
+                <a href="http://127.0.0.1:18091/apps/marble/Task/FindTask?renderMode=csv&amp;saveFilename=ListTasks.csv&amp;pageNoLimit=true&amp;lastStandalone=true" class="btn btn-default">CSV</a>
+        </nav>
+        </th></tr>
+
+            <tr><th colspan="15" style="font-weight: normal">
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                                <span style="white-space:nowrap;"><strong>Status:</strong> <span class="text-success">In Planning, Approved, In Progress, On Hold, Complete</span></span>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    <form name="ListTasks_header" id="ListTasks_header" method="post" action="http://127.0.0.1:18091/apps/marble/Task/FindTask">
+                        
+                        <button id="ListTasks_header-quick-clear" type="submit" name="clearParameters" style="float:left; padding: 0 5px 0 5px; margin: 0 4px 0 0;" class="btn btn-primary btn-sm"><i class="fa fa-remove"></i></button>
+                    </form>
+            </th></tr>
+
+                <tr>
+                    <th>
+                        <div><div class="form-title">Pri            <span class="form-order-by">
+                <a href="http://127.0.0.1:18091/apps/marble/Task/FindTask?orderByField=-priority" class="active"><i class="fa fa-caret-up"></i></a>
+                <a href="http://127.0.0.1:18091/apps/marble/Task/FindTask?orderByField=-priority"><i class="fa fa-caret-down"></i></a>
+            </span>
+</div>    </div>
+                    </th>
+                    <th>
+                        <div><div class="form-title">ID            <span class="form-order-by">
+                <a href="http://127.0.0.1:18091/apps/marble/Task/FindTask?orderByField=-workEffortId" class="active"><i class="fa fa-caret-up"></i></a>
+                <a href="http://127.0.0.1:18091/apps/marble/Task/FindTask?orderByField=-workEffortId"><i class="fa fa-caret-down"></i></a>
+            </span>
+</div>    </div>
+                    </th>
+                    <th>
+                        <div><div class="form-title">Name            <span class="form-order-by">
+                <a href="http://127.0.0.1:18091/apps/marble/Task/FindTask?orderByField=workEffortName"><i class="fa fa-caret-up"></i></a>
+                <a href="http://127.0.0.1:18091/apps/marble/Task/FindTask?orderByField=-workEffortName"><i class="fa fa-caret-down"></i></a>
+            </span>
+</div>    </div>
+                    </th>
+                    <th>
+                        <div><div class="form-title">Project            <span class="form-order-by">
+                <a href="http://127.0.0.1:18091/apps/marble/Task/FindTask?orderByField=rootWorkEffortId"><i class="fa fa-caret-up"></i></a>
+                <a href="http://127.0.0.1:18091/apps/marble/Task/FindTask?orderByField=-rootWorkEffortId"><i class="fa fa-caret-down"></i></a>
+            </span>
+</div>    </div>
+                    </th>
+                    <th>
+                        <div><div class="form-title">Parent            <span class="form-order-by">
+                <a href="http://127.0.0.1:18091/apps/marble/Task/FindTask?orderByField=parentWorkEffortId"><i class="fa fa-caret-up"></i></a>
+                <a href="http://127.0.0.1:18091/apps/marble/Task/FindTask?orderByField=-parentWorkEffortId"><i class="fa fa-caret-down"></i></a>
+            </span>
+</div>    </div>
+                    </th>
+                    <th>
+                        <div><div class="form-title">Milestone            <span class="form-order-by">
+                <a href="http://127.0.0.1:18091/apps/marble/Task/FindTask?orderByField=milestoneWorkEffortId"><i class="fa fa-caret-up"></i></a>
+                <a href="http://127.0.0.1:18091/apps/marble/Task/FindTask?orderByField=-milestoneWorkEffortId"><i class="fa fa-caret-down"></i></a>
+            </span>
+</div>    </div>
+                    </th>
+                    <th>
+                        <div><div class="form-title">Purpose            <span class="form-order-by">
+                <a href="http://127.0.0.1:18091/apps/marble/Task/FindTask?orderByField=purposeEnumId"><i class="fa fa-caret-up"></i></a>
+                <a href="http://127.0.0.1:18091/apps/marble/Task/FindTask?orderByField=-purposeEnumId"><i class="fa fa-caret-down"></i></a>
+            </span>
+</div>    </div>
+                    </th>
+                    <th>
+                        <div><div class="form-title">Status            <span class="form-order-by">
+                <a href="http://127.0.0.1:18091/apps/marble/Task/FindTask?orderByField=statusId"><i class="fa fa-caret-up"></i></a>
+                <a href="http://127.0.0.1:18091/apps/marble/Task/FindTask?orderByField=-statusId"><i class="fa fa-caret-down"></i></a>
+            </span>
+</div>    </div>
+                    </th>
+                    <th>
+                        <div><div class="form-title">Resolution            <span class="form-order-by">
+                <a href="http://127.0.0.1:18091/apps/marble/Task/FindTask?orderByField=resolutionEnumId"><i class="fa fa-caret-up"></i></a>
+                <a href="http://127.0.0.1:18091/apps/marble/Task/FindTask?orderByField=-resolutionEnumId"><i class="fa fa-caret-down"></i></a>
+            </span>
+</div>    </div>
+                    </th>
+                    <th>
+                        <div><div class="form-title">Assigned</div>    </div>
+                    </th>
+                    <th>
+                        <div><div class="form-title">Due Date            <span class="form-order-by">
+                <a href="http://127.0.0.1:18091/apps/marble/Task/FindTask?orderByField=estimatedCompletionDate"><i class="fa fa-caret-up"></i></a>
+                <a href="http://127.0.0.1:18091/apps/marble/Task/FindTask?orderByField=-estimatedCompletionDate"><i class="fa fa-caret-down"></i></a>
+            </span>
+</div>    </div>
+                    </th>
+                    <th>
+                        <div><div class="form-title">Last Updated</div>    </div>
+                    </th>
+                    <th>
+                        <div><div class="form-title text-right">Est</div>    </div>
+                    </th>
+                    <th>
+                        <div><div class="form-title text-right">Rem</div>    </div>
+                    </th>
+                    <th>
+                        <div><div class="form-title text-right">Actual</div>    </div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                </tbody>
+        </table></div>
+    
+    <!-- END   form-list[@name=ListTasks] -->
+    <!-- END   screen[@location=component://SimpleScreens/screen/SimpleScreens/Task/FindTask.xml].widgets -->
+
+        </div>
+    <!-- END   screen[@location=component://SimpleScreens/screen/SimpleScreens/Task.xml].widgets -->
+
+    <!-- END   screen[@location=component://MarbleERP/screen/marble.xml].widgets -->
+
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    <!-- BEGIN section[@name=BottomNavSection] -->
+        <!-- BEGIN screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+    <div id="footer" class="bg-dark">
+        <!-- BEGIN render-mode.text[inline][@template=true] -->
+                <div id="apps-footer-content">
+<p><a href="https://www.moqui.org/" target="_blank">Built on Moqui Framework 4.0.0</a></p><p><a href="/vapps/ScreenTree">Site Map</a></p>                </div>        <!-- END   render-mode.text[inline][@template=true] -->
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    <!-- END   screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+
+    <!-- END   section[@name=BottomNavSection] -->
+    <!-- END   screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+        
+
+
+
+
+        
+        
+        
+    
+</body></html>

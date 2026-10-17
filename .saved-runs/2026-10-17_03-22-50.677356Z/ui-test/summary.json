@@ -1,0 +1,806 @@
+{
+  "runDir": ".saved-runs/2026-10-17_03-22-50.677356Z",
+  "documents": 42,
+  "documentModes": 126,
+  "activityModes": 2232,
+  "partial": 0,
+  "blocked": 2232,
+  "screenshots": 3341,
+  "comparisons": 1668,
+  "diagnosticComparisons": 1668,
+  "visualMatches": 24,
+  "visualMismatches": 1644,
+  "completeWorkflows": 0,
+  "uniqueCaptures": 462,
+  "uniqueScreenshots": 462,
+  "openedDialogs": 17,
+  "captureStatuses": {
+    "java/apps/blocked": 77,
+    "rust/vapps/blocked": 77,
+    "java/vapps/blocked": 77,
+    "rust/apps/captured": 44,
+    "rust/apps/blocked": 33,
+    "rust/qapps/blocked": 19,
+    "java/qapps/blocked": 77,
+    "rust/qapps/captured": 58
+  },
+  "byMode": {
+    "apps": {
+      "partial": 0,
+      "blocked": 744,
+      "comparisons": 556,
+      "visualMismatches": 532
+    },
+    "qapps": {
+      "partial": 0,
+      "blocked": 744,
+      "comparisons": 556,
+      "visualMismatches": 556
+    },
+    "vapps": {
+      "partial": 0,
+      "blocked": 744,
+      "comparisons": 556,
+      "visualMismatches": 556
+    }
+  },
+  "processes": [
+    {
+      "source": "docs/business-processes/walkthroughs/bank-accounts.md",
+      "mode": "apps",
+      "activities": 46,
+      "summary": "ui-test/walkthroughs/bank-accounts/apps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/walkthroughs/bank-accounts.md",
+      "mode": "qapps",
+      "activities": 46,
+      "summary": "ui-test/walkthroughs/bank-accounts/qapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/walkthroughs/bank-accounts.md",
+      "mode": "vapps",
+      "activities": 46,
+      "summary": "ui-test/walkthroughs/bank-accounts/vapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/walkthroughs/company-setup.md",
+      "mode": "apps",
+      "activities": 6,
+      "summary": "ui-test/walkthroughs/company-setup/apps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/walkthroughs/company-setup.md",
+      "mode": "qapps",
+      "activities": 6,
+      "summary": "ui-test/walkthroughs/company-setup/qapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/walkthroughs/company-setup.md",
+      "mode": "vapps",
+      "activities": 6,
+      "summary": "ui-test/walkthroughs/company-setup/vapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/walkthroughs/find-and-create-customer.md",
+      "mode": "apps",
+      "activities": 9,
+      "summary": "ui-test/walkthroughs/find-and-create-customer/apps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/walkthroughs/find-and-create-customer.md",
+      "mode": "qapps",
+      "activities": 9,
+      "summary": "ui-test/walkthroughs/find-and-create-customer/qapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/walkthroughs/find-and-create-customer.md",
+      "mode": "vapps",
+      "activities": 9,
+      "summary": "ui-test/walkthroughs/find-and-create-customer/vapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/walkthroughs/initial-setup-and-basics.md",
+      "mode": "apps",
+      "activities": 187,
+      "summary": "ui-test/walkthroughs/initial-setup-and-basics/apps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/walkthroughs/initial-setup-and-basics.md",
+      "mode": "qapps",
+      "activities": 187,
+      "summary": "ui-test/walkthroughs/initial-setup-and-basics/qapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/walkthroughs/initial-setup-and-basics.md",
+      "mode": "vapps",
+      "activities": 187,
+      "summary": "ui-test/walkthroughs/initial-setup-and-basics/vapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/walkthroughs/period-closing.md",
+      "mode": "apps",
+      "activities": 26,
+      "summary": "ui-test/walkthroughs/period-closing/apps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/walkthroughs/period-closing.md",
+      "mode": "qapps",
+      "activities": 26,
+      "summary": "ui-test/walkthroughs/period-closing/qapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/walkthroughs/period-closing.md",
+      "mode": "vapps",
+      "activities": 26,
+      "summary": "ui-test/walkthroughs/period-closing/vapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/walkthroughs/place-and-approve-sales-order.md",
+      "mode": "apps",
+      "activities": 28,
+      "summary": "ui-test/walkthroughs/place-and-approve-sales-order/apps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/walkthroughs/place-and-approve-sales-order.md",
+      "mode": "qapps",
+      "activities": 28,
+      "summary": "ui-test/walkthroughs/place-and-approve-sales-order/qapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/walkthroughs/place-and-approve-sales-order.md",
+      "mode": "vapps",
+      "activities": 28,
+      "summary": "ui-test/walkthroughs/place-and-approve-sales-order/vapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/walkthroughs/pricing-and-promotions.md",
+      "mode": "apps",
+      "activities": 21,
+      "summary": "ui-test/walkthroughs/pricing-and-promotions/apps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/walkthroughs/pricing-and-promotions.md",
+      "mode": "qapps",
+      "activities": 21,
+      "summary": "ui-test/walkthroughs/pricing-and-promotions/qapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/walkthroughs/pricing-and-promotions.md",
+      "mode": "vapps",
+      "activities": 21,
+      "summary": "ui-test/walkthroughs/pricing-and-promotions/vapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/walkthroughs/procure-to-pay.md",
+      "mode": "apps",
+      "activities": 22,
+      "summary": "ui-test/walkthroughs/procure-to-pay/apps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/walkthroughs/procure-to-pay.md",
+      "mode": "qapps",
+      "activities": 22,
+      "summary": "ui-test/walkthroughs/procure-to-pay/qapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/walkthroughs/procure-to-pay.md",
+      "mode": "vapps",
+      "activities": 22,
+      "summary": "ui-test/walkthroughs/procure-to-pay/vapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/walkthroughs/ship-sales-order.md",
+      "mode": "apps",
+      "activities": 44,
+      "summary": "ui-test/walkthroughs/ship-sales-order/apps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/walkthroughs/ship-sales-order.md",
+      "mode": "qapps",
+      "activities": 44,
+      "summary": "ui-test/walkthroughs/ship-sales-order/qapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/walkthroughs/ship-sales-order.md",
+      "mode": "vapps",
+      "activities": 44,
+      "summary": "ui-test/walkthroughs/ship-sales-order/vapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/walkthroughs/shipping-management-with-picklists.md",
+      "mode": "apps",
+      "activities": 8,
+      "summary": "ui-test/walkthroughs/shipping-management-with-picklists/apps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/walkthroughs/shipping-management-with-picklists.md",
+      "mode": "qapps",
+      "activities": 8,
+      "summary": "ui-test/walkthroughs/shipping-management-with-picklists/qapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/walkthroughs/shipping-management-with-picklists.md",
+      "mode": "vapps",
+      "activities": 8,
+      "summary": "ui-test/walkthroughs/shipping-management-with-picklists/vapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/walkthroughs/transfer-shipments.md",
+      "mode": "apps",
+      "activities": 23,
+      "summary": "ui-test/walkthroughs/transfer-shipments/apps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/walkthroughs/transfer-shipments.md",
+      "mode": "qapps",
+      "activities": 23,
+      "summary": "ui-test/walkthroughs/transfer-shipments/qapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/walkthroughs/transfer-shipments.md",
+      "mode": "vapps",
+      "activities": 23,
+      "summary": "ui-test/walkthroughs/transfer-shipments/vapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/accountant-receives-invoice-and-sends-payment.md",
+      "mode": "apps",
+      "activities": 3,
+      "summary": "ui-test/process-library/accountant-receives-invoice-and-sends-payment/apps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/accountant-receives-invoice-and-sends-payment.md",
+      "mode": "qapps",
+      "activities": 3,
+      "summary": "ui-test/process-library/accountant-receives-invoice-and-sends-payment/qapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/accountant-receives-invoice-and-sends-payment.md",
+      "mode": "vapps",
+      "activities": 3,
+      "summary": "ui-test/process-library/accountant-receives-invoice-and-sends-payment/vapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/accountant-reconciles-bank-account.md",
+      "mode": "apps",
+      "activities": 2,
+      "summary": "ui-test/process-library/accountant-reconciles-bank-account/apps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/accountant-reconciles-bank-account.md",
+      "mode": "qapps",
+      "activities": 2,
+      "summary": "ui-test/process-library/accountant-reconciles-bank-account/qapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/accountant-reconciles-bank-account.md",
+      "mode": "vapps",
+      "activities": 2,
+      "summary": "ui-test/process-library/accountant-reconciles-bank-account/vapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/accountant-sends-invoice-and-receives-payment.md",
+      "mode": "apps",
+      "activities": 2,
+      "summary": "ui-test/process-library/accountant-sends-invoice-and-receives-payment/apps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/accountant-sends-invoice-and-receives-payment.md",
+      "mode": "qapps",
+      "activities": 2,
+      "summary": "ui-test/process-library/accountant-sends-invoice-and-receives-payment/qapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/accountant-sends-invoice-and-receives-payment.md",
+      "mode": "vapps",
+      "activities": 2,
+      "summary": "ui-test/process-library/accountant-sends-invoice-and-receives-payment/vapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/b2b-sales-process.md",
+      "mode": "apps",
+      "activities": 40,
+      "summary": "ui-test/process-library/b2b-sales-process/apps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/b2b-sales-process.md",
+      "mode": "qapps",
+      "activities": 40,
+      "summary": "ui-test/process-library/b2b-sales-process/qapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/b2b-sales-process.md",
+      "mode": "vapps",
+      "activities": 40,
+      "summary": "ui-test/process-library/b2b-sales-process/vapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/buyer-places-purchase-order.md",
+      "mode": "apps",
+      "activities": 5,
+      "summary": "ui-test/process-library/buyer-places-purchase-order/apps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/buyer-places-purchase-order.md",
+      "mode": "qapps",
+      "activities": 5,
+      "summary": "ui-test/process-library/buyer-places-purchase-order/qapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/buyer-places-purchase-order.md",
+      "mode": "vapps",
+      "activities": 5,
+      "summary": "ui-test/process-library/buyer-places-purchase-order/vapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/carrier-does-not-deliver-shipment-to-customer.md",
+      "mode": "apps",
+      "activities": 3,
+      "summary": "ui-test/process-library/carrier-does-not-deliver-shipment-to-customer/apps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/carrier-does-not-deliver-shipment-to-customer.md",
+      "mode": "qapps",
+      "activities": 3,
+      "summary": "ui-test/process-library/carrier-does-not-deliver-shipment-to-customer/qapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/carrier-does-not-deliver-shipment-to-customer.md",
+      "mode": "vapps",
+      "activities": 3,
+      "summary": "ui-test/process-library/carrier-does-not-deliver-shipment-to-customer/vapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/carrier-returns-undeliverable-shipment-to-company.md",
+      "mode": "apps",
+      "activities": 4,
+      "summary": "ui-test/process-library/carrier-returns-undeliverable-shipment-to-company/apps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/carrier-returns-undeliverable-shipment-to-company.md",
+      "mode": "qapps",
+      "activities": 4,
+      "summary": "ui-test/process-library/carrier-returns-undeliverable-shipment-to-company/qapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/carrier-returns-undeliverable-shipment-to-company.md",
+      "mode": "vapps",
+      "activities": 4,
+      "summary": "ui-test/process-library/carrier-returns-undeliverable-shipment-to-company/vapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/company-approves-sales-order.md",
+      "mode": "apps",
+      "activities": 6,
+      "summary": "ui-test/process-library/company-approves-sales-order/apps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/company-approves-sales-order.md",
+      "mode": "qapps",
+      "activities": 6,
+      "summary": "ui-test/process-library/company-approves-sales-order/qapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/company-approves-sales-order.md",
+      "mode": "vapps",
+      "activities": 6,
+      "summary": "ui-test/process-library/company-approves-sales-order/vapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/company-fulfills-sales-order.md",
+      "mode": "apps",
+      "activities": 8,
+      "summary": "ui-test/process-library/company-fulfills-sales-order/apps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/company-fulfills-sales-order.md",
+      "mode": "qapps",
+      "activities": 8,
+      "summary": "ui-test/process-library/company-fulfills-sales-order/qapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/company-fulfills-sales-order.md",
+      "mode": "vapps",
+      "activities": 8,
+      "summary": "ui-test/process-library/company-fulfills-sales-order/vapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/company-processes-return-received.md",
+      "mode": "apps",
+      "activities": 16,
+      "summary": "ui-test/process-library/company-processes-return-received/apps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/company-processes-return-received.md",
+      "mode": "qapps",
+      "activities": 16,
+      "summary": "ui-test/process-library/company-processes-return-received/qapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/company-processes-return-received.md",
+      "mode": "vapps",
+      "activities": 16,
+      "summary": "ui-test/process-library/company-processes-return-received/vapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/customer-cancels-order.md",
+      "mode": "apps",
+      "activities": 2,
+      "summary": "ui-test/process-library/customer-cancels-order/apps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/customer-cancels-order.md",
+      "mode": "qapps",
+      "activities": 2,
+      "summary": "ui-test/process-library/customer-cancels-order/qapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/customer-cancels-order.md",
+      "mode": "vapps",
+      "activities": 2,
+      "summary": "ui-test/process-library/customer-cancels-order/vapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/customer-creates-and-edits-account.md",
+      "mode": "apps",
+      "activities": 3,
+      "summary": "ui-test/process-library/customer-creates-and-edits-account/apps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/customer-creates-and-edits-account.md",
+      "mode": "qapps",
+      "activities": 3,
+      "summary": "ui-test/process-library/customer-creates-and-edits-account/qapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/customer-creates-and-edits-account.md",
+      "mode": "vapps",
+      "activities": 3,
+      "summary": "ui-test/process-library/customer-creates-and-edits-account/vapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/customer-finds-product.md",
+      "mode": "apps",
+      "activities": 8,
+      "summary": "ui-test/process-library/customer-finds-product/apps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/customer-finds-product.md",
+      "mode": "qapps",
+      "activities": 8,
+      "summary": "ui-test/process-library/customer-finds-product/qapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/customer-finds-product.md",
+      "mode": "vapps",
+      "activities": 8,
+      "summary": "ui-test/process-library/customer-finds-product/vapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/customer-returns-product.md",
+      "mode": "apps",
+      "activities": 7,
+      "summary": "ui-test/process-library/customer-returns-product/apps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/customer-returns-product.md",
+      "mode": "qapps",
+      "activities": 7,
+      "summary": "ui-test/process-library/customer-returns-product/qapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/customer-returns-product.md",
+      "mode": "vapps",
+      "activities": 7,
+      "summary": "ui-test/process-library/customer-returns-product/vapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/customer-reviews-order-history-and-status.md",
+      "mode": "apps",
+      "activities": 4,
+      "summary": "ui-test/process-library/customer-reviews-order-history-and-status/apps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/customer-reviews-order-history-and-status.md",
+      "mode": "qapps",
+      "activities": 4,
+      "summary": "ui-test/process-library/customer-reviews-order-history-and-status/qapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/customer-reviews-order-history-and-status.md",
+      "mode": "vapps",
+      "activities": 4,
+      "summary": "ui-test/process-library/customer-reviews-order-history-and-status/vapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/inventory-mover-checks-physical-inventory.md",
+      "mode": "apps",
+      "activities": 1,
+      "summary": "ui-test/process-library/inventory-mover-checks-physical-inventory/apps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/inventory-mover-checks-physical-inventory.md",
+      "mode": "qapps",
+      "activities": 1,
+      "summary": "ui-test/process-library/inventory-mover-checks-physical-inventory/qapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/inventory-mover-checks-physical-inventory.md",
+      "mode": "vapps",
+      "activities": 1,
+      "summary": "ui-test/process-library/inventory-mover-checks-physical-inventory/vapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/inventory-mover-does-stock-move.md",
+      "mode": "apps",
+      "activities": 3,
+      "summary": "ui-test/process-library/inventory-mover-does-stock-move/apps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/inventory-mover-does-stock-move.md",
+      "mode": "qapps",
+      "activities": 3,
+      "summary": "ui-test/process-library/inventory-mover-does-stock-move/qapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/inventory-mover-does-stock-move.md",
+      "mode": "vapps",
+      "activities": 3,
+      "summary": "ui-test/process-library/inventory-mover-does-stock-move/vapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/inventory-mover-puts-away-inventory.md",
+      "mode": "apps",
+      "activities": 5,
+      "summary": "ui-test/process-library/inventory-mover-puts-away-inventory/apps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/inventory-mover-puts-away-inventory.md",
+      "mode": "qapps",
+      "activities": 5,
+      "summary": "ui-test/process-library/inventory-mover-puts-away-inventory/qapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/inventory-mover-puts-away-inventory.md",
+      "mode": "vapps",
+      "activities": 5,
+      "summary": "ui-test/process-library/inventory-mover-puts-away-inventory/vapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/marketer-maintains-general-site-content.md",
+      "mode": "apps",
+      "activities": 3,
+      "summary": "ui-test/process-library/marketer-maintains-general-site-content/apps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/marketer-maintains-general-site-content.md",
+      "mode": "qapps",
+      "activities": 3,
+      "summary": "ui-test/process-library/marketer-maintains-general-site-content/qapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/marketer-maintains-general-site-content.md",
+      "mode": "vapps",
+      "activities": 3,
+      "summary": "ui-test/process-library/marketer-maintains-general-site-content/vapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/oagis-order-to-cash.md",
+      "mode": "apps",
+      "activities": 106,
+      "summary": "ui-test/process-library/oagis-order-to-cash/apps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/oagis-order-to-cash.md",
+      "mode": "qapps",
+      "activities": 106,
+      "summary": "ui-test/process-library/oagis-order-to-cash/qapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/oagis-order-to-cash.md",
+      "mode": "vapps",
+      "activities": 106,
+      "summary": "ui-test/process-library/oagis-order-to-cash/vapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/oagis-procure-to-pay.md",
+      "mode": "apps",
+      "activities": 4,
+      "summary": "ui-test/process-library/oagis-procure-to-pay/apps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/oagis-procure-to-pay.md",
+      "mode": "qapps",
+      "activities": 4,
+      "summary": "ui-test/process-library/oagis-procure-to-pay/qapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/oagis-procure-to-pay.md",
+      "mode": "vapps",
+      "activities": 4,
+      "summary": "ui-test/process-library/oagis-procure-to-pay/vapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/oagis-work-plan-to-cash.md",
+      "mode": "apps",
+      "activities": 21,
+      "summary": "ui-test/process-library/oagis-work-plan-to-cash/apps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/oagis-work-plan-to-cash.md",
+      "mode": "qapps",
+      "activities": 21,
+      "summary": "ui-test/process-library/oagis-work-plan-to-cash/qapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/oagis-work-plan-to-cash.md",
+      "mode": "vapps",
+      "activities": 21,
+      "summary": "ui-test/process-library/oagis-work-plan-to-cash/vapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/placing-customer-adds-product-to-cart.md",
+      "mode": "apps",
+      "activities": 6,
+      "summary": "ui-test/process-library/placing-customer-adds-product-to-cart/apps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/placing-customer-adds-product-to-cart.md",
+      "mode": "qapps",
+      "activities": 6,
+      "summary": "ui-test/process-library/placing-customer-adds-product-to-cart/qapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/placing-customer-adds-product-to-cart.md",
+      "mode": "vapps",
+      "activities": 6,
+      "summary": "ui-test/process-library/placing-customer-adds-product-to-cart/vapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/placing-customer-places-a-sales-order-online-checkout.md",
+      "mode": "apps",
+      "activities": 18,
+      "summary": "ui-test/process-library/placing-customer-places-a-sales-order-online-checkout/apps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/placing-customer-places-a-sales-order-online-checkout.md",
+      "mode": "qapps",
+      "activities": 18,
+      "summary": "ui-test/process-library/placing-customer-places-a-sales-order-online-checkout/qapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/placing-customer-places-a-sales-order-online-checkout.md",
+      "mode": "vapps",
+      "activities": 18,
+      "summary": "ui-test/process-library/placing-customer-places-a-sales-order-online-checkout/vapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/placing-customer-places-a-sales-order-through-csr.md",
+      "mode": "apps",
+      "activities": 3,
+      "summary": "ui-test/process-library/placing-customer-places-a-sales-order-through-csr/apps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/placing-customer-places-a-sales-order-through-csr.md",
+      "mode": "qapps",
+      "activities": 3,
+      "summary": "ui-test/process-library/placing-customer-places-a-sales-order-through-csr/qapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/placing-customer-places-a-sales-order-through-csr.md",
+      "mode": "vapps",
+      "activities": 3,
+      "summary": "ui-test/process-library/placing-customer-places-a-sales-order-through-csr/vapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/placing-customer-places-a-sales-order-through-ebay.md",
+      "mode": "apps",
+      "activities": 8,
+      "summary": "ui-test/process-library/placing-customer-places-a-sales-order-through-ebay/apps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/placing-customer-places-a-sales-order-through-ebay.md",
+      "mode": "qapps",
+      "activities": 8,
+      "summary": "ui-test/process-library/placing-customer-places-a-sales-order-through-ebay/qapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/placing-customer-places-a-sales-order-through-ebay.md",
+      "mode": "vapps",
+      "activities": 8,
+      "summary": "ui-test/process-library/placing-customer-places-a-sales-order-through-ebay/vapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/product-marketer-maintains-product-information.md",
+      "mode": "apps",
+      "activities": 6,
+      "summary": "ui-test/process-library/product-marketer-maintains-product-information/apps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/product-marketer-maintains-product-information.md",
+      "mode": "qapps",
+      "activities": 6,
+      "summary": "ui-test/process-library/product-marketer-maintains-product-information/qapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/product-marketer-maintains-product-information.md",
+      "mode": "vapps",
+      "activities": 6,
+      "summary": "ui-test/process-library/product-marketer-maintains-product-information/vapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/sales-representative-leads-prospects-from-rfq-to-sales-order.md",
+      "mode": "apps",
+      "activities": 6,
+      "summary": "ui-test/process-library/sales-representative-leads-prospects-from-rfq-to-sales-order/apps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/sales-representative-leads-prospects-from-rfq-to-sales-order.md",
+      "mode": "qapps",
+      "activities": 6,
+      "summary": "ui-test/process-library/sales-representative-leads-prospects-from-rfq-to-sales-order/qapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/sales-representative-leads-prospects-from-rfq-to-sales-order.md",
+      "mode": "vapps",
+      "activities": 6,
+      "summary": "ui-test/process-library/sales-representative-leads-prospects-from-rfq-to-sales-order/vapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/sales-representative-seeks-prospects-and-opportunities.md",
+      "mode": "apps",
+      "activities": 4,
+      "summary": "ui-test/process-library/sales-representative-seeks-prospects-and-opportunities/apps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/sales-representative-seeks-prospects-and-opportunities.md",
+      "mode": "qapps",
+      "activities": 4,
+      "summary": "ui-test/process-library/sales-representative-seeks-prospects-and-opportunities/qapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/sales-representative-seeks-prospects-and-opportunities.md",
+      "mode": "vapps",
+      "activities": 4,
+      "summary": "ui-test/process-library/sales-representative-seeks-prospects-and-opportunities/vapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/shipment-receiver-receives-shipment.md",
+      "mode": "apps",
+      "activities": 10,
+      "summary": "ui-test/process-library/shipment-receiver-receives-shipment/apps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/shipment-receiver-receives-shipment.md",
+      "mode": "qapps",
+      "activities": 10,
+      "summary": "ui-test/process-library/shipment-receiver-receives-shipment/qapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/shipment-receiver-receives-shipment.md",
+      "mode": "vapps",
+      "activities": 10,
+      "summary": "ui-test/process-library/shipment-receiver-receives-shipment/vapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/story-of-online-retail-company.md",
+      "mode": "apps",
+      "activities": 7,
+      "summary": "ui-test/process-library/story-of-online-retail-company/apps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/story-of-online-retail-company.md",
+      "mode": "qapps",
+      "activities": 7,
+      "summary": "ui-test/process-library/story-of-online-retail-company/qapps.summary.json"
+    },
+    {
+      "source": "docs/business-processes/process-library/story-of-online-retail-company.md",
+      "mode": "vapps",
+      "activities": 7,
+      "summary": "ui-test/process-library/story-of-online-retail-company/vapps.summary.json"
+    }
+  ],
+  "note": "Best-effort read-only evidence sweep, not a complete workflow suite. Entry candidates and error pages are not activity coverage. Reused captures are explicitly identified."
+}

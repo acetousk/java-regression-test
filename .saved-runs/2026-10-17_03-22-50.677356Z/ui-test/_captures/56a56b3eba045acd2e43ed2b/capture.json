@@ -1,0 +1,22 @@
+{
+  "engine": "rust",
+  "mode": "apps",
+  "route": "marble/Customer/FindCustomer",
+  "dialog": {
+    "label": "New Sales Account (Organization Customer)",
+    "id": "CreateAccountDialog",
+    "route": "Customer/FindCustomer"
+  },
+  "authenticated": true,
+  "errors": [
+    "locator.click: Timeout 3500ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'New Sales Account (Organization Customer)', exact: true }).or(getByRole('link', { name: 'New Sales Account (Organization Customer)', exact: true })).filter({ visible: true }).first()\u001b[22m\n"
+  ],
+  "failedRequests": [],
+  "httpErrors": [],
+  "consoleErrors": [],
+  "status": "blocked",
+  "reused": false,
+  "requestedURL": "http://127.0.0.1:18092/apps/marble/Customer/FindCustomer",
+  "navigation": "dashboard-link",
+  "finalURL": "http://127.0.0.1:18092/apps/marble/Customer/FindCustomer"
+}

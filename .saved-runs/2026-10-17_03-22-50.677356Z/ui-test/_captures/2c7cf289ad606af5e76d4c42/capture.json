@@ -1,0 +1,22 @@
+{
+  "engine": "rust",
+  "mode": "apps",
+  "route": "marble/Project/FindProject",
+  "dialog": {
+    "label": "New Project",
+    "id": "NewProjectContainer",
+    "route": "Project/FindProject"
+  },
+  "authenticated": true,
+  "errors": [
+    "locator.click: Timeout 3500ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'New Project', exact: true }).or(getByRole('link', { name: 'New Project', exact: true })).filter({ visible: true }).first()\u001b[22m\n"
+  ],
+  "failedRequests": [],
+  "httpErrors": [],
+  "consoleErrors": [],
+  "status": "blocked",
+  "reused": false,
+  "requestedURL": "http://127.0.0.1:18092/apps/marble/Project/FindProject",
+  "navigation": "dashboard-link",
+  "finalURL": "http://127.0.0.1:18092/apps/marble/Project/FindProject"
+}

@@ -1,0 +1,148 @@
+Toggle navigation 
+Dashboard
+0 0 0 0
+ Shipments - Find Shipments
+Marble ERP - Dashboard
+ Shipments - Find Shipments (ShpTpTransfer)
+Applications
+Applications
+Applications
+Applications
+ Picklists - Picklists
+Applications (ShpTpSales)
+Applications (ShpTpSales)
+ Shipments - Find Shipments (ShpTpSales)
+Applications
+Applications (POPC_DEFAULT)
+Applications
+Applications (POPC_DEFAULT)
+ Promotions - Store Promotions
+ Promotions - Store Promotions (POPC_DEFAULT)
+Applications
+Applications
+Applications
+Applications
+ Orders - Order Detail
+ Customers - Find Customer
+Applications
+Applications
+Application
+Marble ERP
+My Account
+System
+Tools
+ZIRET: Ziziwork Retail & Wholesale
+ZISER: Ziziwork Services
+Marble ERP
+Dashboard
+Quick Search
+Accounting
+Asset
+Catalog
+Customers
+Facility
+Human Resources
+Manufacturing
+Orders
+Parties
+Projects
+Requests
+Returns
+Shipments
+Shipping
+Stores
+Suppliers
+Survey
+Tasks
+Wiki/Content
+Custom Reports
+Report Builder
+Any Type
+Communication Event
+Event
+Facility
+Party
+Product
+Project
+Request
+Task
+Wiki Page
+ 
+ 
+Search
+Sales
+ Placed 0 Approved 0 Held 0 
+Requests
+ Submitted 0 In Progress 0
+
+ 
+
+Customers
+Marketing
+ 
+Customer Requests
+ 
+Sales Orders & Quotes
+ 
+Sales Shipments
+Shipping - Pick & Pack
+ 
+Receivable Invoices
+Customer Credit Memos
+Customer Payments
+ 
+Sales Returns & RMA
+Customer Return Shipments
+Payable Return Invoices
+Outgoing Refund Payments
+
+ 
+
+Internal
+HR - Employees
+ 
+Requests
+ 
+Products - Catalog
+ 
+Assets - Inventory
+Manufacturing
+ 
+Projects
+Tasks
+ 
+All Parties
+Facilities
+Stores
+Content: Wiki - Blogs
+Surveys
+ 
+Accounting - Reports
+Custom Reports - Report Builder
+
+ 
+
+Suppliers
+
+ 
+
+ 
+Purchase Requests
+ 
+Purchase Orders & Quotes
+ 
+ 
+Purchase Shipments
+ 
+Payable Invoices
+Supplier Credit Memos
+Supplier Payments
+ 
+Purchase Returns
+Supplier Return Shipments
+Receivable Return Invoices
+Incoming Refund Payments
+
+Built on Moqui Framework 4.0.0
+
+Site Map

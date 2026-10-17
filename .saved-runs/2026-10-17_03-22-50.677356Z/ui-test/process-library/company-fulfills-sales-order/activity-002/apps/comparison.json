@@ -1,0 +1,109 @@
+{
+  "id": "activity-002",
+  "sourceLine": 20,
+  "headings": [
+    "Company Fulfills Sales Order",
+    "Story",
+    "Pick"
+  ],
+  "text": "Once inventory is available (for part or all of the order, depending on preference) Fulfillment Manager creates a picklist and prints it (for up to X orders at a time, depending on batch pick size; only orders where inventory is available for part or all of the order, depending on preference). Picker walks the pick floor and at each location listed on the pick sheet Picker picks the amount specified for the location and places items in the cart bin(s) specified on the pick sheet, and verifies each is the correct location by looking at the pack sheet for the order in that bin. Once all items on the pick sheet are picked Picker records status update for the picklist.",
+  "route": "marble/Shipping/dashboard",
+  "dialog": null,
+  "mapping": "entry-candidate",
+  "limitation": "Read-only screen/dialog evidence only. Prerequisite creation, field input, submissions, integrations and full story transitions are not executed.",
+  "source": "docs/business-processes/process-library/company-fulfills-sales-order.md",
+  "mode": "apps",
+  "coverage": "blocked",
+  "captures": [
+    {
+      "engine": "java",
+      "mode": "apps",
+      "route": "marble/Shipping/dashboard",
+      "dialog": null,
+      "authenticated": true,
+      "errors": [
+        "moqui is not defined",
+        "Cannot read properties of undefined (reading 'registerListener')",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "moqui is not defined",
+        "Cannot read properties of undefined (reading 'registerListener')",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined"
+      ],
+      "failedRequests": [
+        {
+          "url": "http://127.0.0.1:18091/apps/marble/dashboard",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:18091/apps/marble/Shipping/dashboard",
+          "error": "net::ERR_ABORTED"
+        }
+      ],
+      "httpErrors": [],
+      "consoleErrors": [
+        "Refused to apply style from 'http://127.0.0.1:18091/apps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not a supported stylesheet MIME type, and strict MIME checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/apps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/apps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/apps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to apply style from 'http://127.0.0.1:18091/apps/marble/Shipping/dashboard#?v=1a147e2' because its MIME type ('text/html') is not a supported stylesheet MIME type, and strict MIME checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/apps/marble/Shipping/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/apps/marble/Shipping/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/apps/marble/Shipping/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled."
+      ],
+      "status": "blocked",
+      "reused": true,
+      "requestedURL": "http://127.0.0.1:18091/apps/marble/Shipping/dashboard",
+      "navigation": "dashboard-link",
+      "finalURL": "http://127.0.0.1:18091/apps/marble/Shipping/dashboard",
+      "directory": ".saved-runs/2026-10-17_03-22-50.677356Z/ui-test/_captures/78f74ff74574d93e977de96a"
+    },
+    {
+      "engine": "rust",
+      "mode": "apps",
+      "route": "marble/Shipping/dashboard",
+      "dialog": null,
+      "authenticated": true,
+      "errors": [],
+      "failedRequests": [],
+      "httpErrors": [],
+      "consoleErrors": [],
+      "status": "captured",
+      "reused": true,
+      "requestedURL": "http://127.0.0.1:18092/apps/marble/Shipping/dashboard",
+      "navigation": "dashboard-link",
+      "finalURL": "http://127.0.0.1:18092/apps/marble/Shipping/dashboard",
+      "directory": ".saved-runs/2026-10-17_03-22-50.677356Z/ui-test/_captures/0d1a3b9533dfb184ac036945"
+    }
+  ],
+  "comparison": {
+    "status": "diagnostic-only",
+    "equal": false,
+    "dimensions": [
+      {
+        "width": 1440,
+        "height": 1009
+      },
+      {
+        "width": 1440,
+        "height": 1000
+      }
+    ],
+    "dimensionsEqual": false,
+    "differentPixels": 115231,
+    "comparedPixels": 1452960,
+    "differencePercent": 7.9307757956172225,
+    "threshold": 0.1
+  }
+}

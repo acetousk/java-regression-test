@@ -1,0 +1,38 @@
+Application 
+Marble ERP 
+Asset 
+Asset 
+Find Summary
+ 0  0  0  0
+ Organization
+Find Individual Assets Move Asset Containers Lots Pools On Hand Report  Receive Direct  Physical Diff
+ Find Options
+ Columns
+CSV
+XLS
+
+
+Assets
+	
+Product ID
+Product Name
+Asset Class
+	
+Status
+Owner Party
+Asset Pool
+	
+Facility
+Location
+Lot
+	
+Available
+On Hand
+	
+PhI Qty
+	
+Move
+
+Built on Moqui Framework 0.1.0
+
+Site Map

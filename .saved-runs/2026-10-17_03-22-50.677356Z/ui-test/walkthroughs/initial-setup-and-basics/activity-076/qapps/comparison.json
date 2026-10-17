@@ -1,0 +1,114 @@
+{
+  "id": "activity-076",
+  "sourceLine": 259,
+  "headings": [
+    "Initial Setup and Basics",
+    "Sales - Service & Product",
+    "Create first Invoice - Service",
+    "Create Project Client Invoice (receivable)"
+  ],
+  "text": "- use the **Project Client Invoice** dialog",
+  "route": "marble/Accounting/Invoice/FindInvoice",
+  "dialog": {
+    "label": "Project Client Invoice",
+    "id": "ProjectInvoiceDialog",
+    "route": "Accounting/Invoice/FindInvoice"
+  },
+  "mapping": "documented-dialog-label",
+  "limitation": "Read-only screen/dialog evidence only. Prerequisite creation, field input, submissions, integrations and full story transitions are not executed.",
+  "source": "docs/business-processes/walkthroughs/initial-setup-and-basics.md",
+  "mode": "qapps",
+  "coverage": "blocked",
+  "captures": [
+    {
+      "engine": "java",
+      "mode": "qapps",
+      "route": "marble/Accounting/Invoice/FindInvoice",
+      "dialog": {
+        "label": "Project Client Invoice",
+        "id": "ProjectInvoiceDialog",
+        "route": "Accounting/Invoice/FindInvoice"
+      },
+      "authenticated": true,
+      "errors": [
+        "$ is not defined",
+        "Vue is not defined",
+        "$ is not defined",
+        "Vue is not defined",
+        "locator.click: Timeout 3500ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Project Client Invoice', exact: true }).or(getByRole('link', { name: 'Project Client Invoice', exact: true })).filter({ visible: true }).first()\u001b[22m\n"
+      ],
+      "failedRequests": [
+        {
+          "url": "http://127.0.0.1:18091/qapps/marble/dashboard",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:18091/qapps/marble/Accounting/Invoice/FindInvoice",
+          "error": "net::ERR_ABORTED"
+        }
+      ],
+      "httpErrors": [],
+      "consoleErrors": [
+        "Refused to apply style from 'http://127.0.0.1:18091/qapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not a supported stylesheet MIME type, and strict MIME checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to apply style from 'http://127.0.0.1:18091/qapps/marble/Accounting/Invoice/FindInvoice#?v=1a147e2' because its MIME type ('text/html') is not a supported stylesheet MIME type, and strict MIME checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/Accounting/Invoice/FindInvoice#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/Accounting/Invoice/FindInvoice#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/Accounting/Invoice/FindInvoice#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/Accounting/Invoice/FindInvoice#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled."
+      ],
+      "status": "blocked",
+      "reused": false,
+      "requestedURL": "http://127.0.0.1:18091/qapps/marble/Accounting/Invoice/FindInvoice",
+      "navigation": "documented-or-candidate-deep-link",
+      "httpStatus": 200,
+      "finalURL": "http://127.0.0.1:18091/qapps/marble/Accounting/Invoice/FindInvoice",
+      "directory": ".saved-runs/2026-10-17_03-22-50.677356Z/ui-test/_captures/ed9a0094035953052b8cdbf4"
+    },
+    {
+      "engine": "rust",
+      "mode": "qapps",
+      "route": "marble/Accounting/Invoice/FindInvoice",
+      "dialog": {
+        "label": "Project Client Invoice",
+        "id": "ProjectInvoiceDialog",
+        "route": "Accounting/Invoice/FindInvoice"
+      },
+      "authenticated": true,
+      "errors": [],
+      "failedRequests": [],
+      "httpErrors": [],
+      "consoleErrors": [],
+      "status": "captured",
+      "reused": false,
+      "requestedURL": "http://127.0.0.1:18092/qapps/marble/Accounting/Invoice/FindInvoice",
+      "navigation": "documented-or-candidate-deep-link",
+      "httpStatus": 200,
+      "finalURL": "http://127.0.0.1:18092/qapps/marble/Accounting/Invoice/FindInvoice",
+      "dialogOpened": true,
+      "directory": ".saved-runs/2026-10-17_03-22-50.677356Z/ui-test/_captures/6e648a169b90c6a5018cce07"
+    }
+  ],
+  "comparison": {
+    "status": "diagnostic-only",
+    "equal": false,
+    "dimensions": [
+      {
+        "width": 1440,
+        "height": 1000
+      },
+      {
+        "width": 1440,
+        "height": 1000
+      }
+    ],
+    "dimensionsEqual": true,
+    "differentPixels": 122933,
+    "comparedPixels": 1440000,
+    "differencePercent": 8.53701388888889,
+    "threshold": 0.1
+  }
+}

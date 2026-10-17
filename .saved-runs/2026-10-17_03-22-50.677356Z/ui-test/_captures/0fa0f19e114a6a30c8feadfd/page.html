@@ -1,0 +1,905 @@
+<!DOCTYPE html><html><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    
+    <title>Promotions - Store Promotions</title>
+    <link rel="apple-touch-icon" href="/MoquiLogo100.png">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="http://127.0.0.1:18091/css/webroot-layout.css?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="http://127.0.0.1:18091/css/webroot-theme.css?v=1a147e2" rel="stylesheet" type="text/css">
+    <script src="#?v=1a147e2" type="text/javascript"></script>
+    <script src="#?v=1a147e2" type="text/javascript"></script>
+    <script src="#?v=1a147e2" type="text/javascript"></script>
+    <link rel="shortcut icon" href="http://127.0.0.1:18091/favicon.ico">
+</head>
+<body class="dev bg-light FindPromotion">
+        
+        
+        
+        
+    <!-- BEGIN screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+        <!-- BEGIN render-mode.text[inline][@template=true] -->
+<script>var notificationClient = new moqui.NotificationClient((location.protocol === 'https:' ? 'wss' : 'ws') + "://127.0.0.1:18091/notws");</script>        <!-- END   render-mode.text[inline][@template=true] -->
+    <!-- BEGIN section[@name=TopNavSection] -->
+        <!-- BEGIN screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+    <div id="top">
+        <!-- BEGIN render-mode.text[@location=component://webroot/screen/includes/navbar.html.ftl][@template=true] -->
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <header class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a href="http://127.0.0.1:18091/apps/AppList" class="navbar-brand"><img src="http://127.0.0.1:18091/images/MoquiLogoSmall.png" alt="Home"></a>
+        
+    </header>
+    <div id="navbar-buttons" class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul id="header-menus" class="nav navbar-nav">
+        </ul>
+        <div id="navbar-menu-crumbs">
+        </div>
+        <a class="navbar-text" href="http://127.0.0.1:18091/apps/marble/ProductStore/Promotion/FindPromotion?productStoreId=POPC_DEFAULT">Store Promotions</a>
+        <a href="http://127.0.0.1:18091/Login/logout" data-toggle="tooltip" data-original-title="Logout John Doe" data-placement="bottom" class="btn btn-danger btn-sm navbar-btn navbar-right">
+            <i class="fa fa-power-off"></i>
+        </a>
+        <a href="#" onclick="switchDarkLight();" data-toggle="tooltip" data-original-title="Switch Dark/Light" data-placement="bottom" class="btn btn-default btn-sm navbar-btn navbar-right">
+            <i class="fa fa-adjust"></i>
+        </a>
+
+<div class="btn-group navbar-right">
+    <a href="/apps/my/User/Notifications" data-toggle="tooltip" data-container="body" data-original-title="Notifications" data-placement="bottom" class="btn btn-default btn-sm navbar-btn">
+        <i class="fa fa-info-circle"></i>
+        <span id="navbar_notification_count" class="label label-info">0</span>
+    </a>
+    <a href="/apps/my/User/Messages/FindMessage?statusId=CeReceived&amp;toPartyId=EX_JOHN_DOE" data-toggle="tooltip" data-container="body" data-original-title="Messages" data-placement="bottom" class="btn btn-default btn-sm navbar-btn">
+        <i class="fa fa-envelope"></i>
+        <span class="label label-warning">0</span>
+    </a>
+    <a href="/apps/my/User/Calendar/MyCalendar" data-toggle="tooltip" data-container="body" data-original-title="Events This Week" data-placement="bottom" class="btn btn-default btn-sm navbar-btn">
+        <i class="fa fa-calendar"></i>
+        <span class="label label-primary">0</span>
+    </a>
+    <a href="/apps/my/User/Task/MyTasks" data-toggle="tooltip" data-container="body" data-original-title="Open Tasks" data-placement="bottom" class="btn btn-default btn-sm navbar-btn">
+        <i class="fa fa-check"></i>
+        <span class="label label-success">0</span>
+    </a>
+</div>
+    <script>
+        var navbarNotificationListener = function(jsonObj, webSocket) {
+            if (jsonObj && jsonObj.persistOnSend === true) {
+                var countElement = $("#navbar_notification_count");
+                countElement.text((parseInt(countElement.text()) + 1).toString());
+            }
+            notificationClient.displayNotify(jsonObj, webSocket);
+        };
+        notificationClient.registerListener("ALL", navbarNotificationListener);
+    </script>
+        <div id="history-menu" class="nav navbar-right dropdown">
+            <a id="history-menu-link" href="#" class="dropdown-toggle btn btn-default btn-sm navbar-btn" data-toggle="dropdown" title="History">
+                <i class="fa fa-list"></i></a>
+            <ul class="dropdown-menu">
+                <li><a href="http://127.0.0.1:18091/apps/marble/dashboard">
+                            <i class="fa fa-dashboard" style="padding-right: 8px;"></i>
+                    Marble ERP - Dashboard
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Order/OrderDetail">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/dashboard">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Customer/FindCustomer">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/vapps/marble/Order/OrderDetail">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/vapps/marble/dashboard">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/vapps/marble/Customer/FindCustomer">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Order/OrderDetail">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Sales.png" alt="Orders - Order Detail" height="18" style="padding-right: 4px;">
+                    Orders - Order Detail
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Customer/FindCustomer">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Customer.png" alt="Customers - Find Customer" height="18" style="padding-right: 4px;">
+                    Customers - Find Customer
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Accounting/TimePeriod/FindTimePeriod">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/vapps/marble/Accounting/TimePeriod/FindTimePeriod">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Accounting/TimePeriod/FindTimePeriod">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Accounting.png" alt="Time Period - Find Time Period" height="18" style="padding-right: 4px;">
+                    Time Period - Find Time Period
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Accounting/Reports/ReportList">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Accounting/Invoice/EditInvoice">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Accounting/Payment/FindPayment?paymentType=Incoming">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications (Incoming)
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Shipment/ShipmentItems">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Order/FindOrder">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Asset/Asset/FindSummary">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/ProductStore/FindProductStore">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Facility/FindFacility">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Catalog/Product/EditPrices">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Asset/Asset/FindSummary?assetTypeEnumId=AstTpInventory">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications (AstTpInventory)
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Catalog/Product/FindProduct">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Accounting/Invoice/FindInvoice">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Party/PartyTimeEntries">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            </ul>
+        </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+    $('.navbar [data-toggle="tooltip"]').tooltip({ placement:'bottom', trigger:'hover' });
+    $('#history-menu-link').tooltip({ placement:'bottom', trigger:'hover' });
+    $('#document-menu-link').tooltip({ placement:'bottom', trigger:'hover' });
+    function switchDarkLight() {
+        $("body").toggleClass("bg-dark");
+        $("body").toggleClass("bg-light");
+        var currentStyle = $("body").hasClass("bg-dark") ? "bg-dark" : "bg-light";
+        $.ajax({ type:'POST', url:'http://127.0.0.1:18091/apps/setPreference', data:{ 'moquiSessionToken': '[REDACTED]','preferenceKey': 'OUTER_STYLE', 'preferenceValue': currentStyle }, dataType:'json' });
+    }
+</script>
+
+        <!-- END   render-mode.text[@location=component://webroot/screen/includes/navbar.html.ftl][@template=true] -->
+        <!-- BEGIN render-mode.text[inline][@template=true] -->
+        <!-- END   render-mode.text[inline][@template=true] -->
+        <li id="header-menu" class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Application <i class="fa fa-chevron-right"></i></a>
+            <ul class="dropdown-menu">
+                        <li class="active"><a href="http://127.0.0.1:18091/apps/marble/dashboard"><i class="fa fa-cogs" style="padding-right: 8px;"></i>Marble ERP</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/my"><i class="fa fa-user" style="padding-right: 8px;"></i>My Account</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/system"><i class="fa fa-cog" style="padding-right: 8px;"></i>System</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/tools"><i class="fa fa-wrench" style="padding-right: 8px;"></i>Tools</a></li>
+            </ul>
+        </li>
+        <script>$("#header-menus").append($("#header-menu"));</script>
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    <!-- END   screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+
+    <!-- END   section[@name=TopNavSection] -->
+    <div id="content">
+    <div class="inner">
+    <div class="container-fluid">
+    <!-- BEGIN section[@name=MessagesSection] -->
+        <!-- BEGIN screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+    <!-- BEGIN section-iterate[@name=headerMessageInfos] -->
+    
+    <!-- END   section-iterate[@name=headerMessageInfos] -->
+    <!-- BEGIN section-iterate[@name=headerErrors] -->
+    
+    <!-- END   section-iterate[@name=headerErrors] -->
+    <!-- BEGIN section-iterate[@name=headerValidationErrors] -->
+    
+    <!-- END   section-iterate[@name=headerValidationErrors] -->
+    <!-- BEGIN section-iterate[@name=headerSavedMessages] -->
+    
+    <!-- END   section-iterate[@name=headerSavedMessages] -->
+    <!-- BEGIN section-iterate[@name=headerSavedErrors] -->
+    
+    <!-- END   section-iterate[@name=headerSavedErrors] -->
+    <!-- BEGIN section-iterate[@name=headerSavedValidationErrors] -->
+    
+    <!-- END   section-iterate[@name=headerSavedValidationErrors] -->
+    <!-- END   screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+
+    <!-- END   section[@name=MessagesSection] -->
+        <!-- BEGIN screen[@location=component://MarbleERP/screen/marble.xml].widgets -->
+    <!-- BEGIN section[@name=OrgChooserSection] -->
+        <!-- BEGIN screen[@location=component://MarbleERP/screen/marble.xml].widgets -->
+        <!-- BEGIN render-mode.text[inline][@template=true] -->
+<div id="active-org-menu" class="nav navbar-right dropdown">
+                <a id="active-org-menu-link" href="#" class="dropdown-toggle btn btn-default btn-sm navbar-btn" data-toggle="dropdown" title="Organization">
+                    <i class="fa fa-globe"></i> </a>
+                <ul class="dropdown-menu">
+                        <li><a href="http://127.0.0.1:18091/apps/setPrefGoLast?preferenceKey=ACTIVE_ORGANIZATION&amp;preferenceValue=ORG_ZIZI_RETAIL">ZIRET: Ziziwork Retail &amp; Wholesale</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/setPrefGoLast?preferenceKey=ACTIVE_ORGANIZATION&amp;preferenceValue=ORG_ZIZI_SERVICES">ZISER: Ziziwork Services</a></li>
+                </ul>
+            </div>
+            <script>$("#navbar-buttons").append($("#active-org-menu")); $('#active-org-menu-link').tooltip({ placement:'bottom', trigger:'hover' });</script>        <!-- END   render-mode.text[inline][@template=true] -->
+    <!-- END   screen[@location=component://MarbleERP/screen/marble.xml].widgets -->
+
+    <!-- END   section[@name=OrgChooserSection] -->
+        <li id="MarbleErpPanel-menu" class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Marble ERP <i class="fa fa-chevron-right"></i></a>
+            <ul class="dropdown-menu">
+                        <li><a href="http://127.0.0.1:18091/apps/marble/dashboard"><i class="fa fa-dashboard" style="padding-right: 8px;"></i>Dashboard</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/QuickSearch"><i class="fa fa-search" style="padding-right: 8px;"></i>Quick Search</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Accounting/dashboard"><img src="http://127.0.0.1:18091/ssstatic/images/Accounting.png" alt="Accounting" height="18" style="padding-right: 4px;">Accounting</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Asset/dashboard"><img src="http://127.0.0.1:18091/ssstatic/images/Asset.png" alt="Asset" height="18" style="padding-right: 4px;">Asset</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Catalog/dashboard"><img src="http://127.0.0.1:18091/ssstatic/images/Catalog.png" alt="Catalog" height="18" style="padding-right: 4px;">Catalog</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Customer/FindCustomer"><img src="http://127.0.0.1:18091/ssstatic/images/Customer.png" alt="Customers" height="18" style="padding-right: 4px;">Customers</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Facility/FindFacility"><img src="http://127.0.0.1:18091/ssstatic/images/Facility.png" alt="Facility" height="18" style="padding-right: 4px;">Facility</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/HumanRes/dashboard"><i class="fa fa-user-plus" style="padding-right: 8px;"></i>Human Resources</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Manufacturing/dashboard"><i class="fa fa-industry" style="padding-right: 8px;"></i>Manufacturing</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Order/FindOrder"><img src="http://127.0.0.1:18091/ssstatic/images/Sales.png" alt="Orders" height="18" style="padding-right: 4px;">Orders</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Party/FindParty"><img src="http://127.0.0.1:18091/ssstatic/images/Parties.png" alt="Parties" height="18" style="padding-right: 4px;">Parties</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Project/FindProject"><img src="http://127.0.0.1:18091/ssstatic/images/project-business120.png" alt="Projects" height="18" style="padding-right: 4px;">Projects</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Request/FindRequest"><img src="http://127.0.0.1:18091/ssstatic/images/Request.png" alt="Requests" height="18" style="padding-right: 4px;">Requests</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Return/FindReturn"><img src="http://127.0.0.1:18091/ssstatic/images/Return.png" alt="Returns" height="18" style="padding-right: 4px;">Returns</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Shipment/FindShipment"><img src="http://127.0.0.1:18091/ssstatic/images/Shipping.png" alt="Shipments" height="18" style="padding-right: 4px;">Shipments</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Shipping/dashboard"><img src="http://127.0.0.1:18091/ssstatic/images/Picking.png" alt="Shipping" height="18" style="padding-right: 4px;">Shipping</a></li>
+                        <li class="active"><a href="http://127.0.0.1:18091/apps/marble/ProductStore/FindProductStore"><img src="http://127.0.0.1:18091/ssstatic/images/ProductStore.png" alt="Stores" height="18" style="padding-right: 4px;">Stores</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Supplier/FindSupplier"><img src="http://127.0.0.1:18091/ssstatic/images/Supplier.png" alt="Suppliers" height="18" style="padding-right: 4px;">Suppliers</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Survey/FindSurvey"><i class="fa fa-pencil-square-o" style="padding-right: 8px;"></i>Survey</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Task/FindTask"><img src="http://127.0.0.1:18091/ssstatic/images/task-homework.png" alt="Tasks" height="18" style="padding-right: 4px;">Tasks</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Wiki/WikiSpaces"><img src="http://127.0.0.1:18091/ssstatic/images/Wiki.png" alt="Wiki/Content" height="18" style="padding-right: 4px;">Wiki/Content</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/QuickViewReport"><i class="fa fa-database" style="padding-right: 8px;"></i>Custom Reports</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/SimpleReport/FindReport"><i class="fa fa-database" style="padding-right: 8px;"></i>Report Builder</a></li>
+            </ul>
+        </li>
+        <script>$("#header-menus").append($("#MarbleErpPanel-menu"));</script>
+            <!-- BEGIN screen[@location=component://SimpleScreens/screen/SimpleScreens/ProductStore.xml].widgets -->
+<strong class="text-inline">POPC_DEFAULT: Ziziwork Retail Store</strong>
+        <div id="StorePanel-tabpanel">
+                    <ul id="StorePanel-menu" class="nav nav-tabs" role="tablist">
+                            <li class=""><a href="http://127.0.0.1:18091/apps/marble/ProductStore/EditProductStore?productStoreId=POPC_DEFAULT">Product Store</a></li>
+                            <li class="active"><a href="http://127.0.0.1:18091/apps/marble/ProductStore/Promotion/FindPromotion?productStoreId=POPC_DEFAULT">Promotions</a></li>
+                            <li class=""><a href="http://127.0.0.1:18091/apps/marble/ProductStore/FindProductStoreEmails?productStoreId=POPC_DEFAULT">Emails</a></li>
+                            <li class=""><a href="http://127.0.0.1:18091/apps/marble/ProductStore/FindProductStoreCategory?productStoreId=POPC_DEFAULT">Categories</a></li>
+                            <li class=""><a href="http://127.0.0.1:18091/apps/marble/ProductStore/FindProductStoreParty?productStoreId=POPC_DEFAULT">Parties</a></li>
+                            <li class=""><a href="http://127.0.0.1:18091/apps/marble/ProductStore/FindProductStoreFacility?productStoreId=POPC_DEFAULT">Facilities</a></li>
+                            <li class=""><a href="http://127.0.0.1:18091/apps/marble/ProductStore/FindProductStoreSettings?productStoreId=POPC_DEFAULT">Settings</a></li>
+                    </ul>
+                <a id="StorePanel-menu-crumb" class="navbar-text" href="http://127.0.0.1:18091/apps/marble/ProductStore/FindProductStore">Stores <i class="fa fa-chevron-right"></i></a>
+                <script>$("#navbar-menu-crumbs").append($("#StorePanel-menu-crumb"));</script>
+                <!-- BEGIN screen[@location=component://SimpleScreens/screen/SimpleScreens/ProductStore/Promotion.xml].widgets -->
+        <div id="PromotionsPanel-tabpanel">
+                <a id="PromotionsPanel-menu-crumb" class="navbar-text" href="http://127.0.0.1:18091/apps/marble/ProductStore/Promotion/FindPromotion">Promotions <i class="fa fa-chevron-right"></i></a>
+                <script>$("#navbar-menu-crumbs").append($("#PromotionsPanel-menu-crumb"));</script>
+                <!-- BEGIN screen[@location=component://SimpleScreens/screen/SimpleScreens/ProductStore/Promotion/FindPromotion.xml].widgets -->
+        <button id="NewPromotionDialog-button" type="button" data-toggle="modal" data-target="#NewPromotionDialog" data-original-title="New Store Promotion" data-placement="bottom" class="btn btn-primary btn-sm "><i class="fa fa-share"></i> New Store Promotion</button>
+
+        <div id="NewPromotionDialog" class="modal container-dialog" aria-hidden="true" style="display: none;" tabindex="-1">
+            <div class="modal-dialog" style="width: 760px;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">New Store Promotion</h4>
+                    </div>
+                    <div class="modal-body">
+    <!-- BEGIN form-single[@name=NewPromotionForm] -->
+    <form name="NewPromotionForm" id="NewPromotionForm" method="post" action="http://127.0.0.1:18091/apps/marble/ProductStore/Promotion/FindPromotion/createPromotion">
+        <input type="hidden" name="moquiFormName" value="NewPromotionForm" style="">
+        <input type="hidden" name="moquiSessionToken" value="[REDACTED]" style="">
+        
+        <fieldset class="form-horizontal">
+    <input type="hidden" name="productStoreId" value="POPC_DEFAULT" id="NewPromotionForm_productStoreId" style="">
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="NewPromotionForm_itemDescription">Item Description</label>
+            <div class="col-sm-10">
+    
+<input id="NewPromotionForm_itemDescription" type="text" name="itemDescription" value="" size="50" class="form-control" style="">
+        
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="NewPromotionForm_serviceRegisterId">Service</label>
+            <div class="col-sm-10">
+    
+    <select name="serviceRegisterId" class="" id="NewPromotionForm_serviceRegisterId">
+            <option value="BuyGetDiscount">Buy X Get Y at Z% Discount</option>
+            <option value="FlatDiscount">Flat Discount per Quantity</option>
+            <option value="NewCustomerDiscount">New Customer Discount</option>
+    </select>
+    
+    
+        <script>$("#NewPromotionForm_serviceRegisterId").select2({  });</script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="NewPromotionForm_fromDate">From Date</label>
+            <div class="col-sm-10">
+    
+
+
+
+        <div class="input-group date" id="NewPromotionForm_fromDate">
+            <input type="text" class="form-control" name="fromDate" value="" size="16" maxlength="23" style="">
+            <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+        </div>
+        <script>
+            $('#NewPromotionForm_fromDate').datetimepicker({toolbarPlacement:'top', showClose:true, showClear:true, showTodayButton:true,
+                useStrict:true, defaultDate: '' && moment('','YYYY-MM-DD HH:mm'),
+                format:'YYYY-MM-DD HH:mm', extraFormats:['YYYY-MM-DD HH:mm', 'YYYY-MM-DD HH:mm:ss', 'MM/DD/YYYY HH:mm'], stepping:5, locale:"en-US",
+                keyBinds: {t: function() {this.date(moment());}, up: function () { this.date(this.date().clone().add(1, 'd')); }, down: function () { this.date(this.date().clone().subtract(1, 'd')); }, 'control up': function () { this.date(this.date().clone().add(1, 'd')); }, 'control down': function () { this.date(this.date().clone().subtract(1, 'd')); }}});
+            $('#NewPromotionForm_fromDate').on("dp.change", function() { var jqEl = $('#NewPromotionForm_fromDate'); jqEl.val(jqEl.find("input").first().val()); jqEl.trigger("change"); });
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <div class="col-sm-2 hidden-xs">&nbsp;</div>
+            <div class="col-sm-10">
+    
+    <button type="submit" name="submitButton" value="submitButton" id="NewPromotionForm_submitButton" class="btn btn-primary btn-sm">
+Create    </button>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        </fieldset>
+    </form>
+        <script>
+            $("#NewPromotionForm").validate({ errorClass: 'help-block', errorElement: 'span',
+                highlight: function(element, errorClass, validClass) { $(element).parents('.form-group').removeClass('has-success').addClass('has-error'); },
+                unhighlight: function(element, errorClass, validClass) { $(element).parents('.form-group').removeClass('has-error').addClass('has-success'); }
+            });
+            $('#NewPromotionForm [data-toggle="tooltip"]').tooltip({placement:'auto top'});
+
+        </script>
+    <!-- END   form-single[@name=NewPromotionForm] -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>$('#NewPromotionDialog').on('shown.bs.modal', function() {
+            $("#NewPromotionDialog :not(.noResetSelect2)>select:not(.noResetSelect2)").select2({ });
+            var defFocus = $("#NewPromotionDialog .default-focus");
+            if (defFocus.length) { defFocus.focus(); } else { $("#NewPromotionDialog form :input:visible:first").focus(); }
+        });</script>
+<p class="text-inline">NOTE: Promotions are applied in the order of the Sequence Num. Higher value promotions should have lower sequence numbers.</p>
+    <!-- BEGIN form-list[@name=PromotionsForm] -->
+        <form name="PromotionsForm" id="PromotionsForm" method="post" action="http://127.0.0.1:18091/apps/marble/ProductStore/Promotion/FindPromotion/updatePromotion">
+            <input type="hidden" name="moquiFormName" value="PromotionsForm" style="">
+            <input type="hidden" name="moquiSessionToken" value="[REDACTED]" style="">
+            <input type="hidden" name="_isMulti" value="true" style="">
+            
+                
+    <input type="hidden" name="productStoreId_0" value="POPC_DEFAULT" id="PromotionsForm_productStoreId_0" style="">
+                
+                
+    <input type="hidden" name="productStoreId_1" value="POPC_DEFAULT" id="PromotionsForm_productStoreId_1" style="">
+                
+        </form>
+
+        <div id="PromotionsForm_hdialog" class="modal" aria-hidden="true" style="display: none;" tabindex="-1">
+            <div class="modal-dialog" style="width: 800px;"><div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Find Options</h4>
+                </div>
+                <div class="modal-body">
+                
+                
+                    <form name="PromotionsForm_header" id="PromotionsForm_header" method="post" action="http://127.0.0.1:18091/apps/marble/ProductStore/Promotion/FindPromotion">
+                        <input type="hidden" name="moquiSessionToken" value="[REDACTED]" style="">
+                        
+                        
+                        <fieldset class="form-horizontal">
+                            <div class="form-group"><div class="col-sm-2">&nbsp;</div><div class="col-sm-10">
+                                <button type="button" class="btn btn-primary btn-sm" onclick="PromotionsForm_header_clearForm()">Clear Parameters</button></div></div>
+
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="PromotionsForm_header_orderByField">Order By</label>
+                                <div class="col-sm-10">
+                                    <select name="orderBySelect" id="PromotionsForm_header_orderBySelect" multiple="multiple" style="width: 100%;" class="noResetSelect2">
+                                                <option value="sequenceNum">Seq Num (Asc)</option>
+                                                <option value="-sequenceNum">Seq Num (Desc)</option>
+                                                <option value="storePromotionId">ID (Asc)</option>
+                                                <option value="-storePromotionId">ID (Desc)</option>
+                                                <option value="^itemDescription">Item Description (Asc)</option>
+                                                <option value="-^itemDescription">Item Description (Desc)</option>
+                                                <option value="serviceRegisterId">Service (Asc)</option>
+                                                <option value="-serviceRegisterId">Service (Desc)</option>
+                                                <option value="fromDate">From Date (Asc)</option>
+                                                <option value="-fromDate">From Date (Desc)</option>
+                                                <option value="thruDate">Thru Date (Asc)</option>
+                                                <option value="-thruDate">Thru Date (Desc)</option>
+                                    </select>
+                                    <input type="hidden" id="PromotionsForm_header_orderByField" name="orderByField" value="sequenceNum,storePromotionId" style="">
+                                </div>
+                            </div>
+                            <script>
+                                function PromotionsForm_header_clearForm() {
+                                    var jqEl = $("#PromotionsForm_header");
+                                    jqEl.find(':radio, :checkbox').removeAttr('checked');
+                                    jqEl.find('textarea, :text, select').val('').trigger('change');
+                                    return false;
+                                }
+                                $("#PromotionsForm_header_orderBySelect").selectivity({ positionDropdown: function(dropdownEl, selectEl) { dropdownEl.css("width", "300px"); } })[0].selectivity.filterResults = function(results) {
+                                    // Filter out asc and desc options if anyone selected.
+                                    return results.filter(function(item){return !this._data.some(function(data_item) {return data_item.id.substring(1) === item.id.substring(1);});}, this);
+                                };
+                                    $("#PromotionsForm_header_orderBySelect").selectivity("value", ['sequenceNum','storePromotionId']);
+                                $("div#PromotionsForm_header_orderBySelect").on("change", function(evt) {
+                                    if (evt.value) $("#PromotionsForm_header_orderByField").val(evt.value.join(","));
+                                });
+                            </script>
+
+    <input type="hidden" name="productStoreId" value="POPC_DEFAULT" id="PromotionsForm_productStoreId" style="">
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="PromotionsForm_header_sequenceNum">Seq Num</label>
+            <div class="col-sm-10">
+    
+<span class="form-text-find">
+        <input type="hidden" name="sequenceNum_op" value="contains" style="">
+    <input type="text" class="form-control" name="sequenceNum" value="" size="3" id="PromotionsForm_header_sequenceNum" style="">
+        <input type="hidden" name="sequenceNum_ic" value="Y" style="">
+</span>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="PromotionsForm_header_storePromotionId">ID</label>
+            <div class="col-sm-10">
+    
+<span class="form-text-find">
+        <input type="hidden" name="storePromotionId_op" value="contains" style="">
+    <input type="text" class="form-control" name="storePromotionId" value="" size="10" id="PromotionsForm_header_storePromotionId" style="">
+        <input type="hidden" name="storePromotionId_ic" value="Y" style="">
+</span>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="PromotionsForm_header_itemDescription">Item Description</label>
+            <div class="col-sm-10">
+    
+<span class="form-text-find">
+        <input type="hidden" name="itemDescription_op" value="contains" style="">
+    <input type="text" class="form-control" name="itemDescription" value="" size="25" id="PromotionsForm_header_itemDescription" style="">
+        <input type="hidden" name="itemDescription_ic" value="Y" style="">
+</span>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="PromotionsForm_header_serviceRegisterId">Service</label>
+            <div class="col-sm-10">
+    
+    <select name="serviceRegisterId" class="" id="PromotionsForm_header_serviceRegisterId">
+            <option value="">&nbsp;</option>
+            <option value="BuyGetDiscount">Buy X Get Y at Z% Discount</option>
+            <option value="FlatDiscount">Flat Discount per Quantity</option>
+            <option value="NewCustomerDiscount">New Customer Discount</option>
+    </select>
+    
+    
+        <script>$("#PromotionsForm_header_serviceRegisterId").select2({  });</script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="PromotionsForm_header_fromDate">From Date</label>
+            <div class="col-sm-10">
+    
+    <div class="date-period">
+        <select name="fromDate_poffset" id="PromotionsForm_header_fromDate_poffset">
+                <option value="">&nbsp;</option>
+            <option value="0">This</option>
+            <option value="-1">Last</option>
+            <option value="1">Next</option>
+            <option value="-2">-2</option>
+            <option value="2">+2</option>
+            <option value="-3">-3</option>
+            <option value="-4">-4</option>
+            <option value="-6">-6</option>
+            <option value="-12">-12</option>
+        </select>
+        <select name="fromDate_period" id="PromotionsForm_header_fromDate_period">
+            <option value="">&nbsp;</option>
+            <option value="day">Day</option>
+            <option value="7d">7 Days</option>
+            <option value="30d">30 Days</option>
+            <option value="week">Week</option>
+            <option value="weeks">Weeks</option>
+            <option value="month">Month</option>
+            <option value="months">Months</option>
+            <option value="quarter">Quarter</option>
+            <option value="year">Year</option>
+            <option value="7r">+/-7d</option>
+            <option value="30r">+/-30d</option>
+        </select>
+        <div class="input-group date" id="PromotionsForm_header_fromDate_pdate">
+            <input type="text" class="form-control" name="fromDate_pdate" value="" size="10" maxlength="10" style="">
+            <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+        </div>
+        <script>
+            $("#PromotionsForm_header_fromDate_poffset").select2({ }); $("#PromotionsForm_header_fromDate_period").select2({ });
+            $('#PromotionsForm_header_fromDate_pdate').datetimepicker({toolbarPlacement:'top', showClose:true, showClear:true, showTodayButton:true, useStrict:true, defaultDate: '' && moment('','YYYY-MM-DD'), format:'YYYY-MM-DD', extraFormats:['l', 'L', 'YYYY-MM-DD'], locale:"en-US", keyBinds: {t: function() {this.date(moment());}, up: function () { this.date(this.date().clone().add(1, 'd')); }, down: function () { this.date(this.date().clone().subtract(1, 'd')); }, 'control up': function () { this.date(this.date().clone().add(1, 'd')); }, 'control down': function () { this.date(this.date().clone().subtract(1, 'd')); }}});
+        </script>
+    </div>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="PromotionsForm_header_thruDate">Thru Date</label>
+            <div class="col-sm-10">
+    
+    <div class="date-period">
+        <select name="thruDate_poffset" id="PromotionsForm_header_thruDate_poffset">
+                <option value="">&nbsp;</option>
+            <option value="0">This</option>
+            <option value="-1">Last</option>
+            <option value="1">Next</option>
+            <option value="-2">-2</option>
+            <option value="2">+2</option>
+            <option value="-3">-3</option>
+            <option value="-4">-4</option>
+            <option value="-6">-6</option>
+            <option value="-12">-12</option>
+        </select>
+        <select name="thruDate_period" id="PromotionsForm_header_thruDate_period">
+            <option value="">&nbsp;</option>
+            <option value="day">Day</option>
+            <option value="7d">7 Days</option>
+            <option value="30d">30 Days</option>
+            <option value="week">Week</option>
+            <option value="weeks">Weeks</option>
+            <option value="month">Month</option>
+            <option value="months">Months</option>
+            <option value="quarter">Quarter</option>
+            <option value="year">Year</option>
+            <option value="7r">+/-7d</option>
+            <option value="30r">+/-30d</option>
+        </select>
+        <div class="input-group date" id="PromotionsForm_header_thruDate_pdate">
+            <input type="text" class="form-control" name="thruDate_pdate" value="" size="10" maxlength="10" style="">
+            <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+        </div>
+        <script>
+            $("#PromotionsForm_header_thruDate_poffset").select2({ }); $("#PromotionsForm_header_thruDate_period").select2({ });
+            $('#PromotionsForm_header_thruDate_pdate').datetimepicker({toolbarPlacement:'top', showClose:true, showClear:true, showTodayButton:true, useStrict:true, defaultDate: '' && moment('','YYYY-MM-DD'), format:'YYYY-MM-DD', extraFormats:['l', 'L', 'YYYY-MM-DD'], locale:"en-US", keyBinds: {t: function() {this.date(moment());}, up: function () { this.date(this.date().clone().add(1, 'd')); }, down: function () { this.date(this.date().clone().subtract(1, 'd')); }, 'control up': function () { this.date(this.date().clone().add(1, 'd')); }, 'control down': function () { this.date(this.date().clone().subtract(1, 'd')); }}});
+        </script>
+    </div>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <div class="col-sm-2 hidden-xs">&nbsp;</div>
+            <div class="col-sm-10">
+    
+    <button type="submit" name="submitButton" value="submitButton" id="PromotionsForm_header_submitButton" class="btn btn-primary btn-sm">
+Find    </button>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+                        </fieldset>
+                    </form>
+                </div>
+            </div></div>
+        </div>
+        <script>$('#PromotionsForm_hdialog').on('shown.bs.modal', function() {
+            $("#PromotionsForm_hdialog :not(.noResetSelect2)>select:not(.noResetSelect2)").select2({ });
+        })</script>
+        <div class="table-scroll-wrapper"><table class="table table-striped table-hover table-condensed" id="PromotionsForm_table">
+            <thead>
+        <tr class="form-list-nav-row"><th colspan="7">
+        <nav class="form-list-nav">
+            <button id="PromotionsForm_hdialog_button" type="button" data-toggle="modal" data-target="#PromotionsForm_hdialog" data-original-title="Find Options" data-placement="bottom" class="btn btn-default"><i class="fa fa-share"></i> Find Options</button>
+            
+
+                <ul class="pagination">
+                    <li><span><i class="fa fa-fast-backward"></i></span></li>
+                    <li><span><i class="fa fa-backward"></i></span></li>
+
+                <li><a href="http://127.0.0.1:18091/apps/marble/ProductStore/Promotion/FindPromotion?productStoreId=POPC_DEFAULT">Page 1 of 1 (1 - 2 of 2)</a></li>
+
+
+                    <li><span><i class="fa fa-forward"></i></span></li>
+                    <li><span><i class="fa fa-fast-forward"></i></span></li>
+                </ul>
+
+        </nav>
+        </th></tr>
+
+            <tr><th colspan="7" style="font-weight: normal">
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+            </th></tr>
+
+                <tr>
+                    <th>
+                        <div><div class="form-title">Seq Num            <span class="form-order-by">
+                <a href="http://127.0.0.1:18091/apps/marble/ProductStore/Promotion/FindPromotion?orderByField=-sequenceNum&amp;productStoreId=POPC_DEFAULT" class="active"><i class="fa fa-caret-up"></i></a>
+                <a href="http://127.0.0.1:18091/apps/marble/ProductStore/Promotion/FindPromotion?orderByField=-sequenceNum&amp;productStoreId=POPC_DEFAULT"><i class="fa fa-caret-down"></i></a>
+            </span>
+</div>    </div>
+                    </th>
+                    <th>
+                        <div><div class="form-title">ID            <span class="form-order-by">
+                <a href="http://127.0.0.1:18091/apps/marble/ProductStore/Promotion/FindPromotion?orderByField=-storePromotionId&amp;productStoreId=POPC_DEFAULT" class="active"><i class="fa fa-caret-up"></i></a>
+                <a href="http://127.0.0.1:18091/apps/marble/ProductStore/Promotion/FindPromotion?orderByField=-storePromotionId&amp;productStoreId=POPC_DEFAULT"><i class="fa fa-caret-down"></i></a>
+            </span>
+</div>    </div>
+                    </th>
+                    <th>
+                        <div><div class="form-title">Item Description            <span class="form-order-by">
+                <a href="http://127.0.0.1:18091/apps/marble/ProductStore/Promotion/FindPromotion?orderByField=%5EitemDescription&amp;productStoreId=POPC_DEFAULT"><i class="fa fa-caret-up"></i></a>
+                <a href="http://127.0.0.1:18091/apps/marble/ProductStore/Promotion/FindPromotion?orderByField=-%5EitemDescription&amp;productStoreId=POPC_DEFAULT"><i class="fa fa-caret-down"></i></a>
+            </span>
+</div>    </div>
+                    </th>
+                    <th>
+                        <div><div class="form-title">Service            <span class="form-order-by">
+                <a href="http://127.0.0.1:18091/apps/marble/ProductStore/Promotion/FindPromotion?orderByField=serviceRegisterId&amp;productStoreId=POPC_DEFAULT"><i class="fa fa-caret-up"></i></a>
+                <a href="http://127.0.0.1:18091/apps/marble/ProductStore/Promotion/FindPromotion?orderByField=-serviceRegisterId&amp;productStoreId=POPC_DEFAULT"><i class="fa fa-caret-down"></i></a>
+            </span>
+</div>    </div>
+                    </th>
+                    <th>
+                        <div><div class="form-title">From Date            <span class="form-order-by">
+                <a href="http://127.0.0.1:18091/apps/marble/ProductStore/Promotion/FindPromotion?orderByField=fromDate&amp;productStoreId=POPC_DEFAULT"><i class="fa fa-caret-up"></i></a>
+                <a href="http://127.0.0.1:18091/apps/marble/ProductStore/Promotion/FindPromotion?orderByField=-fromDate&amp;productStoreId=POPC_DEFAULT"><i class="fa fa-caret-down"></i></a>
+            </span>
+</div>    </div>
+                    </th>
+                    <th>
+                        <div><div class="form-title">Thru Date            <span class="form-order-by">
+                <a href="http://127.0.0.1:18091/apps/marble/ProductStore/Promotion/FindPromotion?orderByField=thruDate&amp;productStoreId=POPC_DEFAULT"><i class="fa fa-caret-up"></i></a>
+                <a href="http://127.0.0.1:18091/apps/marble/ProductStore/Promotion/FindPromotion?orderByField=-thruDate&amp;productStoreId=POPC_DEFAULT"><i class="fa fa-caret-down"></i></a>
+            </span>
+</div>    </div>
+                    </th>
+                    <th>
+                        <div><div class="form-title">&nbsp;</div>    </div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+        
+        <tr>
+            <td>
+    <div class="form-group">
+    
+<input id="PromotionsForm_sequenceNum_0" type="text" name="sequenceNum_0" value="10" size="3" class="form-control number" form="PromotionsForm" style="">    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String"> </span>            <input type="hidden" id="PromotionsForm_storePromotionId_0" name="storePromotionId_0" value="PopcBuyGet" form="PromotionsForm" style="">            <a href="http://127.0.0.1:18091/apps/marble/ProductStore/Promotion/EditPromotion?productStoreId=POPC_DEFAULT&amp;storePromotionId=PopcBuyGet" id="PromotionsForm_storePromotionId_0_editPromotion" class="">PopcBuyGet</a>                
+            
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/ProductStore/Promotion/EditPromotion?productStoreId=POPC_DEFAULT&amp;storePromotionId=PopcBuyGet" id="PromotionsForm_itemDescription_0_editPromotion" class="">Buy 1 Get 1 Half Off</a>                
+            
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline">Buy X Get Y at Z% Discount</span>
+<input type="hidden" id="PromotionsForm_serviceRegisterId_0" name="serviceRegisterId_0" value="BuyGetDiscount" form="PromotionsForm" style="">    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<div class="input-group date" id="PromotionsForm_fromDate_0">
+            <input type="text" class="form-control" name="fromDate_0" value="" size="16" maxlength="23" form="PromotionsForm" style="">
+            <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+        </div>
+        <script>
+            $('#PromotionsForm_fromDate_0').datetimepicker({toolbarPlacement:'top', showClose:true, showClear:true, showTodayButton:true,
+                useStrict:true, defaultDate: '' && moment('','YYYY-MM-DD HH:mm'),
+                format:'YYYY-MM-DD HH:mm', extraFormats:['YYYY-MM-DD HH:mm', 'YYYY-MM-DD HH:mm:ss', 'MM/DD/YYYY HH:mm'], stepping:5, locale:"en-US",
+                keyBinds: {t: function() {this.date(moment());}, up: function () { this.date(this.date().clone().add(1, 'd')); }, down: function () { this.date(this.date().clone().subtract(1, 'd')); }, 'control up': function () { this.date(this.date().clone().add(1, 'd')); }, 'control down': function () { this.date(this.date().clone().subtract(1, 'd')); }}});
+            $('#PromotionsForm_fromDate_0').on("dp.change", function() { var jqEl = $('#PromotionsForm_fromDate_0'); jqEl.val(jqEl.find("input").first().val()); jqEl.trigger("change"); });
+        </script>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<div class="input-group date" id="PromotionsForm_thruDate_0">
+            <input type="text" class="form-control" name="thruDate_0" value="" size="16" maxlength="23" form="PromotionsForm" style="">
+            <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+        </div>
+        <script>
+            $('#PromotionsForm_thruDate_0').datetimepicker({toolbarPlacement:'top', showClose:true, showClear:true, showTodayButton:true,
+                useStrict:true, defaultDate: '' && moment('','YYYY-MM-DD HH:mm'),
+                format:'YYYY-MM-DD HH:mm', extraFormats:['YYYY-MM-DD HH:mm', 'YYYY-MM-DD HH:mm:ss', 'MM/DD/YYYY HH:mm'], stepping:5, locale:"en-US",
+                keyBinds: {t: function() {this.date(moment());}, up: function () { this.date(this.date().clone().add(1, 'd')); }, down: function () { this.date(this.date().clone().subtract(1, 'd')); }, 'control up': function () { this.date(this.date().clone().add(1, 'd')); }, 'control down': function () { this.date(this.date().clone().subtract(1, 'd')); }}});
+            $('#PromotionsForm_thruDate_0').on("dp.change", function() { var jqEl = $('#PromotionsForm_thruDate_0'); jqEl.val(jqEl.find("input").first().val()); jqEl.trigger("change"); });
+        </script>    </div>
+            </td>
+            <td>
+            </td>
+        </tr>
+        
+        
+        <tr>
+            <td>
+    <div class="form-group">
+    
+<input id="PromotionsForm_sequenceNum_1" type="text" name="sequenceNum_1" value="99" size="3" class="form-control number" form="PromotionsForm" style="">    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String"> </span>            <input type="hidden" id="PromotionsForm_storePromotionId_1" name="storePromotionId_1" value="PopcNewCustomer" form="PromotionsForm" style="">            <a href="http://127.0.0.1:18091/apps/marble/ProductStore/Promotion/EditPromotion?productStoreId=POPC_DEFAULT&amp;storePromotionId=PopcNewCustomer" id="PromotionsForm_storePromotionId_1_editPromotion" class="">PopcNewCustomer</a>                
+            
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/ProductStore/Promotion/EditPromotion?productStoreId=POPC_DEFAULT&amp;storePromotionId=PopcNewCustomer" id="PromotionsForm_itemDescription_1_editPromotion" class="">20% Discount for New Customers</a>                
+            
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline">New Customer Discount</span>
+<input type="hidden" id="PromotionsForm_serviceRegisterId_1" name="serviceRegisterId_1" value="NewCustomerDiscount" form="PromotionsForm" style="">    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<div class="input-group date" id="PromotionsForm_fromDate_1">
+            <input type="text" class="form-control" name="fromDate_1" value="" size="16" maxlength="23" form="PromotionsForm" style="">
+            <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+        </div>
+        <script>
+            $('#PromotionsForm_fromDate_1').datetimepicker({toolbarPlacement:'top', showClose:true, showClear:true, showTodayButton:true,
+                useStrict:true, defaultDate: '' && moment('','YYYY-MM-DD HH:mm'),
+                format:'YYYY-MM-DD HH:mm', extraFormats:['YYYY-MM-DD HH:mm', 'YYYY-MM-DD HH:mm:ss', 'MM/DD/YYYY HH:mm'], stepping:5, locale:"en-US",
+                keyBinds: {t: function() {this.date(moment());}, up: function () { this.date(this.date().clone().add(1, 'd')); }, down: function () { this.date(this.date().clone().subtract(1, 'd')); }, 'control up': function () { this.date(this.date().clone().add(1, 'd')); }, 'control down': function () { this.date(this.date().clone().subtract(1, 'd')); }}});
+            $('#PromotionsForm_fromDate_1').on("dp.change", function() { var jqEl = $('#PromotionsForm_fromDate_1'); jqEl.val(jqEl.find("input").first().val()); jqEl.trigger("change"); });
+        </script>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<div class="input-group date" id="PromotionsForm_thruDate_1">
+            <input type="text" class="form-control" name="thruDate_1" value="" size="16" maxlength="23" form="PromotionsForm" style="">
+            <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+        </div>
+        <script>
+            $('#PromotionsForm_thruDate_1').datetimepicker({toolbarPlacement:'top', showClose:true, showClear:true, showTodayButton:true,
+                useStrict:true, defaultDate: '' && moment('','YYYY-MM-DD HH:mm'),
+                format:'YYYY-MM-DD HH:mm', extraFormats:['YYYY-MM-DD HH:mm', 'YYYY-MM-DD HH:mm:ss', 'MM/DD/YYYY HH:mm'], stepping:5, locale:"en-US",
+                keyBinds: {t: function() {this.date(moment());}, up: function () { this.date(this.date().clone().add(1, 'd')); }, down: function () { this.date(this.date().clone().subtract(1, 'd')); }, 'control up': function () { this.date(this.date().clone().add(1, 'd')); }, 'control down': function () { this.date(this.date().clone().subtract(1, 'd')); }}});
+            $('#PromotionsForm_thruDate_1').on("dp.change", function() { var jqEl = $('#PromotionsForm_thruDate_1'); jqEl.val(jqEl.find("input").first().val()); jqEl.trigger("change"); });
+        </script>    </div>
+            </td>
+            <td>
+            </td>
+        </tr>
+        
+                <tr><td colspan="7">
+    
+    
+<button type="submit" name="submitButton" value="submitButton" id="PromotionsForm_submitButton" class="btn btn-primary btn-sm" form="PromotionsForm">
+Update    </button>    
+            </td></tr>
+            </tbody>
+        </table></div>
+        <script>
+            $("#PromotionsForm").validate({ errorClass: 'help-block', errorElement: 'span',
+                highlight: function(element, errorClass, validClass) { $(element).parents('.form-group').removeClass('has-success').addClass('has-error'); },
+                unhighlight: function(element, errorClass, validClass) { $(element).parents('.form-group').removeClass('has-error').addClass('has-success'); }
+            });
+            $('#PromotionsForm [data-toggle="tooltip"]').tooltip({placement:'auto top'});
+        </script>
+    
+    <!-- END   form-list[@name=PromotionsForm] -->
+    <!-- END   screen[@location=component://SimpleScreens/screen/SimpleScreens/ProductStore/Promotion/FindPromotion.xml].widgets -->
+
+        </div>
+    <!-- END   screen[@location=component://SimpleScreens/screen/SimpleScreens/ProductStore/Promotion.xml].widgets -->
+
+        </div>
+    <!-- END   screen[@location=component://SimpleScreens/screen/SimpleScreens/ProductStore.xml].widgets -->
+
+    <!-- END   screen[@location=component://MarbleERP/screen/marble.xml].widgets -->
+
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    <!-- BEGIN section[@name=BottomNavSection] -->
+        <!-- BEGIN screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+    <div id="footer" class="bg-dark">
+        <!-- BEGIN render-mode.text[inline][@template=true] -->
+                <div id="apps-footer-content">
+<p><a href="https://www.moqui.org/" target="_blank">Built on Moqui Framework 4.0.0</a></p><p><a href="/vapps/ScreenTree">Site Map</a></p>                </div>        <!-- END   render-mode.text[inline][@template=true] -->
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    <!-- END   screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+
+    <!-- END   section[@name=BottomNavSection] -->
+    <!-- END   screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+        
+
+
+
+
+        
+        
+        
+    
+</body></html>

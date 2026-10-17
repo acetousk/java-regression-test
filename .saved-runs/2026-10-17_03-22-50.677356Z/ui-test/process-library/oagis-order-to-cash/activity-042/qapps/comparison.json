@@ -1,0 +1,19 @@
+{
+  "id": "activity-042",
+  "sourceLine": 162,
+  "headings": [
+    "OAGIS Order to Cash",
+    "Process Story",
+    "Quote"
+  ],
+  "text": "Customer sends ProcessRFQ to Supplier and Supplier sends AcknowledgeRFQ to Customer.\nTo change a RFQ, Customer sends ChangeRFQ to Supplier and Supplier sends RespondRFQ to Customer.\nTo get RFQ details, Supplier sends GetRFQ to Customer and Customer sends ShowRFQ to Supplier.\nTo cancel an RFQ, Customer sends CancelRFQ to Supplier and Supplier sends ConfirmBOD to Customer.",
+  "route": null,
+  "dialog": null,
+  "mapping": "entry-candidate",
+  "limitation": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required.",
+  "source": "docs/business-processes/process-library/oagis-order-to-cash.md",
+  "mode": "qapps",
+  "coverage": "blocked",
+  "captures": [],
+  "reason": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required."
+}

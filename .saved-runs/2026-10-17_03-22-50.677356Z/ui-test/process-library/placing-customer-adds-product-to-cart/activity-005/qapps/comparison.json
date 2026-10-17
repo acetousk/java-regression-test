@@ -1,0 +1,18 @@
+{
+  "id": "activity-005",
+  "sourceLine": 26,
+  "headings": [
+    "Placing Customer Adds Product to Cart",
+    "Story"
+  ],
+  "text": "If the product Customer wants to order has configuration options, variants (variations) to select, or additional information to gather Customer will specify that information as they add it to the list.",
+  "route": null,
+  "dialog": null,
+  "mapping": "entry-candidate",
+  "limitation": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required.",
+  "source": "docs/business-processes/process-library/placing-customer-adds-product-to-cart.md",
+  "mode": "qapps",
+  "coverage": "blocked",
+  "captures": [],
+  "reason": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required."
+}

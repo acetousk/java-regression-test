@@ -1,0 +1,220 @@
+Toggle navigation 
+Find Time Period
+0 0 0 0
+Marble ERP - Dashboard
+Applications
+Applications
+Applications
+Applications (Incoming)
+Applications
+Applications
+Applications
+Applications
+Applications
+Applications
+Applications
+Applications (AstTpInventory)
+Applications
+Applications
+Applications
+Applications
+Applications
+Applications
+Applications
+Applications
+Applications
+Applications
+Applications
+Applications
+Application
+Marble ERP
+My Account
+System
+Tools
+ZIRET: Ziziwork Retail & Wholesale
+ZISER: Ziziwork Services
+Marble ERP
+Dashboard
+Quick Search
+Accounting
+Asset
+Catalog
+Customers
+Facility
+Human Resources
+Manufacturing
+Orders
+Parties
+Projects
+Requests
+Returns
+Shipments
+Shipping
+Stores
+Suppliers
+Survey
+Tasks
+Wiki/Content
+Custom Reports
+Report Builder
+Accounting
+Dashboard
+Invoices
+Payments
+Financial Accounts
+Transactions
+GL Journals
+Time Period
+GL Accounts
+Budgets
+Reports
+Time Period Create First Period
+Find Options
+Columns
+Page 1 of 1 (1 - 6 of 6)
+CSV
+
+
+
+Organization
+Period Name 
+	
+Type 
+Period Num 
+	
+From Date 
+Thru Date 
+	
+Closed
+	
+Parent
+	
+Previous
+	
+Next
+	
+Accounts
+
+
+ZICORP: Ziziwork Industries
+ZICORP FY2027
+	
+Fiscal Year
+2027
+	
+2027-01-01
+2027-12-31
+	
+N
+	
+ 
+	
+ZICORP FY2026 (Closed: N)  
+	
+  Create Next
+	
+Accounts
+
+
+ZICORP: Ziziwork Industries
+ZICORP FY2027q01
+	
+Fiscal Quarter
+1
+	
+2027-01-01
+2027-03-31
+	
+N
+	
+ZICORP FY2027 (Closed: N)
+	
+ZICORP FY2026q04 (Closed: N)  
+	
+  Create Next
+	
+Accounts
+
+
+ZICORP: Ziziwork Industries
+ZICORP FY2026m11
+	
+Fiscal Month
+11
+	
+2026-11-01
+2026-11-30
+	
+N
+	
+ZICORP FY2026q04 (Closed: N)
+	
+ZICORP FY2026m10 (Closed: N)  
+	
+  Create Next
+	
+Accounts
+
+
+ZICORP: Ziziwork Industries
+ZICORP FY2026q04
+	
+Fiscal Quarter
+4
+	
+2026-10-01
+2026-12-31
+	
+N
+	
+ZICORP FY2026 (Closed: N)
+	
+  Create Previous
+	
+ZICORP FY2027q01  
+	
+Accounts
+
+
+ZICORP: Ziziwork Industries
+ZICORP FY2026m10
+	
+Fiscal Month
+10
+	
+2026-10-01
+2026-10-31
+	
+N
+	
+ZICORP FY2026q04 (Closed: N)
+	
+  Create Previous
+	
+ZICORP FY2026m11  
+	
+Accounts
+
+
+ZICORP: Ziziwork Industries
+ZICORP FY2026
+	
+Fiscal Year
+2026
+	
+2026-01-01
+2026-12-31
+	
+N
+	
+ 
+	
+  Create Previous
+	
+ZICORP FY2027  
+	
+Accounts
+
+Built on Moqui Framework 4.0.0
+
+Site Map

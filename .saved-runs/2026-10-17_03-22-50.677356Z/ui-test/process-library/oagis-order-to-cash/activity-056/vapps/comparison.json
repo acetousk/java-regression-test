@@ -1,0 +1,19 @@
+{
+  "id": "activity-056",
+  "sourceLine": 243,
+  "headings": [
+    "OAGIS Order to Cash",
+    "Process Story",
+    "Supplier AR"
+  ],
+  "text": "Supplier Billing sends PostJournalEntry to Supplier General Ledger and GL sends PostAcknowledgeJournalEntry to Billing.\nAlternatively, Supplier Billing sends LoadReceivable to Supplier AR and AR sends ConfirmBOD to Billing, then Supplier AR sends PostJournalEntry to Supplier GL and GL sends PostAcknowledgeJournalEntry to AR.\nAlternatively, Supplier Order Management sends LoadReceivable to Supplier AR and AR sends ConfirmBOD to OM, then AR sends PostJournalEntry to GL and GL sends PostAcknowledgeJournalEntry to AR.",
+  "route": null,
+  "dialog": null,
+  "mapping": "entry-candidate",
+  "limitation": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required.",
+  "source": "docs/business-processes/process-library/oagis-order-to-cash.md",
+  "mode": "vapps",
+  "coverage": "blocked",
+  "captures": [],
+  "reason": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required."
+}

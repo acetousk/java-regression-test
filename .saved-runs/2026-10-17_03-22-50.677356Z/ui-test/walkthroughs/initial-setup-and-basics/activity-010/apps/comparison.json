@@ -1,0 +1,95 @@
+{
+  "id": "activity-010",
+  "sourceLine": 43,
+  "headings": [
+    "Initial Setup and Basics",
+    "Initial Setup",
+    "Create first Company (Internal Organization)",
+    "Add Internal role (direct role)"
+  ],
+  "text": "- on the **Marble ERP > Parties > Party** screen (*marble/Party/EditParty*)",
+  "route": "marble/Party/EditParty",
+  "dialog": null,
+  "mapping": "documented-url",
+  "limitation": "Read-only screen/dialog evidence only. Prerequisite creation, field input, submissions, integrations and full story transitions are not executed.",
+  "source": "docs/business-processes/walkthroughs/initial-setup-and-basics.md",
+  "mode": "apps",
+  "coverage": "blocked",
+  "captures": [
+    {
+      "engine": "java",
+      "mode": "apps",
+      "route": "marble/Party/EditParty",
+      "dialog": null,
+      "authenticated": true,
+      "errors": [
+        "moqui is not defined",
+        "Cannot read properties of undefined (reading 'registerListener')",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined"
+      ],
+      "failedRequests": [
+        {
+          "url": "http://127.0.0.1:18091/apps/marble/dashboard",
+          "error": "net::ERR_ABORTED"
+        }
+      ],
+      "httpErrors": [],
+      "consoleErrors": [
+        "Refused to apply style from 'http://127.0.0.1:18091/apps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not a supported stylesheet MIME type, and strict MIME checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/apps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/apps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/apps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled."
+      ],
+      "status": "blocked",
+      "reused": false,
+      "requestedURL": "http://127.0.0.1:18091/apps/marble/Party/EditParty",
+      "navigation": "documented-or-candidate-deep-link",
+      "httpStatus": 200,
+      "finalURL": "http://127.0.0.1:18091/apps/marble/Party/EditParty",
+      "directory": ".saved-runs/2026-10-17_03-22-50.677356Z/ui-test/_captures/9cfbefba3b92072ea0c04227"
+    },
+    {
+      "engine": "rust",
+      "mode": "apps",
+      "route": "marble/Party/EditParty",
+      "dialog": null,
+      "authenticated": true,
+      "errors": [],
+      "failedRequests": [],
+      "httpErrors": [],
+      "consoleErrors": [],
+      "status": "captured",
+      "reused": false,
+      "requestedURL": "http://127.0.0.1:18092/apps/marble/Party/EditParty",
+      "navigation": "documented-or-candidate-deep-link",
+      "httpStatus": 200,
+      "finalURL": "http://127.0.0.1:18092/apps/marble/Party/EditParty",
+      "directory": ".saved-runs/2026-10-17_03-22-50.677356Z/ui-test/_captures/f5ce3f9aeb51a38e197a2ff5"
+    }
+  ],
+  "comparison": {
+    "status": "diagnostic-only",
+    "equal": true,
+    "dimensions": [
+      {
+        "width": 1440,
+        "height": 1000
+      },
+      {
+        "width": 1440,
+        "height": 1000
+      }
+    ],
+    "dimensionsEqual": true,
+    "differentPixels": 0,
+    "comparedPixels": 1440000,
+    "differencePercent": 0,
+    "threshold": 0.1
+  }
+}

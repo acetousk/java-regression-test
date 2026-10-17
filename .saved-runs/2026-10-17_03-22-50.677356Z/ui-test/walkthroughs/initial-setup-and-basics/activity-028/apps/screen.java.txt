@@ -1,0 +1,457 @@
+Toggle navigation 
+Find Customer
+0 0 0 0
+Marble ERP - Dashboard
+ Parties - Party
+Applications
+Applications
+Applications
+Applications
+ Parties - Find Party
+Applications
+Applications
+Applications (ORG_ZIZI_RETAIL, ZIRET_BA)
+Applications
+Applications
+Applications (OrgInternal)
+Applications
+Applications
+Applications (ORG_ZIZI_RETAIL, ZIRET_BA)
+Applications
+Applications
+Applications (OrgInternal)
+ Payment Method - Transactions
+ Payment Method - Files
+ Payment Method - Files (ZIRET_BA, ORG_ZIZI_RETAIL)
+ Payments - Find Payment
+ Accounting - Dashboard
+ Parties - Find Party (OrgInternal)
+Application
+Marble ERP
+My Account
+System
+Tools
+ZIRET: Ziziwork Retail & Wholesale
+ZISER: Ziziwork Services
+Marble ERP
+Dashboard
+Quick Search
+Accounting
+Asset
+Catalog
+Customers
+Facility
+Human Resources
+Manufacturing
+Orders
+Parties
+Projects
+Requests
+Returns
+Shipments
+Shipping
+Stores
+Suppliers
+Survey
+Tasks
+Wiki/Content
+Custom Reports
+Report Builder
+Customers New Person Customer New Sales Account (Organization Customer) New Sales Contact Customer Data Search String Reference
+ 
+Search
+Find Options
+Page 1 of 2,199 (1 - 20 of 43,980)
+2
+3
+4
+Page Number 
+Go
+CSV
+
+Role: Customer Hidden: N
+
+
+ID 
+	
+Name 
+	
+Username 
+	
+Role
+	
+Class
+	
+Hidden
+	
+Dups
+	
+Matches
+	
+ 
+
+
+100052
+	
+hari mali
+	
+	
+Customer, Customer - Bill To, Customer - Ship To
+	
+Consumer
+	
+N
+	
+Y
+	
+Role Type ID: "Customer"
+	
+Sales Orders
+
+
+100053
+	
+Ronak NA
+	
+	
+Customer, Customer - Bill To, Customer - Ship To
+	
+Consumer
+	
+N
+	
+Y
+	
+Role Type ID: "Customer"
+	
+Sales Orders
+
+
+100054
+	
+Hari Vishnu
+	
+	
+Customer, Customer - Bill To, Customer - Ship To
+	
+Consumer
+	
+N
+	
+Y
+	
+Role Type ID: "Customer"
+	
+Sales Orders
+
+
+100055
+	
+Ronak NA
+	
+	
+Customer, Customer - Bill To, Customer - Ship To
+	
+Consumer
+	
+N
+	
+Y
+	
+Role Type ID: "Customer"
+	
+Sales Orders
+
+
+100103
+	
+hari mali
+	
+	
+Customer, Customer - Bill To, Customer - Ship To
+	
+Consumer
+	
+N
+	
+Y
+	
+Role Type ID: "Customer"
+	
+Sales Orders
+
+
+100153
+	
+John Doe
+	
+	
+Customer, Customer - Bill To, Customer - Ship To
+	
+Consumer
+	
+N
+	
+Y
+	
+Role Type ID: "Customer"
+	
+Sales Orders
+
+
+100156
+	
+Danielle Csibi
+	
+	
+Customer
+	
+Consumer
+	
+N
+	
+Y
+	
+Role Type ID: "Customer"
+	
+Sales Orders
+
+
+100204
+	
+Patricia Kisch
+	
+	
+Customer, Customer - Bill To, Customer - Ship To
+	
+Consumer
+	
+N
+	
+N
+	
+Role Type ID: "Customer"
+	
+Sales Orders
+
+
+100205
+	
+James McCabe
+	
+	
+Customer, Customer - Bill To, Customer - Ship To
+	
+Consumer
+	
+N
+	
+N
+	
+Role Type ID: "Customer"
+	
+Sales Orders
+
+
+100206
+	
+Marsha Gaudin
+	
+	
+Customer, Customer - Bill To, Customer - Ship To
+	
+Consumer
+	
+N
+	
+N
+	
+Role Type ID: "Customer"
+	
+Sales Orders
+
+
+100207
+	
+Lawrence Pairitz
+	
+	
+Customer, Customer - Bill To, Customer - Ship To
+	
+Consumer
+	
+N
+	
+N
+	
+Role Type ID: "Customer"
+	
+Sales Orders
+
+
+100208
+	
+Sandy Murphey
+	
+	
+Customer, Customer - Bill To, Customer - Ship To
+	
+Consumer
+	
+N
+	
+N
+	
+Role Type ID: "Customer"
+	
+Sales Orders
+
+
+100209
+	
+Bobbie Mauzy
+	
+	
+Customer, Customer - Bill To, Customer - Ship To
+	
+Consumer
+	
+N
+	
+N
+	
+Role Type ID: "Customer"
+	
+Sales Orders
+
+
+100210
+	
+Judith Cook
+	
+	
+Customer, Customer - Bill To, Customer - Ship To
+	
+Consumer
+	
+N
+	
+N
+	
+Role Type ID: "Customer"
+	
+Sales Orders
+
+
+100211
+	
+Ann Daniel
+	
+	
+Customer, Customer - Bill To, Customer - Ship To
+	
+Consumer
+	
+N
+	
+N
+	
+Role Type ID: "Customer"
+	
+Sales Orders
+
+
+100212
+	
+Kimberly M Taylor
+	
+	
+Customer, Customer - Bill To, Customer - Ship To
+	
+Consumer
+	
+N
+	
+N
+	
+Role Type ID: "Customer"
+	
+Sales Orders
+
+
+100213
+	
+Vicki Hunt
+	
+	
+Customer, Customer - Bill To, Customer - Ship To
+	
+Consumer
+	
+N
+	
+N
+	
+Role Type ID: "Customer"
+	
+Sales Orders
+
+
+100214
+	
+Frank Cividino
+	
+	
+Customer, Customer - Bill To, Customer - Ship To
+	
+Consumer
+	
+N
+	
+N
+	
+Role Type ID: "Customer"
+	
+Sales Orders
+
+
+100215
+	
+John Fredrickson
+	
+	
+Customer, Customer - Bill To, Customer - Ship To
+	
+Consumer
+	
+N
+	
+N
+	
+Role Type ID: "Customer"
+	
+Sales Orders
+
+
+100216
+	
+Matthew Cavallo
+	
+	
+Customer, Customer - Bill To, Customer - Ship To
+	
+Consumer
+	
+N
+	
+N
+	
+Role Type ID: "Customer"
+	
+Sales Orders
+Current Search String
+roles.roleTypeId:Customer AND disabled:N
+
+Built on Moqui Framework 4.0.0
+
+Site Map

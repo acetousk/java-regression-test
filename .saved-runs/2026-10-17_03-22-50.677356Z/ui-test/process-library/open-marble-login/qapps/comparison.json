@@ -1,0 +1,29 @@
+{
+  "activity": "Open Marble ERP anonymously (all demo data loaded)",
+  "source": "docs/business-processes/walkthroughs/initial-setup-and-basics.md",
+  "renderMode": "qapps",
+  "urls": {
+    "java": "http://127.0.0.1:18091",
+    "rust": "http://127.0.0.1:18092"
+  },
+  "finalURLs": {
+    "java": "http://127.0.0.1:18091/Login",
+    "rust": "http://127.0.0.1:18092/Login"
+  },
+  "dimensions": {
+    "java": {
+      "width": 1440,
+      "height": 1008
+    },
+    "rust": {
+      "width": 1440,
+      "height": 1000
+    }
+  },
+  "dimensionsEqual": false,
+  "differentPixels": 47874,
+  "comparedPixels": 1451520,
+  "differencePercent": 3.298197751322751,
+  "threshold": 0.1,
+  "equal": false
+}

@@ -1,0 +1,86 @@
+Toggle navigation 
+Find Physical Inventory
+0 0 0 0
+Marble ERP - Dashboard
+Applications (Customer)
+Applications
+Applications (Customer)
+Applications
+ Returns - Returns (Customer)
+Applications
+Applications
+ Shipping - Dashboard
+Applications (Sales)
+Applications (Sales)
+ Orders - Find Order (Sales)
+Applications (Purchase)
+Applications (Purchase)
+ Orders - Find Order (Purchase)
+Applications
+Applications
+ Customers - Find Customer
+Applications (Receivable)
+Applications (Receivable)
+ Invoices - Find Invoice (Receivable)
+Applications
+Applications
+ Payments - Find Payment
+Applications (Payable)
+Application
+Marble ERP
+My Account
+System
+Tools
+ZIRET: Ziziwork Retail & Wholesale
+ZISER: Ziziwork Services
+Marble ERP
+Dashboard
+Quick Search
+Accounting
+Asset
+Catalog
+Customers
+Facility
+Human Resources
+Manufacturing
+Orders
+Parties
+Projects
+Requests
+Returns
+Shipments
+Shipping
+Stores
+Suppliers
+Survey
+Tasks
+Wiki/Content
+Custom Reports
+Report Builder
+Asset
+Dashboard
+Physical Inventory
+Containers
+Pools
+Asset
+Physical Inventory
+Find Options
+
+Date: -3 30 Days (2026-07-18 to 2026-10-16)
+
+
+Phys. Inv. ID 
+	
+Date 
+	
+Status 
+	
+Facility 
+	
+Assets
+	
+Comments 
+
+Built on Moqui Framework 4.0.0
+
+Site Map

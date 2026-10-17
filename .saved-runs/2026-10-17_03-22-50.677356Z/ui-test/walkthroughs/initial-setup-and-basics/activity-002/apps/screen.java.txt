@@ -1,0 +1,148 @@
+Toggle navigation 
+Dashboard
+0 0 0 0
+Applications (ShpTpPurchase)
+Applications
+Applications (ShpTpPurchase)
+Applications
+ Shipments - Find Shipments (ShpTpPurchase)
+Marble ERP - Dashboard
+Applications
+Applications
+ Requests - Find Request
+Applications
+Applications
+ Products - Find Product
+Applications
+Applications
+ Asset - Find Summary
+Applications
+Applications
+ Physical Inventory - Find Physical Inventory
+Applications (Customer)
+Applications (Customer)
+ Returns - Returns (Customer)
+Applications
+Applications
+ Shipping - Dashboard
+Applications (Sales)
+Application
+Marble ERP
+My Account
+System
+Tools
+ZIRET: Ziziwork Retail & Wholesale
+ZISER: Ziziwork Services
+Marble ERP
+Dashboard
+Quick Search
+Accounting
+Asset
+Catalog
+Customers
+Facility
+Human Resources
+Manufacturing
+Orders
+Parties
+Projects
+Requests
+Returns
+Shipments
+Shipping
+Stores
+Suppliers
+Survey
+Tasks
+Wiki/Content
+Custom Reports
+Report Builder
+Any Type
+Communication Event
+Event
+Facility
+Party
+Product
+Project
+Request
+Task
+Wiki Page
+ 
+ 
+Search
+Sales
+ Placed 0 Approved 0 Held 0 
+Requests
+ Submitted 0 In Progress 0
+
+ 
+
+Customers
+Marketing
+ 
+Customer Requests
+ 
+Sales Orders & Quotes
+ 
+Sales Shipments
+Shipping - Pick & Pack
+ 
+Receivable Invoices
+Customer Credit Memos
+Customer Payments
+ 
+Sales Returns & RMA
+Customer Return Shipments
+Payable Return Invoices
+Outgoing Refund Payments
+
+ 
+
+Internal
+HR - Employees
+ 
+Requests
+ 
+Products - Catalog
+ 
+Assets - Inventory
+Manufacturing
+ 
+Projects
+Tasks
+ 
+All Parties
+Facilities
+Stores
+Content: Wiki - Blogs
+Surveys
+ 
+Accounting - Reports
+Custom Reports - Report Builder
+
+ 
+
+Suppliers
+
+ 
+
+ 
+Purchase Requests
+ 
+Purchase Orders & Quotes
+ 
+ 
+Purchase Shipments
+ 
+Payable Invoices
+Supplier Credit Memos
+Supplier Payments
+ 
+Purchase Returns
+Supplier Return Shipments
+Receivable Return Invoices
+Incoming Refund Payments
+
+Built on Moqui Framework 4.0.0
+
+Site Map

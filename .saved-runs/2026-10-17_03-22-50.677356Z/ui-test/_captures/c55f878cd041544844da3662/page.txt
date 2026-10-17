@@ -1,0 +1,60 @@
+menu
+Applications
+chevron_right
+Marble ERP
+chevron_right
+Parties
+chevron_right
+Payment Method
+chevron_right
+Files
+search
+edit_location
+notifications
+history
+account_circle
+ZIRET: Ziziwork Retail & Wholesale
+Payment Method
+Party
+Calendar
+Emails
+Messages
+Related
+Time
+Agreements
+Projects
+Tasks
+Requests
+Financial Info
+Payment Method
+Transactions
+Checks
+Files
+Gateway Responses
+open_in_new
+Generate NACHA File
+open_in_new
+Generate Pos. Pay File
+search
+Find Options
+No results found
+File ID
+	
+File Type
+	
+File Date
+	
+Entry Count
+	
+Debit Amount Total
+	
+Credit Amount Total
+	
+Payments Button
+	
+Is Cancelled
+	
+Messages
+	
+Built on Moqui 0.1.0
+Site Map

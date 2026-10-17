@@ -1,0 +1,110 @@
+Toggle navigation 
+Report List
+0 0 0 0
+Marble ERP - Dashboard
+ Invoices - Invoice
+ Payments - Find Payment (Incoming)
+ Shipments - Items
+ Orders - Order Detail
+ Orders - Find Order
+ Asset - Find Summary
+ Stores - Find Product Store
+ Facility - Find Facility
+ Products - Prices
+ Asset - Find Summary (AstTpInventory)
+ Products - Find Product
+ Invoices - Find Invoice
+ Parties - Time
+ Human Resources - Rates
+ Tasks - Find Task
+ Projects - Find Project
+ Customers - Customer
+ Customers - Find Customer
+ Parties - Party
+Applications
+Applications
+Applications
+Applications
+ Parties - Find Party
+Application
+Marble ERP
+My Account
+System
+Tools
+ZIRET: Ziziwork Retail & Wholesale
+ZISER: Ziziwork Services
+Marble ERP
+Dashboard
+Quick Search
+Accounting
+Asset
+Catalog
+Customers
+Facility
+Human Resources
+Manufacturing
+Orders
+Parties
+Projects
+Requests
+Returns
+Shipments
+Shipping
+Stores
+Suppliers
+Survey
+Tasks
+Wiki/Content
+Custom Reports
+Report Builder
+Accounting
+Dashboard
+Invoices
+Payments
+Financial Accounts
+Transactions
+GL Journals
+Time Period
+GL Accounts
+Budgets
+Reports
+Reports
+Report List
+Financial Reports
+Balance Sheet Income Statement Cash Flow Retained Earnings Financial Ratios
+Sales and Invoice Reports
+Sales Summary Sales Order Analysis Sales Invoice Analysis Customer Statement PDF
+Order Item Summary Order Issued and Invoiced Invoice Item Summary
+Quick Aging Invoice Aging Detail AR Aging Summary Invoice Reconciliation
+Transaction Reports
+Account Ledger Account Balance History Transactions Transaction Entries
+Posted Amount Summary Posted Balance Summary
+Asset and Inventory Reports
+Inventory Valuation Receipt Transactions Status by Receipt
+On Hand On Hand Summary Shipment Package Summary
+ZIHR: Ziziwork Human Resources
+ZICORP: Ziziwork Industries
+ZIRET: Ziziwork Retail & Wholesale
+ZISAL: Ziziwork Sales
+ZISER: Ziziwork Services
+ 
+Month
+Quarter
+ 
+ 
+ 
+View Charts
+Operating Revenue and Expense
+Get CSV
+Current Assets and Liabilities
+Get CSV
+Net Income History
+Get CSV
+Balance Sheet History
+Get CSV
+Net Income Year Over Year
+Get CSV
+
+Built on Moqui Framework 4.0.0
+
+Site Map

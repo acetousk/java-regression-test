@@ -1,0 +1,35 @@
+Application 
+Marble ERP 
+Facility 
+Find Facility
+ 0  0  0  0
+ Organization
+ New Facility Box Types Carrier Ship Methods
+ Find Options
+ Columns
+Page 1 of 1 (1 - 1 of 1)
+CSV
+
+
+Facility ID
+	
+Name
+	
+Type
+	
+Owner
+	
+
+
+ZIRET_WH
+	
+Ziziwork Retail Warehouse
+	
+Warehouse
+	
+ZIRET: Ziziwork Retail & Wholesale
+	
+
+Built on Moqui Framework 0.1.0
+
+Site Map

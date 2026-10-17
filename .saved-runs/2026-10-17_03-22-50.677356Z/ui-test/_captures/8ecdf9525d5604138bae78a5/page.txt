@@ -1,0 +1,314 @@
+menu
+Applications
+chevron_right
+Marble ERP
+chevron_right
+Catalog
+chevron_right
+Products
+chevron_right
+Find Product
+search
+edit_location
+notifications
+history
+account_circle
+open_in_new
+New Product
+search
+Find Options
+table_chart
+Columns
+CSV
+20
+arrow_drop_down
+skip_previous
+fast_rewind
+1 / 2 (1-20 / 25)
+2
+fast_forward
+skip_next
+ID
+Name
+	
+Product Type
+Product Class
+	
+Asset Type
+Asset Class
+	
+Owned By Org
+Other IDs
+	
+Assoc From
+
+
+EQUIP_AB4
+Assembly Bot 4000
+	
+Asset (Good)
+	
+Equipment
+Manufacturing Equipment
+	
+	
+
+
+DEMO_PA
+Demo Bundle One
+	
+Pick Assembly
+	
+Inventory
+Inventory - Finished Good
+	
+ZIRET: Ziziwork Retail & Wholesale
+	
+
+
+DEMO_1_1
+Demo Product One-One
+	
+Asset (Good)
+	
+Inventory
+Inventory - Finished Good
+	
+ZIRET: Ziziwork Retail & Wholesale
+	
+DEMO_PA: Demo Bundle One (Manufacturing Bill of Materials)
+
+
+DEMO_1_2
+Demo Product One-Two
+	
+Asset (Good)
+	
+Inventory
+Inventory - Finished Good
+	
+ZIRET: Ziziwork Retail & Wholesale
+	
+
+
+DEMO_UNIT
+Demo Product One Unit
+	
+Asset (Good)
+	
+Inventory
+Inventory - Finished Good
+	
+ZIRET: Ziziwork Retail & Wholesale
+	
+
+
+DEMO_3_1
+Demo Product Three-One
+	
+Asset (Good)
+	
+Inventory
+Inventory - Finished Good
+	
+ZIRET: Ziziwork Retail & Wholesale
+	
+
+
+DEMO_2_1
+Demo Product Two-One
+	
+Asset (Good)
+	
+Inventory
+Inventory - Finished Good
+	
+ZIRET: Ziziwork Retail & Wholesale
+	
+DEMO_PA: Demo Bundle One (Manufacturing Bill of Materials)
+
+
+DEMO_RM_1
+Demo Raw Material 1
+	
+Asset (Good)
+	
+Inventory
+Inventory - Raw Material
+	
+	
+DEMO_1_1: Demo Product One-One (Manufacturing Bill of Materials)
+DEMO_3_1: Demo Product Three-One (Manufacturing Bill of Materials)
+
+
+DEMO_DIG_SER
+Demo Serialized Digital Asset
+	
+Digital and Asset
+	
+Inventory
+Inventory - Digital Good
+	
+	
+
+
+DEMO_SA_1
+Demo Sub Assembly One
+	
+Asset (Good)
+	
+Inventory
+Inventory - Sub-assembly
+	
+	
+DEMO_1_1: Demo Product One-One (Manufacturing Bill of Materials)
+DEMO_3_1: Demo Product Three-One (Manufacturing Bill of Materials)
+
+
+DEMO_SA_2
+Demo Sub Assembly Two
+	
+Asset (Good)
+	
+Inventory
+Inventory - Sub-assembly
+	
+	
+DEMO_1_1: Demo Product One-One (Manufacturing Bill of Materials)
+DEMO_3_1: Demo Product Three-One (Manufacturing Bill of Materials)
+
+
+DEMO_VAR
+Demo with Variants
+	
+Virtual (with variants)
+	
+	
+ZIRET: Ziziwork Retail & Wholesale
+	
+
+
+DEMO_VAR_BL_XL
+Demo with Variants Black Extra Large
+	
+Asset (Good)
+	
+Inventory
+Inventory - Finished Good
+	
+ZIRET: Ziziwork Retail & Wholesale
+	
+DEMO_VAR: Demo with Variants (Product Variant)
+
+
+DEMO_VAR_BL_LG
+Demo with Variants Black Large
+	
+Asset (Good)
+	
+Inventory
+Inventory - Finished Good
+	
+ZIRET: Ziziwork Retail & Wholesale
+	
+DEMO_VAR: Demo with Variants (Product Variant)
+
+
+DEMO_VAR_BL_MD
+Demo with Variants Black Medium
+	
+Asset (Good)
+	
+Inventory
+Inventory - Finished Good
+	
+ZIRET: Ziziwork Retail & Wholesale
+	
+DEMO_VAR: Demo with Variants (Product Variant)
+
+
+DEMO_VAR_BL_SM
+Demo with Variants Black Small
+	
+Asset (Good)
+	
+Inventory
+Inventory - Finished Good
+	
+ZIRET: Ziziwork Retail & Wholesale
+	
+DEMO_VAR: Demo with Variants (Product Variant)
+
+
+DEMO_VAR_BU_XL
+Demo with Variants Blue Extra Large
+	
+Asset (Good)
+	
+Inventory
+Inventory - Finished Good
+	
+ZIRET: Ziziwork Retail & Wholesale
+	
+DEMO_VAR: Demo with Variants (Product Variant)
+
+
+DEMO_VAR_BU_LG
+Demo with Variants Blue Large
+	
+Asset (Good)
+	
+Inventory
+Inventory - Finished Good
+	
+ZIRET: Ziziwork Retail & Wholesale
+	
+DEMO_VAR: Demo with Variants (Product Variant)
+
+
+DEMO_VAR_BU_MD
+Demo with Variants Blue Medium
+	
+Asset (Good)
+	
+Inventory
+Inventory - Finished Good
+	
+ZIRET: Ziziwork Retail & Wholesale
+	
+DEMO_VAR: Demo with Variants (Product Variant)
+
+
+DEMO_VAR_BU_SM
+Demo with Variants Blue Small
+	
+Asset (Good)
+	
+Inventory
+Inventory - Finished Good
+	
+ZIRET: Ziziwork Retail & Wholesale
+	
+DEMO_VAR: Demo with Variants (Product Variant)
+
+
+20
+arrow_drop_down
+skip_previous
+fast_rewind
+1 / 2 (1-20 / 25)
+2
+fast_forward
+skip_next
+Built on Moqui 0.1.0
+Site Map
+New Product
+close
+Product Name
+Product Type
+Asset (Good)
+arrow_drop_down
+Owned By Org
+N/A
+arrow_drop_down
+Create

@@ -1,0 +1,18 @@
+{
+  "id": "activity-006",
+  "sourceLine": 31,
+  "headings": [
+    "Customer Finds Product",
+    "Story"
+  ],
+  "text": "**Combined Search (category, keyword, parameter)** If Customer has already selected a category relevant to what they are looking for but they do not see a sub-category that also matches their needs (or there are multiple apparently relevant sub-categories and they choose not to explore each one), they may choose to search within a category. This can be a simple search but is generally an advanced search where Customer selects from a set of parameters (features) that are relevant for the category they are searching in.",
+  "route": null,
+  "dialog": null,
+  "mapping": "entry-candidate",
+  "limitation": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required.",
+  "source": "docs/business-processes/process-library/customer-finds-product.md",
+  "mode": "qapps",
+  "coverage": "blocked",
+  "captures": [],
+  "reason": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required."
+}

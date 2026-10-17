@@ -1,0 +1,18 @@
+{
+  "id": "activity-003",
+  "sourceLine": 20,
+  "headings": [
+    "Placing Customer Places a Sales Order - Through EBay",
+    "Story"
+  ],
+  "text": "Placing Customer places an order through eBay Store, or places the highest bid in an eBay Auction.",
+  "route": null,
+  "dialog": null,
+  "mapping": "entry-candidate",
+  "limitation": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required.",
+  "source": "docs/business-processes/process-library/placing-customer-places-a-sales-order-through-ebay.md",
+  "mode": "apps",
+  "coverage": "blocked",
+  "captures": [],
+  "reason": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required."
+}

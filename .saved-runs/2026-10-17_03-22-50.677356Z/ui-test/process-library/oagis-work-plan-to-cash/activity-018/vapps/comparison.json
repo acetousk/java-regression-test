@@ -1,0 +1,18 @@
+{
+  "id": "activity-018",
+  "sourceLine": 82,
+  "headings": [
+    "OAGIS Work Plan to Cash",
+    "OAGIS Documents Used"
+  ],
+  "text": "* SyncField - ConfirmBOD",
+  "route": null,
+  "dialog": null,
+  "mapping": "entry-candidate",
+  "limitation": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required.",
+  "source": "docs/business-processes/process-library/oagis-work-plan-to-cash.md",
+  "mode": "vapps",
+  "coverage": "blocked",
+  "captures": [],
+  "reason": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required."
+}

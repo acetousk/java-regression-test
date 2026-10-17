@@ -1,0 +1,31 @@
+{
+  "source": "docs/business-processes/process-library/customer-reviews-order-history-and-status.md",
+  "mode": "qapps",
+  "activities": [
+    {
+      "id": "activity-001",
+      "sourceLine": 12,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/customer-reviews-order-history-and-status/activity-001/qapps/comparison.json"
+    },
+    {
+      "id": "activity-002",
+      "sourceLine": 16,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/customer-reviews-order-history-and-status/activity-002/qapps/comparison.json"
+    },
+    {
+      "id": "activity-003",
+      "sourceLine": 20,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/customer-reviews-order-history-and-status/activity-003/qapps/comparison.json"
+    },
+    {
+      "id": "activity-004",
+      "sourceLine": 24,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/customer-reviews-order-history-and-status/activity-004/qapps/comparison.json"
+    }
+  ],
+  "note": "Evidence sweep only; no complete business-process execution is claimed."
+}

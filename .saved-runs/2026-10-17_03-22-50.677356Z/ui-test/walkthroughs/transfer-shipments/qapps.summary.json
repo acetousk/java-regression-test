@@ -1,0 +1,582 @@
+{
+  "source": "docs/business-processes/walkthroughs/transfer-shipments.md",
+  "mode": "qapps",
+  "activities": [
+    {
+      "id": "activity-001",
+      "sourceLine": 8,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 123168,
+        "comparedPixels": 1440000,
+        "differencePercent": 8.553333333333333,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/transfer-shipments/activity-001/qapps/comparison.json"
+    },
+    {
+      "id": "activity-002",
+      "sourceLine": 14,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 123168,
+        "comparedPixels": 1440000,
+        "differencePercent": 8.553333333333333,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/transfer-shipments/activity-002/qapps/comparison.json"
+    },
+    {
+      "id": "activity-003",
+      "sourceLine": 17,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 123168,
+        "comparedPixels": 1440000,
+        "differencePercent": 8.553333333333333,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/transfer-shipments/activity-003/qapps/comparison.json"
+    },
+    {
+      "id": "activity-004",
+      "sourceLine": 20,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 123168,
+        "comparedPixels": 1440000,
+        "differencePercent": 8.553333333333333,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/transfer-shipments/activity-004/qapps/comparison.json"
+    },
+    {
+      "id": "activity-005",
+      "sourceLine": 23,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 123168,
+        "comparedPixels": 1440000,
+        "differencePercent": 8.553333333333333,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/transfer-shipments/activity-005/qapps/comparison.json"
+    },
+    {
+      "id": "activity-006",
+      "sourceLine": 26,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 123168,
+        "comparedPixels": 1440000,
+        "differencePercent": 8.553333333333333,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/transfer-shipments/activity-006/qapps/comparison.json"
+    },
+    {
+      "id": "activity-007",
+      "sourceLine": 29,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 123168,
+        "comparedPixels": 1440000,
+        "differencePercent": 8.553333333333333,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/transfer-shipments/activity-007/qapps/comparison.json"
+    },
+    {
+      "id": "activity-008",
+      "sourceLine": 32,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 123168,
+        "comparedPixels": 1440000,
+        "differencePercent": 8.553333333333333,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/transfer-shipments/activity-008/qapps/comparison.json"
+    },
+    {
+      "id": "activity-009",
+      "sourceLine": 35,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 123168,
+        "comparedPixels": 1440000,
+        "differencePercent": 8.553333333333333,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/transfer-shipments/activity-009/qapps/comparison.json"
+    },
+    {
+      "id": "activity-010",
+      "sourceLine": 38,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 123168,
+        "comparedPixels": 1440000,
+        "differencePercent": 8.553333333333333,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/transfer-shipments/activity-010/qapps/comparison.json"
+    },
+    {
+      "id": "activity-011",
+      "sourceLine": 41,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 123168,
+        "comparedPixels": 1440000,
+        "differencePercent": 8.553333333333333,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/transfer-shipments/activity-011/qapps/comparison.json"
+    },
+    {
+      "id": "activity-012",
+      "sourceLine": 44,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 123168,
+        "comparedPixels": 1440000,
+        "differencePercent": 8.553333333333333,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/transfer-shipments/activity-012/qapps/comparison.json"
+    },
+    {
+      "id": "activity-013",
+      "sourceLine": 47,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 123168,
+        "comparedPixels": 1440000,
+        "differencePercent": 8.553333333333333,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/transfer-shipments/activity-013/qapps/comparison.json"
+    },
+    {
+      "id": "activity-014",
+      "sourceLine": 50,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 123168,
+        "comparedPixels": 1440000,
+        "differencePercent": 8.553333333333333,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/transfer-shipments/activity-014/qapps/comparison.json"
+    },
+    {
+      "id": "activity-015",
+      "sourceLine": 53,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 123168,
+        "comparedPixels": 1440000,
+        "differencePercent": 8.553333333333333,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/transfer-shipments/activity-015/qapps/comparison.json"
+    },
+    {
+      "id": "activity-016",
+      "sourceLine": 56,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 123168,
+        "comparedPixels": 1440000,
+        "differencePercent": 8.553333333333333,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/transfer-shipments/activity-016/qapps/comparison.json"
+    },
+    {
+      "id": "activity-017",
+      "sourceLine": 59,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 123168,
+        "comparedPixels": 1440000,
+        "differencePercent": 8.553333333333333,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/transfer-shipments/activity-017/qapps/comparison.json"
+    },
+    {
+      "id": "activity-018",
+      "sourceLine": 62,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 123168,
+        "comparedPixels": 1440000,
+        "differencePercent": 8.553333333333333,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/transfer-shipments/activity-018/qapps/comparison.json"
+    },
+    {
+      "id": "activity-019",
+      "sourceLine": 68,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 123168,
+        "comparedPixels": 1440000,
+        "differencePercent": 8.553333333333333,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/transfer-shipments/activity-019/qapps/comparison.json"
+    },
+    {
+      "id": "activity-020",
+      "sourceLine": 71,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 123168,
+        "comparedPixels": 1440000,
+        "differencePercent": 8.553333333333333,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/transfer-shipments/activity-020/qapps/comparison.json"
+    },
+    {
+      "id": "activity-021",
+      "sourceLine": 74,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 123168,
+        "comparedPixels": 1440000,
+        "differencePercent": 8.553333333333333,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/transfer-shipments/activity-021/qapps/comparison.json"
+    },
+    {
+      "id": "activity-022",
+      "sourceLine": 77,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 123168,
+        "comparedPixels": 1440000,
+        "differencePercent": 8.553333333333333,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/transfer-shipments/activity-022/qapps/comparison.json"
+    },
+    {
+      "id": "activity-023",
+      "sourceLine": 80,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 123168,
+        "comparedPixels": 1440000,
+        "differencePercent": 8.553333333333333,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/transfer-shipments/activity-023/qapps/comparison.json"
+    }
+  ],
+  "note": "Evidence sweep only; no complete business-process execution is claimed."
+}

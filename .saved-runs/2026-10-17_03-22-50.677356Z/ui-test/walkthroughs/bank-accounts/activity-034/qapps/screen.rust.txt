@@ -1,0 +1,20 @@
+menu
+Applications
+chevron_right
+Marble ERP
+chevron_right
+Parties
+chevron_right
+Payment Method
+chevron_right
+Files
+search
+edit_location
+notifications
+history
+account_circle
+Built on Moqui 0.1.0
+Site Map
+warning
+Required parameter missing (paymentMethodId)
+X

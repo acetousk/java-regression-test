@@ -1,0 +1,19 @@
+{
+  "id": "activity-090",
+  "sourceLine": 375,
+  "headings": [
+    "OAGIS Order to Cash",
+    "OAGIS Documents Used",
+    "Shipping"
+  ],
+  "text": "* ProcessPlanningSchedule - AcknowledgePlanningSchedule",
+  "route": null,
+  "dialog": null,
+  "mapping": "entry-candidate",
+  "limitation": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required.",
+  "source": "docs/business-processes/process-library/oagis-order-to-cash.md",
+  "mode": "apps",
+  "coverage": "blocked",
+  "captures": [],
+  "reason": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required."
+}

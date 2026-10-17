@@ -1,0 +1,116 @@
+Toggle navigation 
+Store Promotions
+0 0 0 0
+Marble ERP - Dashboard
+Applications
+Applications
+Applications
+Applications
+Applications
+Applications
+ Orders - Order Detail
+ Customers - Find Customer
+Applications
+Applications
+ Time Period - Find Time Period
+Applications
+Applications
+Applications (Incoming)
+Applications
+Applications
+Applications
+Applications
+Applications
+Applications
+Applications (AstTpInventory)
+Applications
+Applications
+Applications
+Application
+Marble ERP
+My Account
+System
+Tools
+ZIRET: Ziziwork Retail & Wholesale
+ZISER: Ziziwork Services
+Marble ERP
+Dashboard
+Quick Search
+Accounting
+Asset
+Catalog
+Customers
+Facility
+Human Resources
+Manufacturing
+Orders
+Parties
+Projects
+Requests
+Returns
+Shipments
+Shipping
+Stores
+Suppliers
+Survey
+Tasks
+Wiki/Content
+Custom Reports
+Report Builder
+POPC_DEFAULT: Ziziwork Retail Store
+Product Store
+Promotions
+Emails
+Categories
+Parties
+Facilities
+Settings
+Stores
+Promotions New Store Promotion
+
+NOTE: Promotions are applied in the order of the Sequence Num. Higher value promotions should have lower sequence numbers.
+
+Find Options
+Page 1 of 1 (1 - 2 of 2)
+
+
+
+Seq Num 
+	
+ID 
+	
+Item Description 
+	
+Service 
+	
+From Date 
+	
+Thru Date 
+	
+ 
+
+
+	
+PopcBuyGet
+	
+Buy 1 Get 1 Half Off
+	
+Buy X Get Y at Z% Discount
+	
+	
+	
+
+	
+PopcNewCustomer
+	
+20% Discount for New Customers
+	
+New Customer Discount
+	
+	
+	
+Update
+
+Built on Moqui Framework 4.0.0
+
+Site Map

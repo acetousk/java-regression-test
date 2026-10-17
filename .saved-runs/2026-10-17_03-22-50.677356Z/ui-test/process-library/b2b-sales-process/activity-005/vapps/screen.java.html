@@ -1,0 +1,153 @@
+<!DOCTYPE html><html><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    
+    <title>Webroot - Applications</title>
+    <link rel="apple-touch-icon" href="/MoquiLogo100.png">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="http://127.0.0.1:18091/css/webroot-layout.css?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="http://127.0.0.1:18091/css/webroot-theme.css?v=1a147e2" rel="stylesheet" type="text/css">
+    <script src="#?v=1a147e2" type="text/javascript"></script>
+    <link rel="shortcut icon" href="http://127.0.0.1:18091/favicon.ico">
+</head>
+<body class="dev bg-light vapps">
+        
+        
+        
+        
+    <!-- BEGIN screen[@location=component://webroot/screen/webroot/vapps.xml].widgets -->
+        <!-- BEGIN render-mode.text[@location=component://webroot/screen/includes/WebrootVue.vuet.ftl][@template=true] -->
+<div id="apps-root">
+    <input type="hidden" id="confMoquiSessionToken" value="l1ZzsN6m74cpMmc7TQ4Q" style="">
+    <input type="hidden" id="confAppHost" value="127.0.0.1:18091" style="">
+    <input type="hidden" id="confAppRootPath" value="" style="">
+    <input type="hidden" id="confBasePath" value="/apps" style="">
+    <input type="hidden" id="confLinkBasePath" value="/vapps" style="">
+    <input type="hidden" id="confUserId" value="EX_JOHN_DOE" style="">
+    <input type="hidden" id="confLocale" value="en-US" style="">
+    <input type="hidden" id="confOuterStyle" value="bg-light" style="">
+    <input type="hidden" class="confNavPluginUrl" value="/ssstatic/lib/MyAccountNav.js" style=""><input type="hidden" class="confNavPluginUrl" value="/ssstatic/lib/ActiveOrgNav.js" style="">
+    <div id="top"><nav class="navbar navbar-inverse navbar-fixed-top"><div class="container-fluid">
+        <header class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        <m-link href="/apps" class="navbar-brand"><img src="http://127.0.0.1:18091/images/MoquiLogoSmall.png" alt="Home"></m-link>
+        
+        </header>
+        <div id="navbar-buttons" class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul id="dynamic-menus" class="nav navbar-nav">
+                <li v-for="(navMenuItem, menuIndex) in navMenuList" class="dropdown">
+                    <template v-if="menuIndex &lt; (navMenuList.length - 1)">
+                        <m-link v-if="navMenuItem.hasTabMenu" :href="getNavHref(menuIndex)">{{navMenuItem.title}} <i class="fa fa-chevron-right"></i></m-link>
+                        <template v-else-if="navMenuItem.subscreens &amp;&amp; navMenuItem.subscreens.length &gt; 1">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{navMenuItem.title}} <i class="fa fa-chevron-right"></i></a>
+                            <ul class="dropdown-menu">
+                                <li v-for="subscreen in navMenuItem.subscreens" :class="{active:subscreen.active}">
+                                    <m-link :href="subscreen.pathWithParams">
+                                        <template v-if="subscreen.image">
+                                            <i v-if="subscreen.imageType === 'icon'" :class="subscreen.image" style="padding-right: 4px;"></i>
+                                            <img v-else="" :src="subscreen.image" :alt="subscreen.title" width="18" style="padding-right: 4px;">
+                                        </template>
+                                        <i v-else="" class="fa fa-link" style="padding-right: 8px;"></i>
+                                        {{subscreen.title}}</m-link></li>
+                            </ul>
+                        </template>
+                        <m-link v-else="" :href="getNavHref(menuIndex)">{{navMenuItem.title}} <i class="fa fa-chevron-right"></i></m-link>
+                    </template>
+                </li>
+            </ul>
+            <template v-if="navMenuList.length &gt; 0"><m-link class="navbar-text" :href="getNavHref(navMenuList.length - 1)">{{navMenuList[navMenuList.length - 1].title}}</m-link></template>
+            <a href="http://127.0.0.1:18091/Login/logout" data-toggle="tooltip" data-original-title="Logout John Doe" onclick="return confirm('Logout John Doe?')" data-placement="bottom" class="btn btn-danger btn-sm navbar-btn navbar-right"><i class="fa fa-power-off"></i></a>
+            <div id="history-menu" class="nav navbar-right dropdown">
+                <a id="history-menu-link" href="#" class="dropdown-toggle btn btn-default btn-sm navbar-btn" data-toggle="dropdown" title="Screen History">
+                    <i class="fa fa-bars"></i></a>
+                <ul class="dropdown-menu">
+                    <li v-for="histItem in navHistoryList"><m-link :href="histItem.pathWithParams">
+                        <template v-if="histItem.image">
+                            <i v-if="histItem.imageType === 'icon'" :class="histItem.image" style="padding-right: 8px;"></i>
+                            <img v-else="" :src="histItem.image" :alt="histItem.title" width="18" style="padding-right: 4px;">
+                        </template>
+                        <i v-else="" class="fa fa-link" style="padding-right: 8px;"></i>
+                        {{histItem.title}}</m-link></li>
+                </ul>
+            </div>
+            <div id="notify-history-menu" class="nav navbar-right dropdown">
+                <a id="notify-history-menu-link" href="#" class="dropdown-toggle btn btn-default btn-sm navbar-btn" data-toggle="dropdown" title="Notify History">
+                    <i class="fa fa-exclamation-circle"></i></a>
+                <ul class="dropdown-menu" @click.prevent="stopProp">
+                    <li v-for="histItem in notifyHistoryList">
+                        <div :class="'alert alert-' + histItem.type" @click.prevent="stopProp" role="alert"><strong>{{histItem.time}}</strong> <span>{{histItem.message}}</span></div>
+                    </li>
+                </ul>
+            </div>
+            <a href="#" @click.prevent="switchDarkLight()" data-toggle="tooltip" data-original-title="Switch Dark/Light" data-placement="bottom" class="btn btn-default btn-sm navbar-btn navbar-right"><i class="fa fa-adjust"></i></a>
+
+            <component :is="qzVue" ref="qzVue"></component>
+
+            <template v-for="navPlugin in navPlugins"><component :is="navPlugin"></component></template>
+
+            <div id="document-menu" class="nav navbar-right dropdown" :class="{hidden:!documentMenuList.length}">
+                <a id="document-menu-link" href="#" class="dropdown-toggle btn btn-info btn-sm navbar-btn" data-toggle="dropdown" title="Documentation">
+                    <i class="fa fa-question-circle"></i></a>
+                <ul class="dropdown-menu">
+                    <li v-for="screenDoc in documentMenuList">
+                        <a href="#" @click.prevent="showScreenDocDialog(screenDoc.index)">{{screenDoc.title}}</a></li>
+                </ul>
+            </div>
+
+            <div class="navbar-right" style="padding:10px 4px 6px 4px;" :class="{ hidden: loading &lt; 1 }"><div class="spinner small"><div>&nbsp;</div></div></div>
+        </div>
+    </div></nav></div>
+
+    <div id="content"><div class="inner"><div class="container-fluid">
+        <subscreens-active></subscreens-active>
+    </div></div></div>
+
+    <div id="footer" class="bg-dark">
+        <div id="apps-footer-content">
+<p><a href="https://www.moqui.org/" target="_blank">Built on Moqui Framework 4.0.0</a></p><p><a href="/vapps/ScreenTree">Site Map</a></p>        </div>
+    </div>
+</div>
+
+<div id="screen-document-dialog" class="modal dynamic-dialog" aria-hidden="true" style="display: none;" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Documentation</h4>
+            </div>
+            <div class="modal-body" id="screen-document-dialog-body">
+                <div class="spinner"><div>&nbsp;</div></div>
+            </div>
+            <div class="modal-footer"><button type="button" class="btn btn-primary" data-dismiss="modal">Close</button></div>
+        </div>
+    </div>
+</div>
+        <!-- END   render-mode.text[@location=component://webroot/screen/includes/WebrootVue.vuet.ftl][@template=true] -->
+        <!-- BEGIN render-mode.text[inline][@template=true] -->
+        <!-- END   render-mode.text[inline][@template=true] -->
+    <!-- END   screen[@location=component://webroot/screen/webroot/vapps.xml].widgets -->
+        
+
+
+    <script src="#?v=1a147e2" type="text/javascript"></script>
+    <script src="http://127.0.0.1:18091/js/http-vue-loader/httpVueLoader.js?v=1a147e2" type="text/javascript"></script>
+    <script src="http://127.0.0.1:18091/js/WebrootVue.js?v=1a147e2" type="text/javascript"></script>
+
+
+        
+        
+        
+    
+</body></html>

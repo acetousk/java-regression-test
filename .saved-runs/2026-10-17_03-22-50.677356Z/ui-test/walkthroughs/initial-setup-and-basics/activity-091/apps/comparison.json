@@ -1,0 +1,148 @@
+{
+  "id": "activity-091",
+  "sourceLine": 310,
+  "headings": [
+    "Initial Setup and Basics",
+    "Sales - Service & Product",
+    "Create first Invoice - Physical Good",
+    "Create first Product",
+    "New Product, Content"
+  ],
+  "text": "- change *Asset Type* to *Inventory*",
+  "route": "marble/Asset/Asset/FindSummary?assetTypeEnumId=AstTpInventory",
+  "dialog": null,
+  "mapping": "documented-navigation-label",
+  "limitation": "Read-only screen/dialog evidence only. Prerequisite creation, field input, submissions, integrations and full story transitions are not executed.",
+  "source": "docs/business-processes/walkthroughs/initial-setup-and-basics.md",
+  "mode": "apps",
+  "coverage": "blocked",
+  "captures": [
+    {
+      "engine": "java",
+      "mode": "apps",
+      "route": "marble/Asset/Asset/FindSummary?assetTypeEnumId=AstTpInventory",
+      "dialog": null,
+      "authenticated": true,
+      "errors": [
+        "moqui is not defined",
+        "Cannot read properties of undefined (reading 'registerListener')",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "moqui is not defined",
+        "Cannot read properties of undefined (reading 'registerListener')",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined"
+      ],
+      "failedRequests": [
+        {
+          "url": "http://127.0.0.1:18091/apps/marble/dashboard",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:18091/apps/marble/Asset/Asset/FindSummary?assetTypeEnumId=AstTpInventory",
+          "error": "net::ERR_ABORTED"
+        }
+      ],
+      "httpErrors": [],
+      "consoleErrors": [
+        "Refused to apply style from 'http://127.0.0.1:18091/apps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not a supported stylesheet MIME type, and strict MIME checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/apps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/apps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/apps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to apply style from 'http://127.0.0.1:18091/apps/marble/Asset/Asset/FindSummary?assetTypeEnumId=AstTpInventory#?v=1a147e2' because its MIME type ('text/html') is not a supported stylesheet MIME type, and strict MIME checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/apps/marble/Asset/Asset/FindSummary?assetTypeEnumId=AstTpInventory#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/apps/marble/Asset/Asset/FindSummary?assetTypeEnumId=AstTpInventory#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/apps/marble/Asset/Asset/FindSummary?assetTypeEnumId=AstTpInventory#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled."
+      ],
+      "status": "blocked",
+      "reused": false,
+      "requestedURL": "http://127.0.0.1:18091/apps/marble/Asset/Asset/FindSummary?assetTypeEnumId=AstTpInventory",
+      "navigation": "dashboard-link",
+      "finalURL": "http://127.0.0.1:18091/apps/marble/Asset/Asset/FindSummary?assetTypeEnumId=AstTpInventory",
+      "directory": ".saved-runs/2026-10-17_03-22-50.677356Z/ui-test/_captures/e5c13bdfbea470b55ebb4f75"
+    },
+    {
+      "engine": "rust",
+      "mode": "apps",
+      "route": "marble/Asset/Asset/FindSummary?assetTypeEnumId=AstTpInventory",
+      "dialog": null,
+      "authenticated": true,
+      "errors": [],
+      "failedRequests": [],
+      "httpErrors": [],
+      "consoleErrors": [],
+      "status": "captured",
+      "reused": false,
+      "requestedURL": "http://127.0.0.1:18092/apps/marble/Asset/Asset/FindSummary?assetTypeEnumId=AstTpInventory",
+      "navigation": "dashboard-link",
+      "finalURL": "http://127.0.0.1:18092/apps/marble/Asset/Asset/FindSummary?assetTypeEnumId=AstTpInventory",
+      "directory": ".saved-runs/2026-10-17_03-22-50.677356Z/ui-test/_captures/03c40a40417c185de7a7aa4d"
+    }
+  ],
+  "comparison": {
+    "status": "diagnostic-only",
+    "equal": false,
+    "dimensions": [
+      {
+        "width": 1440,
+        "height": 1090
+      },
+      {
+        "width": 1440,
+        "height": 1000
+      }
+    ],
+    "dimensionsEqual": false,
+    "differentPixels": 302715,
+    "comparedPixels": 1569600,
+    "differencePercent": 19.28612385321101,
+    "threshold": 0.1
+  }
+}

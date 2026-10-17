@@ -1,0 +1,16 @@
+{
+  "engine": "rust",
+  "mode": "qapps",
+  "route": "marble/Request/FindRequest",
+  "dialog": null,
+  "authenticated": true,
+  "errors": [],
+  "failedRequests": [],
+  "httpErrors": [],
+  "consoleErrors": [],
+  "status": "captured",
+  "reused": false,
+  "requestedURL": "http://127.0.0.1:18092/qapps/marble/Request/FindRequest",
+  "navigation": "dashboard-link",
+  "finalURL": "http://127.0.0.1:18092/qapps/marble/Request/FindRequest"
+}

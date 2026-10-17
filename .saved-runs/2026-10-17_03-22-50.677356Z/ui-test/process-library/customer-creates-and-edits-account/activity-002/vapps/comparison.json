@@ -1,0 +1,18 @@
+{
+  "id": "activity-002",
+  "sourceLine": 16,
+  "headings": [
+    "Customer Creates and Edits Account",
+    "Story"
+  ],
+  "text": "Customer reviews their account information on record with Company. Information on record may include: Personal Information, Loyalty Points, Contact Information, Payment Method Information, Tax Identification and Exemption, Username & Password, Default Shipment Method, File Manager, Contact Lists, Surveys, and Messages.",
+  "route": null,
+  "dialog": null,
+  "mapping": "entry-candidate",
+  "limitation": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required.",
+  "source": "docs/business-processes/process-library/customer-creates-and-edits-account.md",
+  "mode": "vapps",
+  "coverage": "blocked",
+  "captures": [],
+  "reason": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required."
+}

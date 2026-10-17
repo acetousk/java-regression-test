@@ -1,0 +1,18 @@
+{
+  "id": "activity-019",
+  "sourceLine": 85,
+  "headings": [
+    "OAGIS Work Plan to Cash",
+    "OAGIS Documents Used"
+  ],
+  "text": "* GetPersonnel - ShowPersonnel",
+  "route": null,
+  "dialog": null,
+  "mapping": "entry-candidate",
+  "limitation": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required.",
+  "source": "docs/business-processes/process-library/oagis-work-plan-to-cash.md",
+  "mode": "apps",
+  "coverage": "blocked",
+  "captures": [],
+  "reason": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required."
+}

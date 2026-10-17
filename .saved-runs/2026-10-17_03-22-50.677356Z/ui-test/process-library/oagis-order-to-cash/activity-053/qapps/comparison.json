@@ -1,0 +1,19 @@
+{
+  "id": "activity-053",
+  "sourceLine": 227,
+  "headings": [
+    "OAGIS Order to Cash",
+    "Process Story",
+    "Shipping"
+  ],
+  "text": "Carrier sends NotifyShipmentUnit to Supplier and Customer, and each send ConfirmBOD to Carrier.\nCarrier sends ProcessInvoice (for freight) to Supplier and/or Customer, and Supplier and/or Customer send AcknowledgeInvoice to Carrier.\nCarrier sends NotifyReceiveDelivery to Supplier and Supplier sends ConfirmBOD to Carrier.",
+  "route": null,
+  "dialog": null,
+  "mapping": "entry-candidate",
+  "limitation": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required.",
+  "source": "docs/business-processes/process-library/oagis-order-to-cash.md",
+  "mode": "qapps",
+  "coverage": "blocked",
+  "captures": [],
+  "reason": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required."
+}

@@ -1,0 +1,1157 @@
+{
+  "source": "docs/business-processes/walkthroughs/bank-accounts.md",
+  "mode": "qapps",
+  "activities": [
+    {
+      "id": "activity-001",
+      "sourceLine": 10,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150680,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.463888888888889,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-001/qapps/comparison.json"
+    },
+    {
+      "id": "activity-002",
+      "sourceLine": 16,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150680,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.463888888888889,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-002/qapps/comparison.json"
+    },
+    {
+      "id": "activity-003",
+      "sourceLine": 20,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150680,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.463888888888889,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-003/qapps/comparison.json"
+    },
+    {
+      "id": "activity-004",
+      "sourceLine": 24,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150680,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.463888888888889,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-004/qapps/comparison.json"
+    },
+    {
+      "id": "activity-005",
+      "sourceLine": 27,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150680,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.463888888888889,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-005/qapps/comparison.json"
+    },
+    {
+      "id": "activity-006",
+      "sourceLine": 30,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150680,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.463888888888889,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-006/qapps/comparison.json"
+    },
+    {
+      "id": "activity-007",
+      "sourceLine": 33,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150680,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.463888888888889,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-007/qapps/comparison.json"
+    },
+    {
+      "id": "activity-008",
+      "sourceLine": 36,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150680,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.463888888888889,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-008/qapps/comparison.json"
+    },
+    {
+      "id": "activity-009",
+      "sourceLine": 39,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150680,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.463888888888889,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-009/qapps/comparison.json"
+    },
+    {
+      "id": "activity-010",
+      "sourceLine": 43,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150680,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.463888888888889,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-010/qapps/comparison.json"
+    },
+    {
+      "id": "activity-011",
+      "sourceLine": 47,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150680,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.463888888888889,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-011/qapps/comparison.json"
+    },
+    {
+      "id": "activity-012",
+      "sourceLine": 51,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 155997,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.833125,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-012/qapps/comparison.json"
+    },
+    {
+      "id": "activity-013",
+      "sourceLine": 54,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 155997,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.833125,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-013/qapps/comparison.json"
+    },
+    {
+      "id": "activity-014",
+      "sourceLine": 57,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 1045243,
+        "comparedPixels": 1440000,
+        "differencePercent": 72.58631944444444,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-014/qapps/comparison.json"
+    },
+    {
+      "id": "activity-015",
+      "sourceLine": 60,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 120021,
+        "comparedPixels": 1440000,
+        "differencePercent": 8.334791666666666,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-015/qapps/comparison.json"
+    },
+    {
+      "id": "activity-016",
+      "sourceLine": 63,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 120021,
+        "comparedPixels": 1440000,
+        "differencePercent": 8.334791666666666,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-016/qapps/comparison.json"
+    },
+    {
+      "id": "activity-017",
+      "sourceLine": 66,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 120021,
+        "comparedPixels": 1440000,
+        "differencePercent": 8.334791666666666,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-017/qapps/comparison.json"
+    },
+    {
+      "id": "activity-018",
+      "sourceLine": 69,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 120021,
+        "comparedPixels": 1440000,
+        "differencePercent": 8.334791666666666,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-018/qapps/comparison.json"
+    },
+    {
+      "id": "activity-019",
+      "sourceLine": 72,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 120021,
+        "comparedPixels": 1440000,
+        "differencePercent": 8.334791666666666,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-019/qapps/comparison.json"
+    },
+    {
+      "id": "activity-020",
+      "sourceLine": 75,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 120021,
+        "comparedPixels": 1440000,
+        "differencePercent": 8.334791666666666,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-020/qapps/comparison.json"
+    },
+    {
+      "id": "activity-021",
+      "sourceLine": 78,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 120021,
+        "comparedPixels": 1440000,
+        "differencePercent": 8.334791666666666,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-021/qapps/comparison.json"
+    },
+    {
+      "id": "activity-022",
+      "sourceLine": 81,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 120021,
+        "comparedPixels": 1440000,
+        "differencePercent": 8.334791666666666,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-022/qapps/comparison.json"
+    },
+    {
+      "id": "activity-023",
+      "sourceLine": 84,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 120021,
+        "comparedPixels": 1440000,
+        "differencePercent": 8.334791666666666,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-023/qapps/comparison.json"
+    },
+    {
+      "id": "activity-024",
+      "sourceLine": 88,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 120021,
+        "comparedPixels": 1440000,
+        "differencePercent": 8.334791666666666,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-024/qapps/comparison.json"
+    },
+    {
+      "id": "activity-025",
+      "sourceLine": 92,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 120021,
+        "comparedPixels": 1440000,
+        "differencePercent": 8.334791666666666,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-025/qapps/comparison.json"
+    },
+    {
+      "id": "activity-026",
+      "sourceLine": 96,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 155997,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.833125,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-026/qapps/comparison.json"
+    },
+    {
+      "id": "activity-027",
+      "sourceLine": 99,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 125337,
+        "comparedPixels": 1440000,
+        "differencePercent": 8.703958333333333,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-027/qapps/comparison.json"
+    },
+    {
+      "id": "activity-028",
+      "sourceLine": 102,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 139052,
+        "comparedPixels": 1440000,
+        "differencePercent": 9.65638888888889,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-028/qapps/comparison.json"
+    },
+    {
+      "id": "activity-029",
+      "sourceLine": 105,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 116215,
+        "comparedPixels": 1440000,
+        "differencePercent": 8.07048611111111,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-029/qapps/comparison.json"
+    },
+    {
+      "id": "activity-030",
+      "sourceLine": 108,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 116215,
+        "comparedPixels": 1440000,
+        "differencePercent": 8.07048611111111,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-030/qapps/comparison.json"
+    },
+    {
+      "id": "activity-031",
+      "sourceLine": 111,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 116215,
+        "comparedPixels": 1440000,
+        "differencePercent": 8.07048611111111,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-031/qapps/comparison.json"
+    },
+    {
+      "id": "activity-032",
+      "sourceLine": 114,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 116215,
+        "comparedPixels": 1440000,
+        "differencePercent": 8.07048611111111,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-032/qapps/comparison.json"
+    },
+    {
+      "id": "activity-033",
+      "sourceLine": 120,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 116215,
+        "comparedPixels": 1440000,
+        "differencePercent": 8.07048611111111,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-033/qapps/comparison.json"
+    },
+    {
+      "id": "activity-034",
+      "sourceLine": 126,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 116215,
+        "comparedPixels": 1440000,
+        "differencePercent": 8.07048611111111,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-034/qapps/comparison.json"
+    },
+    {
+      "id": "activity-035",
+      "sourceLine": 130,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 138826,
+        "comparedPixels": 1440000,
+        "differencePercent": 9.640694444444444,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-035/qapps/comparison.json"
+    },
+    {
+      "id": "activity-036",
+      "sourceLine": 134,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 115989,
+        "comparedPixels": 1440000,
+        "differencePercent": 8.054791666666667,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-036/qapps/comparison.json"
+    },
+    {
+      "id": "activity-037",
+      "sourceLine": 140,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 115989,
+        "comparedPixels": 1440000,
+        "differencePercent": 8.054791666666667,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-037/qapps/comparison.json"
+    },
+    {
+      "id": "activity-038",
+      "sourceLine": 144,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 115989,
+        "comparedPixels": 1440000,
+        "differencePercent": 8.054791666666667,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-038/qapps/comparison.json"
+    },
+    {
+      "id": "activity-039",
+      "sourceLine": 148,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 115989,
+        "comparedPixels": 1440000,
+        "differencePercent": 8.054791666666667,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-039/qapps/comparison.json"
+    },
+    {
+      "id": "activity-040",
+      "sourceLine": 154,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 115989,
+        "comparedPixels": 1440000,
+        "differencePercent": 8.054791666666667,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-040/qapps/comparison.json"
+    },
+    {
+      "id": "activity-041",
+      "sourceLine": 158,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 138826,
+        "comparedPixels": 1440000,
+        "differencePercent": 9.640694444444444,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-041/qapps/comparison.json"
+    },
+    {
+      "id": "activity-042",
+      "sourceLine": 162,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 138826,
+        "comparedPixels": 1440000,
+        "differencePercent": 9.640694444444444,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-042/qapps/comparison.json"
+    },
+    {
+      "id": "activity-043",
+      "sourceLine": 165,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 138826,
+        "comparedPixels": 1440000,
+        "differencePercent": 9.640694444444444,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-043/qapps/comparison.json"
+    },
+    {
+      "id": "activity-044",
+      "sourceLine": 168,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 115989,
+        "comparedPixels": 1440000,
+        "differencePercent": 8.054791666666667,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-044/qapps/comparison.json"
+    },
+    {
+      "id": "activity-045",
+      "sourceLine": 172,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 115989,
+        "comparedPixels": 1440000,
+        "differencePercent": 8.054791666666667,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-045/qapps/comparison.json"
+    },
+    {
+      "id": "activity-046",
+      "sourceLine": 176,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 115989,
+        "comparedPixels": 1440000,
+        "differencePercent": 8.054791666666667,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-046/qapps/comparison.json"
+    }
+  ],
+  "note": "Evidence sweep only; no complete business-process execution is claimed."
+}

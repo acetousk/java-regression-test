@@ -1,0 +1,22 @@
+{
+  "engine": "rust",
+  "mode": "qapps",
+  "route": "marble/Shipment/FindShipment",
+  "dialog": {
+    "label": "New Transfer Shipment",
+    "id": "NewTransferShipmentDialog",
+    "route": "Shipment/FindShipment"
+  },
+  "authenticated": true,
+  "errors": [],
+  "failedRequests": [],
+  "httpErrors": [],
+  "consoleErrors": [],
+  "status": "captured",
+  "reused": false,
+  "requestedURL": "http://127.0.0.1:18092/qapps/marble/Shipment/FindShipment",
+  "navigation": "documented-or-candidate-deep-link",
+  "httpStatus": 200,
+  "finalURL": "http://127.0.0.1:18092/qapps/marble/Shipment/FindShipment",
+  "dialogOpened": true
+}

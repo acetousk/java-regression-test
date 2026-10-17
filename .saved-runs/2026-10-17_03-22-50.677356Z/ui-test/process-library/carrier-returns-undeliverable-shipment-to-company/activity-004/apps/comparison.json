@@ -1,0 +1,18 @@
+{
+  "id": "activity-004",
+  "sourceLine": 24,
+  "headings": [
+    "Carrier Returns Undeliverable Shipment to Company",
+    "Story"
+  ],
+  "text": "Carrier sends notice that they could not deliver package or Customer refuses to pay the customs and specifies approximate number of days to resolve the issue. CSR contacts Customer to notify them and request they go pick it up. If Customer does not pick up package from Carrier or contact Carrier for delivery within the number of days specified by Carrier, Carrier may destroy the package right away. Carrier may also contact Company (via Carrier Contact) and ask what to do with the package. Carrier Contact will review the value of the item(s) and instruct Carrier to either return the package (and incur a charge) or fax a \"please destroy\" form so that Carrier can destroy the package.",
+  "route": null,
+  "dialog": null,
+  "mapping": "entry-candidate",
+  "limitation": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required.",
+  "source": "docs/business-processes/process-library/carrier-returns-undeliverable-shipment-to-company.md",
+  "mode": "apps",
+  "coverage": "blocked",
+  "captures": [],
+  "reason": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required."
+}

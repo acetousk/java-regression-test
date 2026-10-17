@@ -1,0 +1,82 @@
+{
+  "source": "docs/business-processes/process-library/placing-customer-places-a-sales-order-through-csr.md",
+  "mode": "qapps",
+  "activities": [
+    {
+      "id": "activity-001",
+      "sourceLine": 12,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150680,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.463888888888889,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/placing-customer-places-a-sales-order-through-csr/activity-001/qapps/comparison.json"
+    },
+    {
+      "id": "activity-002",
+      "sourceLine": 16,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150680,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.463888888888889,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/placing-customer-places-a-sales-order-through-csr/activity-002/qapps/comparison.json"
+    },
+    {
+      "id": "activity-003",
+      "sourceLine": 20,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150680,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.463888888888889,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/placing-customer-places-a-sales-order-through-csr/activity-003/qapps/comparison.json"
+    }
+  ],
+  "note": "Evidence sweep only; no complete business-process execution is claimed."
+}

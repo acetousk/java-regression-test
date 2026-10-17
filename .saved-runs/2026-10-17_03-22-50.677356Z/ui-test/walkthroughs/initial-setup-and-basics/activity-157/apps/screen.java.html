@@ -1,0 +1,618 @@
+<!DOCTYPE html><html><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    
+    <title>Marble ERP - Dashboard</title>
+    <link rel="apple-touch-icon" href="/MoquiLogo100.png">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="http://127.0.0.1:18091/css/webroot-layout.css?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="http://127.0.0.1:18091/css/webroot-theme.css?v=1a147e2" rel="stylesheet" type="text/css">
+    <script src="#?v=1a147e2" type="text/javascript"></script>
+    <script src="#?v=1a147e2" type="text/javascript"></script>
+    <script src="#?v=1a147e2" type="text/javascript"></script>
+    <link rel="shortcut icon" href="http://127.0.0.1:18091/favicon.ico">
+</head>
+<body class="dev bg-light dashboard">
+        
+        
+        
+        
+    <!-- BEGIN screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+        <!-- BEGIN render-mode.text[inline][@template=true] -->
+<script>var notificationClient = new moqui.NotificationClient((location.protocol === 'https:' ? 'wss' : 'ws') + "://127.0.0.1:18091/notws");</script>        <!-- END   render-mode.text[inline][@template=true] -->
+    <!-- BEGIN section[@name=TopNavSection] -->
+        <!-- BEGIN screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+    <div id="top">
+        <!-- BEGIN render-mode.text[@location=component://webroot/screen/includes/navbar.html.ftl][@template=true] -->
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <header class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a href="http://127.0.0.1:18091/apps/AppList" class="navbar-brand"><img src="http://127.0.0.1:18091/images/MoquiLogoSmall.png" alt="Home"></a>
+        
+    </header>
+    <div id="navbar-buttons" class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul id="header-menus" class="nav navbar-nav">
+        </ul>
+        <div id="navbar-menu-crumbs">
+        </div>
+        <a class="navbar-text" href="http://127.0.0.1:18091/apps/marble/dashboard">Dashboard</a>
+        <a href="http://127.0.0.1:18091/Login/logout" data-toggle="tooltip" data-original-title="Logout John Doe" data-placement="bottom" class="btn btn-danger btn-sm navbar-btn navbar-right">
+            <i class="fa fa-power-off"></i>
+        </a>
+        <a href="#" onclick="switchDarkLight();" data-toggle="tooltip" data-original-title="Switch Dark/Light" data-placement="bottom" class="btn btn-default btn-sm navbar-btn navbar-right">
+            <i class="fa fa-adjust"></i>
+        </a>
+
+<div class="btn-group navbar-right">
+    <a href="/apps/my/User/Notifications" data-toggle="tooltip" data-container="body" data-original-title="Notifications" data-placement="bottom" class="btn btn-default btn-sm navbar-btn">
+        <i class="fa fa-info-circle"></i>
+        <span id="navbar_notification_count" class="label label-info">0</span>
+    </a>
+    <a href="/apps/my/User/Messages/FindMessage?statusId=CeReceived&amp;toPartyId=EX_JOHN_DOE" data-toggle="tooltip" data-container="body" data-original-title="Messages" data-placement="bottom" class="btn btn-default btn-sm navbar-btn">
+        <i class="fa fa-envelope"></i>
+        <span class="label label-warning">0</span>
+    </a>
+    <a href="/apps/my/User/Calendar/MyCalendar" data-toggle="tooltip" data-container="body" data-original-title="Events This Week" data-placement="bottom" class="btn btn-default btn-sm navbar-btn">
+        <i class="fa fa-calendar"></i>
+        <span class="label label-primary">0</span>
+    </a>
+    <a href="/apps/my/User/Task/MyTasks" data-toggle="tooltip" data-container="body" data-original-title="Open Tasks" data-placement="bottom" class="btn btn-default btn-sm navbar-btn">
+        <i class="fa fa-check"></i>
+        <span class="label label-success">0</span>
+    </a>
+</div>
+    <script>
+        var navbarNotificationListener = function(jsonObj, webSocket) {
+            if (jsonObj && jsonObj.persistOnSend === true) {
+                var countElement = $("#navbar_notification_count");
+                countElement.text((parseInt(countElement.text()) + 1).toString());
+            }
+            notificationClient.displayNotify(jsonObj, webSocket);
+        };
+        notificationClient.registerListener("ALL", navbarNotificationListener);
+    </script>
+        <div id="history-menu" class="nav navbar-right dropdown">
+            <a id="history-menu-link" href="#" class="dropdown-toggle btn btn-default btn-sm navbar-btn" data-toggle="dropdown" title="History">
+                <i class="fa fa-list"></i></a>
+            <ul class="dropdown-menu">
+                <li><a href="http://127.0.0.1:18091/apps/marble/Shipment/ShipmentItems">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Shipping.png" alt="Shipments - Items" height="18" style="padding-right: 4px;">
+                    Shipments - Items
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/dashboard">
+                            <i class="fa fa-dashboard" style="padding-right: 8px;"></i>
+                    Marble ERP - Dashboard
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Order/OrderDetail">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Sales.png" alt="Orders - Order Detail" height="18" style="padding-right: 4px;">
+                    Orders - Order Detail
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Order/FindOrder">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Sales.png" alt="Orders - Find Order" height="18" style="padding-right: 4px;">
+                    Orders - Find Order
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Asset/Asset/FindSummary">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Asset.png" alt="Asset - Find Summary" height="18" style="padding-right: 4px;">
+                    Asset - Find Summary
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/ProductStore/FindProductStore">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/ProductStore.png" alt="Stores - Find Product Store" height="18" style="padding-right: 4px;">
+                    Stores - Find Product Store
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Facility/FindFacility">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Facility.png" alt="Facility - Find Facility" height="18" style="padding-right: 4px;">
+                    Facility - Find Facility
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Catalog/Product/EditPrices">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Catalog.png" alt="Products - Prices" height="18" style="padding-right: 4px;">
+                    Products - Prices
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Asset/Asset/FindSummary?assetTypeEnumId=AstTpInventory">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Asset.png" alt="Asset - Find Summary (AstTpInventory)" height="18" style="padding-right: 4px;">
+                    Asset - Find Summary (AstTpInventory)
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Catalog/Product/FindProduct">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Catalog.png" alt="Products - Find Product" height="18" style="padding-right: 4px;">
+                    Products - Find Product
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Accounting/Invoice/FindInvoice">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Accounting.png" alt="Invoices - Find Invoice" height="18" style="padding-right: 4px;">
+                    Invoices - Find Invoice
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Party/PartyTimeEntries">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Parties.png" alt="Parties - Time" height="18" style="padding-right: 4px;">
+                    Parties - Time
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/HumanRes/EditRateAmounts">
+                            <img src="#" alt="Human Resources - Rates" height="18" style="padding-right: 4px;">
+                    Human Resources - Rates
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Task/FindTask">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/task-homework.png" alt="Tasks - Find Task" height="18" style="padding-right: 4px;">
+                    Tasks - Find Task
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Project/FindProject">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/project-business120.png" alt="Projects - Find Project" height="18" style="padding-right: 4px;">
+                    Projects - Find Project
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Customer/EditCustomer">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Customer.png" alt="Customers - Customer" height="18" style="padding-right: 4px;">
+                    Customers - Customer
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Customer/FindCustomer">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Customer.png" alt="Customers - Find Customer" height="18" style="padding-right: 4px;">
+                    Customers - Find Customer
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Party/EditParty">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Parties.png" alt="Parties - Party" height="18" style="padding-right: 4px;">
+                    Parties - Party
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Party/FindParty">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/dashboard">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/vapps/marble/Party/FindParty">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/vapps/marble/dashboard">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Party/FindParty">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Parties.png" alt="Parties - Find Party" height="18" style="padding-right: 4px;">
+                    Parties - Find Party
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Party/PaymentMethod/PaymentMethodTrans">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Party/PaymentMethod/PaymentMethodFiles">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            </ul>
+        </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+    $('.navbar [data-toggle="tooltip"]').tooltip({ placement:'bottom', trigger:'hover' });
+    $('#history-menu-link').tooltip({ placement:'bottom', trigger:'hover' });
+    $('#document-menu-link').tooltip({ placement:'bottom', trigger:'hover' });
+    function switchDarkLight() {
+        $("body").toggleClass("bg-dark");
+        $("body").toggleClass("bg-light");
+        var currentStyle = $("body").hasClass("bg-dark") ? "bg-dark" : "bg-light";
+        $.ajax({ type:'POST', url:'http://127.0.0.1:18091/apps/setPreference', data:{ 'moquiSessionToken': '[REDACTED]','preferenceKey': 'OUTER_STYLE', 'preferenceValue': currentStyle }, dataType:'json' });
+    }
+</script>
+
+        <!-- END   render-mode.text[@location=component://webroot/screen/includes/navbar.html.ftl][@template=true] -->
+        <!-- BEGIN render-mode.text[inline][@template=true] -->
+        <!-- END   render-mode.text[inline][@template=true] -->
+        <li id="header-menu" class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Application <i class="fa fa-chevron-right"></i></a>
+            <ul class="dropdown-menu">
+                        <li class="active"><a href="http://127.0.0.1:18091/apps/marble/dashboard"><i class="fa fa-cogs" style="padding-right: 8px;"></i>Marble ERP</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/my"><i class="fa fa-user" style="padding-right: 8px;"></i>My Account</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/system"><i class="fa fa-cog" style="padding-right: 8px;"></i>System</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/tools"><i class="fa fa-wrench" style="padding-right: 8px;"></i>Tools</a></li>
+            </ul>
+        </li>
+        <script>$("#header-menus").append($("#header-menu"));</script>
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    <!-- END   screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+
+    <!-- END   section[@name=TopNavSection] -->
+    <div id="content">
+    <div class="inner">
+    <div class="container-fluid">
+    <!-- BEGIN section[@name=MessagesSection] -->
+        <!-- BEGIN screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+    <!-- BEGIN section-iterate[@name=headerMessageInfos] -->
+    
+    <!-- END   section-iterate[@name=headerMessageInfos] -->
+    <!-- BEGIN section-iterate[@name=headerErrors] -->
+    
+    <!-- END   section-iterate[@name=headerErrors] -->
+    <!-- BEGIN section-iterate[@name=headerValidationErrors] -->
+    
+    <!-- END   section-iterate[@name=headerValidationErrors] -->
+    <!-- BEGIN section-iterate[@name=headerSavedMessages] -->
+    
+    <!-- END   section-iterate[@name=headerSavedMessages] -->
+    <!-- BEGIN section-iterate[@name=headerSavedErrors] -->
+    
+    <!-- END   section-iterate[@name=headerSavedErrors] -->
+    <!-- BEGIN section-iterate[@name=headerSavedValidationErrors] -->
+    
+    <!-- END   section-iterate[@name=headerSavedValidationErrors] -->
+    <!-- END   screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+
+    <!-- END   section[@name=MessagesSection] -->
+        <!-- BEGIN screen[@location=component://MarbleERP/screen/marble.xml].widgets -->
+    <!-- BEGIN section[@name=OrgChooserSection] -->
+        <!-- BEGIN screen[@location=component://MarbleERP/screen/marble.xml].widgets -->
+        <!-- BEGIN render-mode.text[inline][@template=true] -->
+<div id="active-org-menu" class="nav navbar-right dropdown">
+                <a id="active-org-menu-link" href="#" class="dropdown-toggle btn btn-default btn-sm navbar-btn" data-toggle="dropdown" title="Organization">
+                    <i class="fa fa-globe"></i> </a>
+                <ul class="dropdown-menu">
+                        <li><a href="http://127.0.0.1:18091/apps/setPrefGoLast?preferenceKey=ACTIVE_ORGANIZATION&amp;preferenceValue=ORG_ZIZI_RETAIL">ZIRET: Ziziwork Retail &amp; Wholesale</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/setPrefGoLast?preferenceKey=ACTIVE_ORGANIZATION&amp;preferenceValue=ORG_ZIZI_SERVICES">ZISER: Ziziwork Services</a></li>
+                </ul>
+            </div>
+            <script>$("#navbar-buttons").append($("#active-org-menu")); $('#active-org-menu-link').tooltip({ placement:'bottom', trigger:'hover' });</script>        <!-- END   render-mode.text[inline][@template=true] -->
+    <!-- END   screen[@location=component://MarbleERP/screen/marble.xml].widgets -->
+
+    <!-- END   section[@name=OrgChooserSection] -->
+        <li id="MarbleErpPanel-menu" class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Marble ERP <i class="fa fa-chevron-right"></i></a>
+            <ul class="dropdown-menu">
+                        <li class="active"><a href="http://127.0.0.1:18091/apps/marble/dashboard"><i class="fa fa-dashboard" style="padding-right: 8px;"></i>Dashboard</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/QuickSearch"><i class="fa fa-search" style="padding-right: 8px;"></i>Quick Search</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Accounting/dashboard"><img src="http://127.0.0.1:18091/ssstatic/images/Accounting.png" alt="Accounting" height="18" style="padding-right: 4px;">Accounting</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Asset/dashboard"><img src="http://127.0.0.1:18091/ssstatic/images/Asset.png" alt="Asset" height="18" style="padding-right: 4px;">Asset</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Catalog/dashboard"><img src="http://127.0.0.1:18091/ssstatic/images/Catalog.png" alt="Catalog" height="18" style="padding-right: 4px;">Catalog</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Customer/FindCustomer"><img src="http://127.0.0.1:18091/ssstatic/images/Customer.png" alt="Customers" height="18" style="padding-right: 4px;">Customers</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Facility/FindFacility"><img src="http://127.0.0.1:18091/ssstatic/images/Facility.png" alt="Facility" height="18" style="padding-right: 4px;">Facility</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/HumanRes/dashboard"><i class="fa fa-user-plus" style="padding-right: 8px;"></i>Human Resources</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Manufacturing/dashboard"><i class="fa fa-industry" style="padding-right: 8px;"></i>Manufacturing</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Order/FindOrder"><img src="http://127.0.0.1:18091/ssstatic/images/Sales.png" alt="Orders" height="18" style="padding-right: 4px;">Orders</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Party/FindParty"><img src="http://127.0.0.1:18091/ssstatic/images/Parties.png" alt="Parties" height="18" style="padding-right: 4px;">Parties</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Project/FindProject"><img src="http://127.0.0.1:18091/ssstatic/images/project-business120.png" alt="Projects" height="18" style="padding-right: 4px;">Projects</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Request/FindRequest"><img src="http://127.0.0.1:18091/ssstatic/images/Request.png" alt="Requests" height="18" style="padding-right: 4px;">Requests</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Return/FindReturn"><img src="http://127.0.0.1:18091/ssstatic/images/Return.png" alt="Returns" height="18" style="padding-right: 4px;">Returns</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Shipment/FindShipment"><img src="http://127.0.0.1:18091/ssstatic/images/Shipping.png" alt="Shipments" height="18" style="padding-right: 4px;">Shipments</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Shipping/dashboard"><img src="http://127.0.0.1:18091/ssstatic/images/Picking.png" alt="Shipping" height="18" style="padding-right: 4px;">Shipping</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/ProductStore/FindProductStore"><img src="http://127.0.0.1:18091/ssstatic/images/ProductStore.png" alt="Stores" height="18" style="padding-right: 4px;">Stores</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Supplier/FindSupplier"><img src="http://127.0.0.1:18091/ssstatic/images/Supplier.png" alt="Suppliers" height="18" style="padding-right: 4px;">Suppliers</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Survey/FindSurvey"><i class="fa fa-pencil-square-o" style="padding-right: 8px;"></i>Survey</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Task/FindTask"><img src="http://127.0.0.1:18091/ssstatic/images/task-homework.png" alt="Tasks" height="18" style="padding-right: 4px;">Tasks</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Wiki/WikiSpaces"><img src="http://127.0.0.1:18091/ssstatic/images/Wiki.png" alt="Wiki/Content" height="18" style="padding-right: 4px;">Wiki/Content</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/QuickViewReport"><i class="fa fa-database" style="padding-right: 8px;"></i>Custom Reports</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/SimpleReport/FindReport"><i class="fa fa-database" style="padding-right: 8px;"></i>Report Builder</a></li>
+            </ul>
+        </li>
+        <script>$("#header-menus").append($("#MarbleErpPanel-menu"));</script>
+            <!-- BEGIN screen[@location=component://MarbleERP/screen/marble/dashboard.xml].widgets -->
+    <div class="row">
+            <div class=" col-md-6 text-center">
+    <!-- BEGIN form-single[@name=SearchOptions] -->
+    <form name="SearchOptions" id="SearchOptions" method="post" action="http://127.0.0.1:18091/apps/marble/QuickSearch">
+        <input type="hidden" name="moquiFormName" value="SearchOptions" style="">
+        <input type="hidden" name="moquiSessionToken" value="[REDACTED]" style="">
+        
+        <fieldset class="form-horizontal">
+    <div class="form-group">
+        <div class="col-sm-12">
+            <div class="big-row-item">
+            <div class="form-group">
+    
+    <select name="documentType" class="" id="SearchOptions_documentType">
+            <option selected="selected" value=" ">Any Type</option>
+            <option value="MantleCommunicationEvent">Communication Event</option>
+            <option value="MantleEvent">Event</option>
+            <option value="MantleFacility">Facility</option>
+            <option value="MantleParty">Party</option>
+            <option value="MantleProduct">Product</option>
+            <option value="MantleProject">Project</option>
+            <option value="MantleRequest">Request</option>
+            <option value="MantleTask">Task</option>
+            <option value="MantleWikiPage">Wiki Page</option>
+    </select>
+    
+    
+        <script>$("#SearchOptions_documentType").select2({  });</script>
+            </div><!-- /form-group -->
+        </div><!-- /field-row-item -->
+        <div class="big-row-item">
+            <div class="form-group">
+    
+<input id="SearchOptions_queryString" type="text" name="queryString" value="" size="25" class="form-control" data-toggle="tooltip" title="" style="">
+        
+            </div><!-- /form-group -->
+        </div><!-- /field-row-item -->
+        <div class="big-row-item">
+            <div class="form-group">
+    
+    <button type="submit" name="submitButton" value="submitButton" id="SearchOptions_submitButton" class="btn btn-primary btn-sm">
+Search    </button>
+            </div><!-- /form-group -->
+        </div><!-- /field-row-item -->
+        </div>
+    </div>
+        </fieldset>
+    </form>
+        <script>
+            $("#SearchOptions").validate({ errorClass: 'help-block', errorElement: 'span',
+                highlight: function(element, errorClass, validClass) { $(element).parents('.form-group').removeClass('has-success').addClass('has-error'); },
+                unhighlight: function(element, errorClass, validClass) { $(element).parents('.form-group').removeClass('has-error').addClass('has-success'); }
+            });
+            $('#SearchOptions [data-toggle="tooltip"]').tooltip({placement:'auto top'});
+
+        </script>
+        <script>$("#SearchOptions").find('[name^="queryString"]').addClass('default-focus').focus();</script>
+    <!-- END   form-single[@name=SearchOptions] -->
+            </div>
+            <div class=" col-md-6 text-center">
+    <!-- BEGIN section[@name=QuickInfoSection] -->
+        <!-- BEGIN screen[@location=component://MarbleERP/screen/marble/dashboard.xml].widgets -->
+    <div class="big-row text-center q-my-md">
+    <span class="big-row no-wrap">
+    <div class="big-row-item q-my-auto q-ml-md q-mr-sm">
+<h4 class="text-inline">Sales</h4>
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    <div class="big-row-item q-my-auto">
+            <a href="http://127.0.0.1:18091/apps/marble/Order/FindOrder?statusId_op=in&amp;statusId=OrderPlaced%2COrderProcessing&amp;orderType=Sales" class="btn btn-default btn-sm">Placed <span class="badge">0</span></a>    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    <div class="big-row-item q-my-auto">
+            <a href="http://127.0.0.1:18091/apps/marble/Order/FindOrder?statusId_op=in&amp;statusId=OrderApproved%2COrderSent&amp;orderType=Sales" class="btn btn-default btn-sm">Approved <span class="badge">0</span></a>    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    <div class="big-row-item q-my-auto">
+            <a href="http://127.0.0.1:18091/apps/marble/Order/FindOrder?statusId=OrderHold&amp;orderType=Sales" class="btn btn-default btn-sm">Held <span class="badge">0</span></a>    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    </span><!-- CONTAINER OVERRIDE EXAMPLE -->
+    <span class="big-row no-wrap">
+    <div class="big-row-item q-my-auto q-ml-md q-mr-sm">
+<h4 class="text-inline">Requests</h4>
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    <div class="big-row-item q-my-auto">
+            <a href="http://127.0.0.1:18091/apps/marble/Request/FindRequest?statusId=ReqSubmitted&amp;roleTypeId=Customer" class="btn btn-default btn-sm">Submitted <span class="badge">0</span></a>    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    <div class="big-row-item q-my-auto">
+            <a href="http://127.0.0.1:18091/apps/marble/Request/FindRequest?statusId_op=in&amp;statusId=ReqReviewed%2CReqInProgress&amp;roleTypeId=Customer" class="btn btn-default btn-sm">In Progress <span class="badge">0</span></a>    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    </span><!-- CONTAINER OVERRIDE EXAMPLE -->
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    <!-- END   screen[@location=component://MarbleERP/screen/marble/dashboard.xml].widgets -->
+
+    <!-- END   section[@name=QuickInfoSection] -->
+            </div>
+    </div>
+<p class="text-inline">&nbsp;</p>
+    <div class="row diagram-sequence">
+            <div class=" col-sm-4">
+    <div class="diagram-sequence-actor">
+            <a href="http://127.0.0.1:18091/apps/marble/Customer/FindCustomer" class="">Customers</a>    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    <div class="diagram-sequence-item">
+    <div>
+        <a href="#" class="disabled text-muted ">Marketing</a>
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    <i class="fa left">
+    </i><!-- CONTAINER OVERRIDE EXAMPLE -->
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+<div class="text-inline">&nbsp;</div>
+    <div class="diagram-sequence-item">
+            <a href="http://127.0.0.1:18091/apps/marble/Request/FindRequest" class="">Customer <strong>Requests</strong></a>    <i class="fa right">
+    </i><!-- CONTAINER OVERRIDE EXAMPLE -->
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+<div class="text-inline">&nbsp;</div>
+    <div class="diagram-sequence-item">
+            <a href="http://127.0.0.1:18091/apps/marble/Order/FindOrder?orderType=Sales" class="">Sales <strong>Orders</strong> &amp; Quotes</a>    <i class="fa right">
+    </i><!-- CONTAINER OVERRIDE EXAMPLE -->
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+<div class="text-inline">&nbsp;</div>
+    <div class="diagram-sequence-item">
+    <div>
+            <a href="http://127.0.0.1:18091/apps/marble/Shipment/FindShipment?parentShipmentType=ShpTpOutgoing" class="">Sales <strong>Shipments</strong></a>    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    <div>
+            <a href="http://127.0.0.1:18091/apps/marble/Shipping/dashboard" class="">Shipping - Pick &amp; Pack</a>    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    <i class="fa left">
+    </i><!-- CONTAINER OVERRIDE EXAMPLE -->
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+<div class="text-inline">&nbsp;</div>
+    <div class="diagram-sequence-item">
+            <a href="http://127.0.0.1:18091/apps/marble/Accounting/Invoice/FindInvoice?invoiceType=Receivable" class="">Receivable <strong>Invoices</strong></a>    <i class="fa left">
+    </i><!-- CONTAINER OVERRIDE EXAMPLE -->
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    <div class="diagram-sequence-item">
+            <a href="http://127.0.0.1:18091/apps/marble/Accounting/Invoice/FindInvoice?invoiceTypeEnumId=InvoiceCreditMemo&amp;invoiceType=Payable" class="">Customer Credit Memos</a>    <i class="fa right">
+    </i><!-- CONTAINER OVERRIDE EXAMPLE -->
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    <div class="diagram-sequence-item">
+            <a href="http://127.0.0.1:18091/apps/marble/Accounting/Payment/FindPayment?paymentTypeEnumId=PtInvoicePayment&amp;paymentType=Incoming" class="">Customer <strong>Payments</strong></a>    <i class="fa right">
+    </i><!-- CONTAINER OVERRIDE EXAMPLE -->
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+<div class="text-inline">&nbsp;</div>
+    <div class="diagram-sequence-item smaller">
+    <div>
+            <a href="http://127.0.0.1:18091/apps/marble/Return/FindReturn?returnType=Customer" class=" text-normal">Sales Returns &amp; RMA</a>    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    <i class="fa right">
+    </i><!-- CONTAINER OVERRIDE EXAMPLE -->
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    <div class="diagram-sequence-item smaller">
+    <div>
+            <a href="http://127.0.0.1:18091/apps/marble/Shipment/FindShipment?shipmentTypeEnumId=ShpTpSalesReturn" class="">Customer Return Shipments</a>    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    <i class="fa right">
+    </i><!-- CONTAINER OVERRIDE EXAMPLE -->
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    <div class="diagram-sequence-item smaller">
+            <a href="http://127.0.0.1:18091/apps/marble/Accounting/Invoice/FindInvoice?invoiceTypeEnumId=InvoiceReturn&amp;invoiceType=Payable" class="">Payable Return Invoices</a>    <i class="fa right">
+    </i><!-- CONTAINER OVERRIDE EXAMPLE -->
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    <div class="diagram-sequence-item smaller">
+            <a href="http://127.0.0.1:18091/apps/marble/Accounting/Payment/FindPayment?paymentTypeEnumId=PtRefund&amp;paymentType=Outgoing" class="">Outgoing Refund Payments</a>    <i class="fa left">
+    </i><!-- CONTAINER OVERRIDE EXAMPLE -->
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+            </div>
+            <div class=" col-sm-4">
+<p class="text-inline lt-sm visible-xs-block">&nbsp;</p>
+    <div class="diagram-sequence-actor">
+            <a href="http://127.0.0.1:18091/apps/marble/Party/FindParty?roleTypeId=OrgInternal" class="">Internal</a>    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    <div class="diagram-sequence-item">
+    <div>
+            <a href="http://127.0.0.1:18091/apps/marble/HumanRes/dashboard" class="">HR</a><span class="text-inline"> - </span>
+            <a href="http://127.0.0.1:18091/apps/marble/Party/FindParty?roleTypeId=Employee" class="">Employees</a>    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+<div class="text-inline">&nbsp;</div>
+    <div class="diagram-sequence-item">
+            <a href="http://127.0.0.1:18091/apps/marble/Request/FindRequest" class=" text-strong">Requests</a>    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+<div class="text-inline">&nbsp;</div>
+    <div class="diagram-sequence-item">
+            <a href="http://127.0.0.1:18091/apps/marble/Catalog/Product/FindProduct" class=" text-strong">Products</a><span class="text-inline"> - </span>
+            <a href="http://127.0.0.1:18091/apps/marble/Catalog/dashboard" class="">Catalog</a>    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+<div class="text-inline">&nbsp;</div>
+    <div class="diagram-sequence-item">
+    <div>
+            <a href="http://127.0.0.1:18091/apps/marble/Asset/dashboard" class=" text-strong">Assets</a><span class="text-inline"> - </span>
+            <a href="http://127.0.0.1:18091/apps/marble/Asset/Asset/FindSummary?assetTypeEnumId=AstTpInventory" class="">Inventory</a>    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    <div>
+            <a href="http://127.0.0.1:18091/apps/marble/Manufacturing/dashboard" class="">Manufacturing</a>    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+<div class="text-inline">&nbsp;</div>
+    <div class="diagram-sequence-item">
+    <div>
+            <a href="http://127.0.0.1:18091/apps/marble/Project/FindProject" class=" text-strong">Projects</a>    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    <div>
+            <a href="http://127.0.0.1:18091/apps/marble/Task/FindTask" class="">Tasks</a>    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+<div class="text-inline">&nbsp;</div>
+    <div class="diagram-sequence-item">
+            <a href="http://127.0.0.1:18091/apps/marble/Party/FindParty" class="">All Parties</a>    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    <div class="diagram-sequence-item">
+    <div>
+            <a href="http://127.0.0.1:18091/apps/marble/Facility/FindFacility" class="">Facilities</a>    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    <div>
+            <a href="http://127.0.0.1:18091/apps/marble/ProductStore/FindProductStore" class="">Stores</a>    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    <div class="diagram-sequence-item">
+    <div>
+<span class="text-inline">Content: </span>
+            <a href="http://127.0.0.1:18091/apps/marble/Wiki/WikiSpaces" class="">Wiki</a><span class="text-inline"> - </span>
+            <a href="http://127.0.0.1:18091/apps/marble/Wiki/WikiBlogs" class="">Blogs</a>    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+            <a href="http://127.0.0.1:18091/apps/marble/Survey/FindSurvey" class="">Surveys</a>    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+<div class="text-inline">&nbsp;</div>
+    <div class="diagram-sequence-item">
+            <a href="http://127.0.0.1:18091/apps/marble/Accounting/dashboard" class=" text-strong">Accounting</a><span class="text-inline"> - </span>
+            <a href="http://127.0.0.1:18091/apps/marble/Accounting/Reports/ReportList" class="">Reports</a>    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    <div class="text-center">
+            <a href="http://127.0.0.1:18091/apps/marble/QuickViewReport" class="">Custom Reports</a><span class="text-inline"> - </span>
+            <a href="http://127.0.0.1:18091/apps/marble/SimpleReport/FindReport" class="">Report Builder</a>    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+            </div>
+            <div class=" col-sm-4">
+<p class="text-inline lt-sm visible-xs-block">&nbsp;</p>
+    <div class="diagram-sequence-actor">
+            <a href="http://127.0.0.1:18091/apps/marble/Supplier/FindSupplier" class="">Suppliers</a>    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+<p class="text-inline gt-xs hidden-xs">&nbsp;</p>
+<div class="text-inline gt-xs hidden-xs">&nbsp;</div>
+    <div class="diagram-sequence-item">
+            <a href="http://127.0.0.1:18091/apps/marble/Request/FindRequest" class="">Purchase <strong>Requests</strong></a>    <i class="fa right">
+    </i><!-- CONTAINER OVERRIDE EXAMPLE -->
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+<div class="text-inline">&nbsp;</div>
+    <div class="diagram-sequence-item">
+    <div>
+            <a href="http://127.0.0.1:18091/apps/marble/Order/FindOrder?orderType=Purchase" class="">Purchase <strong>Orders</strong> &amp; Quotes</a>    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    <i class="fa right">
+    </i><!-- CONTAINER OVERRIDE EXAMPLE -->
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+<div class="text-inline">&nbsp;</div>
+<div class="text-inline">&nbsp;</div>
+    <div class="diagram-sequence-item">
+            <a href="http://127.0.0.1:18091/apps/marble/Shipment/FindShipment?parentShipmentType=ShpTpIncoming" class="">Purchase <strong>Shipments</strong></a>    <i class="fa left">
+    </i><!-- CONTAINER OVERRIDE EXAMPLE -->
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+<div class="text-inline">&nbsp;</div>
+    <div class="diagram-sequence-item">
+            <a href="http://127.0.0.1:18091/apps/marble/Accounting/Invoice/FindInvoice?invoiceType=Payable" class="">Payable <strong>Invoices</strong></a>    <i class="fa left">
+    </i><!-- CONTAINER OVERRIDE EXAMPLE -->
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    <div class="diagram-sequence-item">
+            <a href="http://127.0.0.1:18091/apps/marble/Accounting/Invoice/FindInvoice?invoiceTypeEnumId=InvoiceCreditMemo&amp;invoiceType=Receivable" class="">Supplier Credit Memos</a>    <i class="fa right">
+    </i><!-- CONTAINER OVERRIDE EXAMPLE -->
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    <div class="diagram-sequence-item">
+            <a href="http://127.0.0.1:18091/apps/marble/Accounting/Payment/FindPayment?paymentTypeEnumId=PtInvoicePayment&amp;paymentType=Outgoing" class="">Supplier <strong>Payments</strong></a>    <i class="fa right">
+    </i><!-- CONTAINER OVERRIDE EXAMPLE -->
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+<div class="text-inline">&nbsp;</div>
+    <div class="diagram-sequence-item smaller">
+    <div>
+            <a href="http://127.0.0.1:18091/apps/marble/Return/FindReturn?returnType=Supplier" class="">Purchase Returns</a>    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    <i class="fa right">
+    </i><!-- CONTAINER OVERRIDE EXAMPLE -->
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    <div class="diagram-sequence-item smaller">
+    <div>
+            <a href="http://127.0.0.1:18091/apps/marble/Shipment/FindShipment?shipmentTypeEnumId=ShpTpPurchaseReturn" class="">Supplier Return Shipments</a>    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    <i class="fa right">
+    </i><!-- CONTAINER OVERRIDE EXAMPLE -->
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    <div class="diagram-sequence-item smaller">
+            <a href="http://127.0.0.1:18091/apps/marble/Accounting/Invoice/FindInvoice?invoiceTypeEnumId=InvoiceReturn&amp;invoiceType=Receivable" class="">Receivable Return Invoices</a>    <i class="fa right">
+    </i><!-- CONTAINER OVERRIDE EXAMPLE -->
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    <div class="diagram-sequence-item smaller">
+            <a href="http://127.0.0.1:18091/apps/marble/Accounting/Payment/FindPayment?paymentTypeEnumId=PtRefund&amp;paymentType=Incoming" class="">Incoming Refund Payments</a>    <i class="fa left">
+    </i><!-- CONTAINER OVERRIDE EXAMPLE -->
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+            </div>
+    </div>
+    <!-- END   screen[@location=component://MarbleERP/screen/marble/dashboard.xml].widgets -->
+
+    <!-- END   screen[@location=component://MarbleERP/screen/marble.xml].widgets -->
+
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    <!-- BEGIN section[@name=BottomNavSection] -->
+        <!-- BEGIN screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+    <div id="footer" class="bg-dark">
+        <!-- BEGIN render-mode.text[inline][@template=true] -->
+                <div id="apps-footer-content">
+<p><a href="https://www.moqui.org/" target="_blank">Built on Moqui Framework 4.0.0</a></p><p><a href="/vapps/ScreenTree">Site Map</a></p>                </div>        <!-- END   render-mode.text[inline][@template=true] -->
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    <!-- END   screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+
+    <!-- END   section[@name=BottomNavSection] -->
+    <!-- END   screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+        
+
+
+
+
+        
+        
+        
+    
+</body></html>

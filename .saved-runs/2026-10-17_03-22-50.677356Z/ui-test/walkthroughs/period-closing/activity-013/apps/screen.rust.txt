@@ -1,0 +1,75 @@
+Application 
+Marble ERP 
+Accounting 
+Dashboard
+ 0  0  0  0
+ Organization
+Invoices and Payments
+Invoices Aging Payments Bulk Checks Financial Accounts
+General Ledger
+Reports
+Transactions Transaction Entries GL Accounts GL Journals Time Periods Budgets
+Internal Organization
+	
+Receivable
+	
+Payable
+	
+Bank Accounts
+	
+Settings
+
+
+Ziziwork Human Resources
+	
+None
+	
+None
+	
+	
+Settings
+
+
+Ziziwork Industries
+	
+None
+	
+None
+	
+	
+Settings
+
+
+Ziziwork Retail & Wholesale
+	
+None
+	
+None
+	
+Demo Bank Account
+	
+Settings
+
+
+Ziziwork Sales
+	
+None
+	
+None
+	
+	
+Settings
+
+
+Ziziwork Services
+	
+None
+	
+None
+	
+	
+Settings
+
+Built on Moqui Framework 0.1.0
+
+Site Map

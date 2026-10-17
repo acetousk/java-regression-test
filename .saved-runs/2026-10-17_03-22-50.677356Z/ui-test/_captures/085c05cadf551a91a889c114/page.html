@@ -1,0 +1,865 @@
+<!DOCTYPE html><html><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    
+    <title>Payment Method - Files</title>
+    <link rel="apple-touch-icon" href="/MoquiLogo100.png">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="http://127.0.0.1:18091/css/webroot-layout.css?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="http://127.0.0.1:18091/css/webroot-theme.css?v=1a147e2" rel="stylesheet" type="text/css">
+    <script src="#?v=1a147e2" type="text/javascript"></script>
+    <script src="#?v=1a147e2" type="text/javascript"></script>
+    <script src="#?v=1a147e2" type="text/javascript"></script>
+    <link rel="shortcut icon" href="http://127.0.0.1:18091/favicon.ico">
+</head>
+<body class="dev bg-light PaymentMethodFiles">
+        
+        
+        
+        
+    <!-- BEGIN screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+        <!-- BEGIN render-mode.text[inline][@template=true] -->
+<script>var notificationClient = new moqui.NotificationClient((location.protocol === 'https:' ? 'wss' : 'ws') + "://127.0.0.1:18091/notws");</script>        <!-- END   render-mode.text[inline][@template=true] -->
+    <!-- BEGIN section[@name=TopNavSection] -->
+        <!-- BEGIN screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+    <div id="top">
+        <!-- BEGIN render-mode.text[@location=component://webroot/screen/includes/navbar.html.ftl][@template=true] -->
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <header class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a href="http://127.0.0.1:18091/apps/AppList" class="navbar-brand"><img src="http://127.0.0.1:18091/images/MoquiLogoSmall.png" alt="Home"></a>
+        
+    </header>
+    <div id="navbar-buttons" class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul id="header-menus" class="nav navbar-nav">
+        </ul>
+        <div id="navbar-menu-crumbs">
+        </div>
+        <a class="navbar-text" href="http://127.0.0.1:18091/apps/marble/Party/PaymentMethod/PaymentMethodFiles?paymentMethodId=ZIRET_BA&amp;partyId=ORG_ZIZI_RETAIL">Files</a>
+        <a href="http://127.0.0.1:18091/Login/logout" data-toggle="tooltip" data-original-title="Logout John Doe" data-placement="bottom" class="btn btn-danger btn-sm navbar-btn navbar-right">
+            <i class="fa fa-power-off"></i>
+        </a>
+        <a href="#" onclick="switchDarkLight();" data-toggle="tooltip" data-original-title="Switch Dark/Light" data-placement="bottom" class="btn btn-default btn-sm navbar-btn navbar-right">
+            <i class="fa fa-adjust"></i>
+        </a>
+
+<div class="btn-group navbar-right">
+    <a href="/apps/my/User/Notifications" data-toggle="tooltip" data-container="body" data-original-title="Notifications" data-placement="bottom" class="btn btn-default btn-sm navbar-btn">
+        <i class="fa fa-info-circle"></i>
+        <span id="navbar_notification_count" class="label label-info">0</span>
+    </a>
+    <a href="/apps/my/User/Messages/FindMessage?statusId=CeReceived&amp;toPartyId=EX_JOHN_DOE" data-toggle="tooltip" data-container="body" data-original-title="Messages" data-placement="bottom" class="btn btn-default btn-sm navbar-btn">
+        <i class="fa fa-envelope"></i>
+        <span class="label label-warning">0</span>
+    </a>
+    <a href="/apps/my/User/Calendar/MyCalendar" data-toggle="tooltip" data-container="body" data-original-title="Events This Week" data-placement="bottom" class="btn btn-default btn-sm navbar-btn">
+        <i class="fa fa-calendar"></i>
+        <span class="label label-primary">0</span>
+    </a>
+    <a href="/apps/my/User/Task/MyTasks" data-toggle="tooltip" data-container="body" data-original-title="Open Tasks" data-placement="bottom" class="btn btn-default btn-sm navbar-btn">
+        <i class="fa fa-check"></i>
+        <span class="label label-success">0</span>
+    </a>
+</div>
+    <script>
+        var navbarNotificationListener = function(jsonObj, webSocket) {
+            if (jsonObj && jsonObj.persistOnSend === true) {
+                var countElement = $("#navbar_notification_count");
+                countElement.text((parseInt(countElement.text()) + 1).toString());
+            }
+            notificationClient.displayNotify(jsonObj, webSocket);
+        };
+        notificationClient.registerListener("ALL", navbarNotificationListener);
+    </script>
+        <div id="history-menu" class="nav navbar-right dropdown">
+            <a id="history-menu-link" href="#" class="dropdown-toggle btn btn-default btn-sm navbar-btn" data-toggle="dropdown" title="History">
+                <i class="fa fa-list"></i></a>
+            <ul class="dropdown-menu">
+                <li><a href="http://127.0.0.1:18091/apps/marble/dashboard">
+                            <i class="fa fa-dashboard" style="padding-right: 8px;"></i>
+                    Marble ERP - Dashboard
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Accounting/Payment/FindPayment">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Accounting.png" alt="Payments - Find Payment" height="18" style="padding-right: 4px;">
+                    Payments - Find Payment
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Accounting/dashboard">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Accounting.png" alt="Accounting - Dashboard" height="18" style="padding-right: 4px;">
+                    Accounting - Dashboard
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Party/FindParty?roleTypeId=OrgInternal">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Parties.png" alt="Parties - Find Party (OrgInternal)" height="18" style="padding-right: 4px;">
+                    Parties - Find Party (OrgInternal)
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/dashboard">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/vapps/marble/dashboard">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Shipment/FindShipment?shipmentTypeEnumId=ShpTpPurchase">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications (ShpTpPurchase)
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/vapps/marble/Shipment/FindShipment?shipmentTypeEnumId=ShpTpPurchase">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications (ShpTpPurchase)
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Shipment/FindShipment?shipmentTypeEnumId=ShpTpPurchase">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Shipping.png" alt="Shipments - Find Shipments (ShpTpPurchase)" height="18" style="padding-right: 4px;">
+                    Shipments - Find Shipments (ShpTpPurchase)
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Request/FindRequest">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/vapps/marble/Request/FindRequest">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Request/FindRequest">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Request.png" alt="Requests - Find Request" height="18" style="padding-right: 4px;">
+                    Requests - Find Request
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Catalog/Product/FindProduct">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/vapps/marble/Catalog/Product/FindProduct">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Catalog/Product/FindProduct">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Catalog.png" alt="Products - Find Product" height="18" style="padding-right: 4px;">
+                    Products - Find Product
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Asset/Asset/FindSummary">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/vapps/marble/Asset/Asset/FindSummary">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Asset/Asset/FindSummary">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Asset.png" alt="Asset - Find Summary" height="18" style="padding-right: 4px;">
+                    Asset - Find Summary
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Asset/PhysicalInventory/FindPhysicalInventory">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/vapps/marble/Asset/PhysicalInventory/FindPhysicalInventory">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Asset/PhysicalInventory/FindPhysicalInventory">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Asset.png" alt="Physical Inventory - Find Physical Inventory" height="18" style="padding-right: 4px;">
+                    Physical Inventory - Find Physical Inventory
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Return/FindReturn?returnType=Customer">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications (Customer)
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/vapps/marble/Return/FindReturn?returnType=Customer">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications (Customer)
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Return/FindReturn?returnType=Customer">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Return.png" alt="Returns - Returns (Customer)" height="18" style="padding-right: 4px;">
+                    Returns - Returns (Customer)
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Shipping/dashboard">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            </ul>
+        </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+    $('.navbar [data-toggle="tooltip"]').tooltip({ placement:'bottom', trigger:'hover' });
+    $('#history-menu-link').tooltip({ placement:'bottom', trigger:'hover' });
+    $('#document-menu-link').tooltip({ placement:'bottom', trigger:'hover' });
+    function switchDarkLight() {
+        $("body").toggleClass("bg-dark");
+        $("body").toggleClass("bg-light");
+        var currentStyle = $("body").hasClass("bg-dark") ? "bg-dark" : "bg-light";
+        $.ajax({ type:'POST', url:'http://127.0.0.1:18091/apps/setPreference', data:{ 'moquiSessionToken': '[REDACTED]','preferenceKey': 'OUTER_STYLE', 'preferenceValue': currentStyle }, dataType:'json' });
+    }
+</script>
+
+        <!-- END   render-mode.text[@location=component://webroot/screen/includes/navbar.html.ftl][@template=true] -->
+        <!-- BEGIN render-mode.text[inline][@template=true] -->
+        <!-- END   render-mode.text[inline][@template=true] -->
+        <li id="header-menu" class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Application <i class="fa fa-chevron-right"></i></a>
+            <ul class="dropdown-menu">
+                        <li class="active"><a href="http://127.0.0.1:18091/apps/marble/dashboard"><i class="fa fa-cogs" style="padding-right: 8px;"></i>Marble ERP</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/my"><i class="fa fa-user" style="padding-right: 8px;"></i>My Account</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/system"><i class="fa fa-cog" style="padding-right: 8px;"></i>System</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/tools"><i class="fa fa-wrench" style="padding-right: 8px;"></i>Tools</a></li>
+            </ul>
+        </li>
+        <script>$("#header-menus").append($("#header-menu"));</script>
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    <!-- END   screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+
+    <!-- END   section[@name=TopNavSection] -->
+    <div id="content">
+    <div class="inner">
+    <div class="container-fluid">
+    <!-- BEGIN section[@name=MessagesSection] -->
+        <!-- BEGIN screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+    <!-- BEGIN section-iterate[@name=headerMessageInfos] -->
+    
+    <!-- END   section-iterate[@name=headerMessageInfos] -->
+    <!-- BEGIN section-iterate[@name=headerErrors] -->
+    
+    <!-- END   section-iterate[@name=headerErrors] -->
+    <!-- BEGIN section-iterate[@name=headerValidationErrors] -->
+    
+    <!-- END   section-iterate[@name=headerValidationErrors] -->
+    <!-- BEGIN section-iterate[@name=headerSavedMessages] -->
+    
+    <!-- END   section-iterate[@name=headerSavedMessages] -->
+    <!-- BEGIN section-iterate[@name=headerSavedErrors] -->
+    
+    <!-- END   section-iterate[@name=headerSavedErrors] -->
+    <!-- BEGIN section-iterate[@name=headerSavedValidationErrors] -->
+    
+    <!-- END   section-iterate[@name=headerSavedValidationErrors] -->
+    <!-- END   screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+
+    <!-- END   section[@name=MessagesSection] -->
+        <!-- BEGIN screen[@location=component://MarbleERP/screen/marble.xml].widgets -->
+    <!-- BEGIN section[@name=OrgChooserSection] -->
+        <!-- BEGIN screen[@location=component://MarbleERP/screen/marble.xml].widgets -->
+        <!-- BEGIN render-mode.text[inline][@template=true] -->
+<div id="active-org-menu" class="nav navbar-right dropdown">
+                <a id="active-org-menu-link" href="#" class="dropdown-toggle btn btn-default btn-sm navbar-btn" data-toggle="dropdown" title="Organization">
+                    <i class="fa fa-globe"></i> </a>
+                <ul class="dropdown-menu">
+                        <li><a href="http://127.0.0.1:18091/apps/setPrefGoLast?preferenceKey=ACTIVE_ORGANIZATION&amp;preferenceValue=ORG_ZIZI_RETAIL">ZIRET: Ziziwork Retail &amp; Wholesale</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/setPrefGoLast?preferenceKey=ACTIVE_ORGANIZATION&amp;preferenceValue=ORG_ZIZI_SERVICES">ZISER: Ziziwork Services</a></li>
+                </ul>
+            </div>
+            <script>$("#navbar-buttons").append($("#active-org-menu")); $('#active-org-menu-link').tooltip({ placement:'bottom', trigger:'hover' });</script>        <!-- END   render-mode.text[inline][@template=true] -->
+    <!-- END   screen[@location=component://MarbleERP/screen/marble.xml].widgets -->
+
+    <!-- END   section[@name=OrgChooserSection] -->
+        <li id="MarbleErpPanel-menu" class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Marble ERP <i class="fa fa-chevron-right"></i></a>
+            <ul class="dropdown-menu">
+                        <li><a href="http://127.0.0.1:18091/apps/marble/dashboard"><i class="fa fa-dashboard" style="padding-right: 8px;"></i>Dashboard</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/QuickSearch"><i class="fa fa-search" style="padding-right: 8px;"></i>Quick Search</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Accounting/dashboard"><img src="http://127.0.0.1:18091/ssstatic/images/Accounting.png" alt="Accounting" height="18" style="padding-right: 4px;">Accounting</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Asset/dashboard"><img src="http://127.0.0.1:18091/ssstatic/images/Asset.png" alt="Asset" height="18" style="padding-right: 4px;">Asset</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Catalog/dashboard"><img src="http://127.0.0.1:18091/ssstatic/images/Catalog.png" alt="Catalog" height="18" style="padding-right: 4px;">Catalog</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Customer/FindCustomer"><img src="http://127.0.0.1:18091/ssstatic/images/Customer.png" alt="Customers" height="18" style="padding-right: 4px;">Customers</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Facility/FindFacility"><img src="http://127.0.0.1:18091/ssstatic/images/Facility.png" alt="Facility" height="18" style="padding-right: 4px;">Facility</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/HumanRes/dashboard"><i class="fa fa-user-plus" style="padding-right: 8px;"></i>Human Resources</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Manufacturing/dashboard"><i class="fa fa-industry" style="padding-right: 8px;"></i>Manufacturing</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Order/FindOrder"><img src="http://127.0.0.1:18091/ssstatic/images/Sales.png" alt="Orders" height="18" style="padding-right: 4px;">Orders</a></li>
+                        <li class="active"><a href="http://127.0.0.1:18091/apps/marble/Party/FindParty"><img src="http://127.0.0.1:18091/ssstatic/images/Parties.png" alt="Parties" height="18" style="padding-right: 4px;">Parties</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Project/FindProject"><img src="http://127.0.0.1:18091/ssstatic/images/project-business120.png" alt="Projects" height="18" style="padding-right: 4px;">Projects</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Request/FindRequest"><img src="http://127.0.0.1:18091/ssstatic/images/Request.png" alt="Requests" height="18" style="padding-right: 4px;">Requests</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Return/FindReturn"><img src="http://127.0.0.1:18091/ssstatic/images/Return.png" alt="Returns" height="18" style="padding-right: 4px;">Returns</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Shipment/FindShipment"><img src="http://127.0.0.1:18091/ssstatic/images/Shipping.png" alt="Shipments" height="18" style="padding-right: 4px;">Shipments</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Shipping/dashboard"><img src="http://127.0.0.1:18091/ssstatic/images/Picking.png" alt="Shipping" height="18" style="padding-right: 4px;">Shipping</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/ProductStore/FindProductStore"><img src="http://127.0.0.1:18091/ssstatic/images/ProductStore.png" alt="Stores" height="18" style="padding-right: 4px;">Stores</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Supplier/FindSupplier"><img src="http://127.0.0.1:18091/ssstatic/images/Supplier.png" alt="Suppliers" height="18" style="padding-right: 4px;">Suppliers</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Survey/FindSurvey"><i class="fa fa-pencil-square-o" style="padding-right: 8px;"></i>Survey</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Task/FindTask"><img src="http://127.0.0.1:18091/ssstatic/images/task-homework.png" alt="Tasks" height="18" style="padding-right: 4px;">Tasks</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Wiki/WikiSpaces"><img src="http://127.0.0.1:18091/ssstatic/images/Wiki.png" alt="Wiki/Content" height="18" style="padding-right: 4px;">Wiki/Content</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/QuickViewReport"><i class="fa fa-database" style="padding-right: 8px;"></i>Custom Reports</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/SimpleReport/FindReport"><i class="fa fa-database" style="padding-right: 8px;"></i>Report Builder</a></li>
+            </ul>
+        </li>
+        <script>$("#header-menus").append($("#MarbleErpPanel-menu"));</script>
+            <!-- BEGIN screen[@location=component://SimpleScreens/screen/SimpleScreens/Party.xml].widgets -->
+<strong class="text-inline">ZIRET: Ziziwork Retail &amp; Wholesale</strong>
+        <div id="PartyPanel-tabpanel">
+                <a id="PartyPanel-menu-crumb" class="navbar-text" href="http://127.0.0.1:18091/apps/marble/Party/FindParty">Parties <i class="fa fa-chevron-right"></i></a>
+                <script>$("#navbar-menu-crumbs").append($("#PartyPanel-menu-crumb"));</script>
+                <!-- BEGIN screen[@location=component://SimpleScreens/screen/SimpleScreens/Party/PaymentMethod.xml].widgets -->
+        <div id="PaymentMethodPanel-tabpanel">
+                    <ul id="PaymentMethodPanel-menu" class="nav nav-tabs" role="tablist">
+                            <li class=""><a href="http://127.0.0.1:18091/apps/marble/Party/PaymentMethod/EditPaymentMethod?paymentMethodId=ZIRET_BA&amp;partyId=ORG_ZIZI_RETAIL">Payment Method</a></li>
+                            <li class=""><a href="http://127.0.0.1:18091/apps/marble/Party/PaymentMethod/PaymentMethodTrans?paymentMethodId=ZIRET_BA&amp;partyId=ORG_ZIZI_RETAIL">Transactions</a></li>
+                            <li class=""><a href="http://127.0.0.1:18091/apps/marble/Party/PaymentMethod/PaymentMethodChecks?paymentMethodId=ZIRET_BA&amp;partyId=ORG_ZIZI_RETAIL">Checks</a></li>
+                            <li class="active"><a href="http://127.0.0.1:18091/apps/marble/Party/PaymentMethod/PaymentMethodFiles?paymentMethodId=ZIRET_BA&amp;partyId=ORG_ZIZI_RETAIL">Files</a></li>
+                            <li class=""><a href="http://127.0.0.1:18091/apps/marble/Party/PaymentMethod/PaymentGatewayResponses?paymentMethodId=ZIRET_BA&amp;partyId=ORG_ZIZI_RETAIL">Gateway Responses</a></li>
+                    </ul>
+                <a id="PaymentMethodPanel-menu-crumb" class="navbar-text" href="http://127.0.0.1:18091/apps/marble/Party/PaymentMethod/EditPaymentMethod">Payment Method <i class="fa fa-chevron-right"></i></a>
+                <script>$("#navbar-menu-crumbs").append($("#PaymentMethodPanel-menu-crumb"));</script>
+                <!-- BEGIN screen[@location=component://SimpleScreens/screen/SimpleScreens/Party/PaymentMethod/PaymentMethodFiles.xml].widgets -->
+    <!-- BEGIN section[@name=GenerateNachaSection] -->
+        <!-- BEGIN screen[@location=component://SimpleScreens/screen/SimpleScreens/Party/PaymentMethod/PaymentMethodFiles.xml].widgets -->
+        <button id="GenerateNachaFileDialog-button" type="button" data-toggle="modal" data-target="#GenerateNachaFileDialog" data-original-title="Generate NACHA File" data-placement="bottom" class="btn btn-primary btn-sm "><i class="fa fa-share"></i> Generate NACHA File</button>
+
+        <div id="GenerateNachaFileDialog" class="modal container-dialog" aria-hidden="true" style="display: none;" tabindex="-1">
+            <div class="modal-dialog" style="width: 760px;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">Generate NACHA File</h4>
+                    </div>
+                    <div class="modal-body">
+    <!-- BEGIN form-single[@name=GenerateNachaFile] -->
+    <form name="GenerateNachaFile" id="GenerateNachaFile" method="post" action="http://127.0.0.1:18091/apps/marble/Party/PaymentMethod/PaymentMethodFiles/generateNachaFile">
+        <input type="hidden" name="moquiFormName" value="GenerateNachaFile" style="">
+        <input type="hidden" name="moquiSessionToken" value="[REDACTED]" style="">
+        
+        <fieldset class="form-horizontal">
+    <input type="hidden" name="paymentMethodId" value="ZIRET_BA" id="GenerateNachaFile_paymentMethodId" style="">
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="GenerateNachaFile_fromDate">From Date</label>
+            <div class="col-sm-10">
+    
+
+
+
+        <div class="input-group date" id="GenerateNachaFile_fromDate">
+            <input type="text" class="form-control" name="fromDate" value="" size="16" maxlength="23" style="">
+            <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+        </div>
+        <script>
+            $('#GenerateNachaFile_fromDate').datetimepicker({toolbarPlacement:'top', showClose:true, showClear:true, showTodayButton:true,
+                useStrict:true, defaultDate: '' && moment('','YYYY-MM-DD HH:mm'),
+                format:'YYYY-MM-DD HH:mm', extraFormats:['YYYY-MM-DD HH:mm', 'YYYY-MM-DD HH:mm:ss', 'MM/DD/YYYY HH:mm'], stepping:5, locale:"en-US",
+                keyBinds: {t: function() {this.date(moment());}, up: function () { this.date(this.date().clone().add(1, 'd')); }, down: function () { this.date(this.date().clone().subtract(1, 'd')); }, 'control up': function () { this.date(this.date().clone().add(1, 'd')); }, 'control down': function () { this.date(this.date().clone().subtract(1, 'd')); }}});
+            $('#GenerateNachaFile_fromDate').on("dp.change", function() { var jqEl = $('#GenerateNachaFile_fromDate'); jqEl.val(jqEl.find("input").first().val()); jqEl.trigger("change"); });
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="GenerateNachaFile_thruDate">Thru Date</label>
+            <div class="col-sm-10">
+    
+
+
+
+        <div class="input-group date" id="GenerateNachaFile_thruDate">
+            <input type="text" class="form-control" name="thruDate" value="" size="16" maxlength="23" style="">
+            <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+        </div>
+        <script>
+            $('#GenerateNachaFile_thruDate').datetimepicker({toolbarPlacement:'top', showClose:true, showClear:true, showTodayButton:true,
+                useStrict:true, defaultDate: '' && moment('','YYYY-MM-DD HH:mm'),
+                format:'YYYY-MM-DD HH:mm', extraFormats:['YYYY-MM-DD HH:mm', 'YYYY-MM-DD HH:mm:ss', 'MM/DD/YYYY HH:mm'], stepping:5, locale:"en-US",
+                keyBinds: {t: function() {this.date(moment());}, up: function () { this.date(this.date().clone().add(1, 'd')); }, down: function () { this.date(this.date().clone().subtract(1, 'd')); }, 'control up': function () { this.date(this.date().clone().add(1, 'd')); }, 'control down': function () { this.date(this.date().clone().subtract(1, 'd')); }}});
+            $('#GenerateNachaFile_thruDate').on("dp.change", function() { var jqEl = $('#GenerateNachaFile_thruDate'); jqEl.val(jqEl.find("input").first().val()); jqEl.trigger("change"); });
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="GenerateNachaFile_fileDate">File Date</label>
+            <div class="col-sm-10">
+    
+
+
+
+        <div class="input-group date" id="GenerateNachaFile_fileDate">
+            <input type="text" class="form-control" name="fileDate" value="2026-10-16 22:26" size="16" maxlength="23" style="">
+            <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+        </div>
+        <script>
+            $('#GenerateNachaFile_fileDate').datetimepicker({toolbarPlacement:'top', showClose:true, showClear:true, showTodayButton:true,
+                useStrict:true, defaultDate: '2026-10-16 22:26' && moment('2026-10-16 22:26','YYYY-MM-DD HH:mm'),
+                format:'YYYY-MM-DD HH:mm', extraFormats:['YYYY-MM-DD HH:mm', 'YYYY-MM-DD HH:mm:ss', 'MM/DD/YYYY HH:mm'], stepping:5, locale:"en-US",
+                keyBinds: {t: function() {this.date(moment());}, up: function () { this.date(this.date().clone().add(1, 'd')); }, down: function () { this.date(this.date().clone().subtract(1, 'd')); }, 'control up': function () { this.date(this.date().clone().add(1, 'd')); }, 'control down': function () { this.date(this.date().clone().subtract(1, 'd')); }}});
+            $('#GenerateNachaFile_fileDate').on("dp.change", function() { var jqEl = $('#GenerateNachaFile_fileDate'); jqEl.val(jqEl.find("input").first().val()); jqEl.trigger("change"); });
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="GenerateNachaFile_effectiveEntryDate">Effective Entry Date</label>
+            <div class="col-sm-10">
+    
+
+
+
+        <div class="input-group date" id="GenerateNachaFile_effectiveEntryDate">
+            <input type="text" class="form-control" name="effectiveEntryDate" value="" size="10" maxlength="10" data-toggle="tooltip" title="Transaction settle/post date. Defaults to next week day after File Date." style="">
+            <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+        </div>
+        <script>
+            $('#GenerateNachaFile_effectiveEntryDate').datetimepicker({toolbarPlacement:'top', showClose:true, showClear:true, showTodayButton:true,
+                useStrict:true, defaultDate: '' && moment('','YYYY-MM-DD'),
+                format:'YYYY-MM-DD', extraFormats:['l', 'L', 'YYYY-MM-DD'], stepping:5, locale:"en-US",
+                keyBinds: {t: function() {this.date(moment());}, up: function () { this.date(this.date().clone().add(1, 'd')); }, down: function () { this.date(this.date().clone().subtract(1, 'd')); }, 'control up': function () { this.date(this.date().clone().add(1, 'd')); }, 'control down': function () { this.date(this.date().clone().subtract(1, 'd')); }}});
+            $('#GenerateNachaFile_effectiveEntryDate').on("dp.change", function() { var jqEl = $('#GenerateNachaFile_effectiveEntryDate'); jqEl.val(jqEl.find("input").first().val()); jqEl.trigger("change"); });
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="GenerateNachaFile_nachaEntryDescription">NACHA Entry Description</label>
+            <div class="col-sm-10">
+    
+<input id="GenerateNachaFile_nachaEntryDescription" type="text" name="nachaEntryDescription" value="Operations" size="10" maxlength="10" class="form-control" style="">
+        
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <div class="col-sm-2 hidden-xs">&nbsp;</div>
+            <div class="col-sm-10">
+    
+    <button type="submit" name="submitButton" value="submitButton" id="GenerateNachaFile_submitButton" class="btn btn-primary btn-sm">
+Generate    </button>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        </fieldset>
+    </form>
+        <script>
+            $("#GenerateNachaFile").validate({ errorClass: 'help-block', errorElement: 'span',
+                highlight: function(element, errorClass, validClass) { $(element).parents('.form-group').removeClass('has-success').addClass('has-error'); },
+                unhighlight: function(element, errorClass, validClass) { $(element).parents('.form-group').removeClass('has-error').addClass('has-success'); }
+            });
+            $('#GenerateNachaFile [data-toggle="tooltip"]').tooltip({placement:'auto top'});
+
+        </script>
+    <!-- END   form-single[@name=GenerateNachaFile] -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>$('#GenerateNachaFileDialog').on('shown.bs.modal', function() {
+            $("#GenerateNachaFileDialog :not(.noResetSelect2)>select:not(.noResetSelect2)").select2({ });
+            var defFocus = $("#GenerateNachaFileDialog .default-focus");
+            if (defFocus.length) { defFocus.focus(); } else { $("#GenerateNachaFileDialog form :input:visible:first").focus(); }
+        });</script>
+    <!-- END   screen[@location=component://SimpleScreens/screen/SimpleScreens/Party/PaymentMethod/PaymentMethodFiles.xml].widgets -->
+
+    <!-- END   section[@name=GenerateNachaSection] -->
+    <!-- BEGIN section[@name=GeneratePosPaySection] -->
+        <!-- BEGIN screen[@location=component://SimpleScreens/screen/SimpleScreens/Party/PaymentMethod/PaymentMethodFiles.xml].widgets -->
+        <button id="GeneratePosPayFileDialog-button" type="button" data-toggle="modal" data-target="#GeneratePosPayFileDialog" data-original-title="Generate Pos. Pay File" data-placement="bottom" class="btn btn-primary btn-sm "><i class="fa fa-share"></i> Generate Pos. Pay File</button>
+
+        <div id="GeneratePosPayFileDialog" class="modal container-dialog" aria-hidden="true" style="display: none;" tabindex="-1">
+            <div class="modal-dialog" style="width: 760px;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">Generate Pos. Pay File</h4>
+                    </div>
+                    <div class="modal-body">
+    <!-- BEGIN form-single[@name=GeneratePosPayFile] -->
+    <form name="GeneratePosPayFile" id="GeneratePosPayFile" method="post" action="http://127.0.0.1:18091/apps/marble/Party/PaymentMethod/PaymentMethodFiles/generatePosPayFile">
+        <input type="hidden" name="moquiFormName" value="GeneratePosPayFile" style="">
+        <input type="hidden" name="moquiSessionToken" value="[REDACTED]" style="">
+        
+        <fieldset class="form-horizontal">
+    <input type="hidden" name="paymentMethodId" value="ZIRET_BA" id="GeneratePosPayFile_paymentMethodId" style="">
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="GeneratePosPayFile_fromDate">From Date</label>
+            <div class="col-sm-10">
+    
+
+
+
+        <div class="input-group date" id="GeneratePosPayFile_fromDate">
+            <input type="text" class="form-control" name="fromDate" value="" size="16" maxlength="23" style="">
+            <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+        </div>
+        <script>
+            $('#GeneratePosPayFile_fromDate').datetimepicker({toolbarPlacement:'top', showClose:true, showClear:true, showTodayButton:true,
+                useStrict:true, defaultDate: '' && moment('','YYYY-MM-DD HH:mm'),
+                format:'YYYY-MM-DD HH:mm', extraFormats:['YYYY-MM-DD HH:mm', 'YYYY-MM-DD HH:mm:ss', 'MM/DD/YYYY HH:mm'], stepping:5, locale:"en-US",
+                keyBinds: {t: function() {this.date(moment());}, up: function () { this.date(this.date().clone().add(1, 'd')); }, down: function () { this.date(this.date().clone().subtract(1, 'd')); }, 'control up': function () { this.date(this.date().clone().add(1, 'd')); }, 'control down': function () { this.date(this.date().clone().subtract(1, 'd')); }}});
+            $('#GeneratePosPayFile_fromDate').on("dp.change", function() { var jqEl = $('#GeneratePosPayFile_fromDate'); jqEl.val(jqEl.find("input").first().val()); jqEl.trigger("change"); });
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="GeneratePosPayFile_thruDate">Thru Date</label>
+            <div class="col-sm-10">
+    
+
+
+
+        <div class="input-group date" id="GeneratePosPayFile_thruDate">
+            <input type="text" class="form-control" name="thruDate" value="" size="16" maxlength="23" style="">
+            <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+        </div>
+        <script>
+            $('#GeneratePosPayFile_thruDate').datetimepicker({toolbarPlacement:'top', showClose:true, showClear:true, showTodayButton:true,
+                useStrict:true, defaultDate: '' && moment('','YYYY-MM-DD HH:mm'),
+                format:'YYYY-MM-DD HH:mm', extraFormats:['YYYY-MM-DD HH:mm', 'YYYY-MM-DD HH:mm:ss', 'MM/DD/YYYY HH:mm'], stepping:5, locale:"en-US",
+                keyBinds: {t: function() {this.date(moment());}, up: function () { this.date(this.date().clone().add(1, 'd')); }, down: function () { this.date(this.date().clone().subtract(1, 'd')); }, 'control up': function () { this.date(this.date().clone().add(1, 'd')); }, 'control down': function () { this.date(this.date().clone().subtract(1, 'd')); }}});
+            $('#GeneratePosPayFile_thruDate').on("dp.change", function() { var jqEl = $('#GeneratePosPayFile_thruDate'); jqEl.val(jqEl.find("input").first().val()); jqEl.trigger("change"); });
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="GeneratePosPayFile_fileDate">File Date</label>
+            <div class="col-sm-10">
+    
+
+
+
+        <div class="input-group date" id="GeneratePosPayFile_fileDate">
+            <input type="text" class="form-control" name="fileDate" value="2026-10-16 22:26" size="16" maxlength="23" style="">
+            <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+        </div>
+        <script>
+            $('#GeneratePosPayFile_fileDate').datetimepicker({toolbarPlacement:'top', showClose:true, showClear:true, showTodayButton:true,
+                useStrict:true, defaultDate: '2026-10-16 22:26' && moment('2026-10-16 22:26','YYYY-MM-DD HH:mm'),
+                format:'YYYY-MM-DD HH:mm', extraFormats:['YYYY-MM-DD HH:mm', 'YYYY-MM-DD HH:mm:ss', 'MM/DD/YYYY HH:mm'], stepping:5, locale:"en-US",
+                keyBinds: {t: function() {this.date(moment());}, up: function () { this.date(this.date().clone().add(1, 'd')); }, down: function () { this.date(this.date().clone().subtract(1, 'd')); }, 'control up': function () { this.date(this.date().clone().add(1, 'd')); }, 'control down': function () { this.date(this.date().clone().subtract(1, 'd')); }}});
+            $('#GeneratePosPayFile_fileDate').on("dp.change", function() { var jqEl = $('#GeneratePosPayFile_fileDate'); jqEl.val(jqEl.find("input").first().val()); jqEl.trigger("change"); });
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <div class="col-sm-2 hidden-xs">&nbsp;</div>
+            <div class="col-sm-10">
+    
+    <button type="submit" name="submitButton" value="submitButton" id="GeneratePosPayFile_submitButton" class="btn btn-primary btn-sm">
+Generate    </button>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        </fieldset>
+    </form>
+        <script>
+            $("#GeneratePosPayFile").validate({ errorClass: 'help-block', errorElement: 'span',
+                highlight: function(element, errorClass, validClass) { $(element).parents('.form-group').removeClass('has-success').addClass('has-error'); },
+                unhighlight: function(element, errorClass, validClass) { $(element).parents('.form-group').removeClass('has-error').addClass('has-success'); }
+            });
+            $('#GeneratePosPayFile [data-toggle="tooltip"]').tooltip({placement:'auto top'});
+
+        </script>
+    <!-- END   form-single[@name=GeneratePosPayFile] -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>$('#GeneratePosPayFileDialog').on('shown.bs.modal', function() {
+            $("#GeneratePosPayFileDialog :not(.noResetSelect2)>select:not(.noResetSelect2)").select2({ });
+            var defFocus = $("#GeneratePosPayFileDialog .default-focus");
+            if (defFocus.length) { defFocus.focus(); } else { $("#GeneratePosPayFileDialog form :input:visible:first").focus(); }
+        });</script>
+    <!-- END   screen[@location=component://SimpleScreens/screen/SimpleScreens/Party/PaymentMethod/PaymentMethodFiles.xml].widgets -->
+
+    <!-- END   section[@name=GeneratePosPaySection] -->
+    <!-- BEGIN form-list[@name=FileList] -->
+
+        <div id="FileList_hdialog" class="modal" aria-hidden="true" style="display: none;" tabindex="-1">
+            <div class="modal-dialog" style="width: 800px;"><div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Find Options</h4>
+                </div>
+                <div class="modal-body">
+                <h4 style="margin-top: 0;">Saved Finds</h4>
+                        <div><form class="form-inline" id="FileList_NewFind" method="post" action="http://127.0.0.1:18091/apps/marble/Party/PaymentMethod/PaymentMethodFiles/formSaveFind">
+                            <input type="hidden" name="moquiSessionToken" value="[REDACTED]" style="">
+                            <input type="hidden" name="formLocation" value="component://SimpleScreens/screen/SimpleScreens/Party/PaymentMethod/PaymentMethodFiles.xml.form_list$FileList" style="">
+                                <input type="hidden" name="paymentMethodId" value="ZIRET_BA" style="">
+                                <input type="hidden" name="partyId" value="ORG_ZIZI_RETAIL" style="">
+                            <div class="form-group">
+                                <label class="sr-only" for="FileList_NewFind_description">Description</label>
+                                <input type="text" class="form-control" size="40" name="_findDescription" id="FileList_NewFind_description" placeholder="Description" style="">
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-sm">Save New Find</button>
+                        </form></div>
+                <h4>Find Parameters</h4>
+                    <form name="FileList_header" id="FileList_header" method="post" action="http://127.0.0.1:18091/apps/marble/Party/PaymentMethod/PaymentMethodFiles">
+                        <input type="hidden" name="moquiSessionToken" value="[REDACTED]" style="">
+                        
+                        <input type="hidden" name="paymentMethodId" value="ZIRET_BA" style="">
+                        <fieldset class="form-horizontal">
+                            <div class="form-group"><div class="col-sm-2">&nbsp;</div><div class="col-sm-10">
+                                <button type="button" class="btn btn-primary btn-sm" onclick="FileList_header_clearForm()">Clear Parameters</button></div></div>
+
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="FileList_header_orderByField">Order By</label>
+                                <div class="col-sm-10">
+                                    <select name="orderBySelect" id="FileList_header_orderBySelect" multiple="multiple" style="width: 100%;" class="noResetSelect2">
+                                                <option value="paymentMethodFileId">File ID (Asc)</option>
+                                                <option value="-paymentMethodFileId">File ID (Desc)</option>
+                                                <option value="fileTypeEnumId">File Type (Asc)</option>
+                                                <option value="-fileTypeEnumId">File Type (Desc)</option>
+                                                <option value="fileDate">File Date (Asc)</option>
+                                                <option value="-fileDate">File Date (Desc)</option>
+                                                <option value="entryCount">Entry Count (Asc)</option>
+                                                <option value="-entryCount">Entry Count (Desc)</option>
+                                                <option value="debitAmountTotal">Debit Amount Total (Asc)</option>
+                                                <option value="-debitAmountTotal">Debit Amount Total (Desc)</option>
+                                                <option value="creditAmountTotal">Credit Amount Total (Asc)</option>
+                                                <option value="-creditAmountTotal">Credit Amount Total (Desc)</option>
+                                    </select>
+                                    <input type="hidden" id="FileList_header_orderByField" name="orderByField" value="-fileDate" style="">
+                                </div>
+                            </div>
+                            <script>
+                                function FileList_header_clearForm() {
+                                    var jqEl = $("#FileList_header");
+                                    jqEl.find(':radio, :checkbox').removeAttr('checked');
+                                    jqEl.find('textarea, :text, select').val('').trigger('change');
+                                    return false;
+                                }
+                                $("#FileList_header_orderBySelect").selectivity({ positionDropdown: function(dropdownEl, selectEl) { dropdownEl.css("width", "300px"); } })[0].selectivity.filterResults = function(results) {
+                                    // Filter out asc and desc options if anyone selected.
+                                    return results.filter(function(item){return !this._data.some(function(data_item) {return data_item.id.substring(1) === item.id.substring(1);});}, this);
+                                };
+                                    $("#FileList_header_orderBySelect").selectivity("value", ['-fileDate']);
+                                $("div#FileList_header_orderBySelect").on("change", function(evt) {
+                                    if (evt.value) $("#FileList_header_orderByField").val(evt.value.join(","));
+                                });
+                            </script>
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="FileList_header_paymentMethodFileId">File ID</label>
+            <div class="col-sm-10">
+    
+<span class="form-text-find">
+        <input type="hidden" name="paymentMethodFileId_op" value="begins" style="">
+    <input type="text" class="form-control" name="paymentMethodFileId" value="" size="20" id="FileList_header_paymentMethodFileId" style="">
+        <input type="hidden" name="paymentMethodFileId_ic" value="Y" style="">
+</span>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="FileList_header_fileDate">File Date</label>
+            <div class="col-sm-10">
+    
+    <div class="date-period">
+        <select name="fileDate_poffset" id="FileList_header_fileDate_poffset">
+                <option value="">&nbsp;</option>
+            <option value="0">This</option>
+            <option value="-1">Last</option>
+            <option value="1">Next</option>
+            <option value="-2">-2</option>
+            <option value="2">+2</option>
+            <option value="-3">-3</option>
+            <option value="-4">-4</option>
+            <option value="-6">-6</option>
+            <option value="-12">-12</option>
+        </select>
+        <select name="fileDate_period" id="FileList_header_fileDate_period">
+            <option value="">&nbsp;</option>
+            <option value="day">Day</option>
+            <option value="7d">7 Days</option>
+            <option value="30d">30 Days</option>
+            <option value="week">Week</option>
+            <option value="weeks">Weeks</option>
+            <option value="month">Month</option>
+            <option value="months">Months</option>
+            <option value="quarter">Quarter</option>
+            <option value="year">Year</option>
+            <option value="7r">+/-7d</option>
+            <option value="30r">+/-30d</option>
+        </select>
+        <div class="input-group date" id="FileList_header_fileDate_pdate">
+            <input type="text" class="form-control" name="fileDate_pdate" value="" size="10" maxlength="10" style="">
+            <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+        </div>
+        <script>
+            $("#FileList_header_fileDate_poffset").select2({ }); $("#FileList_header_fileDate_period").select2({ });
+            $('#FileList_header_fileDate_pdate').datetimepicker({toolbarPlacement:'top', showClose:true, showClear:true, showTodayButton:true, useStrict:true, defaultDate: '' && moment('','YYYY-MM-DD'), format:'YYYY-MM-DD', extraFormats:['l', 'L', 'YYYY-MM-DD'], locale:"en-US", keyBinds: {t: function() {this.date(moment());}, up: function () { this.date(this.date().clone().add(1, 'd')); }, down: function () { this.date(this.date().clone().subtract(1, 'd')); }, 'control up': function () { this.date(this.date().clone().add(1, 'd')); }, 'control down': function () { this.date(this.date().clone().subtract(1, 'd')); }}});
+        </script>
+    </div>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="FileList_header_debitAmountTotal">Debit Amount Total</label>
+            <div class="col-sm-10">
+    
+<span class="form-range-find">
+    <span>From&nbsp;</span><input type="text" class="form-control" name="debitAmountTotal_from" value="" size="10" id="FileList_header_debitAmountTotal_from" style="">
+</span>
+<span class="form-range-find">
+    <span>Thru&nbsp;</span><input type="text" class="form-control" name="debitAmountTotal_thru" value="" size="10" id="FileList_header_debitAmountTotal_thru" style="">
+</span>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="FileList_header_creditAmountTotal">Credit Amount Total</label>
+            <div class="col-sm-10">
+    
+<span class="form-range-find">
+    <span>From&nbsp;</span><input type="text" class="form-control" name="creditAmountTotal_from" value="" size="10" id="FileList_header_creditAmountTotal_from" style="">
+</span>
+<span class="form-range-find">
+    <span>Thru&nbsp;</span><input type="text" class="form-control" name="creditAmountTotal_thru" value="" size="10" id="FileList_header_creditAmountTotal_thru" style="">
+</span>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <div class="col-sm-2 hidden-xs">&nbsp;</div>
+            <div class="col-sm-10">
+    
+    <button type="submit" name="downloadButton" value="downloadButton" id="FileList_header_downloadButton" class="btn btn-primary btn-sm">
+Find    </button>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+                        </fieldset>
+                    </form>
+                </div>
+            </div></div>
+        </div>
+        <script>$('#FileList_hdialog').on('shown.bs.modal', function() {
+            $("#FileList_hdialog :not(.noResetSelect2)>select:not(.noResetSelect2)").select2({ });
+        })</script>
+        <div class="table-scroll-wrapper"><table class="table table-striped table-hover table-condensed" id="FileList_table">
+            <thead>
+        <tr class="form-list-nav-row"><th colspan="10">
+        <nav class="form-list-nav">
+            <button id="FileList_hdialog_button" type="button" data-toggle="modal" data-target="#FileList_hdialog" data-original-title="Find Options" data-placement="bottom" class="btn btn-default"><i class="fa fa-share"></i> Find Options</button>
+            
+
+
+        </nav>
+        </th></tr>
+
+            <tr><th colspan="10" style="font-weight: normal">
+                        
+                        
+                        
+                        
+                        
+            </th></tr>
+
+                <tr>
+                    <th>
+                        <div><div class="form-title">File ID            <span class="form-order-by">
+                <a href="http://127.0.0.1:18091/apps/marble/Party/PaymentMethod/PaymentMethodFiles?orderByField=paymentMethodFileId&amp;paymentMethodId=ZIRET_BA&amp;partyId=ORG_ZIZI_RETAIL"><i class="fa fa-caret-up"></i></a>
+                <a href="http://127.0.0.1:18091/apps/marble/Party/PaymentMethod/PaymentMethodFiles?orderByField=-paymentMethodFileId&amp;paymentMethodId=ZIRET_BA&amp;partyId=ORG_ZIZI_RETAIL"><i class="fa fa-caret-down"></i></a>
+            </span>
+</div>    </div>
+                    </th>
+                    <th>
+                        <div><div class="form-title">File Type            <span class="form-order-by">
+                <a href="http://127.0.0.1:18091/apps/marble/Party/PaymentMethod/PaymentMethodFiles?orderByField=fileTypeEnumId&amp;paymentMethodId=ZIRET_BA&amp;partyId=ORG_ZIZI_RETAIL"><i class="fa fa-caret-up"></i></a>
+                <a href="http://127.0.0.1:18091/apps/marble/Party/PaymentMethod/PaymentMethodFiles?orderByField=-fileTypeEnumId&amp;paymentMethodId=ZIRET_BA&amp;partyId=ORG_ZIZI_RETAIL"><i class="fa fa-caret-down"></i></a>
+            </span>
+</div>    </div>
+                    </th>
+                    <th>
+                        <div><div class="form-title">File Date            <span class="form-order-by">
+                <a href="http://127.0.0.1:18091/apps/marble/Party/PaymentMethod/PaymentMethodFiles?orderByField=fileDate&amp;paymentMethodId=ZIRET_BA&amp;partyId=ORG_ZIZI_RETAIL"><i class="fa fa-caret-up"></i></a>
+                <a href="http://127.0.0.1:18091/apps/marble/Party/PaymentMethod/PaymentMethodFiles?orderByField=fileDate&amp;paymentMethodId=ZIRET_BA&amp;partyId=ORG_ZIZI_RETAIL" class="active"><i class="fa fa-caret-down"></i></a>
+            </span>
+</div>    </div>
+                    </th>
+                    <th>
+                        <div><div class="form-title">Entry Count            <span class="form-order-by">
+                <a href="http://127.0.0.1:18091/apps/marble/Party/PaymentMethod/PaymentMethodFiles?orderByField=entryCount&amp;paymentMethodId=ZIRET_BA&amp;partyId=ORG_ZIZI_RETAIL"><i class="fa fa-caret-up"></i></a>
+                <a href="http://127.0.0.1:18091/apps/marble/Party/PaymentMethod/PaymentMethodFiles?orderByField=-entryCount&amp;paymentMethodId=ZIRET_BA&amp;partyId=ORG_ZIZI_RETAIL"><i class="fa fa-caret-down"></i></a>
+            </span>
+</div>    </div>
+                    </th>
+                    <th>
+                        <div><div class="form-title">Debit Amount Total            <span class="form-order-by">
+                <a href="http://127.0.0.1:18091/apps/marble/Party/PaymentMethod/PaymentMethodFiles?orderByField=debitAmountTotal&amp;paymentMethodId=ZIRET_BA&amp;partyId=ORG_ZIZI_RETAIL"><i class="fa fa-caret-up"></i></a>
+                <a href="http://127.0.0.1:18091/apps/marble/Party/PaymentMethod/PaymentMethodFiles?orderByField=-debitAmountTotal&amp;paymentMethodId=ZIRET_BA&amp;partyId=ORG_ZIZI_RETAIL"><i class="fa fa-caret-down"></i></a>
+            </span>
+</div>    </div>
+                    </th>
+                    <th>
+                        <div><div class="form-title">Credit Amount Total            <span class="form-order-by">
+                <a href="http://127.0.0.1:18091/apps/marble/Party/PaymentMethod/PaymentMethodFiles?orderByField=creditAmountTotal&amp;paymentMethodId=ZIRET_BA&amp;partyId=ORG_ZIZI_RETAIL"><i class="fa fa-caret-up"></i></a>
+                <a href="http://127.0.0.1:18091/apps/marble/Party/PaymentMethod/PaymentMethodFiles?orderByField=-creditAmountTotal&amp;paymentMethodId=ZIRET_BA&amp;partyId=ORG_ZIZI_RETAIL"><i class="fa fa-caret-down"></i></a>
+            </span>
+</div>    </div>
+                    </th>
+                    <th>
+                        <div><div class="form-title"></div>    </div>
+                    </th>
+                    <th>
+                        <div><div class="form-title"></div>    </div>
+                    </th>
+                    <th>
+                        <div><div class="form-title">Messages</div>    </div>
+                    </th>
+                    <th>
+                        <div><div class="form-title">&nbsp;</div>    </div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                </tbody>
+        </table></div>
+    
+    <!-- END   form-list[@name=FileList] -->
+    <!-- END   screen[@location=component://SimpleScreens/screen/SimpleScreens/Party/PaymentMethod/PaymentMethodFiles.xml].widgets -->
+
+        </div>
+    <!-- END   screen[@location=component://SimpleScreens/screen/SimpleScreens/Party/PaymentMethod.xml].widgets -->
+
+        </div>
+    <!-- END   screen[@location=component://SimpleScreens/screen/SimpleScreens/Party.xml].widgets -->
+
+    <!-- END   screen[@location=component://MarbleERP/screen/marble.xml].widgets -->
+
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    <!-- BEGIN section[@name=BottomNavSection] -->
+        <!-- BEGIN screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+    <div id="footer" class="bg-dark">
+        <!-- BEGIN render-mode.text[inline][@template=true] -->
+                <div id="apps-footer-content">
+<p><a href="https://www.moqui.org/" target="_blank">Built on Moqui Framework 4.0.0</a></p><p><a href="/vapps/ScreenTree">Site Map</a></p>                </div>        <!-- END   render-mode.text[inline][@template=true] -->
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    <!-- END   screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+
+    <!-- END   section[@name=BottomNavSection] -->
+    <!-- END   screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+        
+
+
+
+
+        
+        
+        
+    
+</body></html>

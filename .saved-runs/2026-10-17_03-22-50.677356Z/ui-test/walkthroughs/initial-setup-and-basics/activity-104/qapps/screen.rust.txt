@@ -1,0 +1,54 @@
+menu
+Applications
+chevron_right
+Marble ERP
+chevron_right
+Facility
+chevron_right
+Find Facility
+search
+edit_location
+notifications
+history
+account_circle
+open_in_new
+New Facility
+Box Types
+Carrier Ship Methods
+search
+Find Options
+table_chart
+Columns
+CSV
+Facility ID
+	
+Name
+	
+Type
+	
+Owner
+	
+
+
+ZIRET_WH
+	
+Ziziwork Retail Warehouse
+	
+Warehouse
+	
+ZIRET: Ziziwork Retail & Wholesale
+	
+
+
+Built on Moqui 0.1.0
+Site Map
+New Facility
+close
+ID
+Facility Name
+Facility Type
+Warehouse
+arrow_drop_down
+Owner
+arrow_drop_down
+Create

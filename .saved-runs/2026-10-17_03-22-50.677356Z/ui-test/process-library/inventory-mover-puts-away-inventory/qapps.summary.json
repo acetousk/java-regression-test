@@ -1,0 +1,132 @@
+{
+  "source": "docs/business-processes/process-library/inventory-mover-puts-away-inventory.md",
+  "mode": "qapps",
+  "activities": [
+    {
+      "id": "activity-001",
+      "sourceLine": 12,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 121541,
+        "comparedPixels": 1440000,
+        "differencePercent": 8.440347222222222,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/inventory-mover-puts-away-inventory/activity-001/qapps/comparison.json"
+    },
+    {
+      "id": "activity-002",
+      "sourceLine": 18,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 121541,
+        "comparedPixels": 1440000,
+        "differencePercent": 8.440347222222222,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/inventory-mover-puts-away-inventory/activity-002/qapps/comparison.json"
+    },
+    {
+      "id": "activity-003",
+      "sourceLine": 22,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 121541,
+        "comparedPixels": 1440000,
+        "differencePercent": 8.440347222222222,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/inventory-mover-puts-away-inventory/activity-003/qapps/comparison.json"
+    },
+    {
+      "id": "activity-004",
+      "sourceLine": 26,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 121541,
+        "comparedPixels": 1440000,
+        "differencePercent": 8.440347222222222,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/inventory-mover-puts-away-inventory/activity-004/qapps/comparison.json"
+    },
+    {
+      "id": "activity-005",
+      "sourceLine": 30,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 121541,
+        "comparedPixels": 1440000,
+        "differencePercent": 8.440347222222222,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/inventory-mover-puts-away-inventory/activity-005/qapps/comparison.json"
+    }
+  ],
+  "note": "Evidence sweep only; no complete business-process execution is claimed."
+}

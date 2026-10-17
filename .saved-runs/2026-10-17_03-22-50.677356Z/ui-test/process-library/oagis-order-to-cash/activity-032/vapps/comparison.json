@@ -1,0 +1,19 @@
+{
+  "id": "activity-032",
+  "sourceLine": 112,
+  "headings": [
+    "OAGIS Order to Cash",
+    "OAGIS Scenarios",
+    "Related Scenarios"
+  ],
+  "text": "* 31 - Customer Service Integration, Field Service, No Returns",
+  "route": null,
+  "dialog": null,
+  "mapping": "entry-candidate",
+  "limitation": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required.",
+  "source": "docs/business-processes/process-library/oagis-order-to-cash.md",
+  "mode": "vapps",
+  "coverage": "blocked",
+  "captures": [],
+  "reason": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required."
+}

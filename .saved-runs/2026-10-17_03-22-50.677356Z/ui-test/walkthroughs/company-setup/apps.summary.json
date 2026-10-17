@@ -1,0 +1,157 @@
+{
+  "source": "docs/business-processes/walkthroughs/company-setup.md",
+  "mode": "apps",
+  "activities": [
+    {
+      "id": "activity-001",
+      "sourceLine": 10,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 143932,
+        "comparedPixels": 1452960,
+        "differencePercent": 9.906122673714348,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/company-setup/activity-001/apps/comparison.json"
+    },
+    {
+      "id": "activity-002",
+      "sourceLine": 14,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2121272,
+        "comparedPixels": 3385440,
+        "differencePercent": 62.65867952171653,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/company-setup/activity-002/apps/comparison.json"
+    },
+    {
+      "id": "activity-003",
+      "sourceLine": 18,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1566
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 966573,
+        "comparedPixels": 2255040,
+        "differencePercent": 42.86278735632184,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/company-setup/activity-003/apps/comparison.json"
+    },
+    {
+      "id": "activity-004",
+      "sourceLine": 24,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1198
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 470851,
+        "comparedPixels": 1725120,
+        "differencePercent": 27.293811445000927,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/company-setup/activity-004/apps/comparison.json"
+    },
+    {
+      "id": "activity-005",
+      "sourceLine": 28,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1198
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 470851,
+        "comparedPixels": 1725120,
+        "differencePercent": 27.293811445000927,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/company-setup/activity-005/apps/comparison.json"
+    },
+    {
+      "id": "activity-006",
+      "sourceLine": 32,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1198
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 470851,
+        "comparedPixels": 1725120,
+        "differencePercent": 27.293811445000927,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/company-setup/activity-006/apps/comparison.json"
+    }
+  ],
+  "note": "Evidence sweep only; no complete business-process execution is claimed."
+}

@@ -1,0 +1,21 @@
+# Carrier Does Not Deliver Shipment to Customer
+
+Source: [Business Process Library/Carrier Does Not Deliver Shipment to Customer](https://moqui.org/docs/mantle/Business%20Process%20Library/Carrier%20Does%20Not%20Deliver%20Shipment%20to%20Customer)
+
+Type: Business-process description; verify UI applicability.
+
+## Dependencies
+
+* [Company Fulfills Sales Order](https://moqui.org/docs/mantle/Business%20Process%20Library/Company%20Fulfills%20Sales%20Order)
+  - visual test:
+  - transition test:
+
+## Story
+
+Customer contacts CSR to request information about an item that has not arrived. CSR reviews information from Customer and finds the order. If item has not been shipped CSR notifies Customer that it has not shipped and what the ETA is. If Customer does not want to wait Customer requests that the order be canceled. CSR reviews cancellation request and cancels the order. If payment has been received on the order Company refunds payment.
+- visual test:
+- transition test:
+
+If the item has been shipped CSR notifies Customer and asks them to check at the post office for the package. If Customer contacts CSR again saying package has not arrived and is not at the post office and it has been more than a reasonable number of days (decided by the CSR based on feedback from Customer) then package is considered lost. CSR contacts Customer to check the address and if it is not correct updates it. If the package is insured, CSR places a new zero amount order for a replacement item. If the package is not insured CSR contacts Customer to see if it is okay to send another item and charge them shipping. If Customer agrees CSR places replacement order with the price of the item(s) discounted but with full shipping cost. If Customer does not agree to shipping CSR negotiates with Customer, and may send out replacement totally free of charge. CSR may also upgrade the shipping method on the replacement order for customer satisfaction reasons.
+- visual test:
+- transition test:

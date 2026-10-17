@@ -1,0 +1,48 @@
+menu
+Applications
+chevron_right
+Marble ERP
+chevron_right
+Accounting
+chevron_right
+Payments
+chevron_right
+Find Payment
+help_outline
+search
+edit_location
+notifications
+history
+account_circle
+open_in_new
+New Incoming Payment
+open_in_new
+New Outgoing Payment
+Bulk Checks
+search
+Find Options
+table_chart
+Columns
+CSV
+XLS
+No results found
+Payment
+Ref Num
+	
+Effective Date
+Status
+	
+From
+To
+	
+Type
+Instrument
+	
+From Payment Method
+To Payment Method
+	
+Amount
+	
+Unapplied
+Built on Moqui 0.1.0
+Site Map

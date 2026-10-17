@@ -1,0 +1,36 @@
+{
+  "engine": "java",
+  "mode": "vapps",
+  "route": "marble/HumanRes/EditRateAmounts",
+  "dialog": null,
+  "authenticated": true,
+  "errors": [
+    "moqui is not defined",
+    "moqui is not defined"
+  ],
+  "failedRequests": [
+    {
+      "url": "http://127.0.0.1:18091/vapps/marble/dashboard",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "url": "http://127.0.0.1:18091/vapps/marble/HumanRes/EditRateAmounts",
+      "error": "net::ERR_ABORTED"
+    }
+  ],
+  "httpErrors": [],
+  "consoleErrors": [
+    "Refused to apply style from 'http://127.0.0.1:18091/vapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not a supported stylesheet MIME type, and strict MIME checking is enabled.",
+    "Refused to execute script from 'http://127.0.0.1:18091/vapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+    "Refused to execute script from 'http://127.0.0.1:18091/vapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+    "Refused to apply style from 'http://127.0.0.1:18091/vapps/marble/HumanRes/EditRateAmounts#?v=1a147e2' because its MIME type ('text/html') is not a supported stylesheet MIME type, and strict MIME checking is enabled.",
+    "Refused to execute script from 'http://127.0.0.1:18091/vapps/marble/HumanRes/EditRateAmounts#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+    "Refused to execute script from 'http://127.0.0.1:18091/vapps/marble/HumanRes/EditRateAmounts#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled."
+  ],
+  "status": "blocked",
+  "reused": false,
+  "requestedURL": "http://127.0.0.1:18091/vapps/marble/HumanRes/EditRateAmounts",
+  "navigation": "documented-or-candidate-deep-link",
+  "httpStatus": 200,
+  "finalURL": "http://127.0.0.1:18091/vapps/marble/HumanRes/EditRateAmounts"
+}

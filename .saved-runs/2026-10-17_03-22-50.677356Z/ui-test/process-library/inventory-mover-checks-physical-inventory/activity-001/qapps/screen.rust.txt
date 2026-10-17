@@ -1,0 +1,31 @@
+menu
+Applications
+chevron_right
+Marble ERP
+chevron_right
+Asset
+chevron_right
+Physical Inventory
+chevron_right
+Find Physical Inventory
+search
+edit_location
+notifications
+history
+account_circle
+search
+Find Options
+No results found
+Phys. Inv. ID
+	
+Date
+	
+Status
+	
+Facility
+	
+Assets
+	
+Comments
+Built on Moqui 0.1.0
+Site Map

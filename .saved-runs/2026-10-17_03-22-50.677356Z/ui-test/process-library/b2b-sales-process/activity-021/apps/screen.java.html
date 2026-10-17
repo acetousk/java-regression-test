@@ -1,0 +1,2971 @@
+<!DOCTYPE html><html><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    
+    <title>Customers - Find Customer</title>
+    <link rel="apple-touch-icon" href="/MoquiLogo100.png">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="http://127.0.0.1:18091/css/webroot-layout.css?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="http://127.0.0.1:18091/css/webroot-theme.css?v=1a147e2" rel="stylesheet" type="text/css">
+    <script src="#?v=1a147e2" type="text/javascript"></script>
+    <script src="#?v=1a147e2" type="text/javascript"></script>
+    <script src="#?v=1a147e2" type="text/javascript"></script>
+    <link rel="shortcut icon" href="http://127.0.0.1:18091/favicon.ico">
+</head>
+<body class="dev bg-light FindCustomer">
+        
+        
+        
+        
+    <!-- BEGIN screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+        <!-- BEGIN render-mode.text[inline][@template=true] -->
+<script>var notificationClient = new moqui.NotificationClient((location.protocol === 'https:' ? 'wss' : 'ws') + "://127.0.0.1:18091/notws");</script>        <!-- END   render-mode.text[inline][@template=true] -->
+    <!-- BEGIN section[@name=TopNavSection] -->
+        <!-- BEGIN screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+    <div id="top">
+        <!-- BEGIN render-mode.text[@location=component://webroot/screen/includes/navbar.html.ftl][@template=true] -->
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <header class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a href="http://127.0.0.1:18091/apps/AppList" class="navbar-brand"><img src="http://127.0.0.1:18091/images/MoquiLogoSmall.png" alt="Home"></a>
+        
+    </header>
+    <div id="navbar-buttons" class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul id="header-menus" class="nav navbar-nav">
+        </ul>
+        <div id="navbar-menu-crumbs">
+        </div>
+        <a class="navbar-text" href="http://127.0.0.1:18091/apps/marble/Customer/FindCustomer">Find Customer</a>
+        <a href="http://127.0.0.1:18091/Login/logout" data-toggle="tooltip" data-original-title="Logout John Doe" data-placement="bottom" class="btn btn-danger btn-sm navbar-btn navbar-right">
+            <i class="fa fa-power-off"></i>
+        </a>
+        <a href="#" onclick="switchDarkLight();" data-toggle="tooltip" data-original-title="Switch Dark/Light" data-placement="bottom" class="btn btn-default btn-sm navbar-btn navbar-right">
+            <i class="fa fa-adjust"></i>
+        </a>
+
+<div class="btn-group navbar-right">
+    <a href="/apps/my/User/Notifications" data-toggle="tooltip" data-container="body" data-original-title="Notifications" data-placement="bottom" class="btn btn-default btn-sm navbar-btn">
+        <i class="fa fa-info-circle"></i>
+        <span id="navbar_notification_count" class="label label-info">0</span>
+    </a>
+    <a href="/apps/my/User/Messages/FindMessage?statusId=CeReceived&amp;toPartyId=EX_JOHN_DOE" data-toggle="tooltip" data-container="body" data-original-title="Messages" data-placement="bottom" class="btn btn-default btn-sm navbar-btn">
+        <i class="fa fa-envelope"></i>
+        <span class="label label-warning">0</span>
+    </a>
+    <a href="/apps/my/User/Calendar/MyCalendar" data-toggle="tooltip" data-container="body" data-original-title="Events This Week" data-placement="bottom" class="btn btn-default btn-sm navbar-btn">
+        <i class="fa fa-calendar"></i>
+        <span class="label label-primary">0</span>
+    </a>
+    <a href="/apps/my/User/Task/MyTasks" data-toggle="tooltip" data-container="body" data-original-title="Open Tasks" data-placement="bottom" class="btn btn-default btn-sm navbar-btn">
+        <i class="fa fa-check"></i>
+        <span class="label label-success">0</span>
+    </a>
+</div>
+    <script>
+        var navbarNotificationListener = function(jsonObj, webSocket) {
+            if (jsonObj && jsonObj.persistOnSend === true) {
+                var countElement = $("#navbar_notification_count");
+                countElement.text((parseInt(countElement.text()) + 1).toString());
+            }
+            notificationClient.displayNotify(jsonObj, webSocket);
+        };
+        notificationClient.registerListener("ALL", navbarNotificationListener);
+    </script>
+        <div id="history-menu" class="nav navbar-right dropdown">
+            <a id="history-menu-link" href="#" class="dropdown-toggle btn btn-default btn-sm navbar-btn" data-toggle="dropdown" title="History">
+                <i class="fa fa-list"></i></a>
+            <ul class="dropdown-menu">
+                <li><a href="http://127.0.0.1:18091/apps/marble/dashboard">
+                            <i class="fa fa-dashboard" style="padding-right: 8px;"></i>
+                    Marble ERP - Dashboard
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Accounting/Invoice/FindInvoice?invoiceType=Receivable">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications (Receivable)
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/dashboard">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/vapps/marble/Accounting/Invoice/FindInvoice?invoiceType=Receivable">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications (Receivable)
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/vapps/marble/dashboard">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Accounting/Invoice/FindInvoice?invoiceType=Receivable">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Accounting.png" alt="Invoices - Find Invoice (Receivable)" height="18" style="padding-right: 4px;">
+                    Invoices - Find Invoice (Receivable)
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Accounting/Payment/FindPayment">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/vapps/marble/Accounting/Payment/FindPayment">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Accounting/Payment/FindPayment">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Accounting.png" alt="Payments - Find Payment" height="18" style="padding-right: 4px;">
+                    Payments - Find Payment
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Accounting/Invoice/FindInvoice?invoiceType=Payable">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications (Payable)
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/vapps/marble/Accounting/Invoice/FindInvoice?invoiceType=Payable">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications (Payable)
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Accounting/Invoice/FindInvoice?invoiceType=Payable">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Accounting.png" alt="Invoices - Find Invoice (Payable)" height="18" style="padding-right: 4px;">
+                    Invoices - Find Invoice (Payable)
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            </ul>
+        </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+    $('.navbar [data-toggle="tooltip"]').tooltip({ placement:'bottom', trigger:'hover' });
+    $('#history-menu-link').tooltip({ placement:'bottom', trigger:'hover' });
+    $('#document-menu-link').tooltip({ placement:'bottom', trigger:'hover' });
+    function switchDarkLight() {
+        $("body").toggleClass("bg-dark");
+        $("body").toggleClass("bg-light");
+        var currentStyle = $("body").hasClass("bg-dark") ? "bg-dark" : "bg-light";
+        $.ajax({ type:'POST', url:'http://127.0.0.1:18091/apps/setPreference', data:{ 'moquiSessionToken': '[REDACTED]','preferenceKey': 'OUTER_STYLE', 'preferenceValue': currentStyle }, dataType:'json' });
+    }
+</script>
+
+        <!-- END   render-mode.text[@location=component://webroot/screen/includes/navbar.html.ftl][@template=true] -->
+        <!-- BEGIN render-mode.text[inline][@template=true] -->
+        <!-- END   render-mode.text[inline][@template=true] -->
+        <li id="header-menu" class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Application <i class="fa fa-chevron-right"></i></a>
+            <ul class="dropdown-menu">
+                        <li class="active"><a href="http://127.0.0.1:18091/apps/marble/dashboard"><i class="fa fa-cogs" style="padding-right: 8px;"></i>Marble ERP</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/my"><i class="fa fa-user" style="padding-right: 8px;"></i>My Account</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/system"><i class="fa fa-cog" style="padding-right: 8px;"></i>System</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/tools"><i class="fa fa-wrench" style="padding-right: 8px;"></i>Tools</a></li>
+            </ul>
+        </li>
+        <script>$("#header-menus").append($("#header-menu"));</script>
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    <!-- END   screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+
+    <!-- END   section[@name=TopNavSection] -->
+    <div id="content">
+    <div class="inner">
+    <div class="container-fluid">
+    <!-- BEGIN section[@name=MessagesSection] -->
+        <!-- BEGIN screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+    <!-- BEGIN section-iterate[@name=headerMessageInfos] -->
+    
+    <!-- END   section-iterate[@name=headerMessageInfos] -->
+    <!-- BEGIN section-iterate[@name=headerErrors] -->
+    
+    <!-- END   section-iterate[@name=headerErrors] -->
+    <!-- BEGIN section-iterate[@name=headerValidationErrors] -->
+    
+    <!-- END   section-iterate[@name=headerValidationErrors] -->
+    <!-- BEGIN section-iterate[@name=headerSavedMessages] -->
+    
+    <!-- END   section-iterate[@name=headerSavedMessages] -->
+    <!-- BEGIN section-iterate[@name=headerSavedErrors] -->
+    
+    <!-- END   section-iterate[@name=headerSavedErrors] -->
+    <!-- BEGIN section-iterate[@name=headerSavedValidationErrors] -->
+    
+    <!-- END   section-iterate[@name=headerSavedValidationErrors] -->
+    <!-- END   screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+
+    <!-- END   section[@name=MessagesSection] -->
+        <!-- BEGIN screen[@location=component://MarbleERP/screen/marble.xml].widgets -->
+    <!-- BEGIN section[@name=OrgChooserSection] -->
+        <!-- BEGIN screen[@location=component://MarbleERP/screen/marble.xml].widgets -->
+        <!-- BEGIN render-mode.text[inline][@template=true] -->
+<div id="active-org-menu" class="nav navbar-right dropdown">
+                <a id="active-org-menu-link" href="#" class="dropdown-toggle btn btn-default btn-sm navbar-btn" data-toggle="dropdown" title="Organization">
+                    <i class="fa fa-globe"></i> </a>
+                <ul class="dropdown-menu">
+                        <li><a href="http://127.0.0.1:18091/apps/setPrefGoLast?preferenceKey=ACTIVE_ORGANIZATION&amp;preferenceValue=ORG_ZIZI_RETAIL">ZIRET: Ziziwork Retail &amp; Wholesale</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/setPrefGoLast?preferenceKey=ACTIVE_ORGANIZATION&amp;preferenceValue=ORG_ZIZI_SERVICES">ZISER: Ziziwork Services</a></li>
+                </ul>
+            </div>
+            <script>$("#navbar-buttons").append($("#active-org-menu")); $('#active-org-menu-link').tooltip({ placement:'bottom', trigger:'hover' });</script>        <!-- END   render-mode.text[inline][@template=true] -->
+    <!-- END   screen[@location=component://MarbleERP/screen/marble.xml].widgets -->
+
+    <!-- END   section[@name=OrgChooserSection] -->
+        <li id="MarbleErpPanel-menu" class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Marble ERP <i class="fa fa-chevron-right"></i></a>
+            <ul class="dropdown-menu">
+                        <li><a href="http://127.0.0.1:18091/apps/marble/dashboard"><i class="fa fa-dashboard" style="padding-right: 8px;"></i>Dashboard</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/QuickSearch"><i class="fa fa-search" style="padding-right: 8px;"></i>Quick Search</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Accounting/dashboard"><img src="http://127.0.0.1:18091/ssstatic/images/Accounting.png" alt="Accounting" height="18" style="padding-right: 4px;">Accounting</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Asset/dashboard"><img src="http://127.0.0.1:18091/ssstatic/images/Asset.png" alt="Asset" height="18" style="padding-right: 4px;">Asset</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Catalog/dashboard"><img src="http://127.0.0.1:18091/ssstatic/images/Catalog.png" alt="Catalog" height="18" style="padding-right: 4px;">Catalog</a></li>
+                        <li class="active"><a href="http://127.0.0.1:18091/apps/marble/Customer/FindCustomer"><img src="http://127.0.0.1:18091/ssstatic/images/Customer.png" alt="Customers" height="18" style="padding-right: 4px;">Customers</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Facility/FindFacility"><img src="http://127.0.0.1:18091/ssstatic/images/Facility.png" alt="Facility" height="18" style="padding-right: 4px;">Facility</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/HumanRes/dashboard"><i class="fa fa-user-plus" style="padding-right: 8px;"></i>Human Resources</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Manufacturing/dashboard"><i class="fa fa-industry" style="padding-right: 8px;"></i>Manufacturing</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Order/FindOrder"><img src="http://127.0.0.1:18091/ssstatic/images/Sales.png" alt="Orders" height="18" style="padding-right: 4px;">Orders</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Party/FindParty"><img src="http://127.0.0.1:18091/ssstatic/images/Parties.png" alt="Parties" height="18" style="padding-right: 4px;">Parties</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Project/FindProject"><img src="http://127.0.0.1:18091/ssstatic/images/project-business120.png" alt="Projects" height="18" style="padding-right: 4px;">Projects</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Request/FindRequest"><img src="http://127.0.0.1:18091/ssstatic/images/Request.png" alt="Requests" height="18" style="padding-right: 4px;">Requests</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Return/FindReturn"><img src="http://127.0.0.1:18091/ssstatic/images/Return.png" alt="Returns" height="18" style="padding-right: 4px;">Returns</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Shipment/FindShipment"><img src="http://127.0.0.1:18091/ssstatic/images/Shipping.png" alt="Shipments" height="18" style="padding-right: 4px;">Shipments</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Shipping/dashboard"><img src="http://127.0.0.1:18091/ssstatic/images/Picking.png" alt="Shipping" height="18" style="padding-right: 4px;">Shipping</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/ProductStore/FindProductStore"><img src="http://127.0.0.1:18091/ssstatic/images/ProductStore.png" alt="Stores" height="18" style="padding-right: 4px;">Stores</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Supplier/FindSupplier"><img src="http://127.0.0.1:18091/ssstatic/images/Supplier.png" alt="Suppliers" height="18" style="padding-right: 4px;">Suppliers</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Survey/FindSurvey"><i class="fa fa-pencil-square-o" style="padding-right: 8px;"></i>Survey</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Task/FindTask"><img src="http://127.0.0.1:18091/ssstatic/images/task-homework.png" alt="Tasks" height="18" style="padding-right: 4px;">Tasks</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Wiki/WikiSpaces"><img src="http://127.0.0.1:18091/ssstatic/images/Wiki.png" alt="Wiki/Content" height="18" style="padding-right: 4px;">Wiki/Content</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/QuickViewReport"><i class="fa fa-database" style="padding-right: 8px;"></i>Custom Reports</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/SimpleReport/FindReport"><i class="fa fa-database" style="padding-right: 8px;"></i>Report Builder</a></li>
+            </ul>
+        </li>
+        <script>$("#header-menus").append($("#MarbleErpPanel-menu"));</script>
+            <!-- BEGIN screen[@location=component://SimpleScreens/screen/SimpleScreens/Customer.xml].widgets -->
+        <div id="CustomerPanel-tabpanel">
+                <a id="CustomerPanel-menu-crumb" class="navbar-text" href="http://127.0.0.1:18091/apps/marble/Customer/FindCustomer">Customers <i class="fa fa-chevron-right"></i></a>
+                <script>$("#navbar-menu-crumbs").append($("#CustomerPanel-menu-crumb"));</script>
+                <!-- BEGIN screen[@location=component://SimpleScreens/screen/SimpleScreens/Customer/FindCustomer.xml].widgets -->
+        <button id="CreatePersonDialog-button" type="button" data-toggle="modal" data-target="#CreatePersonDialog" data-original-title="New Person Customer" data-placement="bottom" class="btn btn-primary btn-sm "><i class="fa fa-share"></i> New Person Customer</button>
+
+        <div id="CreatePersonDialog" class="modal container-dialog" aria-hidden="true" style="display: none;" tabindex="-1">
+            <div class="modal-dialog" style="width: 760px;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">New Person Customer</h4>
+                    </div>
+                    <div class="modal-body">
+    <!-- BEGIN form-single[@name=CreatePersonForm] -->
+    <form name="CreatePersonForm" id="CreatePersonForm" method="post" action="http://127.0.0.1:18091/apps/marble/Customer/FindCustomer/createPersonCustomer">
+        <input type="hidden" name="moquiFormName" value="CreatePersonForm" style="">
+        <input type="hidden" name="moquiSessionToken" value="[REDACTED]" style="">
+        
+        <fieldset class="form-horizontal">
+    <input type="hidden" name="roleTypeId" value="Customer" id="CreatePersonForm_roleTypeId" style="">
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="CreatePersonForm_partyClassificationId">Customer Class</label>
+            <div class="col-sm-10">
+    
+    <select name="partyClassificationId" class="" id="CreatePersonForm_partyClassificationId">
+            <option value="">&nbsp;</option>
+            <option value="CustBroker">Broker</option>
+            <option selected="selected" value="CustConsumer">Consumer</option>
+            <option value="CustDistributor">Distributor</option>
+            <option value="CustDistributorPref">Distributor Preferred</option>
+            <option value="CustEmployee">Employee</option>
+            <option value="CustEnterprise">Enterprise</option>
+            <option value="CustWholesale">Wholesale</option>
+            <option value="CustProfessional">Wholesale - Professional</option>
+            <option value="CustRetailStore">Wholesale - Retail Store</option>
+    </select>
+    
+    
+        <script>$("#CreatePersonForm_partyClassificationId").select2({  });</script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="CreatePersonForm_accountPartyId">Sales Account</label>
+            <div class="col-sm-10">
+    
+    <select name="accountPartyId" class="" id="CreatePersonForm_accountPartyId">
+            <option value="">&nbsp;</option>
+    </select>
+    
+    
+        <script>$("#CreatePersonForm_accountPartyId").select2({  });</script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+    <div class="form-group">
+        <label class="control-label col-sm-2">Name</label>
+        <div class="col-sm-10">
+            <div class="big-row-item">
+            <div class="form-group">
+    
+<input id="CreatePersonForm_firstName" type="text" name="firstName" value="" size="30" class="form-control required" required="" data-toggle="tooltip" title="First Name" style="">
+        
+            </div><!-- /form-group -->
+        </div><!-- /field-row-item -->
+        <div class="big-row-item">
+            <div class="form-group">
+    
+<input id="CreatePersonForm_lastName" type="text" name="lastName" value="" size="30" class="form-control required" required="" data-toggle="tooltip" title="Last Name" style="">
+        
+            </div><!-- /form-group -->
+        </div><!-- /field-row-item -->
+        </div>
+    </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="CreatePersonForm_emailAddress">Email</label>
+            <div class="col-sm-10">
+    
+<input id="CreatePersonForm_emailAddress" type="email" name="emailAddress" value="" size="40" class="form-control email" style="">
+        
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+    <div class="form-group">
+        <label class="control-label col-sm-2">Phone</label>
+        <div class="col-sm-10">
+            <div class="big-row-item">
+            <div class="form-group">
+    
+<span class="text-inline">+</span>
+<input id="CreatePersonForm_countryCode" type="text" name="countryCode" value="1" size="3" maxlength="3" class="form-control digits" data-toggle="tooltip" title="Country Code" style="">
+        
+            </div><!-- /form-group -->
+        </div><!-- /field-row-item -->
+        <div class="big-row-item">
+            <div class="form-group">
+    
+<span class="text-inline">-</span>
+<input id="CreatePersonForm_areaCode" type="text" name="areaCode" value="" size="3" maxlength="3" class="form-control digits" data-toggle="tooltip" title="Area Code" style="">
+        
+            </div><!-- /form-group -->
+        </div><!-- /field-row-item -->
+        <div class="big-row-item">
+            <div class="form-group">
+    
+<span class="text-inline">-</span>
+<input id="CreatePersonForm_contactNumber" type="text" name="contactNumber" value="" size="8" maxlength="8" class="form-control" pattern="^\d\d[-\. \d]*\d\d$" data-msg-pattern="Please enter a valid phone number" data-toggle="tooltip" title="Phone Number" style="">
+        
+            </div><!-- /form-group -->
+        </div><!-- /field-row-item -->
+        </div>
+    </div>
+    <div class="row">
+            <div class="col-sm-6">
+        <div class="form-group">
+            <label class="control-label col-sm-4" for="CreatePersonForm_address1">Address 1</label>
+            <div class="col-sm-8">
+    
+<input id="CreatePersonForm_address1" type="text" name="address1" value="" size="30" class="form-control" style="">
+        
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+            </div><!-- /col-sm-6 not bigRow -->
+            <div class="col-sm-6">
+        <div class="form-group">
+            <label class="control-label col-sm-4" for="CreatePersonForm_unitNumber">Unit</label>
+            <div class="col-sm-8">
+    
+<input id="CreatePersonForm_unitNumber" type="text" name="unitNumber" value="" size="10" class="form-control" style="">
+        
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+            </div><!-- /col-sm-6 not bigRow -->
+    </div>        <div class="form-group">
+            <label class="control-label col-sm-2" for="CreatePersonForm_address2">Address 2</label>
+            <div class="col-sm-10">
+    
+<input id="CreatePersonForm_address2" type="text" name="address2" value="" size="30" class="form-control" style="">
+        
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+    <div class="form-group">
+        <label class="control-label col-sm-2">City/Zip</label>
+        <div class="col-sm-10">
+            <div class="big-row-item">
+            <div class="form-group">
+    
+<input id="CreatePersonForm_city" type="text" name="city" value="" size="16" class="form-control" data-toggle="tooltip" title="City" style="">
+        
+            </div><!-- /form-group -->
+        </div><!-- /field-row-item -->
+        <div class="big-row-item">
+            <div class="form-group">
+    
+<input id="CreatePersonForm_postalCode" type="text" name="postalCode" value="" size="8" class="form-control" data-toggle="tooltip" title="Zip/Postal Code" style="">
+        
+            </div><!-- /form-group -->
+        </div><!-- /field-row-item -->
+        <div class="big-row-item">
+            <div class="form-group">
+    
+<input id="CreatePersonForm_postalCodeExt" type="text" name="postalCodeExt" value="" size="4" class="form-control" data-toggle="tooltip" title="Zip/Postal Code Extension" style="">
+        
+            </div><!-- /form-group -->
+        </div><!-- /field-row-item -->
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2">Country/State</label>
+        <div class="col-sm-10">
+            <div class="big-row-item">
+            <div class="form-group">
+    
+    <select name="countryGeoId" class="" id="CreatePersonForm_countryGeoId">
+            <option value="AFG">Afghanistan</option>
+            <option value="ALB">Albania</option>
+            <option value="DZA">Algeria</option>
+            <option value="ASM">American Samoa</option>
+            <option value="AND">Andorra</option>
+            <option value="AGO">Angola</option>
+            <option value="AIA">Anguilla</option>
+            <option value="ATA">Antarctica</option>
+            <option value="ATG">Antigua And Barbuda</option>
+            <option value="ARG">Argentina</option>
+            <option value="ARM">Armenia</option>
+            <option value="ABW">Aruba</option>
+            <option value="AUS">Australia</option>
+            <option value="AUT">Austria</option>
+            <option value="AZE">Azerbaijan</option>
+            <option value="BHS">Bahamas</option>
+            <option value="BHR">Bahrain</option>
+            <option value="BGD">Bangladesh</option>
+            <option value="BRB">Barbados</option>
+            <option value="BLR">Belarus</option>
+            <option value="BEL">Belgium</option>
+            <option value="BLZ">Belize</option>
+            <option value="BEN">Benin</option>
+            <option value="BMU">Bermuda</option>
+            <option value="BTN">Bhutan</option>
+            <option value="BOL">Bolivia</option>
+            <option value="BIH">Bosnia And Herzegowina</option>
+            <option value="BWA">Botswana</option>
+            <option value="BVT">Bouvet Island</option>
+            <option value="BRA">Brazil</option>
+            <option value="IOT">British Indian Ocean Territory</option>
+            <option value="BRN">Brunei Darussalam</option>
+            <option value="BGR">Bulgaria</option>
+            <option value="BFA">Burkina Faso</option>
+            <option value="BDI">Burundi</option>
+            <option value="KHM">Cambodia</option>
+            <option value="CMR">Cameroon</option>
+            <option value="CAN">Canada</option>
+            <option value="CPV">Cape Verde</option>
+            <option value="CYM">Cayman Islands</option>
+            <option value="CAF">Central African Republic</option>
+            <option value="TCD">Chad</option>
+            <option value="CHL">Chile</option>
+            <option value="CHN">China</option>
+            <option value="CXR">Christmas Island</option>
+            <option value="CCK">Cocos (keeling) Islands</option>
+            <option value="COL">Colombia</option>
+            <option value="COM">Comoros</option>
+            <option value="COG">Congo</option>
+            <option value="COD">Congo, The Democratic Republic Of The</option>
+            <option value="COK">Cook Islands</option>
+            <option value="CRI">Costa Rica</option>
+            <option value="CIV">Cote D'ivoire</option>
+            <option value="HRV">Croatia (local Name: Hrvatska)</option>
+            <option value="CUB">Cuba</option>
+            <option value="CYP">Cyprus</option>
+            <option value="CZE">Czech Republic</option>
+            <option value="DNK">Denmark</option>
+            <option value="DJI">Djibouti</option>
+            <option value="DMA">Dominica</option>
+            <option value="DOM">Dominican Republic</option>
+            <option value="TLS">East Timor</option>
+            <option value="ECU">Ecuador</option>
+            <option value="EGY">Egypt</option>
+            <option value="SLV">El Salvador</option>
+            <option value="GNQ">Equatorial Guinea</option>
+            <option value="ERI">Eritrea</option>
+            <option value="EST">Estonia</option>
+            <option value="ETH">Ethiopia</option>
+            <option value="FLK">Falkland Islands (malvinas)</option>
+            <option value="FRO">Faroe Islands</option>
+            <option value="FJI">Fiji</option>
+            <option value="FIN">Finland</option>
+            <option value="FRA">France</option>
+            <option value="FXX">France, Metropolitan</option>
+            <option value="GUF">French Guiana</option>
+            <option value="PYF">French Polynesia</option>
+            <option value="ATF">French Southern Territories</option>
+            <option value="GAB">Gabon</option>
+            <option value="GMB">Gambia</option>
+            <option value="GEO">Georgia</option>
+            <option value="DEU">Germany</option>
+            <option value="GHA">Ghana</option>
+            <option value="GIB">Gibraltar</option>
+            <option value="GRC">Greece</option>
+            <option value="GRL">Greenland</option>
+            <option value="GRD">Grenada</option>
+            <option value="GLP">Guadeloupe</option>
+            <option value="GUM">Guam</option>
+            <option value="GTM">Guatemala</option>
+            <option value="GIN">Guinea</option>
+            <option value="GNB">Guinea-bissau</option>
+            <option value="GUY">Guyana</option>
+            <option value="HTI">Haiti</option>
+            <option value="HMD">Heard And Mc Donald Islands</option>
+            <option value="VAT">Holy See (vatican City State)</option>
+            <option value="HND">Honduras</option>
+            <option value="HKG">Hong Kong</option>
+            <option value="HUN">Hungary</option>
+            <option value="ISL">Iceland</option>
+            <option value="IND">India</option>
+            <option value="IDN">Indonesia</option>
+            <option value="IRN">Iran (islamic Republic Of)</option>
+            <option value="IRQ">Iraq</option>
+            <option value="IRL">Ireland</option>
+            <option value="ISR">Israel</option>
+            <option value="ITA">Italy</option>
+            <option value="JAM">Jamaica</option>
+            <option value="JPN">Japan</option>
+            <option value="JOR">Jordan</option>
+            <option value="KAZ">Kazakhstan</option>
+            <option value="KEN">Kenya</option>
+            <option value="KIR">Kiribati</option>
+            <option value="PRK">Korea, Democratic People's Republic Of</option>
+            <option value="KOR">Korea, Republic Of</option>
+            <option value="KWT">Kuwait</option>
+            <option value="KGZ">Kyrgyzstan</option>
+            <option value="LAO">Lao People's Democratic Republic</option>
+            <option value="LVA">Latvia</option>
+            <option value="LBN">Lebanon</option>
+            <option value="LSO">Lesotho</option>
+            <option value="LBR">Liberia</option>
+            <option value="LBY">Libyan Arab Jamahiriya</option>
+            <option value="LIE">Liechtenstein</option>
+            <option value="LTU">Lithuania</option>
+            <option value="LUX">Luxembourg</option>
+            <option value="MAC">Macau</option>
+            <option value="MKD">Macedonia, The Former Yugoslav Republic Of</option>
+            <option value="MDG">Madagascar</option>
+            <option value="MWI">Malawi</option>
+            <option value="MYS">Malaysia</option>
+            <option value="MDV">Maldives</option>
+            <option value="MLI">Mali</option>
+            <option value="MLT">Malta</option>
+            <option value="MHL">Marshall Islands</option>
+            <option value="MTQ">Martinique</option>
+            <option value="MRT">Mauritania</option>
+            <option value="MUS">Mauritius</option>
+            <option value="MYT">Mayotte</option>
+            <option value="MEX">Mexico</option>
+            <option value="FSM">Micronesia, Federated States Of</option>
+            <option value="MDA">Moldova, Republic Of</option>
+            <option value="MCO">Monaco</option>
+            <option value="MNG">Mongolia</option>
+            <option value="MNE">Montenegro</option>
+            <option value="MSR">Montserrat</option>
+            <option value="MAR">Morocco</option>
+            <option value="MOZ">Mozambique</option>
+            <option value="MMR">Myanmar</option>
+            <option value="NAM">Namibia</option>
+            <option value="NRU">Nauru</option>
+            <option value="NPL">Nepal</option>
+            <option value="NLD">Netherlands</option>
+            <option value="ANT">Netherlands Antilles</option>
+            <option value="NCL">New Caledonia</option>
+            <option value="NZL">New Zealand</option>
+            <option value="NIC">Nicaragua</option>
+            <option value="NER">Niger</option>
+            <option value="NGA">Nigeria</option>
+            <option value="NIU">Niue</option>
+            <option value="NFK">Norfolk Island</option>
+            <option value="MNP">Northern Mariana Islands</option>
+            <option value="NOR">Norway</option>
+            <option value="OMN">Oman</option>
+            <option value="PAK">Pakistan</option>
+            <option value="PLW">Palau</option>
+            <option value="PSE">Palestinian Territory, Occupied</option>
+            <option value="PAN">Panama</option>
+            <option value="PNG">Papua New Guinea</option>
+            <option value="PRY">Paraguay</option>
+            <option value="PER">Peru</option>
+            <option value="PHL">Philippines</option>
+            <option value="PCN">Pitcairn</option>
+            <option value="POL">Poland</option>
+            <option value="PRT">Portugal</option>
+            <option value="PRI">Puerto Rico</option>
+            <option value="QAT">Qatar</option>
+            <option value="REU">Reunion</option>
+            <option value="ROU">Romania</option>
+            <option value="RUS">Russian Federation</option>
+            <option value="RWA">Rwanda</option>
+            <option value="KNA">Saint Kitts And Nevis</option>
+            <option value="LCA">Saint Lucia</option>
+            <option value="VCT">Saint Vincent And The Grenadines</option>
+            <option value="WSM">Samoa</option>
+            <option value="SMR">San Marino</option>
+            <option value="STP">Sao Tome And Principe</option>
+            <option value="SAU">Saudi Arabia</option>
+            <option value="SEN">Senegal</option>
+            <option value="SRB">Serbia</option>
+            <option value="SYC">Seychelles</option>
+            <option value="SLE">Sierra Leone</option>
+            <option value="SGP">Singapore</option>
+            <option value="SVK">Slovakia (slovak Republic)</option>
+            <option value="SVN">Slovenia</option>
+            <option value="SLB">Solomon Islands</option>
+            <option value="SOM">Somalia</option>
+            <option value="ZAF">South Africa</option>
+            <option value="SGS">South Georgia And The South Sandwich Islands</option>
+            <option value="ESP">Spain</option>
+            <option value="LKA">Sri Lanka</option>
+            <option value="SHN">St. Helena</option>
+            <option value="SPM">St. Pierre And Miquelon</option>
+            <option value="SDN">Sudan</option>
+            <option value="SUR">Suriname</option>
+            <option value="SJM">Svalbard And Jan Mayen Islands</option>
+            <option value="SWZ">Swaziland</option>
+            <option value="SWE">Sweden</option>
+            <option value="CHE">Switzerland</option>
+            <option value="SYR">Syrian Arab Republic</option>
+            <option value="TWN">Taiwan</option>
+            <option value="TJK">Tajikistan</option>
+            <option value="TZA">Tanzania, United Republic Of</option>
+            <option value="THA">Thailand</option>
+            <option value="TGO">Togo</option>
+            <option value="TKL">Tokelau</option>
+            <option value="TON">Tonga</option>
+            <option value="TTO">Trinidad And Tobago</option>
+            <option value="TUN">Tunisia</option>
+            <option value="TUR">Turkey</option>
+            <option value="TKM">Turkmenistan</option>
+            <option value="TCA">Turks And Caicos Islands</option>
+            <option value="TUV">Tuvalu</option>
+            <option value="UGA">Uganda</option>
+            <option value="UKR">Ukraine</option>
+            <option value="ARE">United Arab Emirates</option>
+            <option value="GBR">United Kingdom</option>
+            <option selected="selected" value="USA">United States</option>
+            <option value="UMI">United States Minor Outlying Islands</option>
+            <option value="URY">Uruguay</option>
+            <option value="UZB">Uzbekistan</option>
+            <option value="VUT">Vanuatu</option>
+            <option value="VEN">Venezuela</option>
+            <option value="VNM">Viet Nam</option>
+            <option value="VGB">Virgin Islands (british)</option>
+            <option value="VIR">Virgin Islands (u.s.)</option>
+            <option value="WLF">Wallis And Futuna Islands</option>
+            <option value="ESH">Western Sahara</option>
+            <option value="YEM">Yemen</option>
+            <option value="YUG">Yugoslavia</option>
+            <option value="ZMB">Zambia</option>
+            <option value="ZWE">Zimbabwe</option>
+    </select>
+    
+    
+        <script>$("#CreatePersonForm_countryGeoId").select2({  });</script>
+            </div><!-- /form-group -->
+        </div><!-- /field-row-item -->
+        <div class="big-row-item">
+            <div class="form-group">
+    
+    <select name="stateProvinceGeoId" class=" dynamic-options" id="CreatePersonForm_stateProvinceGeoId">
+            <option value="">&nbsp;</option>
+    </select>
+    
+    
+        <script>
+            var CreatePersonForm_stateProvinceGeoIdS2Opts = { 
+                
+                            };
+            $("#CreatePersonForm_stateProvinceGeoId").select2(CreatePersonForm_stateProvinceGeoIdS2Opts);
+            function populate_CreatePersonForm_stateProvinceGeoId(params) {
+                    var hasAllParms = true;
+                    if (!$('#CreatePersonForm_countryGeoId').val()) { hasAllParms = false; } 
+                    if (!hasAllParms) { $("#CreatePersonForm_stateProvinceGeoId").select2("destroy"); $('#CreatePersonForm_stateProvinceGeoId').html(""); $("#CreatePersonForm_stateProvinceGeoId").select2({ });  return; }
+                $.ajax({ type:"POST", url:"http://127.0.0.1:18091/apps/marble/Customer/FindCustomer/getGeoCountryStates", data:{ moquiSessionToken: "[REDACTED]", "countryGeoId": $("#CreatePersonForm_countryGeoId").val(), term:((params && params.term) || '')}, dataType:"json"}).done(                    function(data) {
+                        var list = moqui.isArray(data) ? data : data.options;
+                        if (list) {
+                            var jqEl = $("#CreatePersonForm_stateProvinceGeoId");
+                            var bWasFocused = jqEl.next().hasClass('select2-container--focus');
+                            jqEl.select2("destroy");
+                            jqEl.html("");
+                            
+                            $.each(list, function(key, value) {
+                                var optionValue = value["geoId"];
+                                if (optionValue === "") {
+                                    jqEl.append("<option selected='selected' value='" + optionValue + "'>" + value["label"] + "</option>");
+                                } else {
+                                    jqEl.append("<option value='" + optionValue + "'>" + value["label"] + "</option>");
+                                }
+                            });
+                            $("#CreatePersonForm_stateProvinceGeoId").select2(CreatePersonForm_stateProvinceGeoIdS2Opts);
+                            if( bWasFocused ) jqEl.focus();
+                            setTimeout(function() { jqEl.trigger('change'); }, 50);
+                        }
+                    }
+                );
+            }
+            $("#CreatePersonForm_countryGeoId").on('change', function() { populate_CreatePersonForm_stateProvinceGeoId(); });
+            populate_CreatePersonForm_stateProvinceGeoId();
+
+        </script>
+            </div><!-- /form-group -->
+        </div><!-- /field-row-item -->
+        </div>
+    </div>
+        <div class="form-group">
+            <div class="col-sm-2 hidden-xs">&nbsp;</div>
+            <div class="col-sm-10">
+    
+    <button type="submit" name="submitButton" value="submitButton" id="CreatePersonForm_submitButton" class="btn btn-primary btn-sm">
+Create    </button>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        </fieldset>
+    </form>
+        <script>
+            $("#CreatePersonForm").validate({ errorClass: 'help-block', errorElement: 'span',
+                highlight: function(element, errorClass, validClass) { $(element).parents('.form-group').removeClass('has-success').addClass('has-error'); },
+                unhighlight: function(element, errorClass, validClass) { $(element).parents('.form-group').removeClass('has-error').addClass('has-success'); }
+            });
+            $('#CreatePersonForm [data-toggle="tooltip"]').tooltip({placement:'auto top'});
+
+        </script>
+    <!-- END   form-single[@name=CreatePersonForm] -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>$('#CreatePersonDialog').on('shown.bs.modal', function() {
+            $("#CreatePersonDialog :not(.noResetSelect2)>select:not(.noResetSelect2)").select2({ });
+            var defFocus = $("#CreatePersonDialog .default-focus");
+            if (defFocus.length) { defFocus.focus(); } else { $("#CreatePersonDialog form :input:visible:first").focus(); }
+        });</script>
+        <button id="CreateAccountDialog-button" type="button" data-toggle="modal" data-target="#CreateAccountDialog" data-original-title="New Sales Account (Organization Customer)" data-placement="bottom" class="btn btn-primary btn-sm "><i class="fa fa-share"></i> New Sales Account (Organization Customer)</button>
+
+        <div id="CreateAccountDialog" class="modal container-dialog" aria-hidden="true" style="display: none;" tabindex="-1">
+            <div class="modal-dialog" style="width: 760px;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">New Sales Account (Organization Customer)</h4>
+                    </div>
+                    <div class="modal-body">
+    <!-- BEGIN form-single[@name=CreateAccountForm] -->
+    <form name="CreateAccountForm" id="CreateAccountForm" method="post" action="http://127.0.0.1:18091/apps/marble/Customer/FindCustomer/createAccount">
+        <input type="hidden" name="moquiFormName" value="CreateAccountForm" style="">
+        <input type="hidden" name="moquiSessionToken" value="[REDACTED]" style="">
+        
+        <fieldset class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="CreateAccountForm_organizationName">Organization Name</label>
+            <div class="col-sm-10">
+    
+<input id="CreateAccountForm_organizationName" type="text" name="organizationName" value="" size="60" class="form-control required" required="" style="">
+        
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="CreateAccountForm_parentAccountPartyId">Parent Sales Account</label>
+            <div class="col-sm-10">
+    
+    <select name="parentAccountPartyId" class=" dynamic-options noResetSelect2" style="min-width:200px;" id="CreateAccountForm_parentAccountPartyId">
+            <option value="">&nbsp;</option>
+    </select>
+    
+    
+        <script>
+            var CreateAccountForm_parentAccountPartyIdS2Opts = { 
+                
+                minimumResultsForSearch:0, width:"100%", minimumInputLength:2,
+                ajax:{ url:"http://127.0.0.1:18091/apps/marble/Customer/FindCustomer/searchPartyList", type:"POST", dataType:"json", cache:true, delay:300,
+                    data:function(params) { return { moquiSessionToken: "[REDACTED]", term:(params.term || ''), pageIndex:(params.page || 1) - 1
+                        
+                        , "roleTypeId":"Account"
+                    }},
+                    processResults:function(data, params) {
+                        var isDataArray = moqui.isArray(data);
+                        var list = isDataArray ? data : data.options;
+                        var newData = [];
+                        // funny case where select2 specifies no option.@value if empty so &nbsp; ends up passed with form submit; now filtered on server for \u00a0 only and set to null
+                        if (!params.page || params.page <= 1) newData.push({ id:'\u00a0', text:'\u00a0' });
+                        var labelField = "label"; var valueField = "value";
+                        $.each(list, function(idx, curObj) {
+                            var idVal = curObj[valueField]; if (!idVal) idVal = '\u00a0';
+                            newData.push({ id:idVal, text:curObj[labelField] })
+                        });
+                        var outObj = { results:newData };
+                        if (!isDataArray) {
+                            params.page = params.page || 1; // NOTE: 1 based index, is 0 based on server side
+                            var pageSize = data.pageSize || 20;
+                            outObj.pagination = { more: (data.count ? (params.page * pageSize) < data.count : false) };
+                        }
+                        return outObj;
+                    }
+                }
+            };
+            $("#CreateAccountForm_parentAccountPartyId").select2(CreateAccountForm_parentAccountPartyIdS2Opts);
+            function populate_CreateAccountForm_parentAccountPartyId(params) {
+                    var hasAllParms = true;
+                    
+                    if (!hasAllParms) { $("#CreateAccountForm_parentAccountPartyId").select2("destroy"); $('#CreateAccountForm_parentAccountPartyId').html(""); $("#CreateAccountForm_parentAccountPartyId").select2({ });  return; }
+                $.ajax({ type:"POST", url:"http://127.0.0.1:18091/apps/marble/Customer/FindCustomer/searchPartyList", data:{ moquiSessionToken: "[REDACTED]", "roleTypeId":"Account", term:((params && params.term) || '')}, dataType:"json"}).done(                    function(data) {
+                        var list = moqui.isArray(data) ? data : data.options;
+                        if (list) {
+                            var jqEl = $("#CreateAccountForm_parentAccountPartyId");
+                            var bWasFocused = jqEl.next().hasClass('select2-container--focus');
+                            jqEl.select2("destroy");
+                            jqEl.html("");
+                            jqEl.append('<option value="">&nbsp;</option>');
+                            
+                            $.each(list, function(key, value) {
+                                var optionValue = value["value"];
+                                if (optionValue === "") {
+                                    jqEl.append("<option selected='selected' value='" + optionValue + "'>" + value["label"] + "</option>");
+                                } else {
+                                    jqEl.append("<option value='" + optionValue + "'>" + value["label"] + "</option>");
+                                }
+                            });
+                            $("#CreateAccountForm_parentAccountPartyId").select2(CreateAccountForm_parentAccountPartyIdS2Opts);
+                            if( bWasFocused ) jqEl.focus();
+                            setTimeout(function() { jqEl.trigger('change'); }, 50);
+                        }
+                    }
+                );
+            }
+            
+                
+
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <div class="col-sm-2 hidden-xs">&nbsp;</div>
+            <div class="col-sm-10">
+    
+    <button type="submit" name="submitButton" value="submitButton" id="CreateAccountForm_submitButton" class="btn btn-primary btn-sm">
+Create    </button>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        </fieldset>
+    </form>
+        <script>
+            $("#CreateAccountForm").validate({ errorClass: 'help-block', errorElement: 'span',
+                highlight: function(element, errorClass, validClass) { $(element).parents('.form-group').removeClass('has-success').addClass('has-error'); },
+                unhighlight: function(element, errorClass, validClass) { $(element).parents('.form-group').removeClass('has-error').addClass('has-success'); }
+            });
+            $('#CreateAccountForm [data-toggle="tooltip"]').tooltip({placement:'auto top'});
+
+        </script>
+    <!-- END   form-single[@name=CreateAccountForm] -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>$('#CreateAccountDialog').on('shown.bs.modal', function() {
+            $("#CreateAccountDialog :not(.noResetSelect2)>select:not(.noResetSelect2)").select2({ });
+            var defFocus = $("#CreateAccountDialog .default-focus");
+            if (defFocus.length) { defFocus.focus(); } else { $("#CreateAccountDialog form :input:visible:first").focus(); }
+        });</script>
+        <button id="CreateContactDialog-button" type="button" data-toggle="modal" data-target="#CreateContactDialog" data-original-title="New Sales Contact" data-placement="bottom" class="btn btn-primary btn-sm "><i class="fa fa-share"></i> New Sales Contact</button>
+
+        <div id="CreateContactDialog" class="modal container-dialog" aria-hidden="true" style="display: none;" tabindex="-1">
+            <div class="modal-dialog" style="width: 760px;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">New Sales Contact</h4>
+                    </div>
+                    <div class="modal-body">
+    <!-- BEGIN form-single[@name=CreateContactForm] -->
+    <form name="CreateContactForm" id="CreateContactForm" method="post" action="http://127.0.0.1:18091/apps/marble/Customer/FindCustomer/createContact">
+        <input type="hidden" name="moquiFormName" value="CreateContactForm" style="">
+        <input type="hidden" name="moquiSessionToken" value="[REDACTED]" style="">
+        
+        <fieldset class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="CreateContactForm_accountPartyId">Sales Account</label>
+            <div class="col-sm-10">
+    
+    <select name="accountPartyId" class=" dynamic-options required noResetSelect2" style="min-width:200px;" id="CreateContactForm_accountPartyId">
+            <option value="">&nbsp;</option>
+    </select>
+    
+    
+        <script>
+            var CreateContactForm_accountPartyIdS2Opts = { 
+                
+                minimumResultsForSearch:0, width:"100%", minimumInputLength:2,
+                ajax:{ url:"http://127.0.0.1:18091/apps/marble/Customer/FindCustomer/searchPartyList", type:"POST", dataType:"json", cache:true, delay:300,
+                    data:function(params) { return { moquiSessionToken: "[REDACTED]", term:(params.term || ''), pageIndex:(params.page || 1) - 1
+                        
+                        , "roleTypeId":"Account"
+                    }},
+                    processResults:function(data, params) {
+                        var isDataArray = moqui.isArray(data);
+                        var list = isDataArray ? data : data.options;
+                        var newData = [];
+                        // funny case where select2 specifies no option.@value if empty so &nbsp; ends up passed with form submit; now filtered on server for \u00a0 only and set to null
+                        if (!params.page || params.page <= 1) newData.push({ id:'\u00a0', text:'\u00a0' });
+                        var labelField = "label"; var valueField = "value";
+                        $.each(list, function(idx, curObj) {
+                            var idVal = curObj[valueField]; if (!idVal) idVal = '\u00a0';
+                            newData.push({ id:idVal, text:curObj[labelField] })
+                        });
+                        var outObj = { results:newData };
+                        if (!isDataArray) {
+                            params.page = params.page || 1; // NOTE: 1 based index, is 0 based on server side
+                            var pageSize = data.pageSize || 20;
+                            outObj.pagination = { more: (data.count ? (params.page * pageSize) < data.count : false) };
+                        }
+                        return outObj;
+                    }
+                }
+            };
+            $("#CreateContactForm_accountPartyId").select2(CreateContactForm_accountPartyIdS2Opts);
+            function populate_CreateContactForm_accountPartyId(params) {
+                    var hasAllParms = true;
+                    
+                    if (!hasAllParms) { $("#CreateContactForm_accountPartyId").select2("destroy"); $('#CreateContactForm_accountPartyId').html(""); $("#CreateContactForm_accountPartyId").select2({ });  return; }
+                $.ajax({ type:"POST", url:"http://127.0.0.1:18091/apps/marble/Customer/FindCustomer/searchPartyList", data:{ moquiSessionToken: "[REDACTED]", "roleTypeId":"Account", term:((params && params.term) || '')}, dataType:"json"}).done(                    function(data) {
+                        var list = moqui.isArray(data) ? data : data.options;
+                        if (list) {
+                            var jqEl = $("#CreateContactForm_accountPartyId");
+                            var bWasFocused = jqEl.next().hasClass('select2-container--focus');
+                            jqEl.select2("destroy");
+                            jqEl.html("");
+                            jqEl.append('<option value="">&nbsp;</option>');
+                            
+                            $.each(list, function(key, value) {
+                                var optionValue = value["value"];
+                                if (optionValue === "") {
+                                    jqEl.append("<option selected='selected' value='" + optionValue + "'>" + value["label"] + "</option>");
+                                } else {
+                                    jqEl.append("<option value='" + optionValue + "'>" + value["label"] + "</option>");
+                                }
+                            });
+                            $("#CreateContactForm_accountPartyId").select2(CreateContactForm_accountPartyIdS2Opts);
+                            if( bWasFocused ) jqEl.focus();
+                            setTimeout(function() { jqEl.trigger('change'); }, 50);
+                        }
+                    }
+                );
+            }
+            
+                
+
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="CreateContactForm_firstName">First Name</label>
+            <div class="col-sm-10">
+    
+<input id="CreateContactForm_firstName" type="text" name="firstName" value="" size="30" class="form-control required" required="" style="">
+        
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="CreateContactForm_lastName">Last Name</label>
+            <div class="col-sm-10">
+    
+<input id="CreateContactForm_lastName" type="text" name="lastName" value="" size="30" class="form-control" style="">
+        
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="CreateContactForm_fromRoleTypeId">Role</label>
+            <div class="col-sm-10">
+    
+    <select name="fromRoleTypeId" class="" id="CreateContactForm_fromRoleTypeId">
+            <option value="">&nbsp;</option>
+            <option value="Accountant">Accountant</option>
+            <option value="Buyer">Buyer</option>
+            <option value="ClientBilling">Client Billing Rep</option>
+            <option value="ClientManager">Client Manager</option>
+            <option value="InventoryManager">Inventory Manager</option>
+            <option value="Manager">Manager</option>
+            <option value="OrderClerk">Order Clerk</option>
+            <option value="Owner">Owner</option>
+            <option value="ProductionManager">Production Manager</option>
+            <option value="Receiver">Receiver</option>
+            <option value="SalesRepresentative">Sales Representative</option>
+            <option value="ShipmentClerk">Shipment Clerk</option>
+            <option value="SupplierAgent">Supplier Agent</option>
+            <option value="TechContact">Technical Contact</option>
+    </select>
+    
+    
+        <script>$("#CreateContactForm_fromRoleTypeId").select2({  });</script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <div class="col-sm-2 hidden-xs">&nbsp;</div>
+            <div class="col-sm-10">
+    
+    <button type="submit" name="submitButton" value="submitButton" id="CreateContactForm_submitButton" class="btn btn-primary btn-sm">
+Create    </button>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        </fieldset>
+    </form>
+        <script>
+            $("#CreateContactForm").validate({ errorClass: 'help-block', errorElement: 'span',
+                highlight: function(element, errorClass, validClass) { $(element).parents('.form-group').removeClass('has-success').addClass('has-error'); },
+                unhighlight: function(element, errorClass, validClass) { $(element).parents('.form-group').removeClass('has-error').addClass('has-success'); }
+            });
+            $('#CreateContactForm [data-toggle="tooltip"]').tooltip({placement:'auto top'});
+
+        </script>
+    <!-- END   form-single[@name=CreateContactForm] -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>$('#CreateContactDialog').on('shown.bs.modal', function() {
+            $("#CreateContactDialog :not(.noResetSelect2)>select:not(.noResetSelect2)").select2({ });
+            var defFocus = $("#CreateContactDialog .default-focus");
+            if (defFocus.length) { defFocus.focus(); } else { $("#CreateContactDialog form :input:visible:first").focus(); }
+        });</script>
+            <a href="http://127.0.0.1:18091/apps/marble/Customer/CustomerData" class="btn btn-primary btn-sm">Customer Data</a>            <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html#query-string-syntax" target="_blank" class="">Search String Reference</a>    <!-- BEGIN form-single[@name=OuterSearchForm] -->
+    <form name="OuterSearchForm" id="OuterSearchForm" method="post" action="http://127.0.0.1:18091/apps/marble/Customer/FindCustomer">
+        <input type="hidden" name="moquiFormName" value="OuterSearchForm" style="">
+        <input type="hidden" name="moquiSessionToken" value="[REDACTED]" style="">
+        
+        <fieldset class="form-horizontal">
+    <div class="form-group">
+        <div class="col-sm-12">
+            <div class="big-row-item">
+            <div class="form-group">
+    
+<input id="OuterSearchForm_anyField" type="text" name="anyField" value="" size="100" class="form-control" data-toggle="tooltip" title="Matches whole words, use the asterisk (*) wildcard to match partial words; use field:term to search a specific field" style="">
+        
+            </div><!-- /form-group -->
+        </div><!-- /field-row-item -->
+        <div class="big-row-item">
+            <div class="form-group">
+    
+    <button type="submit" name="submitButton" value="submitButton" id="OuterSearchForm_submitButton" class="btn btn-primary btn-sm">
+Search    </button>
+            </div><!-- /form-group -->
+        </div><!-- /field-row-item -->
+        </div>
+    </div>
+        </fieldset>
+    </form>
+        <script>
+            $("#OuterSearchForm").validate({ errorClass: 'help-block', errorElement: 'span',
+                highlight: function(element, errorClass, validClass) { $(element).parents('.form-group').removeClass('has-success').addClass('has-error'); },
+                unhighlight: function(element, errorClass, validClass) { $(element).parents('.form-group').removeClass('has-error').addClass('has-success'); }
+            });
+            $('#OuterSearchForm [data-toggle="tooltip"]').tooltip({placement:'auto top'});
+
+        </script>
+        <script>$("#OuterSearchForm").find('[name^="anyField"]').addClass('default-focus').focus();</script>
+    <!-- END   form-single[@name=OuterSearchForm] -->
+    <!-- BEGIN form-list[@name=CustomerListForm] -->
+
+        <div id="CustomerListForm_hdialog" class="modal" aria-hidden="true" style="display: none;" tabindex="-1">
+            <div class="modal-dialog" style="width: 800px;"><div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Find Options</h4>
+                </div>
+                <div class="modal-body">
+                <h4 style="margin-top: 0;">Saved Finds</h4>
+                        <p>No find parameters, choose some to save a new find or update existing</p>
+                <h4>Find Parameters</h4>
+                    <form name="CustomerListForm_header" id="CustomerListForm_header" method="post" action="http://127.0.0.1:18091/apps/marble/Customer/FindCustomer">
+                        <input type="hidden" name="moquiSessionToken" value="[REDACTED]" style="">
+                        
+                        
+                        <fieldset class="form-horizontal">
+                            <div class="form-group"><div class="col-sm-2">&nbsp;</div><div class="col-sm-10">
+                                <button type="button" class="btn btn-primary btn-sm" onclick="CustomerListForm_header_clearForm()">Clear Parameters</button></div></div>
+
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="CustomerListForm_header_orderByField">Order By</label>
+                                <div class="col-sm-10">
+                                    <select name="orderBySelect" id="CustomerListForm_header_orderBySelect" multiple="multiple" style="width: 100%;" class="noResetSelect2">
+                                                <option value="pseudoId">ID (Asc)</option>
+                                                <option value="-pseudoId">ID (Desc)</option>
+                                                <option value="combinedName">Name (Asc)</option>
+                                                <option value="-combinedName">Name (Desc)</option>
+                                                <option value="username">Username (Asc)</option>
+                                                <option value="-username">Username (Desc)</option>
+                                    </select>
+                                    <input type="hidden" id="CustomerListForm_header_orderByField" name="orderByField" value="" style="">
+                                </div>
+                            </div>
+                            <script>
+                                function CustomerListForm_header_clearForm() {
+                                    var jqEl = $("#CustomerListForm_header");
+                                    jqEl.find(':radio, :checkbox').removeAttr('checked');
+                                    jqEl.find('textarea, :text, select').val('').trigger('change');
+                                    return false;
+                                }
+                                $("#CustomerListForm_header_orderBySelect").selectivity({ positionDropdown: function(dropdownEl, selectEl) { dropdownEl.css("width", "300px"); } })[0].selectivity.filterResults = function(results) {
+                                    // Filter out asc and desc options if anyone selected.
+                                    return results.filter(function(item){return !this._data.some(function(data_item) {return data_item.id.substring(1) === item.id.substring(1);});}, this);
+                                };
+                                    
+                                $("div#CustomerListForm_header_orderBySelect").on("change", function(evt) {
+                                    if (evt.value) $("#CustomerListForm_header_orderByField").val(evt.value.join(","));
+                                });
+                            </script>
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="CustomerListForm_header_anyField">Any Field</label>
+            <div class="col-sm-10">
+    
+<input id="CustomerListForm_header_anyField" type="text" name="anyField" value="" size="80" class="form-control" style="">
+        
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="CustomerListForm_header_pseudoId">ID</label>
+            <div class="col-sm-10">
+    
+<input id="CustomerListForm_header_pseudoId" type="text" name="pseudoId" value="" size="20" class="form-control" style="">
+        
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="CustomerListForm_header_idValue">Other ID</label>
+            <div class="col-sm-10">
+    
+<input id="CustomerListForm_header_idValue" type="text" name="idValue" value="" size="20" class="form-control" style="">
+        
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="CustomerListForm_header_gatewayCimId">CIM ID</label>
+            <div class="col-sm-10">
+    
+<input id="CustomerListForm_header_gatewayCimId" type="text" name="gatewayCimId" value="" size="20" class="form-control" style="">
+        
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="CustomerListForm_header_organizationName">Organization Name</label>
+            <div class="col-sm-10">
+    
+<input id="CustomerListForm_header_organizationName" type="text" name="organizationName" value="" size="40" class="form-control" style="">
+        
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="CustomerListForm_header_firstName">First Name</label>
+            <div class="col-sm-10">
+    
+<input id="CustomerListForm_header_firstName" type="text" name="firstName" value="" size="40" class="form-control" style="">
+        
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="CustomerListForm_header_lastName">Last Name</label>
+            <div class="col-sm-10">
+    
+<input id="CustomerListForm_header_lastName" type="text" name="lastName" value="" size="40" class="form-control" style="">
+        
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="CustomerListForm_header_combinedName">Name</label>
+            <div class="col-sm-10">
+    
+<input id="CustomerListForm_header_combinedName" type="text" name="combinedName" value="" size="40" class="form-control" style="">
+        
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="CustomerListForm_header_username">Username</label>
+            <div class="col-sm-10">
+    
+<input id="CustomerListForm_header_username" type="text" name="username" value="" size="20" class="form-control" style="">
+        
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="CustomerListForm_header_roleTypeId">Role</label>
+            <div class="col-sm-10">
+    
+    <select name="roleTypeId" class="" id="CustomerListForm_header_roleTypeId">
+            <option value="">&nbsp;</option>
+            <option value="Accountant">Accountant</option>
+            <option value="Administrator">Administrator</option>
+            <option value="Affiliate">Affiliate</option>
+            <option value="Agent">Agent</option>
+            <option value="AssetOwner">Asset Owner</option>
+            <option value="Assignee">Assignee</option>
+            <option value="OrgAssociation">Association</option>
+            <option value="Attendee">Attendee</option>
+            <option value="BadActor">Bad Actor (Banned)</option>
+            <option value="BusinessAnalyst">Business Analyst</option>
+            <option value="Buyer">Buyer</option>
+            <option value="Carrier">Carrier</option>
+            <option value="Cashier">Cashier</option>
+            <option value="ClientBilling">Client Billing Rep</option>
+            <option value="ClientManager">Client Manager</option>
+            <option value="Competitor">Competitor</option>
+            <option value="Consumer">Consumer</option>
+            <option value="Contractor">Contractor</option>
+            <option value="OrgCorporation">Corporation</option>
+            <option selected="selected" value="Customer">Customer</option>
+            <option value="CustomerBillTo">Customer - Bill To</option>
+            <option value="CustomerEndUser">Customer - End User</option>
+            <option value="CustomerPlacing">Customer - Placing</option>
+            <option value="CustomerShipTo">Customer - Ship To</option>
+            <option value="DefaultAssignee">Default Assignee</option>
+            <option value="Delegate">Delegate</option>
+            <option value="OrgDepartment">Department</option>
+            <option value="Distributor">Distributor</option>
+            <option value="OrgDivision">Division</option>
+            <option value="EmailAdmin">Email Administrator</option>
+            <option value="Employee">Employee</option>
+            <option value="OrgEmployer">Employer</option>
+            <option value="Executive">Executive</option>
+            <option value="ExpertUser">Expert User</option>
+            <option value="OrgFamily">Family</option>
+            <option value="FamilyMember">Family Member</option>
+            <option value="GarnishmentPayee">Garnishment Payee</option>
+            <option value="OrgGovernment">Government</option>
+            <option value="OrgGovernmentAgency">Government Agency</option>
+            <option value="Host">Host</option>
+            <option value="HostingProvider">Hosting Provider</option>
+            <option value="OrgHousehold">Household</option>
+            <option value="HumanResourcesManager">Human Resources Manager</option>
+            <option value="OrgInternal">Internal Organization</option>
+            <option value="InternetSp">Internet Service Provider</option>
+            <option value="InventoryManager">Inventory Manager</option>
+            <option value="Manager">Manager</option>
+            <option value="Manufacturer">Manufacturer</option>
+            <option value="_NA_">Not Applicable</option>
+            <option value="Operator">Operator</option>
+            <option value="OrderClerk">Order Clerk</option>
+            <option value="Organizer">Organizer</option>
+            <option value="Owner">Owner</option>
+            <option value="Packer">Packer</option>
+            <option value="OrgParent">Parent</option>
+            <option value="Partner">Partner</option>
+            <option value="Payroll">Payroll</option>
+            <option value="PayrollOtherPayee">Payroll Other Payee</option>
+            <option value="Picker">Picker</option>
+            <option value="ProductionManager">Production Manager</option>
+            <option value="ProductionWorker">Production Worker</option>
+            <option value="Programmer">Programmer</option>
+            <option value="ProgrammerLead">Programmer Lead</option>
+            <option value="ProjectManager">Project Manager</option>
+            <option value="Prospect">Prospect</option>
+            <option value="QualityAnalyst">Quality Analyst</option>
+            <option value="QualityLead">Quality Lead</option>
+            <option value="Receiver">Receiver</option>
+            <option value="Referrer">Referrer</option>
+            <option value="OrgRegulatoryAgency">Regulatory Agency</option>
+            <option value="Reporter">Reporter</option>
+            <option value="Account">Sales Account</option>
+            <option value="AccountLead">Sales Account Lead</option>
+            <option value="Contact">Sales Contact</option>
+            <option value="SalesRepresentative">Sales Representative</option>
+            <option value="Shareholder">Shareholder</option>
+            <option value="ShipmentClerk">Shipment Clerk</option>
+            <option value="Sponsor">Sponsor</option>
+            <option value="Spouse">Spouse</option>
+            <option value="Stocker">Stocker</option>
+            <option value="Subscriber">Subscriber</option>
+            <option value="OrgSubsidiary">Subsidiary</option>
+            <option value="Supplier">Supplier</option>
+            <option value="SupplierAgent">Supplier Agent</option>
+            <option value="SysAdmin">System Administrator</option>
+            <option value="SysArchitect">System Architect</option>
+            <option value="OrgTaxAuthority">Tax Authority</option>
+            <option value="OrgTeam">Team</option>
+            <option value="TechContact">Technical Contact</option>
+            <option value="UiDesigner">UI Designer</option>
+            <option value="OrgUnion">Union</option>
+            <option value="OrgUnit">Unit</option>
+            <option value="Vendor">Vendor</option>
+            <option value="VendorBillFrom">Vendor - Bill From</option>
+            <option value="VendorPickUpFrom">Vendor - Pick Up From</option>
+            <option value="VendorShipFrom">Vendor - Ship From</option>
+            <option value="Visitor">Visitor</option>
+            <option value="Watcher">Watcher</option>
+            <option value="WebMaster">Web Master</option>
+            <option value="Worker">Worker</option>
+    </select>
+    
+    
+        <script>$("#CustomerListForm_header_roleTypeId").select2({  });</script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="CustomerListForm_header_classificationTypeEnumId">Class Type</label>
+            <div class="col-sm-10">
+    
+    <select name="classificationTypeEnumId" class=" " id="CustomerListForm_header_classificationTypeEnumId">
+            <option value="">&nbsp;</option>
+            <option value="PcltCustomer">Customer</option>
+            <option value="PcltEeoc">EEOC (Equal Opportunity)</option>
+            <option value="PcltIncome">Income</option>
+            <option value="PcltIndustry">Industry</option>
+            <option value="PcltMinority">Minority</option>
+            <option value="PcltNaicsCode">NAICS Code</option>
+            <option value="PcltNumberEmployees">Number of Employees</option>
+            <option value="PcltOwnership">Ownership</option>
+            <option value="PcltRevenue">Revenue</option>
+            <option value="PcltSicCode">SIC Code</option>
+    </select>
+    
+    
+        <script>$("#CustomerListForm_header_classificationTypeEnumId").select2({  });</script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="CustomerListForm_header_partyClassificationId">Class</label>
+            <div class="col-sm-10">
+    
+    <select name="partyClassificationId" class=" dynamic-options" id="CustomerListForm_header_partyClassificationId">
+            <option value="">&nbsp;</option>
+    </select>
+    
+    
+        <script>
+            var CustomerListForm_header_partyClassificationIdS2Opts = { 
+                
+                            };
+            $("#CustomerListForm_header_partyClassificationId").select2(CustomerListForm_header_partyClassificationIdS2Opts);
+            function populate_CustomerListForm_header_partyClassificationId(params) {
+                    var hasAllParms = true;
+                    if (!$('#CustomerListForm_header_classificationTypeEnumId').val()) { hasAllParms = false; } 
+                    if (!hasAllParms) { $("#CustomerListForm_header_partyClassificationId").select2("destroy"); $('#CustomerListForm_header_partyClassificationId').html(""); $("#CustomerListForm_header_partyClassificationId").select2({ });  return; }
+                $.ajax({ type:"POST", url:"http://127.0.0.1:18091/apps/marble/Customer/FindCustomer/getPartyClassificationList", data:{ moquiSessionToken: "[REDACTED]", "classificationTypeEnumId": $("#CustomerListForm_header_classificationTypeEnumId").val(), term:((params && params.term) || '')}, dataType:"json"}).done(                    function(data) {
+                        var list = moqui.isArray(data) ? data : data.options;
+                        if (list) {
+                            var jqEl = $("#CustomerListForm_header_partyClassificationId");
+                            var bWasFocused = jqEl.next().hasClass('select2-container--focus');
+                            jqEl.select2("destroy");
+                            jqEl.html("");
+                            jqEl.append('<option value="">&nbsp;</option>');
+                            
+                            $.each(list, function(key, value) {
+                                var optionValue = value["partyClassificationId"];
+                                if (optionValue === "") {
+                                    jqEl.append("<option selected='selected' value='" + optionValue + "'>" + value["description"] + "</option>");
+                                } else {
+                                    jqEl.append("<option value='" + optionValue + "'>" + value["description"] + "</option>");
+                                }
+                            });
+                            $("#CustomerListForm_header_partyClassificationId").select2(CustomerListForm_header_partyClassificationIdS2Opts);
+                            if( bWasFocused ) jqEl.focus();
+                            setTimeout(function() { jqEl.trigger('change'); }, 50);
+                        }
+                    }
+                );
+            }
+            $("#CustomerListForm_header_classificationTypeEnumId").on('change', function() { populate_CustomerListForm_header_partyClassificationId(); });
+            populate_CustomerListForm_header_partyClassificationId();
+
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="CustomerListForm_header_disabled">Hidden</label>
+            <div class="col-sm-10">
+    
+    <select name="disabled" class="" id="CustomerListForm_header_disabled">
+            <option value="">&nbsp;</option>
+            <option value="Y">Y</option>
+            <option selected="selected" value="N">N</option>
+    </select>
+    
+    
+        <script>$("#CustomerListForm_header_disabled").select2({  });</script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="CustomerListForm_header_hasDuplicates">Dups</label>
+            <div class="col-sm-10">
+    
+    <select name="hasDuplicates" class="" id="CustomerListForm_header_hasDuplicates">
+            <option value="">&nbsp;</option>
+            <option value="Y">Y</option>
+            <option value="N">N</option>
+    </select>
+    
+    
+        <script>$("#CustomerListForm_header_hasDuplicates").select2({  });</script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="CustomerListForm_header_infoString">Email</label>
+            <div class="col-sm-10">
+    
+<input id="CustomerListForm_header_infoString" type="text" name="infoString" value="" size="40" class="form-control" style="">
+        
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="CustomerListForm_header_areaCode">Area Code</label>
+            <div class="col-sm-10">
+    
+<input id="CustomerListForm_header_areaCode" type="text" name="areaCode" value="" size="5" class="form-control" style="">
+        
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="CustomerListForm_header_contactNumber">Contact Number</label>
+            <div class="col-sm-10">
+    
+<input id="CustomerListForm_header_contactNumber" type="text" name="contactNumber" value="" size="10" class="form-control" style="">
+        
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="CustomerListForm_header_address1">Address1</label>
+            <div class="col-sm-10">
+    
+<input id="CustomerListForm_header_address1" type="text" name="address1" value="" size="40" class="form-control" style="">
+        
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="CustomerListForm_header_city">City</label>
+            <div class="col-sm-10">
+    
+<input id="CustomerListForm_header_city" type="text" name="city" value="" size="30" class="form-control" style="">
+        
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="CustomerListForm_header_stateProvinceGeoId">State</label>
+            <div class="col-sm-10">
+    
+    <select name="stateProvinceGeoId" class="" id="CustomerListForm_header_stateProvinceGeoId">
+            <option value="">&nbsp;</option>
+            <option value="USA_AL">Alabama</option>
+            <option value="USA_AK">Alaska</option>
+            <option value="USA_AS">American Samoa</option>
+            <option value="USA_AZ">Arizona</option>
+            <option value="USA_AR">Arkansas</option>
+            <option value="USA_AA">Armed Forces Americas</option>
+            <option value="USA_AE">Armed Forces Europe</option>
+            <option value="USA_AP">Armed Forces Pacific</option>
+            <option value="USA_CA">California</option>
+            <option value="USA_CO">Colorado</option>
+            <option value="USA_CT">Connecticut</option>
+            <option value="USA_DE">Delaware</option>
+            <option value="USA_DC">District of Columbia</option>
+            <option value="USA_FM">Federated States of Micronesia</option>
+            <option value="USA_FL">Florida</option>
+            <option value="USA_GA">Georgia</option>
+            <option value="USA_GU">Guam</option>
+            <option value="USA_HI">Hawaii</option>
+            <option value="USA_ID">Idaho</option>
+            <option value="USA_IL">Illinois</option>
+            <option value="USA_IN">Indiana</option>
+            <option value="USA_IA">Iowa</option>
+            <option value="USA_KS">Kansas</option>
+            <option value="USA_KY">Kentucky</option>
+            <option value="USA_LA">Louisiana</option>
+            <option value="USA_ME">Maine</option>
+            <option value="USA_MH">Marshall Islands</option>
+            <option value="USA_MD">Maryland</option>
+            <option value="USA_MA">Massachusetts</option>
+            <option value="USA_MI">Michigan</option>
+            <option value="USA_MN">Minnesota</option>
+            <option value="USA_MS">Mississippi</option>
+            <option value="USA_MO">Missouri</option>
+            <option value="USA_MT">Montana</option>
+            <option value="USA_NE">Nebraska</option>
+            <option value="USA_NV">Nevada</option>
+            <option value="USA_NH">New Hampshire</option>
+            <option value="USA_NJ">New Jersey</option>
+            <option value="USA_NM">New Mexico</option>
+            <option value="USA_NY">New York</option>
+            <option value="USA_NC">North Carolina</option>
+            <option value="USA_ND">North Dakota</option>
+            <option value="USA_MP">Northern Mariana Islands</option>
+            <option value="USA_OH">Ohio</option>
+            <option value="USA_OK">Oklahoma</option>
+            <option value="USA_OR">Oregon</option>
+            <option value="USA_PW">Palau</option>
+            <option value="USA_PA">Pennsylvania</option>
+            <option value="USA_PR">Puerto Rico</option>
+            <option value="USA_RI">Rhode Island</option>
+            <option value="USA_SC">South Carolina</option>
+            <option value="USA_SD">South Dakota</option>
+            <option value="USA_TN">Tennessee</option>
+            <option value="USA_TX">Texas</option>
+            <option value="USA_UM">U.S. Minor Outlying Islands</option>
+            <option value="USA_UT">Utah</option>
+            <option value="USA_VT">Vermont</option>
+            <option value="USA_VA">Virginia</option>
+            <option value="USA_VI">Virgin Islands</option>
+            <option value="USA_WA">Washington</option>
+            <option value="USA_WV">West Virginia</option>
+            <option value="USA_WI">Wisconsin</option>
+            <option value="USA_WY">Wyoming</option>
+    </select>
+    
+    
+        <script>$("#CustomerListForm_header_stateProvinceGeoId").select2({  });</script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="CustomerListForm_header_postalCode">Postal Code</label>
+            <div class="col-sm-10">
+    
+<input id="CustomerListForm_header_postalCode" type="text" name="postalCode" value="" size="10" class="form-control" style="">
+        
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <div class="col-sm-2 hidden-xs">&nbsp;</div>
+            <div class="col-sm-10">
+    
+    <button type="submit" name="submitButton" value="submitButton" id="CustomerListForm_header_submitButton" class="btn btn-primary btn-sm">
+Find    </button>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+                        </fieldset>
+                    </form>
+                </div>
+            </div></div>
+        </div>
+        <script>$('#CustomerListForm_hdialog').on('shown.bs.modal', function() {
+            $("#CustomerListForm_hdialog :not(.noResetSelect2)>select:not(.noResetSelect2)").select2({ });
+        })</script>
+        <div class="table-scroll-wrapper"><table class="table table-striped table-hover table-condensed" id="CustomerListForm_table">
+            <thead>
+        <tr class="form-list-nav-row"><th colspan="9">
+        <nav class="form-list-nav">
+            <button id="CustomerListForm_hdialog_button" type="button" data-toggle="modal" data-target="#CustomerListForm_hdialog" data-original-title="Find Options" data-placement="bottom" class="btn btn-default"><i class="fa fa-share"></i> Find Options</button>
+            
+
+                <ul class="pagination">
+                    <li><span><i class="fa fa-fast-backward"></i></span></li>
+                    <li><span><i class="fa fa-backward"></i></span></li>
+
+                <li><a href="http://127.0.0.1:18091/apps/marble/Customer/FindCustomer">Page 1 of 2,199 (1 - 20 of 43,980)</a></li>
+
+                    <li><a href="http://127.0.0.1:18091/apps/marble/Customer/FindCustomer?pageIndex=1">2</a></li>
+                    <li><a href="http://127.0.0.1:18091/apps/marble/Customer/FindCustomer?pageIndex=2">3</a></li>
+                    <li><a href="http://127.0.0.1:18091/apps/marble/Customer/FindCustomer?pageIndex=3">4</a></li>
+
+                    <li><a href="http://127.0.0.1:18091/apps/marble/Customer/FindCustomer?pageIndex=1"><i class="fa fa-forward"></i></a></li>
+                    <li><a href="http://127.0.0.1:18091/apps/marble/Customer/FindCustomer?pageIndex=2198"><i class="fa fa-fast-forward"></i></a></li>
+                </ul>
+                    <form class="form-inline" id="CustomerListForm_GoPage" method="post" action="http://127.0.0.1:18091/apps/marble/Customer/FindCustomer">
+
+                        <div class="form-group">
+                            <label class="sr-only" for="CustomerListForm_GoPage_pageIndex">Page Number</label>
+                            <input type="text" class="form-control" size="6" name="pageIndex" id="CustomerListForm_GoPage_pageIndex" placeholder="Page #" style="">
+                        </div>
+                        <button type="submit" class="btn btn-default">Go</button>
+                    </form>
+                    <script>
+                        $("#CustomerListForm_GoPage").validate({ errorClass: 'help-block', errorElement: 'span',
+                            rules: { pageIndex: { required:true, min:1, max:2199 } },
+                            highlight: function(element, errorClass, validClass) { $(element).parents('.form-group').removeClass('has-success').addClass('has-error'); },
+                            unhighlight: function(element, errorClass, validClass) { $(element).parents('.form-group').removeClass('has-error').addClass('has-success'); },
+                            submitHandler: function(form) { $("#CustomerListForm_GoPage_pageIndex").val($("#CustomerListForm_GoPage_pageIndex").val() - 1); form.submit(); }
+                        });
+                    </script>
+
+                <a href="http://127.0.0.1:18091/apps/marble/Customer/FindCustomer?renderMode=csv&amp;saveFilename=CustomerListForm.csv&amp;pageNoLimit=true&amp;lastStandalone=true" class="btn btn-default">CSV</a>
+        </nav>
+        </th></tr>
+
+            <tr><th colspan="9" style="font-weight: normal">
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                                <span style="white-space:nowrap;"><strong>Role:</strong> <span class="text-success">Customer</span></span>
+                        
+                        
+                        
+                                <span style="white-space:nowrap;"><strong>Hidden:</strong> <span class="text-success">N</span></span>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    <form name="CustomerListForm_header" id="CustomerListForm_header" method="post" action="http://127.0.0.1:18091/apps/marble/Customer/FindCustomer">
+                        
+                        <button id="CustomerListForm_header-quick-clear" type="submit" name="clearParameters" style="float:left; padding: 0 5px 0 5px; margin: 0 4px 0 0;" class="btn btn-primary btn-sm"><i class="fa fa-remove"></i></button>
+                    </form>
+            </th></tr>
+
+                <tr>
+                    <th>
+                        <div><div class="form-title">ID            <span class="form-order-by">
+                <a href="http://127.0.0.1:18091/apps/marble/Customer/FindCustomer?orderByField=pseudoId"><i class="fa fa-caret-up"></i></a>
+                <a href="http://127.0.0.1:18091/apps/marble/Customer/FindCustomer?orderByField=-pseudoId"><i class="fa fa-caret-down"></i></a>
+            </span>
+</div>    </div>
+                    </th>
+                    <th>
+                        <div><div class="form-title">Name            <span class="form-order-by">
+                <a href="http://127.0.0.1:18091/apps/marble/Customer/FindCustomer?orderByField=combinedName"><i class="fa fa-caret-up"></i></a>
+                <a href="http://127.0.0.1:18091/apps/marble/Customer/FindCustomer?orderByField=-combinedName"><i class="fa fa-caret-down"></i></a>
+            </span>
+</div>    </div>
+                    </th>
+                    <th>
+                        <div><div class="form-title">Username            <span class="form-order-by">
+                <a href="http://127.0.0.1:18091/apps/marble/Customer/FindCustomer?orderByField=username"><i class="fa fa-caret-up"></i></a>
+                <a href="http://127.0.0.1:18091/apps/marble/Customer/FindCustomer?orderByField=-username"><i class="fa fa-caret-down"></i></a>
+            </span>
+</div>    </div>
+                    </th>
+                    <th>
+                        <div><div class="form-title">Role</div>    </div>
+                    </th>
+                    <th>
+                        <div><div class="form-title">Class</div>    </div>
+                    </th>
+                    <th>
+                        <div><div class="form-title">Hidden</div>    </div>
+                    </th>
+                    <th>
+                        <div><div class="form-title">Dups</div>    </div>
+                    </th>
+                    <th>
+                        <div><div class="form-title">Matches</div>    </div>
+                    </th>
+                    <th>
+                        <div><div class="form-title">&nbsp;</div>    </div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+        
+        <tr>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Customer/EditCustomer?partyId=100052" id="CustomerListForm_pseudoId_0_editCustomer" class="">100052</a>                
+            
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Customer/EditCustomer?partyId=100052" id="CustomerListForm_combinedName_0_editCustomer" class="">hari mali</a>                
+            
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<!-- BEGIN section-iterate[@name=UserAccountsSection] -->
+    
+    <!-- END   section-iterate[@name=UserAccountsSection] -->    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">Customer, Customer - Bill To, Customer - Ship To</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">Consumer</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">N</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">Y</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+    <!-- BEGIN screen[@location=component://SimpleScreens/screen/SimpleScreens/Customer/FindCustomer.xml].widgets -->
+<div class="text-inline">Role Type ID: "<strong>Customer</strong>"</div>
+    <!-- END   screen[@location=component://SimpleScreens/screen/SimpleScreens/Customer/FindCustomer.xml].widgets -->
+<!-- BEGIN section-iterate[@name=MatchesSection] -->
+    
+    <!-- END   section-iterate[@name=MatchesSection] -->    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Order/FindOrder?customerPartyId=100052" id="CustomerListForm_submitButton_0_findOrder" class="">Sales Orders</a>                
+            
+    </div>
+            </td>
+        </tr>
+        
+        
+        <tr>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Customer/EditCustomer?partyId=100053" id="CustomerListForm_pseudoId_1_editCustomer" class="">100053</a>                
+            
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Customer/EditCustomer?partyId=100053" id="CustomerListForm_combinedName_1_editCustomer" class="">Ronak NA</a>                
+            
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<!-- BEGIN section-iterate[@name=UserAccountsSection] -->
+    
+    <!-- END   section-iterate[@name=UserAccountsSection] -->    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">Customer, Customer - Bill To, Customer - Ship To</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">Consumer</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">N</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">Y</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+    <!-- BEGIN screen[@location=component://SimpleScreens/screen/SimpleScreens/Customer/FindCustomer.xml].widgets -->
+<div class="text-inline">Role Type ID: "<strong>Customer</strong>"</div>
+    <!-- END   screen[@location=component://SimpleScreens/screen/SimpleScreens/Customer/FindCustomer.xml].widgets -->
+<!-- BEGIN section-iterate[@name=MatchesSection] -->
+    
+    <!-- END   section-iterate[@name=MatchesSection] -->    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Order/FindOrder?customerPartyId=100053" id="CustomerListForm_submitButton_1_findOrder" class="">Sales Orders</a>                
+            
+    </div>
+            </td>
+        </tr>
+        
+        
+        <tr>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Customer/EditCustomer?partyId=100054" id="CustomerListForm_pseudoId_2_editCustomer" class="">100054</a>                
+            
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Customer/EditCustomer?partyId=100054" id="CustomerListForm_combinedName_2_editCustomer" class="">Hari Vishnu</a>                
+            
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<!-- BEGIN section-iterate[@name=UserAccountsSection] -->
+    
+    <!-- END   section-iterate[@name=UserAccountsSection] -->    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">Customer, Customer - Bill To, Customer - Ship To</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">Consumer</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">N</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">Y</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+    <!-- BEGIN screen[@location=component://SimpleScreens/screen/SimpleScreens/Customer/FindCustomer.xml].widgets -->
+<div class="text-inline">Role Type ID: "<strong>Customer</strong>"</div>
+    <!-- END   screen[@location=component://SimpleScreens/screen/SimpleScreens/Customer/FindCustomer.xml].widgets -->
+<!-- BEGIN section-iterate[@name=MatchesSection] -->
+    
+    <!-- END   section-iterate[@name=MatchesSection] -->    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Order/FindOrder?customerPartyId=100054" id="CustomerListForm_submitButton_2_findOrder" class="">Sales Orders</a>                
+            
+    </div>
+            </td>
+        </tr>
+        
+        
+        <tr>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Customer/EditCustomer?partyId=100055" id="CustomerListForm_pseudoId_3_editCustomer" class="">100055</a>                
+            
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Customer/EditCustomer?partyId=100055" id="CustomerListForm_combinedName_3_editCustomer" class="">Ronak NA</a>                
+            
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<!-- BEGIN section-iterate[@name=UserAccountsSection] -->
+    
+    <!-- END   section-iterate[@name=UserAccountsSection] -->    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">Customer, Customer - Bill To, Customer - Ship To</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">Consumer</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">N</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">Y</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+    <!-- BEGIN screen[@location=component://SimpleScreens/screen/SimpleScreens/Customer/FindCustomer.xml].widgets -->
+<div class="text-inline">Role Type ID: "<strong>Customer</strong>"</div>
+    <!-- END   screen[@location=component://SimpleScreens/screen/SimpleScreens/Customer/FindCustomer.xml].widgets -->
+<!-- BEGIN section-iterate[@name=MatchesSection] -->
+    
+    <!-- END   section-iterate[@name=MatchesSection] -->    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Order/FindOrder?customerPartyId=100055" id="CustomerListForm_submitButton_3_findOrder" class="">Sales Orders</a>                
+            
+    </div>
+            </td>
+        </tr>
+        
+        
+        <tr>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Customer/EditCustomer?partyId=100103" id="CustomerListForm_pseudoId_4_editCustomer" class="">100103</a>                
+            
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Customer/EditCustomer?partyId=100103" id="CustomerListForm_combinedName_4_editCustomer" class="">hari mali</a>                
+            
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<!-- BEGIN section-iterate[@name=UserAccountsSection] -->
+    
+    <!-- END   section-iterate[@name=UserAccountsSection] -->    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">Customer, Customer - Bill To, Customer - Ship To</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">Consumer</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">N</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">Y</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+    <!-- BEGIN screen[@location=component://SimpleScreens/screen/SimpleScreens/Customer/FindCustomer.xml].widgets -->
+<div class="text-inline">Role Type ID: "<strong>Customer</strong>"</div>
+    <!-- END   screen[@location=component://SimpleScreens/screen/SimpleScreens/Customer/FindCustomer.xml].widgets -->
+<!-- BEGIN section-iterate[@name=MatchesSection] -->
+    
+    <!-- END   section-iterate[@name=MatchesSection] -->    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Order/FindOrder?customerPartyId=100103" id="CustomerListForm_submitButton_4_findOrder" class="">Sales Orders</a>                
+            
+    </div>
+            </td>
+        </tr>
+        
+        
+        <tr>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Customer/EditCustomer?partyId=100153" id="CustomerListForm_pseudoId_5_editCustomer" class="">100153</a>                
+            
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Customer/EditCustomer?partyId=100153" id="CustomerListForm_combinedName_5_editCustomer" class="">John Doe</a>                
+            
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<!-- BEGIN section-iterate[@name=UserAccountsSection] -->
+    
+    <!-- END   section-iterate[@name=UserAccountsSection] -->    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">Customer, Customer - Bill To, Customer - Ship To</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">Consumer</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">N</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">Y</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+    <!-- BEGIN screen[@location=component://SimpleScreens/screen/SimpleScreens/Customer/FindCustomer.xml].widgets -->
+<div class="text-inline">Role Type ID: "<strong>Customer</strong>"</div>
+    <!-- END   screen[@location=component://SimpleScreens/screen/SimpleScreens/Customer/FindCustomer.xml].widgets -->
+<!-- BEGIN section-iterate[@name=MatchesSection] -->
+    
+    <!-- END   section-iterate[@name=MatchesSection] -->    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Order/FindOrder?customerPartyId=100153" id="CustomerListForm_submitButton_5_findOrder" class="">Sales Orders</a>                
+            
+    </div>
+            </td>
+        </tr>
+        
+        
+        <tr>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Customer/EditCustomer?partyId=100156" id="CustomerListForm_pseudoId_6_editCustomer" class="">100156</a>                
+            
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Customer/EditCustomer?partyId=100156" id="CustomerListForm_combinedName_6_editCustomer" class="">Danielle Csibi</a>                
+            
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<!-- BEGIN section-iterate[@name=UserAccountsSection] -->
+    
+    <!-- END   section-iterate[@name=UserAccountsSection] -->    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">Customer</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">Consumer</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">N</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">Y</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+    <!-- BEGIN screen[@location=component://SimpleScreens/screen/SimpleScreens/Customer/FindCustomer.xml].widgets -->
+<div class="text-inline">Role Type ID: "<strong>Customer</strong>"</div>
+    <!-- END   screen[@location=component://SimpleScreens/screen/SimpleScreens/Customer/FindCustomer.xml].widgets -->
+<!-- BEGIN section-iterate[@name=MatchesSection] -->
+    
+    <!-- END   section-iterate[@name=MatchesSection] -->    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Order/FindOrder?customerPartyId=100156" id="CustomerListForm_submitButton_6_findOrder" class="">Sales Orders</a>                
+            
+    </div>
+            </td>
+        </tr>
+        
+        
+        <tr>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Customer/EditCustomer?partyId=100204" id="CustomerListForm_pseudoId_7_editCustomer" class="">100204</a>                
+            
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Customer/EditCustomer?partyId=100204" id="CustomerListForm_combinedName_7_editCustomer" class="">Patricia Kisch</a>                
+            
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<!-- BEGIN section-iterate[@name=UserAccountsSection] -->
+    
+    <!-- END   section-iterate[@name=UserAccountsSection] -->    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">Customer, Customer - Bill To, Customer - Ship To</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">Consumer</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">N</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">N</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+    <!-- BEGIN screen[@location=component://SimpleScreens/screen/SimpleScreens/Customer/FindCustomer.xml].widgets -->
+<div class="text-inline">Role Type ID: "<strong>Customer</strong>"</div>
+    <!-- END   screen[@location=component://SimpleScreens/screen/SimpleScreens/Customer/FindCustomer.xml].widgets -->
+<!-- BEGIN section-iterate[@name=MatchesSection] -->
+    
+    <!-- END   section-iterate[@name=MatchesSection] -->    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Order/FindOrder?customerPartyId=100204" id="CustomerListForm_submitButton_7_findOrder" class="">Sales Orders</a>                
+            
+    </div>
+            </td>
+        </tr>
+        
+        
+        <tr>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Customer/EditCustomer?partyId=100205" id="CustomerListForm_pseudoId_8_editCustomer" class="">100205</a>                
+            
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Customer/EditCustomer?partyId=100205" id="CustomerListForm_combinedName_8_editCustomer" class="">James McCabe</a>                
+            
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<!-- BEGIN section-iterate[@name=UserAccountsSection] -->
+    
+    <!-- END   section-iterate[@name=UserAccountsSection] -->    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">Customer, Customer - Bill To, Customer - Ship To</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">Consumer</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">N</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">N</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+    <!-- BEGIN screen[@location=component://SimpleScreens/screen/SimpleScreens/Customer/FindCustomer.xml].widgets -->
+<div class="text-inline">Role Type ID: "<strong>Customer</strong>"</div>
+    <!-- END   screen[@location=component://SimpleScreens/screen/SimpleScreens/Customer/FindCustomer.xml].widgets -->
+<!-- BEGIN section-iterate[@name=MatchesSection] -->
+    
+    <!-- END   section-iterate[@name=MatchesSection] -->    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Order/FindOrder?customerPartyId=100205" id="CustomerListForm_submitButton_8_findOrder" class="">Sales Orders</a>                
+            
+    </div>
+            </td>
+        </tr>
+        
+        
+        <tr>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Customer/EditCustomer?partyId=100206" id="CustomerListForm_pseudoId_9_editCustomer" class="">100206</a>                
+            
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Customer/EditCustomer?partyId=100206" id="CustomerListForm_combinedName_9_editCustomer" class="">Marsha Gaudin</a>                
+            
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<!-- BEGIN section-iterate[@name=UserAccountsSection] -->
+    
+    <!-- END   section-iterate[@name=UserAccountsSection] -->    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">Customer, Customer - Bill To, Customer - Ship To</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">Consumer</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">N</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">N</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+    <!-- BEGIN screen[@location=component://SimpleScreens/screen/SimpleScreens/Customer/FindCustomer.xml].widgets -->
+<div class="text-inline">Role Type ID: "<strong>Customer</strong>"</div>
+    <!-- END   screen[@location=component://SimpleScreens/screen/SimpleScreens/Customer/FindCustomer.xml].widgets -->
+<!-- BEGIN section-iterate[@name=MatchesSection] -->
+    
+    <!-- END   section-iterate[@name=MatchesSection] -->    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Order/FindOrder?customerPartyId=100206" id="CustomerListForm_submitButton_9_findOrder" class="">Sales Orders</a>                
+            
+    </div>
+            </td>
+        </tr>
+        
+        
+        <tr>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Customer/EditCustomer?partyId=100207" id="CustomerListForm_pseudoId_10_editCustomer" class="">100207</a>                
+            
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Customer/EditCustomer?partyId=100207" id="CustomerListForm_combinedName_10_editCustomer" class="">Lawrence Pairitz</a>                
+            
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<!-- BEGIN section-iterate[@name=UserAccountsSection] -->
+    
+    <!-- END   section-iterate[@name=UserAccountsSection] -->    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">Customer, Customer - Bill To, Customer - Ship To</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">Consumer</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">N</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">N</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+    <!-- BEGIN screen[@location=component://SimpleScreens/screen/SimpleScreens/Customer/FindCustomer.xml].widgets -->
+<div class="text-inline">Role Type ID: "<strong>Customer</strong>"</div>
+    <!-- END   screen[@location=component://SimpleScreens/screen/SimpleScreens/Customer/FindCustomer.xml].widgets -->
+<!-- BEGIN section-iterate[@name=MatchesSection] -->
+    
+    <!-- END   section-iterate[@name=MatchesSection] -->    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Order/FindOrder?customerPartyId=100207" id="CustomerListForm_submitButton_10_findOrder" class="">Sales Orders</a>                
+            
+    </div>
+            </td>
+        </tr>
+        
+        
+        <tr>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Customer/EditCustomer?partyId=100208" id="CustomerListForm_pseudoId_11_editCustomer" class="">100208</a>                
+            
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Customer/EditCustomer?partyId=100208" id="CustomerListForm_combinedName_11_editCustomer" class="">Sandy Murphey</a>                
+            
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<!-- BEGIN section-iterate[@name=UserAccountsSection] -->
+    
+    <!-- END   section-iterate[@name=UserAccountsSection] -->    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">Customer, Customer - Bill To, Customer - Ship To</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">Consumer</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">N</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">N</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+    <!-- BEGIN screen[@location=component://SimpleScreens/screen/SimpleScreens/Customer/FindCustomer.xml].widgets -->
+<div class="text-inline">Role Type ID: "<strong>Customer</strong>"</div>
+    <!-- END   screen[@location=component://SimpleScreens/screen/SimpleScreens/Customer/FindCustomer.xml].widgets -->
+<!-- BEGIN section-iterate[@name=MatchesSection] -->
+    
+    <!-- END   section-iterate[@name=MatchesSection] -->    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Order/FindOrder?customerPartyId=100208" id="CustomerListForm_submitButton_11_findOrder" class="">Sales Orders</a>                
+            
+    </div>
+            </td>
+        </tr>
+        
+        
+        <tr>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Customer/EditCustomer?partyId=100209" id="CustomerListForm_pseudoId_12_editCustomer" class="">100209</a>                
+            
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Customer/EditCustomer?partyId=100209" id="CustomerListForm_combinedName_12_editCustomer" class="">Bobbie Mauzy</a>                
+            
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<!-- BEGIN section-iterate[@name=UserAccountsSection] -->
+    
+    <!-- END   section-iterate[@name=UserAccountsSection] -->    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">Customer, Customer - Bill To, Customer - Ship To</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">Consumer</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">N</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">N</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+    <!-- BEGIN screen[@location=component://SimpleScreens/screen/SimpleScreens/Customer/FindCustomer.xml].widgets -->
+<div class="text-inline">Role Type ID: "<strong>Customer</strong>"</div>
+    <!-- END   screen[@location=component://SimpleScreens/screen/SimpleScreens/Customer/FindCustomer.xml].widgets -->
+<!-- BEGIN section-iterate[@name=MatchesSection] -->
+    
+    <!-- END   section-iterate[@name=MatchesSection] -->    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Order/FindOrder?customerPartyId=100209" id="CustomerListForm_submitButton_12_findOrder" class="">Sales Orders</a>                
+            
+    </div>
+            </td>
+        </tr>
+        
+        
+        <tr>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Customer/EditCustomer?partyId=100210" id="CustomerListForm_pseudoId_13_editCustomer" class="">100210</a>                
+            
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Customer/EditCustomer?partyId=100210" id="CustomerListForm_combinedName_13_editCustomer" class="">Judith Cook</a>                
+            
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<!-- BEGIN section-iterate[@name=UserAccountsSection] -->
+    
+    <!-- END   section-iterate[@name=UserAccountsSection] -->    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">Customer, Customer - Bill To, Customer - Ship To</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">Consumer</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">N</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">N</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+    <!-- BEGIN screen[@location=component://SimpleScreens/screen/SimpleScreens/Customer/FindCustomer.xml].widgets -->
+<div class="text-inline">Role Type ID: "<strong>Customer</strong>"</div>
+    <!-- END   screen[@location=component://SimpleScreens/screen/SimpleScreens/Customer/FindCustomer.xml].widgets -->
+<!-- BEGIN section-iterate[@name=MatchesSection] -->
+    
+    <!-- END   section-iterate[@name=MatchesSection] -->    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Order/FindOrder?customerPartyId=100210" id="CustomerListForm_submitButton_13_findOrder" class="">Sales Orders</a>                
+            
+    </div>
+            </td>
+        </tr>
+        
+        
+        <tr>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Customer/EditCustomer?partyId=100211" id="CustomerListForm_pseudoId_14_editCustomer" class="">100211</a>                
+            
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Customer/EditCustomer?partyId=100211" id="CustomerListForm_combinedName_14_editCustomer" class="">Ann Daniel</a>                
+            
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<!-- BEGIN section-iterate[@name=UserAccountsSection] -->
+    
+    <!-- END   section-iterate[@name=UserAccountsSection] -->    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">Customer, Customer - Bill To, Customer - Ship To</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">Consumer</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">N</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">N</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+    <!-- BEGIN screen[@location=component://SimpleScreens/screen/SimpleScreens/Customer/FindCustomer.xml].widgets -->
+<div class="text-inline">Role Type ID: "<strong>Customer</strong>"</div>
+    <!-- END   screen[@location=component://SimpleScreens/screen/SimpleScreens/Customer/FindCustomer.xml].widgets -->
+<!-- BEGIN section-iterate[@name=MatchesSection] -->
+    
+    <!-- END   section-iterate[@name=MatchesSection] -->    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Order/FindOrder?customerPartyId=100211" id="CustomerListForm_submitButton_14_findOrder" class="">Sales Orders</a>                
+            
+    </div>
+            </td>
+        </tr>
+        
+        
+        <tr>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Customer/EditCustomer?partyId=100212" id="CustomerListForm_pseudoId_15_editCustomer" class="">100212</a>                
+            
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Customer/EditCustomer?partyId=100212" id="CustomerListForm_combinedName_15_editCustomer" class="">Kimberly M Taylor</a>                
+            
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<!-- BEGIN section-iterate[@name=UserAccountsSection] -->
+    
+    <!-- END   section-iterate[@name=UserAccountsSection] -->    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">Customer, Customer - Bill To, Customer - Ship To</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">Consumer</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">N</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">N</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+    <!-- BEGIN screen[@location=component://SimpleScreens/screen/SimpleScreens/Customer/FindCustomer.xml].widgets -->
+<div class="text-inline">Role Type ID: "<strong>Customer</strong>"</div>
+    <!-- END   screen[@location=component://SimpleScreens/screen/SimpleScreens/Customer/FindCustomer.xml].widgets -->
+<!-- BEGIN section-iterate[@name=MatchesSection] -->
+    
+    <!-- END   section-iterate[@name=MatchesSection] -->    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Order/FindOrder?customerPartyId=100212" id="CustomerListForm_submitButton_15_findOrder" class="">Sales Orders</a>                
+            
+    </div>
+            </td>
+        </tr>
+        
+        
+        <tr>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Customer/EditCustomer?partyId=100213" id="CustomerListForm_pseudoId_16_editCustomer" class="">100213</a>                
+            
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Customer/EditCustomer?partyId=100213" id="CustomerListForm_combinedName_16_editCustomer" class="">Vicki Hunt</a>                
+            
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<!-- BEGIN section-iterate[@name=UserAccountsSection] -->
+    
+    <!-- END   section-iterate[@name=UserAccountsSection] -->    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">Customer, Customer - Bill To, Customer - Ship To</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">Consumer</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">N</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">N</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+    <!-- BEGIN screen[@location=component://SimpleScreens/screen/SimpleScreens/Customer/FindCustomer.xml].widgets -->
+<div class="text-inline">Role Type ID: "<strong>Customer</strong>"</div>
+    <!-- END   screen[@location=component://SimpleScreens/screen/SimpleScreens/Customer/FindCustomer.xml].widgets -->
+<!-- BEGIN section-iterate[@name=MatchesSection] -->
+    
+    <!-- END   section-iterate[@name=MatchesSection] -->    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Order/FindOrder?customerPartyId=100213" id="CustomerListForm_submitButton_16_findOrder" class="">Sales Orders</a>                
+            
+    </div>
+            </td>
+        </tr>
+        
+        
+        <tr>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Customer/EditCustomer?partyId=100214" id="CustomerListForm_pseudoId_17_editCustomer" class="">100214</a>                
+            
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Customer/EditCustomer?partyId=100214" id="CustomerListForm_combinedName_17_editCustomer" class="">Frank Cividino</a>                
+            
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<!-- BEGIN section-iterate[@name=UserAccountsSection] -->
+    
+    <!-- END   section-iterate[@name=UserAccountsSection] -->    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">Customer, Customer - Bill To, Customer - Ship To</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">Consumer</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">N</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">N</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+    <!-- BEGIN screen[@location=component://SimpleScreens/screen/SimpleScreens/Customer/FindCustomer.xml].widgets -->
+<div class="text-inline">Role Type ID: "<strong>Customer</strong>"</div>
+    <!-- END   screen[@location=component://SimpleScreens/screen/SimpleScreens/Customer/FindCustomer.xml].widgets -->
+<!-- BEGIN section-iterate[@name=MatchesSection] -->
+    
+    <!-- END   section-iterate[@name=MatchesSection] -->    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Order/FindOrder?customerPartyId=100214" id="CustomerListForm_submitButton_17_findOrder" class="">Sales Orders</a>                
+            
+    </div>
+            </td>
+        </tr>
+        
+        
+        <tr>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Customer/EditCustomer?partyId=100215" id="CustomerListForm_pseudoId_18_editCustomer" class="">100215</a>                
+            
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Customer/EditCustomer?partyId=100215" id="CustomerListForm_combinedName_18_editCustomer" class="">John Fredrickson</a>                
+            
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<!-- BEGIN section-iterate[@name=UserAccountsSection] -->
+    
+    <!-- END   section-iterate[@name=UserAccountsSection] -->    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">Customer, Customer - Bill To, Customer - Ship To</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">Consumer</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">N</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">N</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+    <!-- BEGIN screen[@location=component://SimpleScreens/screen/SimpleScreens/Customer/FindCustomer.xml].widgets -->
+<div class="text-inline">Role Type ID: "<strong>Customer</strong>"</div>
+    <!-- END   screen[@location=component://SimpleScreens/screen/SimpleScreens/Customer/FindCustomer.xml].widgets -->
+<!-- BEGIN section-iterate[@name=MatchesSection] -->
+    
+    <!-- END   section-iterate[@name=MatchesSection] -->    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Order/FindOrder?customerPartyId=100215" id="CustomerListForm_submitButton_18_findOrder" class="">Sales Orders</a>                
+            
+    </div>
+            </td>
+        </tr>
+        
+        
+        <tr>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Customer/EditCustomer?partyId=100216" id="CustomerListForm_pseudoId_19_editCustomer" class="">100216</a>                
+            
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Customer/EditCustomer?partyId=100216" id="CustomerListForm_combinedName_19_editCustomer" class="">Matthew Cavallo</a>                
+            
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<!-- BEGIN section-iterate[@name=UserAccountsSection] -->
+    
+    <!-- END   section-iterate[@name=UserAccountsSection] -->    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">Customer, Customer - Bill To, Customer - Ship To</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">Consumer</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">N</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">N</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+    <!-- BEGIN screen[@location=component://SimpleScreens/screen/SimpleScreens/Customer/FindCustomer.xml].widgets -->
+<div class="text-inline">Role Type ID: "<strong>Customer</strong>"</div>
+    <!-- END   screen[@location=component://SimpleScreens/screen/SimpleScreens/Customer/FindCustomer.xml].widgets -->
+<!-- BEGIN section-iterate[@name=MatchesSection] -->
+    
+    <!-- END   section-iterate[@name=MatchesSection] -->    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Order/FindOrder?customerPartyId=100216" id="CustomerListForm_submitButton_19_findOrder" class="">Sales Orders</a>                
+            
+    </div>
+            </td>
+        </tr>
+        
+                </tbody>
+        </table></div>
+    
+    <!-- END   form-list[@name=CustomerListForm] -->
+    <div class="row">
+            <div class=" col-md-2 text-right">
+<strong class="text-inline">Current Search String</strong>
+            </div>
+            <div class="">
+<span class="text-inline">roles.roleTypeId:Customer AND disabled:N</span>
+            </div>
+    </div>
+    <!-- END   screen[@location=component://SimpleScreens/screen/SimpleScreens/Customer/FindCustomer.xml].widgets -->
+
+        </div>
+    <!-- END   screen[@location=component://SimpleScreens/screen/SimpleScreens/Customer.xml].widgets -->
+
+    <!-- END   screen[@location=component://MarbleERP/screen/marble.xml].widgets -->
+
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    <!-- BEGIN section[@name=BottomNavSection] -->
+        <!-- BEGIN screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+    <div id="footer" class="bg-dark">
+        <!-- BEGIN render-mode.text[inline][@template=true] -->
+                <div id="apps-footer-content">
+<p><a href="https://www.moqui.org/" target="_blank">Built on Moqui Framework 4.0.0</a></p><p><a href="/vapps/ScreenTree">Site Map</a></p>                </div>        <!-- END   render-mode.text[inline][@template=true] -->
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    <!-- END   screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+
+    <!-- END   section[@name=BottomNavSection] -->
+    <!-- END   screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+        
+
+
+
+
+        
+        
+        
+    
+</body></html>

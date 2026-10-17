@@ -1,0 +1,643 @@
+{
+  "source": "docs/business-processes/process-library/oagis-order-to-cash.md",
+  "mode": "vapps",
+  "activities": [
+    {
+      "id": "activity-001",
+      "sourceLine": 8,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-001/vapps/comparison.json"
+    },
+    {
+      "id": "activity-002",
+      "sourceLine": 14,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-002/vapps/comparison.json"
+    },
+    {
+      "id": "activity-003",
+      "sourceLine": 22,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-003/vapps/comparison.json"
+    },
+    {
+      "id": "activity-004",
+      "sourceLine": 25,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-004/vapps/comparison.json"
+    },
+    {
+      "id": "activity-005",
+      "sourceLine": 28,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-005/vapps/comparison.json"
+    },
+    {
+      "id": "activity-006",
+      "sourceLine": 31,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-006/vapps/comparison.json"
+    },
+    {
+      "id": "activity-007",
+      "sourceLine": 34,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-007/vapps/comparison.json"
+    },
+    {
+      "id": "activity-008",
+      "sourceLine": 37,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-008/vapps/comparison.json"
+    },
+    {
+      "id": "activity-009",
+      "sourceLine": 40,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-009/vapps/comparison.json"
+    },
+    {
+      "id": "activity-010",
+      "sourceLine": 43,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-010/vapps/comparison.json"
+    },
+    {
+      "id": "activity-011",
+      "sourceLine": 46,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-011/vapps/comparison.json"
+    },
+    {
+      "id": "activity-012",
+      "sourceLine": 49,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-012/vapps/comparison.json"
+    },
+    {
+      "id": "activity-013",
+      "sourceLine": 52,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-013/vapps/comparison.json"
+    },
+    {
+      "id": "activity-014",
+      "sourceLine": 55,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-014/vapps/comparison.json"
+    },
+    {
+      "id": "activity-015",
+      "sourceLine": 58,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-015/vapps/comparison.json"
+    },
+    {
+      "id": "activity-016",
+      "sourceLine": 61,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-016/vapps/comparison.json"
+    },
+    {
+      "id": "activity-017",
+      "sourceLine": 64,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-017/vapps/comparison.json"
+    },
+    {
+      "id": "activity-018",
+      "sourceLine": 67,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-018/vapps/comparison.json"
+    },
+    {
+      "id": "activity-019",
+      "sourceLine": 70,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-019/vapps/comparison.json"
+    },
+    {
+      "id": "activity-020",
+      "sourceLine": 73,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-020/vapps/comparison.json"
+    },
+    {
+      "id": "activity-021",
+      "sourceLine": 76,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-021/vapps/comparison.json"
+    },
+    {
+      "id": "activity-022",
+      "sourceLine": 79,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-022/vapps/comparison.json"
+    },
+    {
+      "id": "activity-023",
+      "sourceLine": 82,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-023/vapps/comparison.json"
+    },
+    {
+      "id": "activity-024",
+      "sourceLine": 88,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-024/vapps/comparison.json"
+    },
+    {
+      "id": "activity-025",
+      "sourceLine": 91,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-025/vapps/comparison.json"
+    },
+    {
+      "id": "activity-026",
+      "sourceLine": 94,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-026/vapps/comparison.json"
+    },
+    {
+      "id": "activity-027",
+      "sourceLine": 97,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-027/vapps/comparison.json"
+    },
+    {
+      "id": "activity-028",
+      "sourceLine": 100,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-028/vapps/comparison.json"
+    },
+    {
+      "id": "activity-029",
+      "sourceLine": 103,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-029/vapps/comparison.json"
+    },
+    {
+      "id": "activity-030",
+      "sourceLine": 106,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-030/vapps/comparison.json"
+    },
+    {
+      "id": "activity-031",
+      "sourceLine": 109,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-031/vapps/comparison.json"
+    },
+    {
+      "id": "activity-032",
+      "sourceLine": 112,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-032/vapps/comparison.json"
+    },
+    {
+      "id": "activity-033",
+      "sourceLine": 115,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-033/vapps/comparison.json"
+    },
+    {
+      "id": "activity-034",
+      "sourceLine": 118,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-034/vapps/comparison.json"
+    },
+    {
+      "id": "activity-035",
+      "sourceLine": 124,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-035/vapps/comparison.json"
+    },
+    {
+      "id": "activity-036",
+      "sourceLine": 127,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-036/vapps/comparison.json"
+    },
+    {
+      "id": "activity-037",
+      "sourceLine": 130,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-037/vapps/comparison.json"
+    },
+    {
+      "id": "activity-038",
+      "sourceLine": 133,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-038/vapps/comparison.json"
+    },
+    {
+      "id": "activity-039",
+      "sourceLine": 143,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-039/vapps/comparison.json"
+    },
+    {
+      "id": "activity-040",
+      "sourceLine": 148,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-040/vapps/comparison.json"
+    },
+    {
+      "id": "activity-041",
+      "sourceLine": 153,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-041/vapps/comparison.json"
+    },
+    {
+      "id": "activity-042",
+      "sourceLine": 162,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-042/vapps/comparison.json"
+    },
+    {
+      "id": "activity-043",
+      "sourceLine": 169,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-043/vapps/comparison.json"
+    },
+    {
+      "id": "activity-044",
+      "sourceLine": 178,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-044/vapps/comparison.json"
+    },
+    {
+      "id": "activity-045",
+      "sourceLine": 183,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-045/vapps/comparison.json"
+    },
+    {
+      "id": "activity-046",
+      "sourceLine": 192,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-046/vapps/comparison.json"
+    },
+    {
+      "id": "activity-047",
+      "sourceLine": 198,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-047/vapps/comparison.json"
+    },
+    {
+      "id": "activity-048",
+      "sourceLine": 203,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-048/vapps/comparison.json"
+    },
+    {
+      "id": "activity-049",
+      "sourceLine": 208,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-049/vapps/comparison.json"
+    },
+    {
+      "id": "activity-050",
+      "sourceLine": 212,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-050/vapps/comparison.json"
+    },
+    {
+      "id": "activity-051",
+      "sourceLine": 217,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-051/vapps/comparison.json"
+    },
+    {
+      "id": "activity-052",
+      "sourceLine": 221,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-052/vapps/comparison.json"
+    },
+    {
+      "id": "activity-053",
+      "sourceLine": 227,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-053/vapps/comparison.json"
+    },
+    {
+      "id": "activity-054",
+      "sourceLine": 231,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-054/vapps/comparison.json"
+    },
+    {
+      "id": "activity-055",
+      "sourceLine": 237,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-055/vapps/comparison.json"
+    },
+    {
+      "id": "activity-056",
+      "sourceLine": 243,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-056/vapps/comparison.json"
+    },
+    {
+      "id": "activity-057",
+      "sourceLine": 249,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-057/vapps/comparison.json"
+    },
+    {
+      "id": "activity-058",
+      "sourceLine": 253,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-058/vapps/comparison.json"
+    },
+    {
+      "id": "activity-059",
+      "sourceLine": 257,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-059/vapps/comparison.json"
+    },
+    {
+      "id": "activity-060",
+      "sourceLine": 264,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-060/vapps/comparison.json"
+    },
+    {
+      "id": "activity-061",
+      "sourceLine": 270,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-061/vapps/comparison.json"
+    },
+    {
+      "id": "activity-062",
+      "sourceLine": 274,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-062/vapps/comparison.json"
+    },
+    {
+      "id": "activity-063",
+      "sourceLine": 278,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-063/vapps/comparison.json"
+    },
+    {
+      "id": "activity-064",
+      "sourceLine": 282,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-064/vapps/comparison.json"
+    },
+    {
+      "id": "activity-065",
+      "sourceLine": 286,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-065/vapps/comparison.json"
+    },
+    {
+      "id": "activity-066",
+      "sourceLine": 293,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-066/vapps/comparison.json"
+    },
+    {
+      "id": "activity-067",
+      "sourceLine": 298,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-067/vapps/comparison.json"
+    },
+    {
+      "id": "activity-068",
+      "sourceLine": 301,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-068/vapps/comparison.json"
+    },
+    {
+      "id": "activity-069",
+      "sourceLine": 304,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-069/vapps/comparison.json"
+    },
+    {
+      "id": "activity-070",
+      "sourceLine": 307,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-070/vapps/comparison.json"
+    },
+    {
+      "id": "activity-071",
+      "sourceLine": 310,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-071/vapps/comparison.json"
+    },
+    {
+      "id": "activity-072",
+      "sourceLine": 315,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-072/vapps/comparison.json"
+    },
+    {
+      "id": "activity-073",
+      "sourceLine": 318,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-073/vapps/comparison.json"
+    },
+    {
+      "id": "activity-074",
+      "sourceLine": 321,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-074/vapps/comparison.json"
+    },
+    {
+      "id": "activity-075",
+      "sourceLine": 324,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-075/vapps/comparison.json"
+    },
+    {
+      "id": "activity-076",
+      "sourceLine": 327,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-076/vapps/comparison.json"
+    },
+    {
+      "id": "activity-077",
+      "sourceLine": 330,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-077/vapps/comparison.json"
+    },
+    {
+      "id": "activity-078",
+      "sourceLine": 333,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-078/vapps/comparison.json"
+    },
+    {
+      "id": "activity-079",
+      "sourceLine": 336,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-079/vapps/comparison.json"
+    },
+    {
+      "id": "activity-080",
+      "sourceLine": 341,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-080/vapps/comparison.json"
+    },
+    {
+      "id": "activity-081",
+      "sourceLine": 344,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-081/vapps/comparison.json"
+    },
+    {
+      "id": "activity-082",
+      "sourceLine": 347,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-082/vapps/comparison.json"
+    },
+    {
+      "id": "activity-083",
+      "sourceLine": 350,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-083/vapps/comparison.json"
+    },
+    {
+      "id": "activity-084",
+      "sourceLine": 353,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-084/vapps/comparison.json"
+    },
+    {
+      "id": "activity-085",
+      "sourceLine": 358,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-085/vapps/comparison.json"
+    },
+    {
+      "id": "activity-086",
+      "sourceLine": 361,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-086/vapps/comparison.json"
+    },
+    {
+      "id": "activity-087",
+      "sourceLine": 364,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-087/vapps/comparison.json"
+    },
+    {
+      "id": "activity-088",
+      "sourceLine": 367,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-088/vapps/comparison.json"
+    },
+    {
+      "id": "activity-089",
+      "sourceLine": 370,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-089/vapps/comparison.json"
+    },
+    {
+      "id": "activity-090",
+      "sourceLine": 375,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-090/vapps/comparison.json"
+    },
+    {
+      "id": "activity-091",
+      "sourceLine": 378,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-091/vapps/comparison.json"
+    },
+    {
+      "id": "activity-092",
+      "sourceLine": 381,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-092/vapps/comparison.json"
+    },
+    {
+      "id": "activity-093",
+      "sourceLine": 384,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-093/vapps/comparison.json"
+    },
+    {
+      "id": "activity-094",
+      "sourceLine": 387,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-094/vapps/comparison.json"
+    },
+    {
+      "id": "activity-095",
+      "sourceLine": 390,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-095/vapps/comparison.json"
+    },
+    {
+      "id": "activity-096",
+      "sourceLine": 393,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-096/vapps/comparison.json"
+    },
+    {
+      "id": "activity-097",
+      "sourceLine": 398,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-097/vapps/comparison.json"
+    },
+    {
+      "id": "activity-098",
+      "sourceLine": 401,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-098/vapps/comparison.json"
+    },
+    {
+      "id": "activity-099",
+      "sourceLine": 404,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-099/vapps/comparison.json"
+    },
+    {
+      "id": "activity-100",
+      "sourceLine": 407,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-100/vapps/comparison.json"
+    },
+    {
+      "id": "activity-101",
+      "sourceLine": 412,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-101/vapps/comparison.json"
+    },
+    {
+      "id": "activity-102",
+      "sourceLine": 415,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-102/vapps/comparison.json"
+    },
+    {
+      "id": "activity-103",
+      "sourceLine": 421,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-103/vapps/comparison.json"
+    },
+    {
+      "id": "activity-104",
+      "sourceLine": 424,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-104/vapps/comparison.json"
+    },
+    {
+      "id": "activity-105",
+      "sourceLine": 427,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-105/vapps/comparison.json"
+    },
+    {
+      "id": "activity-106",
+      "sourceLine": 430,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-order-to-cash/activity-106/vapps/comparison.json"
+    }
+  ],
+  "note": "Evidence sweep only; no complete business-process execution is claimed."
+}

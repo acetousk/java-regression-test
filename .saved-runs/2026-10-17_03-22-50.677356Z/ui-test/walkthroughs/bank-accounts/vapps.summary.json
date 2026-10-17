@@ -1,0 +1,1157 @@
+{
+  "source": "docs/business-processes/walkthroughs/bank-accounts.md",
+  "mode": "vapps",
+  "activities": [
+    {
+      "id": "activity-001",
+      "sourceLine": 10,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 154781,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.652805307785487,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-001/vapps/comparison.json"
+    },
+    {
+      "id": "activity-002",
+      "sourceLine": 16,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 154781,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.652805307785487,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-002/vapps/comparison.json"
+    },
+    {
+      "id": "activity-003",
+      "sourceLine": 20,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 154781,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.652805307785487,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-003/vapps/comparison.json"
+    },
+    {
+      "id": "activity-004",
+      "sourceLine": 24,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 154781,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.652805307785487,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-004/vapps/comparison.json"
+    },
+    {
+      "id": "activity-005",
+      "sourceLine": 27,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 154781,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.652805307785487,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-005/vapps/comparison.json"
+    },
+    {
+      "id": "activity-006",
+      "sourceLine": 30,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 154781,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.652805307785487,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-006/vapps/comparison.json"
+    },
+    {
+      "id": "activity-007",
+      "sourceLine": 33,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 154781,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.652805307785487,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-007/vapps/comparison.json"
+    },
+    {
+      "id": "activity-008",
+      "sourceLine": 36,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 154781,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.652805307785487,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-008/vapps/comparison.json"
+    },
+    {
+      "id": "activity-009",
+      "sourceLine": 39,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 154781,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.652805307785487,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-009/vapps/comparison.json"
+    },
+    {
+      "id": "activity-010",
+      "sourceLine": 43,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 154781,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.652805307785487,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-010/vapps/comparison.json"
+    },
+    {
+      "id": "activity-011",
+      "sourceLine": 47,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 154781,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.652805307785487,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-011/vapps/comparison.json"
+    },
+    {
+      "id": "activity-012",
+      "sourceLine": 51,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 154824,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.65576478361414,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-012/vapps/comparison.json"
+    },
+    {
+      "id": "activity-013",
+      "sourceLine": 54,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 154824,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.65576478361414,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-013/vapps/comparison.json"
+    },
+    {
+      "id": "activity-014",
+      "sourceLine": 57,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 155061,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.672076313181368,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-014/vapps/comparison.json"
+    },
+    {
+      "id": "activity-015",
+      "sourceLine": 60,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 155061,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.672076313181368,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-015/vapps/comparison.json"
+    },
+    {
+      "id": "activity-016",
+      "sourceLine": 63,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 155061,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.672076313181368,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-016/vapps/comparison.json"
+    },
+    {
+      "id": "activity-017",
+      "sourceLine": 66,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 155061,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.672076313181368,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-017/vapps/comparison.json"
+    },
+    {
+      "id": "activity-018",
+      "sourceLine": 69,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 155061,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.672076313181368,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-018/vapps/comparison.json"
+    },
+    {
+      "id": "activity-019",
+      "sourceLine": 72,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 155061,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.672076313181368,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-019/vapps/comparison.json"
+    },
+    {
+      "id": "activity-020",
+      "sourceLine": 75,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 155061,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.672076313181368,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-020/vapps/comparison.json"
+    },
+    {
+      "id": "activity-021",
+      "sourceLine": 78,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 155061,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.672076313181368,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-021/vapps/comparison.json"
+    },
+    {
+      "id": "activity-022",
+      "sourceLine": 81,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 155061,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.672076313181368,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-022/vapps/comparison.json"
+    },
+    {
+      "id": "activity-023",
+      "sourceLine": 84,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 155061,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.672076313181368,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-023/vapps/comparison.json"
+    },
+    {
+      "id": "activity-024",
+      "sourceLine": 88,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 155061,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.672076313181368,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-024/vapps/comparison.json"
+    },
+    {
+      "id": "activity-025",
+      "sourceLine": 92,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 155061,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.672076313181368,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-025/vapps/comparison.json"
+    },
+    {
+      "id": "activity-026",
+      "sourceLine": 96,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 154824,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.65576478361414,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-026/vapps/comparison.json"
+    },
+    {
+      "id": "activity-027",
+      "sourceLine": 99,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 155253,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.6852907168814,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-027/vapps/comparison.json"
+    },
+    {
+      "id": "activity-028",
+      "sourceLine": 102,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 155253,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.6852907168814,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-028/vapps/comparison.json"
+    },
+    {
+      "id": "activity-029",
+      "sourceLine": 105,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 155253,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.6852907168814,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-029/vapps/comparison.json"
+    },
+    {
+      "id": "activity-030",
+      "sourceLine": 108,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 155253,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.6852907168814,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-030/vapps/comparison.json"
+    },
+    {
+      "id": "activity-031",
+      "sourceLine": 111,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 155253,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.6852907168814,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-031/vapps/comparison.json"
+    },
+    {
+      "id": "activity-032",
+      "sourceLine": 114,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 155253,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.6852907168814,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-032/vapps/comparison.json"
+    },
+    {
+      "id": "activity-033",
+      "sourceLine": 120,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 155253,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.6852907168814,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-033/vapps/comparison.json"
+    },
+    {
+      "id": "activity-034",
+      "sourceLine": 126,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 155253,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.6852907168814,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-034/vapps/comparison.json"
+    },
+    {
+      "id": "activity-035",
+      "sourceLine": 130,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 155241,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.684464816650149,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-035/vapps/comparison.json"
+    },
+    {
+      "id": "activity-036",
+      "sourceLine": 134,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 155241,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.684464816650149,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-036/vapps/comparison.json"
+    },
+    {
+      "id": "activity-037",
+      "sourceLine": 140,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 155241,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.684464816650149,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-037/vapps/comparison.json"
+    },
+    {
+      "id": "activity-038",
+      "sourceLine": 144,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 155241,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.684464816650149,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-038/vapps/comparison.json"
+    },
+    {
+      "id": "activity-039",
+      "sourceLine": 148,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 155241,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.684464816650149,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-039/vapps/comparison.json"
+    },
+    {
+      "id": "activity-040",
+      "sourceLine": 154,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 155241,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.684464816650149,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-040/vapps/comparison.json"
+    },
+    {
+      "id": "activity-041",
+      "sourceLine": 158,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 155241,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.684464816650149,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-041/vapps/comparison.json"
+    },
+    {
+      "id": "activity-042",
+      "sourceLine": 162,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 155241,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.684464816650149,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-042/vapps/comparison.json"
+    },
+    {
+      "id": "activity-043",
+      "sourceLine": 165,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 155241,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.684464816650149,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-043/vapps/comparison.json"
+    },
+    {
+      "id": "activity-044",
+      "sourceLine": 168,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 155241,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.684464816650149,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-044/vapps/comparison.json"
+    },
+    {
+      "id": "activity-045",
+      "sourceLine": 172,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 155241,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.684464816650149,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-045/vapps/comparison.json"
+    },
+    {
+      "id": "activity-046",
+      "sourceLine": 176,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 155241,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.684464816650149,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/bank-accounts/activity-046/vapps/comparison.json"
+    }
+  ],
+  "note": "Evidence sweep only; no complete business-process execution is claimed."
+}

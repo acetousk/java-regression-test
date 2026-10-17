@@ -1,0 +1,1445 @@
+<!DOCTYPE html><html><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    
+    <title>Time Period - Find Time Period</title>
+    <link rel="apple-touch-icon" href="/MoquiLogo100.png">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="http://127.0.0.1:18091/css/webroot-layout.css?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="http://127.0.0.1:18091/css/webroot-theme.css?v=1a147e2" rel="stylesheet" type="text/css">
+    <script src="#?v=1a147e2" type="text/javascript"></script>
+    <script src="#?v=1a147e2" type="text/javascript"></script>
+    <script src="#?v=1a147e2" type="text/javascript"></script>
+    <link rel="shortcut icon" href="http://127.0.0.1:18091/favicon.ico">
+</head>
+<body class="dev bg-light FindTimePeriod">
+        
+        
+        
+        
+    <!-- BEGIN screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+        <!-- BEGIN render-mode.text[inline][@template=true] -->
+<script>var notificationClient = new moqui.NotificationClient((location.protocol === 'https:' ? 'wss' : 'ws') + "://127.0.0.1:18091/notws");</script>        <!-- END   render-mode.text[inline][@template=true] -->
+    <!-- BEGIN section[@name=TopNavSection] -->
+        <!-- BEGIN screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+    <div id="top">
+        <!-- BEGIN render-mode.text[@location=component://webroot/screen/includes/navbar.html.ftl][@template=true] -->
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <header class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a href="http://127.0.0.1:18091/apps/AppList" class="navbar-brand"><img src="http://127.0.0.1:18091/images/MoquiLogoSmall.png" alt="Home"></a>
+        
+    </header>
+    <div id="navbar-buttons" class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul id="header-menus" class="nav navbar-nav">
+        </ul>
+        <div id="navbar-menu-crumbs">
+        </div>
+        <a class="navbar-text" href="http://127.0.0.1:18091/apps/marble/Accounting/TimePeriod/FindTimePeriod">Find Time Period</a>
+        <a href="http://127.0.0.1:18091/Login/logout" data-toggle="tooltip" data-original-title="Logout John Doe" data-placement="bottom" class="btn btn-danger btn-sm navbar-btn navbar-right">
+            <i class="fa fa-power-off"></i>
+        </a>
+        <a href="#" onclick="switchDarkLight();" data-toggle="tooltip" data-original-title="Switch Dark/Light" data-placement="bottom" class="btn btn-default btn-sm navbar-btn navbar-right">
+            <i class="fa fa-adjust"></i>
+        </a>
+
+<div class="btn-group navbar-right">
+    <a href="/apps/my/User/Notifications" data-toggle="tooltip" data-container="body" data-original-title="Notifications" data-placement="bottom" class="btn btn-default btn-sm navbar-btn">
+        <i class="fa fa-info-circle"></i>
+        <span id="navbar_notification_count" class="label label-info">0</span>
+    </a>
+    <a href="/apps/my/User/Messages/FindMessage?statusId=CeReceived&amp;toPartyId=EX_JOHN_DOE" data-toggle="tooltip" data-container="body" data-original-title="Messages" data-placement="bottom" class="btn btn-default btn-sm navbar-btn">
+        <i class="fa fa-envelope"></i>
+        <span class="label label-warning">0</span>
+    </a>
+    <a href="/apps/my/User/Calendar/MyCalendar" data-toggle="tooltip" data-container="body" data-original-title="Events This Week" data-placement="bottom" class="btn btn-default btn-sm navbar-btn">
+        <i class="fa fa-calendar"></i>
+        <span class="label label-primary">0</span>
+    </a>
+    <a href="/apps/my/User/Task/MyTasks" data-toggle="tooltip" data-container="body" data-original-title="Open Tasks" data-placement="bottom" class="btn btn-default btn-sm navbar-btn">
+        <i class="fa fa-check"></i>
+        <span class="label label-success">0</span>
+    </a>
+</div>
+    <script>
+        var navbarNotificationListener = function(jsonObj, webSocket) {
+            if (jsonObj && jsonObj.persistOnSend === true) {
+                var countElement = $("#navbar_notification_count");
+                countElement.text((parseInt(countElement.text()) + 1).toString());
+            }
+            notificationClient.displayNotify(jsonObj, webSocket);
+        };
+        notificationClient.registerListener("ALL", navbarNotificationListener);
+    </script>
+        <div id="history-menu" class="nav navbar-right dropdown">
+            <a id="history-menu-link" href="#" class="dropdown-toggle btn btn-default btn-sm navbar-btn" data-toggle="dropdown" title="History">
+                <i class="fa fa-list"></i></a>
+            <ul class="dropdown-menu">
+                <li><a href="http://127.0.0.1:18091/apps/marble/dashboard">
+                            <i class="fa fa-dashboard" style="padding-right: 8px;"></i>
+                    Marble ERP - Dashboard
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Accounting/Reports/ReportList">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/dashboard">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Accounting/Invoice/EditInvoice">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Accounting/Payment/FindPayment?paymentType=Incoming">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications (Incoming)
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Shipment/ShipmentItems">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Order/OrderDetail">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Order/FindOrder">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Asset/Asset/FindSummary">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/ProductStore/FindProductStore">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Facility/FindFacility">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Catalog/Product/EditPrices">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Asset/Asset/FindSummary?assetTypeEnumId=AstTpInventory">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications (AstTpInventory)
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Catalog/Product/FindProduct">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Accounting/Invoice/FindInvoice">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Party/PartyTimeEntries">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/HumanRes/EditRateAmounts">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Task/FindTask">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Project/FindProject">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Party/FindParty">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Customer/EditCustomer">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Customer/FindCustomer">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Party/EditParty">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/vapps/marble/Accounting/Reports/ReportList">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/vapps/marble/dashboard">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            </ul>
+        </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+    $('.navbar [data-toggle="tooltip"]').tooltip({ placement:'bottom', trigger:'hover' });
+    $('#history-menu-link').tooltip({ placement:'bottom', trigger:'hover' });
+    $('#document-menu-link').tooltip({ placement:'bottom', trigger:'hover' });
+    function switchDarkLight() {
+        $("body").toggleClass("bg-dark");
+        $("body").toggleClass("bg-light");
+        var currentStyle = $("body").hasClass("bg-dark") ? "bg-dark" : "bg-light";
+        $.ajax({ type:'POST', url:'http://127.0.0.1:18091/apps/setPreference', data:{ 'moquiSessionToken': '[REDACTED]','preferenceKey': 'OUTER_STYLE', 'preferenceValue': currentStyle }, dataType:'json' });
+    }
+</script>
+
+        <!-- END   render-mode.text[@location=component://webroot/screen/includes/navbar.html.ftl][@template=true] -->
+        <!-- BEGIN render-mode.text[inline][@template=true] -->
+        <!-- END   render-mode.text[inline][@template=true] -->
+        <li id="header-menu" class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Application <i class="fa fa-chevron-right"></i></a>
+            <ul class="dropdown-menu">
+                        <li class="active"><a href="http://127.0.0.1:18091/apps/marble/dashboard"><i class="fa fa-cogs" style="padding-right: 8px;"></i>Marble ERP</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/my"><i class="fa fa-user" style="padding-right: 8px;"></i>My Account</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/system"><i class="fa fa-cog" style="padding-right: 8px;"></i>System</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/tools"><i class="fa fa-wrench" style="padding-right: 8px;"></i>Tools</a></li>
+            </ul>
+        </li>
+        <script>$("#header-menus").append($("#header-menu"));</script>
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    <!-- END   screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+
+    <!-- END   section[@name=TopNavSection] -->
+    <div id="content">
+    <div class="inner">
+    <div class="container-fluid">
+    <!-- BEGIN section[@name=MessagesSection] -->
+        <!-- BEGIN screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+    <!-- BEGIN section-iterate[@name=headerMessageInfos] -->
+    
+    <!-- END   section-iterate[@name=headerMessageInfos] -->
+    <!-- BEGIN section-iterate[@name=headerErrors] -->
+    
+    <!-- END   section-iterate[@name=headerErrors] -->
+    <!-- BEGIN section-iterate[@name=headerValidationErrors] -->
+    
+    <!-- END   section-iterate[@name=headerValidationErrors] -->
+    <!-- BEGIN section-iterate[@name=headerSavedMessages] -->
+    
+    <!-- END   section-iterate[@name=headerSavedMessages] -->
+    <!-- BEGIN section-iterate[@name=headerSavedErrors] -->
+    
+    <!-- END   section-iterate[@name=headerSavedErrors] -->
+    <!-- BEGIN section-iterate[@name=headerSavedValidationErrors] -->
+    
+    <!-- END   section-iterate[@name=headerSavedValidationErrors] -->
+    <!-- END   screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+
+    <!-- END   section[@name=MessagesSection] -->
+        <!-- BEGIN screen[@location=component://MarbleERP/screen/marble.xml].widgets -->
+    <!-- BEGIN section[@name=OrgChooserSection] -->
+        <!-- BEGIN screen[@location=component://MarbleERP/screen/marble.xml].widgets -->
+        <!-- BEGIN render-mode.text[inline][@template=true] -->
+<div id="active-org-menu" class="nav navbar-right dropdown">
+                <a id="active-org-menu-link" href="#" class="dropdown-toggle btn btn-default btn-sm navbar-btn" data-toggle="dropdown" title="Organization">
+                    <i class="fa fa-globe"></i> </a>
+                <ul class="dropdown-menu">
+                        <li><a href="http://127.0.0.1:18091/apps/setPrefGoLast?preferenceKey=ACTIVE_ORGANIZATION&amp;preferenceValue=ORG_ZIZI_RETAIL">ZIRET: Ziziwork Retail &amp; Wholesale</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/setPrefGoLast?preferenceKey=ACTIVE_ORGANIZATION&amp;preferenceValue=ORG_ZIZI_SERVICES">ZISER: Ziziwork Services</a></li>
+                </ul>
+            </div>
+            <script>$("#navbar-buttons").append($("#active-org-menu")); $('#active-org-menu-link').tooltip({ placement:'bottom', trigger:'hover' });</script>        <!-- END   render-mode.text[inline][@template=true] -->
+    <!-- END   screen[@location=component://MarbleERP/screen/marble.xml].widgets -->
+
+    <!-- END   section[@name=OrgChooserSection] -->
+        <li id="MarbleErpPanel-menu" class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Marble ERP <i class="fa fa-chevron-right"></i></a>
+            <ul class="dropdown-menu">
+                        <li><a href="http://127.0.0.1:18091/apps/marble/dashboard"><i class="fa fa-dashboard" style="padding-right: 8px;"></i>Dashboard</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/QuickSearch"><i class="fa fa-search" style="padding-right: 8px;"></i>Quick Search</a></li>
+                        <li class="active"><a href="http://127.0.0.1:18091/apps/marble/Accounting/dashboard"><img src="http://127.0.0.1:18091/ssstatic/images/Accounting.png" alt="Accounting" height="18" style="padding-right: 4px;">Accounting</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Asset/dashboard"><img src="http://127.0.0.1:18091/ssstatic/images/Asset.png" alt="Asset" height="18" style="padding-right: 4px;">Asset</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Catalog/dashboard"><img src="http://127.0.0.1:18091/ssstatic/images/Catalog.png" alt="Catalog" height="18" style="padding-right: 4px;">Catalog</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Customer/FindCustomer"><img src="http://127.0.0.1:18091/ssstatic/images/Customer.png" alt="Customers" height="18" style="padding-right: 4px;">Customers</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Facility/FindFacility"><img src="http://127.0.0.1:18091/ssstatic/images/Facility.png" alt="Facility" height="18" style="padding-right: 4px;">Facility</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/HumanRes/dashboard"><i class="fa fa-user-plus" style="padding-right: 8px;"></i>Human Resources</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Manufacturing/dashboard"><i class="fa fa-industry" style="padding-right: 8px;"></i>Manufacturing</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Order/FindOrder"><img src="http://127.0.0.1:18091/ssstatic/images/Sales.png" alt="Orders" height="18" style="padding-right: 4px;">Orders</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Party/FindParty"><img src="http://127.0.0.1:18091/ssstatic/images/Parties.png" alt="Parties" height="18" style="padding-right: 4px;">Parties</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Project/FindProject"><img src="http://127.0.0.1:18091/ssstatic/images/project-business120.png" alt="Projects" height="18" style="padding-right: 4px;">Projects</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Request/FindRequest"><img src="http://127.0.0.1:18091/ssstatic/images/Request.png" alt="Requests" height="18" style="padding-right: 4px;">Requests</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Return/FindReturn"><img src="http://127.0.0.1:18091/ssstatic/images/Return.png" alt="Returns" height="18" style="padding-right: 4px;">Returns</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Shipment/FindShipment"><img src="http://127.0.0.1:18091/ssstatic/images/Shipping.png" alt="Shipments" height="18" style="padding-right: 4px;">Shipments</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Shipping/dashboard"><img src="http://127.0.0.1:18091/ssstatic/images/Picking.png" alt="Shipping" height="18" style="padding-right: 4px;">Shipping</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/ProductStore/FindProductStore"><img src="http://127.0.0.1:18091/ssstatic/images/ProductStore.png" alt="Stores" height="18" style="padding-right: 4px;">Stores</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Supplier/FindSupplier"><img src="http://127.0.0.1:18091/ssstatic/images/Supplier.png" alt="Suppliers" height="18" style="padding-right: 4px;">Suppliers</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Survey/FindSurvey"><i class="fa fa-pencil-square-o" style="padding-right: 8px;"></i>Survey</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Task/FindTask"><img src="http://127.0.0.1:18091/ssstatic/images/task-homework.png" alt="Tasks" height="18" style="padding-right: 4px;">Tasks</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Wiki/WikiSpaces"><img src="http://127.0.0.1:18091/ssstatic/images/Wiki.png" alt="Wiki/Content" height="18" style="padding-right: 4px;">Wiki/Content</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/QuickViewReport"><i class="fa fa-database" style="padding-right: 8px;"></i>Custom Reports</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/SimpleReport/FindReport"><i class="fa fa-database" style="padding-right: 8px;"></i>Report Builder</a></li>
+            </ul>
+        </li>
+        <script>$("#header-menus").append($("#MarbleErpPanel-menu"));</script>
+            <!-- BEGIN screen[@location=component://SimpleScreens/screen/SimpleScreens/Accounting.xml].widgets -->
+        <li id="accounting-panel-menu" class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Accounting <i class="fa fa-chevron-right"></i></a>
+            <ul class="dropdown-menu">
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Accounting/dashboard"><img src="http://127.0.0.1:18091/ssstatic/images/Accounting.png" alt="Dashboard" height="18" style="padding-right: 4px;">Dashboard</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Accounting/Invoice/FindInvoice"><img src="http://127.0.0.1:18091/ssstatic/images/Accounting.png" alt="Invoices" height="18" style="padding-right: 4px;">Invoices</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Accounting/Payment/FindPayment"><img src="http://127.0.0.1:18091/ssstatic/images/Accounting.png" alt="Payments" height="18" style="padding-right: 4px;">Payments</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Accounting/FinancialAccount/FindFinancialAccount"><img src="http://127.0.0.1:18091/ssstatic/images/Accounting.png" alt="Financial Accounts" height="18" style="padding-right: 4px;">Financial Accounts</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Accounting/Transaction/FindTransaction"><img src="http://127.0.0.1:18091/ssstatic/images/Accounting.png" alt="Transactions" height="18" style="padding-right: 4px;">Transactions</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Accounting/FindJournal"><img src="http://127.0.0.1:18091/ssstatic/images/Accounting.png" alt="GL Journals" height="18" style="padding-right: 4px;">GL Journals</a></li>
+                        <li class="active"><a href="http://127.0.0.1:18091/apps/marble/Accounting/TimePeriod/FindTimePeriod"><img src="http://127.0.0.1:18091/ssstatic/images/Accounting.png" alt="Time Period" height="18" style="padding-right: 4px;">Time Period</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Accounting/GlAccount/FindGlAccount"><img src="http://127.0.0.1:18091/ssstatic/images/Accounting.png" alt="GL Accounts" height="18" style="padding-right: 4px;">GL Accounts</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Accounting/Budget/FindBudget"><img src="http://127.0.0.1:18091/ssstatic/images/Accounting.png" alt="Budgets" height="18" style="padding-right: 4px;">Budgets</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Accounting/Reports/ReportList"><img src="http://127.0.0.1:18091/ssstatic/images/Accounting.png" alt="Reports" height="18" style="padding-right: 4px;">Reports</a></li>
+            </ul>
+        </li>
+        <script>$("#header-menus").append($("#accounting-panel-menu"));</script>
+            <!-- BEGIN screen[@location=component://SimpleScreens/screen/SimpleScreens/Accounting/TimePeriod.xml].widgets -->
+        <div id="TimePeriodPanel-tabpanel">
+                <a id="TimePeriodPanel-menu-crumb" class="navbar-text" href="http://127.0.0.1:18091/apps/marble/Accounting/TimePeriod/FindTimePeriod">Time Period <i class="fa fa-chevron-right"></i></a>
+                <script>$("#navbar-menu-crumbs").append($("#TimePeriodPanel-menu-crumb"));</script>
+                <!-- BEGIN screen[@location=component://SimpleScreens/screen/SimpleScreens/Accounting/TimePeriod/FindTimePeriod.xml].widgets -->
+        <button id="CreatePeriodDialog-button" type="button" data-toggle="modal" data-target="#CreatePeriodDialog" data-original-title="Create First Period" data-placement="bottom" class="btn btn-primary btn-sm "><i class="fa fa-share"></i> Create First Period</button>
+
+        <div id="CreatePeriodDialog" class="modal container-dialog" aria-hidden="true" style="display: none;" tabindex="-1">
+            <div class="modal-dialog" style="width: 760px;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">Create First Period</h4>
+                    </div>
+                    <div class="modal-body">
+<p class="text-inline">Only create the first period in a series using this form. Use the Create Next Period buttons to create subsequent periods.</p>
+<p class="text-inline">Create parent periods (years, quarters, etc) then create child periods from parent period screen. </p>
+    <!-- BEGIN form-single[@name=CreatePeriod] -->
+    <form name="CreatePeriod" id="CreatePeriod" method="post" action="http://127.0.0.1:18091/apps/marble/Accounting/TimePeriod/FindTimePeriod/createTimePeriod">
+        <input type="hidden" name="moquiFormName" value="CreatePeriod" style="">
+        <input type="hidden" name="moquiSessionToken" value="[REDACTED]" style="">
+        
+        <fieldset class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="CreatePeriod_partyId">Organization</label>
+            <div class="col-sm-10">
+    
+    <select name="partyId" class="" id="CreatePeriod_partyId">
+            <option value="ORG_ZIZI_HR">ZIHR: Ziziwork Human Resources</option>
+            <option value="ORG_ZIZI_CORP">ZICORP: Ziziwork Industries</option>
+            <option value="ORG_ZIZI_RETAIL">ZIRET: Ziziwork Retail &amp; Wholesale</option>
+            <option value="ORG_ZIZI_SALES">ZISAL: Ziziwork Sales</option>
+            <option value="ORG_ZIZI_SERVICES">ZISER: Ziziwork Services</option>
+    </select>
+    
+    
+        <script>$("#CreatePeriod_partyId").select2({  });</script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="CreatePeriod_timePeriodTypeId">Type</label>
+            <div class="col-sm-10">
+    
+    <select name="timePeriodTypeId" class="" id="CreatePeriod_timePeriodTypeId">
+            <option value="FiscalBiWeek">Fiscal Bi-Week</option>
+            <option value="FiscalMonth">Fiscal Month</option>
+            <option value="FiscalQuarter">Fiscal Quarter</option>
+            <option value="FiscalWeek">Fiscal Week</option>
+            <option value="FiscalYear">Fiscal Year</option>
+            <option value="PayrollBiWeek">Payroll Bi-Week</option>
+            <option value="PayrollMonth">Payroll Month</option>
+            <option value="PayrollQuarter">Payroll Quarter</option>
+            <option value="PayrollSemiMonth">Payroll Semi-Month</option>
+            <option value="PayrollSemiYear">Payroll Semi-Year</option>
+            <option value="PayrollWeek">Payroll Week</option>
+            <option value="PayrollYear">Payroll Year</option>
+            <option value="SalesMonth">Sales Month</option>
+            <option value="SalesQuarter">Sales Quarter</option>
+            <option value="SalesYear">Sales Year</option>
+            <option value="TaxMonth">Tax Month</option>
+            <option value="TaxQuarter">Tax Quarter</option>
+            <option value="TaxYear">Tax Year</option>
+    </select>
+    
+    
+        <script>$("#CreatePeriod_timePeriodTypeId").select2({  });</script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="CreatePeriod_fromDate">From Date</label>
+            <div class="col-sm-10">
+    
+
+
+
+        <div class="input-group date" id="CreatePeriod_fromDate">
+            <input type="text" class="form-control" name="fromDate" value="" size="10" maxlength="10" style="">
+            <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+        </div>
+        <script>
+            $('#CreatePeriod_fromDate').datetimepicker({toolbarPlacement:'top', showClose:true, showClear:true, showTodayButton:true,
+                useStrict:true, defaultDate: '' && moment('','YYYY-MM-DD'),
+                format:'YYYY-MM-DD', extraFormats:['l', 'L', 'YYYY-MM-DD'], stepping:5, locale:"en-US",
+                keyBinds: {t: function() {this.date(moment());}, up: function () { this.date(this.date().clone().add(1, 'd')); }, down: function () { this.date(this.date().clone().subtract(1, 'd')); }, 'control up': function () { this.date(this.date().clone().add(1, 'd')); }, 'control down': function () { this.date(this.date().clone().subtract(1, 'd')); }}});
+            $('#CreatePeriod_fromDate').on("dp.change", function() { var jqEl = $('#CreatePeriod_fromDate'); jqEl.val(jqEl.find("input").first().val()); jqEl.trigger("change"); });
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="CreatePeriod_thruDate">Thru Date</label>
+            <div class="col-sm-10">
+    
+
+
+
+        <div class="input-group date" id="CreatePeriod_thruDate">
+            <input type="text" class="form-control" name="thruDate" value="" size="10" maxlength="10" data-toggle="tooltip" title="Optional, leave empty to calculate with from date and period type" style="">
+            <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+        </div>
+        <script>
+            $('#CreatePeriod_thruDate').datetimepicker({toolbarPlacement:'top', showClose:true, showClear:true, showTodayButton:true,
+                useStrict:true, defaultDate: '' && moment('','YYYY-MM-DD'),
+                format:'YYYY-MM-DD', extraFormats:['l', 'L', 'YYYY-MM-DD'], stepping:5, locale:"en-US",
+                keyBinds: {t: function() {this.date(moment());}, up: function () { this.date(this.date().clone().add(1, 'd')); }, down: function () { this.date(this.date().clone().subtract(1, 'd')); }, 'control up': function () { this.date(this.date().clone().add(1, 'd')); }, 'control down': function () { this.date(this.date().clone().subtract(1, 'd')); }}});
+            $('#CreatePeriod_thruDate').on("dp.change", function() { var jqEl = $('#CreatePeriod_thruDate'); jqEl.val(jqEl.find("input").first().val()); jqEl.trigger("change"); });
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <div class="col-sm-2 hidden-xs">&nbsp;</div>
+            <div class="col-sm-10">
+    
+    <button type="submit" name="createBtn" value="createBtn" id="CreatePeriod_createBtn" class="btn btn-primary btn-sm">
+Create    </button>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        </fieldset>
+    </form>
+        <script>
+            $("#CreatePeriod").validate({ errorClass: 'help-block', errorElement: 'span',
+                highlight: function(element, errorClass, validClass) { $(element).parents('.form-group').removeClass('has-success').addClass('has-error'); },
+                unhighlight: function(element, errorClass, validClass) { $(element).parents('.form-group').removeClass('has-error').addClass('has-success'); }
+            });
+            $('#CreatePeriod [data-toggle="tooltip"]').tooltip({placement:'auto top'});
+
+        </script>
+    <!-- END   form-single[@name=CreatePeriod] -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>$('#CreatePeriodDialog').on('shown.bs.modal', function() {
+            $("#CreatePeriodDialog :not(.noResetSelect2)>select:not(.noResetSelect2)").select2({ });
+            var defFocus = $("#CreatePeriodDialog .default-focus");
+            if (defFocus.length) { defFocus.focus(); } else { $("#CreatePeriodDialog form :input:visible:first").focus(); }
+        });</script>
+    <!-- BEGIN form-list[@name=TimePeriodList] -->
+
+        <div id="TimePeriodList_hdialog" class="modal" aria-hidden="true" style="display: none;" tabindex="-1">
+            <div class="modal-dialog" style="width: 800px;"><div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Find Options</h4>
+                </div>
+                <div class="modal-body">
+                <h4 style="margin-top: 0;">Saved Finds</h4>
+                        <p>No find parameters, choose some to save a new find or update existing</p>
+                <h4>Find Parameters</h4>
+                    <form name="TimePeriodList_header" id="TimePeriodList_header" method="post" action="http://127.0.0.1:18091/apps/marble/Accounting/TimePeriod/FindTimePeriod">
+                        <input type="hidden" name="moquiSessionToken" value="[REDACTED]" style="">
+                        
+                        
+                        <fieldset class="form-horizontal">
+                            <div class="form-group"><div class="col-sm-2">&nbsp;</div><div class="col-sm-10">
+                                <button type="button" class="btn btn-primary btn-sm" onclick="TimePeriodList_header_clearForm()">Clear Parameters</button></div></div>
+
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="TimePeriodList_header_orderByField">Order By</label>
+                                <div class="col-sm-10">
+                                    <select name="orderBySelect" id="TimePeriodList_header_orderBySelect" multiple="multiple" style="width: 100%;" class="noResetSelect2">
+                                                <option value="periodName">Period Name (Asc)</option>
+                                                <option value="-periodName">Period Name (Desc)</option>
+                                                <option value="timePeriodTypeId">Type (Asc)</option>
+                                                <option value="-timePeriodTypeId">Type (Desc)</option>
+                                                <option value="periodNum">Period Num (Asc)</option>
+                                                <option value="-periodNum">Period Num (Desc)</option>
+                                                <option value="fromDate">From Date (Asc)</option>
+                                                <option value="-fromDate">From Date (Desc)</option>
+                                                <option value="thruDate">Thru Date (Asc)</option>
+                                                <option value="-thruDate">Thru Date (Desc)</option>
+                                    </select>
+                                    <input type="hidden" id="TimePeriodList_header_orderByField" name="orderByField" value="-fromDate" style="">
+                                </div>
+                            </div>
+                            <script>
+                                function TimePeriodList_header_clearForm() {
+                                    var jqEl = $("#TimePeriodList_header");
+                                    jqEl.find(':radio, :checkbox').removeAttr('checked');
+                                    jqEl.find('textarea, :text, select').val('').trigger('change');
+                                    return false;
+                                }
+                                $("#TimePeriodList_header_orderBySelect").selectivity({ positionDropdown: function(dropdownEl, selectEl) { dropdownEl.css("width", "300px"); } })[0].selectivity.filterResults = function(results) {
+                                    // Filter out asc and desc options if anyone selected.
+                                    return results.filter(function(item){return !this._data.some(function(data_item) {return data_item.id.substring(1) === item.id.substring(1);});}, this);
+                                };
+                                    $("#TimePeriodList_header_orderBySelect").selectivity("value", ['-fromDate']);
+                                $("div#TimePeriodList_header_orderBySelect").on("change", function(evt) {
+                                    if (evt.value) $("#TimePeriodList_header_orderByField").val(evt.value.join(","));
+                                });
+                            </script>
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="TimePeriodList_header_partyId">Organization</label>
+            <div class="col-sm-10">
+    
+    <select name="partyId" class="" id="TimePeriodList_header_partyId">
+            <option value="">&nbsp;</option>
+            <option value="ORG_ZIZI_HR">ZIHR: Ziziwork Human Resources</option>
+            <option value="ORG_ZIZI_CORP">ZICORP: Ziziwork Industries</option>
+            <option value="ORG_ZIZI_RETAIL">ZIRET: Ziziwork Retail &amp; Wholesale</option>
+            <option value="ORG_ZIZI_SALES">ZISAL: Ziziwork Sales</option>
+            <option value="ORG_ZIZI_SERVICES">ZISER: Ziziwork Services</option>
+    </select>
+    
+    
+        <script>$("#TimePeriodList_header_partyId").select2({  });</script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="TimePeriodList_header_timePeriodTypeId">Type</label>
+            <div class="col-sm-10">
+    
+    <select name="timePeriodTypeId" class=" noResetSelect2" id="TimePeriodList_header_timePeriodTypeId" multiple="multiple">
+            <option value="FiscalBiWeek">Fiscal Bi-Week</option>
+            <option value="FiscalMonth">Fiscal Month</option>
+            <option value="FiscalQuarter">Fiscal Quarter</option>
+            <option value="FiscalWeek">Fiscal Week</option>
+            <option value="FiscalYear">Fiscal Year</option>
+            <option value="PayrollBiWeek">Payroll Bi-Week</option>
+            <option value="PayrollMonth">Payroll Month</option>
+            <option value="PayrollQuarter">Payroll Quarter</option>
+            <option value="PayrollSemiMonth">Payroll Semi-Month</option>
+            <option value="PayrollSemiYear">Payroll Semi-Year</option>
+            <option value="PayrollWeek">Payroll Week</option>
+            <option value="PayrollYear">Payroll Year</option>
+            <option value="SalesMonth">Sales Month</option>
+            <option value="SalesQuarter">Sales Quarter</option>
+            <option value="SalesYear">Sales Year</option>
+            <option value="TaxMonth">Tax Month</option>
+            <option value="TaxQuarter">Tax Quarter</option>
+            <option value="TaxYear">Tax Year</option>
+    </select>
+    
+    <input type="hidden" id="TimePeriodList_header_timePeriodTypeId_op" name="timePeriodTypeId_op" value="in" style="">
+        <script>$("#TimePeriodList_header_timePeriodTypeId").select2({ closeOnSelect:false, width:"100%",  });</script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="TimePeriodList_header_thruDate">Thru Date</label>
+            <div class="col-sm-10">
+    
+    <span class="form-date-find">
+      <span>From&nbsp;</span>
+        <div class="input-group date" id="TimePeriodList_header_thruDate_from">
+            <input type="text" class="form-control" name="thruDate_from" value="" size="10" maxlength="10" style="">
+            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+        </div>
+        <script>$('#TimePeriodList_header_thruDate_from').datetimepicker({toolbarPlacement:'top', showClose:true, showClear:true, useStrict:true, showTodayButton:true, defaultDate:'' && moment('','YYYY-MM-DD'), format:'YYYY-MM-DD', extraFormats:['l', 'L', 'YYYY-MM-DD'], stepping:5, locale:"en-US", keyBinds: {t: function() {this.date(moment());}, up: function () { this.date(this.date().clone().add(1, 'd')); }, down: function () { this.date(this.date().clone().subtract(1, 'd')); }, 'control up': function () { this.date(this.date().clone().add(1, 'd')); }, 'control down': function () { this.date(this.date().clone().subtract(1, 'd')); }}});</script>
+    </span>
+    <span class="form-date-find">
+      <span>Thru&nbsp;</span>
+        <div class="input-group date" id="TimePeriodList_header_thruDate_thru">
+            <input type="text" class="form-control" name="thruDate_thru" value="" size="10" maxlength="10" style="">
+            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+        </div>
+        <script>$('#TimePeriodList_header_thruDate_thru').datetimepicker({toolbarPlacement:'top', showClose:true, showClear:true, useStrict:true, showTodayButton:true, defaultDate:'' && moment('','YYYY-MM-DD'), format:'YYYY-MM-DD', extraFormats:['l', 'L', 'YYYY-MM-DD'], stepping:5, locale:"en-US", keyBinds: {t: function() {this.date(moment());}, up: function () { this.date(this.date().clone().add(1, 'd')); }, down: function () { this.date(this.date().clone().subtract(1, 'd')); }, 'control up': function () { this.date(this.date().clone().add(1, 'd')); }, 'control down': function () { this.date(this.date().clone().subtract(1, 'd')); }}});</script>
+    </span>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="TimePeriodList_header_isClosed">Closed</label>
+            <div class="col-sm-10">
+    
+    <select name="isClosed" class="" id="TimePeriodList_header_isClosed">
+            <option value="">&nbsp;</option>
+            <option value="Y">Y</option>
+            <option value="N">N</option>
+    </select>
+    
+    
+        <script>$("#TimePeriodList_header_isClosed").select2({  });</script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="TimePeriodList_header_parentPeriodId">Parent</label>
+            <div class="col-sm-10">
+    
+    <select name="parentPeriodId" class=" dynamic-options noResetSelect2" style="min-width:200px;" id="TimePeriodList_header_parentPeriodId">
+            <option value="">&nbsp;</option>
+    </select>
+    
+    
+        <script>
+            var TimePeriodList_header_parentPeriodIdS2Opts = { 
+                
+                minimumResultsForSearch:0, width:"100%", minimumInputLength:0,
+                ajax:{ url:"http://127.0.0.1:18091/apps/marble/Accounting/TimePeriod/FindTimePeriod/getTimePeriodList", type:"POST", dataType:"json", cache:true, delay:300,
+                    data:function(params) { return { moquiSessionToken: "[REDACTED]", term:(params.term || ''), pageIndex:(params.page || 1) - 1
+                        , "partyId": $("#TimePeriodList_header_partyId").val()
+                        
+                    }},
+                    processResults:function(data, params) {
+                        var isDataArray = moqui.isArray(data);
+                        var list = isDataArray ? data : data.options;
+                        var newData = [];
+                        // funny case where select2 specifies no option.@value if empty so &nbsp; ends up passed with form submit; now filtered on server for \u00a0 only and set to null
+                        if (!params.page || params.page <= 1) newData.push({ id:'\u00a0', text:'\u00a0' });
+                        var labelField = "label"; var valueField = "value";
+                        $.each(list, function(idx, curObj) {
+                            var idVal = curObj[valueField]; if (!idVal) idVal = '\u00a0';
+                            newData.push({ id:idVal, text:curObj[labelField] })
+                        });
+                        var outObj = { results:newData };
+                        if (!isDataArray) {
+                            params.page = params.page || 1; // NOTE: 1 based index, is 0 based on server side
+                            var pageSize = data.pageSize || 20;
+                            outObj.pagination = { more: (data.count ? (params.page * pageSize) < data.count : false) };
+                        }
+                        return outObj;
+                    }
+                }
+            };
+            $("#TimePeriodList_header_parentPeriodId").select2(TimePeriodList_header_parentPeriodIdS2Opts);
+            function populate_TimePeriodList_header_parentPeriodId(params) {
+                $.ajax({ type:"POST", url:"http://127.0.0.1:18091/apps/marble/Accounting/TimePeriod/FindTimePeriod/getTimePeriodList", data:{ moquiSessionToken: "[REDACTED]", "partyId": $("#TimePeriodList_header_partyId").val(), term:((params && params.term) || '')}, dataType:"json"}).done(                    function(data) {
+                        var list = moqui.isArray(data) ? data : data.options;
+                        if (list) {
+                            var jqEl = $("#TimePeriodList_header_parentPeriodId");
+                            var bWasFocused = jqEl.next().hasClass('select2-container--focus');
+                            jqEl.select2("destroy");
+                            jqEl.html("");
+                            jqEl.append('<option value="">&nbsp;</option>');
+                            
+                            $.each(list, function(key, value) {
+                                var optionValue = value["value"];
+                                if (optionValue === "") {
+                                    jqEl.append("<option selected='selected' value='" + optionValue + "'>" + value["label"] + "</option>");
+                                } else {
+                                    jqEl.append("<option value='" + optionValue + "'>" + value["label"] + "</option>");
+                                }
+                            });
+                            $("#TimePeriodList_header_parentPeriodId").select2(TimePeriodList_header_parentPeriodIdS2Opts);
+                            if( bWasFocused ) jqEl.focus();
+                            setTimeout(function() { jqEl.trigger('change'); }, 50);
+                        }
+                    }
+                );
+            }
+            $("#TimePeriodList_header_partyId").on('change', function() { populate_TimePeriodList_header_parentPeriodId(); });
+            
+                
+
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="TimePeriodList_header_previousPeriodId">Previous</label>
+            <div class="col-sm-10">
+    
+    <select name="previousPeriodId" class=" dynamic-options noResetSelect2" style="min-width:200px;" id="TimePeriodList_header_previousPeriodId">
+            <option value="">&nbsp;</option>
+    </select>
+    
+    
+        <script>
+            var TimePeriodList_header_previousPeriodIdS2Opts = { 
+                
+                minimumResultsForSearch:0, width:"100%", minimumInputLength:0,
+                ajax:{ url:"http://127.0.0.1:18091/apps/marble/Accounting/TimePeriod/FindTimePeriod/getTimePeriodList", type:"POST", dataType:"json", cache:true, delay:300,
+                    data:function(params) { return { moquiSessionToken: "[REDACTED]", term:(params.term || ''), pageIndex:(params.page || 1) - 1
+                        , "partyId": $("#TimePeriodList_header_partyId").val()
+                        
+                    }},
+                    processResults:function(data, params) {
+                        var isDataArray = moqui.isArray(data);
+                        var list = isDataArray ? data : data.options;
+                        var newData = [];
+                        // funny case where select2 specifies no option.@value if empty so &nbsp; ends up passed with form submit; now filtered on server for \u00a0 only and set to null
+                        if (!params.page || params.page <= 1) newData.push({ id:'\u00a0', text:'\u00a0' });
+                        var labelField = "label"; var valueField = "value";
+                        $.each(list, function(idx, curObj) {
+                            var idVal = curObj[valueField]; if (!idVal) idVal = '\u00a0';
+                            newData.push({ id:idVal, text:curObj[labelField] })
+                        });
+                        var outObj = { results:newData };
+                        if (!isDataArray) {
+                            params.page = params.page || 1; // NOTE: 1 based index, is 0 based on server side
+                            var pageSize = data.pageSize || 20;
+                            outObj.pagination = { more: (data.count ? (params.page * pageSize) < data.count : false) };
+                        }
+                        return outObj;
+                    }
+                }
+            };
+            $("#TimePeriodList_header_previousPeriodId").select2(TimePeriodList_header_previousPeriodIdS2Opts);
+            function populate_TimePeriodList_header_previousPeriodId(params) {
+                $.ajax({ type:"POST", url:"http://127.0.0.1:18091/apps/marble/Accounting/TimePeriod/FindTimePeriod/getTimePeriodList", data:{ moquiSessionToken: "[REDACTED]", "partyId": $("#TimePeriodList_header_partyId").val(), term:((params && params.term) || '')}, dataType:"json"}).done(                    function(data) {
+                        var list = moqui.isArray(data) ? data : data.options;
+                        if (list) {
+                            var jqEl = $("#TimePeriodList_header_previousPeriodId");
+                            var bWasFocused = jqEl.next().hasClass('select2-container--focus');
+                            jqEl.select2("destroy");
+                            jqEl.html("");
+                            jqEl.append('<option value="">&nbsp;</option>');
+                            
+                            $.each(list, function(key, value) {
+                                var optionValue = value["value"];
+                                if (optionValue === "") {
+                                    jqEl.append("<option selected='selected' value='" + optionValue + "'>" + value["label"] + "</option>");
+                                } else {
+                                    jqEl.append("<option value='" + optionValue + "'>" + value["label"] + "</option>");
+                                }
+                            });
+                            $("#TimePeriodList_header_previousPeriodId").select2(TimePeriodList_header_previousPeriodIdS2Opts);
+                            if( bWasFocused ) jqEl.focus();
+                            setTimeout(function() { jqEl.trigger('change'); }, 50);
+                        }
+                    }
+                );
+            }
+            $("#TimePeriodList_header_partyId").on('change', function() { populate_TimePeriodList_header_previousPeriodId(); });
+            
+                
+
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <div class="col-sm-2 hidden-xs">&nbsp;</div>
+            <div class="col-sm-10">
+    
+    <button type="submit" name="searchButton" value="searchButton" id="TimePeriodList_header_searchButton" class="btn btn-primary btn-sm">
+Find    </button>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+                        </fieldset>
+                    </form>
+                </div>
+            </div></div>
+        </div>
+        <script>$('#TimePeriodList_hdialog').on('shown.bs.modal', function() {
+            $("#TimePeriodList_hdialog :not(.noResetSelect2)>select:not(.noResetSelect2)").select2({ });
+        })</script>
+        <div id="TimePeriodList_SelColsDialog" class="modal" aria-hidden="true" style="display: none;" tabindex="-1">
+            <div class="modal-dialog" style="width: 600px;"><div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Column Fields</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Drag fields to the desired column or do not display</p>
+                    <ul id="TimePeriodList_SelColsSortable">
+                        <li id="hidden"><div>Do Not Display</div>
+                        </li>
+                            <li id="column_0"><div>Column 1</div><ul>
+                                <li id="partyId"><div>Organization</div></li>
+                                <li id="periodName"><div>Period Name</div></li>
+                            </ul></li>
+                            <li id="column_1"><div>Column 2</div><ul>
+                                <li id="timePeriodTypeId"><div>Type</div></li>
+                                <li id="periodNum"><div>Period Num</div></li>
+                            </ul></li>
+                            <li id="column_2"><div>Column 3</div><ul>
+                                <li id="fromDate"><div>From Date</div></li>
+                                <li id="thruDate"><div>Thru Date</div></li>
+                            </ul></li>
+                            <li id="column_3"><div>Column 4</div><ul>
+                                <li id="isClosed"><div>Closed</div></li>
+                            </ul></li>
+                            <li id="column_4"><div>Column 5</div><ul>
+                                <li id="parentPeriodId"><div>Parent</div></li>
+                            </ul></li>
+                            <li id="column_5"><div>Column 6</div><ul>
+                                <li id="previousPeriodId"><div>Previous</div></li>
+                            </ul></li>
+                            <li id="column_6"><div>Column 7</div><ul>
+                                <li id="nextPeriod"><div>Next</div></li>
+                            </ul></li>
+                            <li id="column_7"><div>Column 8</div><ul>
+                                <li id="accounts"><div>Accounts</div></li>
+                            </ul></li>
+                            <li id="column_8"><div>Column 9</div></li>
+                            <li id="column_9"><div>Column 10</div></li>
+                            <li id="column_10"><div>Column 11</div></li>
+                    </ul>
+                    <form class="form-inline" id="TimePeriodList_SelColsForm" method="post" action="http://127.0.0.1:18091/apps/marble/Accounting/TimePeriod/FindTimePeriod/formSelectColumns">
+                        <input type="hidden" name="moquiSessionToken" value="[REDACTED]" style="">
+                        <input type="hidden" name="formLocation" value="component://SimpleScreens/screen/SimpleScreens/Accounting/TimePeriod/FindTimePeriod.xml.form_list$TimePeriodList" style="">
+                        <input type="hidden" id="TimePeriodList_SelColsForm_columnsTree" name="columnsTree" value="" style="">
+                        <input type="submit" name="SaveColumns" value="Save Columns" class="btn btn-primary btn-sm" style="">
+                        <input type="submit" name="ResetColumns" value="Reset to Default" class="btn btn-primary btn-sm" style="">
+                    </form>
+                </div>
+            </div></div>
+        </div>
+        <script>$('#TimePeriodList_SelColsDialog').on('shown.bs.modal', function() {
+            $("#TimePeriodList_SelColsSortable").sortableLists({
+                isAllowed: function(currEl, hint, target) {
+                    if (currEl.attr('id') === 'hidden' || currEl.attr('id').startsWith('column_')) {
+                        if (!target.attr('id') || (target.attr('id') != 'hidden' && !currEl.attr('id').startsWith('column_'))) { hint.css('background-color', '#99ff99'); return true; }
+                        else { hint.css('background-color', '#ff9999'); return false; }
+                    }
+                    if (target.attr('id') && (target.attr('id') === 'hidden' || target.attr('id').startsWith('column_'))) { hint.css('background-color', '#99ff99'); return true; }
+                    else { hint.css('background-color', '#ff9999'); return false; }
+                },
+                placeholderCss: {'background-color':'#999999'}, insertZone: 50,
+                opener: { active:false, as:'html', close:'', open:'' },
+                onChange: function(cEl) {
+                    var sortableHierarchy = $('#TimePeriodList_SelColsSortable').sortableListsToHierarchy();
+                    // console.log(sortableHierarchy); console.log(JSON.stringify(sortableHierarchy));
+                    $("#TimePeriodList_SelColsForm_columnsTree").val(JSON.stringify(sortableHierarchy));
+                }
+            });
+            $("#TimePeriodList_SelColsForm_columnsTree").val(JSON.stringify($('#TimePeriodList_SelColsSortable').sortableListsToHierarchy()));
+        })</script>
+        <div class="table-scroll-wrapper"><table class="table table-striped table-hover table-condensed" id="TimePeriodList_table">
+            <thead>
+        <tr class="form-list-nav-row"><th colspan="8">
+        <nav class="form-list-nav">
+            <button id="TimePeriodList_hdialog_button" type="button" data-toggle="modal" data-target="#TimePeriodList_hdialog" data-original-title="Find Options" data-placement="bottom" class="btn btn-default"><i class="fa fa-share"></i> Find Options</button>
+            <button id="TimePeriodList_SelColsDialog_button" type="button" data-toggle="modal" data-target="#TimePeriodList_SelColsDialog" data-original-title="Columns" data-placement="bottom" class="btn btn-default"><i class="fa fa-share"></i> Columns</button>
+
+                <ul class="pagination">
+                    <li><span><i class="fa fa-fast-backward"></i></span></li>
+                    <li><span><i class="fa fa-backward"></i></span></li>
+
+                <li><a href="http://127.0.0.1:18091/apps/marble/Accounting/TimePeriod/FindTimePeriod">Page 1 of 1 (1 - 6 of 6)</a></li>
+
+
+                    <li><span><i class="fa fa-forward"></i></span></li>
+                    <li><span><i class="fa fa-fast-forward"></i></span></li>
+                </ul>
+
+                <a href="http://127.0.0.1:18091/apps/marble/Accounting/TimePeriod/FindTimePeriod?renderMode=csv&amp;saveFilename=TimePeriodList.csv&amp;pageNoLimit=true&amp;lastStandalone=true" class="btn btn-default">CSV</a>
+        </nav>
+        </th></tr>
+
+            <tr><th colspan="8" style="font-weight: normal">
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+            </th></tr>
+
+                <tr>
+                    <th>
+                        <div><div class="form-title">Organization</div>    </div>
+                        <div><div class="form-title">Period Name            <span class="form-order-by">
+                <a href="http://127.0.0.1:18091/apps/marble/Accounting/TimePeriod/FindTimePeriod?orderByField=periodName"><i class="fa fa-caret-up"></i></a>
+                <a href="http://127.0.0.1:18091/apps/marble/Accounting/TimePeriod/FindTimePeriod?orderByField=-periodName"><i class="fa fa-caret-down"></i></a>
+            </span>
+</div>    </div>
+                    </th>
+                    <th>
+                        <div><div class="form-title">Type            <span class="form-order-by">
+                <a href="http://127.0.0.1:18091/apps/marble/Accounting/TimePeriod/FindTimePeriod?orderByField=timePeriodTypeId"><i class="fa fa-caret-up"></i></a>
+                <a href="http://127.0.0.1:18091/apps/marble/Accounting/TimePeriod/FindTimePeriod?orderByField=-timePeriodTypeId"><i class="fa fa-caret-down"></i></a>
+            </span>
+</div>    </div>
+                        <div><div class="form-title">Period Num            <span class="form-order-by">
+                <a href="http://127.0.0.1:18091/apps/marble/Accounting/TimePeriod/FindTimePeriod?orderByField=periodNum"><i class="fa fa-caret-up"></i></a>
+                <a href="http://127.0.0.1:18091/apps/marble/Accounting/TimePeriod/FindTimePeriod?orderByField=-periodNum"><i class="fa fa-caret-down"></i></a>
+            </span>
+</div>    </div>
+                    </th>
+                    <th>
+                        <div><div class="form-title">From Date            <span class="form-order-by">
+                <a href="http://127.0.0.1:18091/apps/marble/Accounting/TimePeriod/FindTimePeriod?orderByField=fromDate"><i class="fa fa-caret-up"></i></a>
+                <a href="http://127.0.0.1:18091/apps/marble/Accounting/TimePeriod/FindTimePeriod?orderByField=fromDate" class="active"><i class="fa fa-caret-down"></i></a>
+            </span>
+</div>    </div>
+                        <div><div class="form-title">Thru Date            <span class="form-order-by">
+                <a href="http://127.0.0.1:18091/apps/marble/Accounting/TimePeriod/FindTimePeriod?orderByField=thruDate"><i class="fa fa-caret-up"></i></a>
+                <a href="http://127.0.0.1:18091/apps/marble/Accounting/TimePeriod/FindTimePeriod?orderByField=-thruDate"><i class="fa fa-caret-down"></i></a>
+            </span>
+</div>    </div>
+                    </th>
+                    <th>
+                        <div><div class="form-title">Closed</div>    </div>
+                    </th>
+                    <th>
+                        <div><div class="form-title">Parent</div>    </div>
+                    </th>
+                    <th>
+                        <div><div class="form-title">Previous</div>    </div>
+                    </th>
+                    <th>
+                        <div><div class="form-title">Next</div>    </div>
+                    </th>
+                    <th>
+                        <div><div class="form-title">Accounts</div>    </div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+        
+        <tr>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline">ZICORP: Ziziwork Industries</span>    </div>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Accounting/TimePeriod/EditTimePeriod?timePeriodId=100003" id="TimePeriodList_periodName_0_editTimePeriod" class="">ZICORP FY2027</a>                
+            
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline">Fiscal Year</span>    </div>
+    <div class="form-group">
+    
+<span class="text-inline Long">2027</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline Date">2027-01-01</span>    </div>
+    <div class="form-group">
+    
+<span class="text-inline Date">2027-12-31</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">N</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+&nbsp;
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Accounting/TimePeriod/EditTimePeriod?timePeriodId=100000" id="TimePeriodList_previousPeriodId_0_editTimePeriod" class="">ZICORP FY2026 (Closed: N)</a>                
+            
+&nbsp;
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+&nbsp;
+
+            <button type="submit" form="TimePeriodList_nextPeriod_0_createNextTimePeriod" id="TimePeriodList_nextPeriod_0_createNextTimePeriod_button" class="btn btn-primary btn-sm" onclick="return confirm('Really create next period?')">
+Create Next</button>
+                
+            
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Accounting/TimePeriod/ViewPeriodGlAccounts?timePeriodId=100003" id="TimePeriodList_accounts_0_viewPeriodGlAccounts" class="btn btn-primary btn-sm">Accounts</a>                
+            
+    </div>
+            </td>
+        </tr>
+        
+        
+        <tr>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline">ZICORP: Ziziwork Industries</span>    </div>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Accounting/TimePeriod/EditTimePeriod?timePeriodId=100004" id="TimePeriodList_periodName_1_editTimePeriod" class="">ZICORP FY2027q01</a>                
+            
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline">Fiscal Quarter</span>    </div>
+    <div class="form-group">
+    
+<span class="text-inline Long">1</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline Date">2027-01-01</span>    </div>
+    <div class="form-group">
+    
+<span class="text-inline Date">2027-03-31</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">N</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Accounting/TimePeriod/EditTimePeriod?timePeriodId=100003" id="TimePeriodList_parentPeriodId_1_editTimePeriod" class="">ZICORP FY2027 (Closed: N)</a>                
+            
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Accounting/TimePeriod/EditTimePeriod?timePeriodId=100001" id="TimePeriodList_previousPeriodId_1_editTimePeriod" class="">ZICORP FY2026q04 (Closed: N)</a>                
+            
+&nbsp;
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+&nbsp;
+
+            <button type="submit" form="TimePeriodList_nextPeriod_1_createNextTimePeriod" id="TimePeriodList_nextPeriod_1_createNextTimePeriod_button" class="btn btn-primary btn-sm" onclick="return confirm('Really create next period?')">
+Create Next</button>
+                
+            
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Accounting/TimePeriod/ViewPeriodGlAccounts?timePeriodId=100004" id="TimePeriodList_accounts_1_viewPeriodGlAccounts" class="btn btn-primary btn-sm">Accounts</a>                
+            
+    </div>
+            </td>
+        </tr>
+        
+        
+        <tr>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline">ZICORP: Ziziwork Industries</span>    </div>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Accounting/TimePeriod/EditTimePeriod?timePeriodId=100005" id="TimePeriodList_periodName_2_editTimePeriod" class="">ZICORP FY2026m11</a>                
+            
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline">Fiscal Month</span>    </div>
+    <div class="form-group">
+    
+<span class="text-inline Long">11</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline Date">2026-11-01</span>    </div>
+    <div class="form-group">
+    
+<span class="text-inline Date">2026-11-30</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">N</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Accounting/TimePeriod/EditTimePeriod?timePeriodId=100001" id="TimePeriodList_parentPeriodId_2_editTimePeriod" class="">ZICORP FY2026q04 (Closed: N)</a>                
+            
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Accounting/TimePeriod/EditTimePeriod?timePeriodId=100002" id="TimePeriodList_previousPeriodId_2_editTimePeriod" class="">ZICORP FY2026m10 (Closed: N)</a>                
+            
+&nbsp;
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+&nbsp;
+
+            <button type="submit" form="TimePeriodList_nextPeriod_2_createNextTimePeriod" id="TimePeriodList_nextPeriod_2_createNextTimePeriod_button" class="btn btn-primary btn-sm" onclick="return confirm('Really create next period?')">
+Create Next</button>
+                
+            
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Accounting/TimePeriod/ViewPeriodGlAccounts?timePeriodId=100005" id="TimePeriodList_accounts_2_viewPeriodGlAccounts" class="btn btn-primary btn-sm">Accounts</a>                
+            
+    </div>
+            </td>
+        </tr>
+        
+        
+        <tr>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline">ZICORP: Ziziwork Industries</span>    </div>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Accounting/TimePeriod/EditTimePeriod?timePeriodId=100001" id="TimePeriodList_periodName_3_editTimePeriod" class="">ZICORP FY2026q04</a>                
+            
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline">Fiscal Quarter</span>    </div>
+    <div class="form-group">
+    
+<span class="text-inline Long">4</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline Date">2026-10-01</span>    </div>
+    <div class="form-group">
+    
+<span class="text-inline Date">2026-12-31</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">N</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Accounting/TimePeriod/EditTimePeriod?timePeriodId=100000" id="TimePeriodList_parentPeriodId_3_editTimePeriod" class="">ZICORP FY2026 (Closed: N)</a>                
+            
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+&nbsp;
+
+            <button type="submit" form="TimePeriodList_previousPeriodId_3_createPreviousTimePeriod" id="TimePeriodList_previousPeriodId_3_createPreviousTimePeriod_button" class="btn btn-primary btn-sm" onclick="return confirm('Really create previous period?')">
+Create Previous</button>
+                
+            
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Accounting/TimePeriod/EditTimePeriod?timePeriodId=100004" id="TimePeriodList_nextPeriod_3_editTimePeriod" class="">ZICORP FY2027q01</a>                
+            
+&nbsp;
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Accounting/TimePeriod/ViewPeriodGlAccounts?timePeriodId=100001" id="TimePeriodList_accounts_3_viewPeriodGlAccounts" class="btn btn-primary btn-sm">Accounts</a>                
+            
+    </div>
+            </td>
+        </tr>
+        
+        
+        <tr>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline">ZICORP: Ziziwork Industries</span>    </div>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Accounting/TimePeriod/EditTimePeriod?timePeriodId=100002" id="TimePeriodList_periodName_4_editTimePeriod" class="">ZICORP FY2026m10</a>                
+            
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline">Fiscal Month</span>    </div>
+    <div class="form-group">
+    
+<span class="text-inline Long">10</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline Date">2026-10-01</span>    </div>
+    <div class="form-group">
+    
+<span class="text-inline Date">2026-10-31</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">N</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Accounting/TimePeriod/EditTimePeriod?timePeriodId=100001" id="TimePeriodList_parentPeriodId_4_editTimePeriod" class="">ZICORP FY2026q04 (Closed: N)</a>                
+            
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+&nbsp;
+
+            <button type="submit" form="TimePeriodList_previousPeriodId_4_createPreviousTimePeriod" id="TimePeriodList_previousPeriodId_4_createPreviousTimePeriod_button" class="btn btn-primary btn-sm" onclick="return confirm('Really create previous period?')">
+Create Previous</button>
+                
+            
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Accounting/TimePeriod/EditTimePeriod?timePeriodId=100005" id="TimePeriodList_nextPeriod_4_editTimePeriod" class="">ZICORP FY2026m11</a>                
+            
+&nbsp;
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Accounting/TimePeriod/ViewPeriodGlAccounts?timePeriodId=100002" id="TimePeriodList_accounts_4_viewPeriodGlAccounts" class="btn btn-primary btn-sm">Accounts</a>                
+            
+    </div>
+            </td>
+        </tr>
+        
+        
+        <tr>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline">ZICORP: Ziziwork Industries</span>    </div>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Accounting/TimePeriod/EditTimePeriod?timePeriodId=100000" id="TimePeriodList_periodName_5_editTimePeriod" class="">ZICORP FY2026</a>                
+            
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline">Fiscal Year</span>    </div>
+    <div class="form-group">
+    
+<span class="text-inline Long">2026</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline Date">2026-01-01</span>    </div>
+    <div class="form-group">
+    
+<span class="text-inline Date">2026-12-31</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String">N</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+&nbsp;
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+&nbsp;
+
+            <button type="submit" form="TimePeriodList_previousPeriodId_5_createPreviousTimePeriod" id="TimePeriodList_previousPeriodId_5_createPreviousTimePeriod_button" class="btn btn-primary btn-sm" onclick="return confirm('Really create previous period?')">
+Create Previous</button>
+                
+            
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Accounting/TimePeriod/EditTimePeriod?timePeriodId=100003" id="TimePeriodList_nextPeriod_5_editTimePeriod" class="">ZICORP FY2027</a>                
+            
+&nbsp;
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Accounting/TimePeriod/ViewPeriodGlAccounts?timePeriodId=100000" id="TimePeriodList_accounts_5_viewPeriodGlAccounts" class="btn btn-primary btn-sm">Accounts</a>                
+            
+    </div>
+            </td>
+        </tr>
+        
+                </tbody>
+        </table></div>
+    
+    <!-- END   form-list[@name=TimePeriodList] -->
+    <!-- END   screen[@location=component://SimpleScreens/screen/SimpleScreens/Accounting/TimePeriod/FindTimePeriod.xml].widgets -->
+
+        </div>
+    <!-- END   screen[@location=component://SimpleScreens/screen/SimpleScreens/Accounting/TimePeriod.xml].widgets -->
+
+    <!-- END   screen[@location=component://SimpleScreens/screen/SimpleScreens/Accounting.xml].widgets -->
+
+    <!-- END   screen[@location=component://MarbleERP/screen/marble.xml].widgets -->
+
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    <!-- BEGIN section[@name=BottomNavSection] -->
+        <!-- BEGIN screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+    <div id="footer" class="bg-dark">
+        <!-- BEGIN render-mode.text[inline][@template=true] -->
+                <div id="apps-footer-content">
+<p><a href="https://www.moqui.org/" target="_blank">Built on Moqui Framework 4.0.0</a></p><p><a href="/vapps/ScreenTree">Site Map</a></p>                </div>        <!-- END   render-mode.text[inline][@template=true] -->
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    <!-- END   screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+
+    <!-- END   section[@name=BottomNavSection] -->
+    <!-- END   screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+        
+            <form method="post" action="http://127.0.0.1:18091/apps/marble/Accounting/TimePeriod/FindTimePeriod/createNextTimePeriod" name="TimePeriodList_nextPeriod_0_createNextTimePeriod" id="TimePeriodList_nextPeriod_0_createNextTimePeriod">
+                <input type="hidden" name="moquiSessionToken" value="[REDACTED]" style="">
+                    <input type="hidden" name="periodNum" value="2027" style="">
+                    <input type="hidden" name="fromDate" value="1798761600000" style="">
+                    <input type="hidden" name="timePeriodTypeId" value="FiscalYear" style="">
+                    <input type="hidden" name="isClosed" value="N" style="">
+                    <input type="hidden" name="periodName" value="ZICORP FY2027" style="">
+                    <input type="hidden" name="previousPeriodId" value="100003" style="">
+                    <input type="hidden" name="partyId" value="ORG_ZIZI_CORP" style="">
+                    <input type="hidden" name="thruDate" value="1830211200000" style="">
+            </form>
+            <form method="post" action="http://127.0.0.1:18091/apps/marble/Accounting/TimePeriod/FindTimePeriod/createNextTimePeriod" name="TimePeriodList_nextPeriod_1_createNextTimePeriod" id="TimePeriodList_nextPeriod_1_createNextTimePeriod">
+                <input type="hidden" name="moquiSessionToken" value="[REDACTED]" style="">
+                    <input type="hidden" name="periodNum" value="1" style="">
+                    <input type="hidden" name="fromDate" value="1798761600000" style="">
+                    <input type="hidden" name="timePeriodTypeId" value="FiscalQuarter" style="">
+                    <input type="hidden" name="isClosed" value="N" style="">
+                    <input type="hidden" name="periodName" value="ZICORP FY2027q01" style="">
+                    <input type="hidden" name="parentPeriodId" value="100003" style="">
+                    <input type="hidden" name="previousPeriodId" value="100004" style="">
+                    <input type="hidden" name="partyId" value="ORG_ZIZI_CORP" style="">
+                    <input type="hidden" name="thruDate" value="1806451200000" style="">
+            </form>
+            <form method="post" action="http://127.0.0.1:18091/apps/marble/Accounting/TimePeriod/FindTimePeriod/createNextTimePeriod" name="TimePeriodList_nextPeriod_2_createNextTimePeriod" id="TimePeriodList_nextPeriod_2_createNextTimePeriod">
+                <input type="hidden" name="moquiSessionToken" value="[REDACTED]" style="">
+                    <input type="hidden" name="periodNum" value="11" style="">
+                    <input type="hidden" name="fromDate" value="1793491200000" style="">
+                    <input type="hidden" name="timePeriodTypeId" value="FiscalMonth" style="">
+                    <input type="hidden" name="isClosed" value="N" style="">
+                    <input type="hidden" name="periodName" value="ZICORP FY2026m11" style="">
+                    <input type="hidden" name="parentPeriodId" value="100001" style="">
+                    <input type="hidden" name="previousPeriodId" value="100005" style="">
+                    <input type="hidden" name="partyId" value="ORG_ZIZI_CORP" style="">
+                    <input type="hidden" name="thruDate" value="1795996800000" style="">
+            </form>
+            <form method="post" action="http://127.0.0.1:18091/apps/marble/Accounting/TimePeriod/FindTimePeriod/createPreviousTimePeriod" name="TimePeriodList_previousPeriodId_3_createPreviousTimePeriod" id="TimePeriodList_previousPeriodId_3_createPreviousTimePeriod">
+                <input type="hidden" name="moquiSessionToken" value="[REDACTED]" style="">
+                    <input type="hidden" name="periodNum" value="4" style="">
+                    <input type="hidden" name="fromDate" value="1790812800000" style="">
+                    <input type="hidden" name="timePeriodTypeId" value="FiscalQuarter" style="">
+                    <input type="hidden" name="isClosed" value="N" style="">
+                    <input type="hidden" name="periodName" value="ZICORP FY2026q04" style="">
+                    <input type="hidden" name="nextPeriodId" value="100001" style="">
+                    <input type="hidden" name="parentPeriodId" value="100000" style="">
+                    <input type="hidden" name="partyId" value="ORG_ZIZI_CORP" style="">
+                    <input type="hidden" name="thruDate" value="1798675200000" style="">
+            </form>
+            <form method="post" action="http://127.0.0.1:18091/apps/marble/Accounting/TimePeriod/FindTimePeriod/createPreviousTimePeriod" name="TimePeriodList_previousPeriodId_4_createPreviousTimePeriod" id="TimePeriodList_previousPeriodId_4_createPreviousTimePeriod">
+                <input type="hidden" name="moquiSessionToken" value="[REDACTED]" style="">
+                    <input type="hidden" name="periodNum" value="10" style="">
+                    <input type="hidden" name="fromDate" value="1790812800000" style="">
+                    <input type="hidden" name="timePeriodTypeId" value="FiscalMonth" style="">
+                    <input type="hidden" name="isClosed" value="N" style="">
+                    <input type="hidden" name="periodName" value="ZICORP FY2026m10" style="">
+                    <input type="hidden" name="nextPeriodId" value="100002" style="">
+                    <input type="hidden" name="parentPeriodId" value="100001" style="">
+                    <input type="hidden" name="partyId" value="ORG_ZIZI_CORP" style="">
+                    <input type="hidden" name="thruDate" value="1793404800000" style="">
+            </form>
+            <form method="post" action="http://127.0.0.1:18091/apps/marble/Accounting/TimePeriod/FindTimePeriod/createPreviousTimePeriod" name="TimePeriodList_previousPeriodId_5_createPreviousTimePeriod" id="TimePeriodList_previousPeriodId_5_createPreviousTimePeriod">
+                <input type="hidden" name="moquiSessionToken" value="[REDACTED]" style="">
+                    <input type="hidden" name="periodNum" value="2026" style="">
+                    <input type="hidden" name="fromDate" value="1767225600000" style="">
+                    <input type="hidden" name="timePeriodTypeId" value="FiscalYear" style="">
+                    <input type="hidden" name="isClosed" value="N" style="">
+                    <input type="hidden" name="periodName" value="ZICORP FY2026" style="">
+                    <input type="hidden" name="nextPeriodId" value="100000" style="">
+                    <input type="hidden" name="partyId" value="ORG_ZIZI_CORP" style="">
+                    <input type="hidden" name="thruDate" value="1798675200000" style="">
+            </form>
+
+
+
+
+        
+        
+        
+    
+</body></html>

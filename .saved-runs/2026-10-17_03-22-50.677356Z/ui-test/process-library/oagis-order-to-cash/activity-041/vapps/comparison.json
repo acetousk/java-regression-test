@@ -1,0 +1,19 @@
+{
+  "id": "activity-041",
+  "sourceLine": 153,
+  "headings": [
+    "OAGIS Order to Cash",
+    "Process Story",
+    "Catalog"
+  ],
+  "text": "Customer sends GetInventoryBalance to Supplier and Supplier sends ShowInventoryBalance to Customer.\nAlternatively, Supplier sends SyncInventoryBalance to Customer and Customer sends ConfirmBOD to Supplier (and optionally vice-versa).",
+  "route": null,
+  "dialog": null,
+  "mapping": "entry-candidate",
+  "limitation": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required.",
+  "source": "docs/business-processes/process-library/oagis-order-to-cash.md",
+  "mode": "vapps",
+  "coverage": "blocked",
+  "captures": [],
+  "reason": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required."
+}

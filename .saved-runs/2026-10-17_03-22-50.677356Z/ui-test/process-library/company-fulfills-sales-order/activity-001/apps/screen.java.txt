@@ -1,0 +1,80 @@
+Toggle navigation 
+Dashboard
+0 0 0 0
+Marble ERP - Dashboard
+Applications (Sales)
+Applications
+Applications (Sales)
+Applications
+ Orders - Find Order (Sales)
+Applications (Purchase)
+Applications (Purchase)
+ Orders - Find Order (Purchase)
+Applications
+Applications
+ Customers - Find Customer
+Applications (Receivable)
+Applications (Receivable)
+ Invoices - Find Invoice (Receivable)
+Applications
+Applications
+ Payments - Find Payment
+Applications (Payable)
+Applications (Payable)
+ Invoices - Find Invoice (Payable)
+Applications
+Application
+Marble ERP
+My Account
+System
+Tools
+ZIRET: Ziziwork Retail & Wholesale
+ZISER: Ziziwork Services
+Marble ERP
+Dashboard
+Quick Search
+Accounting
+Asset
+Catalog
+Customers
+Facility
+Human Resources
+Manufacturing
+Orders
+Parties
+Projects
+Requests
+Returns
+Shipments
+Shipping
+Stores
+Suppliers
+Survey
+Tasks
+Wiki/Content
+Custom Reports
+Report Builder
+Shipping
+Dashboard
+Picklists
+Pick Location Moves
+Picklists Pick Location Moves Move Assets
+ 
+Pack Shipment
+Facility 
+	
+Ship Method 
+	
+Carrier 
+	
+Appr Order Qty
+	
+Not Avail
+	
+Not Issued
+	
+Pick Loc Qty
+
+Built on Moqui Framework 4.0.0
+
+Site Map

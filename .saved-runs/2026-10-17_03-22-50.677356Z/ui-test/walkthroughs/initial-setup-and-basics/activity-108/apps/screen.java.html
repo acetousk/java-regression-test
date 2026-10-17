@@ -1,0 +1,871 @@
+<!DOCTYPE html><html><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    
+    <title>Facility - Find Facility</title>
+    <link rel="apple-touch-icon" href="/MoquiLogo100.png">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="http://127.0.0.1:18091/css/webroot-layout.css?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="http://127.0.0.1:18091/css/webroot-theme.css?v=1a147e2" rel="stylesheet" type="text/css">
+    <script src="#?v=1a147e2" type="text/javascript"></script>
+    <script src="#?v=1a147e2" type="text/javascript"></script>
+    <script src="#?v=1a147e2" type="text/javascript"></script>
+    <link rel="shortcut icon" href="http://127.0.0.1:18091/favicon.ico">
+</head>
+<body class="dev bg-light FindFacility">
+        
+        
+        
+        
+    <!-- BEGIN screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+        <!-- BEGIN render-mode.text[inline][@template=true] -->
+<script>var notificationClient = new moqui.NotificationClient((location.protocol === 'https:' ? 'wss' : 'ws') + "://127.0.0.1:18091/notws");</script>        <!-- END   render-mode.text[inline][@template=true] -->
+    <!-- BEGIN section[@name=TopNavSection] -->
+        <!-- BEGIN screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+    <div id="top">
+        <!-- BEGIN render-mode.text[@location=component://webroot/screen/includes/navbar.html.ftl][@template=true] -->
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <header class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a href="http://127.0.0.1:18091/apps/AppList" class="navbar-brand"><img src="http://127.0.0.1:18091/images/MoquiLogoSmall.png" alt="Home"></a>
+        
+    </header>
+    <div id="navbar-buttons" class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul id="header-menus" class="nav navbar-nav">
+        </ul>
+        <div id="navbar-menu-crumbs">
+        </div>
+        <a class="navbar-text" href="http://127.0.0.1:18091/apps/marble/Facility/FindFacility">Find Facility</a>
+        <a href="http://127.0.0.1:18091/Login/logout" data-toggle="tooltip" data-original-title="Logout John Doe" data-placement="bottom" class="btn btn-danger btn-sm navbar-btn navbar-right">
+            <i class="fa fa-power-off"></i>
+        </a>
+        <a href="#" onclick="switchDarkLight();" data-toggle="tooltip" data-original-title="Switch Dark/Light" data-placement="bottom" class="btn btn-default btn-sm navbar-btn navbar-right">
+            <i class="fa fa-adjust"></i>
+        </a>
+
+<div class="btn-group navbar-right">
+    <a href="/apps/my/User/Notifications" data-toggle="tooltip" data-container="body" data-original-title="Notifications" data-placement="bottom" class="btn btn-default btn-sm navbar-btn">
+        <i class="fa fa-info-circle"></i>
+        <span id="navbar_notification_count" class="label label-info">0</span>
+    </a>
+    <a href="/apps/my/User/Messages/FindMessage?statusId=CeReceived&amp;toPartyId=EX_JOHN_DOE" data-toggle="tooltip" data-container="body" data-original-title="Messages" data-placement="bottom" class="btn btn-default btn-sm navbar-btn">
+        <i class="fa fa-envelope"></i>
+        <span class="label label-warning">0</span>
+    </a>
+    <a href="/apps/my/User/Calendar/MyCalendar" data-toggle="tooltip" data-container="body" data-original-title="Events This Week" data-placement="bottom" class="btn btn-default btn-sm navbar-btn">
+        <i class="fa fa-calendar"></i>
+        <span class="label label-primary">0</span>
+    </a>
+    <a href="/apps/my/User/Task/MyTasks" data-toggle="tooltip" data-container="body" data-original-title="Open Tasks" data-placement="bottom" class="btn btn-default btn-sm navbar-btn">
+        <i class="fa fa-check"></i>
+        <span class="label label-success">0</span>
+    </a>
+</div>
+    <script>
+        var navbarNotificationListener = function(jsonObj, webSocket) {
+            if (jsonObj && jsonObj.persistOnSend === true) {
+                var countElement = $("#navbar_notification_count");
+                countElement.text((parseInt(countElement.text()) + 1).toString());
+            }
+            notificationClient.displayNotify(jsonObj, webSocket);
+        };
+        notificationClient.registerListener("ALL", navbarNotificationListener);
+    </script>
+        <div id="history-menu" class="nav navbar-right dropdown">
+            <a id="history-menu-link" href="#" class="dropdown-toggle btn btn-default btn-sm navbar-btn" data-toggle="dropdown" title="History">
+                <i class="fa fa-list"></i></a>
+            <ul class="dropdown-menu">
+                <li><a href="http://127.0.0.1:18091/apps/marble/dashboard">
+                            <i class="fa fa-dashboard" style="padding-right: 8px;"></i>
+                    Marble ERP - Dashboard
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Catalog/Product/EditPrices">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Catalog.png" alt="Products - Prices" height="18" style="padding-right: 4px;">
+                    Products - Prices
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Asset/Asset/FindSummary?assetTypeEnumId=AstTpInventory">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Asset.png" alt="Asset - Find Summary (AstTpInventory)" height="18" style="padding-right: 4px;">
+                    Asset - Find Summary (AstTpInventory)
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Catalog/Product/FindProduct">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Catalog.png" alt="Products - Find Product" height="18" style="padding-right: 4px;">
+                    Products - Find Product
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Accounting/Invoice/FindInvoice">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Accounting.png" alt="Invoices - Find Invoice" height="18" style="padding-right: 4px;">
+                    Invoices - Find Invoice
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Party/PartyTimeEntries">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Parties.png" alt="Parties - Time" height="18" style="padding-right: 4px;">
+                    Parties - Time
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/HumanRes/EditRateAmounts">
+                            <img src="#" alt="Human Resources - Rates" height="18" style="padding-right: 4px;">
+                    Human Resources - Rates
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Task/FindTask">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/task-homework.png" alt="Tasks - Find Task" height="18" style="padding-right: 4px;">
+                    Tasks - Find Task
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Project/FindProject">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/project-business120.png" alt="Projects - Find Project" height="18" style="padding-right: 4px;">
+                    Projects - Find Project
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Customer/EditCustomer">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Customer.png" alt="Customers - Customer" height="18" style="padding-right: 4px;">
+                    Customers - Customer
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Customer/FindCustomer">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Customer.png" alt="Customers - Find Customer" height="18" style="padding-right: 4px;">
+                    Customers - Find Customer
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Party/EditParty">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Parties.png" alt="Parties - Party" height="18" style="padding-right: 4px;">
+                    Parties - Party
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Party/FindParty">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/dashboard">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/vapps/marble/Party/FindParty">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/vapps/marble/dashboard">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Party/FindParty">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Parties.png" alt="Parties - Find Party" height="18" style="padding-right: 4px;">
+                    Parties - Find Party
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Party/PaymentMethod/PaymentMethodTrans">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Party/PaymentMethod/PaymentMethodFiles">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Party/PaymentMethod/PaymentMethodFiles?partyId=ORG_ZIZI_RETAIL&amp;paymentMethodId=ZIRET_BA">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications (ORG_ZIZI_RETAIL, ZIRET_BA)
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Accounting/Payment/FindPayment">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Accounting/dashboard">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Party/FindParty?roleTypeId=OrgInternal">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications (OrgInternal)
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/vapps/marble/Party/PaymentMethod/PaymentMethodTrans">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/vapps/marble/Party/PaymentMethod/PaymentMethodFiles">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            </ul>
+        </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+    $('.navbar [data-toggle="tooltip"]').tooltip({ placement:'bottom', trigger:'hover' });
+    $('#history-menu-link').tooltip({ placement:'bottom', trigger:'hover' });
+    $('#document-menu-link').tooltip({ placement:'bottom', trigger:'hover' });
+    function switchDarkLight() {
+        $("body").toggleClass("bg-dark");
+        $("body").toggleClass("bg-light");
+        var currentStyle = $("body").hasClass("bg-dark") ? "bg-dark" : "bg-light";
+        $.ajax({ type:'POST', url:'http://127.0.0.1:18091/apps/setPreference', data:{ 'moquiSessionToken': '[REDACTED]','preferenceKey': 'OUTER_STYLE', 'preferenceValue': currentStyle }, dataType:'json' });
+    }
+</script>
+
+        <!-- END   render-mode.text[@location=component://webroot/screen/includes/navbar.html.ftl][@template=true] -->
+        <!-- BEGIN render-mode.text[inline][@template=true] -->
+        <!-- END   render-mode.text[inline][@template=true] -->
+        <li id="header-menu" class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Application <i class="fa fa-chevron-right"></i></a>
+            <ul class="dropdown-menu">
+                        <li class="active"><a href="http://127.0.0.1:18091/apps/marble/dashboard"><i class="fa fa-cogs" style="padding-right: 8px;"></i>Marble ERP</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/my"><i class="fa fa-user" style="padding-right: 8px;"></i>My Account</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/system"><i class="fa fa-cog" style="padding-right: 8px;"></i>System</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/tools"><i class="fa fa-wrench" style="padding-right: 8px;"></i>Tools</a></li>
+            </ul>
+        </li>
+        <script>$("#header-menus").append($("#header-menu"));</script>
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    <!-- END   screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+
+    <!-- END   section[@name=TopNavSection] -->
+    <div id="content">
+    <div class="inner">
+    <div class="container-fluid">
+    <!-- BEGIN section[@name=MessagesSection] -->
+        <!-- BEGIN screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+    <!-- BEGIN section-iterate[@name=headerMessageInfos] -->
+    
+    <!-- END   section-iterate[@name=headerMessageInfos] -->
+    <!-- BEGIN section-iterate[@name=headerErrors] -->
+    
+    <!-- END   section-iterate[@name=headerErrors] -->
+    <!-- BEGIN section-iterate[@name=headerValidationErrors] -->
+    
+    <!-- END   section-iterate[@name=headerValidationErrors] -->
+    <!-- BEGIN section-iterate[@name=headerSavedMessages] -->
+    
+    <!-- END   section-iterate[@name=headerSavedMessages] -->
+    <!-- BEGIN section-iterate[@name=headerSavedErrors] -->
+    
+    <!-- END   section-iterate[@name=headerSavedErrors] -->
+    <!-- BEGIN section-iterate[@name=headerSavedValidationErrors] -->
+    
+    <!-- END   section-iterate[@name=headerSavedValidationErrors] -->
+    <!-- END   screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+
+    <!-- END   section[@name=MessagesSection] -->
+        <!-- BEGIN screen[@location=component://MarbleERP/screen/marble.xml].widgets -->
+    <!-- BEGIN section[@name=OrgChooserSection] -->
+        <!-- BEGIN screen[@location=component://MarbleERP/screen/marble.xml].widgets -->
+        <!-- BEGIN render-mode.text[inline][@template=true] -->
+<div id="active-org-menu" class="nav navbar-right dropdown">
+                <a id="active-org-menu-link" href="#" class="dropdown-toggle btn btn-default btn-sm navbar-btn" data-toggle="dropdown" title="Organization">
+                    <i class="fa fa-globe"></i> </a>
+                <ul class="dropdown-menu">
+                        <li><a href="http://127.0.0.1:18091/apps/setPrefGoLast?preferenceKey=ACTIVE_ORGANIZATION&amp;preferenceValue=ORG_ZIZI_RETAIL">ZIRET: Ziziwork Retail &amp; Wholesale</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/setPrefGoLast?preferenceKey=ACTIVE_ORGANIZATION&amp;preferenceValue=ORG_ZIZI_SERVICES">ZISER: Ziziwork Services</a></li>
+                </ul>
+            </div>
+            <script>$("#navbar-buttons").append($("#active-org-menu")); $('#active-org-menu-link').tooltip({ placement:'bottom', trigger:'hover' });</script>        <!-- END   render-mode.text[inline][@template=true] -->
+    <!-- END   screen[@location=component://MarbleERP/screen/marble.xml].widgets -->
+
+    <!-- END   section[@name=OrgChooserSection] -->
+        <li id="MarbleErpPanel-menu" class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Marble ERP <i class="fa fa-chevron-right"></i></a>
+            <ul class="dropdown-menu">
+                        <li><a href="http://127.0.0.1:18091/apps/marble/dashboard"><i class="fa fa-dashboard" style="padding-right: 8px;"></i>Dashboard</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/QuickSearch"><i class="fa fa-search" style="padding-right: 8px;"></i>Quick Search</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Accounting/dashboard"><img src="http://127.0.0.1:18091/ssstatic/images/Accounting.png" alt="Accounting" height="18" style="padding-right: 4px;">Accounting</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Asset/dashboard"><img src="http://127.0.0.1:18091/ssstatic/images/Asset.png" alt="Asset" height="18" style="padding-right: 4px;">Asset</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Catalog/dashboard"><img src="http://127.0.0.1:18091/ssstatic/images/Catalog.png" alt="Catalog" height="18" style="padding-right: 4px;">Catalog</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Customer/FindCustomer"><img src="http://127.0.0.1:18091/ssstatic/images/Customer.png" alt="Customers" height="18" style="padding-right: 4px;">Customers</a></li>
+                        <li class="active"><a href="http://127.0.0.1:18091/apps/marble/Facility/FindFacility"><img src="http://127.0.0.1:18091/ssstatic/images/Facility.png" alt="Facility" height="18" style="padding-right: 4px;">Facility</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/HumanRes/dashboard"><i class="fa fa-user-plus" style="padding-right: 8px;"></i>Human Resources</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Manufacturing/dashboard"><i class="fa fa-industry" style="padding-right: 8px;"></i>Manufacturing</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Order/FindOrder"><img src="http://127.0.0.1:18091/ssstatic/images/Sales.png" alt="Orders" height="18" style="padding-right: 4px;">Orders</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Party/FindParty"><img src="http://127.0.0.1:18091/ssstatic/images/Parties.png" alt="Parties" height="18" style="padding-right: 4px;">Parties</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Project/FindProject"><img src="http://127.0.0.1:18091/ssstatic/images/project-business120.png" alt="Projects" height="18" style="padding-right: 4px;">Projects</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Request/FindRequest"><img src="http://127.0.0.1:18091/ssstatic/images/Request.png" alt="Requests" height="18" style="padding-right: 4px;">Requests</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Return/FindReturn"><img src="http://127.0.0.1:18091/ssstatic/images/Return.png" alt="Returns" height="18" style="padding-right: 4px;">Returns</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Shipment/FindShipment"><img src="http://127.0.0.1:18091/ssstatic/images/Shipping.png" alt="Shipments" height="18" style="padding-right: 4px;">Shipments</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Shipping/dashboard"><img src="http://127.0.0.1:18091/ssstatic/images/Picking.png" alt="Shipping" height="18" style="padding-right: 4px;">Shipping</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/ProductStore/FindProductStore"><img src="http://127.0.0.1:18091/ssstatic/images/ProductStore.png" alt="Stores" height="18" style="padding-right: 4px;">Stores</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Supplier/FindSupplier"><img src="http://127.0.0.1:18091/ssstatic/images/Supplier.png" alt="Suppliers" height="18" style="padding-right: 4px;">Suppliers</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Survey/FindSurvey"><i class="fa fa-pencil-square-o" style="padding-right: 8px;"></i>Survey</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Task/FindTask"><img src="http://127.0.0.1:18091/ssstatic/images/task-homework.png" alt="Tasks" height="18" style="padding-right: 4px;">Tasks</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Wiki/WikiSpaces"><img src="http://127.0.0.1:18091/ssstatic/images/Wiki.png" alt="Wiki/Content" height="18" style="padding-right: 4px;">Wiki/Content</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/QuickViewReport"><i class="fa fa-database" style="padding-right: 8px;"></i>Custom Reports</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/SimpleReport/FindReport"><i class="fa fa-database" style="padding-right: 8px;"></i>Report Builder</a></li>
+            </ul>
+        </li>
+        <script>$("#header-menus").append($("#MarbleErpPanel-menu"));</script>
+            <!-- BEGIN screen[@location=component://SimpleScreens/screen/SimpleScreens/Facility.xml].widgets -->
+        <div id="FacilityPanel-tabpanel">
+                <a id="FacilityPanel-menu-crumb" class="navbar-text" href="http://127.0.0.1:18091/apps/marble/Facility/FindFacility">Facility <i class="fa fa-chevron-right"></i></a>
+                <script>$("#navbar-menu-crumbs").append($("#FacilityPanel-menu-crumb"));</script>
+                <!-- BEGIN screen[@location=component://SimpleScreens/screen/SimpleScreens/Facility/FindFacility.xml].widgets -->
+        <button id="NewFacilityDialog-button" type="button" data-toggle="modal" data-target="#NewFacilityDialog" data-original-title="New Facility" data-placement="bottom" class="btn btn-primary btn-sm "><i class="fa fa-share"></i> New Facility</button>
+
+        <div id="NewFacilityDialog" class="modal container-dialog" aria-hidden="true" style="display: none;" tabindex="-1">
+            <div class="modal-dialog" style="width: 760px;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">New Facility</h4>
+                    </div>
+                    <div class="modal-body">
+    <!-- BEGIN form-single[@name=NewFacilityForm] -->
+    <form name="NewFacilityForm" id="NewFacilityForm" method="post" action="http://127.0.0.1:18091/apps/marble/Facility/FindFacility/createFacility">
+        <input type="hidden" name="moquiFormName" value="NewFacilityForm" style="">
+        <input type="hidden" name="moquiSessionToken" value="[REDACTED]" style="">
+        
+        <fieldset class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="NewFacilityForm_pseudoId">ID</label>
+            <div class="col-sm-10">
+    
+<input id="NewFacilityForm_pseudoId" type="text" name="pseudoId" value="" size="15" class="form-control" style="">
+        
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="NewFacilityForm_facilityName">Facility Name</label>
+            <div class="col-sm-10">
+    
+<input id="NewFacilityForm_facilityName" type="text" name="facilityName" value="" style="width: 100%;" class="form-control">
+        
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="NewFacilityForm_facilityTypeEnumId">Facility Type</label>
+            <div class="col-sm-10">
+    
+    <select name="facilityTypeEnumId" class=" " id="NewFacilityForm_facilityTypeEnumId">
+            <option value="FcTpBlock">Block</option>
+            <option value="FcTpBlockGroup">Block Group</option>
+            <option value="FcTpBuilding">Building</option>
+            <option value="FcTpCallCenter">Call Center</option>
+            <option value="FcTpDataCenter">Data Center</option>
+            <option value="FcTpDock">Dock</option>
+            <option value="FcTpFloor">Floor</option>
+            <option value="FcTpLand">Land</option>
+            <option value="FcTpOffice">Office</option>
+            <option value="FcTpPlant">Plant</option>
+            <option value="FcTpLine">Production Line</option>
+            <option value="FcTpRetailStore">Retail Store</option>
+            <option value="FcTpRoom">Room</option>
+            <option selected="selected" value="FcTpWarehouse">Warehouse</option>
+    </select>
+    
+    
+        <script>$("#NewFacilityForm_facilityTypeEnumId").select2({  });</script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="NewFacilityForm_ownerPartyId">Owner</label>
+            <div class="col-sm-10">
+    
+    <select name="ownerPartyId" class=" dynamic-options noResetSelect2" style="min-width:200px;" id="NewFacilityForm_ownerPartyId">
+            <option value="">&nbsp;</option>
+    </select>
+    
+    
+        <script>
+            var NewFacilityForm_ownerPartyIdS2Opts = { 
+                
+                minimumResultsForSearch:0, width:"100%", minimumInputLength:2,
+                ajax:{ url:"http://127.0.0.1:18091/apps/marble/Facility/FindFacility/searchPartyList", type:"POST", dataType:"json", cache:true, delay:300,
+                    data:function(params) { return { moquiSessionToken: "[REDACTED]", term:(params.term || ''), pageIndex:(params.page || 1) - 1
+                        
+                        
+                    }},
+                    processResults:function(data, params) {
+                        var isDataArray = moqui.isArray(data);
+                        var list = isDataArray ? data : data.options;
+                        var newData = [];
+                        // funny case where select2 specifies no option.@value if empty so &nbsp; ends up passed with form submit; now filtered on server for \u00a0 only and set to null
+                        
+                        var labelField = "label"; var valueField = "value";
+                        $.each(list, function(idx, curObj) {
+                            var idVal = curObj[valueField]; if (!idVal) idVal = '\u00a0';
+                            newData.push({ id:idVal, text:curObj[labelField] })
+                        });
+                        var outObj = { results:newData };
+                        if (!isDataArray) {
+                            params.page = params.page || 1; // NOTE: 1 based index, is 0 based on server side
+                            var pageSize = data.pageSize || 20;
+                            outObj.pagination = { more: (data.count ? (params.page * pageSize) < data.count : false) };
+                        }
+                        return outObj;
+                    }
+                }
+            };
+            $("#NewFacilityForm_ownerPartyId").select2(NewFacilityForm_ownerPartyIdS2Opts);
+            function populate_NewFacilityForm_ownerPartyId(params) {
+                    var hasAllParms = true;
+                    
+                    if (!hasAllParms) { $("#NewFacilityForm_ownerPartyId").select2("destroy"); $('#NewFacilityForm_ownerPartyId').html(""); $("#NewFacilityForm_ownerPartyId").select2({ });  return; }
+                $.ajax({ type:"POST", url:"http://127.0.0.1:18091/apps/marble/Facility/FindFacility/searchPartyList", data:{ moquiSessionToken: "[REDACTED]", term:((params && params.term) || '')}, dataType:"json"}).done(                    function(data) {
+                        var list = moqui.isArray(data) ? data : data.options;
+                        if (list) {
+                            var jqEl = $("#NewFacilityForm_ownerPartyId");
+                            var bWasFocused = jqEl.next().hasClass('select2-container--focus');
+                            jqEl.select2("destroy");
+                            jqEl.html("");
+                            
+                            $.each(list, function(key, value) {
+                                var optionValue = value["value"];
+                                if (optionValue === "") {
+                                    jqEl.append("<option selected='selected' value='" + optionValue + "'>" + value["label"] + "</option>");
+                                } else {
+                                    jqEl.append("<option value='" + optionValue + "'>" + value["label"] + "</option>");
+                                }
+                            });
+                            $("#NewFacilityForm_ownerPartyId").select2(NewFacilityForm_ownerPartyIdS2Opts);
+                            if( bWasFocused ) jqEl.focus();
+                            setTimeout(function() { jqEl.trigger('change'); }, 50);
+                        }
+                    }
+                );
+            }
+            
+                
+
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <div class="col-sm-2 hidden-xs">&nbsp;</div>
+            <div class="col-sm-10">
+    
+    <button type="submit" name="submitButton" value="submitButton" id="NewFacilityForm_submitButton" class="btn btn-primary btn-sm">
+Create    </button>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        </fieldset>
+    </form>
+        <script>
+            $("#NewFacilityForm").validate({ errorClass: 'help-block', errorElement: 'span',
+                highlight: function(element, errorClass, validClass) { $(element).parents('.form-group').removeClass('has-success').addClass('has-error'); },
+                unhighlight: function(element, errorClass, validClass) { $(element).parents('.form-group').removeClass('has-error').addClass('has-success'); }
+            });
+            $('#NewFacilityForm [data-toggle="tooltip"]').tooltip({placement:'auto top'});
+
+        </script>
+    <!-- END   form-single[@name=NewFacilityForm] -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>$('#NewFacilityDialog').on('shown.bs.modal', function() {
+            $("#NewFacilityDialog :not(.noResetSelect2)>select:not(.noResetSelect2)").select2({ });
+            var defFocus = $("#NewFacilityDialog .default-focus");
+            if (defFocus.length) { defFocus.focus(); } else { $("#NewFacilityDialog form :input:visible:first").focus(); }
+        });</script>
+            <a href="http://127.0.0.1:18091/apps/marble/Facility/BoxTypes" class="btn btn-primary btn-sm">Box Types</a>            <a href="http://127.0.0.1:18091/apps/marble/Facility/CarrierShipMethods" class="btn btn-primary btn-sm">Carrier Ship Methods</a>    <!-- BEGIN form-list[@name=FacilityListForm] -->
+
+        <div id="FacilityListForm_hdialog" class="modal" aria-hidden="true" style="display: none;" tabindex="-1">
+            <div class="modal-dialog" style="width: 800px;"><div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Find Options</h4>
+                </div>
+                <div class="modal-body">
+                <h4 style="margin-top: 0;">Saved Finds</h4>
+                        <p>No find parameters, choose some to save a new find or update existing</p>
+                <h4>Find Parameters</h4>
+                    <form name="FacilityListForm_header" id="FacilityListForm_header" method="post" action="http://127.0.0.1:18091/apps/marble/Facility/FindFacility">
+                        <input type="hidden" name="moquiSessionToken" value="[REDACTED]" style="">
+                        
+                        
+                        <fieldset class="form-horizontal">
+                            <div class="form-group"><div class="col-sm-2">&nbsp;</div><div class="col-sm-10">
+                                <button type="button" class="btn btn-primary btn-sm" onclick="FacilityListForm_header_clearForm()">Clear Parameters</button></div></div>
+
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="FacilityListForm_header_orderByField">Order By</label>
+                                <div class="col-sm-10">
+                                    <select name="orderBySelect" id="FacilityListForm_header_orderBySelect" multiple="multiple" style="width: 100%;" class="noResetSelect2">
+                                                <option value="^pseudoId">Facility ID (Asc)</option>
+                                                <option value="-^pseudoId">Facility ID (Desc)</option>
+                                                <option value="^facilityName">Name (Asc)</option>
+                                                <option value="-^facilityName">Name (Desc)</option>
+                                                <option value="facilityTypeEnumId">Type (Asc)</option>
+                                                <option value="-facilityTypeEnumId">Type (Desc)</option>
+                                                <option value="ownerPartyId">Owner (Asc)</option>
+                                                <option value="-ownerPartyId">Owner (Desc)</option>
+                                    </select>
+                                    <input type="hidden" id="FacilityListForm_header_orderByField" name="orderByField" value="facilityName" style="">
+                                </div>
+                            </div>
+                            <script>
+                                function FacilityListForm_header_clearForm() {
+                                    var jqEl = $("#FacilityListForm_header");
+                                    jqEl.find(':radio, :checkbox').removeAttr('checked');
+                                    jqEl.find('textarea, :text, select').val('').trigger('change');
+                                    return false;
+                                }
+                                $("#FacilityListForm_header_orderBySelect").selectivity({ positionDropdown: function(dropdownEl, selectEl) { dropdownEl.css("width", "300px"); } })[0].selectivity.filterResults = function(results) {
+                                    // Filter out asc and desc options if anyone selected.
+                                    return results.filter(function(item){return !this._data.some(function(data_item) {return data_item.id.substring(1) === item.id.substring(1);});}, this);
+                                };
+                                    $("#FacilityListForm_header_orderBySelect").selectivity("value", ['^facilityName']);
+                                $("div#FacilityListForm_header_orderBySelect").on("change", function(evt) {
+                                    if (evt.value) $("#FacilityListForm_header_orderByField").val(evt.value.join(","));
+                                });
+                            </script>
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="FacilityListForm_header_pseudoId">Facility ID</label>
+            <div class="col-sm-10">
+    
+<span class="form-text-find">
+        <input type="hidden" name="pseudoId_op" value="contains" style="">
+    <input type="text" class="form-control" name="pseudoId" value="" size="15" id="FacilityListForm_header_pseudoId" style="">
+        <input type="hidden" name="pseudoId_ic" value="Y" style="">
+</span>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="FacilityListForm_header_facilityName">Name</label>
+            <div class="col-sm-10">
+    
+<span class="form-text-find">
+        <input type="hidden" name="facilityName_op" value="contains" style="">
+    <input type="text" class="form-control" name="facilityName" value="" size="50" id="FacilityListForm_header_facilityName" style="">
+        <input type="hidden" name="facilityName_ic" value="Y" style="">
+</span>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="FacilityListForm_header_facilityTypeEnumId">Type</label>
+            <div class="col-sm-10">
+    
+    <select name="facilityTypeEnumId" class=" " id="FacilityListForm_header_facilityTypeEnumId">
+            <option value="">&nbsp;</option>
+            <option value="FcTpBlock">Block</option>
+            <option value="FcTpBlockGroup">Block Group</option>
+            <option value="FcTpBuilding">Building</option>
+            <option value="FcTpCallCenter">Call Center</option>
+            <option value="FcTpDataCenter">Data Center</option>
+            <option value="FcTpDock">Dock</option>
+            <option value="FcTpFloor">Floor</option>
+            <option value="FcTpLand">Land</option>
+            <option value="FcTpOffice">Office</option>
+            <option value="FcTpPlant">Plant</option>
+            <option value="FcTpLine">Production Line</option>
+            <option value="FcTpRetailStore">Retail Store</option>
+            <option value="FcTpRoom">Room</option>
+            <option value="FcTpWarehouse">Warehouse</option>
+    </select>
+    
+    
+        <script>$("#FacilityListForm_header_facilityTypeEnumId").select2({  });</script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="FacilityListForm_header_ownerPartyId">Owner</label>
+            <div class="col-sm-10">
+    
+    <select name="ownerPartyId" class=" dynamic-options noResetSelect2" style="min-width:200px;" id="FacilityListForm_header_ownerPartyId">
+            <option value="">&nbsp;</option>
+    </select>
+    
+    
+        <script>
+            var FacilityListForm_header_ownerPartyIdS2Opts = { 
+                
+                minimumResultsForSearch:0, width:"100%", minimumInputLength:2,
+                ajax:{ url:"http://127.0.0.1:18091/apps/marble/Facility/FindFacility/searchPartyList", type:"POST", dataType:"json", cache:true, delay:300,
+                    data:function(params) { return { moquiSessionToken: "[REDACTED]", term:(params.term || ''), pageIndex:(params.page || 1) - 1
+                        
+                        
+                    }},
+                    processResults:function(data, params) {
+                        var isDataArray = moqui.isArray(data);
+                        var list = isDataArray ? data : data.options;
+                        var newData = [];
+                        // funny case where select2 specifies no option.@value if empty so &nbsp; ends up passed with form submit; now filtered on server for \u00a0 only and set to null
+                        
+                        var labelField = "label"; var valueField = "value";
+                        $.each(list, function(idx, curObj) {
+                            var idVal = curObj[valueField]; if (!idVal) idVal = '\u00a0';
+                            newData.push({ id:idVal, text:curObj[labelField] })
+                        });
+                        var outObj = { results:newData };
+                        if (!isDataArray) {
+                            params.page = params.page || 1; // NOTE: 1 based index, is 0 based on server side
+                            var pageSize = data.pageSize || 20;
+                            outObj.pagination = { more: (data.count ? (params.page * pageSize) < data.count : false) };
+                        }
+                        return outObj;
+                    }
+                }
+            };
+            $("#FacilityListForm_header_ownerPartyId").select2(FacilityListForm_header_ownerPartyIdS2Opts);
+            function populate_FacilityListForm_header_ownerPartyId(params) {
+                    var hasAllParms = true;
+                    
+                    if (!hasAllParms) { $("#FacilityListForm_header_ownerPartyId").select2("destroy"); $('#FacilityListForm_header_ownerPartyId').html(""); $("#FacilityListForm_header_ownerPartyId").select2({ });  return; }
+                $.ajax({ type:"POST", url:"http://127.0.0.1:18091/apps/marble/Facility/FindFacility/searchPartyList", data:{ moquiSessionToken: "[REDACTED]", term:((params && params.term) || '')}, dataType:"json"}).done(                    function(data) {
+                        var list = moqui.isArray(data) ? data : data.options;
+                        if (list) {
+                            var jqEl = $("#FacilityListForm_header_ownerPartyId");
+                            var bWasFocused = jqEl.next().hasClass('select2-container--focus');
+                            jqEl.select2("destroy");
+                            jqEl.html("");
+                            
+                            $.each(list, function(key, value) {
+                                var optionValue = value["value"];
+                                if (optionValue === "") {
+                                    jqEl.append("<option selected='selected' value='" + optionValue + "'>" + value["label"] + "</option>");
+                                } else {
+                                    jqEl.append("<option value='" + optionValue + "'>" + value["label"] + "</option>");
+                                }
+                            });
+                            $("#FacilityListForm_header_ownerPartyId").select2(FacilityListForm_header_ownerPartyIdS2Opts);
+                            if( bWasFocused ) jqEl.focus();
+                            setTimeout(function() { jqEl.trigger('change'); }, 50);
+                        }
+                    }
+                );
+            }
+            
+                
+
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <div class="col-sm-2 hidden-xs">&nbsp;</div>
+            <div class="col-sm-10">
+    
+    <button type="submit" name="submitButton" value="submitButton" id="FacilityListForm_header_submitButton" class="btn btn-primary btn-sm">
+Find    </button>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+                        </fieldset>
+                    </form>
+                </div>
+            </div></div>
+        </div>
+        <script>$('#FacilityListForm_hdialog').on('shown.bs.modal', function() {
+            $("#FacilityListForm_hdialog :not(.noResetSelect2)>select:not(.noResetSelect2)").select2({ });
+        })</script>
+        <div id="FacilityListForm_SelColsDialog" class="modal" aria-hidden="true" style="display: none;" tabindex="-1">
+            <div class="modal-dialog" style="width: 600px;"><div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Column Fields</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Drag fields to the desired column or do not display</p>
+                    <ul id="FacilityListForm_SelColsSortable">
+                        <li id="hidden"><div>Do Not Display</div>
+                        </li>
+                            <li id="column_0"><div>Column 1</div><ul>
+                                <li id="pseudoId"><div>Facility ID</div></li>
+                            </ul></li>
+                            <li id="column_1"><div>Column 2</div><ul>
+                                <li id="facilityName"><div>Name</div></li>
+                            </ul></li>
+                            <li id="column_2"><div>Column 3</div><ul>
+                                <li id="facilityTypeEnumId"><div>Type</div></li>
+                            </ul></li>
+                            <li id="column_3"><div>Column 4</div><ul>
+                                <li id="ownerPartyId"><div>Owner</div></li>
+                            </ul></li>
+                            <li id="column_4"><div>Column 5</div><ul>
+                                <li id="submitButton"><div>Find</div></li>
+                            </ul></li>
+                            <li id="column_5"><div>Column 6</div></li>
+                            <li id="column_6"><div>Column 7</div></li>
+                            <li id="column_7"><div>Column 8</div></li>
+                    </ul>
+                    <form class="form-inline" id="FacilityListForm_SelColsForm" method="post" action="http://127.0.0.1:18091/apps/marble/Facility/FindFacility/formSelectColumns">
+                        <input type="hidden" name="moquiSessionToken" value="[REDACTED]" style="">
+                        <input type="hidden" name="formLocation" value="component://SimpleScreens/screen/SimpleScreens/Facility/FindFacility.xml.form_list$FacilityListForm" style="">
+                        <input type="hidden" id="FacilityListForm_SelColsForm_columnsTree" name="columnsTree" value="" style="">
+                        <input type="submit" name="SaveColumns" value="Save Columns" class="btn btn-primary btn-sm" style="">
+                        <input type="submit" name="ResetColumns" value="Reset to Default" class="btn btn-primary btn-sm" style="">
+                    </form>
+                </div>
+            </div></div>
+        </div>
+        <script>$('#FacilityListForm_SelColsDialog').on('shown.bs.modal', function() {
+            $("#FacilityListForm_SelColsSortable").sortableLists({
+                isAllowed: function(currEl, hint, target) {
+                    if (currEl.attr('id') === 'hidden' || currEl.attr('id').startsWith('column_')) {
+                        if (!target.attr('id') || (target.attr('id') != 'hidden' && !currEl.attr('id').startsWith('column_'))) { hint.css('background-color', '#99ff99'); return true; }
+                        else { hint.css('background-color', '#ff9999'); return false; }
+                    }
+                    if (target.attr('id') && (target.attr('id') === 'hidden' || target.attr('id').startsWith('column_'))) { hint.css('background-color', '#99ff99'); return true; }
+                    else { hint.css('background-color', '#ff9999'); return false; }
+                },
+                placeholderCss: {'background-color':'#999999'}, insertZone: 50,
+                opener: { active:false, as:'html', close:'', open:'' },
+                onChange: function(cEl) {
+                    var sortableHierarchy = $('#FacilityListForm_SelColsSortable').sortableListsToHierarchy();
+                    // console.log(sortableHierarchy); console.log(JSON.stringify(sortableHierarchy));
+                    $("#FacilityListForm_SelColsForm_columnsTree").val(JSON.stringify(sortableHierarchy));
+                }
+            });
+            $("#FacilityListForm_SelColsForm_columnsTree").val(JSON.stringify($('#FacilityListForm_SelColsSortable').sortableListsToHierarchy()));
+        })</script>
+        <div class="table-scroll-wrapper"><table class="table table-striped table-hover table-condensed" id="FacilityListForm_table">
+            <thead>
+        <tr class="form-list-nav-row"><th colspan="5">
+        <nav class="form-list-nav">
+            <button id="FacilityListForm_hdialog_button" type="button" data-toggle="modal" data-target="#FacilityListForm_hdialog" data-original-title="Find Options" data-placement="bottom" class="btn btn-default"><i class="fa fa-share"></i> Find Options</button>
+            <button id="FacilityListForm_SelColsDialog_button" type="button" data-toggle="modal" data-target="#FacilityListForm_SelColsDialog" data-original-title="Columns" data-placement="bottom" class="btn btn-default"><i class="fa fa-share"></i> Columns</button>
+
+                <ul class="pagination">
+                    <li><span><i class="fa fa-fast-backward"></i></span></li>
+                    <li><span><i class="fa fa-backward"></i></span></li>
+
+                <li><a href="http://127.0.0.1:18091/apps/marble/Facility/FindFacility">Page 1 of 1 (1 - 1 of 1)</a></li>
+
+
+                    <li><span><i class="fa fa-forward"></i></span></li>
+                    <li><span><i class="fa fa-fast-forward"></i></span></li>
+                </ul>
+
+                <a href="http://127.0.0.1:18091/apps/marble/Facility/FindFacility?renderMode=csv&amp;saveFilename=FacilityListForm.csv&amp;pageNoLimit=true&amp;lastStandalone=true" class="btn btn-default">CSV</a>
+        </nav>
+        </th></tr>
+
+            <tr><th colspan="5" style="font-weight: normal">
+                        
+                        
+                        
+                        
+                        
+            </th></tr>
+
+                <tr>
+                    <th>
+                        <div><div class="form-title">Facility ID            <span class="form-order-by">
+                <a href="http://127.0.0.1:18091/apps/marble/Facility/FindFacility?orderByField=%5EpseudoId"><i class="fa fa-caret-up"></i></a>
+                <a href="http://127.0.0.1:18091/apps/marble/Facility/FindFacility?orderByField=-%5EpseudoId"><i class="fa fa-caret-down"></i></a>
+            </span>
+</div>    </div>
+                    </th>
+                    <th>
+                        <div><div class="form-title">Name            <span class="form-order-by">
+                <a href="http://127.0.0.1:18091/apps/marble/Facility/FindFacility?orderByField=-%5EfacilityName" class="active"><i class="fa fa-caret-up"></i></a>
+                <a href="http://127.0.0.1:18091/apps/marble/Facility/FindFacility?orderByField=-%5EfacilityName"><i class="fa fa-caret-down"></i></a>
+            </span>
+</div>    </div>
+                    </th>
+                    <th>
+                        <div><div class="form-title">Type            <span class="form-order-by">
+                <a href="http://127.0.0.1:18091/apps/marble/Facility/FindFacility?orderByField=facilityTypeEnumId"><i class="fa fa-caret-up"></i></a>
+                <a href="http://127.0.0.1:18091/apps/marble/Facility/FindFacility?orderByField=-facilityTypeEnumId"><i class="fa fa-caret-down"></i></a>
+            </span>
+</div>    </div>
+                    </th>
+                    <th>
+                        <div><div class="form-title">Owner            <span class="form-order-by">
+                <a href="http://127.0.0.1:18091/apps/marble/Facility/FindFacility?orderByField=ownerPartyId"><i class="fa fa-caret-up"></i></a>
+                <a href="http://127.0.0.1:18091/apps/marble/Facility/FindFacility?orderByField=-ownerPartyId"><i class="fa fa-caret-down"></i></a>
+            </span>
+</div>    </div>
+                    </th>
+                    <th>
+                        <div><div class="form-title">&nbsp;</div>    </div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+        
+        <tr>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Facility/EditFacility?facilityId=ZIRET_WH" id="FacilityListForm_pseudoId_0_editFacility" class="">ZIRET_WH</a>                
+            
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+            <a href="http://127.0.0.1:18091/apps/marble/Facility/EditFacility?facilityId=ZIRET_WH" id="FacilityListForm_facilityName_0_editFacility" class="">Ziziwork Retail Warehouse</a>                
+            
+    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline">Warehouse</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline">ZIRET: Ziziwork Retail &amp; Wholesale</span>    </div>
+            </td>
+            <td>
+    <div class="form-group">
+    
+<span class="text-inline String"> </span>    </div>
+            </td>
+        </tr>
+        
+                </tbody>
+        </table></div>
+    
+    <!-- END   form-list[@name=FacilityListForm] -->
+    <!-- END   screen[@location=component://SimpleScreens/screen/SimpleScreens/Facility/FindFacility.xml].widgets -->
+
+        </div>
+    <!-- END   screen[@location=component://SimpleScreens/screen/SimpleScreens/Facility.xml].widgets -->
+
+    <!-- END   screen[@location=component://MarbleERP/screen/marble.xml].widgets -->
+
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    <!-- BEGIN section[@name=BottomNavSection] -->
+        <!-- BEGIN screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+    <div id="footer" class="bg-dark">
+        <!-- BEGIN render-mode.text[inline][@template=true] -->
+                <div id="apps-footer-content">
+<p><a href="https://www.moqui.org/" target="_blank">Built on Moqui Framework 4.0.0</a></p><p><a href="/vapps/ScreenTree">Site Map</a></p>                </div>        <!-- END   render-mode.text[inline][@template=true] -->
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    <!-- END   screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+
+    <!-- END   section[@name=BottomNavSection] -->
+    <!-- END   screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+        
+
+
+
+
+        
+        
+        
+    
+</body></html>

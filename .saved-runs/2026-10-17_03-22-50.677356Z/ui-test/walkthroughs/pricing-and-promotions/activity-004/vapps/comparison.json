@@ -1,0 +1,107 @@
+{
+  "id": "activity-004",
+  "sourceLine": 24,
+  "headings": [
+    "Pricing and Promotions",
+    "Product Price Configuration"
+  ],
+  "text": "TODO",
+  "route": "marble/Catalog/Product/FindProduct",
+  "dialog": null,
+  "mapping": "entry-candidate",
+  "limitation": "Read-only screen/dialog evidence only. Prerequisite creation, field input, submissions, integrations and full story transitions are not executed.",
+  "source": "docs/business-processes/walkthroughs/pricing-and-promotions.md",
+  "mode": "vapps",
+  "coverage": "blocked",
+  "captures": [
+    {
+      "engine": "java",
+      "mode": "vapps",
+      "route": "marble/Catalog/Product/FindProduct",
+      "dialog": null,
+      "authenticated": true,
+      "errors": [
+        "moqui is not defined",
+        "moqui is not defined"
+      ],
+      "failedRequests": [
+        {
+          "url": "http://127.0.0.1:18091/vapps/marble/dashboard",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:18091/vapps/marble/Catalog/Product/FindProduct",
+          "error": "net::ERR_ABORTED"
+        }
+      ],
+      "httpErrors": [],
+      "consoleErrors": [
+        "Refused to apply style from 'http://127.0.0.1:18091/vapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not a supported stylesheet MIME type, and strict MIME checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/vapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/vapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to apply style from 'http://127.0.0.1:18091/vapps/marble/Catalog/Product/FindProduct#?v=1a147e2' because its MIME type ('text/html') is not a supported stylesheet MIME type, and strict MIME checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/vapps/marble/Catalog/Product/FindProduct#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/vapps/marble/Catalog/Product/FindProduct#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled."
+      ],
+      "status": "blocked",
+      "reused": true,
+      "requestedURL": "http://127.0.0.1:18091/vapps/marble/Catalog/Product/FindProduct",
+      "navigation": "documented-or-candidate-deep-link",
+      "httpStatus": 200,
+      "finalURL": "http://127.0.0.1:18091/vapps/marble/Catalog/Product/FindProduct",
+      "directory": ".saved-runs/2026-10-17_03-22-50.677356Z/ui-test/_captures/854a2b6c80c13ab1354bebb2"
+    },
+    {
+      "engine": "rust",
+      "mode": "vapps",
+      "route": "marble/Catalog/Product/FindProduct",
+      "dialog": null,
+      "authenticated": true,
+      "errors": [
+        "HTTP 404",
+        "One or more HTTP resources failed (see httpErrors)"
+      ],
+      "failedRequests": [],
+      "httpErrors": [
+        {
+          "url": "http://127.0.0.1:18092/vapps/marble/dashboard",
+          "status": 404
+        },
+        {
+          "url": "http://127.0.0.1:18092/vapps/marble/Catalog/Product/FindProduct",
+          "status": 404
+        }
+      ],
+      "consoleErrors": [
+        "Failed to load resource: the server responded with a status of 404 (Not Found)",
+        "Failed to load resource: the server responded with a status of 404 (Not Found)"
+      ],
+      "status": "blocked",
+      "reused": true,
+      "requestedURL": "http://127.0.0.1:18092/vapps/marble/Catalog/Product/FindProduct",
+      "navigation": "documented-or-candidate-deep-link",
+      "httpStatus": 404,
+      "finalURL": "http://127.0.0.1:18092/vapps/marble/Catalog/Product/FindProduct",
+      "directory": ".saved-runs/2026-10-17_03-22-50.677356Z/ui-test/_captures/fe0d4338f9a36c85f65a525c"
+    }
+  ],
+  "comparison": {
+    "status": "diagnostic-only",
+    "equal": false,
+    "dimensions": [
+      {
+        "width": 1440,
+        "height": 1009
+      },
+      {
+        "width": 1440,
+        "height": 1000
+      }
+    ],
+    "dimensionsEqual": false,
+    "differentPixels": 154956,
+    "comparedPixels": 1452960,
+    "differencePercent": 10.664849686157913,
+    "threshold": 0.1
+  }
+}

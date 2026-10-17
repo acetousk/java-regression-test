@@ -1,0 +1,23 @@
+menu
+Applications
+chevron_right
+Marble ERP
+chevron_right
+Parties
+chevron_right
+Payment Method
+chevron_right
+Transactions
+search
+edit_location
+notifications
+history
+account_circle
+Built on Moqui 0.1.0
+Site Map
+info
+Browser notifications disabled, if you want them use browser notification settings to allow
+X
+warning
+Required parameter missing (paymentMethodId)
+X

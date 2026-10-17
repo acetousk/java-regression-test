@@ -1,0 +1,35 @@
+Application 
+Marble ERP 
+Requests 
+Find Request
+ 0  0  0  0
+ Organization
+ New Request
+ Find Options
+ Columns
+
+Status: Draft, Submitted, Reviewed, In Progress 
+
+Pri
+	
+Request Date
+Due Date
+	
+Name
+ID
+	
+Store
+Project
+Facility
+	
+Type
+	
+Status
+Resolution
+	
+Customer
+Assigned To
+
+Built on Moqui Framework 0.1.0
+
+Site Map

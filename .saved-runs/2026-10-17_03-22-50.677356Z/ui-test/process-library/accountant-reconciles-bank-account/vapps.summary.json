@@ -1,0 +1,57 @@
+{
+  "source": "docs/business-processes/process-library/accountant-reconciles-bank-account.md",
+  "mode": "vapps",
+  "activities": [
+    {
+      "id": "activity-001",
+      "sourceLine": 13,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 155061,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.672076313181368,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/accountant-reconciles-bank-account/activity-001/vapps/comparison.json"
+    },
+    {
+      "id": "activity-002",
+      "sourceLine": 17,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 155061,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.672076313181368,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/accountant-reconciles-bank-account/activity-002/vapps/comparison.json"
+    }
+  ],
+  "note": "Evidence sweep only; no complete business-process execution is claimed."
+}

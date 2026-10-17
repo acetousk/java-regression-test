@@ -1,0 +1,112 @@
+{
+  "id": "activity-006",
+  "sourceLine": 28,
+  "headings": [
+    "Place and Approve Sales Order",
+    "Create a Sales Order"
+  ],
+  "text": "- from the *Find Customer* screen use the **Sales Orders** button, or from the *Edit Customer* screen use the **Orders** button; this takes you to the *Find Orders* screen showing orders for just that customer, and selects the Customer in the **Create Sales Order** dialog",
+  "route": "marble/Order/FindOrder",
+  "dialog": {
+    "label": "Create Sales Order",
+    "id": "CreateSalesOrderDialog",
+    "route": "Order/FindOrder"
+  },
+  "mapping": "documented-dialog-label",
+  "limitation": "Read-only screen/dialog evidence only. Prerequisite creation, field input, submissions, integrations and full story transitions are not executed.",
+  "source": "docs/business-processes/walkthroughs/place-and-approve-sales-order.md",
+  "mode": "qapps",
+  "coverage": "blocked",
+  "captures": [
+    {
+      "engine": "java",
+      "mode": "qapps",
+      "route": "marble/Order/FindOrder",
+      "dialog": {
+        "label": "Create Sales Order",
+        "id": "CreateSalesOrderDialog",
+        "route": "Order/FindOrder"
+      },
+      "authenticated": true,
+      "errors": [
+        "$ is not defined",
+        "Vue is not defined",
+        "$ is not defined",
+        "Vue is not defined",
+        "locator.click: Timeout 3500ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Create Sales Order', exact: true }).or(getByRole('link', { name: 'Create Sales Order', exact: true })).filter({ visible: true }).first()\u001b[22m\n"
+      ],
+      "failedRequests": [
+        {
+          "url": "http://127.0.0.1:18091/qapps/marble/dashboard",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:18091/qapps/marble/Order/FindOrder",
+          "error": "net::ERR_ABORTED"
+        }
+      ],
+      "httpErrors": [],
+      "consoleErrors": [
+        "Refused to apply style from 'http://127.0.0.1:18091/qapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not a supported stylesheet MIME type, and strict MIME checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to apply style from 'http://127.0.0.1:18091/qapps/marble/Order/FindOrder#?v=1a147e2' because its MIME type ('text/html') is not a supported stylesheet MIME type, and strict MIME checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/Order/FindOrder#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/Order/FindOrder#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/Order/FindOrder#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/Order/FindOrder#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled."
+      ],
+      "status": "blocked",
+      "reused": true,
+      "requestedURL": "http://127.0.0.1:18091/qapps/marble/Order/FindOrder",
+      "navigation": "documented-or-candidate-deep-link",
+      "httpStatus": 200,
+      "finalURL": "http://127.0.0.1:18091/qapps/marble/Order/FindOrder",
+      "directory": ".saved-runs/2026-10-17_03-22-50.677356Z/ui-test/_captures/7920d7bf682f761536885050"
+    },
+    {
+      "engine": "rust",
+      "mode": "qapps",
+      "route": "marble/Order/FindOrder",
+      "dialog": {
+        "label": "Create Sales Order",
+        "id": "CreateSalesOrderDialog",
+        "route": "Order/FindOrder"
+      },
+      "authenticated": true,
+      "errors": [],
+      "failedRequests": [],
+      "httpErrors": [],
+      "consoleErrors": [],
+      "status": "captured",
+      "reused": true,
+      "requestedURL": "http://127.0.0.1:18092/qapps/marble/Order/FindOrder",
+      "navigation": "documented-or-candidate-deep-link",
+      "httpStatus": 200,
+      "finalURL": "http://127.0.0.1:18092/qapps/marble/Order/FindOrder",
+      "dialogOpened": true,
+      "directory": ".saved-runs/2026-10-17_03-22-50.677356Z/ui-test/_captures/bd0b5a7d1a1e5ab85e4f799d"
+    }
+  ],
+  "comparison": {
+    "status": "diagnostic-only",
+    "equal": false,
+    "dimensions": [
+      {
+        "width": 1440,
+        "height": 1000
+      },
+      {
+        "width": 1440,
+        "height": 1000
+      }
+    ],
+    "dimensionsEqual": true,
+    "differentPixels": 987477,
+    "comparedPixels": 1440000,
+    "differencePercent": 68.57479166666667,
+    "threshold": 0.1
+  }
+}

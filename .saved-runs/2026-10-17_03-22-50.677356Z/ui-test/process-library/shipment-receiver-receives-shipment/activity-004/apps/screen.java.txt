@@ -1,0 +1,101 @@
+Toggle navigation 
+Find Shipments
+Shipment Status Reference
+0 0 0 0
+Marble ERP - Dashboard
+Applications
+Applications
+Applications
+Applications
+ Requests - Find Request
+Applications
+Applications
+ Products - Find Product
+Applications
+Applications
+ Asset - Find Summary
+Applications
+Applications
+ Physical Inventory - Find Physical Inventory
+Applications (Customer)
+Applications (Customer)
+ Returns - Returns (Customer)
+Applications
+Applications
+ Shipping - Dashboard
+Applications (Sales)
+Applications (Sales)
+ Orders - Find Order (Sales)
+Applications (Purchase)
+Application
+Marble ERP
+My Account
+System
+Tools
+ZIRET: Ziziwork Retail & Wholesale
+ZISER: Ziziwork Services
+Marble ERP
+Dashboard
+Quick Search
+Accounting
+Asset
+Catalog
+Customers
+Facility
+Human Resources
+Manufacturing
+Orders
+Parties
+Projects
+Requests
+Returns
+Shipments
+Shipping
+Stores
+Suppliers
+Survey
+Tasks
+Wiki/Content
+Custom Reports
+Report Builder
+Shipments New Outgoing Shipment New Incoming Shipment New Transfer Shipment Package Tracking
+Find Options
+Columns
+CSV
+
+Type: Purchase Shipment
+
+
+Shipment 
+Ship Method 
+Type 
+	
+Entry Date 
+Status 
+	
+Priority 
+Picklist 
+	
+Origin Facility
+Dest. Facility
+Store
+	
+From Party
+To Party
+Shipping Instructions 
+	
+Their Order 
+Orders
+Tracking Codes
+	
+Ship After 
+Est. Ready 
+Actual Start 
+	
+Ship Before 
+Est. Arrival 
+Actual Arrival 
+
+Built on Moqui Framework 4.0.0
+
+Site Map

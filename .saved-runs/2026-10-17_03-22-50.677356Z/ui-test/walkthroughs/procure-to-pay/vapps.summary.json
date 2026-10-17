@@ -1,0 +1,557 @@
+{
+  "source": "docs/business-processes/walkthroughs/procure-to-pay.md",
+  "mode": "vapps",
+  "activities": [
+    {
+      "id": "activity-001",
+      "sourceLine": 8,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 154755,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.65101585728444,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/procure-to-pay/activity-001/vapps/comparison.json"
+    },
+    {
+      "id": "activity-002",
+      "sourceLine": 12,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 154755,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.65101585728444,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/procure-to-pay/activity-002/vapps/comparison.json"
+    },
+    {
+      "id": "activity-003",
+      "sourceLine": 20,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 154755,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.65101585728444,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/procure-to-pay/activity-003/vapps/comparison.json"
+    },
+    {
+      "id": "activity-004",
+      "sourceLine": 23,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 154755,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.65101585728444,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/procure-to-pay/activity-004/vapps/comparison.json"
+    },
+    {
+      "id": "activity-005",
+      "sourceLine": 29,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 154755,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.65101585728444,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/procure-to-pay/activity-005/vapps/comparison.json"
+    },
+    {
+      "id": "activity-006",
+      "sourceLine": 32,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 154755,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.65101585728444,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/procure-to-pay/activity-006/vapps/comparison.json"
+    },
+    {
+      "id": "activity-007",
+      "sourceLine": 35,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 154755,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.65101585728444,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/procure-to-pay/activity-007/vapps/comparison.json"
+    },
+    {
+      "id": "activity-008",
+      "sourceLine": 41,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 154755,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.65101585728444,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/procure-to-pay/activity-008/vapps/comparison.json"
+    },
+    {
+      "id": "activity-009",
+      "sourceLine": 44,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 154755,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.65101585728444,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/procure-to-pay/activity-009/vapps/comparison.json"
+    },
+    {
+      "id": "activity-010",
+      "sourceLine": 47,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 154755,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.65101585728444,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/procure-to-pay/activity-010/vapps/comparison.json"
+    },
+    {
+      "id": "activity-011",
+      "sourceLine": 50,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 154755,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.65101585728444,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/procure-to-pay/activity-011/vapps/comparison.json"
+    },
+    {
+      "id": "activity-012",
+      "sourceLine": 53,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 154755,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.65101585728444,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/procure-to-pay/activity-012/vapps/comparison.json"
+    },
+    {
+      "id": "activity-013",
+      "sourceLine": 56,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 154755,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.65101585728444,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/procure-to-pay/activity-013/vapps/comparison.json"
+    },
+    {
+      "id": "activity-014",
+      "sourceLine": 59,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 154755,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.65101585728444,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/procure-to-pay/activity-014/vapps/comparison.json"
+    },
+    {
+      "id": "activity-015",
+      "sourceLine": 65,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 154755,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.65101585728444,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/procure-to-pay/activity-015/vapps/comparison.json"
+    },
+    {
+      "id": "activity-016",
+      "sourceLine": 68,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 154755,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.65101585728444,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/procure-to-pay/activity-016/vapps/comparison.json"
+    },
+    {
+      "id": "activity-017",
+      "sourceLine": 78,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 154755,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.65101585728444,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/procure-to-pay/activity-017/vapps/comparison.json"
+    },
+    {
+      "id": "activity-018",
+      "sourceLine": 82,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 154755,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.65101585728444,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/procure-to-pay/activity-018/vapps/comparison.json"
+    },
+    {
+      "id": "activity-019",
+      "sourceLine": 86,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 154755,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.65101585728444,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/procure-to-pay/activity-019/vapps/comparison.json"
+    },
+    {
+      "id": "activity-020",
+      "sourceLine": 89,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 154755,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.65101585728444,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/procure-to-pay/activity-020/vapps/comparison.json"
+    },
+    {
+      "id": "activity-021",
+      "sourceLine": 92,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 154755,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.65101585728444,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/procure-to-pay/activity-021/vapps/comparison.json"
+    },
+    {
+      "id": "activity-022",
+      "sourceLine": 95,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 154755,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.65101585728444,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/procure-to-pay/activity-022/vapps/comparison.json"
+    }
+  ],
+  "note": "Evidence sweep only; no complete business-process execution is claimed."
+}

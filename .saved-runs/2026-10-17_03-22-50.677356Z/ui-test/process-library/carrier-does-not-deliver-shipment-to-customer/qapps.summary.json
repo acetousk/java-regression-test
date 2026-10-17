@@ -1,0 +1,25 @@
+{
+  "source": "docs/business-processes/process-library/carrier-does-not-deliver-shipment-to-customer.md",
+  "mode": "qapps",
+  "activities": [
+    {
+      "id": "activity-001",
+      "sourceLine": 10,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/carrier-does-not-deliver-shipment-to-customer/activity-001/qapps/comparison.json"
+    },
+    {
+      "id": "activity-002",
+      "sourceLine": 16,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/carrier-does-not-deliver-shipment-to-customer/activity-002/qapps/comparison.json"
+    },
+    {
+      "id": "activity-003",
+      "sourceLine": 20,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/carrier-does-not-deliver-shipment-to-customer/activity-003/qapps/comparison.json"
+    }
+  ],
+  "note": "Evidence sweep only; no complete business-process execution is claimed."
+}

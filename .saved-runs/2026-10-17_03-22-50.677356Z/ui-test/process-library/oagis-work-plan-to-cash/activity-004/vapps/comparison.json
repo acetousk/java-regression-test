@@ -1,0 +1,18 @@
+{
+  "id": "activity-004",
+  "sourceLine": 23,
+  "headings": [
+    "OAGIS Work Plan to Cash",
+    "OAGIS Scenarios"
+  ],
+  "text": "* 10 - Feeder Applications to Project Accounting",
+  "route": null,
+  "dialog": null,
+  "mapping": "entry-candidate",
+  "limitation": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required.",
+  "source": "docs/business-processes/process-library/oagis-work-plan-to-cash.md",
+  "mode": "vapps",
+  "coverage": "blocked",
+  "captures": [],
+  "reason": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required."
+}

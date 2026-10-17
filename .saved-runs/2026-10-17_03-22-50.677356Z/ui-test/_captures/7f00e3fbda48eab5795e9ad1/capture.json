@@ -1,0 +1,22 @@
+{
+  "engine": "rust",
+  "mode": "qapps",
+  "route": "marble/Accounting/Payment/FindPayment",
+  "dialog": {
+    "label": "New Outgoing Payment",
+    "id": "NewOutPaymentDialog",
+    "route": "Accounting/Payment/FindPayment"
+  },
+  "authenticated": true,
+  "errors": [],
+  "failedRequests": [],
+  "httpErrors": [],
+  "consoleErrors": [],
+  "status": "captured",
+  "reused": false,
+  "requestedURL": "http://127.0.0.1:18092/qapps/marble/Accounting/Payment/FindPayment",
+  "navigation": "documented-or-candidate-deep-link",
+  "httpStatus": 200,
+  "finalURL": "http://127.0.0.1:18092/qapps/marble/Accounting/Payment/FindPayment",
+  "dialogOpened": true
+}

@@ -1,0 +1,99 @@
+{
+  "id": "activity-161",
+  "sourceLine": 529,
+  "headings": [
+    "Initial Setup and Basics",
+    "Sales - Service & Product",
+    "Receive first Payment"
+  ],
+  "text": "- payments can be viewed or created directly on **Marble ERP Dashboard** ==> **Customer Payments**",
+  "route": "marble/Accounting/Payment/FindPayment?paymentType=Incoming",
+  "dialog": null,
+  "mapping": "documented-navigation-label",
+  "limitation": "Read-only screen/dialog evidence only. Prerequisite creation, field input, submissions, integrations and full story transitions are not executed.",
+  "source": "docs/business-processes/walkthroughs/initial-setup-and-basics.md",
+  "mode": "qapps",
+  "coverage": "blocked",
+  "captures": [
+    {
+      "engine": "java",
+      "mode": "qapps",
+      "route": "marble/Accounting/Payment/FindPayment?paymentType=Incoming",
+      "dialog": null,
+      "authenticated": true,
+      "errors": [
+        "$ is not defined",
+        "Vue is not defined",
+        "$ is not defined",
+        "Vue is not defined"
+      ],
+      "failedRequests": [
+        {
+          "url": "http://127.0.0.1:18091/qapps/marble/dashboard",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:18091/qapps/marble/Accounting/Payment/FindPayment?paymentType=Incoming",
+          "error": "net::ERR_ABORTED"
+        }
+      ],
+      "httpErrors": [],
+      "consoleErrors": [
+        "Refused to apply style from 'http://127.0.0.1:18091/qapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not a supported stylesheet MIME type, and strict MIME checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to apply style from 'http://127.0.0.1:18091/qapps/marble/Accounting/Payment/FindPayment?paymentType=Incoming#?v=1a147e2' because its MIME type ('text/html') is not a supported stylesheet MIME type, and strict MIME checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/Accounting/Payment/FindPayment?paymentType=Incoming#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/Accounting/Payment/FindPayment?paymentType=Incoming#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/Accounting/Payment/FindPayment?paymentType=Incoming#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/Accounting/Payment/FindPayment?paymentType=Incoming#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled."
+      ],
+      "status": "blocked",
+      "reused": false,
+      "requestedURL": "http://127.0.0.1:18091/qapps/marble/Accounting/Payment/FindPayment?paymentType=Incoming",
+      "navigation": "documented-or-candidate-deep-link",
+      "httpStatus": 200,
+      "finalURL": "http://127.0.0.1:18091/qapps/marble/Accounting/Payment/FindPayment?paymentType=Incoming",
+      "directory": ".saved-runs/2026-10-17_03-22-50.677356Z/ui-test/_captures/31d011ac7b413111f753c0a4"
+    },
+    {
+      "engine": "rust",
+      "mode": "qapps",
+      "route": "marble/Accounting/Payment/FindPayment?paymentType=Incoming",
+      "dialog": null,
+      "authenticated": true,
+      "errors": [],
+      "failedRequests": [],
+      "httpErrors": [],
+      "consoleErrors": [],
+      "status": "captured",
+      "reused": false,
+      "requestedURL": "http://127.0.0.1:18092/qapps/marble/Accounting/Payment/FindPayment?paymentType=Incoming",
+      "navigation": "documented-or-candidate-deep-link",
+      "httpStatus": 200,
+      "finalURL": "http://127.0.0.1:18092/qapps/marble/Accounting/Payment/FindPayment?paymentType=Incoming",
+      "directory": ".saved-runs/2026-10-17_03-22-50.677356Z/ui-test/_captures/639d149bf12a739a140ad554"
+    }
+  ],
+  "comparison": {
+    "status": "diagnostic-only",
+    "equal": false,
+    "dimensions": [
+      {
+        "width": 1440,
+        "height": 1000
+      },
+      {
+        "width": 1440,
+        "height": 1000
+      }
+    ],
+    "dimensionsEqual": true,
+    "differentPixels": 120021,
+    "comparedPixels": 1440000,
+    "differencePercent": 8.334791666666666,
+    "threshold": 0.1
+  }
+}

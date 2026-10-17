@@ -1,0 +1,32 @@
+{
+  "source": "docs/business-processes/process-library/inventory-mover-checks-physical-inventory.md",
+  "mode": "qapps",
+  "activities": [
+    {
+      "id": "activity-001",
+      "sourceLine": 14,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 115768,
+        "comparedPixels": 1440000,
+        "differencePercent": 8.039444444444445,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/inventory-mover-checks-physical-inventory/activity-001/qapps/comparison.json"
+    }
+  ],
+  "note": "Evidence sweep only; no complete business-process execution is claimed."
+}

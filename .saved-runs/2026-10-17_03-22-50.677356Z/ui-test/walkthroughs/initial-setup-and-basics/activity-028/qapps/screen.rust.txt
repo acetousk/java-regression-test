@@ -1,0 +1,135 @@
+menu
+Applications
+chevron_right
+Marble ERP
+chevron_right
+Customers
+chevron_right
+Find Customer
+search
+edit_location
+notifications
+history
+account_circle
+open_in_new
+New Person Customer
+open_in_new
+New Sales Account (Organization Customer)
+open_in_new
+New Sales Contact
+Customer Data
+Search String Reference
+Any Field
+Search
+search
+Find Options
+CSV
+XLS
+20
+arrow_drop_down
+skip_previous
+fast_rewind
+1 / 1 (1-4 / 4)
+fast_forward
+skip_next
+ID
+	
+Name
+	
+Username
+	
+Role
+	
+Class
+	
+Hidden
+	
+Dups
+	
+Matches
+	
+
+
+CustJqp
+	
+Joe Public
+	
+joe@public.com
+	
+Customer
+	
+	
+N
+	
+	
+Role Type ID: "Customer"
+	
+Sales Orders
+
+
+ORG_ACME
+	
+Another Company Making Everything
+	
+	
+Customer - Bill To, Customer
+	
+	
+N
+	
+	
+Role Type ID: "Customer"
+	
+Sales Orders
+
+
+ORG_BLUTH
+	
+Bluth Corp
+	
+	
+Customer - Bill To, Customer
+	
+	
+N
+	
+	
+Role Type ID: "Customer"
+	
+Sales Orders
+
+
+JoeDist
+	
+Joe & Joe's Distributing
+	
+	
+Customer
+	
+	
+N
+	
+	
+Role Type ID: "Customer"
+	
+Sales Orders
+
+
+20
+arrow_drop_down
+skip_previous
+fast_rewind
+1 / 1 (1-4 / 4)
+fast_forward
+skip_next
+Current Search String
+roles.roleTypeId:Customer AND disabled:N
+Built on Moqui 0.1.0
+Site Map
+Matches whole words, use the asterisk (*) wildcard to match partial words; use field:term to search a specific field
+New Sales Account (Organization Customer)
+close
+Organization Name
+Parent Sales Account
+arrow_drop_down
+Create

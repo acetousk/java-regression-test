@@ -1,0 +1,19 @@
+{
+  "status": "diagnostic-only",
+  "equal": false,
+  "dimensions": [
+    {
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "width": 1440,
+      "height": 1000
+    }
+  ],
+  "dimensionsEqual": true,
+  "differentPixels": 150431,
+  "comparedPixels": 1440000,
+  "differencePercent": 10.446597222222222,
+  "threshold": 0.1
+}

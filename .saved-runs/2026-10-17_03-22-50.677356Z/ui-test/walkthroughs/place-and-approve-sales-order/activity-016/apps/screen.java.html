@@ -1,0 +1,2594 @@
+<!DOCTYPE html><html><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    
+    <title>Orders - Find Order</title>
+    <link rel="apple-touch-icon" href="/MoquiLogo100.png">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="http://127.0.0.1:18091/css/webroot-layout.css?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="http://127.0.0.1:18091/css/webroot-theme.css?v=1a147e2" rel="stylesheet" type="text/css">
+    <script src="#?v=1a147e2" type="text/javascript"></script>
+    <script src="#?v=1a147e2" type="text/javascript"></script>
+    <script src="#?v=1a147e2" type="text/javascript"></script>
+    <link rel="shortcut icon" href="http://127.0.0.1:18091/favicon.ico">
+</head>
+<body class="dev bg-light FindOrder">
+        
+        
+        
+        
+    <!-- BEGIN screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+        <!-- BEGIN render-mode.text[inline][@template=true] -->
+<script>var notificationClient = new moqui.NotificationClient((location.protocol === 'https:' ? 'wss' : 'ws') + "://127.0.0.1:18091/notws");</script>        <!-- END   render-mode.text[inline][@template=true] -->
+    <!-- BEGIN section[@name=TopNavSection] -->
+        <!-- BEGIN screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+    <div id="top">
+        <!-- BEGIN render-mode.text[@location=component://webroot/screen/includes/navbar.html.ftl][@template=true] -->
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <header class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a href="http://127.0.0.1:18091/apps/AppList" class="navbar-brand"><img src="http://127.0.0.1:18091/images/MoquiLogoSmall.png" alt="Home"></a>
+        
+    </header>
+    <div id="navbar-buttons" class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul id="header-menus" class="nav navbar-nav">
+        </ul>
+        <div id="navbar-menu-crumbs">
+        </div>
+        <a class="navbar-text" href="http://127.0.0.1:18091/apps/marble/Order/FindOrder">Find Order</a>
+        <a href="http://127.0.0.1:18091/Login/logout" data-toggle="tooltip" data-original-title="Logout John Doe" data-placement="bottom" class="btn btn-danger btn-sm navbar-btn navbar-right">
+            <i class="fa fa-power-off"></i>
+        </a>
+            <div id="document-menu" class="nav navbar-right dropdown">
+                <a id="document-menu-link" href="#" class="dropdown-toggle btn btn-info btn-sm navbar-btn" data-toggle="dropdown" title="Documentation">
+                    <i class="fa fa-question-circle"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#" onclick="showScreenDocDialog('100')">Order Roles and Parts</a></li>
+                
+                    <li><a href="#" onclick="showScreenDocDialog('110')">Order Status Reference</a></li>
+                </ul>
+            </div>
+        <a href="#" onclick="switchDarkLight();" data-toggle="tooltip" data-original-title="Switch Dark/Light" data-placement="bottom" class="btn btn-default btn-sm navbar-btn navbar-right">
+            <i class="fa fa-adjust"></i>
+        </a>
+
+<div class="btn-group navbar-right">
+    <a href="/apps/my/User/Notifications" data-toggle="tooltip" data-container="body" data-original-title="Notifications" data-placement="bottom" class="btn btn-default btn-sm navbar-btn">
+        <i class="fa fa-info-circle"></i>
+        <span id="navbar_notification_count" class="label label-info">0</span>
+    </a>
+    <a href="/apps/my/User/Messages/FindMessage?statusId=CeReceived&amp;toPartyId=EX_JOHN_DOE" data-toggle="tooltip" data-container="body" data-original-title="Messages" data-placement="bottom" class="btn btn-default btn-sm navbar-btn">
+        <i class="fa fa-envelope"></i>
+        <span class="label label-warning">0</span>
+    </a>
+    <a href="/apps/my/User/Calendar/MyCalendar" data-toggle="tooltip" data-container="body" data-original-title="Events This Week" data-placement="bottom" class="btn btn-default btn-sm navbar-btn">
+        <i class="fa fa-calendar"></i>
+        <span class="label label-primary">0</span>
+    </a>
+    <a href="/apps/my/User/Task/MyTasks" data-toggle="tooltip" data-container="body" data-original-title="Open Tasks" data-placement="bottom" class="btn btn-default btn-sm navbar-btn">
+        <i class="fa fa-check"></i>
+        <span class="label label-success">0</span>
+    </a>
+</div>
+    <script>
+        var navbarNotificationListener = function(jsonObj, webSocket) {
+            if (jsonObj && jsonObj.persistOnSend === true) {
+                var countElement = $("#navbar_notification_count");
+                countElement.text((parseInt(countElement.text()) + 1).toString());
+            }
+            notificationClient.displayNotify(jsonObj, webSocket);
+        };
+        notificationClient.registerListener("ALL", navbarNotificationListener);
+    </script>
+        <div id="history-menu" class="nav navbar-right dropdown">
+            <a id="history-menu-link" href="#" class="dropdown-toggle btn btn-default btn-sm navbar-btn" data-toggle="dropdown" title="History">
+                <i class="fa fa-list"></i></a>
+            <ul class="dropdown-menu">
+                <li><a href="http://127.0.0.1:18091/apps/marble/dashboard">
+                            <i class="fa fa-dashboard" style="padding-right: 8px;"></i>
+                    Marble ERP - Dashboard
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Asset/Asset/FindSummary">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Asset.png" alt="Asset - Find Summary" height="18" style="padding-right: 4px;">
+                    Asset - Find Summary
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/ProductStore/FindProductStore">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/ProductStore.png" alt="Stores - Find Product Store" height="18" style="padding-right: 4px;">
+                    Stores - Find Product Store
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Facility/FindFacility">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Facility.png" alt="Facility - Find Facility" height="18" style="padding-right: 4px;">
+                    Facility - Find Facility
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Catalog/Product/EditPrices">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Catalog.png" alt="Products - Prices" height="18" style="padding-right: 4px;">
+                    Products - Prices
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Asset/Asset/FindSummary?assetTypeEnumId=AstTpInventory">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Asset.png" alt="Asset - Find Summary (AstTpInventory)" height="18" style="padding-right: 4px;">
+                    Asset - Find Summary (AstTpInventory)
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Catalog/Product/FindProduct">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Catalog.png" alt="Products - Find Product" height="18" style="padding-right: 4px;">
+                    Products - Find Product
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Accounting/Invoice/FindInvoice">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Accounting.png" alt="Invoices - Find Invoice" height="18" style="padding-right: 4px;">
+                    Invoices - Find Invoice
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Party/PartyTimeEntries">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Parties.png" alt="Parties - Time" height="18" style="padding-right: 4px;">
+                    Parties - Time
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/HumanRes/EditRateAmounts">
+                            <img src="#" alt="Human Resources - Rates" height="18" style="padding-right: 4px;">
+                    Human Resources - Rates
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Task/FindTask">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/task-homework.png" alt="Tasks - Find Task" height="18" style="padding-right: 4px;">
+                    Tasks - Find Task
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Project/FindProject">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/project-business120.png" alt="Projects - Find Project" height="18" style="padding-right: 4px;">
+                    Projects - Find Project
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Customer/EditCustomer">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Customer.png" alt="Customers - Customer" height="18" style="padding-right: 4px;">
+                    Customers - Customer
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Customer/FindCustomer">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Customer.png" alt="Customers - Find Customer" height="18" style="padding-right: 4px;">
+                    Customers - Find Customer
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Party/EditParty">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Parties.png" alt="Parties - Party" height="18" style="padding-right: 4px;">
+                    Parties - Party
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Party/FindParty">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/dashboard">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/vapps/marble/Party/FindParty">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/vapps/marble/dashboard">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Party/FindParty">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Parties.png" alt="Parties - Find Party" height="18" style="padding-right: 4px;">
+                    Parties - Find Party
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Party/PaymentMethod/PaymentMethodTrans">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Party/PaymentMethod/PaymentMethodFiles">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Party/PaymentMethod/PaymentMethodFiles?partyId=ORG_ZIZI_RETAIL&amp;paymentMethodId=ZIRET_BA">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications (ORG_ZIZI_RETAIL, ZIRET_BA)
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Accounting/Payment/FindPayment">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Accounting/dashboard">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            </ul>
+        </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+    $('.navbar [data-toggle="tooltip"]').tooltip({ placement:'bottom', trigger:'hover' });
+    $('#history-menu-link').tooltip({ placement:'bottom', trigger:'hover' });
+    $('#document-menu-link').tooltip({ placement:'bottom', trigger:'hover' });
+    function switchDarkLight() {
+        $("body").toggleClass("bg-dark");
+        $("body").toggleClass("bg-light");
+        var currentStyle = $("body").hasClass("bg-dark") ? "bg-dark" : "bg-light";
+        $.ajax({ type:'POST', url:'http://127.0.0.1:18091/apps/setPreference', data:{ 'moquiSessionToken': '[REDACTED]','preferenceKey': 'OUTER_STYLE', 'preferenceValue': currentStyle }, dataType:'json' });
+    }
+</script>
+
+        <!-- END   render-mode.text[@location=component://webroot/screen/includes/navbar.html.ftl][@template=true] -->
+        <!-- BEGIN render-mode.text[inline][@template=true] -->
+        <!-- END   render-mode.text[inline][@template=true] -->
+        <li id="header-menu" class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Application <i class="fa fa-chevron-right"></i></a>
+            <ul class="dropdown-menu">
+                        <li class="active"><a href="http://127.0.0.1:18091/apps/marble/dashboard"><i class="fa fa-cogs" style="padding-right: 8px;"></i>Marble ERP</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/my"><i class="fa fa-user" style="padding-right: 8px;"></i>My Account</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/system"><i class="fa fa-cog" style="padding-right: 8px;"></i>System</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/tools"><i class="fa fa-wrench" style="padding-right: 8px;"></i>Tools</a></li>
+            </ul>
+        </li>
+        <script>$("#header-menus").append($("#header-menu"));</script>
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    <!-- END   screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+
+    <!-- END   section[@name=TopNavSection] -->
+    <div id="content">
+    <div class="inner">
+    <div class="container-fluid">
+    <!-- BEGIN section[@name=MessagesSection] -->
+        <!-- BEGIN screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+    <!-- BEGIN section-iterate[@name=headerMessageInfos] -->
+    
+    <!-- END   section-iterate[@name=headerMessageInfos] -->
+    <!-- BEGIN section-iterate[@name=headerErrors] -->
+    
+    <!-- END   section-iterate[@name=headerErrors] -->
+    <!-- BEGIN section-iterate[@name=headerValidationErrors] -->
+    
+    <!-- END   section-iterate[@name=headerValidationErrors] -->
+    <!-- BEGIN section-iterate[@name=headerSavedMessages] -->
+    
+    <!-- END   section-iterate[@name=headerSavedMessages] -->
+    <!-- BEGIN section-iterate[@name=headerSavedErrors] -->
+    
+    <!-- END   section-iterate[@name=headerSavedErrors] -->
+    <!-- BEGIN section-iterate[@name=headerSavedValidationErrors] -->
+    
+    <!-- END   section-iterate[@name=headerSavedValidationErrors] -->
+    <!-- END   screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+
+    <!-- END   section[@name=MessagesSection] -->
+        <!-- BEGIN screen[@location=component://MarbleERP/screen/marble.xml].widgets -->
+    <!-- BEGIN section[@name=OrgChooserSection] -->
+        <!-- BEGIN screen[@location=component://MarbleERP/screen/marble.xml].widgets -->
+        <!-- BEGIN render-mode.text[inline][@template=true] -->
+<div id="active-org-menu" class="nav navbar-right dropdown">
+                <a id="active-org-menu-link" href="#" class="dropdown-toggle btn btn-default btn-sm navbar-btn" data-toggle="dropdown" title="Organization">
+                    <i class="fa fa-globe"></i> </a>
+                <ul class="dropdown-menu">
+                        <li><a href="http://127.0.0.1:18091/apps/setPrefGoLast?preferenceKey=ACTIVE_ORGANIZATION&amp;preferenceValue=ORG_ZIZI_RETAIL">ZIRET: Ziziwork Retail &amp; Wholesale</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/setPrefGoLast?preferenceKey=ACTIVE_ORGANIZATION&amp;preferenceValue=ORG_ZIZI_SERVICES">ZISER: Ziziwork Services</a></li>
+                </ul>
+            </div>
+            <script>$("#navbar-buttons").append($("#active-org-menu")); $('#active-org-menu-link').tooltip({ placement:'bottom', trigger:'hover' });</script>        <!-- END   render-mode.text[inline][@template=true] -->
+    <!-- END   screen[@location=component://MarbleERP/screen/marble.xml].widgets -->
+
+    <!-- END   section[@name=OrgChooserSection] -->
+        <li id="MarbleErpPanel-menu" class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Marble ERP <i class="fa fa-chevron-right"></i></a>
+            <ul class="dropdown-menu">
+                        <li><a href="http://127.0.0.1:18091/apps/marble/dashboard"><i class="fa fa-dashboard" style="padding-right: 8px;"></i>Dashboard</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/QuickSearch"><i class="fa fa-search" style="padding-right: 8px;"></i>Quick Search</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Accounting/dashboard"><img src="http://127.0.0.1:18091/ssstatic/images/Accounting.png" alt="Accounting" height="18" style="padding-right: 4px;">Accounting</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Asset/dashboard"><img src="http://127.0.0.1:18091/ssstatic/images/Asset.png" alt="Asset" height="18" style="padding-right: 4px;">Asset</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Catalog/dashboard"><img src="http://127.0.0.1:18091/ssstatic/images/Catalog.png" alt="Catalog" height="18" style="padding-right: 4px;">Catalog</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Customer/FindCustomer"><img src="http://127.0.0.1:18091/ssstatic/images/Customer.png" alt="Customers" height="18" style="padding-right: 4px;">Customers</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Facility/FindFacility"><img src="http://127.0.0.1:18091/ssstatic/images/Facility.png" alt="Facility" height="18" style="padding-right: 4px;">Facility</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/HumanRes/dashboard"><i class="fa fa-user-plus" style="padding-right: 8px;"></i>Human Resources</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Manufacturing/dashboard"><i class="fa fa-industry" style="padding-right: 8px;"></i>Manufacturing</a></li>
+                        <li class="active"><a href="http://127.0.0.1:18091/apps/marble/Order/FindOrder"><img src="http://127.0.0.1:18091/ssstatic/images/Sales.png" alt="Orders" height="18" style="padding-right: 4px;">Orders</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Party/FindParty"><img src="http://127.0.0.1:18091/ssstatic/images/Parties.png" alt="Parties" height="18" style="padding-right: 4px;">Parties</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Project/FindProject"><img src="http://127.0.0.1:18091/ssstatic/images/project-business120.png" alt="Projects" height="18" style="padding-right: 4px;">Projects</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Request/FindRequest"><img src="http://127.0.0.1:18091/ssstatic/images/Request.png" alt="Requests" height="18" style="padding-right: 4px;">Requests</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Return/FindReturn"><img src="http://127.0.0.1:18091/ssstatic/images/Return.png" alt="Returns" height="18" style="padding-right: 4px;">Returns</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Shipment/FindShipment"><img src="http://127.0.0.1:18091/ssstatic/images/Shipping.png" alt="Shipments" height="18" style="padding-right: 4px;">Shipments</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Shipping/dashboard"><img src="http://127.0.0.1:18091/ssstatic/images/Picking.png" alt="Shipping" height="18" style="padding-right: 4px;">Shipping</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/ProductStore/FindProductStore"><img src="http://127.0.0.1:18091/ssstatic/images/ProductStore.png" alt="Stores" height="18" style="padding-right: 4px;">Stores</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Supplier/FindSupplier"><img src="http://127.0.0.1:18091/ssstatic/images/Supplier.png" alt="Suppliers" height="18" style="padding-right: 4px;">Suppliers</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Survey/FindSurvey"><i class="fa fa-pencil-square-o" style="padding-right: 8px;"></i>Survey</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Task/FindTask"><img src="http://127.0.0.1:18091/ssstatic/images/task-homework.png" alt="Tasks" height="18" style="padding-right: 4px;">Tasks</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Wiki/WikiSpaces"><img src="http://127.0.0.1:18091/ssstatic/images/Wiki.png" alt="Wiki/Content" height="18" style="padding-right: 4px;">Wiki/Content</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/QuickViewReport"><i class="fa fa-database" style="padding-right: 8px;"></i>Custom Reports</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/SimpleReport/FindReport"><i class="fa fa-database" style="padding-right: 8px;"></i>Report Builder</a></li>
+            </ul>
+        </li>
+        <script>$("#header-menus").append($("#MarbleErpPanel-menu"));</script>
+            <!-- BEGIN screen[@location=component://SimpleScreens/screen/SimpleScreens/Order.xml].widgets -->
+        <div id="OrderPanel-tabpanel">
+                <a id="OrderPanel-menu-crumb" class="navbar-text" href="http://127.0.0.1:18091/apps/marble/Order/FindOrder">Orders <i class="fa fa-chevron-right"></i></a>
+                <script>$("#navbar-menu-crumbs").append($("#OrderPanel-menu-crumb"));</script>
+                <!-- BEGIN screen[@location=component://SimpleScreens/screen/SimpleScreens/Order/FindOrder.xml].widgets -->
+    <div class="row">
+            <div class=" col-md-5">
+        <button id="CreateSalesOrderDialog-button" type="button" data-toggle="modal" data-target="#CreateSalesOrderDialog" data-original-title="Create Sales Order" data-placement="bottom" class="btn btn-primary btn-sm "><i class="fa fa-share"></i> Create Sales Order</button>
+
+        <div id="CreateSalesOrderDialog" class="modal container-dialog" aria-hidden="true" style="display: none;" tabindex="-1">
+            <div class="modal-dialog" style="width: 760px;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">Create Sales Order</h4>
+                    </div>
+                    <div class="modal-body">
+    <!-- BEGIN form-single[@name=CreateSalesOrder] -->
+    <form name="CreateSalesOrder" id="CreateSalesOrder" method="post" action="http://127.0.0.1:18091/apps/marble/Order/FindOrder/createOrder">
+        <input type="hidden" name="moquiFormName" value="CreateSalesOrder" style="">
+        <input type="hidden" name="moquiSessionToken" value="[REDACTED]" style="">
+        
+        <fieldset class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="CreateSalesOrder_productStoreId">Store</label>
+            <div class="col-sm-10">
+    
+    <select name="productStoreId" class="" id="CreateSalesOrder_productStoreId">
+            <option value="">&nbsp;</option>
+            <option value="POPC_DEFAULT">POPC_DEFAULT: Ziziwork Retail Store</option>
+    </select>
+    
+    
+        <script>$("#CreateSalesOrder_productStoreId").select2({  });</script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="CreateSalesOrder_vendorPartyId">Vendor Org</label>
+            <div class="col-sm-10">
+    
+    <select name="vendorPartyId" class=" dynamic-options" id="CreateSalesOrder_vendorPartyId">
+            <option value="ORG_ZIZI_HR">ZIHR: Ziziwork Human Resources</option>
+            <option value="ORG_ZIZI_CORP">ZICORP: Ziziwork Industries</option>
+            <option value="ORG_ZIZI_RETAIL">ZIRET: Ziziwork Retail &amp; Wholesale</option>
+            <option value="ORG_ZIZI_SALES">ZISAL: Ziziwork Sales</option>
+            <option value="ORG_ZIZI_SERVICES">ZISER: Ziziwork Services</option>
+    </select>
+    
+    
+        <script>
+            var CreateSalesOrder_vendorPartyIdS2Opts = { 
+                
+                            };
+            $("#CreateSalesOrder_vendorPartyId").select2(CreateSalesOrder_vendorPartyIdS2Opts);
+            function populate_CreateSalesOrder_vendorPartyId(params) {
+                $.ajax({ type:"POST", url:"http://127.0.0.1:18091/apps/marble/Order/FindOrder/getStoreOrgOrAllOrgInternal", data:{ moquiSessionToken: "[REDACTED]", "productStoreId": $("#CreateSalesOrder_productStoreId").val(), term:((params && params.term) || '')}, dataType:"json"}).done(                    function(data) {
+                        var list = moqui.isArray(data) ? data : data.options;
+                        if (list) {
+                            var jqEl = $("#CreateSalesOrder_vendorPartyId");
+                            var bWasFocused = jqEl.next().hasClass('select2-container--focus');
+                            jqEl.select2("destroy");
+                            jqEl.html("");
+                            
+                            $.each(list, function(key, value) {
+                                var optionValue = value["value"];
+                                if (optionValue === "") {
+                                    jqEl.append("<option selected='selected' value='" + optionValue + "'>" + value["label"] + "</option>");
+                                } else {
+                                    jqEl.append("<option value='" + optionValue + "'>" + value["label"] + "</option>");
+                                }
+                            });
+                            $("#CreateSalesOrder_vendorPartyId").select2(CreateSalesOrder_vendorPartyIdS2Opts);
+                            if( bWasFocused ) jqEl.focus();
+                            setTimeout(function() { jqEl.trigger('change'); }, 50);
+                        }
+                    }
+                );
+            }
+            $("#CreateSalesOrder_productStoreId").on('change', function() { populate_CreateSalesOrder_vendorPartyId(); });
+            populate_CreateSalesOrder_vendorPartyId();
+
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="CreateSalesOrder_facilityId">Facility</label>
+            <div class="col-sm-10">
+    
+    <select name="facilityId" class=" dynamic-options" id="CreateSalesOrder_facilityId">
+            <option value="">&nbsp;</option>
+    </select>
+    
+    
+        <script>
+            var CreateSalesOrder_facilityIdS2Opts = { 
+                
+                            };
+            $("#CreateSalesOrder_facilityId").select2(CreateSalesOrder_facilityIdS2Opts);
+            function populate_CreateSalesOrder_facilityId(params) {
+                $.ajax({ type:"POST", url:"http://127.0.0.1:18091/apps/marble/Order/FindOrder/getWhFacilitiesByOwner", data:{ moquiSessionToken: "[REDACTED]", "vendorPartyId": $("#CreateSalesOrder_vendorPartyId").val(), "productStoreId": $("#CreateSalesOrder_productStoreId").val(), term:((params && params.term) || '')}, dataType:"json"}).done(                    function(data) {
+                        var list = moqui.isArray(data) ? data : data.options;
+                        if (list) {
+                            var jqEl = $("#CreateSalesOrder_facilityId");
+                            var bWasFocused = jqEl.next().hasClass('select2-container--focus');
+                            jqEl.select2("destroy");
+                            jqEl.html("");
+                            
+                            $.each(list, function(key, value) {
+                                var optionValue = value["facilityId"];
+                                if (optionValue === "") {
+                                    jqEl.append("<option selected='selected' value='" + optionValue + "'>" + value["label"] + "</option>");
+                                } else {
+                                    jqEl.append("<option value='" + optionValue + "'>" + value["label"] + "</option>");
+                                }
+                            });
+                            $("#CreateSalesOrder_facilityId").select2(CreateSalesOrder_facilityIdS2Opts);
+                            if( bWasFocused ) jqEl.focus();
+                            setTimeout(function() { jqEl.trigger('change'); }, 50);
+                        }
+                    }
+                );
+            }
+            $("#CreateSalesOrder_vendorPartyId").on('change', function() { populate_CreateSalesOrder_facilityId(); });
+            $("#CreateSalesOrder_productStoreId").on('change', function() { populate_CreateSalesOrder_facilityId(); });
+            populate_CreateSalesOrder_facilityId();
+
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="CreateSalesOrder_customerPartyId">Customer</label>
+            <div class="col-sm-10">
+    
+    <select name="customerPartyId" class=" dynamic-options noResetSelect2" style="min-width:200px;" id="CreateSalesOrder_customerPartyId">
+            <option value="">&nbsp;</option>
+    </select>
+    
+    
+        <script>
+            var CreateSalesOrder_customerPartyIdS2Opts = { 
+                
+                minimumResultsForSearch:0, width:"100%", minimumInputLength:2,
+                ajax:{ url:"http://127.0.0.1:18091/apps/marble/Order/FindOrder/searchPartyList", type:"POST", dataType:"json", cache:true, delay:300,
+                    data:function(params) { return { moquiSessionToken: "[REDACTED]", term:(params.term || ''), pageIndex:(params.page || 1) - 1
+                        
+                        , "roleTypeId":"Customer"
+                    }},
+                    processResults:function(data, params) {
+                        var isDataArray = moqui.isArray(data);
+                        var list = isDataArray ? data : data.options;
+                        var newData = [];
+                        // funny case where select2 specifies no option.@value if empty so &nbsp; ends up passed with form submit; now filtered on server for \u00a0 only and set to null
+                        if (!params.page || params.page <= 1) newData.push({ id:'\u00a0', text:'\u00a0' });
+                        var labelField = "label"; var valueField = "value";
+                        $.each(list, function(idx, curObj) {
+                            var idVal = curObj[valueField]; if (!idVal) idVal = '\u00a0';
+                            newData.push({ id:idVal, text:curObj[labelField] })
+                        });
+                        var outObj = { results:newData };
+                        if (!isDataArray) {
+                            params.page = params.page || 1; // NOTE: 1 based index, is 0 based on server side
+                            var pageSize = data.pageSize || 20;
+                            outObj.pagination = { more: (data.count ? (params.page * pageSize) < data.count : false) };
+                        }
+                        return outObj;
+                    }
+                }
+            };
+            $("#CreateSalesOrder_customerPartyId").select2(CreateSalesOrder_customerPartyIdS2Opts);
+            function populate_CreateSalesOrder_customerPartyId(params) {
+                    var hasAllParms = true;
+                    
+                    if (!hasAllParms) { $("#CreateSalesOrder_customerPartyId").select2("destroy"); $('#CreateSalesOrder_customerPartyId').html(""); $("#CreateSalesOrder_customerPartyId").select2({ });  return; }
+                $.ajax({ type:"POST", url:"http://127.0.0.1:18091/apps/marble/Order/FindOrder/searchPartyList", data:{ moquiSessionToken: "[REDACTED]", "roleTypeId":"Customer", term:((params && params.term) || '')}, dataType:"json"}).done(                    function(data) {
+                        var list = moqui.isArray(data) ? data : data.options;
+                        if (list) {
+                            var jqEl = $("#CreateSalesOrder_customerPartyId");
+                            var bWasFocused = jqEl.next().hasClass('select2-container--focus');
+                            jqEl.select2("destroy");
+                            jqEl.html("");
+                            jqEl.append('<option value="">&nbsp;</option>');
+                            
+                            $.each(list, function(key, value) {
+                                var optionValue = value["value"];
+                                if (optionValue === "") {
+                                    jqEl.append("<option selected='selected' value='" + optionValue + "'>" + value["label"] + "</option>");
+                                } else {
+                                    jqEl.append("<option value='" + optionValue + "'>" + value["label"] + "</option>");
+                                }
+                            });
+                            $("#CreateSalesOrder_customerPartyId").select2(CreateSalesOrder_customerPartyIdS2Opts);
+                            if( bWasFocused ) jqEl.focus();
+                            setTimeout(function() { jqEl.trigger('change'); }, 50);
+                        }
+                    }
+                );
+            }
+            
+                
+
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="CreateSalesOrder_otherPartyOrderId">Their Order ID</label>
+            <div class="col-sm-10">
+    
+<input id="CreateSalesOrder_otherPartyOrderId" type="text" name="otherPartyOrderId" value="" size="40" class="form-control" style="">
+        
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="CreateSalesOrder_priority">Priority</label>
+            <div class="col-sm-10">
+    
+        <span id="CreateSalesOrder_priority"><input type="radio" name="priority" value="1" style="">&nbsp;1</span>
+        <span id="CreateSalesOrder_priority_1"><input type="radio" name="priority" value="2" style="">&nbsp;2</span>
+        <span id="CreateSalesOrder_priority_2"><input type="radio" name="priority" value="3" style="">&nbsp;3</span>
+        <span id="CreateSalesOrder_priority_3"><input type="radio" name="priority" value="4" style="">&nbsp;4</span>
+        <span id="CreateSalesOrder_priority_4"><input type="radio" name="priority" value="5" checked="checked" style="">&nbsp;5</span>
+        <span id="CreateSalesOrder_priority_5"><input type="radio" name="priority" value="6" style="">&nbsp;6</span>
+        <span id="CreateSalesOrder_priority_6"><input type="radio" name="priority" value="7" style="">&nbsp;7</span>
+        <span id="CreateSalesOrder_priority_7"><input type="radio" name="priority" value="8" style="">&nbsp;8</span>
+        <span id="CreateSalesOrder_priority_8"><input type="radio" name="priority" value="9" style="">&nbsp;9</span>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="CreateSalesOrder_shipBeforeDate">Ship Before Date</label>
+            <div class="col-sm-10">
+    
+
+
+
+        <div class="input-group date" id="CreateSalesOrder_shipBeforeDate">
+            <input type="text" class="form-control" name="shipBeforeDate" value="" size="16" maxlength="23" style="">
+            <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+        </div>
+        <script>
+            $('#CreateSalesOrder_shipBeforeDate').datetimepicker({toolbarPlacement:'top', showClose:true, showClear:true, showTodayButton:true,
+                useStrict:true, defaultDate: '' && moment('','YYYY-MM-DD HH:mm'),
+                format:'YYYY-MM-DD HH:mm', extraFormats:['YYYY-MM-DD HH:mm', 'YYYY-MM-DD HH:mm:ss', 'MM/DD/YYYY HH:mm'], stepping:5, locale:"en-US",
+                keyBinds: {t: function() {this.date(moment());}, up: function () { this.date(this.date().clone().add(1, 'd')); }, down: function () { this.date(this.date().clone().subtract(1, 'd')); }, 'control up': function () { this.date(this.date().clone().add(1, 'd')); }, 'control down': function () { this.date(this.date().clone().subtract(1, 'd')); }}});
+            $('#CreateSalesOrder_shipBeforeDate').on("dp.change", function() { var jqEl = $('#CreateSalesOrder_shipBeforeDate'); jqEl.val(jqEl.find("input").first().val()); jqEl.trigger("change"); });
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="CreateSalesOrder_estimatedDeliveryDate">Delivery Date</label>
+            <div class="col-sm-10">
+    
+
+
+
+        <div class="input-group date" id="CreateSalesOrder_estimatedDeliveryDate">
+            <input type="text" class="form-control" name="estimatedDeliveryDate" value="" size="16" maxlength="23" style="">
+            <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+        </div>
+        <script>
+            $('#CreateSalesOrder_estimatedDeliveryDate').datetimepicker({toolbarPlacement:'top', showClose:true, showClear:true, showTodayButton:true,
+                useStrict:true, defaultDate: '' && moment('','YYYY-MM-DD HH:mm'),
+                format:'YYYY-MM-DD HH:mm', extraFormats:['YYYY-MM-DD HH:mm', 'YYYY-MM-DD HH:mm:ss', 'MM/DD/YYYY HH:mm'], stepping:5, locale:"en-US",
+                keyBinds: {t: function() {this.date(moment());}, up: function () { this.date(this.date().clone().add(1, 'd')); }, down: function () { this.date(this.date().clone().subtract(1, 'd')); }, 'control up': function () { this.date(this.date().clone().add(1, 'd')); }, 'control down': function () { this.date(this.date().clone().subtract(1, 'd')); }}});
+            $('#CreateSalesOrder_estimatedDeliveryDate').on("dp.change", function() { var jqEl = $('#CreateSalesOrder_estimatedDeliveryDate'); jqEl.val(jqEl.find("input").first().val()); jqEl.trigger("change"); });
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <div class="col-sm-2 hidden-xs">&nbsp;</div>
+            <div class="col-sm-10">
+    
+    <button type="submit" name="submitButton" value="submitButton" id="CreateSalesOrder_submitButton" class="btn btn-primary btn-sm">
+Create    </button>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        </fieldset>
+    </form>
+        <script>
+            $("#CreateSalesOrder").validate({ errorClass: 'help-block', errorElement: 'span',
+                highlight: function(element, errorClass, validClass) { $(element).parents('.form-group').removeClass('has-success').addClass('has-error'); },
+                unhighlight: function(element, errorClass, validClass) { $(element).parents('.form-group').removeClass('has-error').addClass('has-success'); }
+            });
+            $('#CreateSalesOrder [data-toggle="tooltip"]').tooltip({placement:'auto top'});
+
+        </script>
+    <!-- END   form-single[@name=CreateSalesOrder] -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>$('#CreateSalesOrderDialog').on('shown.bs.modal', function() {
+            $("#CreateSalesOrderDialog :not(.noResetSelect2)>select:not(.noResetSelect2)").select2({ });
+            var defFocus = $("#CreateSalesOrderDialog .default-focus");
+            if (defFocus.length) { defFocus.focus(); } else { $("#CreateSalesOrderDialog form :input:visible:first").focus(); }
+        });</script>
+            <a href="http://127.0.0.1:18091/apps/marble/Order/SalesAnalysis" class="btn btn-primary btn-sm">Sales Analysis Report</a>            <a href="http://127.0.0.1:18091/apps/marble/Order/SalesSummary" class="btn btn-primary btn-sm">Sales Summary Charts</a>            <a href="http://127.0.0.1:18091/apps/marble/Order/OrderIssuedInvoiced" class="btn btn-primary btn-sm">Issued and Invoiced Report</a>            </div>
+            <div class=" col-md-7 text-right">
+    <!-- BEGIN section[@name=ApproveOrdersSection] -->
+    
+    <!-- END   section[@name=ApproveOrdersSection] -->
+    <!-- BEGIN section[@name=CloseOrdersSection] -->
+    
+    <!-- END   section[@name=CloseOrdersSection] -->
+        <button id="CreatePurchaseOrderDialog-button" type="button" data-toggle="modal" data-target="#CreatePurchaseOrderDialog" data-original-title="Create Purchase Order" data-placement="bottom" class="btn btn-primary btn-sm "><i class="fa fa-share"></i> Create Purchase Order</button>
+
+        <div id="CreatePurchaseOrderDialog" class="modal container-dialog" aria-hidden="true" style="display: none;" tabindex="-1">
+            <div class="modal-dialog" style="width: 760px;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">Create Purchase Order</h4>
+                    </div>
+                    <div class="modal-body">
+    <!-- BEGIN form-single[@name=CreatePurchaseOrder] -->
+    <form name="CreatePurchaseOrder" id="CreatePurchaseOrder" method="post" action="http://127.0.0.1:18091/apps/marble/Order/FindOrder/createOrder">
+        <input type="hidden" name="moquiFormName" value="CreatePurchaseOrder" style="">
+        <input type="hidden" name="moquiSessionToken" value="[REDACTED]" style="">
+        
+        <fieldset class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="CreatePurchaseOrder_vendorPartyId">Supplier</label>
+            <div class="col-sm-10">
+    
+    <select name="vendorPartyId" class=" dynamic-options noResetSelect2" style="min-width:200px;" id="CreatePurchaseOrder_vendorPartyId">
+            <option value="">&nbsp;</option>
+    </select>
+    
+    
+        <script>
+            var CreatePurchaseOrder_vendorPartyIdS2Opts = { 
+                
+                minimumResultsForSearch:0, width:"100%", minimumInputLength:0,
+                ajax:{ url:"http://127.0.0.1:18091/apps/marble/Order/FindOrder/searchPartyList", type:"POST", dataType:"json", cache:true, delay:300,
+                    data:function(params) { return { moquiSessionToken: "[REDACTED]", term:(params.term || ''), pageIndex:(params.page || 1) - 1
+                        
+                        , "roleTypeId":"Supplier,Vendor,VendorBillFrom"
+                    }},
+                    processResults:function(data, params) {
+                        var isDataArray = moqui.isArray(data);
+                        var list = isDataArray ? data : data.options;
+                        var newData = [];
+                        // funny case where select2 specifies no option.@value if empty so &nbsp; ends up passed with form submit; now filtered on server for \u00a0 only and set to null
+                        if (!params.page || params.page <= 1) newData.push({ id:'\u00a0', text:'\u00a0' });
+                        var labelField = "label"; var valueField = "value";
+                        $.each(list, function(idx, curObj) {
+                            var idVal = curObj[valueField]; if (!idVal) idVal = '\u00a0';
+                            newData.push({ id:idVal, text:curObj[labelField] })
+                        });
+                        var outObj = { results:newData };
+                        if (!isDataArray) {
+                            params.page = params.page || 1; // NOTE: 1 based index, is 0 based on server side
+                            var pageSize = data.pageSize || 20;
+                            outObj.pagination = { more: (data.count ? (params.page * pageSize) < data.count : false) };
+                        }
+                        return outObj;
+                    }
+                }
+            };
+            $("#CreatePurchaseOrder_vendorPartyId").select2(CreatePurchaseOrder_vendorPartyIdS2Opts);
+            function populate_CreatePurchaseOrder_vendorPartyId(params) {
+                    var hasAllParms = true;
+                    
+                    if (!hasAllParms) { $("#CreatePurchaseOrder_vendorPartyId").select2("destroy"); $('#CreatePurchaseOrder_vendorPartyId').html(""); $("#CreatePurchaseOrder_vendorPartyId").select2({ });  return; }
+                $.ajax({ type:"POST", url:"http://127.0.0.1:18091/apps/marble/Order/FindOrder/searchPartyList", data:{ moquiSessionToken: "[REDACTED]", "roleTypeId":"Supplier,Vendor,VendorBillFrom", term:((params && params.term) || '')}, dataType:"json"}).done(                    function(data) {
+                        var list = moqui.isArray(data) ? data : data.options;
+                        if (list) {
+                            var jqEl = $("#CreatePurchaseOrder_vendorPartyId");
+                            var bWasFocused = jqEl.next().hasClass('select2-container--focus');
+                            jqEl.select2("destroy");
+                            jqEl.html("");
+                            jqEl.append('<option value="">&nbsp;</option>');
+                            
+                            $.each(list, function(key, value) {
+                                var optionValue = value["value"];
+                                if (optionValue === "") {
+                                    jqEl.append("<option selected='selected' value='" + optionValue + "'>" + value["label"] + "</option>");
+                                } else {
+                                    jqEl.append("<option value='" + optionValue + "'>" + value["label"] + "</option>");
+                                }
+                            });
+                            $("#CreatePurchaseOrder_vendorPartyId").select2(CreatePurchaseOrder_vendorPartyIdS2Opts);
+                            if( bWasFocused ) jqEl.focus();
+                            setTimeout(function() { jqEl.trigger('change'); }, 50);
+                        }
+                    }
+                );
+            }
+            
+                
+
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="CreatePurchaseOrder_customerPartyId">Customer Org</label>
+            <div class="col-sm-10">
+    
+    <select name="customerPartyId" class="" id="CreatePurchaseOrder_customerPartyId">
+            <option value="ORG_ZIZI_HR">ZIHR: Ziziwork Human Resources</option>
+            <option value="ORG_ZIZI_CORP">ZICORP: Ziziwork Industries</option>
+            <option value="ORG_ZIZI_RETAIL">ZIRET: Ziziwork Retail &amp; Wholesale</option>
+            <option value="ORG_ZIZI_SALES">ZISAL: Ziziwork Sales</option>
+            <option value="ORG_ZIZI_SERVICES">ZISER: Ziziwork Services</option>
+    </select>
+    
+    
+        <script>$("#CreatePurchaseOrder_customerPartyId").select2({  });</script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="CreatePurchaseOrder_facilityId">Facility</label>
+            <div class="col-sm-10">
+    
+    <select name="facilityId" class=" dynamic-options noResetSelect2" style="min-width:200px;" id="CreatePurchaseOrder_facilityId">
+            <option value="">&nbsp;</option>
+    </select>
+    
+    
+        <script>
+            var CreatePurchaseOrder_facilityIdS2Opts = { 
+                
+                minimumResultsForSearch:0, width:"100%", minimumInputLength:0,
+                ajax:{ url:"http://127.0.0.1:18091/apps/marble/Order/FindOrder/getFacilityList", type:"POST", dataType:"json", cache:true, delay:300,
+                    data:function(params) { return { moquiSessionToken: "[REDACTED]", term:(params.term || ''), pageIndex:(params.page || 1) - 1
+                        
+                        , "facilityTypeEnumId":"FcTpWarehouse"
+                    }},
+                    processResults:function(data, params) {
+                        var isDataArray = moqui.isArray(data);
+                        var list = isDataArray ? data : data.options;
+                        var newData = [];
+                        // funny case where select2 specifies no option.@value if empty so &nbsp; ends up passed with form submit; now filtered on server for \u00a0 only and set to null
+                        
+                        var labelField = "label"; var valueField = "value";
+                        $.each(list, function(idx, curObj) {
+                            var idVal = curObj[valueField]; if (!idVal) idVal = '\u00a0';
+                            newData.push({ id:idVal, text:curObj[labelField] })
+                        });
+                        var outObj = { results:newData };
+                        if (!isDataArray) {
+                            params.page = params.page || 1; // NOTE: 1 based index, is 0 based on server side
+                            var pageSize = data.pageSize || 20;
+                            outObj.pagination = { more: (data.count ? (params.page * pageSize) < data.count : false) };
+                        }
+                        return outObj;
+                    }
+                }
+            };
+            $("#CreatePurchaseOrder_facilityId").select2(CreatePurchaseOrder_facilityIdS2Opts);
+            function populate_CreatePurchaseOrder_facilityId(params) {
+                    var hasAllParms = true;
+                    
+                    if (!hasAllParms) { $("#CreatePurchaseOrder_facilityId").select2("destroy"); $('#CreatePurchaseOrder_facilityId').html(""); $("#CreatePurchaseOrder_facilityId").select2({ });  return; }
+                $.ajax({ type:"POST", url:"http://127.0.0.1:18091/apps/marble/Order/FindOrder/getFacilityList", data:{ moquiSessionToken: "[REDACTED]", "facilityTypeEnumId":"FcTpWarehouse", term:((params && params.term) || '')}, dataType:"json"}).done(                    function(data) {
+                        var list = moqui.isArray(data) ? data : data.options;
+                        if (list) {
+                            var jqEl = $("#CreatePurchaseOrder_facilityId");
+                            var bWasFocused = jqEl.next().hasClass('select2-container--focus');
+                            jqEl.select2("destroy");
+                            jqEl.html("");
+                            
+                            $.each(list, function(key, value) {
+                                var optionValue = value["value"];
+                                if (optionValue === "") {
+                                    jqEl.append("<option selected='selected' value='" + optionValue + "'>" + value["label"] + "</option>");
+                                } else {
+                                    jqEl.append("<option value='" + optionValue + "'>" + value["label"] + "</option>");
+                                }
+                            });
+                            $("#CreatePurchaseOrder_facilityId").select2(CreatePurchaseOrder_facilityIdS2Opts);
+                            if( bWasFocused ) jqEl.focus();
+                            setTimeout(function() { jqEl.trigger('change'); }, 50);
+                        }
+                    }
+                );
+            }
+            
+                
+
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="CreatePurchaseOrder_shipBeforeDate">Ship Before Date</label>
+            <div class="col-sm-10">
+    
+
+
+
+        <div class="input-group date" id="CreatePurchaseOrder_shipBeforeDate">
+            <input type="text" class="form-control" name="shipBeforeDate" value="" size="16" maxlength="23" style="">
+            <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+        </div>
+        <script>
+            $('#CreatePurchaseOrder_shipBeforeDate').datetimepicker({toolbarPlacement:'top', showClose:true, showClear:true, showTodayButton:true,
+                useStrict:true, defaultDate: '' && moment('','YYYY-MM-DD HH:mm'),
+                format:'YYYY-MM-DD HH:mm', extraFormats:['YYYY-MM-DD HH:mm', 'YYYY-MM-DD HH:mm:ss', 'MM/DD/YYYY HH:mm'], stepping:5, locale:"en-US",
+                keyBinds: {t: function() {this.date(moment());}, up: function () { this.date(this.date().clone().add(1, 'd')); }, down: function () { this.date(this.date().clone().subtract(1, 'd')); }, 'control up': function () { this.date(this.date().clone().add(1, 'd')); }, 'control down': function () { this.date(this.date().clone().subtract(1, 'd')); }}});
+            $('#CreatePurchaseOrder_shipBeforeDate').on("dp.change", function() { var jqEl = $('#CreatePurchaseOrder_shipBeforeDate'); jqEl.val(jqEl.find("input").first().val()); jqEl.trigger("change"); });
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="CreatePurchaseOrder_estimatedDeliveryDate">Delivery Date</label>
+            <div class="col-sm-10">
+    
+
+
+
+        <div class="input-group date" id="CreatePurchaseOrder_estimatedDeliveryDate">
+            <input type="text" class="form-control" name="estimatedDeliveryDate" value="" size="16" maxlength="23" style="">
+            <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+        </div>
+        <script>
+            $('#CreatePurchaseOrder_estimatedDeliveryDate').datetimepicker({toolbarPlacement:'top', showClose:true, showClear:true, showTodayButton:true,
+                useStrict:true, defaultDate: '' && moment('','YYYY-MM-DD HH:mm'),
+                format:'YYYY-MM-DD HH:mm', extraFormats:['YYYY-MM-DD HH:mm', 'YYYY-MM-DD HH:mm:ss', 'MM/DD/YYYY HH:mm'], stepping:5, locale:"en-US",
+                keyBinds: {t: function() {this.date(moment());}, up: function () { this.date(this.date().clone().add(1, 'd')); }, down: function () { this.date(this.date().clone().subtract(1, 'd')); }, 'control up': function () { this.date(this.date().clone().add(1, 'd')); }, 'control down': function () { this.date(this.date().clone().subtract(1, 'd')); }}});
+            $('#CreatePurchaseOrder_estimatedDeliveryDate').on("dp.change", function() { var jqEl = $('#CreatePurchaseOrder_estimatedDeliveryDate'); jqEl.val(jqEl.find("input").first().val()); jqEl.trigger("change"); });
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <div class="col-sm-2 hidden-xs">&nbsp;</div>
+            <div class="col-sm-10">
+    
+    <button type="submit" name="submitButton" value="submitButton" id="CreatePurchaseOrder_submitButton" class="btn btn-primary btn-sm">
+Create    </button>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        </fieldset>
+    </form>
+        <script>
+            $("#CreatePurchaseOrder").validate({ errorClass: 'help-block', errorElement: 'span',
+                highlight: function(element, errorClass, validClass) { $(element).parents('.form-group').removeClass('has-success').addClass('has-error'); },
+                unhighlight: function(element, errorClass, validClass) { $(element).parents('.form-group').removeClass('has-error').addClass('has-success'); }
+            });
+            $('#CreatePurchaseOrder [data-toggle="tooltip"]').tooltip({placement:'auto top'});
+
+        </script>
+    <!-- END   form-single[@name=CreatePurchaseOrder] -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>$('#CreatePurchaseOrderDialog').on('shown.bs.modal', function() {
+            $("#CreatePurchaseOrderDialog :not(.noResetSelect2)>select:not(.noResetSelect2)").select2({ });
+            var defFocus = $("#CreatePurchaseOrderDialog .default-focus");
+            if (defFocus.length) { defFocus.focus(); } else { $("#CreatePurchaseOrderDialog form :input:visible:first").focus(); }
+        });</script>
+            </div>
+    </div>
+    <!-- BEGIN form-list[@name=OrderList] -->
+
+        <div id="OrderList_hdialog" class="modal" aria-hidden="true" style="display: none;" tabindex="-1">
+            <div class="modal-dialog" style="width: 800px;"><div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Find Options</h4>
+                </div>
+                <div class="modal-body">
+                <h4 style="margin-top: 0;">Saved Finds</h4>
+                        <p>No find parameters, choose some to save a new find or update existing</p>
+                <h4>Find Parameters</h4>
+                    <form name="OrderList_header" id="OrderList_header" method="post" action="http://127.0.0.1:18091/apps/marble/Order/FindOrder">
+                        <input type="hidden" name="moquiSessionToken" value="[REDACTED]" style="">
+                        
+                        
+                        <fieldset class="form-horizontal">
+                            <div class="form-group"><div class="col-sm-2">&nbsp;</div><div class="col-sm-10">
+                                <button type="button" class="btn btn-primary btn-sm" onclick="OrderList_header_clearForm()">Clear Parameters</button></div></div>
+
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="OrderList_header_orderByField">Order By</label>
+                                <div class="col-sm-10">
+                                    <select name="orderBySelect" id="OrderList_header_orderBySelect" multiple="multiple" style="width: 100%;" class="noResetSelect2">
+                                                <option value="orderId">Order (Asc)</option>
+                                                <option value="-orderId">Order (Desc)</option>
+                                                <option value="otherPartyOrderId">Their Order (Asc)</option>
+                                                <option value="-otherPartyOrderId">Their Order (Desc)</option>
+                                                <option value="salesChannelEnumId">Source (Asc)</option>
+                                                <option value="-salesChannelEnumId">Source (Desc)</option>
+                                                <option value="priority">Priority (Asc)</option>
+                                                <option value="-priority">Priority (Desc)</option>
+                                                <option value="entryDate">Entry Date (Asc)</option>
+                                                <option value="-entryDate">Entry Date (Desc)</option>
+                                                <option value="placedDate">Placed Date (Asc)</option>
+                                                <option value="-placedDate">Placed Date (Desc)</option>
+                                                <option value="shipAfterDate">Ship After Date (Asc)</option>
+                                                <option value="-shipAfterDate">Ship After Date (Desc)</option>
+                                                <option value="shipBeforeDate">Ship Before Date (Asc)</option>
+                                                <option value="-shipBeforeDate">Ship Before Date (Desc)</option>
+                                                <option value="partStatusId">Status (Asc)</option>
+                                                <option value="-partStatusId">Status (Desc)</option>
+                                                <option value="facilityId">Facility (Asc)</option>
+                                                <option value="-facilityId">Facility (Desc)</option>
+                                                <option value="productStoreId">Store (Asc)</option>
+                                                <option value="-productStoreId">Store (Desc)</option>
+                                                <option value="shippingInstructions">Shipping Instructions (Asc)</option>
+                                                <option value="-shippingInstructions">Shipping Instructions (Desc)</option>
+                                                <option value="vendorPartyId">Vendor (Asc)</option>
+                                                <option value="-vendorPartyId">Vendor (Desc)</option>
+                                                <option value="customerPartyId">Customer (Asc)</option>
+                                                <option value="-customerPartyId">Customer (Desc)</option>
+                                                <option value="shipmentMethodEnumId">Ship Method (Asc)</option>
+                                                <option value="-shipmentMethodEnumId">Ship Method (Desc)</option>
+                                                <option value="countryGeoId">Country (Asc)</option>
+                                                <option value="-countryGeoId">Country (Desc)</option>
+                                                <option value="stateProvinceGeoId">State/Province (Asc)</option>
+                                                <option value="-stateProvinceGeoId">State/Province (Desc)</option>
+                                                <option value="partTotal">Total (Asc)</option>
+                                                <option value="-partTotal">Total (Desc)</option>
+                                                <option value="quantityTotal">Quantity Total (Asc)</option>
+                                                <option value="-quantityTotal">Quantity Total (Desc)</option>
+                                                <option value="quantityNotAvailable">Qty Not Avail (Asc)</option>
+                                                <option value="-quantityNotAvailable">Qty Not Avail (Desc)</option>
+                                                <option value="issuedQuantity">Qty Shipped (Asc)</option>
+                                                <option value="-issuedQuantity">Qty Shipped (Desc)</option>
+                                                <option value="externalId">External ID (Asc)</option>
+                                                <option value="-externalId">External ID (Desc)</option>
+                                                <option value="displayId">Display ID (Asc)</option>
+                                                <option value="-displayId">Display ID (Desc)</option>
+                                    </select>
+                                    <input type="hidden" id="OrderList_header_orderByField" name="orderByField" value="-entryDate,orderId,orderPartSeqId" style="">
+                                </div>
+                            </div>
+                            <script>
+                                function OrderList_header_clearForm() {
+                                    var jqEl = $("#OrderList_header");
+                                    jqEl.find(':radio, :checkbox').removeAttr('checked');
+                                    jqEl.find('textarea, :text, select').val('').trigger('change');
+                                    return false;
+                                }
+                                $("#OrderList_header_orderBySelect").selectivity({ positionDropdown: function(dropdownEl, selectEl) { dropdownEl.css("width", "300px"); } })[0].selectivity.filterResults = function(results) {
+                                    // Filter out asc and desc options if anyone selected.
+                                    return results.filter(function(item){return !this._data.some(function(data_item) {return data_item.id.substring(1) === item.id.substring(1);});}, this);
+                                };
+                                    $("#OrderList_header_orderBySelect").selectivity("value", ['-entryDate','orderId',]);
+                                $("div#OrderList_header_orderBySelect").on("change", function(evt) {
+                                    if (evt.value) $("#OrderList_header_orderByField").val(evt.value.join(","));
+                                });
+                            </script>
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="OrderList_header_orderType">Order Type</label>
+            <div class="col-sm-10">
+    
+        <span id="OrderList_header_orderType"><input type="radio" name="orderType" value="Any" checked="checked" style="">&nbsp;Any</span>
+        <span id="OrderList_header_orderType_1"><input type="radio" name="orderType" value="Sales" style="">&nbsp;Sales</span>
+        <span id="OrderList_header_orderType_2"><input type="radio" name="orderType" value="Purchase" style="">&nbsp;Purchase</span>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="OrderList_header_onlyPartlyShipped">Shipped</label>
+            <div class="col-sm-10">
+    
+        <span id="OrderList_header_onlyPartlyShipped"><input type="checkbox" name="onlyPartlyShipped" value="true" style=""><span class="checkbox-label" onclick="$('#OrderList_header_onlyPartlyShipped').children('input[type=checkbox]').click()" style="cursor: default">Only Partly Shipped</span></span>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="OrderList_header_inventoryAvailable">Inventory Available</label>
+            <div class="col-sm-10">
+    
+        <span id="OrderList_header_inventoryAvailable"><input type="radio" name="inventoryAvailable" value="any" checked="checked" style="">&nbsp;Any</span>
+        <span id="OrderList_header_inventoryAvailable_1"><input type="radio" name="inventoryAvailable" value="all" style="">&nbsp;All</span>
+        <span id="OrderList_header_inventoryAvailable_2"><input type="radio" name="inventoryAvailable" value="notall" style="">&nbsp;Partial/None</span>
+        <span id="OrderList_header_inventoryAvailable_3"><input type="radio" name="inventoryAvailable" value="partial" style="">&nbsp;Partial</span>
+        <span id="OrderList_header_inventoryAvailable_4"><input type="radio" name="inventoryAvailable" value="none" style="">&nbsp;None</span>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="OrderList_header_onlyProductQuantity">Quantity</label>
+            <div class="col-sm-10">
+    
+        <span id="OrderList_header_onlyProductQuantity"><input type="checkbox" name="onlyProductQuantity" value="true" style=""><span class="checkbox-label" onclick="$('#OrderList_header_onlyProductQuantity').children('input[type=checkbox]').click()" style="cursor: default">Only count Product</span></span>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="OrderList_header_onlyRecurring">Recurring</label>
+            <div class="col-sm-10">
+    
+        <span id="OrderList_header_onlyRecurring"><input type="checkbox" name="onlyRecurring" value="true" style=""><span class="checkbox-label" onclick="$('#OrderList_header_onlyRecurring').children('input[type=checkbox]').click()" style="cursor: default">Only Recurring</span></span>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="OrderList_header_orderId">Order</label>
+            <div class="col-sm-10">
+    
+<span class="form-text-find">
+        <input type="hidden" name="orderId_op" value="contains" style="">
+    <input type="text" class="form-control" name="orderId" value="" size="20" id="OrderList_header_orderId" style="">
+        <input type="hidden" name="orderId_ic" value="Y" style="">
+</span>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="OrderList_header_otherPartyOrderId">Their Order</label>
+            <div class="col-sm-10">
+    
+<span class="form-text-find">
+        <input type="hidden" name="otherPartyOrderId_op" value="contains" style="">
+    <input type="text" class="form-control" name="otherPartyOrderId" value="" size="20" id="OrderList_header_otherPartyOrderId" style="">
+        <input type="hidden" name="otherPartyOrderId_ic" value="Y" style="">
+</span>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="OrderList_header_salesChannelEnumId">Source</label>
+            <div class="col-sm-10">
+    
+    <select name="salesChannelEnumId" class="  noResetSelect2" id="OrderList_header_salesChannelEnumId" multiple="multiple">
+            <option value="ScAffiliate">Affiliate</option>
+            <option value="ScAmazon">Amazon</option>
+            <option value="ScEbay">eBay</option>
+            <option value="ScEdi">EDI</option>
+            <option value="ScEmail">E-Mail</option>
+            <option value="ScFax">Fax</option>
+            <option value="ScOagis">OAGIS</option>
+            <option value="ScPhone">Phone</option>
+            <option value="ScPos">POS</option>
+            <option value="ScPostal">Postal Mail</option>
+            <option value="ScTest">Test Order</option>
+            <option value="ScUnknown">Unknown</option>
+            <option value="ScWeb">Web</option>
+            <option value="ScWebExternal">Web External</option>
+    </select>
+    <span><input type="checkbox" class="form-control" name="salesChannelEnumId_not" value="Y" style="">&nbsp;Not</span>
+    <input type="hidden" id="OrderList_header_salesChannelEnumId_op" name="salesChannelEnumId_op" value="in" style="">
+        <script>$("#OrderList_header_salesChannelEnumId").select2({ closeOnSelect:false, width:"100%",  });</script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="OrderList_header_orderName">Order Name</label>
+            <div class="col-sm-10">
+    
+<span class="form-text-find">
+        <span><input type="checkbox" class="form-control" name="orderName_not" value="Y" style="">&nbsp;Not</span>
+        <select name="orderName_op" class="form-control">
+            <option value="equals">Equals</option>
+            <option value="like">Like</option>
+            <option value="contains" selected="selected">Contains</option>
+            <option value="begins">Begins With</option>
+            <option value="empty">Empty</option>        </select>
+    <input type="text" class="form-control" name="orderName" value="" size="40" id="OrderList_header_orderName" style="">
+        <span><input type="checkbox" class="form-control" name="orderName_ic" value="Y" checked="checked" style="">&nbsp;Ignore Case</span>
+</span>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="OrderList_header_priority">Priority</label>
+            <div class="col-sm-10">
+    
+<span class="form-range-find">
+    <span>From&nbsp;</span><input type="text" class="form-control" name="priority_from" value="" size="10" id="OrderList_header_priority_from" style="">
+</span>
+<span class="form-range-find">
+    <span>Thru&nbsp;</span><input type="text" class="form-control" name="priority_thru" value="" size="10" id="OrderList_header_priority_thru" style="">
+</span>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="OrderList_header_entryDate">Entry Date</label>
+            <div class="col-sm-10">
+    
+    <div class="date-period">
+        <select name="entryDate_poffset" id="OrderList_header_entryDate_poffset">
+                <option value="">&nbsp;</option>
+            <option value="0">This</option>
+            <option value="-1">Last</option>
+            <option value="1">Next</option>
+            <option value="-2">-2</option>
+            <option value="2">+2</option>
+            <option value="-3" selected="selected">-3</option>
+            <option value="-4">-4</option>
+            <option value="-6">-6</option>
+            <option value="-12">-12</option>
+        </select>
+        <select name="entryDate_period" id="OrderList_header_entryDate_period">
+            <option value="">&nbsp;</option>
+            <option value="day">Day</option>
+            <option value="7d">7 Days</option>
+            <option value="30d" selected="selected">30 Days</option>
+            <option value="week">Week</option>
+            <option value="weeks">Weeks</option>
+            <option value="month">Month</option>
+            <option value="months">Months</option>
+            <option value="quarter">Quarter</option>
+            <option value="year">Year</option>
+            <option value="7r">+/-7d</option>
+            <option value="30r">+/-30d</option>
+        </select>
+        <div class="input-group date" id="OrderList_header_entryDate_pdate">
+            <input type="text" class="form-control" name="entryDate_pdate" value="" size="10" maxlength="10" style="">
+            <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+        </div>
+        <script>
+            $("#OrderList_header_entryDate_poffset").select2({ }); $("#OrderList_header_entryDate_period").select2({ });
+            $('#OrderList_header_entryDate_pdate').datetimepicker({toolbarPlacement:'top', showClose:true, showClear:true, showTodayButton:true, useStrict:true, defaultDate: '' && moment('','YYYY-MM-DD'), format:'YYYY-MM-DD', extraFormats:['l', 'L', 'YYYY-MM-DD'], locale:"en-US", keyBinds: {t: function() {this.date(moment());}, up: function () { this.date(this.date().clone().add(1, 'd')); }, down: function () { this.date(this.date().clone().subtract(1, 'd')); }, 'control up': function () { this.date(this.date().clone().add(1, 'd')); }, 'control down': function () { this.date(this.date().clone().subtract(1, 'd')); }}});
+        </script>
+    </div>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="OrderList_header_placedDate">Placed Date</label>
+            <div class="col-sm-10">
+    
+    <div class="date-period">
+        <select name="placedDate_poffset" id="OrderList_header_placedDate_poffset">
+                <option value="">&nbsp;</option>
+            <option value="0">This</option>
+            <option value="-1">Last</option>
+            <option value="1">Next</option>
+            <option value="-2">-2</option>
+            <option value="2">+2</option>
+            <option value="-3">-3</option>
+            <option value="-4">-4</option>
+            <option value="-6">-6</option>
+            <option value="-12">-12</option>
+        </select>
+        <select name="placedDate_period" id="OrderList_header_placedDate_period">
+            <option value="">&nbsp;</option>
+            <option value="day">Day</option>
+            <option value="7d">7 Days</option>
+            <option value="30d">30 Days</option>
+            <option value="week">Week</option>
+            <option value="weeks">Weeks</option>
+            <option value="month">Month</option>
+            <option value="months">Months</option>
+            <option value="quarter">Quarter</option>
+            <option value="year">Year</option>
+            <option value="7r">+/-7d</option>
+            <option value="30r">+/-30d</option>
+        </select>
+        <div class="input-group date" id="OrderList_header_placedDate_pdate">
+            <input type="text" class="form-control" name="placedDate_pdate" value="" size="10" maxlength="10" style="">
+            <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+        </div>
+        <script>
+            $("#OrderList_header_placedDate_poffset").select2({ }); $("#OrderList_header_placedDate_period").select2({ });
+            $('#OrderList_header_placedDate_pdate').datetimepicker({toolbarPlacement:'top', showClose:true, showClear:true, showTodayButton:true, useStrict:true, defaultDate: '' && moment('','YYYY-MM-DD'), format:'YYYY-MM-DD', extraFormats:['l', 'L', 'YYYY-MM-DD'], locale:"en-US", keyBinds: {t: function() {this.date(moment());}, up: function () { this.date(this.date().clone().add(1, 'd')); }, down: function () { this.date(this.date().clone().subtract(1, 'd')); }, 'control up': function () { this.date(this.date().clone().add(1, 'd')); }, 'control down': function () { this.date(this.date().clone().subtract(1, 'd')); }}});
+        </script>
+    </div>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="OrderList_header_shipAfterDate">Ship After Date</label>
+            <div class="col-sm-10">
+    
+    <div class="date-period">
+        <select name="shipAfterDate_poffset" id="OrderList_header_shipAfterDate_poffset">
+                <option value="">&nbsp;</option>
+            <option value="0">This</option>
+            <option value="-1">Last</option>
+            <option value="1">Next</option>
+            <option value="-2">-2</option>
+            <option value="2">+2</option>
+            <option value="-3">-3</option>
+            <option value="-4">-4</option>
+            <option value="-6">-6</option>
+            <option value="-12">-12</option>
+        </select>
+        <select name="shipAfterDate_period" id="OrderList_header_shipAfterDate_period">
+            <option value="">&nbsp;</option>
+            <option value="day">Day</option>
+            <option value="7d">7 Days</option>
+            <option value="30d">30 Days</option>
+            <option value="week">Week</option>
+            <option value="weeks">Weeks</option>
+            <option value="month">Month</option>
+            <option value="months">Months</option>
+            <option value="quarter">Quarter</option>
+            <option value="year">Year</option>
+            <option value="7r">+/-7d</option>
+            <option value="30r">+/-30d</option>
+        </select>
+        <div class="input-group date" id="OrderList_header_shipAfterDate_pdate">
+            <input type="text" class="form-control" name="shipAfterDate_pdate" value="" size="10" maxlength="10" style="">
+            <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+        </div>
+        <script>
+            $("#OrderList_header_shipAfterDate_poffset").select2({ }); $("#OrderList_header_shipAfterDate_period").select2({ });
+            $('#OrderList_header_shipAfterDate_pdate').datetimepicker({toolbarPlacement:'top', showClose:true, showClear:true, showTodayButton:true, useStrict:true, defaultDate: '' && moment('','YYYY-MM-DD'), format:'YYYY-MM-DD', extraFormats:['l', 'L', 'YYYY-MM-DD'], locale:"en-US", keyBinds: {t: function() {this.date(moment());}, up: function () { this.date(this.date().clone().add(1, 'd')); }, down: function () { this.date(this.date().clone().subtract(1, 'd')); }, 'control up': function () { this.date(this.date().clone().add(1, 'd')); }, 'control down': function () { this.date(this.date().clone().subtract(1, 'd')); }}});
+        </script>
+    </div>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="OrderList_header_shipBeforeDate">Ship Before Date</label>
+            <div class="col-sm-10">
+    
+    <div class="date-period">
+        <select name="shipBeforeDate_poffset" id="OrderList_header_shipBeforeDate_poffset">
+                <option value="">&nbsp;</option>
+            <option value="0">This</option>
+            <option value="-1">Last</option>
+            <option value="1">Next</option>
+            <option value="-2">-2</option>
+            <option value="2">+2</option>
+            <option value="-3">-3</option>
+            <option value="-4">-4</option>
+            <option value="-6">-6</option>
+            <option value="-12">-12</option>
+        </select>
+        <select name="shipBeforeDate_period" id="OrderList_header_shipBeforeDate_period">
+            <option value="">&nbsp;</option>
+            <option value="day">Day</option>
+            <option value="7d">7 Days</option>
+            <option value="30d">30 Days</option>
+            <option value="week">Week</option>
+            <option value="weeks">Weeks</option>
+            <option value="month">Month</option>
+            <option value="months">Months</option>
+            <option value="quarter">Quarter</option>
+            <option value="year">Year</option>
+            <option value="7r">+/-7d</option>
+            <option value="30r">+/-30d</option>
+        </select>
+        <div class="input-group date" id="OrderList_header_shipBeforeDate_pdate">
+            <input type="text" class="form-control" name="shipBeforeDate_pdate" value="" size="10" maxlength="10" style="">
+            <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+        </div>
+        <script>
+            $("#OrderList_header_shipBeforeDate_poffset").select2({ }); $("#OrderList_header_shipBeforeDate_period").select2({ });
+            $('#OrderList_header_shipBeforeDate_pdate').datetimepicker({toolbarPlacement:'top', showClose:true, showClear:true, showTodayButton:true, useStrict:true, defaultDate: '' && moment('','YYYY-MM-DD'), format:'YYYY-MM-DD', extraFormats:['l', 'L', 'YYYY-MM-DD'], locale:"en-US", keyBinds: {t: function() {this.date(moment());}, up: function () { this.date(this.date().clone().add(1, 'd')); }, down: function () { this.date(this.date().clone().subtract(1, 'd')); }, 'control up': function () { this.date(this.date().clone().add(1, 'd')); }, 'control down': function () { this.date(this.date().clone().subtract(1, 'd')); }}});
+        </script>
+    </div>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="OrderList_header_partStatusId">Status</label>
+            <div class="col-sm-10">
+    
+    <select name="partStatusId" class="  noResetSelect2" id="OrderList_header_partStatusId" multiple="multiple">
+            <option value="OrderBeingChanged">Being Changed</option>
+            <option value="OrderOpen">Open (Tentative)</option>
+            <option selected="selected" value="OrderRequested">Quote Requested by Customer</option>
+            <option selected="selected" value="OrderProposed">Quote Proposed by Vendor</option>
+            <option selected="selected" value="OrderPlaced">Placed by Customer</option>
+            <option selected="selected" value="OrderHold">Held</option>
+            <option value="OrderProcessing">Processing</option>
+            <option selected="selected" value="OrderApproved">Approved</option>
+            <option value="OrderSent">Sent</option>
+            <option value="OrderCompleted">Completed</option>
+            <option value="OrderRejected">Rejected by Vendor</option>
+            <option value="OrderCancelled">Cancelled by Customer</option>
+            <option value="OrderWishList">Wish List</option>
+            <option value="OrderGiftRegistry">Gift Registry</option>
+            <option value="OrderAutoReorder">Auto Reorder</option>
+    </select>
+    
+    <input type="hidden" id="OrderList_header_partStatusId_op" name="partStatusId_op" value="in" style="">
+        <script>$("#OrderList_header_partStatusId").select2({ closeOnSelect:false, width:"100%",  });</script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="OrderList_header_facilityId">Facility</label>
+            <div class="col-sm-10">
+    
+    <select name="facilityId" class=" dynamic-options noResetSelect2" style="min-width:200px;" id="OrderList_header_facilityId">
+            <option value="">&nbsp;</option>
+    </select>
+    
+    
+        <script>
+            var OrderList_header_facilityIdS2Opts = { 
+                
+                minimumResultsForSearch:0, width:"100%", minimumInputLength:0,
+                ajax:{ url:"http://127.0.0.1:18091/apps/marble/Order/FindOrder/getFacilityList", type:"POST", dataType:"json", cache:true, delay:300,
+                    data:function(params) { return { moquiSessionToken: "[REDACTED]", term:(params.term || ''), pageIndex:(params.page || 1) - 1
+                        
+                        , "facilityTypeEnumId":"FcTpWarehouse"
+                    }},
+                    processResults:function(data, params) {
+                        var isDataArray = moqui.isArray(data);
+                        var list = isDataArray ? data : data.options;
+                        var newData = [];
+                        // funny case where select2 specifies no option.@value if empty so &nbsp; ends up passed with form submit; now filtered on server for \u00a0 only and set to null
+                        if (!params.page || params.page <= 1) newData.push({ id:'\u00a0', text:'\u00a0' });
+                        var labelField = "label"; var valueField = "value";
+                        $.each(list, function(idx, curObj) {
+                            var idVal = curObj[valueField]; if (!idVal) idVal = '\u00a0';
+                            newData.push({ id:idVal, text:curObj[labelField] })
+                        });
+                        var outObj = { results:newData };
+                        if (!isDataArray) {
+                            params.page = params.page || 1; // NOTE: 1 based index, is 0 based on server side
+                            var pageSize = data.pageSize || 20;
+                            outObj.pagination = { more: (data.count ? (params.page * pageSize) < data.count : false) };
+                        }
+                        return outObj;
+                    }
+                }
+            };
+            $("#OrderList_header_facilityId").select2(OrderList_header_facilityIdS2Opts);
+            function populate_OrderList_header_facilityId(params) {
+                    var hasAllParms = true;
+                    
+                    if (!hasAllParms) { $("#OrderList_header_facilityId").select2("destroy"); $('#OrderList_header_facilityId').html(""); $("#OrderList_header_facilityId").select2({ });  return; }
+                $.ajax({ type:"POST", url:"http://127.0.0.1:18091/apps/marble/Order/FindOrder/getFacilityList", data:{ moquiSessionToken: "[REDACTED]", "facilityTypeEnumId":"FcTpWarehouse", term:((params && params.term) || '')}, dataType:"json"}).done(                    function(data) {
+                        var list = moqui.isArray(data) ? data : data.options;
+                        if (list) {
+                            var jqEl = $("#OrderList_header_facilityId");
+                            var bWasFocused = jqEl.next().hasClass('select2-container--focus');
+                            jqEl.select2("destroy");
+                            jqEl.html("");
+                            jqEl.append('<option value="">&nbsp;</option>');
+                            
+                            $.each(list, function(key, value) {
+                                var optionValue = value["value"];
+                                if (optionValue === "") {
+                                    jqEl.append("<option selected='selected' value='" + optionValue + "'>" + value["label"] + "</option>");
+                                } else {
+                                    jqEl.append("<option value='" + optionValue + "'>" + value["label"] + "</option>");
+                                }
+                            });
+                            $("#OrderList_header_facilityId").select2(OrderList_header_facilityIdS2Opts);
+                            if( bWasFocused ) jqEl.focus();
+                            setTimeout(function() { jqEl.trigger('change'); }, 50);
+                        }
+                    }
+                );
+            }
+            
+                
+
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="OrderList_header_productStoreId">Store</label>
+            <div class="col-sm-10">
+    
+    <select name="productStoreId" class="" id="OrderList_header_productStoreId">
+            <option value="">&nbsp;</option>
+            <option value="POPC_DEFAULT">POPC_DEFAULT: Ziziwork Retail Store</option>
+    </select>
+    
+    
+        <script>$("#OrderList_header_productStoreId").select2({  });</script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="OrderList_header_shippingInstructions">Shipping Instructions</label>
+            <div class="col-sm-10">
+    
+<span class="form-text-find">
+        <span><input type="checkbox" class="form-control" name="shippingInstructions_not" value="Y" style="">&nbsp;Not</span>
+        <select name="shippingInstructions_op" class="form-control">
+            <option value="equals">Equals</option>
+            <option value="like">Like</option>
+            <option value="contains" selected="selected">Contains</option>
+            <option value="begins">Begins With</option>
+            <option value="empty">Empty</option>        </select>
+    <input type="text" class="form-control" name="shippingInstructions" value="" size="40" id="OrderList_header_shippingInstructions" style="">
+        <span><input type="checkbox" class="form-control" name="shippingInstructions_ic" value="Y" checked="checked" style="">&nbsp;Ignore Case</span>
+</span>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="OrderList_header_vendorPartyId">Vendor</label>
+            <div class="col-sm-10">
+    
+    <select name="vendorPartyId" class=" dynamic-options noResetSelect2" style="min-width:200px;" id="OrderList_header_vendorPartyId">
+            <option value="">&nbsp;</option>
+    </select>
+    
+    
+        <script>
+            var OrderList_header_vendorPartyIdS2Opts = { 
+                
+                minimumResultsForSearch:0, width:"100%", minimumInputLength:0,
+                ajax:{ url:"http://127.0.0.1:18091/apps/marble/Order/FindOrder/searchPartyList", type:"POST", dataType:"json", cache:true, delay:300,
+                    data:function(params) { return { moquiSessionToken: "[REDACTED]", term:(params.term || ''), pageIndex:(params.page || 1) - 1
+                        
+                        , "roleTypeId":"Supplier,Vendor,OrgInternal"
+                    }},
+                    processResults:function(data, params) {
+                        var isDataArray = moqui.isArray(data);
+                        var list = isDataArray ? data : data.options;
+                        var newData = [];
+                        // funny case where select2 specifies no option.@value if empty so &nbsp; ends up passed with form submit; now filtered on server for \u00a0 only and set to null
+                        if (!params.page || params.page <= 1) newData.push({ id:'\u00a0', text:'\u00a0' });
+                        var labelField = "label"; var valueField = "value";
+                        $.each(list, function(idx, curObj) {
+                            var idVal = curObj[valueField]; if (!idVal) idVal = '\u00a0';
+                            newData.push({ id:idVal, text:curObj[labelField] })
+                        });
+                        var outObj = { results:newData };
+                        if (!isDataArray) {
+                            params.page = params.page || 1; // NOTE: 1 based index, is 0 based on server side
+                            var pageSize = data.pageSize || 20;
+                            outObj.pagination = { more: (data.count ? (params.page * pageSize) < data.count : false) };
+                        }
+                        return outObj;
+                    }
+                }
+            };
+            $("#OrderList_header_vendorPartyId").select2(OrderList_header_vendorPartyIdS2Opts);
+            function populate_OrderList_header_vendorPartyId(params) {
+                    var hasAllParms = true;
+                    
+                    if (!hasAllParms) { $("#OrderList_header_vendorPartyId").select2("destroy"); $('#OrderList_header_vendorPartyId').html(""); $("#OrderList_header_vendorPartyId").select2({ });  return; }
+                $.ajax({ type:"POST", url:"http://127.0.0.1:18091/apps/marble/Order/FindOrder/searchPartyList", data:{ moquiSessionToken: "[REDACTED]", "roleTypeId":"Supplier,Vendor,OrgInternal", term:((params && params.term) || '')}, dataType:"json"}).done(                    function(data) {
+                        var list = moqui.isArray(data) ? data : data.options;
+                        if (list) {
+                            var jqEl = $("#OrderList_header_vendorPartyId");
+                            var bWasFocused = jqEl.next().hasClass('select2-container--focus');
+                            jqEl.select2("destroy");
+                            jqEl.html("");
+                            jqEl.append('<option value="">&nbsp;</option>');
+                            
+                            $.each(list, function(key, value) {
+                                var optionValue = value["value"];
+                                if (optionValue === "") {
+                                    jqEl.append("<option selected='selected' value='" + optionValue + "'>" + value["label"] + "</option>");
+                                } else {
+                                    jqEl.append("<option value='" + optionValue + "'>" + value["label"] + "</option>");
+                                }
+                            });
+                            $("#OrderList_header_vendorPartyId").select2(OrderList_header_vendorPartyIdS2Opts);
+                            if( bWasFocused ) jqEl.focus();
+                            setTimeout(function() { jqEl.trigger('change'); }, 50);
+                        }
+                    }
+                );
+            }
+            
+                
+
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="OrderList_header_customerPartyId">Customer</label>
+            <div class="col-sm-10">
+    
+    <select name="customerPartyId" class=" dynamic-options noResetSelect2" style="min-width:200px;" id="OrderList_header_customerPartyId">
+            <option value="">&nbsp;</option>
+    </select>
+    
+    
+        <script>
+            var OrderList_header_customerPartyIdS2Opts = { 
+                
+                minimumResultsForSearch:0, width:"100%", minimumInputLength:2,
+                ajax:{ url:"http://127.0.0.1:18091/apps/marble/Order/FindOrder/searchPartyList", type:"POST", dataType:"json", cache:true, delay:300,
+                    data:function(params) { return { moquiSessionToken: "[REDACTED]", term:(params.term || ''), pageIndex:(params.page || 1) - 1
+                        
+                        , "roleTypeId":"Customer,OrgInternal"
+                    }},
+                    processResults:function(data, params) {
+                        var isDataArray = moqui.isArray(data);
+                        var list = isDataArray ? data : data.options;
+                        var newData = [];
+                        // funny case where select2 specifies no option.@value if empty so &nbsp; ends up passed with form submit; now filtered on server for \u00a0 only and set to null
+                        if (!params.page || params.page <= 1) newData.push({ id:'\u00a0', text:'\u00a0' });
+                        var labelField = "label"; var valueField = "value";
+                        $.each(list, function(idx, curObj) {
+                            var idVal = curObj[valueField]; if (!idVal) idVal = '\u00a0';
+                            newData.push({ id:idVal, text:curObj[labelField] })
+                        });
+                        var outObj = { results:newData };
+                        if (!isDataArray) {
+                            params.page = params.page || 1; // NOTE: 1 based index, is 0 based on server side
+                            var pageSize = data.pageSize || 20;
+                            outObj.pagination = { more: (data.count ? (params.page * pageSize) < data.count : false) };
+                        }
+                        return outObj;
+                    }
+                }
+            };
+            $("#OrderList_header_customerPartyId").select2(OrderList_header_customerPartyIdS2Opts);
+            function populate_OrderList_header_customerPartyId(params) {
+                    var hasAllParms = true;
+                    
+                    if (!hasAllParms) { $("#OrderList_header_customerPartyId").select2("destroy"); $('#OrderList_header_customerPartyId').html(""); $("#OrderList_header_customerPartyId").select2({ });  return; }
+                $.ajax({ type:"POST", url:"http://127.0.0.1:18091/apps/marble/Order/FindOrder/searchPartyList", data:{ moquiSessionToken: "[REDACTED]", "roleTypeId":"Customer,OrgInternal", term:((params && params.term) || '')}, dataType:"json"}).done(                    function(data) {
+                        var list = moqui.isArray(data) ? data : data.options;
+                        if (list) {
+                            var jqEl = $("#OrderList_header_customerPartyId");
+                            var bWasFocused = jqEl.next().hasClass('select2-container--focus');
+                            jqEl.select2("destroy");
+                            jqEl.html("");
+                            jqEl.append('<option value="">&nbsp;</option>');
+                            
+                            $.each(list, function(key, value) {
+                                var optionValue = value["value"];
+                                if (optionValue === "") {
+                                    jqEl.append("<option selected='selected' value='" + optionValue + "'>" + value["label"] + "</option>");
+                                } else {
+                                    jqEl.append("<option value='" + optionValue + "'>" + value["label"] + "</option>");
+                                }
+                            });
+                            $("#OrderList_header_customerPartyId").select2(OrderList_header_customerPartyIdS2Opts);
+                            if( bWasFocused ) jqEl.focus();
+                            setTimeout(function() { jqEl.trigger('change'); }, 50);
+                        }
+                    }
+                );
+            }
+            
+                
+
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="OrderList_header_customerClassificationId">Customer Class</label>
+            <div class="col-sm-10">
+    
+    <select name="customerClassificationId" class=" noResetSelect2" id="OrderList_header_customerClassificationId" multiple="multiple">
+            <option value="CustBroker">Broker</option>
+            <option value="CustConsumer">Consumer</option>
+            <option value="CustDistributor">Distributor</option>
+            <option value="CustDistributorPref">Distributor Preferred</option>
+            <option value="CustEmployee">Employee</option>
+            <option value="CustEnterprise">Enterprise</option>
+            <option value="CustWholesale">Wholesale</option>
+            <option value="CustProfessional">Wholesale - Professional</option>
+            <option value="CustRetailStore">Wholesale - Retail Store</option>
+    </select>
+    <span><input type="checkbox" class="form-control" name="customerClassificationId_not" value="Y" style="">&nbsp;Not</span>
+    <input type="hidden" id="OrderList_header_customerClassificationId_op" name="customerClassificationId_op" value="in" style="">
+        <script>$("#OrderList_header_customerClassificationId").select2({ closeOnSelect:false, width:"100%",  });</script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="OrderList_header_otherPartyId">Other Party</label>
+            <div class="col-sm-10">
+    
+    <select name="otherPartyId" class=" dynamic-options noResetSelect2" style="min-width:200px;" id="OrderList_header_otherPartyId">
+            <option value="">&nbsp;</option>
+    </select>
+    
+    
+        <script>
+            var OrderList_header_otherPartyIdS2Opts = { 
+                
+                minimumResultsForSearch:0, width:"100%", minimumInputLength:2,
+                ajax:{ url:"http://127.0.0.1:18091/apps/marble/Order/FindOrder/searchPartyList", type:"POST", dataType:"json", cache:true, delay:300,
+                    data:function(params) { return { moquiSessionToken: "[REDACTED]", term:(params.term || ''), pageIndex:(params.page || 1) - 1
+                        
+                        
+                    }},
+                    processResults:function(data, params) {
+                        var isDataArray = moqui.isArray(data);
+                        var list = isDataArray ? data : data.options;
+                        var newData = [];
+                        // funny case where select2 specifies no option.@value if empty so &nbsp; ends up passed with form submit; now filtered on server for \u00a0 only and set to null
+                        if (!params.page || params.page <= 1) newData.push({ id:'\u00a0', text:'\u00a0' });
+                        var labelField = "label"; var valueField = "value";
+                        $.each(list, function(idx, curObj) {
+                            var idVal = curObj[valueField]; if (!idVal) idVal = '\u00a0';
+                            newData.push({ id:idVal, text:curObj[labelField] })
+                        });
+                        var outObj = { results:newData };
+                        if (!isDataArray) {
+                            params.page = params.page || 1; // NOTE: 1 based index, is 0 based on server side
+                            var pageSize = data.pageSize || 20;
+                            outObj.pagination = { more: (data.count ? (params.page * pageSize) < data.count : false) };
+                        }
+                        return outObj;
+                    }
+                }
+            };
+            $("#OrderList_header_otherPartyId").select2(OrderList_header_otherPartyIdS2Opts);
+            function populate_OrderList_header_otherPartyId(params) {
+                    var hasAllParms = true;
+                    
+                    if (!hasAllParms) { $("#OrderList_header_otherPartyId").select2("destroy"); $('#OrderList_header_otherPartyId').html(""); $("#OrderList_header_otherPartyId").select2({ });  return; }
+                $.ajax({ type:"POST", url:"http://127.0.0.1:18091/apps/marble/Order/FindOrder/searchPartyList", data:{ moquiSessionToken: "[REDACTED]", term:((params && params.term) || '')}, dataType:"json"}).done(                    function(data) {
+                        var list = moqui.isArray(data) ? data : data.options;
+                        if (list) {
+                            var jqEl = $("#OrderList_header_otherPartyId");
+                            var bWasFocused = jqEl.next().hasClass('select2-container--focus');
+                            jqEl.select2("destroy");
+                            jqEl.html("");
+                            jqEl.append('<option value="">&nbsp;</option>');
+                            
+                            $.each(list, function(key, value) {
+                                var optionValue = value["value"];
+                                if (optionValue === "") {
+                                    jqEl.append("<option selected='selected' value='" + optionValue + "'>" + value["label"] + "</option>");
+                                } else {
+                                    jqEl.append("<option value='" + optionValue + "'>" + value["label"] + "</option>");
+                                }
+                            });
+                            $("#OrderList_header_otherPartyId").select2(OrderList_header_otherPartyIdS2Opts);
+                            if( bWasFocused ) jqEl.focus();
+                            setTimeout(function() { jqEl.trigger('change'); }, 50);
+                        }
+                    }
+                );
+            }
+            
+                
+
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="OrderList_header_otherRoleTypeId">Other Role</label>
+            <div class="col-sm-10">
+    
+    <select name="otherRoleTypeId" class="" id="OrderList_header_otherRoleTypeId">
+            <option value="">&nbsp;</option>
+            <option value="Affiliate">Affiliate</option>
+            <option value="Agent">Agent</option>
+            <option value="Buyer">Buyer</option>
+            <option value="Carrier">Carrier</option>
+            <option value="Cashier">Cashier</option>
+            <option value="ClientBilling">Client Billing Rep</option>
+            <option value="Competitor">Competitor</option>
+            <option value="Customer">Customer</option>
+            <option value="CustomerBillTo">Customer - Bill To</option>
+            <option value="CustomerEndUser">Customer - End User</option>
+            <option value="CustomerPlacing">Customer - Placing</option>
+            <option value="CustomerShipTo">Customer - Ship To</option>
+            <option value="OrderClerk">Order Clerk</option>
+            <option value="Partner">Partner</option>
+            <option value="Referrer">Referrer</option>
+            <option value="Account">Sales Account</option>
+            <option value="SalesRepresentative">Sales Representative</option>
+            <option value="Supplier">Supplier</option>
+            <option value="Vendor">Vendor</option>
+            <option value="VendorBillFrom">Vendor - Bill From</option>
+            <option value="VendorPickUpFrom">Vendor - Pick Up From</option>
+            <option value="VendorShipFrom">Vendor - Ship From</option>
+    </select>
+    
+    
+        <script>$("#OrderList_header_otherRoleTypeId").select2({  });</script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="OrderList_header_shipmentMethodEnumId">Ship Method</label>
+            <div class="col-sm-10">
+    
+    <select name="shipmentMethodEnumId" class="  noResetSelect2" id="OrderList_header_shipmentMethodEnumId" multiple="multiple">
+            <option value="ShMthNextDayPri">Next Day Priority</option>
+            <option value="ShMthNextDay">Next Day Standard</option>
+            <option value="ShMthSecondDay">Second Day</option>
+            <option value="ShMthThirdDay">Third Day</option>
+            <option value="ShMthGroundCom">Ground Commercial</option>
+            <option value="ShMthGround">Ground Parcel</option>
+            <option value="ShMthMotor">Motor (Common Carrier)</option>
+            <option value="ShMthPickUp">Customer Pick Up</option>
+    </select>
+    <span><input type="checkbox" class="form-control" name="shipmentMethodEnumId_not" value="Y" style="">&nbsp;Not</span>
+    <input type="hidden" id="OrderList_header_shipmentMethodEnumId_op" name="shipmentMethodEnumId_op" value="in" style="">
+        <script>$("#OrderList_header_shipmentMethodEnumId").select2({ closeOnSelect:false, width:"100%",  });</script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="OrderList_header_carrierPartyId">Carrier</label>
+            <div class="col-sm-10">
+    
+    <select name="carrierPartyId" class=" noResetSelect2" id="OrderList_header_carrierPartyId" multiple="multiple">
+            <option value="_NA_">N/A</option>
+            <option value="DHLX">DHLX: DHL Express</option>
+            <option value="FedEx">FedEx: FedEx Corporation</option>
+            <option value="UPS">UPS: United Parcel Service</option>
+            <option value="USPS">USPS: United States Postal Service</option>
+    </select>
+    <span><input type="checkbox" class="form-control" name="carrierPartyId_not" value="Y" style="">&nbsp;Not</span>
+    <input type="hidden" id="OrderList_header_carrierPartyId_op" name="carrierPartyId_op" value="in" style="">
+        <script>$("#OrderList_header_carrierPartyId").select2({ closeOnSelect:false, width:"100%",  });</script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="OrderList_header_countryGeoId">Country</label>
+            <div class="col-sm-10">
+    
+    <select name="countryGeoId" class="" id="OrderList_header_countryGeoId">
+            <option value="">&nbsp;</option>
+            <option value="AFG">Afghanistan</option>
+            <option value="ALB">Albania</option>
+            <option value="DZA">Algeria</option>
+            <option value="ASM">American Samoa</option>
+            <option value="AND">Andorra</option>
+            <option value="AGO">Angola</option>
+            <option value="AIA">Anguilla</option>
+            <option value="ATA">Antarctica</option>
+            <option value="ATG">Antigua And Barbuda</option>
+            <option value="ARG">Argentina</option>
+            <option value="ARM">Armenia</option>
+            <option value="ABW">Aruba</option>
+            <option value="AUS">Australia</option>
+            <option value="AUT">Austria</option>
+            <option value="AZE">Azerbaijan</option>
+            <option value="BHS">Bahamas</option>
+            <option value="BHR">Bahrain</option>
+            <option value="BGD">Bangladesh</option>
+            <option value="BRB">Barbados</option>
+            <option value="BLR">Belarus</option>
+            <option value="BEL">Belgium</option>
+            <option value="BLZ">Belize</option>
+            <option value="BEN">Benin</option>
+            <option value="BMU">Bermuda</option>
+            <option value="BTN">Bhutan</option>
+            <option value="BOL">Bolivia</option>
+            <option value="BIH">Bosnia And Herzegowina</option>
+            <option value="BWA">Botswana</option>
+            <option value="BVT">Bouvet Island</option>
+            <option value="BRA">Brazil</option>
+            <option value="IOT">British Indian Ocean Territory</option>
+            <option value="BRN">Brunei Darussalam</option>
+            <option value="BGR">Bulgaria</option>
+            <option value="BFA">Burkina Faso</option>
+            <option value="BDI">Burundi</option>
+            <option value="KHM">Cambodia</option>
+            <option value="CMR">Cameroon</option>
+            <option value="CAN">Canada</option>
+            <option value="CPV">Cape Verde</option>
+            <option value="CYM">Cayman Islands</option>
+            <option value="CAF">Central African Republic</option>
+            <option value="TCD">Chad</option>
+            <option value="CHL">Chile</option>
+            <option value="CHN">China</option>
+            <option value="CXR">Christmas Island</option>
+            <option value="CCK">Cocos (keeling) Islands</option>
+            <option value="COL">Colombia</option>
+            <option value="COM">Comoros</option>
+            <option value="COG">Congo</option>
+            <option value="COD">Congo, The Democratic Republic Of The</option>
+            <option value="COK">Cook Islands</option>
+            <option value="CRI">Costa Rica</option>
+            <option value="CIV">Cote D'ivoire</option>
+            <option value="HRV">Croatia (local Name: Hrvatska)</option>
+            <option value="CUB">Cuba</option>
+            <option value="CYP">Cyprus</option>
+            <option value="CZE">Czech Republic</option>
+            <option value="DNK">Denmark</option>
+            <option value="DJI">Djibouti</option>
+            <option value="DMA">Dominica</option>
+            <option value="DOM">Dominican Republic</option>
+            <option value="TLS">East Timor</option>
+            <option value="ECU">Ecuador</option>
+            <option value="EGY">Egypt</option>
+            <option value="SLV">El Salvador</option>
+            <option value="GNQ">Equatorial Guinea</option>
+            <option value="ERI">Eritrea</option>
+            <option value="EST">Estonia</option>
+            <option value="ETH">Ethiopia</option>
+            <option value="FLK">Falkland Islands (malvinas)</option>
+            <option value="FRO">Faroe Islands</option>
+            <option value="FJI">Fiji</option>
+            <option value="FIN">Finland</option>
+            <option value="FRA">France</option>
+            <option value="FXX">France, Metropolitan</option>
+            <option value="GUF">French Guiana</option>
+            <option value="PYF">French Polynesia</option>
+            <option value="ATF">French Southern Territories</option>
+            <option value="GAB">Gabon</option>
+            <option value="GMB">Gambia</option>
+            <option value="GEO">Georgia</option>
+            <option value="DEU">Germany</option>
+            <option value="GHA">Ghana</option>
+            <option value="GIB">Gibraltar</option>
+            <option value="GRC">Greece</option>
+            <option value="GRL">Greenland</option>
+            <option value="GRD">Grenada</option>
+            <option value="GLP">Guadeloupe</option>
+            <option value="GUM">Guam</option>
+            <option value="GTM">Guatemala</option>
+            <option value="GIN">Guinea</option>
+            <option value="GNB">Guinea-bissau</option>
+            <option value="GUY">Guyana</option>
+            <option value="HTI">Haiti</option>
+            <option value="HMD">Heard And Mc Donald Islands</option>
+            <option value="VAT">Holy See (vatican City State)</option>
+            <option value="HND">Honduras</option>
+            <option value="HKG">Hong Kong</option>
+            <option value="HUN">Hungary</option>
+            <option value="ISL">Iceland</option>
+            <option value="IND">India</option>
+            <option value="IDN">Indonesia</option>
+            <option value="IRN">Iran (islamic Republic Of)</option>
+            <option value="IRQ">Iraq</option>
+            <option value="IRL">Ireland</option>
+            <option value="ISR">Israel</option>
+            <option value="ITA">Italy</option>
+            <option value="JAM">Jamaica</option>
+            <option value="JPN">Japan</option>
+            <option value="JOR">Jordan</option>
+            <option value="KAZ">Kazakhstan</option>
+            <option value="KEN">Kenya</option>
+            <option value="KIR">Kiribati</option>
+            <option value="PRK">Korea, Democratic People's Republic Of</option>
+            <option value="KOR">Korea, Republic Of</option>
+            <option value="KWT">Kuwait</option>
+            <option value="KGZ">Kyrgyzstan</option>
+            <option value="LAO">Lao People's Democratic Republic</option>
+            <option value="LVA">Latvia</option>
+            <option value="LBN">Lebanon</option>
+            <option value="LSO">Lesotho</option>
+            <option value="LBR">Liberia</option>
+            <option value="LBY">Libyan Arab Jamahiriya</option>
+            <option value="LIE">Liechtenstein</option>
+            <option value="LTU">Lithuania</option>
+            <option value="LUX">Luxembourg</option>
+            <option value="MAC">Macau</option>
+            <option value="MKD">Macedonia, The Former Yugoslav Republic Of</option>
+            <option value="MDG">Madagascar</option>
+            <option value="MWI">Malawi</option>
+            <option value="MYS">Malaysia</option>
+            <option value="MDV">Maldives</option>
+            <option value="MLI">Mali</option>
+            <option value="MLT">Malta</option>
+            <option value="MHL">Marshall Islands</option>
+            <option value="MTQ">Martinique</option>
+            <option value="MRT">Mauritania</option>
+            <option value="MUS">Mauritius</option>
+            <option value="MYT">Mayotte</option>
+            <option value="MEX">Mexico</option>
+            <option value="FSM">Micronesia, Federated States Of</option>
+            <option value="MDA">Moldova, Republic Of</option>
+            <option value="MCO">Monaco</option>
+            <option value="MNG">Mongolia</option>
+            <option value="MNE">Montenegro</option>
+            <option value="MSR">Montserrat</option>
+            <option value="MAR">Morocco</option>
+            <option value="MOZ">Mozambique</option>
+            <option value="MMR">Myanmar</option>
+            <option value="NAM">Namibia</option>
+            <option value="NRU">Nauru</option>
+            <option value="NPL">Nepal</option>
+            <option value="NLD">Netherlands</option>
+            <option value="ANT">Netherlands Antilles</option>
+            <option value="NCL">New Caledonia</option>
+            <option value="NZL">New Zealand</option>
+            <option value="NIC">Nicaragua</option>
+            <option value="NER">Niger</option>
+            <option value="NGA">Nigeria</option>
+            <option value="NIU">Niue</option>
+            <option value="NFK">Norfolk Island</option>
+            <option value="MNP">Northern Mariana Islands</option>
+            <option value="NOR">Norway</option>
+            <option value="OMN">Oman</option>
+            <option value="PAK">Pakistan</option>
+            <option value="PLW">Palau</option>
+            <option value="PSE">Palestinian Territory, Occupied</option>
+            <option value="PAN">Panama</option>
+            <option value="PNG">Papua New Guinea</option>
+            <option value="PRY">Paraguay</option>
+            <option value="PER">Peru</option>
+            <option value="PHL">Philippines</option>
+            <option value="PCN">Pitcairn</option>
+            <option value="POL">Poland</option>
+            <option value="PRT">Portugal</option>
+            <option value="PRI">Puerto Rico</option>
+            <option value="QAT">Qatar</option>
+            <option value="REU">Reunion</option>
+            <option value="ROU">Romania</option>
+            <option value="RUS">Russian Federation</option>
+            <option value="RWA">Rwanda</option>
+            <option value="KNA">Saint Kitts And Nevis</option>
+            <option value="LCA">Saint Lucia</option>
+            <option value="VCT">Saint Vincent And The Grenadines</option>
+            <option value="WSM">Samoa</option>
+            <option value="SMR">San Marino</option>
+            <option value="STP">Sao Tome And Principe</option>
+            <option value="SAU">Saudi Arabia</option>
+            <option value="SEN">Senegal</option>
+            <option value="SRB">Serbia</option>
+            <option value="SYC">Seychelles</option>
+            <option value="SLE">Sierra Leone</option>
+            <option value="SGP">Singapore</option>
+            <option value="SVK">Slovakia (slovak Republic)</option>
+            <option value="SVN">Slovenia</option>
+            <option value="SLB">Solomon Islands</option>
+            <option value="SOM">Somalia</option>
+            <option value="ZAF">South Africa</option>
+            <option value="SGS">South Georgia And The South Sandwich Islands</option>
+            <option value="ESP">Spain</option>
+            <option value="LKA">Sri Lanka</option>
+            <option value="SHN">St. Helena</option>
+            <option value="SPM">St. Pierre And Miquelon</option>
+            <option value="SDN">Sudan</option>
+            <option value="SUR">Suriname</option>
+            <option value="SJM">Svalbard And Jan Mayen Islands</option>
+            <option value="SWZ">Swaziland</option>
+            <option value="SWE">Sweden</option>
+            <option value="CHE">Switzerland</option>
+            <option value="SYR">Syrian Arab Republic</option>
+            <option value="TWN">Taiwan</option>
+            <option value="TJK">Tajikistan</option>
+            <option value="TZA">Tanzania, United Republic Of</option>
+            <option value="THA">Thailand</option>
+            <option value="TGO">Togo</option>
+            <option value="TKL">Tokelau</option>
+            <option value="TON">Tonga</option>
+            <option value="TTO">Trinidad And Tobago</option>
+            <option value="TUN">Tunisia</option>
+            <option value="TUR">Turkey</option>
+            <option value="TKM">Turkmenistan</option>
+            <option value="TCA">Turks And Caicos Islands</option>
+            <option value="TUV">Tuvalu</option>
+            <option value="UGA">Uganda</option>
+            <option value="UKR">Ukraine</option>
+            <option value="ARE">United Arab Emirates</option>
+            <option value="GBR">United Kingdom</option>
+            <option value="USA">United States</option>
+            <option value="UMI">United States Minor Outlying Islands</option>
+            <option value="URY">Uruguay</option>
+            <option value="UZB">Uzbekistan</option>
+            <option value="VUT">Vanuatu</option>
+            <option value="VEN">Venezuela</option>
+            <option value="VNM">Viet Nam</option>
+            <option value="VGB">Virgin Islands (british)</option>
+            <option value="VIR">Virgin Islands (u.s.)</option>
+            <option value="WLF">Wallis And Futuna Islands</option>
+            <option value="ESH">Western Sahara</option>
+            <option value="YEM">Yemen</option>
+            <option value="YUG">Yugoslavia</option>
+            <option value="ZMB">Zambia</option>
+            <option value="ZWE">Zimbabwe</option>
+    </select>
+    
+    
+        <script>$("#OrderList_header_countryGeoId").select2({  });</script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="OrderList_header_stateProvinceGeoId">State/Province</label>
+            <div class="col-sm-10">
+    
+    <select name="stateProvinceGeoId" class=" dynamic-options noResetSelect2" id="OrderList_header_stateProvinceGeoId" multiple="multiple">
+    </select>
+    
+    <input type="hidden" id="OrderList_header_stateProvinceGeoId_op" name="stateProvinceGeoId_op" value="in" style="">
+        <script>
+            var OrderList_header_stateProvinceGeoIdS2Opts = { 
+                closeOnSelect:false,
+                            };
+            $("#OrderList_header_stateProvinceGeoId").select2(OrderList_header_stateProvinceGeoIdS2Opts);
+            function populate_OrderList_header_stateProvinceGeoId(params) {
+                    var hasAllParms = true;
+                    if (!$('#OrderList_header_countryGeoId').val()) { hasAllParms = false; } 
+                    if (!hasAllParms) { $("#OrderList_header_stateProvinceGeoId").select2("destroy"); $('#OrderList_header_stateProvinceGeoId').html(""); $("#OrderList_header_stateProvinceGeoId").select2({ });  return; }
+                $.ajax({ type:"POST", url:"http://127.0.0.1:18091/apps/marble/Order/FindOrder/getGeoCountryStates", data:{ moquiSessionToken: "[REDACTED]", "countryGeoId": $("#OrderList_header_countryGeoId").val(), term:((params && params.term) || '')}, dataType:"json"}).done(                    function(data) {
+                        var list = moqui.isArray(data) ? data : data.options;
+                        if (list) {
+                            var jqEl = $("#OrderList_header_stateProvinceGeoId");
+                            var bWasFocused = jqEl.next().hasClass('select2-container--focus');
+                            jqEl.select2("destroy");
+                            jqEl.html("");
+                            jqEl.append('<option value="">&nbsp;</option>');
+                            var currentValues = [""];
+                            $.each(list, function(key, value) {
+                                var optionValue = value["geoId"];
+                                if (currentValues.indexOf(optionValue) >= 0) {
+                                    jqEl.append("<option selected='selected' value='" + optionValue + "'>" + value["label"] + "</option>");
+                                } else {
+                                    jqEl.append("<option value='" + optionValue + "'>" + value["label"] + "</option>");
+                                }
+                            });
+                            $("#OrderList_header_stateProvinceGeoId").select2(OrderList_header_stateProvinceGeoIdS2Opts);
+                            if( bWasFocused ) jqEl.focus();
+                            setTimeout(function() { jqEl.trigger('change'); }, 50);
+                        }
+                    }
+                );
+            }
+            $("#OrderList_header_countryGeoId").on('change', function() { populate_OrderList_header_stateProvinceGeoId(); });
+            populate_OrderList_header_stateProvinceGeoId();
+
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="OrderList_header_partTotal">Total</label>
+            <div class="col-sm-10">
+    
+<span class="form-range-find">
+    <span>From&nbsp;</span><input type="text" class="form-control" name="partTotal_from" value="" size="10" id="OrderList_header_partTotal_from" style="">
+</span>
+<span class="form-range-find">
+    <span>Thru&nbsp;</span><input type="text" class="form-control" name="partTotal_thru" value="" size="10" id="OrderList_header_partTotal_thru" style="">
+</span>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="OrderList_header_quantityTotal">Quantity Total</label>
+            <div class="col-sm-10">
+    
+<span class="form-range-find">
+    <span>From&nbsp;</span><input type="text" class="form-control" name="quantityTotal_from" value="" size="10" id="OrderList_header_quantityTotal_from" style="">
+</span>
+<span class="form-range-find">
+    <span>Thru&nbsp;</span><input type="text" class="form-control" name="quantityTotal_thru" value="" size="10" id="OrderList_header_quantityTotal_thru" style="">
+</span>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="OrderList_header_findQuantity">Item Quantity</label>
+            <div class="col-sm-10">
+    
+<span class="form-range-find">
+    <span>From&nbsp;</span><input type="text" class="form-control" name="findQuantity_from" value="" size="10" id="OrderList_header_findQuantity_from" style="">
+</span>
+<span class="form-range-find">
+    <span>Thru&nbsp;</span><input type="text" class="form-control" name="findQuantity_thru" value="" size="10" id="OrderList_header_findQuantity_thru" style="">
+</span>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="OrderList_header_purchaseItemTypeEnumId">Purchase Item Type</label>
+            <div class="col-sm-10">
+    
+    <select name="purchaseItemTypeEnumId" class=" noResetSelect2" id="OrderList_header_purchaseItemTypeEnumId" multiple="multiple">
+            <option value="ItemExpAdvertising">Advertising</option>
+            <option value="ItemAdjAdvertising">Advertising</option>
+            <option value="ItemAsset">Asset - Fixed Asset</option>
+            <option value="ItemInventory">Asset - Inventory</option>
+            <option value="ItemExpCharitable">Charitable Contribution</option>
+            <option value="ItemCommissionAdj">Commission Adjustment</option>
+            <option value="ItemExpCommissionFee">Commission/Fee</option>
+            <option value="ItemCommission">Commission Line Item</option>
+            <option value="ItemExpCommCellular">Communication Cellular</option>
+            <option value="ItemExpCommNetwork">Communication Network</option>
+            <option value="ItemExpCommTelephone">Communication Telephone</option>
+            <option value="ItemExpHosting">Computer Server Hosting</option>
+            <option value="ItemDiscount">Discount - Promotional</option>
+            <option value="ItemFee">Fee</option>
+            <option value="ItemExpInsBusiness">Insurance Business</option>
+            <option value="ItemExpInsEquipment">Insurance Equipment</option>
+            <option value="ItemExpInsHealth">Insurance Health</option>
+            <option value="ItemExpInsOther">Insurance Other</option>
+            <option value="ItemExpInsRealEst">Insurance Real Estate</option>
+            <option value="ItemExpInsVehicle">Insurance Vehicle</option>
+            <option value="ItemExpInterestEquip">Interest Equipment</option>
+            <option value="ItemExpInterestOther">Interest Other</option>
+            <option value="ItemExpInterestReal">Interest Real Estate</option>
+            <option value="ItemExpInterestVehi">Interest Vehicle</option>
+            <option value="ItemAdjJointAdv">Joint Advertising</option>
+            <option value="ItemExpLeaseEquip">Lease/Rent Equipment</option>
+            <option value="ItemExpLeaseOther">Lease/Rent Other</option>
+            <option value="ItemExpLeaseRealEst">Lease/Rent Real Estate</option>
+            <option value="ItemExpLeaseVehicle">Lease/Rent Vehicle</option>
+            <option value="ItemExpMaintEquip">Maintenance/Repair Equipment</option>
+            <option value="ItemExpMaintOther">Maintenance/Repair Other</option>
+            <option value="ItemExpMaintRealEst">Maintenance/Repair Real Estate</option>
+            <option value="ItemExpMaintVehicle">Maintenance/Repair Vehicle</option>
+            <option value="ItemExpMedical">Medical and Health Care</option>
+            <option value="ItemMiscCharge">Miscellaneous Charge</option>
+            <option value="ItemExpOfficePostage">Office Postage</option>
+            <option value="ItemExpOfficeSup">Office Supplies</option>
+            <option value="ItemExpOther">Other</option>
+            <option value="ItemShippingOther">Other Shipping (Non-Inventory)</option>
+            <option value="ItemRentalDeposit">Rental Deposit</option>
+            <option value="ItemExpRoyalties">Royalties</option>
+            <option value="ItemSalesTax">Sales Tax</option>
+            <option value="ItemExpServAccount">Services Accounting</option>
+            <option value="ItemExpServLabor">Services Labor</option>
+            <option value="ItemExpServLegal">Services Legal</option>
+            <option value="ItemShipping">Shipping and Handling</option>
+            <option value="ItemSlottingFees">Slotting Fees</option>
+            <option value="ItemExpSupplies">Supplies</option>
+            <option value="ItemExpTaxesLic">Taxes and Licenses</option>
+            <option value="ItemTimeEntry">Time Entry</option>
+            <option value="ItemExpTravAir">Travel Air</option>
+            <option value="ItemExpTravCarRental">Travel Car Rental</option>
+            <option value="ItemExpTravLocal">Travel Local/Parking/Tolls</option>
+            <option value="ItemExpTravLodging">Travel Lodging</option>
+            <option value="ItemExpTravMealsEnt">Travel Meals/Entertainment</option>
+            <option value="ItemExpTravOther">Travel Other</option>
+            <option value="ItemExpUtilElec">Utilities Electricity</option>
+            <option value="ItemExpUtilHeating">Utilities Heating</option>
+            <option value="ItemExpUtilTrash">Utilities Trash/Recycle</option>
+            <option value="ItemExpUtilVehFuel">Utilities Vehicle Fuel</option>
+            <option value="ItemExpUtilWater">Utilities Water/Sewer</option>
+            <option value="ItemVatTax">VAT Tax (not added to totals)</option>
+            <option value="ItemWorkEffort">Work Effort</option>
+    </select>
+    
+    <input type="hidden" id="OrderList_header_purchaseItemTypeEnumId_op" name="purchaseItemTypeEnumId_op" value="in" style="">
+        <script>$("#OrderList_header_purchaseItemTypeEnumId").select2({ closeOnSelect:false, width:"100%",  });</script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="OrderList_header_salesItemTypeEnumId">Sales Item Type</label>
+            <div class="col-sm-10">
+    
+    <select name="salesItemTypeEnumId" class=" noResetSelect2" id="OrderList_header_salesItemTypeEnumId" multiple="multiple">
+            <option value="ItemAddtlFeature">Additional Feature</option>
+            <option value="ItemAdjAdvertising">Advertising</option>
+            <option value="ItemChargebackAdjust">Chargeback</option>
+            <option value="ItemComplianceFee">Compliance Fee</option>
+            <option value="ItemCouponCredit">Coupons and Credits</option>
+            <option value="ItemDiscountAppease">Discount - Appeasement</option>
+            <option value="ItemDiscount">Discount - Promotional</option>
+            <option value="ItemSupplierDiscount">Discount - Supplier</option>
+            <option value="ItemDonation">Donation</option>
+            <option value="ItemFee">Fee</option>
+            <option value="ItemFreeFills">Free Fills</option>
+            <option value="ItemAdjJointAdv">Joint Advertising</option>
+            <option value="ItemLateCharge">Late Payment Charge</option>
+            <option value="ItemMkgtPkgAdj">Marketing Package Adjustment</option>
+            <option value="ItemMiscCharge">Miscellaneous Charge</option>
+            <option value="ItemProduct">Product</option>
+            <option value="ItemPromoDiscount">Promotional Discounts</option>
+            <option value="ItemPromptDiscount">Prompt Payment Discount</option>
+            <option value="ItemRental">Rental</option>
+            <option value="ItemRentalDeposit">Rental Deposit</option>
+            <option value="ItemReplacement">Replacement</option>
+            <option value="ItemReturnAdjust">Return</option>
+            <option value="ItemSalesTax">Sales Tax</option>
+            <option value="ItemServiceProduct">Service Product</option>
+            <option value="ItemShipping">Shipping and Handling</option>
+            <option value="ItemShrinkage">Shrinkage</option>
+            <option value="ItemSlottingFees">Slotting Fees</option>
+            <option value="ItemSurcharge">Surcharge</option>
+            <option value="ItemSalesThirdParty">Third Party</option>
+            <option value="ItemTimeEntry">Time Entry</option>
+            <option value="ItemVatTax">VAT Tax (not added to totals)</option>
+            <option value="ItemWarranty">Warranty</option>
+            <option value="ItemWorkEffort">Work Effort</option>
+            <option value="ItemWriteOff">Write-off</option>
+    </select>
+    
+    <input type="hidden" id="OrderList_header_salesItemTypeEnumId_op" name="salesItemTypeEnumId_op" value="in" style="">
+        <script>$("#OrderList_header_salesItemTypeEnumId").select2({ closeOnSelect:false, width:"100%",  });</script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="OrderList_header_findProductId">Product</label>
+            <div class="col-sm-10">
+    
+    <select name="findProductId" class=" dynamic-options noResetSelect2" style="min-width:200px;" id="OrderList_header_findProductId" multiple="multiple">
+    </select>
+    
+    <input type="hidden" id="OrderList_header_findProductId_op" name="findProductId_op" value="in" style="">
+        <script>
+            var OrderList_header_findProductIdS2Opts = { 
+                closeOnSelect:false,
+                minimumResultsForSearch:0, width:"100%", minimumInputLength:0,
+                ajax:{ url:"http://127.0.0.1:18091/apps/marble/Order/FindOrder/getProductList", type:"POST", dataType:"json", cache:true, delay:300,
+                    data:function(params) { return { moquiSessionToken: "[REDACTED]", term:(params.term || ''), pageIndex:(params.page || 1) - 1
+                        
+                        
+                    }},
+                    processResults:function(data, params) {
+                        var isDataArray = moqui.isArray(data);
+                        var list = isDataArray ? data : data.options;
+                        var newData = [];
+                        // funny case where select2 specifies no option.@value if empty so &nbsp; ends up passed with form submit; now filtered on server for \u00a0 only and set to null
+                        if (!params.page || params.page <= 1) newData.push({ id:'\u00a0', text:'\u00a0' });
+                        var labelField = "label"; var valueField = "value";
+                        $.each(list, function(idx, curObj) {
+                            var idVal = curObj[valueField]; if (!idVal) idVal = '\u00a0';
+                            newData.push({ id:idVal, text:curObj[labelField] })
+                        });
+                        var outObj = { results:newData };
+                        if (!isDataArray) {
+                            params.page = params.page || 1; // NOTE: 1 based index, is 0 based on server side
+                            var pageSize = data.pageSize || 20;
+                            outObj.pagination = { more: (data.count ? (params.page * pageSize) < data.count : false) };
+                        }
+                        return outObj;
+                    }
+                }
+            };
+            $("#OrderList_header_findProductId").select2(OrderList_header_findProductIdS2Opts);
+            function populate_OrderList_header_findProductId(params) {
+                    var hasAllParms = true;
+                    
+                    if (!hasAllParms) { $("#OrderList_header_findProductId").select2("destroy"); $('#OrderList_header_findProductId').html(""); $("#OrderList_header_findProductId").select2({ });  return; }
+                $.ajax({ type:"POST", url:"http://127.0.0.1:18091/apps/marble/Order/FindOrder/getProductList", data:{ moquiSessionToken: "[REDACTED]", term:((params && params.term) || '')}, dataType:"json"}).done(                    function(data) {
+                        var list = moqui.isArray(data) ? data : data.options;
+                        if (list) {
+                            var jqEl = $("#OrderList_header_findProductId");
+                            var bWasFocused = jqEl.next().hasClass('select2-container--focus');
+                            jqEl.select2("destroy");
+                            jqEl.html("");
+                            jqEl.append('<option value="">&nbsp;</option>');
+                            var currentValues = [""];
+                            $.each(list, function(key, value) {
+                                var optionValue = value["value"];
+                                if (currentValues.indexOf(optionValue) >= 0) {
+                                    jqEl.append("<option selected='selected' value='" + optionValue + "'>" + value["label"] + "</option>");
+                                } else {
+                                    jqEl.append("<option value='" + optionValue + "'>" + value["label"] + "</option>");
+                                }
+                            });
+                            $("#OrderList_header_findProductId").select2(OrderList_header_findProductIdS2Opts);
+                            if( bWasFocused ) jqEl.focus();
+                            setTimeout(function() { jqEl.trigger('change'); }, 50);
+                        }
+                    }
+                );
+            }
+            
+                
+
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="OrderList_header_externalId">External ID</label>
+            <div class="col-sm-10">
+    
+<span class="form-text-find">
+        <input type="hidden" name="externalId_op" value="begins" style="">
+    <input type="text" class="form-control" name="externalId" value="" size="30" id="OrderList_header_externalId" style="">
+        <input type="hidden" name="externalId_ic" value="Y" style="">
+</span>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="OrderList_header_displayId">Display ID</label>
+            <div class="col-sm-10">
+    
+<span class="form-text-find">
+        <input type="hidden" name="displayId_op" value="begins" style="">
+    <input type="text" class="form-control" name="displayId" value="" size="30" id="OrderList_header_displayId" style="">
+        <input type="hidden" name="displayId_ic" value="Y" style="">
+</span>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <div class="col-sm-2 hidden-xs">&nbsp;</div>
+            <div class="col-sm-10">
+    
+    <button type="submit" name="submitButton" value="submitButton" id="OrderList_header_submitButton" class="btn btn-primary btn-sm">
+Find    </button>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+                        </fieldset>
+                    </form>
+                </div>
+            </div></div>
+        </div>
+        <script>$('#OrderList_hdialog').on('shown.bs.modal', function() {
+            $("#OrderList_hdialog :not(.noResetSelect2)>select:not(.noResetSelect2)").select2({ });
+        })</script>
+        <div id="OrderList_SelColsDialog" class="modal" aria-hidden="true" style="display: none;" tabindex="-1">
+            <div class="modal-dialog" style="width: 600px;"><div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Column Fields</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Drag fields to the desired column or do not display</p>
+                    <ul id="OrderList_SelColsSortable">
+                        <li id="hidden"><div>Do Not Display</div>
+                            <ul>
+                                <li id="orderName"><div>Order Name</div></li>
+                                <li id="shipAfterDate"><div>Ship After Date</div></li>
+                                <li id="countryGeoId"><div>Country</div></li>
+                                <li id="stateProvinceGeoId"><div>State/Province</div></li>
+                                <li id="quantityTotal"><div>Quantity Total</div></li>
+                                <li id="quantityNotAvailable"><div>Qty Not Avail</div></li>
+                                <li id="issuedQuantity"><div>Qty Shipped</div></li>
+                                <li id="externalId"><div>External ID</div></li>
+                                <li id="displayId"><div>Display ID</div></li>
+                            </ul>
+                        </li>
+                            <li id="column_0"><div>Column 1</div><ul>
+                                <li id="orderId"><div>Order</div></li>
+                                <li id="otherPartyOrderId"><div>Their Order</div></li>
+                                <li id="salesChannelEnumId"><div>Source</div></li>
+                            </ul></li>
+                            <li id="column_1"><div>Column 2</div><ul>
+                                <li id="partStatusId"><div>Status</div></li>
+                                <li id="priority"><div>Priority</div></li>
+                                <li id="partTotal"><div>Total</div></li>
+                            </ul></li>
+                            <li id="column_2"><div>Column 3</div><ul>
+                                <li id="entryDate"><div>Entry Date</div></li>
+                                <li id="placedDate"><div>Placed Date</div></li>
+                                <li id="shipBeforeDate"><div>Ship Before Date</div></li>
+                            </ul></li>
+                            <li id="column_3"><div>Column 4</div><ul>
+                                <li id="facilityId"><div>Facility</div></li>
+                                <li id="productStoreId"><div>Store</div></li>
+                                <li id="shippingInstructions"><div>Shipping Instructions</div></li>
+                            </ul></li>
+                            <li id="column_4"><div>Column 5</div><ul>
+                                <li id="vendorPartyId"><div>Vendor</div></li>
+                                <li id="customerPartyId"><div>Customer</div></li>
+                                <li id="otherParties"><div>Other Parties</div></li>
+                            </ul></li>
+                            <li id="column_5"><div>Column 6</div><ul>
+                                <li id="shipmentMethodEnumId"><div>Ship Method</div></li>
+                                <li id="carrierPartyId"><div>Carrier</div></li>
+                                <li id="shipments"><div>Shipments</div></li>
+                            </ul></li>
+                            <li id="column_6"><div>Column 7</div></li>
+                            <li id="column_7"><div>Column 8</div></li>
+                            <li id="column_8"><div>Column 9</div></li>
+                    </ul>
+                    <form class="form-inline" id="OrderList_SelColsForm" method="post" action="http://127.0.0.1:18091/apps/marble/Order/FindOrder/formSelectColumns">
+                        <input type="hidden" name="moquiSessionToken" value="[REDACTED]" style="">
+                        <input type="hidden" name="formLocation" value="component://SimpleScreens/screen/SimpleScreens/Order/FindOrder.xml.form_list$OrderList" style="">
+                        <input type="hidden" id="OrderList_SelColsForm_columnsTree" name="columnsTree" value="" style="">
+                        <input type="submit" name="SaveColumns" value="Save Columns" class="btn btn-primary btn-sm" style="">
+                        <input type="submit" name="ResetColumns" value="Reset to Default" class="btn btn-primary btn-sm" style="">
+                    </form>
+                </div>
+            </div></div>
+        </div>
+        <script>$('#OrderList_SelColsDialog').on('shown.bs.modal', function() {
+            $("#OrderList_SelColsSortable").sortableLists({
+                isAllowed: function(currEl, hint, target) {
+                    if (currEl.attr('id') === 'hidden' || currEl.attr('id').startsWith('column_')) {
+                        if (!target.attr('id') || (target.attr('id') != 'hidden' && !currEl.attr('id').startsWith('column_'))) { hint.css('background-color', '#99ff99'); return true; }
+                        else { hint.css('background-color', '#ff9999'); return false; }
+                    }
+                    if (target.attr('id') && (target.attr('id') === 'hidden' || target.attr('id').startsWith('column_'))) { hint.css('background-color', '#99ff99'); return true; }
+                    else { hint.css('background-color', '#ff9999'); return false; }
+                },
+                placeholderCss: {'background-color':'#999999'}, insertZone: 50,
+                opener: { active:false, as:'html', close:'', open:'' },
+                onChange: function(cEl) {
+                    var sortableHierarchy = $('#OrderList_SelColsSortable').sortableListsToHierarchy();
+                    // console.log(sortableHierarchy); console.log(JSON.stringify(sortableHierarchy));
+                    $("#OrderList_SelColsForm_columnsTree").val(JSON.stringify(sortableHierarchy));
+                }
+            });
+            $("#OrderList_SelColsForm_columnsTree").val(JSON.stringify($('#OrderList_SelColsSortable').sortableListsToHierarchy()));
+        })</script>
+        <div class="table-scroll-wrapper"><table class="table table-striped table-hover table-condensed" id="OrderList_table">
+            <thead>
+        <tr class="form-list-nav-row"><th colspan="6">
+        <nav class="form-list-nav">
+            <button id="OrderList_hdialog_button" type="button" data-toggle="modal" data-target="#OrderList_hdialog" data-original-title="Find Options" data-placement="bottom" class="btn btn-default"><i class="fa fa-share"></i> Find Options</button>
+            <button id="OrderList_SelColsDialog_button" type="button" data-toggle="modal" data-target="#OrderList_SelColsDialog" data-original-title="Columns" data-placement="bottom" class="btn btn-default"><i class="fa fa-share"></i> Columns</button>
+
+
+                <a href="http://127.0.0.1:18091/apps/marble/Order/FindOrder?renderMode=csv&amp;saveFilename=OrderList.csv&amp;pageNoLimit=true&amp;lastStandalone=true" class="btn btn-default">CSV</a>
+        </nav>
+        </th></tr>
+
+            <tr><th colspan="6" style="font-weight: normal">
+                        
+                                <span style="white-space:nowrap;"><strong>Order Type:</strong> <span class="text-success">Any</span></span>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                                <span style="white-space:nowrap;"><strong>Entry Date:</strong> <span class="text-success">-3 30 Days (2026-07-18 to 2026-10-16)</span></span>
+                        
+                        
+                        
+                        
+                                <span style="white-space:nowrap;"><strong>Status:</strong> <span class="text-success">Quote Proposed by Vendor, Quote Requested by Customer, Placed by Customer, Approved, Held</span></span>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    <form name="OrderList_header" id="OrderList_header" method="post" action="http://127.0.0.1:18091/apps/marble/Order/FindOrder">
+                        
+                        <button id="OrderList_header-quick-clear" type="submit" name="clearParameters" style="float:left; padding: 0 5px 0 5px; margin: 0 4px 0 0;" class="btn btn-primary btn-sm"><i class="fa fa-remove"></i></button>
+                    </form>
+            </th></tr>
+
+                <tr>
+                    <th>
+                        <div><div class="form-title">Order            <span class="form-order-by">
+                <a href="http://127.0.0.1:18091/apps/marble/Order/FindOrder?orderByField=-orderId" class="active"><i class="fa fa-caret-up"></i></a>
+                <a href="http://127.0.0.1:18091/apps/marble/Order/FindOrder?orderByField=-orderId"><i class="fa fa-caret-down"></i></a>
+            </span>
+</div>    </div>
+                        <div><div class="form-title">Their Order            <span class="form-order-by">
+                <a href="http://127.0.0.1:18091/apps/marble/Order/FindOrder?orderByField=otherPartyOrderId"><i class="fa fa-caret-up"></i></a>
+                <a href="http://127.0.0.1:18091/apps/marble/Order/FindOrder?orderByField=-otherPartyOrderId"><i class="fa fa-caret-down"></i></a>
+            </span>
+</div>    </div>
+                        <div><div class="form-title">Source            <span class="form-order-by">
+                <a href="http://127.0.0.1:18091/apps/marble/Order/FindOrder?orderByField=salesChannelEnumId"><i class="fa fa-caret-up"></i></a>
+                <a href="http://127.0.0.1:18091/apps/marble/Order/FindOrder?orderByField=-salesChannelEnumId"><i class="fa fa-caret-down"></i></a>
+            </span>
+</div>    </div>
+                    </th>
+                    <th>
+                        <div><div class="form-title">Status            <span class="form-order-by">
+                <a href="http://127.0.0.1:18091/apps/marble/Order/FindOrder?orderByField=partStatusId"><i class="fa fa-caret-up"></i></a>
+                <a href="http://127.0.0.1:18091/apps/marble/Order/FindOrder?orderByField=-partStatusId"><i class="fa fa-caret-down"></i></a>
+            </span>
+</div>    </div>
+                        <div><div class="form-title text-center">Priority            <span class="form-order-by">
+                <a href="http://127.0.0.1:18091/apps/marble/Order/FindOrder?orderByField=priority"><i class="fa fa-caret-up"></i></a>
+                <a href="http://127.0.0.1:18091/apps/marble/Order/FindOrder?orderByField=-priority"><i class="fa fa-caret-down"></i></a>
+            </span>
+</div>    </div>
+                        <div><div class="form-title text-right">Total            <span class="form-order-by">
+                <a href="http://127.0.0.1:18091/apps/marble/Order/FindOrder?orderByField=partTotal"><i class="fa fa-caret-up"></i></a>
+                <a href="http://127.0.0.1:18091/apps/marble/Order/FindOrder?orderByField=-partTotal"><i class="fa fa-caret-down"></i></a>
+            </span>
+</div>    </div>
+                    </th>
+                    <th>
+                        <div><div class="form-title">Entry Date            <span class="form-order-by">
+                <a href="http://127.0.0.1:18091/apps/marble/Order/FindOrder?orderByField=entryDate"><i class="fa fa-caret-up"></i></a>
+                <a href="http://127.0.0.1:18091/apps/marble/Order/FindOrder?orderByField=entryDate" class="active"><i class="fa fa-caret-down"></i></a>
+            </span>
+</div>    </div>
+                        <div><div class="form-title">Placed Date            <span class="form-order-by">
+                <a href="http://127.0.0.1:18091/apps/marble/Order/FindOrder?orderByField=placedDate"><i class="fa fa-caret-up"></i></a>
+                <a href="http://127.0.0.1:18091/apps/marble/Order/FindOrder?orderByField=-placedDate"><i class="fa fa-caret-down"></i></a>
+            </span>
+</div>    </div>
+                        <div><div class="form-title">Ship Before Date            <span class="form-order-by">
+                <a href="http://127.0.0.1:18091/apps/marble/Order/FindOrder?orderByField=shipBeforeDate"><i class="fa fa-caret-up"></i></a>
+                <a href="http://127.0.0.1:18091/apps/marble/Order/FindOrder?orderByField=-shipBeforeDate"><i class="fa fa-caret-down"></i></a>
+            </span>
+</div>    </div>
+                    </th>
+                    <th>
+                        <div><div class="form-title">Facility            <span class="form-order-by">
+                <a href="http://127.0.0.1:18091/apps/marble/Order/FindOrder?orderByField=facilityId"><i class="fa fa-caret-up"></i></a>
+                <a href="http://127.0.0.1:18091/apps/marble/Order/FindOrder?orderByField=-facilityId"><i class="fa fa-caret-down"></i></a>
+            </span>
+</div>    </div>
+                        <div><div class="form-title">Store            <span class="form-order-by">
+                <a href="http://127.0.0.1:18091/apps/marble/Order/FindOrder?orderByField=productStoreId"><i class="fa fa-caret-up"></i></a>
+                <a href="http://127.0.0.1:18091/apps/marble/Order/FindOrder?orderByField=-productStoreId"><i class="fa fa-caret-down"></i></a>
+            </span>
+</div>    </div>
+                        <div><div class="form-title">Shipping Instructions            <span class="form-order-by">
+                <a href="http://127.0.0.1:18091/apps/marble/Order/FindOrder?orderByField=shippingInstructions"><i class="fa fa-caret-up"></i></a>
+                <a href="http://127.0.0.1:18091/apps/marble/Order/FindOrder?orderByField=-shippingInstructions"><i class="fa fa-caret-down"></i></a>
+            </span>
+</div>    </div>
+                    </th>
+                    <th>
+                        <div><div class="form-title">Vendor            <span class="form-order-by">
+                <a href="http://127.0.0.1:18091/apps/marble/Order/FindOrder?orderByField=vendorPartyId"><i class="fa fa-caret-up"></i></a>
+                <a href="http://127.0.0.1:18091/apps/marble/Order/FindOrder?orderByField=-vendorPartyId"><i class="fa fa-caret-down"></i></a>
+            </span>
+</div>    </div>
+                        <div><div class="form-title">Customer            <span class="form-order-by">
+                <a href="http://127.0.0.1:18091/apps/marble/Order/FindOrder?orderByField=customerPartyId"><i class="fa fa-caret-up"></i></a>
+                <a href="http://127.0.0.1:18091/apps/marble/Order/FindOrder?orderByField=-customerPartyId"><i class="fa fa-caret-down"></i></a>
+            </span>
+</div>    </div>
+                        <div><div class="form-title">Other Parties</div>    </div>
+                    </th>
+                    <th>
+                        <div><div class="form-title">Ship Method            <span class="form-order-by">
+                <a href="http://127.0.0.1:18091/apps/marble/Order/FindOrder?orderByField=shipmentMethodEnumId"><i class="fa fa-caret-up"></i></a>
+                <a href="http://127.0.0.1:18091/apps/marble/Order/FindOrder?orderByField=-shipmentMethodEnumId"><i class="fa fa-caret-down"></i></a>
+            </span>
+</div>    </div>
+                        <div><div class="form-title">Carrier</div>    </div>
+                        <div><div class="form-title">Shipments</div>    </div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                </tbody>
+        </table></div>
+    
+    <!-- END   form-list[@name=OrderList] -->
+    <!-- END   screen[@location=component://SimpleScreens/screen/SimpleScreens/Order/FindOrder.xml].widgets -->
+
+        </div>
+    <!-- END   screen[@location=component://SimpleScreens/screen/SimpleScreens/Order.xml].widgets -->
+
+    <!-- END   screen[@location=component://MarbleERP/screen/marble.xml].widgets -->
+
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    <!-- BEGIN section[@name=BottomNavSection] -->
+        <!-- BEGIN screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+    <div id="footer" class="bg-dark">
+        <!-- BEGIN render-mode.text[inline][@template=true] -->
+                <div id="apps-footer-content">
+<p><a href="https://www.moqui.org/" target="_blank">Built on Moqui Framework 4.0.0</a></p><p><a href="/vapps/ScreenTree">Site Map</a></p>                </div>        <!-- END   render-mode.text[inline][@template=true] -->
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    <!-- END   screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+
+    <!-- END   section[@name=BottomNavSection] -->
+    <!-- END   screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+        
+    <div id="screen-document-dialog" class="modal dynamic-dialog" aria-hidden="true" style="display: none;" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Documentation</h4>
+                </div>
+                <div class="modal-body" id="screen-document-dialog-body">
+                    <img src="/images/wait_anim_16x16.gif" alt="Loading...">
+                </div>
+                <div class="modal-footer"><button type="button" class="btn btn-primary" data-dismiss="modal">Close</button></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function showScreenDocDialog(docIndex) {
+            $("#screen-document-dialog").modal("show");
+            $("#screen-document-dialog-body").load('http://127.0.0.1:18091/apps/marble/Order/FindOrder/screenDoc?docIndex=' + docIndex);
+        }
+        $("#screen-document-dialog").on("hidden.bs.modal", function () { var jqEl = $("#screen-document-dialog-body"); jqEl.empty(); jqEl.append('<img src="/images/wait_anim_16x16.gif" alt="Loading...">'); });
+    </script>
+
+
+
+
+        
+        
+        
+    
+</body></html>

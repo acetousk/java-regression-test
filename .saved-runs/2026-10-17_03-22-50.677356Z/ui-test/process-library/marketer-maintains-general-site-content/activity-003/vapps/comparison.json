@@ -1,0 +1,18 @@
+{
+  "id": "activity-003",
+  "sourceLine": 18,
+  "headings": [
+    "Marketer Maintains General Site Content",
+    "Story"
+  ],
+  "text": "If there is no existing content on the site and Marketer wants to create a new content-managed page Marketer adds page, selecting the desired decorator screen so that common parts look the same as other pages. Marketer adds content to the page as desired.",
+  "route": null,
+  "dialog": null,
+  "mapping": "entry-candidate",
+  "limitation": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required.",
+  "source": "docs/business-processes/process-library/marketer-maintains-general-site-content.md",
+  "mode": "vapps",
+  "coverage": "blocked",
+  "captures": [],
+  "reason": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required."
+}

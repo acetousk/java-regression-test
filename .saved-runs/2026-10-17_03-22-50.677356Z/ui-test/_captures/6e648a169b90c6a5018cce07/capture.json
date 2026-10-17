@@ -1,0 +1,22 @@
+{
+  "engine": "rust",
+  "mode": "qapps",
+  "route": "marble/Accounting/Invoice/FindInvoice",
+  "dialog": {
+    "label": "Project Client Invoice",
+    "id": "ProjectInvoiceDialog",
+    "route": "Accounting/Invoice/FindInvoice"
+  },
+  "authenticated": true,
+  "errors": [],
+  "failedRequests": [],
+  "httpErrors": [],
+  "consoleErrors": [],
+  "status": "captured",
+  "reused": false,
+  "requestedURL": "http://127.0.0.1:18092/qapps/marble/Accounting/Invoice/FindInvoice",
+  "navigation": "documented-or-candidate-deep-link",
+  "httpStatus": 200,
+  "finalURL": "http://127.0.0.1:18092/qapps/marble/Accounting/Invoice/FindInvoice",
+  "dialogOpened": true
+}

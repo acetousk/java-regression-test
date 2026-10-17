@@ -1,0 +1,109 @@
+{
+  "id": "activity-165",
+  "sourceLine": 541,
+  "headings": [
+    "Initial Setup and Basics",
+    "Sales - Service & Product",
+    "Receive first Payment"
+  ],
+  "text": "- use **New Payment for Invoice** dialog",
+  "route": "marble/Accounting/Invoice/EditInvoice",
+  "dialog": {
+    "label": "New Payment for Invoice",
+    "id": "RecordPaymentContainer",
+    "route": "Accounting/Invoice/EditInvoice"
+  },
+  "mapping": "documented-dialog-label",
+  "limitation": "Read-only screen/dialog evidence only. Prerequisite creation, field input, submissions, integrations and full story transitions are not executed.",
+  "source": "docs/business-processes/walkthroughs/initial-setup-and-basics.md",
+  "mode": "apps",
+  "coverage": "blocked",
+  "captures": [
+    {
+      "engine": "java",
+      "mode": "apps",
+      "route": "marble/Accounting/Invoice/EditInvoice",
+      "dialog": {
+        "label": "New Payment for Invoice",
+        "id": "RecordPaymentContainer",
+        "route": "Accounting/Invoice/EditInvoice"
+      },
+      "authenticated": true,
+      "errors": [
+        "moqui is not defined",
+        "Cannot read properties of undefined (reading 'registerListener')",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "locator.click: Timeout 3500ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'New Payment for Invoice', exact: true }).or(getByRole('link', { name: 'New Payment for Invoice', exact: true })).filter({ visible: true }).first()\u001b[22m\n"
+      ],
+      "failedRequests": [
+        {
+          "url": "http://127.0.0.1:18091/apps/marble/dashboard",
+          "error": "net::ERR_ABORTED"
+        }
+      ],
+      "httpErrors": [],
+      "consoleErrors": [
+        "Refused to apply style from 'http://127.0.0.1:18091/apps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not a supported stylesheet MIME type, and strict MIME checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/apps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/apps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/apps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled."
+      ],
+      "status": "blocked",
+      "reused": false,
+      "requestedURL": "http://127.0.0.1:18091/apps/marble/Accounting/Invoice/EditInvoice",
+      "navigation": "documented-or-candidate-deep-link",
+      "httpStatus": 200,
+      "finalURL": "http://127.0.0.1:18091/apps/marble/Accounting/Invoice/EditInvoice",
+      "directory": ".saved-runs/2026-10-17_03-22-50.677356Z/ui-test/_captures/856c881167579a9b94b5b636"
+    },
+    {
+      "engine": "rust",
+      "mode": "apps",
+      "route": "marble/Accounting/Invoice/EditInvoice",
+      "dialog": {
+        "label": "New Payment for Invoice",
+        "id": "RecordPaymentContainer",
+        "route": "Accounting/Invoice/EditInvoice"
+      },
+      "authenticated": true,
+      "errors": [
+        "locator.click: Timeout 3500ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'New Payment for Invoice', exact: true }).or(getByRole('link', { name: 'New Payment for Invoice', exact: true })).filter({ visible: true }).first()\u001b[22m\n"
+      ],
+      "failedRequests": [],
+      "httpErrors": [],
+      "consoleErrors": [],
+      "status": "blocked",
+      "reused": false,
+      "requestedURL": "http://127.0.0.1:18092/apps/marble/Accounting/Invoice/EditInvoice",
+      "navigation": "documented-or-candidate-deep-link",
+      "httpStatus": 200,
+      "finalURL": "http://127.0.0.1:18092/apps/marble/Accounting/Invoice/EditInvoice",
+      "directory": ".saved-runs/2026-10-17_03-22-50.677356Z/ui-test/_captures/2eadce2d55ef689c86acd34c"
+    }
+  ],
+  "comparison": {
+    "status": "diagnostic-only",
+    "equal": true,
+    "dimensions": [
+      {
+        "width": 1440,
+        "height": 1000
+      },
+      {
+        "width": 1440,
+        "height": 1000
+      }
+    ],
+    "dimensionsEqual": true,
+    "differentPixels": 0,
+    "comparedPixels": 1440000,
+    "differencePercent": 0,
+    "threshold": 0.1
+  }
+}

@@ -1,0 +1,89 @@
+Toggle navigation 
+Find Request
+0 0 0 0
+Marble ERP - Dashboard
+Applications
+Applications
+Applications
+Applications
+ Products - Find Product
+Applications
+Applications
+ Asset - Find Summary
+Applications
+Applications
+ Physical Inventory - Find Physical Inventory
+Applications (Customer)
+Applications (Customer)
+ Returns - Returns (Customer)
+Applications
+Applications
+ Shipping - Dashboard
+Applications (Sales)
+Applications (Sales)
+ Orders - Find Order (Sales)
+Applications (Purchase)
+Applications (Purchase)
+ Orders - Find Order (Purchase)
+Applications
+Application
+Marble ERP
+My Account
+System
+Tools
+ZIRET: Ziziwork Retail & Wholesale
+ZISER: Ziziwork Services
+Marble ERP
+Dashboard
+Quick Search
+Accounting
+Asset
+Catalog
+Customers
+Facility
+Human Resources
+Manufacturing
+Orders
+Parties
+Projects
+Requests
+Returns
+Shipments
+Shipping
+Stores
+Suppliers
+Survey
+Tasks
+Wiki/Content
+Custom Reports
+Report Builder
+Requests New Request
+Find Options
+Columns
+
+Status: Draft, Submitted, Reviewed, In Progress
+
+
+Pri 
+	
+Request Date 
+Due Date 
+	
+Name 
+ID
+	
+Store
+Project
+Facility
+	
+Type 
+	
+Status 
+Resolution 
+	
+Customer
+Assigned To
+
+Built on Moqui Framework 4.0.0
+
+Site Map

@@ -1,0 +1,31 @@
+Application 
+Marble ERP 
+Shipping 
+Picklists 
+Picklists
+ 0  0  0  0
+ Organization
+ New Picklist Bulk Create Picklists
+ Find Options
+ Columns
+
+Status: In Planning, Approved, In Progress, On Hold 
+
+Picklist
+Start Date
+	
+Status
+Facility
+	
+Store
+Owner Org
+	
+People
+	
+Equipment
+Shipments
+	
+
+Built on Moqui Framework 0.1.0
+
+Site Map

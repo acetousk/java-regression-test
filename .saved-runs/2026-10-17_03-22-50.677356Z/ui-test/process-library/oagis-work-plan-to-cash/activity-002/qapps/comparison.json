@@ -1,0 +1,18 @@
+{
+  "id": "activity-002",
+  "sourceLine": 14,
+  "headings": [
+    "OAGIS Work Plan to Cash",
+    "Introduction"
+  ],
+  "text": "This process covers project work including billable time and expenses. OAGIS doesn't have many scenarios to cover this literally, so it is mostly an adaptation of similar manufacturing scenarios.",
+  "route": null,
+  "dialog": null,
+  "mapping": "entry-candidate",
+  "limitation": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required.",
+  "source": "docs/business-processes/process-library/oagis-work-plan-to-cash.md",
+  "mode": "qapps",
+  "coverage": "blocked",
+  "captures": [],
+  "reason": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required."
+}

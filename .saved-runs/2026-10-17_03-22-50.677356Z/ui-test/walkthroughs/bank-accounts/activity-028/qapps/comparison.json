@@ -1,0 +1,120 @@
+{
+  "id": "activity-028",
+  "sourceLine": 102,
+  "headings": [
+    "Bank Accounts",
+    "Generate NACHA File"
+  ],
+  "text": "3. use the **Generate NACHA File** dialog to generate a NACHA file, you can use the default options (no From Date or Thru Date) to include all outstanding ACH payments setup with the guidelines above",
+  "route": "marble/Party/PaymentMethod/PaymentMethodFiles",
+  "dialog": {
+    "label": "Generate NACHA File",
+    "id": "GenerateNachaFileDialog",
+    "route": "Party/PaymentMethod/PaymentMethodFiles"
+  },
+  "mapping": "documented-dialog-label",
+  "limitation": "Read-only screen/dialog evidence only. Prerequisite creation, field input, submissions, integrations and full story transitions are not executed.",
+  "source": "docs/business-processes/walkthroughs/bank-accounts.md",
+  "mode": "qapps",
+  "coverage": "blocked",
+  "captures": [
+    {
+      "engine": "java",
+      "mode": "qapps",
+      "route": "marble/Party/PaymentMethod/PaymentMethodFiles",
+      "dialog": {
+        "label": "Generate NACHA File",
+        "id": "GenerateNachaFileDialog",
+        "route": "Party/PaymentMethod/PaymentMethodFiles"
+      },
+      "authenticated": true,
+      "errors": [
+        "$ is not defined",
+        "Vue is not defined",
+        "$ is not defined",
+        "Vue is not defined",
+        "locator.click: Timeout 3500ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Generate NACHA File', exact: true }).or(getByRole('link', { name: 'Generate NACHA File', exact: true })).filter({ visible: true }).first()\u001b[22m\n"
+      ],
+      "failedRequests": [
+        {
+          "url": "http://127.0.0.1:18091/qapps/marble/dashboard",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:18091/qapps/marble/Party/PaymentMethod/PaymentMethodFiles",
+          "error": "net::ERR_ABORTED"
+        }
+      ],
+      "httpErrors": [],
+      "consoleErrors": [
+        "Refused to apply style from 'http://127.0.0.1:18091/qapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not a supported stylesheet MIME type, and strict MIME checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to apply style from 'http://127.0.0.1:18091/qapps/marble/Party/PaymentMethod/PaymentMethodFiles#?v=1a147e2' because its MIME type ('text/html') is not a supported stylesheet MIME type, and strict MIME checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/Party/PaymentMethod/PaymentMethodFiles#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/Party/PaymentMethod/PaymentMethodFiles#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/Party/PaymentMethod/PaymentMethodFiles#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/Party/PaymentMethod/PaymentMethodFiles#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled."
+      ],
+      "status": "blocked",
+      "reused": false,
+      "requestedURL": "http://127.0.0.1:18091/qapps/marble/Party/PaymentMethod/PaymentMethodFiles",
+      "navigation": "documented-or-candidate-deep-link",
+      "httpStatus": 200,
+      "finalURL": "http://127.0.0.1:18091/qapps/marble/Party/PaymentMethod/PaymentMethodFiles",
+      "directory": ".saved-runs/2026-10-17_03-22-50.677356Z/ui-test/_captures/1b436791d5d373b3945103cd"
+    },
+    {
+      "engine": "rust",
+      "mode": "qapps",
+      "route": "marble/Party/PaymentMethod/PaymentMethodFiles",
+      "dialog": {
+        "label": "Generate NACHA File",
+        "id": "GenerateNachaFileDialog",
+        "route": "Party/PaymentMethod/PaymentMethodFiles"
+      },
+      "authenticated": true,
+      "errors": [
+        "locator.click: Timeout 3500ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Generate NACHA File', exact: true }).or(getByRole('link', { name: 'Generate NACHA File', exact: true })).filter({ visible: true }).first()\u001b[22m\n"
+      ],
+      "failedRequests": [],
+      "httpErrors": [
+        {
+          "url": "http://127.0.0.1:18092/apps/marble/Party/PaymentMethod/actions",
+          "status": 400
+        }
+      ],
+      "consoleErrors": [
+        "Failed to load resource: the server responded with a status of 400 (Bad Request)"
+      ],
+      "status": "blocked",
+      "reused": false,
+      "requestedURL": "http://127.0.0.1:18092/qapps/marble/Party/PaymentMethod/PaymentMethodFiles",
+      "navigation": "documented-or-candidate-deep-link",
+      "httpStatus": 200,
+      "finalURL": "http://127.0.0.1:18092/qapps/marble/Party/PaymentMethod/PaymentMethodFiles",
+      "directory": ".saved-runs/2026-10-17_03-22-50.677356Z/ui-test/_captures/1227d1d67f2e644eff521ab5"
+    }
+  ],
+  "comparison": {
+    "status": "diagnostic-only",
+    "equal": false,
+    "dimensions": [
+      {
+        "width": 1440,
+        "height": 1000
+      },
+      {
+        "width": 1440,
+        "height": 1000
+      }
+    ],
+    "dimensionsEqual": true,
+    "differentPixels": 139052,
+    "comparedPixels": 1440000,
+    "differencePercent": 9.65638888888889,
+    "threshold": 0.1
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "engine": "rust",
+  "mode": "qapps",
+  "route": "marble/Task/FindTask",
+  "dialog": {
+    "label": "New Task",
+    "id": "NewTaskContainer",
+    "route": "Task/FindTask"
+  },
+  "authenticated": true,
+  "errors": [],
+  "failedRequests": [],
+  "httpErrors": [],
+  "consoleErrors": [],
+  "status": "captured",
+  "reused": false,
+  "requestedURL": "http://127.0.0.1:18092/qapps/marble/Task/FindTask",
+  "navigation": "dashboard-link",
+  "finalURL": "http://127.0.0.1:18092/qapps/marble/Task/FindTask",
+  "dialogOpened": true
+}

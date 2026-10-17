@@ -1,0 +1,96 @@
+Toggle navigation 
+Find Summary
+0 0 0 0
+Marble ERP - Dashboard
+Applications
+Applications
+Applications
+Applications
+ Physical Inventory - Find Physical Inventory
+Applications (Customer)
+Applications (Customer)
+ Returns - Returns (Customer)
+Applications
+Applications
+ Shipping - Dashboard
+Applications (Sales)
+Applications (Sales)
+ Orders - Find Order (Sales)
+Applications (Purchase)
+Applications (Purchase)
+ Orders - Find Order (Purchase)
+Applications
+Applications
+ Customers - Find Customer
+Applications (Receivable)
+Applications (Receivable)
+ Invoices - Find Invoice (Receivable)
+Applications
+Application
+Marble ERP
+My Account
+System
+Tools
+ZIRET: Ziziwork Retail & Wholesale
+ZISER: Ziziwork Services
+Marble ERP
+Dashboard
+Quick Search
+Accounting
+Asset
+Catalog
+Customers
+Facility
+Human Resources
+Manufacturing
+Orders
+Parties
+Projects
+Requests
+Returns
+Shipments
+Shipping
+Stores
+Suppliers
+Survey
+Tasks
+Wiki/Content
+Custom Reports
+Report Builder
+Asset
+Dashboard
+Physical Inventory
+Containers
+Pools
+Asset
+Asset Find Individual Assets Move Asset Containers Lots Pools On Hand Report Receive Direct Physical Diff
+Find Options
+Columns
+CSV
+
+
+
+Assets
+	
+Product ID 
+Product Name 
+Asset Class 
+	
+Status 
+Owner Party
+Asset Pool
+	
+Facility 
+Location 
+Lot 
+	
+Available 
+On Hand 
+	
+PhI Qty
+	
+Move
+
+Built on Moqui Framework 4.0.0
+
+Site Map

@@ -1,0 +1,23 @@
+{
+  "engine": "rust",
+  "mode": "qapps",
+  "route": "marble/Accounting/Invoice/EditInvoice",
+  "dialog": {
+    "label": "New Payment for Invoice",
+    "id": "RecordPaymentContainer",
+    "route": "Accounting/Invoice/EditInvoice"
+  },
+  "authenticated": true,
+  "errors": [
+    "locator.click: Timeout 3500ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'New Payment for Invoice', exact: true }).or(getByRole('link', { name: 'New Payment for Invoice', exact: true })).filter({ visible: true }).first()\u001b[22m\n"
+  ],
+  "failedRequests": [],
+  "httpErrors": [],
+  "consoleErrors": [],
+  "status": "blocked",
+  "reused": false,
+  "requestedURL": "http://127.0.0.1:18092/qapps/marble/Accounting/Invoice/EditInvoice",
+  "navigation": "documented-or-candidate-deep-link",
+  "httpStatus": 200,
+  "finalURL": "http://127.0.0.1:18092/qapps/marble/Accounting/Invoice/EditInvoice"
+}

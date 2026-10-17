@@ -1,0 +1,89 @@
+Toggle navigation 
+Find Order
+Order Roles and Parts
+Order Status Reference
+0 0 0 0
+Marble ERP - Dashboard
+Applications
+Applications
+Applications
+Applications
+ Customers - Find Customer
+Applications (Receivable)
+Applications (Receivable)
+ Invoices - Find Invoice (Receivable)
+Applications
+Applications
+ Payments - Find Payment
+Applications (Payable)
+Applications (Payable)
+ Invoices - Find Invoice (Payable)
+Applications
+Application
+Marble ERP
+My Account
+System
+Tools
+ZIRET: Ziziwork Retail & Wholesale
+ZISER: Ziziwork Services
+Marble ERP
+Dashboard
+Quick Search
+Accounting
+Asset
+Catalog
+Customers
+Facility
+Human Resources
+Manufacturing
+Orders
+Parties
+Projects
+Requests
+Returns
+Shipments
+Shipping
+Stores
+Suppliers
+Survey
+Tasks
+Wiki/Content
+Custom Reports
+Report Builder
+Orders
+Create Sales Order Sales Analysis Report Sales Summary Charts Issued and Invoiced Report
+Create Purchase Order
+Find Options
+Columns
+CSV
+
+Order Type: Purchase Entry Date: -3 30 Days (2026-07-18 to 2026-10-16) Status: Quote Proposed by Vendor, Quote Requested by Customer, Placed by Customer, Approved, Held
+
+
+Order 
+Their Order 
+Source 
+	
+Status 
+Priority 
+Total 
+	
+Entry Date 
+Placed Date 
+Ship Before Date 
+	
+Facility 
+Store 
+Shipping Instructions 
+	
+Vendor 
+Customer 
+Other Parties
+	
+Ship Method 
+Carrier
+Shipments
+
+Built on Moqui Framework 4.0.0
+
+Site Map

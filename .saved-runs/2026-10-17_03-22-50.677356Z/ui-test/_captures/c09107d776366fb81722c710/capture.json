@@ -1,0 +1,21 @@
+{
+  "engine": "rust",
+  "mode": "qapps",
+  "route": "marble/ProductStore/FindProductStore",
+  "dialog": {
+    "label": "New Store",
+    "id": "NewStoreDialog",
+    "route": "ProductStore/FindProductStore"
+  },
+  "authenticated": true,
+  "errors": [],
+  "failedRequests": [],
+  "httpErrors": [],
+  "consoleErrors": [],
+  "status": "captured",
+  "reused": false,
+  "requestedURL": "http://127.0.0.1:18092/qapps/marble/ProductStore/FindProductStore",
+  "navigation": "dashboard-link",
+  "finalURL": "http://127.0.0.1:18092/qapps/marble/ProductStore/FindProductStore",
+  "dialogOpened": true
+}

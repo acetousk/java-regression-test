@@ -1,0 +1,90 @@
+{
+  "id": "activity-006",
+  "sourceLine": 38,
+  "headings": [
+    "Story of Online Retail Company"
+  ],
+  "text": "When inventory is not sufficient in a pick location [Inventory Mover does Stock Move](https://moqui.org/docs/mantle/Business%20Process%20Library/Inventory%20Mover%20does%20Stock%20Move). \n[Company Fulfills Sales Order](https://moqui.org/docs/mantle/Business%20Process%20Library/Company%20Fulfills%20Sales%20Order). [Accountant Sends Invoice and Receives Payment](https://moqui.org/docs/mantle/Business%20Process%20Library/Accountant%20Sends%20Invoice%20and%20Receives%20Payment). \nSometimes special cases come up, like [Carrier Does Not Deliver Shipment to Customer](https://moqui.org/docs/mantle/Business%20Process%20Library/Carrier%20Does%20Not%20Deliver%20Shipment%20to%20Customer) \nand [Carrier Returns Undeliverable Shipment to Company](https://moqui.org/docs/mantle/Business%20Process%20Library/Carrier%20Returns%20Undeliverable%20Shipment%20to%20Company).",
+  "route": "marble/dashboard",
+  "dialog": null,
+  "mapping": "entry-candidate",
+  "limitation": "Read-only screen/dialog evidence only. Prerequisite creation, field input, submissions, integrations and full story transitions are not executed.",
+  "source": "docs/business-processes/process-library/story-of-online-retail-company.md",
+  "mode": "vapps",
+  "coverage": "blocked",
+  "captures": [
+    {
+      "engine": "java",
+      "mode": "vapps",
+      "route": "marble/dashboard",
+      "dialog": null,
+      "authenticated": true,
+      "errors": [
+        "moqui is not defined"
+      ],
+      "failedRequests": [
+        {
+          "url": "http://127.0.0.1:18091/vapps/marble/dashboard",
+          "error": "net::ERR_ABORTED"
+        }
+      ],
+      "httpErrors": [],
+      "consoleErrors": [
+        "Refused to apply style from 'http://127.0.0.1:18091/vapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not a supported stylesheet MIME type, and strict MIME checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/vapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/vapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled."
+      ],
+      "status": "blocked",
+      "reused": true,
+      "requestedURL": "http://127.0.0.1:18091/vapps/marble/dashboard",
+      "navigation": "dashboard-link",
+      "finalURL": "http://127.0.0.1:18091/vapps/marble/dashboard#",
+      "directory": ".saved-runs/2026-10-17_03-22-50.677356Z/ui-test/_captures/5dd3bdc5b10d1834d0cb2d6e"
+    },
+    {
+      "engine": "rust",
+      "mode": "vapps",
+      "route": "marble/dashboard",
+      "dialog": null,
+      "authenticated": true,
+      "errors": [
+        "page.waitForURL: Timeout 5000ms exceeded.\n=========================== logs ===========================\nwaiting for navigation until \"load\"\n============================================================"
+      ],
+      "failedRequests": [],
+      "httpErrors": [
+        {
+          "url": "http://127.0.0.1:18092/vapps/marble/dashboard",
+          "status": 404
+        }
+      ],
+      "consoleErrors": [
+        "Failed to load resource: the server responded with a status of 404 (Not Found)"
+      ],
+      "status": "blocked",
+      "reused": true,
+      "requestedURL": "http://127.0.0.1:18092/vapps/marble/dashboard",
+      "navigation": "dashboard-link",
+      "finalURL": "about:blank",
+      "directory": ".saved-runs/2026-10-17_03-22-50.677356Z/ui-test/_captures/1786dd3421e3ee2628f8a588"
+    }
+  ],
+  "comparison": {
+    "status": "diagnostic-only",
+    "equal": false,
+    "dimensions": [
+      {
+        "width": 1440,
+        "height": 1009
+      },
+      {
+        "width": 1440,
+        "height": 1000
+      }
+    ],
+    "dimensionsEqual": false,
+    "differentPixels": 143440,
+    "comparedPixels": 1452960,
+    "differencePercent": 9.872260764233014,
+    "threshold": 0.1
+  }
+}

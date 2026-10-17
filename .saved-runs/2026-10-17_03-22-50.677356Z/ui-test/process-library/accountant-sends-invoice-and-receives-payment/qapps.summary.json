@@ -1,0 +1,57 @@
+{
+  "source": "docs/business-processes/process-library/accountant-sends-invoice-and-receives-payment.md",
+  "mode": "qapps",
+  "activities": [
+    {
+      "id": "activity-001",
+      "sourceLine": 14,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150006,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.417083333333334,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/accountant-sends-invoice-and-receives-payment/activity-001/qapps/comparison.json"
+    },
+    {
+      "id": "activity-002",
+      "sourceLine": 18,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150006,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.417083333333334,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/accountant-sends-invoice-and-receives-payment/activity-002/qapps/comparison.json"
+    }
+  ],
+  "note": "Evidence sweep only; no complete business-process execution is claimed."
+}

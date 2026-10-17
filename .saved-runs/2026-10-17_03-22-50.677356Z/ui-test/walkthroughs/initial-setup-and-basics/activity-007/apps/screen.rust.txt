@@ -1,0 +1,101 @@
+Application 
+Marble ERP 
+Dashboard
+ 0  0  0  0
+ Organization
+Document Type
+Any Type
+Asset
+Communication Event
+Event
+Facility
+Invoice
+Order
+Party
+Product
+Project
+Request
+Shipment
+Task
+Wiki Page
+Query String
+Search
+Sales
+Placed 0
+Approved 0
+Held 0
+Requests
+Submitted 0
+In Progress 0
+
+ 
+
+Customers
+Marketing
+ 
+Customer Requests 
+ 
+Sales Orders & Quotes 
+ 
+Sales Shipments
+Shipping - Pick & Pack
+ 
+Receivable Invoices 
+Customer Credit Memos 
+Customer Payments 
+ 
+Sales Returns & RMA
+Customer Return Shipments
+Payable Return Invoices 
+Outgoing Refund Payments 
+
+ 
+
+Internal
+HR - Employees
+ 
+Requests
+ 
+Products - Catalog
+ 
+Assets - Inventory
+Manufacturing
+ 
+Projects
+Tasks
+ 
+All Parties
+Facilities
+Stores
+Content: Wiki - Blogs
+Surveys
+ 
+Accounting - Reports
+Custom Reports - Report Builder
+
+ 
+
+Suppliers
+
+ 
+
+ 
+Purchase Requests 
+ 
+Purchase Orders & Quotes
+ 
+ 
+Purchase Shipments 
+ 
+Payable Invoices 
+Supplier Credit Memos 
+Supplier Payments 
+ 
+Purchase Returns
+Supplier Return Shipments
+Receivable Return Invoices 
+Incoming Refund Payments 
+
+Built on Moqui Framework 0.1.0
+
+Site Map

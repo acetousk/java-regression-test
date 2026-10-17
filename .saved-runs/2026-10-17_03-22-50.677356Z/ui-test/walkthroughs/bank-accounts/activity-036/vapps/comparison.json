@@ -1,0 +1,107 @@
+{
+  "id": "activity-036",
+  "sourceLine": 134,
+  "headings": [
+    "Bank Accounts",
+    "Import OFX/QFX Transactions File"
+  ],
+  "text": "On a technical note an automatic import service is supported using the System Message integration functionality in Moqui framework. The consume service to use is: *mantle.account.OfxServices.consume#OfxV1SystemMessage*. Using System Message based integrations different transports are supported including SFTP using the *org.moqui.sftp.SftpMessageServices.poll#SystemMessageSftp* service. For more details on configuration see the demo data for the *DemoZiretOfx* SystemMessageType and the *DemoZiretSftp_poll_OFX* ServiceJob.",
+  "route": "marble/Party/PaymentMethod/PaymentMethodTrans",
+  "dialog": null,
+  "mapping": "entry-candidate",
+  "limitation": "Read-only screen/dialog evidence only. Prerequisite creation, field input, submissions, integrations and full story transitions are not executed.",
+  "source": "docs/business-processes/walkthroughs/bank-accounts.md",
+  "mode": "vapps",
+  "coverage": "blocked",
+  "captures": [
+    {
+      "engine": "java",
+      "mode": "vapps",
+      "route": "marble/Party/PaymentMethod/PaymentMethodTrans",
+      "dialog": null,
+      "authenticated": true,
+      "errors": [
+        "moqui is not defined",
+        "moqui is not defined"
+      ],
+      "failedRequests": [
+        {
+          "url": "http://127.0.0.1:18091/vapps/marble/dashboard",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:18091/vapps/marble/Party/PaymentMethod/PaymentMethodTrans",
+          "error": "net::ERR_ABORTED"
+        }
+      ],
+      "httpErrors": [],
+      "consoleErrors": [
+        "Refused to apply style from 'http://127.0.0.1:18091/vapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not a supported stylesheet MIME type, and strict MIME checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/vapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/vapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to apply style from 'http://127.0.0.1:18091/vapps/marble/Party/PaymentMethod/PaymentMethodTrans#?v=1a147e2' because its MIME type ('text/html') is not a supported stylesheet MIME type, and strict MIME checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/vapps/marble/Party/PaymentMethod/PaymentMethodTrans#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/vapps/marble/Party/PaymentMethod/PaymentMethodTrans#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled."
+      ],
+      "status": "blocked",
+      "reused": false,
+      "requestedURL": "http://127.0.0.1:18091/vapps/marble/Party/PaymentMethod/PaymentMethodTrans",
+      "navigation": "documented-or-candidate-deep-link",
+      "httpStatus": 200,
+      "finalURL": "http://127.0.0.1:18091/vapps/marble/Party/PaymentMethod/PaymentMethodTrans",
+      "directory": ".saved-runs/2026-10-17_03-22-50.677356Z/ui-test/_captures/678d8e9afc9055ae6bc3f4ab"
+    },
+    {
+      "engine": "rust",
+      "mode": "vapps",
+      "route": "marble/Party/PaymentMethod/PaymentMethodTrans",
+      "dialog": null,
+      "authenticated": true,
+      "errors": [
+        "HTTP 404",
+        "One or more HTTP resources failed (see httpErrors)"
+      ],
+      "failedRequests": [],
+      "httpErrors": [
+        {
+          "url": "http://127.0.0.1:18092/vapps/marble/dashboard",
+          "status": 404
+        },
+        {
+          "url": "http://127.0.0.1:18092/vapps/marble/Party/PaymentMethod/PaymentMethodTrans",
+          "status": 404
+        }
+      ],
+      "consoleErrors": [
+        "Failed to load resource: the server responded with a status of 404 (Not Found)",
+        "Failed to load resource: the server responded with a status of 404 (Not Found)"
+      ],
+      "status": "blocked",
+      "reused": false,
+      "requestedURL": "http://127.0.0.1:18092/vapps/marble/Party/PaymentMethod/PaymentMethodTrans",
+      "navigation": "documented-or-candidate-deep-link",
+      "httpStatus": 404,
+      "finalURL": "http://127.0.0.1:18092/vapps/marble/Party/PaymentMethod/PaymentMethodTrans",
+      "directory": ".saved-runs/2026-10-17_03-22-50.677356Z/ui-test/_captures/800c375bbb93df9571495117"
+    }
+  ],
+  "comparison": {
+    "status": "diagnostic-only",
+    "equal": false,
+    "dimensions": [
+      {
+        "width": 1440,
+        "height": 1009
+      },
+      {
+        "width": 1440,
+        "height": 1000
+      }
+    ],
+    "dimensionsEqual": false,
+    "differentPixels": 155241,
+    "comparedPixels": 1452960,
+    "differencePercent": 10.684464816650149,
+    "threshold": 0.1
+  }
+}

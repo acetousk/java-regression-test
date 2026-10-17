@@ -1,0 +1,115 @@
+{
+  "source": "docs/business-processes/process-library/placing-customer-places-a-sales-order-online-checkout.md",
+  "mode": "vapps",
+  "activities": [
+    {
+      "id": "activity-001",
+      "sourceLine": 8,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/placing-customer-places-a-sales-order-online-checkout/activity-001/vapps/comparison.json"
+    },
+    {
+      "id": "activity-002",
+      "sourceLine": 13,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/placing-customer-places-a-sales-order-online-checkout/activity-002/vapps/comparison.json"
+    },
+    {
+      "id": "activity-003",
+      "sourceLine": 17,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/placing-customer-places-a-sales-order-online-checkout/activity-003/vapps/comparison.json"
+    },
+    {
+      "id": "activity-004",
+      "sourceLine": 20,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/placing-customer-places-a-sales-order-online-checkout/activity-004/vapps/comparison.json"
+    },
+    {
+      "id": "activity-005",
+      "sourceLine": 23,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/placing-customer-places-a-sales-order-online-checkout/activity-005/vapps/comparison.json"
+    },
+    {
+      "id": "activity-006",
+      "sourceLine": 26,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/placing-customer-places-a-sales-order-online-checkout/activity-006/vapps/comparison.json"
+    },
+    {
+      "id": "activity-007",
+      "sourceLine": 29,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/placing-customer-places-a-sales-order-online-checkout/activity-007/vapps/comparison.json"
+    },
+    {
+      "id": "activity-008",
+      "sourceLine": 32,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/placing-customer-places-a-sales-order-online-checkout/activity-008/vapps/comparison.json"
+    },
+    {
+      "id": "activity-009",
+      "sourceLine": 36,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/placing-customer-places-a-sales-order-online-checkout/activity-009/vapps/comparison.json"
+    },
+    {
+      "id": "activity-010",
+      "sourceLine": 40,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/placing-customer-places-a-sales-order-online-checkout/activity-010/vapps/comparison.json"
+    },
+    {
+      "id": "activity-011",
+      "sourceLine": 44,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/placing-customer-places-a-sales-order-online-checkout/activity-011/vapps/comparison.json"
+    },
+    {
+      "id": "activity-012",
+      "sourceLine": 48,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/placing-customer-places-a-sales-order-online-checkout/activity-012/vapps/comparison.json"
+    },
+    {
+      "id": "activity-013",
+      "sourceLine": 51,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/placing-customer-places-a-sales-order-online-checkout/activity-013/vapps/comparison.json"
+    },
+    {
+      "id": "activity-014",
+      "sourceLine": 54,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/placing-customer-places-a-sales-order-online-checkout/activity-014/vapps/comparison.json"
+    },
+    {
+      "id": "activity-015",
+      "sourceLine": 57,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/placing-customer-places-a-sales-order-online-checkout/activity-015/vapps/comparison.json"
+    },
+    {
+      "id": "activity-016",
+      "sourceLine": 60,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/placing-customer-places-a-sales-order-online-checkout/activity-016/vapps/comparison.json"
+    },
+    {
+      "id": "activity-017",
+      "sourceLine": 64,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/placing-customer-places-a-sales-order-online-checkout/activity-017/vapps/comparison.json"
+    },
+    {
+      "id": "activity-018",
+      "sourceLine": 68,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/placing-customer-places-a-sales-order-online-checkout/activity-018/vapps/comparison.json"
+    }
+  ],
+  "note": "Evidence sweep only; no complete business-process execution is claimed."
+}

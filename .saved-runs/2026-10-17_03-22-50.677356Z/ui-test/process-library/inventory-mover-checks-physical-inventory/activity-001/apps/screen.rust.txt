@@ -1,0 +1,26 @@
+Application 
+Marble ERP 
+Asset 
+Physical Inventory 
+Find Physical Inventory
+ 0  0  0  0
+ Organization
+ Find Options
+
+Date: 30d -3 
+
+Phys. Inv. ID
+	
+Date
+	
+Status
+	
+Facility
+	
+Assets
+	
+Comments
+
+Built on Moqui Framework 0.1.0
+
+Site Map

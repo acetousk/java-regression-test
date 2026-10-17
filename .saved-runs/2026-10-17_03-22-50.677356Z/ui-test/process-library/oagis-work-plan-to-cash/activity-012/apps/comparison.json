@@ -1,0 +1,18 @@
+{
+  "id": "activity-012",
+  "sourceLine": 59,
+  "headings": [
+    "OAGIS Work Plan to Cash",
+    "Process Story"
+  ],
+  "text": "Time Collection sends GetPersonnel to Work Planning and Work Planning sends ShowPersonnel to Time Collection.\nTime Collection sends UpdateEmployeeWorkTime to Work Planning and Work Planning sends RespondEmployeeWorkTime to Time Collection.",
+  "route": null,
+  "dialog": null,
+  "mapping": "entry-candidate",
+  "limitation": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required.",
+  "source": "docs/business-processes/process-library/oagis-work-plan-to-cash.md",
+  "mode": "apps",
+  "coverage": "blocked",
+  "captures": [],
+  "reason": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required."
+}

@@ -1273,6 +1273,14 @@ COMMIT;
         state.catalog = [record for record in state.catalog if 'sequence' not in json.loads(record)] + sequences
 
 
+def run_visual_tests(args, evidence):
+    subprocess.run(
+        ["npm", "run", "test:visual", "--", args.visual_spec], cwd=ROOT / "ui-test",
+        env={**os.environ, "MOQUI_RUN_DIR": str(evidence),
+             "JAVA_BASE_URL": f"http://127.0.0.1:{args.java_port}",
+             "RUST_BASE_URL": f"http://127.0.0.1:{args.rust_port}"}, check=True)
+
+
 def boot_and_stop(args):
     # Reject occupied HTTP ports so another application's listener cannot pass readiness.
     for port in (args.java_port, args.rust_port):
@@ -1439,6 +1447,10 @@ def boot_and_stop(args):
                        failure_check=coordinator.check_health if coordinator else None)
         started = True
         verification["servers_started"] = True
+        if getattr(args, "skip_step_4", False):
+            print("All demo data loaded; running visual tests before shutdown (Step 4 skipped).", flush=True)
+            run_visual_tests(args, evidence)
+            verification["visual_tests_passed"] = True
         print("Both engines started; stopping both processes.", flush=True)
     finally:
         shutdown = stop_engines(processes, {name: evidence / f"{name}-boot.log" for name in processes},
@@ -1465,17 +1477,21 @@ def boot_and_stop(args):
                 if any(result["errors"] for result in shutdown.values()):
                     raise RuntimeError(f"Graceful shutdown verification failed; inspect {evidence / 'shutdown.json'}")
                 print("Both engines shut down gracefully and flushed artifact bins.", flush=True)
-                # Step 4: Snapshot and compare only after verified graceful shutdown.
-                for name, container in containers.items():
-                    capture_snapshot(container, evidence / f"{name}-snapshot.json")
-                verification["final_databases_equal"] = snapshot_compare(
-                    evidence / "java-snapshot.json", evidence / "rust-snapshot.json", evidence,
-                    rust_only_manifest=(RUST_ONLY_SOURCES if args.exclude_rust_only else None),
-                    source_root=args.source_root, approved_differences=approved)
-                if not verification["final_databases_equal"]:
-                    raise SystemExit(f"Startup snapshots differ; inspect {evidence / 'comparison.json'}")
-                verification["passed"] = True
-                print("Startup snapshots match after approved differences (not a complete logical-equivalence proof).", flush=True)
+                if getattr(args, "skip_step_4", False):
+                    verification["step_4_skipped"] = True
+                    verification["passed"] = verification.get("visual_tests_passed", False)
+                else:
+                    # Step 4: Snapshot and compare only after verified graceful shutdown.
+                    for name, container in containers.items():
+                        capture_snapshot(container, evidence / f"{name}-snapshot.json")
+                    verification["final_databases_equal"] = snapshot_compare(
+                        evidence / "java-snapshot.json", evidence / "rust-snapshot.json", evidence,
+                        rust_only_manifest=(RUST_ONLY_SOURCES if args.exclude_rust_only else None),
+                        source_root=args.source_root, approved_differences=approved)
+                    if not verification["final_databases_equal"]:
+                        raise SystemExit(f"Startup snapshots differ; inspect {evidence / 'comparison.json'}")
+                    verification["passed"] = True
+                    print("Startup snapshots match after approved differences (not a complete logical-equivalence proof).", flush=True)
         finally:
             (evidence / "verification.json").write_text(json.dumps(verification, indent=2) + "\n")
             for name, container in containers.items():
@@ -1495,6 +1511,10 @@ def main():
     parser.add_argument("--rust-checkout", type=Path, help="Use an existing private Rust worktree (not reset)")
     parser.add_argument("--deterministic", action="store_true",
                         help="Pair transaction hooks and compare committed databases after every transaction")
+    parser.add_argument("--skip-step-4", action="store_true",
+                        help="Temporary visual mode: load all demo data, run UI tests, skip database comparison")
+    parser.add_argument("--visual-spec", default=".visual.spec.js",
+                        help="Visual spec filter for --skip-step-4 (default: all business-process specs)")
     parser.add_argument("--differences", type=Path, default=ROOT / "approved-differences.json",
                         help="Reviewed differences JSON; copied into the run evidence")
     parser.add_argument("--java-port", type=int, default=8080)
@@ -1509,6 +1529,8 @@ def main():
     parser.add_argument("--source-root", type=Path, default=ROOT,
                         help="Parent of mr-moqui source checkout for Rust only source attribution")
     args = parser.parse_args()
+    if args.skip_step_4 and args.deterministic:
+        parser.error("--skip-step-4 cannot be combined with --deterministic")
     args.approved_differences = json.loads(args.differences.read_text())
     if not isinstance(args.approved_differences, dict) or not all(
             key in args.approved_differences for key in ("theme_resources", "full_text_indexes")):

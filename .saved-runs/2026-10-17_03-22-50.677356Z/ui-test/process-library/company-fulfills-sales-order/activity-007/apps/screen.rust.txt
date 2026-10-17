@@ -1,0 +1,26 @@
+Application 
+Marble ERP 
+Shipping 
+Dashboard
+ 0  0  0  0
+ Organization
+Picklists Pick Location Moves Move Assets
+Shipment ID
+Pack Shipment
+Facility
+	
+Ship Method
+	
+Carrier
+	
+Appr Order Qty
+	
+Not Avail
+	
+Not Issued
+	
+Pick Loc Qty
+
+Built on Moqui Framework 0.1.0
+
+Site Map

@@ -1,0 +1,19 @@
+{
+  "id": "activity-054",
+  "sourceLine": 231,
+  "headings": [
+    "OAGIS Order to Cash",
+    "Process Story",
+    "Shipping"
+  ],
+  "text": "Customer sends NotifyReceiveDelivery to Supplier and Supplier sends ConfirmBOD to Customer.",
+  "route": null,
+  "dialog": null,
+  "mapping": "entry-candidate",
+  "limitation": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required.",
+  "source": "docs/business-processes/process-library/oagis-order-to-cash.md",
+  "mode": "vapps",
+  "coverage": "blocked",
+  "captures": [],
+  "reason": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required."
+}

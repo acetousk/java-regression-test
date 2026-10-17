@@ -1,0 +1,19 @@
+{
+  "id": "activity-058",
+  "sourceLine": 253,
+  "headings": [
+    "OAGIS Order to Cash",
+    "Process Story",
+    "Customer AP"
+  ],
+  "text": "Customer Purchasing sends LoadPayable to AP and AP sends ConfirmBOD to Purchasing. AP or Purchasing sends PostJournalEntry to GL and GL sends ConfirmBOD back.",
+  "route": null,
+  "dialog": null,
+  "mapping": "entry-candidate",
+  "limitation": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required.",
+  "source": "docs/business-processes/process-library/oagis-order-to-cash.md",
+  "mode": "apps",
+  "coverage": "blocked",
+  "captures": [],
+  "reason": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required."
+}

@@ -1,0 +1,18 @@
+{
+  "id": "activity-004",
+  "sourceLine": 24,
+  "headings": [
+    "Customer Reviews Order History and Status",
+    "Story"
+  ],
+  "text": "Customer reviews digital downloads available based on orders approved or complete, including Order ID, Product Name, Digital Content Name, Content Description, and option to download the content. Customer requests content download and receives purchased content file.",
+  "route": null,
+  "dialog": null,
+  "mapping": "entry-candidate",
+  "limitation": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required.",
+  "source": "docs/business-processes/process-library/customer-reviews-order-history-and-status.md",
+  "mode": "apps",
+  "coverage": "blocked",
+  "captures": [],
+  "reason": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required."
+}

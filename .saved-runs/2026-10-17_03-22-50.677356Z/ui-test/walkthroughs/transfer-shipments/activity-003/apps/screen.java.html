@@ -1,0 +1,2488 @@
+<!DOCTYPE html><html><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    
+    <title>Shipments - Find Shipments</title>
+    <link rel="apple-touch-icon" href="/MoquiLogo100.png">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="http://127.0.0.1:18091/css/webroot-layout.css?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="http://127.0.0.1:18091/css/webroot-theme.css?v=1a147e2" rel="stylesheet" type="text/css">
+    <script src="#?v=1a147e2" type="text/javascript"></script>
+    <script src="#?v=1a147e2" type="text/javascript"></script>
+    <script src="#?v=1a147e2" type="text/javascript"></script>
+    <link rel="shortcut icon" href="http://127.0.0.1:18091/favicon.ico">
+</head>
+<body class="dev bg-light FindShipment">
+        
+        
+        
+        
+    <!-- BEGIN screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+        <!-- BEGIN render-mode.text[inline][@template=true] -->
+<script>var notificationClient = new moqui.NotificationClient((location.protocol === 'https:' ? 'wss' : 'ws') + "://127.0.0.1:18091/notws");</script>        <!-- END   render-mode.text[inline][@template=true] -->
+    <!-- BEGIN section[@name=TopNavSection] -->
+        <!-- BEGIN screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+    <div id="top">
+        <!-- BEGIN render-mode.text[@location=component://webroot/screen/includes/navbar.html.ftl][@template=true] -->
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <header class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a href="http://127.0.0.1:18091/apps/AppList" class="navbar-brand"><img src="http://127.0.0.1:18091/images/MoquiLogoSmall.png" alt="Home"></a>
+        
+    </header>
+    <div id="navbar-buttons" class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul id="header-menus" class="nav navbar-nav">
+        </ul>
+        <div id="navbar-menu-crumbs">
+        </div>
+        <a class="navbar-text" href="http://127.0.0.1:18091/apps/marble/Shipment/FindShipment">Find Shipments</a>
+        <a href="http://127.0.0.1:18091/Login/logout" data-toggle="tooltip" data-original-title="Logout John Doe" data-placement="bottom" class="btn btn-danger btn-sm navbar-btn navbar-right">
+            <i class="fa fa-power-off"></i>
+        </a>
+            <div id="document-menu" class="nav navbar-right dropdown">
+                <a id="document-menu-link" href="#" class="dropdown-toggle btn btn-info btn-sm navbar-btn" data-toggle="dropdown" title="Documentation">
+                    <i class="fa fa-question-circle"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#" onclick="showScreenDocDialog('100')">Shipment Status Reference</a></li>
+                </ul>
+            </div>
+        <a href="#" onclick="switchDarkLight();" data-toggle="tooltip" data-original-title="Switch Dark/Light" data-placement="bottom" class="btn btn-default btn-sm navbar-btn navbar-right">
+            <i class="fa fa-adjust"></i>
+        </a>
+
+<div class="btn-group navbar-right">
+    <a href="/apps/my/User/Notifications" data-toggle="tooltip" data-container="body" data-original-title="Notifications" data-placement="bottom" class="btn btn-default btn-sm navbar-btn">
+        <i class="fa fa-info-circle"></i>
+        <span id="navbar_notification_count" class="label label-info">0</span>
+    </a>
+    <a href="/apps/my/User/Messages/FindMessage?statusId=CeReceived&amp;toPartyId=EX_JOHN_DOE" data-toggle="tooltip" data-container="body" data-original-title="Messages" data-placement="bottom" class="btn btn-default btn-sm navbar-btn">
+        <i class="fa fa-envelope"></i>
+        <span class="label label-warning">0</span>
+    </a>
+    <a href="/apps/my/User/Calendar/MyCalendar" data-toggle="tooltip" data-container="body" data-original-title="Events This Week" data-placement="bottom" class="btn btn-default btn-sm navbar-btn">
+        <i class="fa fa-calendar"></i>
+        <span class="label label-primary">0</span>
+    </a>
+    <a href="/apps/my/User/Task/MyTasks" data-toggle="tooltip" data-container="body" data-original-title="Open Tasks" data-placement="bottom" class="btn btn-default btn-sm navbar-btn">
+        <i class="fa fa-check"></i>
+        <span class="label label-success">0</span>
+    </a>
+</div>
+    <script>
+        var navbarNotificationListener = function(jsonObj, webSocket) {
+            if (jsonObj && jsonObj.persistOnSend === true) {
+                var countElement = $("#navbar_notification_count");
+                countElement.text((parseInt(countElement.text()) + 1).toString());
+            }
+            notificationClient.displayNotify(jsonObj, webSocket);
+        };
+        notificationClient.registerListener("ALL", navbarNotificationListener);
+    </script>
+        <div id="history-menu" class="nav navbar-right dropdown">
+            <a id="history-menu-link" href="#" class="dropdown-toggle btn btn-default btn-sm navbar-btn" data-toggle="dropdown" title="History">
+                <i class="fa fa-list"></i></a>
+            <ul class="dropdown-menu">
+                <li><a href="http://127.0.0.1:18091/apps/marble/dashboard">
+                            <i class="fa fa-dashboard" style="padding-right: 8px;"></i>
+                    Marble ERP - Dashboard
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Shipment/FindShipment?shipmentTypeEnumId=ShpTpTransfer">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Shipping.png" alt="Shipments - Find Shipments (ShpTpTransfer)" height="18" style="padding-right: 4px;">
+                    Shipments - Find Shipments (ShpTpTransfer)
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Shipping/Picklist/FindPicklist">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/dashboard">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/vapps/marble/Shipping/Picklist/FindPicklist">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/vapps/marble/dashboard">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Shipping/Picklist/FindPicklist">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Picking.png" alt="Picklists - Picklists" height="18" style="padding-right: 4px;">
+                    Picklists - Picklists
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Shipment/FindShipment?shipmentTypeEnumId=ShpTpSales">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications (ShpTpSales)
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/vapps/marble/Shipment/FindShipment?shipmentTypeEnumId=ShpTpSales">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications (ShpTpSales)
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Shipment/FindShipment?shipmentTypeEnumId=ShpTpSales">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Shipping.png" alt="Shipments - Find Shipments (ShpTpSales)" height="18" style="padding-right: 4px;">
+                    Shipments - Find Shipments (ShpTpSales)
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/ProductStore/Promotion/FindPromotion">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/ProductStore/Promotion/FindPromotion?productStoreId=POPC_DEFAULT">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications (POPC_DEFAULT)
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/vapps/marble/ProductStore/Promotion/FindPromotion">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/vapps/marble/ProductStore/Promotion/FindPromotion?productStoreId=POPC_DEFAULT">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications (POPC_DEFAULT)
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/ProductStore/Promotion/FindPromotion">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Promotions.png" alt="Promotions - Store Promotions" height="18" style="padding-right: 4px;">
+                    Promotions - Store Promotions
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/ProductStore/Promotion/FindPromotion?productStoreId=POPC_DEFAULT">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Promotions.png" alt="Promotions - Store Promotions (POPC_DEFAULT)" height="18" style="padding-right: 4px;">
+                    Promotions - Store Promotions (POPC_DEFAULT)
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Order/OrderDetail">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Customer/FindCustomer">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/vapps/marble/Order/OrderDetail">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/vapps/marble/Customer/FindCustomer">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Order/OrderDetail">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Sales.png" alt="Orders - Order Detail" height="18" style="padding-right: 4px;">
+                    Orders - Order Detail
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Customer/FindCustomer">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Customer.png" alt="Customers - Find Customer" height="18" style="padding-right: 4px;">
+                    Customers - Find Customer
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Accounting/TimePeriod/FindTimePeriod">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/vapps/marble/Accounting/TimePeriod/FindTimePeriod">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Accounting/TimePeriod/FindTimePeriod">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Accounting.png" alt="Time Period - Find Time Period" height="18" style="padding-right: 4px;">
+                    Time Period - Find Time Period
+                </a></li>
+            </ul>
+        </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+    $('.navbar [data-toggle="tooltip"]').tooltip({ placement:'bottom', trigger:'hover' });
+    $('#history-menu-link').tooltip({ placement:'bottom', trigger:'hover' });
+    $('#document-menu-link').tooltip({ placement:'bottom', trigger:'hover' });
+    function switchDarkLight() {
+        $("body").toggleClass("bg-dark");
+        $("body").toggleClass("bg-light");
+        var currentStyle = $("body").hasClass("bg-dark") ? "bg-dark" : "bg-light";
+        $.ajax({ type:'POST', url:'http://127.0.0.1:18091/apps/setPreference', data:{ 'moquiSessionToken': '[REDACTED]','preferenceKey': 'OUTER_STYLE', 'preferenceValue': currentStyle }, dataType:'json' });
+    }
+</script>
+
+        <!-- END   render-mode.text[@location=component://webroot/screen/includes/navbar.html.ftl][@template=true] -->
+        <!-- BEGIN render-mode.text[inline][@template=true] -->
+        <!-- END   render-mode.text[inline][@template=true] -->
+        <li id="header-menu" class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Application <i class="fa fa-chevron-right"></i></a>
+            <ul class="dropdown-menu">
+                        <li class="active"><a href="http://127.0.0.1:18091/apps/marble/dashboard"><i class="fa fa-cogs" style="padding-right: 8px;"></i>Marble ERP</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/my"><i class="fa fa-user" style="padding-right: 8px;"></i>My Account</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/system"><i class="fa fa-cog" style="padding-right: 8px;"></i>System</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/tools"><i class="fa fa-wrench" style="padding-right: 8px;"></i>Tools</a></li>
+            </ul>
+        </li>
+        <script>$("#header-menus").append($("#header-menu"));</script>
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    <!-- END   screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+
+    <!-- END   section[@name=TopNavSection] -->
+    <div id="content">
+    <div class="inner">
+    <div class="container-fluid">
+    <!-- BEGIN section[@name=MessagesSection] -->
+        <!-- BEGIN screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+    <!-- BEGIN section-iterate[@name=headerMessageInfos] -->
+    
+    <!-- END   section-iterate[@name=headerMessageInfos] -->
+    <!-- BEGIN section-iterate[@name=headerErrors] -->
+    
+    <!-- END   section-iterate[@name=headerErrors] -->
+    <!-- BEGIN section-iterate[@name=headerValidationErrors] -->
+    
+    <!-- END   section-iterate[@name=headerValidationErrors] -->
+    <!-- BEGIN section-iterate[@name=headerSavedMessages] -->
+    
+    <!-- END   section-iterate[@name=headerSavedMessages] -->
+    <!-- BEGIN section-iterate[@name=headerSavedErrors] -->
+    
+    <!-- END   section-iterate[@name=headerSavedErrors] -->
+    <!-- BEGIN section-iterate[@name=headerSavedValidationErrors] -->
+    
+    <!-- END   section-iterate[@name=headerSavedValidationErrors] -->
+    <!-- END   screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+
+    <!-- END   section[@name=MessagesSection] -->
+        <!-- BEGIN screen[@location=component://MarbleERP/screen/marble.xml].widgets -->
+    <!-- BEGIN section[@name=OrgChooserSection] -->
+        <!-- BEGIN screen[@location=component://MarbleERP/screen/marble.xml].widgets -->
+        <!-- BEGIN render-mode.text[inline][@template=true] -->
+<div id="active-org-menu" class="nav navbar-right dropdown">
+                <a id="active-org-menu-link" href="#" class="dropdown-toggle btn btn-default btn-sm navbar-btn" data-toggle="dropdown" title="Organization">
+                    <i class="fa fa-globe"></i> </a>
+                <ul class="dropdown-menu">
+                        <li><a href="http://127.0.0.1:18091/apps/setPrefGoLast?preferenceKey=ACTIVE_ORGANIZATION&amp;preferenceValue=ORG_ZIZI_RETAIL">ZIRET: Ziziwork Retail &amp; Wholesale</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/setPrefGoLast?preferenceKey=ACTIVE_ORGANIZATION&amp;preferenceValue=ORG_ZIZI_SERVICES">ZISER: Ziziwork Services</a></li>
+                </ul>
+            </div>
+            <script>$("#navbar-buttons").append($("#active-org-menu")); $('#active-org-menu-link').tooltip({ placement:'bottom', trigger:'hover' });</script>        <!-- END   render-mode.text[inline][@template=true] -->
+    <!-- END   screen[@location=component://MarbleERP/screen/marble.xml].widgets -->
+
+    <!-- END   section[@name=OrgChooserSection] -->
+        <li id="MarbleErpPanel-menu" class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Marble ERP <i class="fa fa-chevron-right"></i></a>
+            <ul class="dropdown-menu">
+                        <li><a href="http://127.0.0.1:18091/apps/marble/dashboard"><i class="fa fa-dashboard" style="padding-right: 8px;"></i>Dashboard</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/QuickSearch"><i class="fa fa-search" style="padding-right: 8px;"></i>Quick Search</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Accounting/dashboard"><img src="http://127.0.0.1:18091/ssstatic/images/Accounting.png" alt="Accounting" height="18" style="padding-right: 4px;">Accounting</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Asset/dashboard"><img src="http://127.0.0.1:18091/ssstatic/images/Asset.png" alt="Asset" height="18" style="padding-right: 4px;">Asset</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Catalog/dashboard"><img src="http://127.0.0.1:18091/ssstatic/images/Catalog.png" alt="Catalog" height="18" style="padding-right: 4px;">Catalog</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Customer/FindCustomer"><img src="http://127.0.0.1:18091/ssstatic/images/Customer.png" alt="Customers" height="18" style="padding-right: 4px;">Customers</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Facility/FindFacility"><img src="http://127.0.0.1:18091/ssstatic/images/Facility.png" alt="Facility" height="18" style="padding-right: 4px;">Facility</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/HumanRes/dashboard"><i class="fa fa-user-plus" style="padding-right: 8px;"></i>Human Resources</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Manufacturing/dashboard"><i class="fa fa-industry" style="padding-right: 8px;"></i>Manufacturing</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Order/FindOrder"><img src="http://127.0.0.1:18091/ssstatic/images/Sales.png" alt="Orders" height="18" style="padding-right: 4px;">Orders</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Party/FindParty"><img src="http://127.0.0.1:18091/ssstatic/images/Parties.png" alt="Parties" height="18" style="padding-right: 4px;">Parties</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Project/FindProject"><img src="http://127.0.0.1:18091/ssstatic/images/project-business120.png" alt="Projects" height="18" style="padding-right: 4px;">Projects</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Request/FindRequest"><img src="http://127.0.0.1:18091/ssstatic/images/Request.png" alt="Requests" height="18" style="padding-right: 4px;">Requests</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Return/FindReturn"><img src="http://127.0.0.1:18091/ssstatic/images/Return.png" alt="Returns" height="18" style="padding-right: 4px;">Returns</a></li>
+                        <li class="active"><a href="http://127.0.0.1:18091/apps/marble/Shipment/FindShipment"><img src="http://127.0.0.1:18091/ssstatic/images/Shipping.png" alt="Shipments" height="18" style="padding-right: 4px;">Shipments</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Shipping/dashboard"><img src="http://127.0.0.1:18091/ssstatic/images/Picking.png" alt="Shipping" height="18" style="padding-right: 4px;">Shipping</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/ProductStore/FindProductStore"><img src="http://127.0.0.1:18091/ssstatic/images/ProductStore.png" alt="Stores" height="18" style="padding-right: 4px;">Stores</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Supplier/FindSupplier"><img src="http://127.0.0.1:18091/ssstatic/images/Supplier.png" alt="Suppliers" height="18" style="padding-right: 4px;">Suppliers</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Survey/FindSurvey"><i class="fa fa-pencil-square-o" style="padding-right: 8px;"></i>Survey</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Task/FindTask"><img src="http://127.0.0.1:18091/ssstatic/images/task-homework.png" alt="Tasks" height="18" style="padding-right: 4px;">Tasks</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Wiki/WikiSpaces"><img src="http://127.0.0.1:18091/ssstatic/images/Wiki.png" alt="Wiki/Content" height="18" style="padding-right: 4px;">Wiki/Content</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/QuickViewReport"><i class="fa fa-database" style="padding-right: 8px;"></i>Custom Reports</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/SimpleReport/FindReport"><i class="fa fa-database" style="padding-right: 8px;"></i>Report Builder</a></li>
+            </ul>
+        </li>
+        <script>$("#header-menus").append($("#MarbleErpPanel-menu"));</script>
+            <!-- BEGIN screen[@location=component://SimpleScreens/screen/SimpleScreens/Shipment.xml].widgets -->
+        <div id="ShipmentPanel-tabpanel">
+                <a id="ShipmentPanel-menu-crumb" class="navbar-text" href="http://127.0.0.1:18091/apps/marble/Shipment/FindShipment">Shipments <i class="fa fa-chevron-right"></i></a>
+                <script>$("#navbar-menu-crumbs").append($("#ShipmentPanel-menu-crumb"));</script>
+                <!-- BEGIN screen[@location=component://SimpleScreens/screen/SimpleScreens/Shipment/FindShipment.xml].widgets -->
+        <button id="NewOutgoingShipmentDialog-button" type="button" data-toggle="modal" data-target="#NewOutgoingShipmentDialog" data-original-title="New Outgoing Shipment" data-placement="bottom" class="btn btn-primary btn-sm "><i class="fa fa-share"></i> New Outgoing Shipment</button>
+
+        <div id="NewOutgoingShipmentDialog" class="modal container-dialog" aria-hidden="true" style="display: none;" tabindex="-1">
+            <div class="modal-dialog" style="width: 760px;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">New Outgoing Shipment</h4>
+                    </div>
+                    <div class="modal-body">
+    <!-- BEGIN form-single[@name=NewOutgoingShipment] -->
+    <form name="NewOutgoingShipment" id="NewOutgoingShipment" method="post" action="http://127.0.0.1:18091/apps/marble/Shipment/FindShipment/createShipment">
+        <input type="hidden" name="moquiFormName" value="NewOutgoingShipment" style="">
+        <input type="hidden" name="moquiSessionToken" value="[REDACTED]" style="">
+        
+        <fieldset class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="NewOutgoingShipment_shipmentTypeEnumId">Type</label>
+            <div class="col-sm-10">
+    
+    <select name="shipmentTypeEnumId" class="" id="NewOutgoingShipment_shipmentTypeEnumId">
+            <option value="ShpTpOutgoing">Outgoing</option>
+            <option value="ShpTpPurchaseReturn">Purchase Return</option>
+            <option value="ShpTpSales">Sales Shipment</option>
+    </select>
+    
+    
+        <script>$("#NewOutgoingShipment_shipmentTypeEnumId").select2({  });</script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="NewOutgoingShipment_originFacilityId">Origin Facility</label>
+            <div class="col-sm-10">
+    
+    <select name="originFacilityId" class=" dynamic-options noResetSelect2" style="min-width:200px;" id="NewOutgoingShipment_originFacilityId">
+            <option value="">&nbsp;</option>
+    </select>
+    
+    
+        <script>
+            var NewOutgoingShipment_originFacilityIdS2Opts = { 
+                
+                minimumResultsForSearch:0, width:"100%", minimumInputLength:0,
+                ajax:{ url:"http://127.0.0.1:18091/apps/marble/Shipment/FindShipment/getFacilityList", type:"POST", dataType:"json", cache:true, delay:300,
+                    data:function(params) { return { moquiSessionToken: "[REDACTED]", term:(params.term || ''), pageIndex:(params.page || 1) - 1
+                        
+                        
+                    }},
+                    processResults:function(data, params) {
+                        var isDataArray = moqui.isArray(data);
+                        var list = isDataArray ? data : data.options;
+                        var newData = [];
+                        // funny case where select2 specifies no option.@value if empty so &nbsp; ends up passed with form submit; now filtered on server for \u00a0 only and set to null
+                        if (!params.page || params.page <= 1) newData.push({ id:'\u00a0', text:'\u00a0' });
+                        var labelField = "label"; var valueField = "value";
+                        $.each(list, function(idx, curObj) {
+                            var idVal = curObj[valueField]; if (!idVal) idVal = '\u00a0';
+                            newData.push({ id:idVal, text:curObj[labelField] })
+                        });
+                        var outObj = { results:newData };
+                        if (!isDataArray) {
+                            params.page = params.page || 1; // NOTE: 1 based index, is 0 based on server side
+                            var pageSize = data.pageSize || 20;
+                            outObj.pagination = { more: (data.count ? (params.page * pageSize) < data.count : false) };
+                        }
+                        return outObj;
+                    }
+                }
+            };
+            $("#NewOutgoingShipment_originFacilityId").select2(NewOutgoingShipment_originFacilityIdS2Opts);
+            function populate_NewOutgoingShipment_originFacilityId(params) {
+                    var hasAllParms = true;
+                    
+                    if (!hasAllParms) { $("#NewOutgoingShipment_originFacilityId").select2("destroy"); $('#NewOutgoingShipment_originFacilityId').html(""); $("#NewOutgoingShipment_originFacilityId").select2({ });  return; }
+                $.ajax({ type:"POST", url:"http://127.0.0.1:18091/apps/marble/Shipment/FindShipment/getFacilityList", data:{ moquiSessionToken: "[REDACTED]", term:((params && params.term) || '')}, dataType:"json"}).done(                    function(data) {
+                        var list = moqui.isArray(data) ? data : data.options;
+                        if (list) {
+                            var jqEl = $("#NewOutgoingShipment_originFacilityId");
+                            var bWasFocused = jqEl.next().hasClass('select2-container--focus');
+                            jqEl.select2("destroy");
+                            jqEl.html("");
+                            jqEl.append('<option value="">&nbsp;</option>');
+                            
+                            $.each(list, function(key, value) {
+                                var optionValue = value["value"];
+                                if (optionValue === "") {
+                                    jqEl.append("<option selected='selected' value='" + optionValue + "'>" + value["label"] + "</option>");
+                                } else {
+                                    jqEl.append("<option value='" + optionValue + "'>" + value["label"] + "</option>");
+                                }
+                            });
+                            $("#NewOutgoingShipment_originFacilityId").select2(NewOutgoingShipment_originFacilityIdS2Opts);
+                            if( bWasFocused ) jqEl.focus();
+                            setTimeout(function() { jqEl.trigger('change'); }, 50);
+                        }
+                    }
+                );
+            }
+            
+                
+
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="NewOutgoingShipment_toPartyId">To Party</label>
+            <div class="col-sm-10">
+    
+    <select name="toPartyId" class=" dynamic-options noResetSelect2" style="min-width:200px;" id="NewOutgoingShipment_toPartyId">
+            <option value="">&nbsp;</option>
+    </select>
+    
+    
+        <script>
+            var NewOutgoingShipment_toPartyIdS2Opts = { 
+                
+                minimumResultsForSearch:0, width:"100%", minimumInputLength:2,
+                ajax:{ url:"http://127.0.0.1:18091/apps/marble/Shipment/FindShipment/searchPartyList", type:"POST", dataType:"json", cache:true, delay:300,
+                    data:function(params) { return { moquiSessionToken: "[REDACTED]", term:(params.term || ''), pageIndex:(params.page || 1) - 1
+                        
+                        
+                    }},
+                    processResults:function(data, params) {
+                        var isDataArray = moqui.isArray(data);
+                        var list = isDataArray ? data : data.options;
+                        var newData = [];
+                        // funny case where select2 specifies no option.@value if empty so &nbsp; ends up passed with form submit; now filtered on server for \u00a0 only and set to null
+                        if (!params.page || params.page <= 1) newData.push({ id:'\u00a0', text:'\u00a0' });
+                        var labelField = "label"; var valueField = "value";
+                        $.each(list, function(idx, curObj) {
+                            var idVal = curObj[valueField]; if (!idVal) idVal = '\u00a0';
+                            newData.push({ id:idVal, text:curObj[labelField] })
+                        });
+                        var outObj = { results:newData };
+                        if (!isDataArray) {
+                            params.page = params.page || 1; // NOTE: 1 based index, is 0 based on server side
+                            var pageSize = data.pageSize || 20;
+                            outObj.pagination = { more: (data.count ? (params.page * pageSize) < data.count : false) };
+                        }
+                        return outObj;
+                    }
+                }
+            };
+            $("#NewOutgoingShipment_toPartyId").select2(NewOutgoingShipment_toPartyIdS2Opts);
+            function populate_NewOutgoingShipment_toPartyId(params) {
+                    var hasAllParms = true;
+                    
+                    if (!hasAllParms) { $("#NewOutgoingShipment_toPartyId").select2("destroy"); $('#NewOutgoingShipment_toPartyId').html(""); $("#NewOutgoingShipment_toPartyId").select2({ });  return; }
+                $.ajax({ type:"POST", url:"http://127.0.0.1:18091/apps/marble/Shipment/FindShipment/searchPartyList", data:{ moquiSessionToken: "[REDACTED]", term:((params && params.term) || '')}, dataType:"json"}).done(                    function(data) {
+                        var list = moqui.isArray(data) ? data : data.options;
+                        if (list) {
+                            var jqEl = $("#NewOutgoingShipment_toPartyId");
+                            var bWasFocused = jqEl.next().hasClass('select2-container--focus');
+                            jqEl.select2("destroy");
+                            jqEl.html("");
+                            jqEl.append('<option value="">&nbsp;</option>');
+                            
+                            $.each(list, function(key, value) {
+                                var optionValue = value["value"];
+                                if (optionValue === "") {
+                                    jqEl.append("<option selected='selected' value='" + optionValue + "'>" + value["label"] + "</option>");
+                                } else {
+                                    jqEl.append("<option value='" + optionValue + "'>" + value["label"] + "</option>");
+                                }
+                            });
+                            $("#NewOutgoingShipment_toPartyId").select2(NewOutgoingShipment_toPartyIdS2Opts);
+                            if( bWasFocused ) jqEl.focus();
+                            setTimeout(function() { jqEl.trigger('change'); }, 50);
+                        }
+                    }
+                );
+            }
+            
+                
+
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="NewOutgoingShipment_estimatedReadyDate">Ready Date</label>
+            <div class="col-sm-10">
+    
+
+
+
+        <div class="input-group date" id="NewOutgoingShipment_estimatedReadyDate">
+            <input type="text" class="form-control" name="estimatedReadyDate" value="" size="16" maxlength="23" style="">
+            <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+        </div>
+        <script>
+            $('#NewOutgoingShipment_estimatedReadyDate').datetimepicker({toolbarPlacement:'top', showClose:true, showClear:true, showTodayButton:true,
+                useStrict:true, defaultDate: '' && moment('','YYYY-MM-DD HH:mm'),
+                format:'YYYY-MM-DD HH:mm', extraFormats:['YYYY-MM-DD HH:mm', 'YYYY-MM-DD HH:mm:ss', 'MM/DD/YYYY HH:mm'], stepping:5, locale:"en-US",
+                keyBinds: {t: function() {this.date(moment());}, up: function () { this.date(this.date().clone().add(1, 'd')); }, down: function () { this.date(this.date().clone().subtract(1, 'd')); }, 'control up': function () { this.date(this.date().clone().add(1, 'd')); }, 'control down': function () { this.date(this.date().clone().subtract(1, 'd')); }}});
+            $('#NewOutgoingShipment_estimatedReadyDate').on("dp.change", function() { var jqEl = $('#NewOutgoingShipment_estimatedReadyDate'); jqEl.val(jqEl.find("input").first().val()); jqEl.trigger("change"); });
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <div class="col-sm-2 hidden-xs">&nbsp;</div>
+            <div class="col-sm-10">
+    
+    <button type="submit" name="submitButton" value="submitButton" id="NewOutgoingShipment_submitButton" class="btn btn-primary btn-sm">
+Create    </button>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        </fieldset>
+    </form>
+        <script>
+            $("#NewOutgoingShipment").validate({ errorClass: 'help-block', errorElement: 'span',
+                highlight: function(element, errorClass, validClass) { $(element).parents('.form-group').removeClass('has-success').addClass('has-error'); },
+                unhighlight: function(element, errorClass, validClass) { $(element).parents('.form-group').removeClass('has-error').addClass('has-success'); }
+            });
+            $('#NewOutgoingShipment [data-toggle="tooltip"]').tooltip({placement:'auto top'});
+
+        </script>
+    <!-- END   form-single[@name=NewOutgoingShipment] -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>$('#NewOutgoingShipmentDialog').on('shown.bs.modal', function() {
+            $("#NewOutgoingShipmentDialog :not(.noResetSelect2)>select:not(.noResetSelect2)").select2({ });
+            var defFocus = $("#NewOutgoingShipmentDialog .default-focus");
+            if (defFocus.length) { defFocus.focus(); } else { $("#NewOutgoingShipmentDialog form :input:visible:first").focus(); }
+        });</script>
+        <button id="NewIncomingShipmentDialog-button" type="button" data-toggle="modal" data-target="#NewIncomingShipmentDialog" data-original-title="New Incoming Shipment" data-placement="bottom" class="btn btn-primary btn-sm "><i class="fa fa-share"></i> New Incoming Shipment</button>
+
+        <div id="NewIncomingShipmentDialog" class="modal container-dialog" aria-hidden="true" style="display: none;" tabindex="-1">
+            <div class="modal-dialog" style="width: 760px;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">New Incoming Shipment</h4>
+                    </div>
+                    <div class="modal-body">
+    <!-- BEGIN form-single[@name=NewIncomingShipment] -->
+    <form name="NewIncomingShipment" id="NewIncomingShipment" method="post" action="http://127.0.0.1:18091/apps/marble/Shipment/FindShipment/createShipment">
+        <input type="hidden" name="moquiFormName" value="NewIncomingShipment" style="">
+        <input type="hidden" name="moquiSessionToken" value="[REDACTED]" style="">
+        
+        <fieldset class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="NewIncomingShipment_shipmentTypeEnumId">Type</label>
+            <div class="col-sm-10">
+    
+    <select name="shipmentTypeEnumId" class="" id="NewIncomingShipment_shipmentTypeEnumId">
+            <option value="ShpTpIncoming">Incoming</option>
+            <option value="ShpTpPurchase">Purchase Shipment</option>
+            <option value="ShpTpSalesReturn">Sales Return</option>
+    </select>
+    
+    
+        <script>$("#NewIncomingShipment_shipmentTypeEnumId").select2({  });</script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="NewIncomingShipment_fromPartyId">From Party</label>
+            <div class="col-sm-10">
+    
+    <select name="fromPartyId" class=" dynamic-options noResetSelect2" style="min-width:200px;" id="NewIncomingShipment_fromPartyId">
+            <option value="">&nbsp;</option>
+    </select>
+    
+    
+        <script>
+            var NewIncomingShipment_fromPartyIdS2Opts = { 
+                
+                minimumResultsForSearch:0, width:"100%", minimumInputLength:2,
+                ajax:{ url:"http://127.0.0.1:18091/apps/marble/Shipment/FindShipment/searchPartyList", type:"POST", dataType:"json", cache:true, delay:300,
+                    data:function(params) { return { moquiSessionToken: "[REDACTED]", term:(params.term || ''), pageIndex:(params.page || 1) - 1
+                        
+                        
+                    }},
+                    processResults:function(data, params) {
+                        var isDataArray = moqui.isArray(data);
+                        var list = isDataArray ? data : data.options;
+                        var newData = [];
+                        // funny case where select2 specifies no option.@value if empty so &nbsp; ends up passed with form submit; now filtered on server for \u00a0 only and set to null
+                        if (!params.page || params.page <= 1) newData.push({ id:'\u00a0', text:'\u00a0' });
+                        var labelField = "label"; var valueField = "value";
+                        $.each(list, function(idx, curObj) {
+                            var idVal = curObj[valueField]; if (!idVal) idVal = '\u00a0';
+                            newData.push({ id:idVal, text:curObj[labelField] })
+                        });
+                        var outObj = { results:newData };
+                        if (!isDataArray) {
+                            params.page = params.page || 1; // NOTE: 1 based index, is 0 based on server side
+                            var pageSize = data.pageSize || 20;
+                            outObj.pagination = { more: (data.count ? (params.page * pageSize) < data.count : false) };
+                        }
+                        return outObj;
+                    }
+                }
+            };
+            $("#NewIncomingShipment_fromPartyId").select2(NewIncomingShipment_fromPartyIdS2Opts);
+            function populate_NewIncomingShipment_fromPartyId(params) {
+                    var hasAllParms = true;
+                    
+                    if (!hasAllParms) { $("#NewIncomingShipment_fromPartyId").select2("destroy"); $('#NewIncomingShipment_fromPartyId').html(""); $("#NewIncomingShipment_fromPartyId").select2({ });  return; }
+                $.ajax({ type:"POST", url:"http://127.0.0.1:18091/apps/marble/Shipment/FindShipment/searchPartyList", data:{ moquiSessionToken: "[REDACTED]", term:((params && params.term) || '')}, dataType:"json"}).done(                    function(data) {
+                        var list = moqui.isArray(data) ? data : data.options;
+                        if (list) {
+                            var jqEl = $("#NewIncomingShipment_fromPartyId");
+                            var bWasFocused = jqEl.next().hasClass('select2-container--focus');
+                            jqEl.select2("destroy");
+                            jqEl.html("");
+                            jqEl.append('<option value="">&nbsp;</option>');
+                            
+                            $.each(list, function(key, value) {
+                                var optionValue = value["value"];
+                                if (optionValue === "") {
+                                    jqEl.append("<option selected='selected' value='" + optionValue + "'>" + value["label"] + "</option>");
+                                } else {
+                                    jqEl.append("<option value='" + optionValue + "'>" + value["label"] + "</option>");
+                                }
+                            });
+                            $("#NewIncomingShipment_fromPartyId").select2(NewIncomingShipment_fromPartyIdS2Opts);
+                            if( bWasFocused ) jqEl.focus();
+                            setTimeout(function() { jqEl.trigger('change'); }, 50);
+                        }
+                    }
+                );
+            }
+            
+                
+
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="NewIncomingShipment_destinationFacilityId">Destination Facility</label>
+            <div class="col-sm-10">
+    
+    <select name="destinationFacilityId" class=" dynamic-options noResetSelect2" style="min-width:200px;" id="NewIncomingShipment_destinationFacilityId">
+            <option value="">&nbsp;</option>
+    </select>
+    
+    
+        <script>
+            var NewIncomingShipment_destinationFacilityIdS2Opts = { 
+                
+                minimumResultsForSearch:0, width:"100%", minimumInputLength:0,
+                ajax:{ url:"http://127.0.0.1:18091/apps/marble/Shipment/FindShipment/getFacilityList", type:"POST", dataType:"json", cache:true, delay:300,
+                    data:function(params) { return { moquiSessionToken: "[REDACTED]", term:(params.term || ''), pageIndex:(params.page || 1) - 1
+                        
+                        
+                    }},
+                    processResults:function(data, params) {
+                        var isDataArray = moqui.isArray(data);
+                        var list = isDataArray ? data : data.options;
+                        var newData = [];
+                        // funny case where select2 specifies no option.@value if empty so &nbsp; ends up passed with form submit; now filtered on server for \u00a0 only and set to null
+                        if (!params.page || params.page <= 1) newData.push({ id:'\u00a0', text:'\u00a0' });
+                        var labelField = "label"; var valueField = "value";
+                        $.each(list, function(idx, curObj) {
+                            var idVal = curObj[valueField]; if (!idVal) idVal = '\u00a0';
+                            newData.push({ id:idVal, text:curObj[labelField] })
+                        });
+                        var outObj = { results:newData };
+                        if (!isDataArray) {
+                            params.page = params.page || 1; // NOTE: 1 based index, is 0 based on server side
+                            var pageSize = data.pageSize || 20;
+                            outObj.pagination = { more: (data.count ? (params.page * pageSize) < data.count : false) };
+                        }
+                        return outObj;
+                    }
+                }
+            };
+            $("#NewIncomingShipment_destinationFacilityId").select2(NewIncomingShipment_destinationFacilityIdS2Opts);
+            function populate_NewIncomingShipment_destinationFacilityId(params) {
+                    var hasAllParms = true;
+                    
+                    if (!hasAllParms) { $("#NewIncomingShipment_destinationFacilityId").select2("destroy"); $('#NewIncomingShipment_destinationFacilityId').html(""); $("#NewIncomingShipment_destinationFacilityId").select2({ });  return; }
+                $.ajax({ type:"POST", url:"http://127.0.0.1:18091/apps/marble/Shipment/FindShipment/getFacilityList", data:{ moquiSessionToken: "[REDACTED]", term:((params && params.term) || '')}, dataType:"json"}).done(                    function(data) {
+                        var list = moqui.isArray(data) ? data : data.options;
+                        if (list) {
+                            var jqEl = $("#NewIncomingShipment_destinationFacilityId");
+                            var bWasFocused = jqEl.next().hasClass('select2-container--focus');
+                            jqEl.select2("destroy");
+                            jqEl.html("");
+                            jqEl.append('<option value="">&nbsp;</option>');
+                            
+                            $.each(list, function(key, value) {
+                                var optionValue = value["value"];
+                                if (optionValue === "") {
+                                    jqEl.append("<option selected='selected' value='" + optionValue + "'>" + value["label"] + "</option>");
+                                } else {
+                                    jqEl.append("<option value='" + optionValue + "'>" + value["label"] + "</option>");
+                                }
+                            });
+                            $("#NewIncomingShipment_destinationFacilityId").select2(NewIncomingShipment_destinationFacilityIdS2Opts);
+                            if( bWasFocused ) jqEl.focus();
+                            setTimeout(function() { jqEl.trigger('change'); }, 50);
+                        }
+                    }
+                );
+            }
+            
+                
+
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="NewIncomingShipment_estimatedArrivalDate">Arrival Date</label>
+            <div class="col-sm-10">
+    
+
+
+
+        <div class="input-group date" id="NewIncomingShipment_estimatedArrivalDate">
+            <input type="text" class="form-control" name="estimatedArrivalDate" value="" size="16" maxlength="23" style="">
+            <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+        </div>
+        <script>
+            $('#NewIncomingShipment_estimatedArrivalDate').datetimepicker({toolbarPlacement:'top', showClose:true, showClear:true, showTodayButton:true,
+                useStrict:true, defaultDate: '' && moment('','YYYY-MM-DD HH:mm'),
+                format:'YYYY-MM-DD HH:mm', extraFormats:['YYYY-MM-DD HH:mm', 'YYYY-MM-DD HH:mm:ss', 'MM/DD/YYYY HH:mm'], stepping:5, locale:"en-US",
+                keyBinds: {t: function() {this.date(moment());}, up: function () { this.date(this.date().clone().add(1, 'd')); }, down: function () { this.date(this.date().clone().subtract(1, 'd')); }, 'control up': function () { this.date(this.date().clone().add(1, 'd')); }, 'control down': function () { this.date(this.date().clone().subtract(1, 'd')); }}});
+            $('#NewIncomingShipment_estimatedArrivalDate').on("dp.change", function() { var jqEl = $('#NewIncomingShipment_estimatedArrivalDate'); jqEl.val(jqEl.find("input").first().val()); jqEl.trigger("change"); });
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <div class="col-sm-2 hidden-xs">&nbsp;</div>
+            <div class="col-sm-10">
+    
+    <button type="submit" name="submitButton" value="submitButton" id="NewIncomingShipment_submitButton" class="btn btn-primary btn-sm">
+Create    </button>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        </fieldset>
+    </form>
+        <script>
+            $("#NewIncomingShipment").validate({ errorClass: 'help-block', errorElement: 'span',
+                highlight: function(element, errorClass, validClass) { $(element).parents('.form-group').removeClass('has-success').addClass('has-error'); },
+                unhighlight: function(element, errorClass, validClass) { $(element).parents('.form-group').removeClass('has-error').addClass('has-success'); }
+            });
+            $('#NewIncomingShipment [data-toggle="tooltip"]').tooltip({placement:'auto top'});
+
+        </script>
+    <!-- END   form-single[@name=NewIncomingShipment] -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>$('#NewIncomingShipmentDialog').on('shown.bs.modal', function() {
+            $("#NewIncomingShipmentDialog :not(.noResetSelect2)>select:not(.noResetSelect2)").select2({ });
+            var defFocus = $("#NewIncomingShipmentDialog .default-focus");
+            if (defFocus.length) { defFocus.focus(); } else { $("#NewIncomingShipmentDialog form :input:visible:first").focus(); }
+        });</script>
+        <button id="NewTransferShipmentDialog-button" type="button" data-toggle="modal" data-target="#NewTransferShipmentDialog" data-original-title="New Transfer Shipment" data-placement="bottom" class="btn btn-primary btn-sm "><i class="fa fa-share"></i> New Transfer Shipment</button>
+
+        <div id="NewTransferShipmentDialog" class="modal container-dialog" aria-hidden="true" style="display: none;" tabindex="-1">
+            <div class="modal-dialog" style="width: 760px;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">New Transfer Shipment</h4>
+                    </div>
+                    <div class="modal-body">
+    <!-- BEGIN form-single[@name=NewTransferShipment] -->
+    <form name="NewTransferShipment" id="NewTransferShipment" method="post" action="http://127.0.0.1:18091/apps/marble/Shipment/FindShipment/createShipment">
+        <input type="hidden" name="moquiFormName" value="NewTransferShipment" style="">
+        <input type="hidden" name="moquiSessionToken" value="[REDACTED]" style="">
+        
+        <fieldset class="form-horizontal">
+    <input type="hidden" name="shipmentTypeEnumId" value="ShpTpTransfer" id="NewTransferShipment_shipmentTypeEnumId" style="">
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="NewTransferShipment_originFacilityId">Origin Facility</label>
+            <div class="col-sm-10">
+    
+    <select name="originFacilityId" class=" dynamic-options noResetSelect2" style="min-width:200px;" id="NewTransferShipment_originFacilityId">
+            <option value="">&nbsp;</option>
+    </select>
+    
+    
+        <script>
+            var NewTransferShipment_originFacilityIdS2Opts = { 
+                
+                minimumResultsForSearch:0, width:"100%", minimumInputLength:0,
+                ajax:{ url:"http://127.0.0.1:18091/apps/marble/Shipment/FindShipment/getFacilityList", type:"POST", dataType:"json", cache:true, delay:300,
+                    data:function(params) { return { moquiSessionToken: "[REDACTED]", term:(params.term || ''), pageIndex:(params.page || 1) - 1
+                        
+                        
+                    }},
+                    processResults:function(data, params) {
+                        var isDataArray = moqui.isArray(data);
+                        var list = isDataArray ? data : data.options;
+                        var newData = [];
+                        // funny case where select2 specifies no option.@value if empty so &nbsp; ends up passed with form submit; now filtered on server for \u00a0 only and set to null
+                        if (!params.page || params.page <= 1) newData.push({ id:'\u00a0', text:'\u00a0' });
+                        var labelField = "label"; var valueField = "value";
+                        $.each(list, function(idx, curObj) {
+                            var idVal = curObj[valueField]; if (!idVal) idVal = '\u00a0';
+                            newData.push({ id:idVal, text:curObj[labelField] })
+                        });
+                        var outObj = { results:newData };
+                        if (!isDataArray) {
+                            params.page = params.page || 1; // NOTE: 1 based index, is 0 based on server side
+                            var pageSize = data.pageSize || 20;
+                            outObj.pagination = { more: (data.count ? (params.page * pageSize) < data.count : false) };
+                        }
+                        return outObj;
+                    }
+                }
+            };
+            $("#NewTransferShipment_originFacilityId").select2(NewTransferShipment_originFacilityIdS2Opts);
+            function populate_NewTransferShipment_originFacilityId(params) {
+                    var hasAllParms = true;
+                    
+                    if (!hasAllParms) { $("#NewTransferShipment_originFacilityId").select2("destroy"); $('#NewTransferShipment_originFacilityId').html(""); $("#NewTransferShipment_originFacilityId").select2({ });  return; }
+                $.ajax({ type:"POST", url:"http://127.0.0.1:18091/apps/marble/Shipment/FindShipment/getFacilityList", data:{ moquiSessionToken: "[REDACTED]", term:((params && params.term) || '')}, dataType:"json"}).done(                    function(data) {
+                        var list = moqui.isArray(data) ? data : data.options;
+                        if (list) {
+                            var jqEl = $("#NewTransferShipment_originFacilityId");
+                            var bWasFocused = jqEl.next().hasClass('select2-container--focus');
+                            jqEl.select2("destroy");
+                            jqEl.html("");
+                            jqEl.append('<option value="">&nbsp;</option>');
+                            
+                            $.each(list, function(key, value) {
+                                var optionValue = value["value"];
+                                if (optionValue === "") {
+                                    jqEl.append("<option selected='selected' value='" + optionValue + "'>" + value["label"] + "</option>");
+                                } else {
+                                    jqEl.append("<option value='" + optionValue + "'>" + value["label"] + "</option>");
+                                }
+                            });
+                            $("#NewTransferShipment_originFacilityId").select2(NewTransferShipment_originFacilityIdS2Opts);
+                            if( bWasFocused ) jqEl.focus();
+                            setTimeout(function() { jqEl.trigger('change'); }, 50);
+                        }
+                    }
+                );
+            }
+            
+                
+
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="NewTransferShipment_destinationFacilityId">Destination Facility</label>
+            <div class="col-sm-10">
+    
+    <select name="destinationFacilityId" class=" dynamic-options noResetSelect2" style="min-width:200px;" id="NewTransferShipment_destinationFacilityId">
+            <option value="">&nbsp;</option>
+    </select>
+    
+    
+        <script>
+            var NewTransferShipment_destinationFacilityIdS2Opts = { 
+                
+                minimumResultsForSearch:0, width:"100%", minimumInputLength:0,
+                ajax:{ url:"http://127.0.0.1:18091/apps/marble/Shipment/FindShipment/getFacilityList", type:"POST", dataType:"json", cache:true, delay:300,
+                    data:function(params) { return { moquiSessionToken: "[REDACTED]", term:(params.term || ''), pageIndex:(params.page || 1) - 1
+                        
+                        
+                    }},
+                    processResults:function(data, params) {
+                        var isDataArray = moqui.isArray(data);
+                        var list = isDataArray ? data : data.options;
+                        var newData = [];
+                        // funny case where select2 specifies no option.@value if empty so &nbsp; ends up passed with form submit; now filtered on server for \u00a0 only and set to null
+                        if (!params.page || params.page <= 1) newData.push({ id:'\u00a0', text:'\u00a0' });
+                        var labelField = "label"; var valueField = "value";
+                        $.each(list, function(idx, curObj) {
+                            var idVal = curObj[valueField]; if (!idVal) idVal = '\u00a0';
+                            newData.push({ id:idVal, text:curObj[labelField] })
+                        });
+                        var outObj = { results:newData };
+                        if (!isDataArray) {
+                            params.page = params.page || 1; // NOTE: 1 based index, is 0 based on server side
+                            var pageSize = data.pageSize || 20;
+                            outObj.pagination = { more: (data.count ? (params.page * pageSize) < data.count : false) };
+                        }
+                        return outObj;
+                    }
+                }
+            };
+            $("#NewTransferShipment_destinationFacilityId").select2(NewTransferShipment_destinationFacilityIdS2Opts);
+            function populate_NewTransferShipment_destinationFacilityId(params) {
+                    var hasAllParms = true;
+                    
+                    if (!hasAllParms) { $("#NewTransferShipment_destinationFacilityId").select2("destroy"); $('#NewTransferShipment_destinationFacilityId').html(""); $("#NewTransferShipment_destinationFacilityId").select2({ });  return; }
+                $.ajax({ type:"POST", url:"http://127.0.0.1:18091/apps/marble/Shipment/FindShipment/getFacilityList", data:{ moquiSessionToken: "[REDACTED]", term:((params && params.term) || '')}, dataType:"json"}).done(                    function(data) {
+                        var list = moqui.isArray(data) ? data : data.options;
+                        if (list) {
+                            var jqEl = $("#NewTransferShipment_destinationFacilityId");
+                            var bWasFocused = jqEl.next().hasClass('select2-container--focus');
+                            jqEl.select2("destroy");
+                            jqEl.html("");
+                            jqEl.append('<option value="">&nbsp;</option>');
+                            
+                            $.each(list, function(key, value) {
+                                var optionValue = value["value"];
+                                if (optionValue === "") {
+                                    jqEl.append("<option selected='selected' value='" + optionValue + "'>" + value["label"] + "</option>");
+                                } else {
+                                    jqEl.append("<option value='" + optionValue + "'>" + value["label"] + "</option>");
+                                }
+                            });
+                            $("#NewTransferShipment_destinationFacilityId").select2(NewTransferShipment_destinationFacilityIdS2Opts);
+                            if( bWasFocused ) jqEl.focus();
+                            setTimeout(function() { jqEl.trigger('change'); }, 50);
+                        }
+                    }
+                );
+            }
+            
+                
+
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="NewTransferShipment_toPartyId">To Party</label>
+            <div class="col-sm-10">
+    
+    <select name="toPartyId" class=" dynamic-options noResetSelect2" style="min-width:200px;" id="NewTransferShipment_toPartyId">
+            <option value="">&nbsp;</option>
+    </select>
+    
+    
+        <script>
+            var NewTransferShipment_toPartyIdS2Opts = { 
+                
+                minimumResultsForSearch:0, width:"100%", minimumInputLength:2,
+                ajax:{ url:"http://127.0.0.1:18091/apps/marble/Shipment/FindShipment/searchPartyList", type:"POST", dataType:"json", cache:true, delay:300,
+                    data:function(params) { return { moquiSessionToken: "[REDACTED]", term:(params.term || ''), pageIndex:(params.page || 1) - 1
+                        
+                        
+                    }},
+                    processResults:function(data, params) {
+                        var isDataArray = moqui.isArray(data);
+                        var list = isDataArray ? data : data.options;
+                        var newData = [];
+                        // funny case where select2 specifies no option.@value if empty so &nbsp; ends up passed with form submit; now filtered on server for \u00a0 only and set to null
+                        if (!params.page || params.page <= 1) newData.push({ id:'\u00a0', text:'\u00a0' });
+                        var labelField = "label"; var valueField = "value";
+                        $.each(list, function(idx, curObj) {
+                            var idVal = curObj[valueField]; if (!idVal) idVal = '\u00a0';
+                            newData.push({ id:idVal, text:curObj[labelField] })
+                        });
+                        var outObj = { results:newData };
+                        if (!isDataArray) {
+                            params.page = params.page || 1; // NOTE: 1 based index, is 0 based on server side
+                            var pageSize = data.pageSize || 20;
+                            outObj.pagination = { more: (data.count ? (params.page * pageSize) < data.count : false) };
+                        }
+                        return outObj;
+                    }
+                }
+            };
+            $("#NewTransferShipment_toPartyId").select2(NewTransferShipment_toPartyIdS2Opts);
+            function populate_NewTransferShipment_toPartyId(params) {
+                    var hasAllParms = true;
+                    
+                    if (!hasAllParms) { $("#NewTransferShipment_toPartyId").select2("destroy"); $('#NewTransferShipment_toPartyId').html(""); $("#NewTransferShipment_toPartyId").select2({ });  return; }
+                $.ajax({ type:"POST", url:"http://127.0.0.1:18091/apps/marble/Shipment/FindShipment/searchPartyList", data:{ moquiSessionToken: "[REDACTED]", term:((params && params.term) || '')}, dataType:"json"}).done(                    function(data) {
+                        var list = moqui.isArray(data) ? data : data.options;
+                        if (list) {
+                            var jqEl = $("#NewTransferShipment_toPartyId");
+                            var bWasFocused = jqEl.next().hasClass('select2-container--focus');
+                            jqEl.select2("destroy");
+                            jqEl.html("");
+                            jqEl.append('<option value="">&nbsp;</option>');
+                            
+                            $.each(list, function(key, value) {
+                                var optionValue = value["value"];
+                                if (optionValue === "") {
+                                    jqEl.append("<option selected='selected' value='" + optionValue + "'>" + value["label"] + "</option>");
+                                } else {
+                                    jqEl.append("<option value='" + optionValue + "'>" + value["label"] + "</option>");
+                                }
+                            });
+                            $("#NewTransferShipment_toPartyId").select2(NewTransferShipment_toPartyIdS2Opts);
+                            if( bWasFocused ) jqEl.focus();
+                            setTimeout(function() { jqEl.trigger('change'); }, 50);
+                        }
+                    }
+                );
+            }
+            
+                
+
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="NewTransferShipment_estimatedReadyDate">Ready Date</label>
+            <div class="col-sm-10">
+    
+
+
+
+        <div class="input-group date" id="NewTransferShipment_estimatedReadyDate">
+            <input type="text" class="form-control" name="estimatedReadyDate" value="" size="16" maxlength="23" style="">
+            <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+        </div>
+        <script>
+            $('#NewTransferShipment_estimatedReadyDate').datetimepicker({toolbarPlacement:'top', showClose:true, showClear:true, showTodayButton:true,
+                useStrict:true, defaultDate: '' && moment('','YYYY-MM-DD HH:mm'),
+                format:'YYYY-MM-DD HH:mm', extraFormats:['YYYY-MM-DD HH:mm', 'YYYY-MM-DD HH:mm:ss', 'MM/DD/YYYY HH:mm'], stepping:5, locale:"en-US",
+                keyBinds: {t: function() {this.date(moment());}, up: function () { this.date(this.date().clone().add(1, 'd')); }, down: function () { this.date(this.date().clone().subtract(1, 'd')); }, 'control up': function () { this.date(this.date().clone().add(1, 'd')); }, 'control down': function () { this.date(this.date().clone().subtract(1, 'd')); }}});
+            $('#NewTransferShipment_estimatedReadyDate').on("dp.change", function() { var jqEl = $('#NewTransferShipment_estimatedReadyDate'); jqEl.val(jqEl.find("input").first().val()); jqEl.trigger("change"); });
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <div class="col-sm-2 hidden-xs">&nbsp;</div>
+            <div class="col-sm-10">
+    
+    <button type="submit" name="submitButton" value="submitButton" id="NewTransferShipment_submitButton" class="btn btn-primary btn-sm">
+Create    </button>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        </fieldset>
+    </form>
+        <script>
+            $("#NewTransferShipment").validate({ errorClass: 'help-block', errorElement: 'span',
+                highlight: function(element, errorClass, validClass) { $(element).parents('.form-group').removeClass('has-success').addClass('has-error'); },
+                unhighlight: function(element, errorClass, validClass) { $(element).parents('.form-group').removeClass('has-error').addClass('has-success'); }
+            });
+            $('#NewTransferShipment [data-toggle="tooltip"]').tooltip({placement:'auto top'});
+
+        </script>
+    <!-- END   form-single[@name=NewTransferShipment] -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>$('#NewTransferShipmentDialog').on('shown.bs.modal', function() {
+            $("#NewTransferShipmentDialog :not(.noResetSelect2)>select:not(.noResetSelect2)").select2({ });
+            var defFocus = $("#NewTransferShipmentDialog .default-focus");
+            if (defFocus.length) { defFocus.focus(); } else { $("#NewTransferShipmentDialog form :input:visible:first").focus(); }
+        });</script>
+            <a href="http://127.0.0.1:18091/apps/marble/Shipment/PackageTracking" class="btn btn-primary btn-sm">Package Tracking</a>    <!-- BEGIN form-list[@name=ShipmentList] -->
+
+        <div id="ShipmentList_hdialog" class="modal" aria-hidden="true" style="display: none;" tabindex="-1">
+            <div class="modal-dialog" style="width: 800px;"><div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Find Options</h4>
+                </div>
+                <div class="modal-body">
+                <h4 style="margin-top: 0;">Saved Finds</h4>
+                        <p>No find parameters, choose some to save a new find or update existing</p>
+                <h4>Find Parameters</h4>
+                    <form name="ShipmentList_header" id="ShipmentList_header" method="post" action="http://127.0.0.1:18091/apps/marble/Shipment/FindShipment">
+                        <input type="hidden" name="moquiSessionToken" value="[REDACTED]" style="">
+                        
+                        
+                        <fieldset class="form-horizontal">
+                            <div class="form-group"><div class="col-sm-2">&nbsp;</div><div class="col-sm-10">
+                                <button type="button" class="btn btn-primary btn-sm" onclick="ShipmentList_header_clearForm()">Clear Parameters</button></div></div>
+
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="ShipmentList_header_orderByField">Order By</label>
+                                <div class="col-sm-10">
+                                    <select name="orderBySelect" id="ShipmentList_header_orderBySelect" multiple="multiple" style="width: 100%;" class="noResetSelect2">
+                                                <option value="shipmentId">Shipment (Asc)</option>
+                                                <option value="-shipmentId">Shipment (Desc)</option>
+                                                <option value="shipmentMethodEnumId">Ship Method (Asc)</option>
+                                                <option value="-shipmentMethodEnumId">Ship Method (Desc)</option>
+                                                <option value="shipmentTypeEnumId">Type (Asc)</option>
+                                                <option value="-shipmentTypeEnumId">Type (Desc)</option>
+                                                <option value="priority">Priority (Asc)</option>
+                                                <option value="-priority">Priority (Desc)</option>
+                                                <option value="entryDate">Entry Date (Asc)</option>
+                                                <option value="-entryDate">Entry Date (Desc)</option>
+                                                <option value="statusId">Status (Asc)</option>
+                                                <option value="-statusId">Status (Desc)</option>
+                                                <option value="shipWorkEffortId">Picklist (Asc)</option>
+                                                <option value="-shipWorkEffortId">Picklist (Desc)</option>
+                                                <option value="shipAfterDate">Ship After (Asc)</option>
+                                                <option value="-shipAfterDate">Ship After (Desc)</option>
+                                                <option value="shipBeforeDate">Ship Before (Asc)</option>
+                                                <option value="-shipBeforeDate">Ship Before (Desc)</option>
+                                                <option value="actualStartDate">Actual Start (Asc)</option>
+                                                <option value="-actualStartDate">Actual Start (Desc)</option>
+                                                <option value="actualArrivalDate">Actual Arrival (Asc)</option>
+                                                <option value="-actualArrivalDate">Actual Arrival (Desc)</option>
+                                                <option value="handlingInstructions">Shipping Instructions (Asc)</option>
+                                                <option value="-handlingInstructions">Shipping Instructions (Desc)</option>
+                                                <option value="otherPartyOrderId">Their Order (Asc)</option>
+                                                <option value="-otherPartyOrderId">Their Order (Desc)</option>
+                                                <option value="estimatedArrivalDate">Est. Arrival (Asc)</option>
+                                                <option value="-estimatedArrivalDate">Est. Arrival (Desc)</option>
+                                                <option value="estimatedReadyDate">Est. Ready (Asc)</option>
+                                                <option value="-estimatedReadyDate">Est. Ready (Desc)</option>
+                                    </select>
+                                    <input type="hidden" id="ShipmentList_header_orderByField" name="orderByField" value="-entryDate,shipmentId" style="">
+                                </div>
+                            </div>
+                            <script>
+                                function ShipmentList_header_clearForm() {
+                                    var jqEl = $("#ShipmentList_header");
+                                    jqEl.find(':radio, :checkbox').removeAttr('checked');
+                                    jqEl.find('textarea, :text, select').val('').trigger('change');
+                                    return false;
+                                }
+                                $("#ShipmentList_header_orderBySelect").selectivity({ positionDropdown: function(dropdownEl, selectEl) { dropdownEl.css("width", "300px"); } })[0].selectivity.filterResults = function(results) {
+                                    // Filter out asc and desc options if anyone selected.
+                                    return results.filter(function(item){return !this._data.some(function(data_item) {return data_item.id.substring(1) === item.id.substring(1);});}, this);
+                                };
+                                    $("#ShipmentList_header_orderBySelect").selectivity("value", ['-entryDate','shipmentId']);
+                                $("div#ShipmentList_header_orderBySelect").on("change", function(evt) {
+                                    if (evt.value) $("#ShipmentList_header_orderByField").val(evt.value.join(","));
+                                });
+                            </script>
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="ShipmentList_header_shipmentId">Shipment</label>
+            <div class="col-sm-10">
+    
+<span class="form-text-find">
+        <input type="hidden" name="shipmentId_op" value="contains" style="">
+    <input type="text" class="form-control" name="shipmentId" value="" size="10" id="ShipmentList_header_shipmentId" style="">
+        <input type="hidden" name="shipmentId_ic" value="Y" style="">
+</span>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="ShipmentList_header_shipmentMethodEnumId">Ship Method</label>
+            <div class="col-sm-10">
+    
+    <select name="shipmentMethodEnumId" class="  noResetSelect2" id="ShipmentList_header_shipmentMethodEnumId" multiple="multiple">
+            <option value="ShMthNextDayPri">Next Day Priority</option>
+            <option value="ShMthNextDay">Next Day Standard</option>
+            <option value="ShMthSecondDay">Second Day</option>
+            <option value="ShMthThirdDay">Third Day</option>
+            <option value="ShMthGroundCom">Ground Commercial</option>
+            <option value="ShMthGround">Ground Parcel</option>
+            <option value="ShMthMotor">Motor (Common Carrier)</option>
+            <option value="ShMthPickUp">Customer Pick Up</option>
+    </select>
+    <span><input type="checkbox" class="form-control" name="shipmentMethodEnumId_not" value="Y" style="">&nbsp;Not</span>
+    <input type="hidden" id="ShipmentList_header_shipmentMethodEnumId_op" name="shipmentMethodEnumId_op" value="in" style="">
+        <script>$("#ShipmentList_header_shipmentMethodEnumId").select2({ closeOnSelect:false, width:"100%",  });</script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="ShipmentList_header_shipmentTypeEnumId">Type</label>
+            <div class="col-sm-10">
+    
+    <select name="shipmentTypeEnumId" class=" " id="ShipmentList_header_shipmentTypeEnumId">
+            <option value="">&nbsp;</option>
+            <option value="ShpTpDrop">Drop Shipment</option>
+            <option value="ShpTpIncoming">Incoming</option>
+            <option value="ShpTpOutgoing">Outgoing</option>
+            <option value="ShpTpPurchaseReturn">Purchase Return</option>
+            <option value="ShpTpPurchase">Purchase Shipment</option>
+            <option value="ShpTpSalesReturn">Sales Return</option>
+            <option value="ShpTpSales">Sales Shipment</option>
+            <option value="ShpTpTransfer">Transfer</option>
+    </select>
+    <span><input type="checkbox" class="form-control" name="shipmentTypeEnumId_not" value="Y" style="">&nbsp;Not</span>
+    
+        <script>$("#ShipmentList_header_shipmentTypeEnumId").select2({  });</script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="ShipmentList_header_priority">Priority</label>
+            <div class="col-sm-10">
+    
+<span class="form-range-find">
+    <span>From&nbsp;</span><input type="text" class="form-control" name="priority_from" value="" size="4" id="ShipmentList_header_priority_from" style="">
+</span>
+<span class="form-range-find">
+    <span>Thru&nbsp;</span><input type="text" class="form-control" name="priority_thru" value="" size="4" id="ShipmentList_header_priority_thru" style="">
+</span>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="ShipmentList_header_entryDate">Entry Date</label>
+            <div class="col-sm-10">
+    
+    <div class="date-period">
+        <select name="entryDate_poffset" id="ShipmentList_header_entryDate_poffset">
+                <option value="">&nbsp;</option>
+            <option value="0">This</option>
+            <option value="-1">Last</option>
+            <option value="1">Next</option>
+            <option value="-2">-2</option>
+            <option value="2">+2</option>
+            <option value="-3" selected="selected">-3</option>
+            <option value="-4">-4</option>
+            <option value="-6">-6</option>
+            <option value="-12">-12</option>
+        </select>
+        <select name="entryDate_period" id="ShipmentList_header_entryDate_period">
+            <option value="">&nbsp;</option>
+            <option value="day">Day</option>
+            <option value="7d">7 Days</option>
+            <option value="30d" selected="selected">30 Days</option>
+            <option value="week">Week</option>
+            <option value="weeks">Weeks</option>
+            <option value="month">Month</option>
+            <option value="months">Months</option>
+            <option value="quarter">Quarter</option>
+            <option value="year">Year</option>
+            <option value="7r">+/-7d</option>
+            <option value="30r">+/-30d</option>
+        </select>
+        <div class="input-group date" id="ShipmentList_header_entryDate_pdate">
+            <input type="text" class="form-control" name="entryDate_pdate" value="" size="10" maxlength="10" style="">
+            <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+        </div>
+        <script>
+            $("#ShipmentList_header_entryDate_poffset").select2({ }); $("#ShipmentList_header_entryDate_period").select2({ });
+            $('#ShipmentList_header_entryDate_pdate').datetimepicker({toolbarPlacement:'top', showClose:true, showClear:true, showTodayButton:true, useStrict:true, defaultDate: '' && moment('','YYYY-MM-DD'), format:'YYYY-MM-DD', extraFormats:['l', 'L', 'YYYY-MM-DD'], locale:"en-US", keyBinds: {t: function() {this.date(moment());}, up: function () { this.date(this.date().clone().add(1, 'd')); }, down: function () { this.date(this.date().clone().subtract(1, 'd')); }, 'control up': function () { this.date(this.date().clone().add(1, 'd')); }, 'control down': function () { this.date(this.date().clone().subtract(1, 'd')); }}});
+        </script>
+    </div>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="ShipmentList_header_statusId">Status</label>
+            <div class="col-sm-10">
+    
+    <select name="statusId" class="  noResetSelect2" id="ShipmentList_header_statusId" multiple="multiple">
+            <option selected="selected" value="ShipInput">Input</option>
+            <option selected="selected" value="ShipScheduled">Scheduled</option>
+            <option selected="selected" value="ShipPicked">Picked</option>
+            <option value="ShipPacked">Packed</option>
+            <option value="ShipShipped">Shipped</option>
+            <option value="ShipDelivered">Delivered</option>
+            <option value="ShipRejected">Rejected</option>
+            <option value="ShipCancelled">Cancelled</option>
+    </select>
+    <span><input type="checkbox" class="form-control" name="statusId_not" value="Y" style="">&nbsp;Not</span>
+    <input type="hidden" id="ShipmentList_header_statusId_op" name="statusId_op" value="in" style="">
+        <script>$("#ShipmentList_header_statusId").select2({ closeOnSelect:false, width:"100%",  });</script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="ShipmentList_header_shipWorkEffortId">Picklist</label>
+            <div class="col-sm-10">
+    
+<span class="form-text-find">
+        <input type="hidden" name="shipWorkEffortId_op" value="contains" style="">
+    <input type="text" class="form-control" name="shipWorkEffortId" value="" size="15" id="ShipmentList_header_shipWorkEffortId" style="">
+        <input type="hidden" name="shipWorkEffortId_ic" value="Y" style="">
+</span>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="ShipmentList_header_findProductId">Product</label>
+            <div class="col-sm-10">
+    
+    <select name="findProductId" class=" dynamic-options noResetSelect2" style="min-width:200px;" id="ShipmentList_header_findProductId" multiple="multiple">
+    </select>
+    
+    <input type="hidden" id="ShipmentList_header_findProductId_op" name="findProductId_op" value="in" style="">
+        <script>
+            var ShipmentList_header_findProductIdS2Opts = { 
+                closeOnSelect:false,
+                minimumResultsForSearch:0, width:"100%", minimumInputLength:0,
+                ajax:{ url:"http://127.0.0.1:18091/apps/marble/Shipment/FindShipment/getProductList", type:"POST", dataType:"json", cache:true, delay:300,
+                    data:function(params) { return { moquiSessionToken: "[REDACTED]", term:(params.term || ''), pageIndex:(params.page || 1) - 1
+                        
+                        
+                    }},
+                    processResults:function(data, params) {
+                        var isDataArray = moqui.isArray(data);
+                        var list = isDataArray ? data : data.options;
+                        var newData = [];
+                        // funny case where select2 specifies no option.@value if empty so &nbsp; ends up passed with form submit; now filtered on server for \u00a0 only and set to null
+                        if (!params.page || params.page <= 1) newData.push({ id:'\u00a0', text:'\u00a0' });
+                        var labelField = "label"; var valueField = "value";
+                        $.each(list, function(idx, curObj) {
+                            var idVal = curObj[valueField]; if (!idVal) idVal = '\u00a0';
+                            newData.push({ id:idVal, text:curObj[labelField] })
+                        });
+                        var outObj = { results:newData };
+                        if (!isDataArray) {
+                            params.page = params.page || 1; // NOTE: 1 based index, is 0 based on server side
+                            var pageSize = data.pageSize || 20;
+                            outObj.pagination = { more: (data.count ? (params.page * pageSize) < data.count : false) };
+                        }
+                        return outObj;
+                    }
+                }
+            };
+            $("#ShipmentList_header_findProductId").select2(ShipmentList_header_findProductIdS2Opts);
+            function populate_ShipmentList_header_findProductId(params) {
+                    var hasAllParms = true;
+                    
+                    if (!hasAllParms) { $("#ShipmentList_header_findProductId").select2("destroy"); $('#ShipmentList_header_findProductId').html(""); $("#ShipmentList_header_findProductId").select2({ });  return; }
+                $.ajax({ type:"POST", url:"http://127.0.0.1:18091/apps/marble/Shipment/FindShipment/getProductList", data:{ moquiSessionToken: "[REDACTED]", term:((params && params.term) || '')}, dataType:"json"}).done(                    function(data) {
+                        var list = moqui.isArray(data) ? data : data.options;
+                        if (list) {
+                            var jqEl = $("#ShipmentList_header_findProductId");
+                            var bWasFocused = jqEl.next().hasClass('select2-container--focus');
+                            jqEl.select2("destroy");
+                            jqEl.html("");
+                            jqEl.append('<option value="">&nbsp;</option>');
+                            var currentValues = [""];
+                            $.each(list, function(key, value) {
+                                var optionValue = value["value"];
+                                if (currentValues.indexOf(optionValue) >= 0) {
+                                    jqEl.append("<option selected='selected' value='" + optionValue + "'>" + value["label"] + "</option>");
+                                } else {
+                                    jqEl.append("<option value='" + optionValue + "'>" + value["label"] + "</option>");
+                                }
+                            });
+                            $("#ShipmentList_header_findProductId").select2(ShipmentList_header_findProductIdS2Opts);
+                            if( bWasFocused ) jqEl.focus();
+                            setTimeout(function() { jqEl.trigger('change'); }, 50);
+                        }
+                    }
+                );
+            }
+            
+                
+
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="ShipmentList_header_shipAfterDate">Ship After</label>
+            <div class="col-sm-10">
+    
+    <div class="date-period">
+        <select name="shipAfterDate_poffset" id="ShipmentList_header_shipAfterDate_poffset">
+                <option value="">&nbsp;</option>
+            <option value="0">This</option>
+            <option value="-1">Last</option>
+            <option value="1">Next</option>
+            <option value="-2">-2</option>
+            <option value="2">+2</option>
+            <option value="-3">-3</option>
+            <option value="-4">-4</option>
+            <option value="-6">-6</option>
+            <option value="-12">-12</option>
+        </select>
+        <select name="shipAfterDate_period" id="ShipmentList_header_shipAfterDate_period">
+            <option value="">&nbsp;</option>
+            <option value="day">Day</option>
+            <option value="7d">7 Days</option>
+            <option value="30d">30 Days</option>
+            <option value="week">Week</option>
+            <option value="weeks">Weeks</option>
+            <option value="month">Month</option>
+            <option value="months">Months</option>
+            <option value="quarter">Quarter</option>
+            <option value="year">Year</option>
+            <option value="7r">+/-7d</option>
+            <option value="30r">+/-30d</option>
+        </select>
+        <div class="input-group date" id="ShipmentList_header_shipAfterDate_pdate">
+            <input type="text" class="form-control" name="shipAfterDate_pdate" value="" size="10" maxlength="10" style="">
+            <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+        </div>
+        <script>
+            $("#ShipmentList_header_shipAfterDate_poffset").select2({ }); $("#ShipmentList_header_shipAfterDate_period").select2({ });
+            $('#ShipmentList_header_shipAfterDate_pdate').datetimepicker({toolbarPlacement:'top', showClose:true, showClear:true, showTodayButton:true, useStrict:true, defaultDate: '' && moment('','YYYY-MM-DD'), format:'YYYY-MM-DD', extraFormats:['l', 'L', 'YYYY-MM-DD'], locale:"en-US", keyBinds: {t: function() {this.date(moment());}, up: function () { this.date(this.date().clone().add(1, 'd')); }, down: function () { this.date(this.date().clone().subtract(1, 'd')); }, 'control up': function () { this.date(this.date().clone().add(1, 'd')); }, 'control down': function () { this.date(this.date().clone().subtract(1, 'd')); }}});
+        </script>
+    </div>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="ShipmentList_header_shipBeforeDate">Ship Before</label>
+            <div class="col-sm-10">
+    
+    <div class="date-period">
+        <select name="shipBeforeDate_poffset" id="ShipmentList_header_shipBeforeDate_poffset">
+                <option value="">&nbsp;</option>
+            <option value="0">This</option>
+            <option value="-1">Last</option>
+            <option value="1">Next</option>
+            <option value="-2">-2</option>
+            <option value="2">+2</option>
+            <option value="-3">-3</option>
+            <option value="-4">-4</option>
+            <option value="-6">-6</option>
+            <option value="-12">-12</option>
+        </select>
+        <select name="shipBeforeDate_period" id="ShipmentList_header_shipBeforeDate_period">
+            <option value="">&nbsp;</option>
+            <option value="day">Day</option>
+            <option value="7d">7 Days</option>
+            <option value="30d">30 Days</option>
+            <option value="week">Week</option>
+            <option value="weeks">Weeks</option>
+            <option value="month">Month</option>
+            <option value="months">Months</option>
+            <option value="quarter">Quarter</option>
+            <option value="year">Year</option>
+            <option value="7r">+/-7d</option>
+            <option value="30r">+/-30d</option>
+        </select>
+        <div class="input-group date" id="ShipmentList_header_shipBeforeDate_pdate">
+            <input type="text" class="form-control" name="shipBeforeDate_pdate" value="" size="10" maxlength="10" style="">
+            <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+        </div>
+        <script>
+            $("#ShipmentList_header_shipBeforeDate_poffset").select2({ }); $("#ShipmentList_header_shipBeforeDate_period").select2({ });
+            $('#ShipmentList_header_shipBeforeDate_pdate').datetimepicker({toolbarPlacement:'top', showClose:true, showClear:true, showTodayButton:true, useStrict:true, defaultDate: '' && moment('','YYYY-MM-DD'), format:'YYYY-MM-DD', extraFormats:['l', 'L', 'YYYY-MM-DD'], locale:"en-US", keyBinds: {t: function() {this.date(moment());}, up: function () { this.date(this.date().clone().add(1, 'd')); }, down: function () { this.date(this.date().clone().subtract(1, 'd')); }, 'control up': function () { this.date(this.date().clone().add(1, 'd')); }, 'control down': function () { this.date(this.date().clone().subtract(1, 'd')); }}});
+        </script>
+    </div>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="ShipmentList_header_actualStartDate">Actual Start</label>
+            <div class="col-sm-10">
+    
+    <div class="date-period">
+        <select name="actualStartDate_poffset" id="ShipmentList_header_actualStartDate_poffset">
+                <option value="">&nbsp;</option>
+            <option value="0">This</option>
+            <option value="-1">Last</option>
+            <option value="1">Next</option>
+            <option value="-2">-2</option>
+            <option value="2">+2</option>
+            <option value="-3">-3</option>
+            <option value="-4">-4</option>
+            <option value="-6">-6</option>
+            <option value="-12">-12</option>
+        </select>
+        <select name="actualStartDate_period" id="ShipmentList_header_actualStartDate_period">
+            <option value="">&nbsp;</option>
+            <option value="day">Day</option>
+            <option value="7d">7 Days</option>
+            <option value="30d">30 Days</option>
+            <option value="week">Week</option>
+            <option value="weeks">Weeks</option>
+            <option value="month">Month</option>
+            <option value="months">Months</option>
+            <option value="quarter">Quarter</option>
+            <option value="year">Year</option>
+            <option value="7r">+/-7d</option>
+            <option value="30r">+/-30d</option>
+        </select>
+        <div class="input-group date" id="ShipmentList_header_actualStartDate_pdate">
+            <input type="text" class="form-control" name="actualStartDate_pdate" value="" size="10" maxlength="10" style="">
+            <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+        </div>
+        <script>
+            $("#ShipmentList_header_actualStartDate_poffset").select2({ }); $("#ShipmentList_header_actualStartDate_period").select2({ });
+            $('#ShipmentList_header_actualStartDate_pdate').datetimepicker({toolbarPlacement:'top', showClose:true, showClear:true, showTodayButton:true, useStrict:true, defaultDate: '' && moment('','YYYY-MM-DD'), format:'YYYY-MM-DD', extraFormats:['l', 'L', 'YYYY-MM-DD'], locale:"en-US", keyBinds: {t: function() {this.date(moment());}, up: function () { this.date(this.date().clone().add(1, 'd')); }, down: function () { this.date(this.date().clone().subtract(1, 'd')); }, 'control up': function () { this.date(this.date().clone().add(1, 'd')); }, 'control down': function () { this.date(this.date().clone().subtract(1, 'd')); }}});
+        </script>
+    </div>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="ShipmentList_header_actualArrivalDate">Actual Arrival</label>
+            <div class="col-sm-10">
+    
+    <div class="date-period">
+        <select name="actualArrivalDate_poffset" id="ShipmentList_header_actualArrivalDate_poffset">
+                <option value="">&nbsp;</option>
+            <option value="0">This</option>
+            <option value="-1">Last</option>
+            <option value="1">Next</option>
+            <option value="-2">-2</option>
+            <option value="2">+2</option>
+            <option value="-3">-3</option>
+            <option value="-4">-4</option>
+            <option value="-6">-6</option>
+            <option value="-12">-12</option>
+        </select>
+        <select name="actualArrivalDate_period" id="ShipmentList_header_actualArrivalDate_period">
+            <option value="">&nbsp;</option>
+            <option value="day">Day</option>
+            <option value="7d">7 Days</option>
+            <option value="30d">30 Days</option>
+            <option value="week">Week</option>
+            <option value="weeks">Weeks</option>
+            <option value="month">Month</option>
+            <option value="months">Months</option>
+            <option value="quarter">Quarter</option>
+            <option value="year">Year</option>
+            <option value="7r">+/-7d</option>
+            <option value="30r">+/-30d</option>
+        </select>
+        <div class="input-group date" id="ShipmentList_header_actualArrivalDate_pdate">
+            <input type="text" class="form-control" name="actualArrivalDate_pdate" value="" size="10" maxlength="10" style="">
+            <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+        </div>
+        <script>
+            $("#ShipmentList_header_actualArrivalDate_poffset").select2({ }); $("#ShipmentList_header_actualArrivalDate_period").select2({ });
+            $('#ShipmentList_header_actualArrivalDate_pdate').datetimepicker({toolbarPlacement:'top', showClose:true, showClear:true, showTodayButton:true, useStrict:true, defaultDate: '' && moment('','YYYY-MM-DD'), format:'YYYY-MM-DD', extraFormats:['l', 'L', 'YYYY-MM-DD'], locale:"en-US", keyBinds: {t: function() {this.date(moment());}, up: function () { this.date(this.date().clone().add(1, 'd')); }, down: function () { this.date(this.date().clone().subtract(1, 'd')); }, 'control up': function () { this.date(this.date().clone().add(1, 'd')); }, 'control down': function () { this.date(this.date().clone().subtract(1, 'd')); }}});
+        </script>
+    </div>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="ShipmentList_header_originFacilityId">Origin Facility</label>
+            <div class="col-sm-10">
+    
+    <select name="originFacilityId" class=" dynamic-options noResetSelect2" style="min-width:200px;" id="ShipmentList_header_originFacilityId">
+            <option value="">&nbsp;</option>
+    </select>
+    
+    
+        <script>
+            var ShipmentList_header_originFacilityIdS2Opts = { 
+                
+                minimumResultsForSearch:0, width:"100%", minimumInputLength:0,
+                ajax:{ url:"http://127.0.0.1:18091/apps/marble/Shipment/FindShipment/getFacilityList", type:"POST", dataType:"json", cache:true, delay:300,
+                    data:function(params) { return { moquiSessionToken: "[REDACTED]", term:(params.term || ''), pageIndex:(params.page || 1) - 1
+                        
+                        
+                    }},
+                    processResults:function(data, params) {
+                        var isDataArray = moqui.isArray(data);
+                        var list = isDataArray ? data : data.options;
+                        var newData = [];
+                        // funny case where select2 specifies no option.@value if empty so &nbsp; ends up passed with form submit; now filtered on server for \u00a0 only and set to null
+                        if (!params.page || params.page <= 1) newData.push({ id:'\u00a0', text:'\u00a0' });
+                        var labelField = "label"; var valueField = "value";
+                        $.each(list, function(idx, curObj) {
+                            var idVal = curObj[valueField]; if (!idVal) idVal = '\u00a0';
+                            newData.push({ id:idVal, text:curObj[labelField] })
+                        });
+                        var outObj = { results:newData };
+                        if (!isDataArray) {
+                            params.page = params.page || 1; // NOTE: 1 based index, is 0 based on server side
+                            var pageSize = data.pageSize || 20;
+                            outObj.pagination = { more: (data.count ? (params.page * pageSize) < data.count : false) };
+                        }
+                        return outObj;
+                    }
+                }
+            };
+            $("#ShipmentList_header_originFacilityId").select2(ShipmentList_header_originFacilityIdS2Opts);
+            function populate_ShipmentList_header_originFacilityId(params) {
+                    var hasAllParms = true;
+                    
+                    if (!hasAllParms) { $("#ShipmentList_header_originFacilityId").select2("destroy"); $('#ShipmentList_header_originFacilityId').html(""); $("#ShipmentList_header_originFacilityId").select2({ });  return; }
+                $.ajax({ type:"POST", url:"http://127.0.0.1:18091/apps/marble/Shipment/FindShipment/getFacilityList", data:{ moquiSessionToken: "[REDACTED]", term:((params && params.term) || '')}, dataType:"json"}).done(                    function(data) {
+                        var list = moqui.isArray(data) ? data : data.options;
+                        if (list) {
+                            var jqEl = $("#ShipmentList_header_originFacilityId");
+                            var bWasFocused = jqEl.next().hasClass('select2-container--focus');
+                            jqEl.select2("destroy");
+                            jqEl.html("");
+                            jqEl.append('<option value="">&nbsp;</option>');
+                            
+                            $.each(list, function(key, value) {
+                                var optionValue = value["value"];
+                                if (optionValue === "") {
+                                    jqEl.append("<option selected='selected' value='" + optionValue + "'>" + value["label"] + "</option>");
+                                } else {
+                                    jqEl.append("<option value='" + optionValue + "'>" + value["label"] + "</option>");
+                                }
+                            });
+                            $("#ShipmentList_header_originFacilityId").select2(ShipmentList_header_originFacilityIdS2Opts);
+                            if( bWasFocused ) jqEl.focus();
+                            setTimeout(function() { jqEl.trigger('change'); }, 50);
+                        }
+                    }
+                );
+            }
+            
+                
+
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="ShipmentList_header_destinationFacilityId">Dest. Facility</label>
+            <div class="col-sm-10">
+    
+    <select name="destinationFacilityId" class=" dynamic-options noResetSelect2" style="min-width:200px;" id="ShipmentList_header_destinationFacilityId">
+            <option value="">&nbsp;</option>
+    </select>
+    
+    
+        <script>
+            var ShipmentList_header_destinationFacilityIdS2Opts = { 
+                
+                minimumResultsForSearch:0, width:"100%", minimumInputLength:0,
+                ajax:{ url:"http://127.0.0.1:18091/apps/marble/Shipment/FindShipment/getFacilityList", type:"POST", dataType:"json", cache:true, delay:300,
+                    data:function(params) { return { moquiSessionToken: "[REDACTED]", term:(params.term || ''), pageIndex:(params.page || 1) - 1
+                        
+                        
+                    }},
+                    processResults:function(data, params) {
+                        var isDataArray = moqui.isArray(data);
+                        var list = isDataArray ? data : data.options;
+                        var newData = [];
+                        // funny case where select2 specifies no option.@value if empty so &nbsp; ends up passed with form submit; now filtered on server for \u00a0 only and set to null
+                        if (!params.page || params.page <= 1) newData.push({ id:'\u00a0', text:'\u00a0' });
+                        var labelField = "label"; var valueField = "value";
+                        $.each(list, function(idx, curObj) {
+                            var idVal = curObj[valueField]; if (!idVal) idVal = '\u00a0';
+                            newData.push({ id:idVal, text:curObj[labelField] })
+                        });
+                        var outObj = { results:newData };
+                        if (!isDataArray) {
+                            params.page = params.page || 1; // NOTE: 1 based index, is 0 based on server side
+                            var pageSize = data.pageSize || 20;
+                            outObj.pagination = { more: (data.count ? (params.page * pageSize) < data.count : false) };
+                        }
+                        return outObj;
+                    }
+                }
+            };
+            $("#ShipmentList_header_destinationFacilityId").select2(ShipmentList_header_destinationFacilityIdS2Opts);
+            function populate_ShipmentList_header_destinationFacilityId(params) {
+                    var hasAllParms = true;
+                    
+                    if (!hasAllParms) { $("#ShipmentList_header_destinationFacilityId").select2("destroy"); $('#ShipmentList_header_destinationFacilityId').html(""); $("#ShipmentList_header_destinationFacilityId").select2({ });  return; }
+                $.ajax({ type:"POST", url:"http://127.0.0.1:18091/apps/marble/Shipment/FindShipment/getFacilityList", data:{ moquiSessionToken: "[REDACTED]", term:((params && params.term) || '')}, dataType:"json"}).done(                    function(data) {
+                        var list = moqui.isArray(data) ? data : data.options;
+                        if (list) {
+                            var jqEl = $("#ShipmentList_header_destinationFacilityId");
+                            var bWasFocused = jqEl.next().hasClass('select2-container--focus');
+                            jqEl.select2("destroy");
+                            jqEl.html("");
+                            jqEl.append('<option value="">&nbsp;</option>');
+                            
+                            $.each(list, function(key, value) {
+                                var optionValue = value["value"];
+                                if (optionValue === "") {
+                                    jqEl.append("<option selected='selected' value='" + optionValue + "'>" + value["label"] + "</option>");
+                                } else {
+                                    jqEl.append("<option value='" + optionValue + "'>" + value["label"] + "</option>");
+                                }
+                            });
+                            $("#ShipmentList_header_destinationFacilityId").select2(ShipmentList_header_destinationFacilityIdS2Opts);
+                            if( bWasFocused ) jqEl.focus();
+                            setTimeout(function() { jqEl.trigger('change'); }, 50);
+                        }
+                    }
+                );
+            }
+            
+                
+
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="ShipmentList_header_productStoreId">Store</label>
+            <div class="col-sm-10">
+    
+    <select name="productStoreId" class="" id="ShipmentList_header_productStoreId">
+            <option value="">&nbsp;</option>
+            <option value="POPC_DEFAULT">POPC_DEFAULT: Ziziwork Retail Store</option>
+    </select>
+    
+    
+        <script>$("#ShipmentList_header_productStoreId").select2({  });</script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="ShipmentList_header_handlingInstructions">Shipping Instructions</label>
+            <div class="col-sm-10">
+    
+<span class="form-text-find">
+        <span><input type="checkbox" class="form-control" name="handlingInstructions_not" value="Y" style="">&nbsp;Not</span>
+        <select name="handlingInstructions_op" class="form-control">
+            <option value="equals">Equals</option>
+            <option value="like">Like</option>
+            <option value="contains" selected="selected">Contains</option>
+            <option value="begins">Begins With</option>
+            <option value="empty">Empty</option>        </select>
+    <input type="text" class="form-control" name="handlingInstructions" value="" size="30" id="ShipmentList_header_handlingInstructions" style="">
+        <span><input type="checkbox" class="form-control" name="handlingInstructions_ic" value="Y" checked="checked" style="">&nbsp;Ignore Case</span>
+</span>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="ShipmentList_header_fromPartyId">From Party</label>
+            <div class="col-sm-10">
+    
+    <select name="fromPartyId" class=" dynamic-options noResetSelect2" style="min-width:200px;" id="ShipmentList_header_fromPartyId">
+            <option value="">&nbsp;</option>
+    </select>
+    
+    
+        <script>
+            var ShipmentList_header_fromPartyIdS2Opts = { 
+                
+                minimumResultsForSearch:0, width:"100%", minimumInputLength:2,
+                ajax:{ url:"http://127.0.0.1:18091/apps/marble/Shipment/FindShipment/searchPartyList", type:"POST", dataType:"json", cache:true, delay:300,
+                    data:function(params) { return { moquiSessionToken: "[REDACTED]", term:(params.term || ''), pageIndex:(params.page || 1) - 1
+                        
+                        
+                    }},
+                    processResults:function(data, params) {
+                        var isDataArray = moqui.isArray(data);
+                        var list = isDataArray ? data : data.options;
+                        var newData = [];
+                        // funny case where select2 specifies no option.@value if empty so &nbsp; ends up passed with form submit; now filtered on server for \u00a0 only and set to null
+                        if (!params.page || params.page <= 1) newData.push({ id:'\u00a0', text:'\u00a0' });
+                        var labelField = "label"; var valueField = "value";
+                        $.each(list, function(idx, curObj) {
+                            var idVal = curObj[valueField]; if (!idVal) idVal = '\u00a0';
+                            newData.push({ id:idVal, text:curObj[labelField] })
+                        });
+                        var outObj = { results:newData };
+                        if (!isDataArray) {
+                            params.page = params.page || 1; // NOTE: 1 based index, is 0 based on server side
+                            var pageSize = data.pageSize || 20;
+                            outObj.pagination = { more: (data.count ? (params.page * pageSize) < data.count : false) };
+                        }
+                        return outObj;
+                    }
+                }
+            };
+            $("#ShipmentList_header_fromPartyId").select2(ShipmentList_header_fromPartyIdS2Opts);
+            function populate_ShipmentList_header_fromPartyId(params) {
+                    var hasAllParms = true;
+                    
+                    if (!hasAllParms) { $("#ShipmentList_header_fromPartyId").select2("destroy"); $('#ShipmentList_header_fromPartyId').html(""); $("#ShipmentList_header_fromPartyId").select2({ });  return; }
+                $.ajax({ type:"POST", url:"http://127.0.0.1:18091/apps/marble/Shipment/FindShipment/searchPartyList", data:{ moquiSessionToken: "[REDACTED]", term:((params && params.term) || '')}, dataType:"json"}).done(                    function(data) {
+                        var list = moqui.isArray(data) ? data : data.options;
+                        if (list) {
+                            var jqEl = $("#ShipmentList_header_fromPartyId");
+                            var bWasFocused = jqEl.next().hasClass('select2-container--focus');
+                            jqEl.select2("destroy");
+                            jqEl.html("");
+                            jqEl.append('<option value="">&nbsp;</option>');
+                            
+                            $.each(list, function(key, value) {
+                                var optionValue = value["value"];
+                                if (optionValue === "") {
+                                    jqEl.append("<option selected='selected' value='" + optionValue + "'>" + value["label"] + "</option>");
+                                } else {
+                                    jqEl.append("<option value='" + optionValue + "'>" + value["label"] + "</option>");
+                                }
+                            });
+                            $("#ShipmentList_header_fromPartyId").select2(ShipmentList_header_fromPartyIdS2Opts);
+                            if( bWasFocused ) jqEl.focus();
+                            setTimeout(function() { jqEl.trigger('change'); }, 50);
+                        }
+                    }
+                );
+            }
+            
+                
+
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="ShipmentList_header_toPartyId">To Party</label>
+            <div class="col-sm-10">
+    
+    <select name="toPartyId" class=" dynamic-options noResetSelect2" style="min-width:200px;" id="ShipmentList_header_toPartyId">
+            <option value="">&nbsp;</option>
+    </select>
+    
+    
+        <script>
+            var ShipmentList_header_toPartyIdS2Opts = { 
+                
+                minimumResultsForSearch:0, width:"100%", minimumInputLength:2,
+                ajax:{ url:"http://127.0.0.1:18091/apps/marble/Shipment/FindShipment/searchPartyList", type:"POST", dataType:"json", cache:true, delay:300,
+                    data:function(params) { return { moquiSessionToken: "[REDACTED]", term:(params.term || ''), pageIndex:(params.page || 1) - 1
+                        
+                        
+                    }},
+                    processResults:function(data, params) {
+                        var isDataArray = moqui.isArray(data);
+                        var list = isDataArray ? data : data.options;
+                        var newData = [];
+                        // funny case where select2 specifies no option.@value if empty so &nbsp; ends up passed with form submit; now filtered on server for \u00a0 only and set to null
+                        if (!params.page || params.page <= 1) newData.push({ id:'\u00a0', text:'\u00a0' });
+                        var labelField = "label"; var valueField = "value";
+                        $.each(list, function(idx, curObj) {
+                            var idVal = curObj[valueField]; if (!idVal) idVal = '\u00a0';
+                            newData.push({ id:idVal, text:curObj[labelField] })
+                        });
+                        var outObj = { results:newData };
+                        if (!isDataArray) {
+                            params.page = params.page || 1; // NOTE: 1 based index, is 0 based on server side
+                            var pageSize = data.pageSize || 20;
+                            outObj.pagination = { more: (data.count ? (params.page * pageSize) < data.count : false) };
+                        }
+                        return outObj;
+                    }
+                }
+            };
+            $("#ShipmentList_header_toPartyId").select2(ShipmentList_header_toPartyIdS2Opts);
+            function populate_ShipmentList_header_toPartyId(params) {
+                    var hasAllParms = true;
+                    
+                    if (!hasAllParms) { $("#ShipmentList_header_toPartyId").select2("destroy"); $('#ShipmentList_header_toPartyId').html(""); $("#ShipmentList_header_toPartyId").select2({ });  return; }
+                $.ajax({ type:"POST", url:"http://127.0.0.1:18091/apps/marble/Shipment/FindShipment/searchPartyList", data:{ moquiSessionToken: "[REDACTED]", term:((params && params.term) || '')}, dataType:"json"}).done(                    function(data) {
+                        var list = moqui.isArray(data) ? data : data.options;
+                        if (list) {
+                            var jqEl = $("#ShipmentList_header_toPartyId");
+                            var bWasFocused = jqEl.next().hasClass('select2-container--focus');
+                            jqEl.select2("destroy");
+                            jqEl.html("");
+                            jqEl.append('<option value="">&nbsp;</option>');
+                            
+                            $.each(list, function(key, value) {
+                                var optionValue = value["value"];
+                                if (optionValue === "") {
+                                    jqEl.append("<option selected='selected' value='" + optionValue + "'>" + value["label"] + "</option>");
+                                } else {
+                                    jqEl.append("<option value='" + optionValue + "'>" + value["label"] + "</option>");
+                                }
+                            });
+                            $("#ShipmentList_header_toPartyId").select2(ShipmentList_header_toPartyIdS2Opts);
+                            if( bWasFocused ) jqEl.focus();
+                            setTimeout(function() { jqEl.trigger('change'); }, 50);
+                        }
+                    }
+                );
+            }
+            
+                
+
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="ShipmentList_header_customerClassificationId">Customer Class</label>
+            <div class="col-sm-10">
+    
+    <select name="customerClassificationId" class="" id="ShipmentList_header_customerClassificationId">
+            <option value="">&nbsp;</option>
+            <option value="CustBroker">Broker</option>
+            <option value="CustConsumer">Consumer</option>
+            <option value="CustDistributor">Distributor</option>
+            <option value="CustDistributorPref">Distributor Preferred</option>
+            <option value="CustEmployee">Employee</option>
+            <option value="CustEnterprise">Enterprise</option>
+            <option value="CustWholesale">Wholesale</option>
+            <option value="CustProfessional">Wholesale - Professional</option>
+            <option value="CustRetailStore">Wholesale - Retail Store</option>
+    </select>
+    
+    
+        <script>$("#ShipmentList_header_customerClassificationId").select2({  });</script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="ShipmentList_header_orderPartyId">Order Party ID</label>
+            <div class="col-sm-10">
+    
+    <select name="orderPartyId" class=" dynamic-options noResetSelect2" style="min-width:200px;" id="ShipmentList_header_orderPartyId">
+            <option value="">&nbsp;</option>
+    </select>
+    
+    
+        <script>
+            var ShipmentList_header_orderPartyIdS2Opts = { 
+                
+                minimumResultsForSearch:0, width:"100%", minimumInputLength:2,
+                ajax:{ url:"http://127.0.0.1:18091/apps/marble/Shipment/FindShipment/searchPartyList", type:"POST", dataType:"json", cache:true, delay:300,
+                    data:function(params) { return { moquiSessionToken: "[REDACTED]", term:(params.term || ''), pageIndex:(params.page || 1) - 1
+                        
+                        
+                    }},
+                    processResults:function(data, params) {
+                        var isDataArray = moqui.isArray(data);
+                        var list = isDataArray ? data : data.options;
+                        var newData = [];
+                        // funny case where select2 specifies no option.@value if empty so &nbsp; ends up passed with form submit; now filtered on server for \u00a0 only and set to null
+                        if (!params.page || params.page <= 1) newData.push({ id:'\u00a0', text:'\u00a0' });
+                        var labelField = "label"; var valueField = "value";
+                        $.each(list, function(idx, curObj) {
+                            var idVal = curObj[valueField]; if (!idVal) idVal = '\u00a0';
+                            newData.push({ id:idVal, text:curObj[labelField] })
+                        });
+                        var outObj = { results:newData };
+                        if (!isDataArray) {
+                            params.page = params.page || 1; // NOTE: 1 based index, is 0 based on server side
+                            var pageSize = data.pageSize || 20;
+                            outObj.pagination = { more: (data.count ? (params.page * pageSize) < data.count : false) };
+                        }
+                        return outObj;
+                    }
+                }
+            };
+            $("#ShipmentList_header_orderPartyId").select2(ShipmentList_header_orderPartyIdS2Opts);
+            function populate_ShipmentList_header_orderPartyId(params) {
+                    var hasAllParms = true;
+                    
+                    if (!hasAllParms) { $("#ShipmentList_header_orderPartyId").select2("destroy"); $('#ShipmentList_header_orderPartyId').html(""); $("#ShipmentList_header_orderPartyId").select2({ });  return; }
+                $.ajax({ type:"POST", url:"http://127.0.0.1:18091/apps/marble/Shipment/FindShipment/searchPartyList", data:{ moquiSessionToken: "[REDACTED]", term:((params && params.term) || '')}, dataType:"json"}).done(                    function(data) {
+                        var list = moqui.isArray(data) ? data : data.options;
+                        if (list) {
+                            var jqEl = $("#ShipmentList_header_orderPartyId");
+                            var bWasFocused = jqEl.next().hasClass('select2-container--focus');
+                            jqEl.select2("destroy");
+                            jqEl.html("");
+                            jqEl.append('<option value="">&nbsp;</option>');
+                            
+                            $.each(list, function(key, value) {
+                                var optionValue = value["value"];
+                                if (optionValue === "") {
+                                    jqEl.append("<option selected='selected' value='" + optionValue + "'>" + value["label"] + "</option>");
+                                } else {
+                                    jqEl.append("<option value='" + optionValue + "'>" + value["label"] + "</option>");
+                                }
+                            });
+                            $("#ShipmentList_header_orderPartyId").select2(ShipmentList_header_orderPartyIdS2Opts);
+                            if( bWasFocused ) jqEl.focus();
+                            setTimeout(function() { jqEl.trigger('change'); }, 50);
+                        }
+                    }
+                );
+            }
+            
+                
+
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="ShipmentList_header_orderRoleTypeId">Order Role Type ID</label>
+            <div class="col-sm-10">
+    
+    <select name="orderRoleTypeId" class="" id="ShipmentList_header_orderRoleTypeId">
+            <option value="">&nbsp;</option>
+            <option value="Affiliate">Affiliate</option>
+            <option value="Agent">Agent</option>
+            <option value="Buyer">Buyer</option>
+            <option value="Carrier">Carrier</option>
+            <option value="Cashier">Cashier</option>
+            <option value="ClientBilling">Client Billing Rep</option>
+            <option value="Competitor">Competitor</option>
+            <option value="Customer">Customer</option>
+            <option value="CustomerBillTo">Customer - Bill To</option>
+            <option value="CustomerEndUser">Customer - End User</option>
+            <option value="CustomerPlacing">Customer - Placing</option>
+            <option value="CustomerShipTo">Customer - Ship To</option>
+            <option value="OrderClerk">Order Clerk</option>
+            <option value="Partner">Partner</option>
+            <option value="Referrer">Referrer</option>
+            <option value="Account">Sales Account</option>
+            <option value="SalesRepresentative">Sales Representative</option>
+            <option value="Supplier">Supplier</option>
+            <option value="Vendor">Vendor</option>
+            <option value="VendorBillFrom">Vendor - Bill From</option>
+            <option value="VendorPickUpFrom">Vendor - Pick Up From</option>
+            <option value="VendorShipFrom">Vendor - Ship From</option>
+    </select>
+    
+    
+        <script>$("#ShipmentList_header_orderRoleTypeId").select2({  });</script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="ShipmentList_header_trackingCode">Tracking Code</label>
+            <div class="col-sm-10">
+    
+<span class="form-text-find">
+        <span><input type="checkbox" class="form-control" name="trackingCode_not" value="Y" style="">&nbsp;Not</span>
+        <select name="trackingCode_op" class="form-control">
+            <option value="equals">Equals</option>
+            <option value="like">Like</option>
+            <option value="contains">Contains</option>
+            <option value="begins" selected="selected">Begins With</option>
+            <option value="empty">Empty</option>        </select>
+    <input type="text" class="form-control" name="trackingCode" value="" size="30" id="ShipmentList_header_trackingCode" style="">
+        <span><input type="checkbox" class="form-control" name="trackingCode_ic" value="Y" checked="checked" style="">&nbsp;Ignore Case</span>
+</span>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="ShipmentList_header_returnTrackingCode">Return Tracking</label>
+            <div class="col-sm-10">
+    
+<span class="form-text-find">
+        <span><input type="checkbox" class="form-control" name="returnTrackingCode_not" value="Y" style="">&nbsp;Not</span>
+        <select name="returnTrackingCode_op" class="form-control">
+            <option value="equals">Equals</option>
+            <option value="like">Like</option>
+            <option value="contains">Contains</option>
+            <option value="begins" selected="selected">Begins With</option>
+            <option value="empty">Empty</option>        </select>
+    <input type="text" class="form-control" name="returnTrackingCode" value="" size="30" id="ShipmentList_header_returnTrackingCode" style="">
+        <span><input type="checkbox" class="form-control" name="returnTrackingCode_ic" value="Y" checked="checked" style="">&nbsp;Ignore Case</span>
+</span>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="ShipmentList_header_orderId">Order ID</label>
+            <div class="col-sm-10">
+    
+<span class="form-text-find">
+        <span><input type="checkbox" class="form-control" name="orderId_not" value="Y" style="">&nbsp;Not</span>
+        <select name="orderId_op" class="form-control">
+            <option value="equals">Equals</option>
+            <option value="like">Like</option>
+            <option value="contains">Contains</option>
+            <option value="begins" selected="selected">Begins With</option>
+            <option value="empty">Empty</option>        </select>
+    <input type="text" class="form-control" name="orderId" value="" size="30" id="ShipmentList_header_orderId" style="">
+        <span><input type="checkbox" class="form-control" name="orderId_ic" value="Y" checked="checked" style="">&nbsp;Ignore Case</span>
+</span>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="ShipmentList_header_salesChannelEnumId">Order Source</label>
+            <div class="col-sm-10">
+    
+    <select name="salesChannelEnumId" class=" " id="ShipmentList_header_salesChannelEnumId">
+            <option value="">&nbsp;</option>
+            <option value="ScAffiliate">Affiliate</option>
+            <option value="ScAmazon">Amazon</option>
+            <option value="ScEbay">eBay</option>
+            <option value="ScEdi">EDI</option>
+            <option value="ScEmail">E-Mail</option>
+            <option value="ScFax">Fax</option>
+            <option value="ScOagis">OAGIS</option>
+            <option value="ScPhone">Phone</option>
+            <option value="ScPos">POS</option>
+            <option value="ScPostal">Postal Mail</option>
+            <option value="ScTest">Test Order</option>
+            <option value="ScUnknown">Unknown</option>
+            <option value="ScWeb">Web</option>
+            <option value="ScWebExternal">Web External</option>
+    </select>
+    
+    
+        <script>$("#ShipmentList_header_salesChannelEnumId").select2({  });</script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="ShipmentList_header_otherPartyOrderId">Their Order</label>
+            <div class="col-sm-10">
+    
+<span class="form-text-find">
+        <input type="hidden" name="otherPartyOrderId_op" value="contains" style="">
+    <input type="text" class="form-control" name="otherPartyOrderId" value="" size="20" id="ShipmentList_header_otherPartyOrderId" style="">
+        <input type="hidden" name="otherPartyOrderId_ic" value="Y" style="">
+</span>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="ShipmentList_header_estimatedArrivalDate">Est. Arrival</label>
+            <div class="col-sm-10">
+    
+    <div class="date-period">
+        <select name="estimatedArrivalDate_poffset" id="ShipmentList_header_estimatedArrivalDate_poffset">
+                <option value="">&nbsp;</option>
+            <option value="0">This</option>
+            <option value="-1">Last</option>
+            <option value="1">Next</option>
+            <option value="-2">-2</option>
+            <option value="2">+2</option>
+            <option value="-3">-3</option>
+            <option value="-4">-4</option>
+            <option value="-6">-6</option>
+            <option value="-12">-12</option>
+        </select>
+        <select name="estimatedArrivalDate_period" id="ShipmentList_header_estimatedArrivalDate_period">
+            <option value="">&nbsp;</option>
+            <option value="day">Day</option>
+            <option value="7d">7 Days</option>
+            <option value="30d">30 Days</option>
+            <option value="week">Week</option>
+            <option value="weeks">Weeks</option>
+            <option value="month">Month</option>
+            <option value="months">Months</option>
+            <option value="quarter">Quarter</option>
+            <option value="year">Year</option>
+            <option value="7r">+/-7d</option>
+            <option value="30r">+/-30d</option>
+        </select>
+        <div class="input-group date" id="ShipmentList_header_estimatedArrivalDate_pdate">
+            <input type="text" class="form-control" name="estimatedArrivalDate_pdate" value="" size="10" maxlength="10" style="">
+            <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+        </div>
+        <script>
+            $("#ShipmentList_header_estimatedArrivalDate_poffset").select2({ }); $("#ShipmentList_header_estimatedArrivalDate_period").select2({ });
+            $('#ShipmentList_header_estimatedArrivalDate_pdate').datetimepicker({toolbarPlacement:'top', showClose:true, showClear:true, showTodayButton:true, useStrict:true, defaultDate: '' && moment('','YYYY-MM-DD'), format:'YYYY-MM-DD', extraFormats:['l', 'L', 'YYYY-MM-DD'], locale:"en-US", keyBinds: {t: function() {this.date(moment());}, up: function () { this.date(this.date().clone().add(1, 'd')); }, down: function () { this.date(this.date().clone().subtract(1, 'd')); }, 'control up': function () { this.date(this.date().clone().add(1, 'd')); }, 'control down': function () { this.date(this.date().clone().subtract(1, 'd')); }}});
+        </script>
+    </div>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="ShipmentList_header_estimatedReadyDate">Est. Ready</label>
+            <div class="col-sm-10">
+    
+    <div class="date-period">
+        <select name="estimatedReadyDate_poffset" id="ShipmentList_header_estimatedReadyDate_poffset">
+                <option value="">&nbsp;</option>
+            <option value="0">This</option>
+            <option value="-1">Last</option>
+            <option value="1">Next</option>
+            <option value="-2">-2</option>
+            <option value="2">+2</option>
+            <option value="-3">-3</option>
+            <option value="-4">-4</option>
+            <option value="-6">-6</option>
+            <option value="-12">-12</option>
+        </select>
+        <select name="estimatedReadyDate_period" id="ShipmentList_header_estimatedReadyDate_period">
+            <option value="">&nbsp;</option>
+            <option value="day">Day</option>
+            <option value="7d">7 Days</option>
+            <option value="30d">30 Days</option>
+            <option value="week">Week</option>
+            <option value="weeks">Weeks</option>
+            <option value="month">Month</option>
+            <option value="months">Months</option>
+            <option value="quarter">Quarter</option>
+            <option value="year">Year</option>
+            <option value="7r">+/-7d</option>
+            <option value="30r">+/-30d</option>
+        </select>
+        <div class="input-group date" id="ShipmentList_header_estimatedReadyDate_pdate">
+            <input type="text" class="form-control" name="estimatedReadyDate_pdate" value="" size="10" maxlength="10" style="">
+            <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+        </div>
+        <script>
+            $("#ShipmentList_header_estimatedReadyDate_poffset").select2({ }); $("#ShipmentList_header_estimatedReadyDate_period").select2({ });
+            $('#ShipmentList_header_estimatedReadyDate_pdate').datetimepicker({toolbarPlacement:'top', showClose:true, showClear:true, showTodayButton:true, useStrict:true, defaultDate: '' && moment('','YYYY-MM-DD'), format:'YYYY-MM-DD', extraFormats:['l', 'L', 'YYYY-MM-DD'], locale:"en-US", keyBinds: {t: function() {this.date(moment());}, up: function () { this.date(this.date().clone().add(1, 'd')); }, down: function () { this.date(this.date().clone().subtract(1, 'd')); }, 'control up': function () { this.date(this.date().clone().add(1, 'd')); }, 'control down': function () { this.date(this.date().clone().subtract(1, 'd')); }}});
+        </script>
+    </div>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <div class="col-sm-2 hidden-xs">&nbsp;</div>
+            <div class="col-sm-10">
+    
+    <button type="submit" name="findButton" value="findButton" id="ShipmentList_header_findButton" class="btn btn-primary btn-sm">
+Find    </button>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+                        </fieldset>
+                    </form>
+                </div>
+            </div></div>
+        </div>
+        <script>$('#ShipmentList_hdialog').on('shown.bs.modal', function() {
+            $("#ShipmentList_hdialog :not(.noResetSelect2)>select:not(.noResetSelect2)").select2({ });
+        })</script>
+        <div id="ShipmentList_SelColsDialog" class="modal" aria-hidden="true" style="display: none;" tabindex="-1">
+            <div class="modal-dialog" style="width: 600px;"><div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Column Fields</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Drag fields to the desired column or do not display</p>
+                    <ul id="ShipmentList_SelColsSortable">
+                        <li id="hidden"><div>Do Not Display</div>
+                            <ul>
+                                <li id="orderParties"><div>Order Parties</div></li>
+                                <li id="packScreenLink"><div>Pack</div></li>
+                            </ul>
+                        </li>
+                            <li id="column_0"><div>Column 1</div><ul>
+                                <li id="shipmentId"><div>Shipment</div></li>
+                                <li id="shipmentMethodEnumId"><div>Ship Method</div></li>
+                                <li id="shipmentTypeEnumId"><div>Type</div></li>
+                            </ul></li>
+                            <li id="column_1"><div>Column 2</div><ul>
+                                <li id="entryDate"><div>Entry Date</div></li>
+                                <li id="statusId"><div>Status</div></li>
+                            </ul></li>
+                            <li id="column_2"><div>Column 3</div><ul>
+                                <li id="priority"><div>Priority</div></li>
+                                <li id="shipWorkEffortId"><div>Picklist</div></li>
+                            </ul></li>
+                            <li id="column_3"><div>Column 4</div><ul>
+                                <li id="originFacilityId"><div>Origin Facility</div></li>
+                                <li id="destinationFacilityId"><div>Dest. Facility</div></li>
+                                <li id="productStoreId"><div>Store</div></li>
+                            </ul></li>
+                            <li id="column_4"><div>Column 5</div><ul>
+                                <li id="fromPartyId"><div>From Party</div></li>
+                                <li id="toPartyId"><div>To Party</div></li>
+                                <li id="handlingInstructions"><div>Shipping Instructions</div></li>
+                            </ul></li>
+                            <li id="column_5"><div>Column 6</div><ul>
+                                <li id="otherPartyOrderId"><div>Their Order</div></li>
+                                <li id="orderIds"><div>Orders</div></li>
+                                <li id="trackingCodes"><div>Tracking Codes</div></li>
+                            </ul></li>
+                            <li id="column_6"><div>Column 7</div><ul>
+                                <li id="shipAfterDate"><div>Ship After</div></li>
+                                <li id="estimatedReadyDate"><div>Est. Ready</div></li>
+                                <li id="actualStartDate"><div>Actual Start</div></li>
+                            </ul></li>
+                            <li id="column_7"><div>Column 8</div><ul>
+                                <li id="shipBeforeDate"><div>Ship Before</div></li>
+                                <li id="estimatedArrivalDate"><div>Est. Arrival</div></li>
+                                <li id="actualArrivalDate"><div>Actual Arrival</div></li>
+                            </ul></li>
+                            <li id="column_8"><div>Column 9</div></li>
+                            <li id="column_9"><div>Column 10</div></li>
+                            <li id="column_10"><div>Column 11</div></li>
+                    </ul>
+                    <form class="form-inline" id="ShipmentList_SelColsForm" method="post" action="http://127.0.0.1:18091/apps/marble/Shipment/FindShipment/formSelectColumns">
+                        <input type="hidden" name="moquiSessionToken" value="[REDACTED]" style="">
+                        <input type="hidden" name="formLocation" value="component://SimpleScreens/screen/SimpleScreens/Shipment/FindShipment.xml.form_list$ShipmentList" style="">
+                        <input type="hidden" id="ShipmentList_SelColsForm_columnsTree" name="columnsTree" value="" style="">
+                        <input type="submit" name="SaveColumns" value="Save Columns" class="btn btn-primary btn-sm" style="">
+                        <input type="submit" name="ResetColumns" value="Reset to Default" class="btn btn-primary btn-sm" style="">
+                    </form>
+                </div>
+            </div></div>
+        </div>
+        <script>$('#ShipmentList_SelColsDialog').on('shown.bs.modal', function() {
+            $("#ShipmentList_SelColsSortable").sortableLists({
+                isAllowed: function(currEl, hint, target) {
+                    if (currEl.attr('id') === 'hidden' || currEl.attr('id').startsWith('column_')) {
+                        if (!target.attr('id') || (target.attr('id') != 'hidden' && !currEl.attr('id').startsWith('column_'))) { hint.css('background-color', '#99ff99'); return true; }
+                        else { hint.css('background-color', '#ff9999'); return false; }
+                    }
+                    if (target.attr('id') && (target.attr('id') === 'hidden' || target.attr('id').startsWith('column_'))) { hint.css('background-color', '#99ff99'); return true; }
+                    else { hint.css('background-color', '#ff9999'); return false; }
+                },
+                placeholderCss: {'background-color':'#999999'}, insertZone: 50,
+                opener: { active:false, as:'html', close:'', open:'' },
+                onChange: function(cEl) {
+                    var sortableHierarchy = $('#ShipmentList_SelColsSortable').sortableListsToHierarchy();
+                    // console.log(sortableHierarchy); console.log(JSON.stringify(sortableHierarchy));
+                    $("#ShipmentList_SelColsForm_columnsTree").val(JSON.stringify(sortableHierarchy));
+                }
+            });
+            $("#ShipmentList_SelColsForm_columnsTree").val(JSON.stringify($('#ShipmentList_SelColsSortable').sortableListsToHierarchy()));
+        })</script>
+        <div class="table-scroll-wrapper"><table class="table table-striped table-hover table-condensed" id="ShipmentList_table">
+            <thead>
+        <tr class="form-list-nav-row"><th colspan="8">
+        <nav class="form-list-nav">
+            <button id="ShipmentList_hdialog_button" type="button" data-toggle="modal" data-target="#ShipmentList_hdialog" data-original-title="Find Options" data-placement="bottom" class="btn btn-default"><i class="fa fa-share"></i> Find Options</button>
+            <button id="ShipmentList_SelColsDialog_button" type="button" data-toggle="modal" data-target="#ShipmentList_SelColsDialog" data-original-title="Columns" data-placement="bottom" class="btn btn-default"><i class="fa fa-share"></i> Columns</button>
+
+
+                <a href="http://127.0.0.1:18091/apps/marble/Shipment/FindShipment?renderMode=csv&amp;saveFilename=ShipmentList.csv&amp;pageNoLimit=true&amp;lastStandalone=true" class="btn btn-default">CSV</a>
+        </nav>
+        </th></tr>
+
+            <tr><th colspan="8" style="font-weight: normal">
+                        
+                        
+                        
+                        
+                        
+                                <span style="white-space:nowrap;"><strong>Entry Date:</strong> <span class="text-success">-3 30 Days (2026-07-18 to 2026-10-16)</span></span>
+                        
+                                <span style="white-space:nowrap;"><strong>Status:</strong> <span class="text-success">Input, Scheduled, Picked</span></span>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    <form name="ShipmentList_header" id="ShipmentList_header" method="post" action="http://127.0.0.1:18091/apps/marble/Shipment/FindShipment">
+                        
+                        <button id="ShipmentList_header-quick-clear" type="submit" name="clearParameters" style="float:left; padding: 0 5px 0 5px; margin: 0 4px 0 0;" class="btn btn-primary btn-sm"><i class="fa fa-remove"></i></button>
+                    </form>
+            </th></tr>
+
+                <tr>
+                    <th>
+                        <div><div class="form-title">Shipment            <span class="form-order-by">
+                <a href="http://127.0.0.1:18091/apps/marble/Shipment/FindShipment?orderByField=-shipmentId" class="active"><i class="fa fa-caret-up"></i></a>
+                <a href="http://127.0.0.1:18091/apps/marble/Shipment/FindShipment?orderByField=-shipmentId"><i class="fa fa-caret-down"></i></a>
+            </span>
+</div>    </div>
+                        <div><div class="form-title">Ship Method            <span class="form-order-by">
+                <a href="http://127.0.0.1:18091/apps/marble/Shipment/FindShipment?orderByField=shipmentMethodEnumId"><i class="fa fa-caret-up"></i></a>
+                <a href="http://127.0.0.1:18091/apps/marble/Shipment/FindShipment?orderByField=-shipmentMethodEnumId"><i class="fa fa-caret-down"></i></a>
+            </span>
+</div>    </div>
+                        <div><div class="form-title">Type            <span class="form-order-by">
+                <a href="http://127.0.0.1:18091/apps/marble/Shipment/FindShipment?orderByField=shipmentTypeEnumId"><i class="fa fa-caret-up"></i></a>
+                <a href="http://127.0.0.1:18091/apps/marble/Shipment/FindShipment?orderByField=-shipmentTypeEnumId"><i class="fa fa-caret-down"></i></a>
+            </span>
+</div>    </div>
+                    </th>
+                    <th>
+                        <div><div class="form-title">Entry Date            <span class="form-order-by">
+                <a href="http://127.0.0.1:18091/apps/marble/Shipment/FindShipment?orderByField=entryDate"><i class="fa fa-caret-up"></i></a>
+                <a href="http://127.0.0.1:18091/apps/marble/Shipment/FindShipment?orderByField=entryDate" class="active"><i class="fa fa-caret-down"></i></a>
+            </span>
+</div>    </div>
+                        <div><div class="form-title">Status            <span class="form-order-by">
+                <a href="http://127.0.0.1:18091/apps/marble/Shipment/FindShipment?orderByField=statusId"><i class="fa fa-caret-up"></i></a>
+                <a href="http://127.0.0.1:18091/apps/marble/Shipment/FindShipment?orderByField=-statusId"><i class="fa fa-caret-down"></i></a>
+            </span>
+</div>    </div>
+                    </th>
+                    <th>
+                        <div><div class="form-title text-center">Priority            <span class="form-order-by">
+                <a href="http://127.0.0.1:18091/apps/marble/Shipment/FindShipment?orderByField=priority"><i class="fa fa-caret-up"></i></a>
+                <a href="http://127.0.0.1:18091/apps/marble/Shipment/FindShipment?orderByField=-priority"><i class="fa fa-caret-down"></i></a>
+            </span>
+</div>    </div>
+                        <div><div class="form-title">Picklist            <span class="form-order-by">
+                <a href="http://127.0.0.1:18091/apps/marble/Shipment/FindShipment?orderByField=shipWorkEffortId"><i class="fa fa-caret-up"></i></a>
+                <a href="http://127.0.0.1:18091/apps/marble/Shipment/FindShipment?orderByField=-shipWorkEffortId"><i class="fa fa-caret-down"></i></a>
+            </span>
+</div>    </div>
+                    </th>
+                    <th>
+                        <div><div class="form-title">Origin Facility</div>    </div>
+                        <div><div class="form-title">Dest. Facility</div>    </div>
+                        <div><div class="form-title">Store</div>    </div>
+                    </th>
+                    <th>
+                        <div><div class="form-title">From Party</div>    </div>
+                        <div><div class="form-title">To Party</div>    </div>
+                        <div><div class="form-title">Shipping Instructions            <span class="form-order-by">
+                <a href="http://127.0.0.1:18091/apps/marble/Shipment/FindShipment?orderByField=handlingInstructions"><i class="fa fa-caret-up"></i></a>
+                <a href="http://127.0.0.1:18091/apps/marble/Shipment/FindShipment?orderByField=-handlingInstructions"><i class="fa fa-caret-down"></i></a>
+            </span>
+</div>    </div>
+                    </th>
+                    <th>
+                        <div><div class="form-title">Their Order            <span class="form-order-by">
+                <a href="http://127.0.0.1:18091/apps/marble/Shipment/FindShipment?orderByField=otherPartyOrderId"><i class="fa fa-caret-up"></i></a>
+                <a href="http://127.0.0.1:18091/apps/marble/Shipment/FindShipment?orderByField=-otherPartyOrderId"><i class="fa fa-caret-down"></i></a>
+            </span>
+</div>    </div>
+                        <div><div class="form-title">Orders</div>    </div>
+                        <div><div class="form-title">Tracking Codes</div>    </div>
+                    </th>
+                    <th>
+                        <div><div class="form-title">Ship After            <span class="form-order-by">
+                <a href="http://127.0.0.1:18091/apps/marble/Shipment/FindShipment?orderByField=shipAfterDate"><i class="fa fa-caret-up"></i></a>
+                <a href="http://127.0.0.1:18091/apps/marble/Shipment/FindShipment?orderByField=-shipAfterDate"><i class="fa fa-caret-down"></i></a>
+            </span>
+</div>    </div>
+                        <div><div class="form-title">Est. Ready            <span class="form-order-by">
+                <a href="http://127.0.0.1:18091/apps/marble/Shipment/FindShipment?orderByField=estimatedReadyDate"><i class="fa fa-caret-up"></i></a>
+                <a href="http://127.0.0.1:18091/apps/marble/Shipment/FindShipment?orderByField=-estimatedReadyDate"><i class="fa fa-caret-down"></i></a>
+            </span>
+</div>    </div>
+                        <div><div class="form-title">Actual Start            <span class="form-order-by">
+                <a href="http://127.0.0.1:18091/apps/marble/Shipment/FindShipment?orderByField=actualStartDate"><i class="fa fa-caret-up"></i></a>
+                <a href="http://127.0.0.1:18091/apps/marble/Shipment/FindShipment?orderByField=-actualStartDate"><i class="fa fa-caret-down"></i></a>
+            </span>
+</div>    </div>
+                    </th>
+                    <th>
+                        <div><div class="form-title">Ship Before            <span class="form-order-by">
+                <a href="http://127.0.0.1:18091/apps/marble/Shipment/FindShipment?orderByField=shipBeforeDate"><i class="fa fa-caret-up"></i></a>
+                <a href="http://127.0.0.1:18091/apps/marble/Shipment/FindShipment?orderByField=-shipBeforeDate"><i class="fa fa-caret-down"></i></a>
+            </span>
+</div>    </div>
+                        <div><div class="form-title">Est. Arrival            <span class="form-order-by">
+                <a href="http://127.0.0.1:18091/apps/marble/Shipment/FindShipment?orderByField=estimatedArrivalDate"><i class="fa fa-caret-up"></i></a>
+                <a href="http://127.0.0.1:18091/apps/marble/Shipment/FindShipment?orderByField=-estimatedArrivalDate"><i class="fa fa-caret-down"></i></a>
+            </span>
+</div>    </div>
+                        <div><div class="form-title">Actual Arrival            <span class="form-order-by">
+                <a href="http://127.0.0.1:18091/apps/marble/Shipment/FindShipment?orderByField=actualArrivalDate"><i class="fa fa-caret-up"></i></a>
+                <a href="http://127.0.0.1:18091/apps/marble/Shipment/FindShipment?orderByField=-actualArrivalDate"><i class="fa fa-caret-down"></i></a>
+            </span>
+</div>    </div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                </tbody>
+        </table></div>
+    
+    <!-- END   form-list[@name=ShipmentList] -->
+    <!-- END   screen[@location=component://SimpleScreens/screen/SimpleScreens/Shipment/FindShipment.xml].widgets -->
+
+        </div>
+    <!-- END   screen[@location=component://SimpleScreens/screen/SimpleScreens/Shipment.xml].widgets -->
+
+    <!-- END   screen[@location=component://MarbleERP/screen/marble.xml].widgets -->
+
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    <!-- BEGIN section[@name=BottomNavSection] -->
+        <!-- BEGIN screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+    <div id="footer" class="bg-dark">
+        <!-- BEGIN render-mode.text[inline][@template=true] -->
+                <div id="apps-footer-content">
+<p><a href="https://www.moqui.org/" target="_blank">Built on Moqui Framework 4.0.0</a></p><p><a href="/vapps/ScreenTree">Site Map</a></p>                </div>        <!-- END   render-mode.text[inline][@template=true] -->
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    <!-- END   screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+
+    <!-- END   section[@name=BottomNavSection] -->
+    <!-- END   screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+        
+    <div id="screen-document-dialog" class="modal dynamic-dialog" aria-hidden="true" style="display: none;" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Documentation</h4>
+                </div>
+                <div class="modal-body" id="screen-document-dialog-body">
+                    <img src="/images/wait_anim_16x16.gif" alt="Loading...">
+                </div>
+                <div class="modal-footer"><button type="button" class="btn btn-primary" data-dismiss="modal">Close</button></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function showScreenDocDialog(docIndex) {
+            $("#screen-document-dialog").modal("show");
+            $("#screen-document-dialog-body").load('http://127.0.0.1:18091/apps/marble/Shipment/FindShipment/screenDoc?docIndex=' + docIndex);
+        }
+        $("#screen-document-dialog").on("hidden.bs.modal", function () { var jqEl = $("#screen-document-dialog-body"); jqEl.empty(); jqEl.append('<img src="/images/wait_anim_16x16.gif" alt="Loading...">'); });
+    </script>
+
+
+
+
+        
+        
+        
+    
+</body></html>
