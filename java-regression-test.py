@@ -1113,6 +1113,14 @@ COMMIT;
 CDC_SLOT = "moqui_regression_cdc"
 
 
+def approval_snapshots(states, containers, evidence):
+    """Approval validators need current DDL metadata, just like paired comparisons."""
+    for side, state in states.items():
+        if state.schema_dirty:
+            refresh_incremental_catalog(containers[side], state, evidence / f"{side}-catalog.json")
+    return [states[side].snapshot() for side in ("java", "rust")]
+
+
 def approved_statistics_change(event, kind, snapshots, approved):
     """Exempt only extra bins validated by the existing snapshot approvals."""
     row = event.get("new", {})
@@ -1400,7 +1408,7 @@ def boot_and_stop(args):
 
             def approved_difference(event, kind):
                 return approved_statistics_change(event, kind,
-                    lambda: [states[side].snapshot() for side in ("java", "rust")], approved)
+                    lambda: approval_snapshots(states, containers, evidence), approved)
 
             coordinator = DeterministicCoordinator(run_id, evidence, compare=compare_transaction,
                                                    cdc=changes,
