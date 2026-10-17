@@ -1113,6 +1113,30 @@ COMMIT;
 CDC_SLOT = "moqui_regression_cdc"
 
 
+def approved_statistics_change(event, kind, snapshots, approved):
+    """Exempt only extra bins validated by the existing snapshot approvals."""
+    row = event.get("new", {})
+    if (kind not in ("seed_statistics", "rust_only_statistics") or event.get("kind") != "insert"
+            or event.get("table") != "public.artifact_hit_bin"
+            or not isinstance(row, dict) or row.get("artifact_type") != "AT_ENTITY"):
+        return False
+    captured = snapshots()
+    _, applied = apply_approved_differences(*captured, approved)
+    if kind == "rust_only_statistics":
+        bins = [json.loads(record, parse_int=Decimal, parse_float=Decimal)["row"]
+                for record in captured[1]["records"]
+                if json.loads(record).get("table") == "public.artifact_hit_bin"]
+        if [item for item in bins if item.get("hit_bin_id") == row.get("hit_bin_id")] != [row]:
+            return False
+        return any(rule["kind"] == kind and any(
+            all(row.get(field) == value for field, value in item.items()) for item in rule["rows"])
+            for rule in applied)
+    return any(rule["kind"] == kind and rule["java_hit_count"] == 0
+               and rule["artifact_name"] == row.get("artifact_name")
+               and rule["artifact_sub_type"] == row.get("artifact_sub_type")
+               and rule["rust_hit_count"] == row.get("hit_count") for rule in applied)
+
+
 def create_cdc_slot(container):
     """Start logical decoding before either engine connects, so every committed change is captured."""
     subprocess.run(["docker", "exec", "-i", container, "psql", "-X", "-qAt", "-v", "ON_ERROR_STOP=1",
@@ -1374,9 +1398,13 @@ def boot_and_stop(args):
                     refresh_incremental_catalog(containers[side], state, evidence / f"{side}-catalog.json")
                 return diff_compare(states['java'], states['rust'], step, approved_differences=approved)
 
+            def approved_difference(event, kind):
+                return approved_statistics_change(event, kind,
+                    lambda: [states[side].snapshot() for side in ("java", "rust")], approved)
+
             coordinator = DeterministicCoordinator(run_id, evidence, compare=compare_transaction,
                                                    cdc=changes,
-                                                   exempt=ApprovalEngine(approved).exempt_transaction,
+                                                   exempt=ApprovalEngine(approved, approved_difference).exempt_transaction,
                                                    operation_checks=False, timeout=args.boot_timeout)
             hook_url = coordinator.start()
 

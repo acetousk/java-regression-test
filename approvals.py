@@ -11,8 +11,9 @@ class ApprovalEngine:
     Every event in a transaction must match an exemption for its engine. There is
     no implicit exemption for an empty transaction or an unknown event/rule.
     """
-    def __init__(self, rules):
+    def __init__(self, rules, approved_difference=None):
         self.rules = rules
+        self.approved_difference = approved_difference
         self.exemptions = rules.get("transaction_exemptions", [])
         if not isinstance(self.exemptions, list):
             raise ValueError("transaction_exemptions must be a list")
@@ -31,6 +32,10 @@ class ApprovalEngine:
                 for child in condition[operator]:
                     self._validate(child)
                 return
+        if set(condition) == {"approved_difference"}:
+            if not isinstance(condition["approved_difference"], str):
+                raise ValueError("approved_difference requires a name")
+            return
         if set(condition) == {"keyed_rows"}:
             if not isinstance(self._value(condition["keyed_rows"]), list):
                 raise ValueError("keyed_rows requires a list")
@@ -59,6 +64,9 @@ class ApprovalEngine:
             return all(self._matches(event, child) for child in condition["all"])
         if "any" in condition:
             return any(self._matches(event, child) for child in condition["any"])
+        if "approved_difference" in condition:
+            return self.approved_difference is not None and self.approved_difference(
+                event, condition["approved_difference"])
         if "keyed_rows" in condition:
             row = event.get("new")
             if not isinstance(row, dict):

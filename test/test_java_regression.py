@@ -218,6 +218,84 @@ class CdcTests(unittest.TestCase):
             with self.assertRaisesRegex(RuntimeError, "inside a transaction"):
                 controller.read_cdc("container")
 
+    def test_rust_only_statistics_exemption_uses_existing_snapshot_approval(self):
+        from test.test_approvals import row_change
+        approved = {"theme_resources": [], "full_text_indexes": [],
+                    "rust_only_statistics": {"artifact_sub_types": ["update-probe"]},
+                    "transaction_exemptions": [
+                        {"engine": "rust", "when": {"approved_difference": "rust_only_statistics"}}]}
+        row = {"hit_bin_id": "100091", "artifact_type": "AT_ENTITY", "artifact_sub_type": "update-probe",
+               "artifact_name": "moqui.basic.Enumeration", "hit_count": 219}
+        shared = {**row, "hit_bin_id": "100090", "artifact_sub_type": "create"}
+        record = {"table": "public.artifact_hit_bin", "row": row}
+        records = [[{"table": "public.artifact_hit_bin", "row": shared}],
+                   [{"table": "public.artifact_hit_bin", "row": shared}, record]]
+        snapshots = lambda: [{"schema": "", "records": [json.dumps(item) for item in side]} for side in records]
+        engine = controller.ApprovalEngine(approved, lambda event, kind:
+            controller.approved_statistics_change(event, kind, snapshots, approved))
+        transaction = lambda: row_change("public.artifact_hit_bin", row)
+        self.assertTrue(engine.exempt_transaction("rust", transaction()))
+        sequence = row_change("public.sequence_value_item", {"seq_name": "moqui.server.ArtifactHitBin",
+                              "seq_num": 100201}, "update")
+        self.assertFalse(engine.exempt_transaction("rust", sequence))
+        self.assertFalse(engine.exempt_transaction("rust", transaction() + sequence))
+        self.assertFalse(engine.exempt_transaction("java", transaction()))
+        self.assertFalse(engine.exempt_transaction("rust", row_change("public.artifact_hit_bin", row, "update")))
+        self.assertFalse(engine.exempt_transaction("rust", row_change("public.artifact_hit_bin", shared)))
+        records[0].append(record)
+        self.assertFalse(engine.exempt_transaction("rust", transaction()))
+        records[0].pop()
+        records[1].append(record)
+        self.assertFalse(engine.exempt_transaction("rust", transaction()))
+        records[1].pop()
+        row["hit_bin_id"] = "100089"
+        self.assertFalse(engine.exempt_transaction("rust", transaction()))
+        row["hit_bin_id"] = "100091"
+        records[1].remove(record)
+        self.assertFalse(engine.exempt_transaction("rust", transaction()))
+        records[1].append(record)
+        del approved["rust_only_statistics"]
+        self.assertFalse(engine.exempt_transaction("rust", transaction()))
+
+    def test_seed_statistics_exemption_requires_complete_database_evidence(self):
+        from test.test_approvals import row_change
+        approved = {"theme_resources": [], "full_text_indexes": [], "rust_seed_additions": [
+            {"table": "public.system_message_remote", "entity": "moqui.service.message.SystemMessageRemote",
+             "key": ["system_message_remote_id"], "values": [["ExampleSftpLocal"]]}],
+            "transaction_exemptions": [{"engine": "rust", "when": {"approved_difference": "seed_statistics"}}]}
+        seed = {"table": "public.system_message_remote", "row": {"system_message_remote_id": "ExampleSftpLocal"}}
+        row = {"hit_bin_id": "100004", "artifact_type": "AT_ENTITY", "artifact_sub_type": "create",
+               "artifact_name": "moqui.service.message.SystemMessageRemote", "hit_count": 1}
+        bin_record = {"table": "public.artifact_hit_bin", "row": row}
+        records = [[], [seed, bin_record]]
+        snapshots = lambda: [{"schema": "", "records": [json.dumps(item) for item in side]} for side in records]
+        engine = controller.ApprovalEngine(approved, lambda event, kind:
+            controller.approved_statistics_change(event, kind, snapshots, approved))
+        def covered(kind="insert"):
+            return engine.exempt_transaction("rust", row_change("public.artifact_hit_bin", row, kind))
+        self.assertTrue(covered())
+        self.assertFalse(covered("update"))
+        self.assertFalse(engine.exempt_transaction("java", row_change("public.artifact_hit_bin", row)))
+        self.assertFalse(controller.ApprovalEngine(approved).exempt_transaction(
+            "rust", row_change("public.artifact_hit_bin", row)))
+        row["hit_count"] = 2
+        self.assertFalse(covered())
+        row["hit_count"] = 1
+        records[1].append(bin_record)
+        self.assertFalse(covered())
+        records[1].pop()
+        records[1].remove(seed)
+        self.assertFalse(covered())
+        records[1].append(seed)
+        records[0].append(seed)
+        self.assertFalse(covered())
+        records[0][:] = [bin_record]
+        self.assertFalse(covered())
+        records[0].clear()
+        approved["transaction_exemptions"].clear()
+        self.assertFalse(controller.ApprovalEngine(approved).exempt_transaction(
+            "rust", row_change("public.artifact_hit_bin", row)))
+
 
 if __name__ == "__main__":
     unittest.main()
