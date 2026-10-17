@@ -1444,7 +1444,8 @@ def boot_and_stop(args):
                            "-jar", str(directory / "moqui.war"), f"port={ports[name]}", "no-run-es"]
             else:
                 command = [str(rust_artifact(directory)), "--conf", str(conf),
-                           "--port", str(ports[name]), "--https-port", "off", "--no-run-es"]
+                           "--port", str(ports[name]), "--https-port", "off", "--no-run-es",
+                           "-D", "create-or-update=true"]
             log = (evidence / f"{name}-boot.log").open("wb")
             logs.append(log)
             overrides = {node.get("name"): node.get("value")

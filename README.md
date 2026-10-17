@@ -50,7 +50,9 @@ locked to the immutable image index
 `postgres:18.6@sha256:74935e72241653ca55e0414067e6d8763aceb8a810eb51b452253ec3dcfc4336`
 in `java-regression-test.py` (no command-line version override),
 verifies identical image IDs and empty databases, and starts both engines. Java
-uses port 8080 and Rust 8081. Neither runtime currently ships a dedicated demo
+uses port 8080 and Rust 8081. Rust is started with `-D create-or-update=true`
+to use Java's read-first create-or-update; outside this test the flag defaults off.
+Neither runtime currently ships a dedicated demo
 configuration, so the controller copies each `MoquiDevConf.xml` to a private run
 configuration, retains its demo loading (`entity_empty_db_load=all`), and overrides
 PostgreSQL connectivity. Both engines receive the same randomly generated,
