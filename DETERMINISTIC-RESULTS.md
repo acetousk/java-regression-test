@@ -140,6 +140,31 @@ It demonstrates rejection of different operation streams, **not a successful
 Java/Rust parity run**. The current harness disables that operation gate; CDC-only
 runs must not be interpreted as operation-order proof.
 
+## JSON-driven exemption checkpoint
+
+Paired rebuilt-engine evidence: `.runs/2026-10-17_02-31-23.001427Z/`.
+The selected JSON's `transaction_exemptions` is interpreted by `approvals.py`;
+PostgreSQL DDL events now identify affected tables and index owners. This fixes
+approved search setup being incorrectly paired with Java's seed load. It does
+not change the existing specialized snapshot normalization algorithms.
+
+- **31 committed-write pairs passed**, with operation checks disabled.
+- **3 Rust transactions were exempted** under the JSON rules.
+- **Write 32 failed**: Java committed a `StatusItem/create` statistics bin (31
+  hits); Rust committed a `SystemMessageRemote/create` statistics bin (1 hit).
+  Schema equality passes; normalized committed data differs. No new statistics
+  exception was added, and this is not a complete startup pass.
+- Python suite: **115 tests run, 114 passed, 1 opt-in test skipped**.
+- The real two-container PostgreSQL integration test separately **passed**,
+  including approved DDL/index setup, mixed-transaction rejection, and existing
+  row/sequence/capture-integrity checks.
+
+For comparison, PR #22's fresh-connection-query change alone did not advance the
+write gate: with-patch `.runs/2026-10-17_02-08-45.354269Z/` and without-patch
+`.runs/2026-10-17_02-13-14.213419Z/` both passed two pairs and failed at write 3.
+The checkpoint run uses the same isolated worktrees (including their existing
+uncommitted instrumentation/startup changes) with that Rust patch applied.
+
 ## Remaining acceptance requirement
 
 A successful full Java/Rust startup run under the current committed-write contract

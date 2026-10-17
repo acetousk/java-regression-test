@@ -25,8 +25,9 @@ import time
 import urllib.request
 import xml.etree.ElementTree as ET
 
+from approvals import ApprovalEngine
 from deterministic import DeterministicCoordinator
-from incremental import DatabaseState, EVENT_PREFIX, INSTALL_SQL, TRACKING_SCHEMA
+from incremental import DatabaseState, INSTALL_SQL, TRACKING_SCHEMA
 
 ROOT = Path(__file__).resolve().parent
 REPOSITORIES = ("moqui-framework", "mr-moqui")
@@ -1110,36 +1111,6 @@ COMMIT;
 
 
 CDC_SLOT = "moqui_regression_cdc"
-CDC_COLUMN = re.compile(r"(\w+)\[[^\]]*\]:('(?:[^']|'')*'|\S+)")
-
-
-def rust_only_change(approved):
-    """A predicate for test_decoding change lines covered by an approved Rust-only difference:
-    any change to a Rust-only table, or the insert of a listed Rust seed row."""
-    tables = set(approved.get("rust_only_tables", ()))
-    seeds = {}
-    for rule in approved.get("rust_seed_additions", []):
-        for values in rule["values"]:
-            seeds.setdefault(rule["table"], set()).add(tuple(zip(rule["key"], values)))
-
-    def covered(change):
-        if change.startswith(EVENT_PREFIX):
-            # The original PostgreSQL row change must independently satisfy the
-            # approval predicate. Schema markers must never be skipped this way.
-            literal = change[len(EVENT_PREFIX):]
-            return json.loads(literal[1:-1].replace("''", "'"))["kind"] != "schema"
-        head, _, rest = change.partition(": ")
-        table = head.removeprefix("table ")
-        if table in tables:
-            return True
-        if not rest.startswith("INSERT: ") or table not in seeds:
-            return False
-        row = {name: (None if value == "null" else value[1:-1].replace("''", "'")
-                      if value.startswith("'") else value)
-               for name, value in CDC_COLUMN.findall(rest.removeprefix("INSERT: "))}
-        return any(all(row.get(field) == value for field, value in key) for key in seeds[table])
-
-    return covered
 
 
 def create_cdc_slot(container):
@@ -1405,7 +1376,7 @@ def boot_and_stop(args):
 
             coordinator = DeterministicCoordinator(run_id, evidence, compare=compare_transaction,
                                                    cdc=changes,
-                                                   rust_only=rust_only_change(approved),
+                                                   exempt=ApprovalEngine(approved).exempt_transaction,
                                                    operation_checks=False, timeout=args.boot_timeout)
             hook_url = coordinator.start()
 

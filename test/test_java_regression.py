@@ -218,18 +218,6 @@ class CdcTests(unittest.TestCase):
             with self.assertRaisesRegex(RuntimeError, "inside a transaction"):
                 controller.read_cdc("container")
 
-    def test_rust_only_change_covers_rust_only_tables_and_listed_seed_inserts(self):
-        covered = controller.rust_only_change({
-            "rust_only_tables": ["search.document_index"],
-            "rust_seed_additions": [{"table": "public.service_job", "key": ["job_name"],
-                                     "values": [["Rust's_job"]]}]})
-        self.assertTrue(covered("table search.document_index: INSERT: document_id[text]:'x'"))
-        self.assertTrue(covered("table public.service_job: INSERT: job_name[character varying]:'Rust''s_job' "
-                                "description[text]:null"))
-        self.assertFalse(covered("table public.service_job: INSERT: job_name[character varying]:'other'"))
-        self.assertFalse(covered("table public.service_job: UPDATE: job_name[character varying]:'Rust''s_job'"))
-        self.assertFalse(covered("table public.enumeration: INSERT: enum_id[character varying]:'Rust''s_job'"))
-
 
 if __name__ == "__main__":
     unittest.main()
