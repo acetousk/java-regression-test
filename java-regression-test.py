@@ -656,8 +656,13 @@ def engine_directories(args=None):
             for name, checkout in zip(("java", "rust"), REPOSITORIES)}
 
 
+def rust_target():
+    cache = Path(os.environ.get("XDG_CACHE_HOME") or Path.home() / ".cache")
+    return os.environ.get("CARGO_TARGET_DIR", str(cache / "moqui/target"))
+
+
 def rust_artifact(directory):
-    target = Path(os.environ.get("CARGO_TARGET_DIR", "target"))
+    target = Path(rust_target() or "target")
     if not target.is_absolute():
         target = directory / target
     return target / "debug/moqui"
@@ -665,6 +670,9 @@ def rust_artifact(directory):
 
 def build_engines(java_home=None, directories=None):
     environment = os.environ.copy()
+    environment.setdefault("CARGO_TARGET_DIR", rust_target())
+    if not environment["CARGO_TARGET_DIR"]:
+        environment.pop("CARGO_TARGET_DIR")  # Cargo rejects an explicitly empty value.
     if java_home:
         environment["JAVA_HOME"] = str(Path(java_home).resolve())
         environment["PATH"] = str(Path(java_home).resolve() / "bin") + os.pathsep + environment.get("PATH", "")

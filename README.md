@@ -45,12 +45,9 @@ checksums, and their separate runtime paths are recorded in `.runs/build.json`
 only after both builds succeed. Gradle comes from the Java checkout's wrapper;
 the controller has no third-party Python dependencies.
 
-Optional shared cache (unset means unchanged local build/run):
-
-```sh
-export CARGO_TARGET_DIR=/home/user/moqui/mr-moqui/target
-mise run build
-```
+Rust builds share `${XDG_CACHE_HOME:-$HOME/.cache}/moqui/target` by default.
+Set `CARGO_TARGET_DIR=/path` to override, or `CARGO_TARGET_DIR=` to opt out and
+use the original checkout-local build/run paths.
 
 Shared mode locks build-and-copy with the same protocol as guarded `moq`, records
 and launches private `.runs/bin/moqui`, and preserves running executable inodes.

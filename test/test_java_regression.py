@@ -22,6 +22,9 @@ class BuildTests(unittest.TestCase):
         self.root_patch = patch.object(controller, "ROOT", self.root)
         self.root_patch.start()
         self.addCleanup(self.root_patch.stop)
+        self.environment_patch = patch.dict(controller.os.environ, {"CARGO_TARGET_DIR": ""})
+        self.environment_patch.start()
+        self.addCleanup(self.environment_patch.stop)
         for checkout in controller.REPOSITORIES:
             conf = self.root / checkout / "runtime" / "conf"
             conf.mkdir(parents=True)
@@ -49,6 +52,7 @@ class BuildTests(unittest.TestCase):
         self.assertEqual(len(manifest["java"]["sha256"]), 64)
         self.assertEqual(manifest["rust"]["artifact"], str(self.root / "mr-moqui/target/debug/moqui"))
         self.assertFalse((self.root / ".runs/bin").exists())
+        self.assertNotIn("CARGO_TARGET_DIR", run.call_args_list[1].kwargs["env"])
 
     def test_explicit_worktrees_are_used_without_replacing_defaults(self):
         from types import SimpleNamespace
@@ -93,6 +97,26 @@ class BuildTests(unittest.TestCase):
                     controller.build_engines()
                 self.assertNotEqual(controller.os.fstat(running.fileno()).st_ino, private.stat().st_ino)
                 self.assertEqual(running.read(), b"test build artifact")
+
+    def test_shared_cache_is_default_and_respects_xdg(self):
+        with patch.dict(controller.os.environ, {"XDG_CACHE_HOME": str(self.root / "cache")}):
+            controller.os.environ.pop("CARGO_TARGET_DIR", None)
+            self.assertEqual(controller.rust_target(), str(self.root / "cache/moqui/target"))
+            with patch.object(controller.cargo_cache, "build") as shared, \
+                    patch.object(controller.subprocess, "run", side_effect=self.fake_build):
+                def copy_fake(command, directory, environment, private):
+                    self.assertEqual(environment["CARGO_TARGET_DIR"], controller.rust_target())
+                    private.parent.mkdir(parents=True, exist_ok=True)
+                    private.write_bytes(b"test build artifact")
+                    private.chmod(0o755)
+                shared.side_effect = copy_fake
+                controller.build_engines()
+            shared.assert_called_once()
+            manifest = json.loads((self.root / ".runs/build.json").read_text())
+            self.assertEqual(manifest["rust"]["artifact"], str(self.root / ".runs/bin/moqui"))
+        with patch.dict(controller.os.environ, {"XDG_CACHE_HOME": ""}):
+            controller.os.environ.pop("CARGO_TARGET_DIR", None)
+            self.assertEqual(controller.rust_target(), str(Path.home() / ".cache/moqui/target"))
 
     def test_missing_artifact_fails(self):
         with patch.object(controller.subprocess, "run"), self.assertRaises(SystemExit):
