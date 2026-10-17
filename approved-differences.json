@@ -1,4 +1,26 @@
 {
+  "transaction_exemptions": [
+    {"engine": "rust", "when": {"all": [
+      {"path": "kind", "in": ["insert", "update", "delete", "truncate"]},
+      {"path": "table", "in": {"ref": "rust_only_tables"}}
+    ]}},
+    {"engine": "rust", "when": {"all": [
+      {"path": "kind", "equals": "insert"},
+      {"keyed_rows": {"ref": "rust_seed_additions"}}
+    ]}},
+    {"engine": "rust", "when": {"all": [
+      {"path": "kind", "equals": "schema"},
+      {"path": "table_only", "equals": true},
+      {"path": "tag", "in": ["CREATE TABLE", "CREATE INDEX"]},
+      {"path": "tables", "all_in": {"ref": "rust_only_tables"}}
+    ]}},
+    {"engine": "rust", "when": {"all": [
+      {"path": "kind", "equals": "schema"},
+      {"path": "table_only", "equals": true},
+      {"path": "tag", "equals": "DROP TABLE"},
+      {"path": "tables", "empty": true}
+    ]}}
+  ],
   "rust_only_tables": [
     "public.auth_flow",
     "public.auth_flow_field_map",

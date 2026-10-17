@@ -65,8 +65,10 @@ class PostgresIncrementalTests(unittest.TestCase):
                     return transactions, cursor
 
                 def compare(expected=True):
-                    with contextlib.redirect_stdout(io.StringIO()):
-                        self.assertEqual(controller.diff_compare(states['java'], states['rust'], root), expected)
+                    output = io.StringIO()
+                    with contextlib.redirect_stdout(output):
+                        equal = controller.diff_compare(states['java'], states['rust'], root)
+                    self.assertEqual(equal, expected, output.getvalue())
 
                 compare()
                 for side in containers:
@@ -130,6 +132,27 @@ class PostgresIncrementalTests(unittest.TestCase):
                 for side in containers:
                     sql(side, 'DROP TABLE example; DROP SEQUENCE example_seq;')
                     consume(side)
+                compare()
+                for side in containers:
+                    sql(side, 'CREATE TABLE shared_probe (id int);')
+                    consume(side)
+                compare()
+                # Approved-table-only setup (including an index and no-op drop) has
+                # no Java write peer; PostgreSQL, not SQL text, identifies its objects.
+                sql('rust', 'BEGIN; DROP TABLE IF EXISTS public.auth_flow; '
+                            'CREATE TABLE public.auth_flow (id integer PRIMARY KEY); '
+                            'CREATE INDEX auth_flow_id_extra ON public.auth_flow(id); '
+                            'INSERT INTO public.auth_flow VALUES (1); COMMIT;')
+                setup, _ = consume('rust')
+                self.assertEqual(len(setup), 1)
+                approvals = controller.ApprovalEngine(controller.APPROVED_STARTUP_DIFFERENCES)
+                self.assertTrue(approvals.exempt_transaction('rust', setup[0]), setup)
+                compare()
+                sql('rust', 'BEGIN; INSERT INTO public.auth_flow VALUES (2); INSERT INTO shared_probe VALUES (1); COMMIT;')
+                mixed, _ = consume('rust')
+                self.assertFalse(approvals.exempt_transaction('rust', mixed[0]))
+                sql('rust', 'DELETE FROM shared_probe;')
+                consume('rust')
                 compare()
                 # Actual synchronous operation barriers over independently committed
                 # PostgreSQL changes, followed by the transaction and final-drain gates.
