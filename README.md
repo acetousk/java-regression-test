@@ -1,9 +1,9 @@
 # Java / Rust Moqui regression tests
 
 For the opt-in transaction-clock coordinator and worktree integration, see
-[Deterministic transaction comparison](DETERMINISTIC.md). This mode checks operation
-order and compares committed state after each paired transaction; it does not
-assume that the two startup transaction streams are already equivalent.
+[Deterministic transaction comparison](DETERMINISTIC.md). This mode pairs the
+engines' committed write transactions using PostgreSQL change data capture and
+compares both databases after each pair; operation order and logs are not compared.
 
 ```text
 java-regression-test/
@@ -64,13 +64,68 @@ as listening TCP ports. It sends SIGTERM to both process groups before waiting
 up to 120 seconds for shutdown. Each engine must log a new artifact-bin flush
 after SIGTERM; Java must also report final factory destruction. Forced kills,
 unexpected exits, or missing shutdown evidence fail the run before snapshots.
-Shutdown verification is recorded in `shutdown.json`.
+Shutdown verification is recorded in `shutdown.json`. Run evidence uses UTC
+timestamp directories: `.runs/YYYY-MM-DD_HH-MM-SS.ffffffZ/`.
 
-Step 4 connects with container-local `psql` and creates snapshots inline in
-`java-regression-test.py`, then calls its `snapshot_compare()` function.
-`diff_compare()` is the separate incremental entry point and currently fails
-explicitly because change tracking has not been implemented. It captures schema-only dumps, table/materialized-view
-rows, and sequence states. Rows use a typed JSON representation with exact numeric
+### Step 4 — per-transaction incremental PostgreSQL verification
+
+The acceptance contract is matching PostgreSQL changes/state per committed write
+transaction, under existing approved differences—not identical engine operations.
+Java and Rust may perform different reads, pool validation and internal calls.
+Transaction completion calls the running Python controller, which consumes changes
+**from each PostgreSQL database** and blocks each writer until its peer's write
+transaction compares equal. Mismatches stop execution. Reads and rollbacks do not
+need matching operation identities. Engine-reported write sets are not evidence.
+Reuse the running controller; resume waiting engines on completion events, not
+sleeps or timed polling.
+
+Implementation requirements:
+
+1. Establish equivalent initial databases and install PostgreSQL change capture
+   **before either engine starts**. Persist the baseline and each database's own
+   capture cursor; LSNs/transaction IDs are local and must not be compared across
+   databases.
+2. Hook transaction completion and pair committed write transactions in order.
+   Hold both writers until Python acknowledges database equality. Retain nested
+   transaction context; internal operation identities/order are diagnostics only.
+3. Implement `diff_compare()` using the existing PostgreSQL CDC reader as its
+   input. Apply complete, ordered committed transactions to separate canonical
+   state indexes; handle inserts, updates, deletes and truncation, including old
+   keys/key changes and missing/null values. Recompare affected keys/relations
+   against the verified prior state, preserving duplicates and numeric precision.
+   Compare state, not raw WAL text or physical row/event order. No full dump or
+   table scan on every transaction. Apply only the existing reviewed differences.
+4. Cover **schema and sequence state**, not only row CDC. The current
+   `test_decoding` stream does not provide full DDL/sequence coverage. Obtain
+   schema changes from PostgreSQL catalog/event-trigger evidence and track
+   affected sequence state explicitly. Missing tables/indexes must fail even
+   when both row-change streams are empty.
+5. Preserve transaction semantics: PostgreSQL logical decoding exposes committed
+   changes, not uncommitted parent contents. Rollback discards transactional
+   changes. Do not force extra commits or claim uncommitted-state verification.
+   Independent nested commits and nontransactional sequence effects remain checked.
+6. Persist operation identity, capture cursors, change batches, exact mismatches
+   and acknowledgements. Capture gaps, missing peers, unknown/untracked writes,
+   failed comparisons or incomplete shutdown must fail closed. Test deliberate
+   row/schema/sequence divergence, rollback, nested transactions, no-ops and
+   capture loss. Finish only after readiness, graceful shutdown and a final CDC
+   drain leave no unmatched write transactions or changes.
+
+Implemented verification path: `diff_compare()` replays full row images from
+PostgreSQL trigger events carried through logical decoding. The controller invokes
+it at committed-write barriers, rather than taking per-write row snapshots. DDL metadata and native sequence state remain
+checked; only DDL-affected relations may need targeted row readback. A baseline is
+captured before engines start; a final snapshot is retained as an independent audit.
+See [protocol, limitations and evidence](DETERMINISTIC.md). Operation-identity
+checks are disabled in the harness; PostgreSQL equality remains strict under the
+existing approvals. Uncommitted state is not verified; unsupported capture paths
+fail closed.
+
+### Current snapshot comparator
+
+The existing Step 4 implementation connects with container-local `psql`, creates
+snapshots inline in `java-regression-test.py`, then calls `snapshot_compare()`.
+It captures schema-only dumps, table/materialized-view rows, and sequence states. Rows use a typed JSON representation with exact numeric
 precision and sorted object keys; comparison ignores row order but preserves
 duplicates. Row reads use a read-only repeatable-read transaction. Schema capture
 and sequence reads require idle databases: sequences are not MVCC-snapshot data.
@@ -122,8 +177,9 @@ Failure output contains database values; treat terminal/CI logs as sensitive.
 This is an initial snapshot comparator, **not the complete equivalence tool in the
 plan**. Schema dumps are compared textually; custom-type canonicalization, large
 objects, foreign-table contents, precise primary-key/column diagnostics, and
-incremental change tracking are not implemented. No equivalence baseline is
-established for incremental mode. Startup log events and TCP accessibility are not verified HTTP health.
+unsupported incremental adapters remain incomplete. Incremental mode establishes
+its own initial baseline and tracks ordinary PostgreSQL tables; it does not claim
+uncommitted transaction visibility or full engine equivalence. Startup log events and TCP accessibility are not verified HTTP health.
 
 Snapshots, configs, reports, and logs remain under `.runs/<run-id>/`; the directory
 is private because it contains database contents and disposable credentials.
@@ -183,9 +239,9 @@ this feature excludes **rows only**, not schema objects or sequences.
 
 Source-file exclusions resolve the five SFTP demo records (including nested job
 parameters) and the four named authentication enum groups from Rust XML plus
-entity PK metadata. There are 33 distinct Enumeration PKs and four types, but
-34 Enumeration source occurrences: `OctGoogle` occurs in both OAuth and OIDC.
-That source collision is retained, not silently assigned to either group.
+entity PK metadata: 33 distinct Enumeration PKs and four types (37 source
+records). A PK that occurs in more than one source group is a source collision;
+it is retained, not silently assigned to either group.
 Only a single Rust row with the exact source values and all unset fields null
 can be excluded. Empty XML attributes load as null; only loader-generated
 `lastUpdatedStamp` is disregarded for seed matching. Edited rows, extra values,

@@ -203,5 +203,33 @@ class StartupTests(unittest.TestCase):
                 controller.wait_for_ports({"java": process}, {"java": 8080}, 1)
 
 
+class CdcTests(unittest.TestCase):
+    def test_read_cdc_groups_rows_per_committed_transaction(self):
+        rows = ["BEGIN", "table public.a: INSERT: id[integer]:1 note[text]:'two\nlines'", "COMMIT",
+                "BEGIN", "COMMIT"]
+        result = subprocess.CompletedProcess([], 0, stdout="\0".join(rows) + "\n")
+        with patch.object(controller.subprocess, "run", return_value=result):
+            self.assertEqual(controller.read_cdc("container"),
+                             [["table public.a: INSERT: id[integer]:1 note[text]:'two\nlines'"], []])
+
+    def test_read_cdc_rejects_a_partial_transaction(self):
+        result = subprocess.CompletedProcess([], 0, stdout="BEGIN\0table public.a: INSERT: id[integer]:1")
+        with patch.object(controller.subprocess, "run", return_value=result):
+            with self.assertRaisesRegex(RuntimeError, "inside a transaction"):
+                controller.read_cdc("container")
+
+    def test_rust_only_change_covers_rust_only_tables_and_listed_seed_inserts(self):
+        covered = controller.rust_only_change({
+            "rust_only_tables": ["search.document_index"],
+            "rust_seed_additions": [{"table": "public.service_job", "key": ["job_name"],
+                                     "values": [["Rust's_job"]]}]})
+        self.assertTrue(covered("table search.document_index: INSERT: document_id[text]:'x'"))
+        self.assertTrue(covered("table public.service_job: INSERT: job_name[character varying]:'Rust''s_job' "
+                                "description[text]:null"))
+        self.assertFalse(covered("table public.service_job: INSERT: job_name[character varying]:'other'"))
+        self.assertFalse(covered("table public.service_job: UPDATE: job_name[character varying]:'Rust''s_job'"))
+        self.assertFalse(covered("table public.enumeration: INSERT: enum_id[character varying]:'Rust''s_job'"))
+
+
 if __name__ == "__main__":
     unittest.main()

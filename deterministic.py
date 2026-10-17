@@ -1,4 +1,4 @@
-"""Strict paired transaction barriers for the Java/Rust regression harness (stdlib only)."""
+"""Per-write-transaction database barriers for the Java/Rust regression harness (stdlib only)."""
 from copy import deepcopy
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import json
@@ -8,29 +8,48 @@ import time
 
 
 class DeterministicCoordinator:
-    """Neither engine leaves a barrier until its peer supplies the same event.
+    """Pairs the engines' committed write transactions and compares both databases after each pair.
 
-    A completion barrier optionally compares committed database state before either
-    engine is acknowledged. No unmatched operation is skipped or assigned a time.
+    Transaction begins are answered at once with the shared logical time: the run's start plus the
+    number of write transactions paired so far. Operation order and artifact identity are not
+    compared; the engines' logs are diagnostics only.
+
+    On each completion the coordinator reads that engine's PostgreSQL change data capture (``cdc``).
+    A completion that produced no committed change (a read, a rollback) is acknowledged at once, as
+    is a Rust write made only of approved Rust-only changes. Any other write waits for the peer's next write; both databases are then compared before either engine
+    continues. A pair whose sides committed different numbers of transactions fails.
     """
-    def __init__(self, run_id, evidence, compare=None, timeout=120,
-                 start_millis=1760000000000, require_logs=False):
+    def __init__(self, run_id, evidence, compare=None, cdc=None, timeout=120, start_millis=None,
+                 rust_only=None, operation_checks=False):
         self.run_id = run_id
+        self.operation_checks = operation_checks
+        self.operation_events = []
+        self.operation_positions = {side: 0 for side in ('java', 'rust')}
+        self.operation_sequences = {side: 0 for side in ('java', 'rust')}
+        self.operation_comparisons = 0
+        # rust_only(change) is true for a CDC change line covered by an approved Rust-only difference.
+        # A Rust transaction made only of such changes has no Java peer.
+        self.rust_only = rust_only
+        self.rust_only_writes = 0
         self.evidence = Path(evidence)
         self.compare = compare
+        self.cdc = cdc
         self.timeout = timeout
-        self.start_millis = start_millis
-        self.require_logs = require_logs
-        self.logs_verified = False
-        self.trace_counts = {}
+        self.start_millis = time.time_ns() // 1_000_000 if start_millis is None else start_millis
         self.condition = threading.Condition()
-        self.events = []
-        self.positions = {side: 0 for side in ("java", "rust")}
-        self.sequences = {side: 0 for side in self.positions}
-        self.stacks = {side: [] for side in self.positions}
-        self.operations = 0
+        self.sides = ("java", "rust")
+        self.stacks = {side: [] for side in self.sides}
+        self.sequences = {side: 0 for side in self.sides}
+        self.counts = {side: {"begin": 0, "committed": 0, "rolled_back": 0, "begin_failed": 0}
+                       for side in self.sides}
+        self.pending = {side: [] for side in self.sides}
+        self.arrived = {side: None for side in self.sides}
+        self.pairs = []
         self.comparisons = 0
+        self.trace_counts = {}
         self.error = None
+        self.closed = False
+        self.final_incremental_equal = None
         self.server = None
         self.thread = None
 
@@ -48,102 +67,193 @@ class DeterministicCoordinator:
     def _validate(self, request):
         side = request.get("engine")
         if (type(request.get("version")) is not int or request["version"] != 1
-                or request.get("run_id") != self.run_id or not isinstance(side, str) or side not in self.positions):
+                or request.get("run_id") != self.run_id or side not in self.sides):
             raise ValueError("Invalid protocol version, run, or engine")
         sequence = request.get("sequence")
         if type(sequence) is not int or sequence <= 0:
             raise ValueError("sequence must be a positive integer")
         event = request.get("event")
-        fields = {"version", "run_id", "engine", "sequence", "event"}
+        if event == "operation":
+            if not self.operation_checks:
+                raise ValueError('Operation checks are not enabled')
+            if set(request) != {'version', 'run_id', 'engine', 'event', 'sequence', 'kind', 'action', 'name', 'outcome', 'transaction_sequence'}:
+                raise ValueError('Unexpected operation fields')
+            if (sequence <= self.operation_sequences[side]
+                    or any(not isinstance(request.get(key), str) or not request[key]
+                           for key in ('kind', 'action', 'name'))):
+                raise ValueError('Invalid operation identity or sequence')
+            if request['outcome'] not in ('exit', 'succeeded', 'failed', 'skipped'):
+                raise ValueError('Invalid operation outcome')
+            parent = request['transaction_sequence']
+            if parent is not None and (type(parent) is not int or not any(entry[0] == parent for entry in self.stacks[side])):
+                raise ValueError('Operation transaction scope is not active')
+            return side, sequence, event
         if event == "begin":
-            fields |= {"parent_sequence", "artifact", "artifact_stack"}
-        elif event == "complete":
-            fields |= {"operation_id", "outcome"}
-        if set(request) != fields:
-            raise ValueError("Unexpected or missing transaction event fields")
-        if event == "begin":
-            if sequence != self.sequences[side] + 1:
-                raise ValueError("Non-consecutive operation sequence")
-            parent = self.stacks[side][-1][0] if self.stacks[side] else None
-            if request.get("parent_sequence") != parent:
-                raise ValueError("Incorrect parent transaction sequence")
-            artifact = request.get("artifact")
-            stack = request.get("artifact_stack")
-            if (not isinstance(artifact, dict) or not isinstance(stack, list)
-                    or not stack or stack[0] != artifact):
-                raise ValueError("Missing artifact metadata or innermost-first stack")
-            for item in [artifact, *stack]:
-                if (not isinstance(item, dict) or set(item) != {"type", "sub_type", "name"}
-                        or any(not isinstance(value, str) for value in item.values())):
-                    raise ValueError("Invalid artifact metadata")
-            return {"event": event, "parent_sequence": parent,
-                    "artifact": artifact, "artifact_stack": stack}
+            if sequence <= self.sequences[side]:
+                raise ValueError("Transaction sequence must increase")
+            return side, sequence, event
         if event == "complete":
-            if not self.stacks[side] or self.stacks[side][-1] != (sequence, request.get("operation_id")):
-                raise ValueError("Completion does not match the active transaction")
-            outcome = request.get("outcome")
-            if outcome not in ("committed", "rolled_back", "begin_failed"):
+            if request.get("outcome") not in ("committed", "rolled_back", "begin_failed"):
                 raise ValueError("Invalid completion outcome")
-            return {"event": event, "operation_id": request["operation_id"], "outcome": outcome}
+            if not any(entry[0] == sequence and entry[1] == request.get("operation_id")
+                       for entry in self.stacks[side]):
+                raise ValueError("Completion does not match an active transaction")
+            return side, sequence, event
         raise ValueError("Unknown transaction event")
 
+    def _rust_only(self, transaction):
+        if transaction and self.rust_only is not None and all(map(self.rust_only, transaction)):
+            self.rust_only_writes += 1
+            return True
+        return False
+
+    def _time(self):
+        return self.start_millis + len(self.pairs)
+
     def exchange(self, request):
-        deadline = time.monotonic() + self.timeout
         with self.condition:
             try:
                 if self.error:
                     raise ValueError(self.error)
-                signature = self._validate(request)
-                side = request["engine"]
-                index = self.positions[side]
-                if index == len(self.events):
-                    self.events.append({"requests": {}, "signature": signature, "ready": False})
-                barrier = self.events[index]
-                if side in barrier["requests"]:
-                    raise ValueError("Concurrent application execution detected")
-                barrier["requests"][side] = deepcopy(request)
-                if signature != barrier["signature"]:
-                    raise ValueError(f"Operation order/metadata mismatch at event {index + 1}")
-                if len(barrier["requests"]) == 2:
-                    if signature["event"] == "begin":
-                        self.operations += 1
-                        response = {"operation_id": f"op-{self.operations:08d}",
-                                    "time_epoch_ms": self.start_millis + self.operations - 1}
-                        for engine, incoming in barrier["requests"].items():
-                            self.sequences[engine] = incoming["sequence"]
-                            self.stacks[engine].append((incoming["sequence"], response["operation_id"]))
-                    else:
-                        # Both applications are paused after completing the transaction.
-                        # Keep the barrier closed, but let health checks/abort acquire the lock.
-                        if self.compare is not None:
-                            self.condition.release()
-                            try:
-                                equal = self.compare(signature["operation_id"], signature["outcome"])
-                            finally:
-                                self.condition.acquire()
-                            if self.error:
-                                raise ValueError(self.error)
-                            if not equal:
-                                raise ValueError(f"Database mismatch after {signature['operation_id']}")
-                            self.comparisons += 1
-                        for engine in self.stacks:
-                            self.stacks[engine].pop()
-                        response = {"ok": True}
-                    barrier["response"] = response
-                    barrier["ready"] = True
-                    self.condition.notify_all()
-                while not barrier["ready"] and not self.error:
-                    remaining = deadline - time.monotonic()
-                    if remaining <= 0:
-                        raise TimeoutError(f"Peer did not reach event {index + 1}")
-                    self.condition.wait(remaining)
+                side, sequence, event = self._validate(request)
+                if event == 'operation':
+                    return self._operation(side, request)
+                if event == "begin":
+                    self.sequences[side] = sequence
+                    self.counts[side]["begin"] += 1
+                    operation_id = f"{side}-{sequence:08d}"
+                    self.stacks[side].append((sequence, operation_id))
+                    return {"operation_id": operation_id, "time_epoch_ms": self._time()}
+                self.stacks[side] = [entry for entry in self.stacks[side] if entry[0] != sequence]
+                self.counts[side][request["outcome"]] += 1
+                changes = []
+                if self.cdc is not None:
+                    # Read outside the lock so the peer can arrive meanwhile.
+                    self.condition.release()
+                    try:
+                        changes = self.cdc(side)
+                    finally:
+                        self.condition.acquire()
                 if self.error:
                     raise ValueError(self.error)
-                self.positions[side] += 1
-                return deepcopy(barrier["response"])
+                changes = [transaction for transaction in changes
+                           if not (side == "rust" and self._rust_only(transaction))]
+                for transaction in changes:
+                    self.pending[side].append({"operation_id": request["operation_id"],
+                                               "outcome": request["outcome"], "changes": transaction})
+                if not self.pending[side]:
+                    return {"ok": True}
+                return self._barrier(side, request)
             except Exception as exc:
                 self.fail(str(exc))
                 raise
+
+    def _operation(self, side, request):
+        index = self.operation_positions[side]
+        signature = {key: request[key] for key in ('kind', 'action', 'name', 'outcome')}
+        if index == len(self.operation_events):
+            self.operation_events.append({'signature': signature, 'requests': {}, 'ready': False})
+        event = self.operation_events[index]
+        if side in event['requests']:
+            raise ValueError('Concurrent operation execution in one engine')
+        event['requests'][side] = deepcopy(request)
+        self.operation_sequences[side] = request['sequence']
+        if signature != event['signature']:
+            raise ValueError(f'Operation identity mismatch at operation {index + 1}: {event["requests"]}')
+        if self.cdc is not None:
+            self.condition.release()
+            try:
+                changes = self.cdc(side)
+            finally:
+                self.condition.acquire()
+            self.pending[side].extend({'operation_id': None, 'outcome': 'operation-boundary', 'changes': item}
+                                      for item in changes if not (side == 'rust' and self._rust_only(item)))
+        # Arrival includes PostgreSQL capture, not merely receipt of the engine hook.
+        event.setdefault('captured', set()).add(side)
+        if len(event['captured']) == 2:
+            if self.compare is None:
+                raise ValueError('Operation comparison callback is required')
+            self.condition.release()
+            try:
+                equal = self.compare(f'operation-{index + 1:08d}')
+            finally:
+                self.condition.acquire()
+            if self.error:
+                raise ValueError(self.error)
+            if not equal:
+                raise ValueError(f'Database mismatch after operation {index + 1}')
+            self.operation_comparisons += 1
+            event['ready'] = True
+            self.condition.notify_all()
+        deadline = time.monotonic() + self.timeout
+        while not event['ready'] and not self.error:
+            remaining = deadline - time.monotonic()
+            if remaining <= 0:
+                raise TimeoutError(f'Peer did not reach operation {index + 1}')
+            self.condition.wait(remaining)
+        if self.error:
+            raise ValueError(self.error)
+        self.operation_positions[side] += 1
+        return {'ok': True, 'state': 'committed-only',
+                'uncommitted_pending': request['transaction_sequence'] is not None}
+
+    def _barrier(self, side, request):
+        if self.arrived[side] is not None:
+            raise ValueError("Concurrent write transactions in one engine")
+        self.arrived[side] = request["operation_id"]
+        round_number = len(self.pairs)
+        peer = "rust" if side == "java" else "java"
+        if self.arrived[peer] is not None:
+            index = round_number + 1
+            pair = {"index": index, "time_epoch_ms": self._time(),
+                    **{name: {"operation_id": self.arrived[name],
+                              "transactions": deepcopy(self.pending[name])} for name in self.sides}}
+            self._write_cdc(index, pair)
+            counts = {name: len(self.pending[name]) for name in self.sides}
+            if counts["java"] != counts["rust"]:
+                raise ValueError(f"Write {index}: java committed {counts['java']} transactions, "
+                                 f"rust committed {counts['rust']}")
+            if counts["java"] != 1:
+                raise ValueError(f"Write {index}: multiple commits cannot be verified as one transaction")
+            # Approved differences can change raw rows, so the database comparison is the gate.
+            cdc_equal = ([t["changes"] for t in self.pending["java"]]
+                         == [t["changes"] for t in self.pending["rust"]])
+            if self.compare is not None:
+                self.condition.release()
+                try:
+                    equal = self.compare(f"write-{index:08d}")
+                finally:
+                    self.condition.acquire()
+                if self.error:
+                    raise ValueError(self.error)
+                if not equal:
+                    raise ValueError(f"Database mismatch after write {index}")
+                self.comparisons += 1
+            self.pairs.append({key: value for key, value in pair.items() if key not in self.sides}
+                              | {"transactions": counts["java"], "cdc_equal": cdc_equal}
+                              | {name: {"operation_id": pair[name]["operation_id"],
+                                        "changes": sum(len(t["changes"]) for t in pair[name]["transactions"])}
+                                 for name in self.sides})
+            for name in self.sides:
+                self.pending[name] = []
+                self.arrived[name] = None
+            self.condition.notify_all()
+            return {"ok": True}
+        deadline = time.monotonic() + self.timeout
+        while len(self.pairs) == round_number and not self.error:
+            remaining = deadline - time.monotonic()
+            if remaining <= 0:
+                raise TimeoutError(f"{peer} did not commit write {round_number + 1}")
+            self.condition.wait(remaining)
+        if self.error:
+            raise ValueError(self.error)
+        return {"ok": True}
+
+    def _write_cdc(self, index, pair):
+        directory = self.evidence / "transactions" / f"write-{index:08d}"
+        directory.mkdir(parents=True, exist_ok=True, mode=0o700)
+        for name in self.sides:
+            (directory / f"{name}-cdc.json").write_text(json.dumps(pair[name], indent=2) + "\n")
 
     def start(self):
         coordinator = self
@@ -185,71 +295,80 @@ class DeterministicCoordinator:
 
     def report(self):
         with self.condition:
-            complete = (self.operations > 0 and self.positions["java"] == self.positions["rust"]
-                        == len(self.events) and all(event["ready"] for event in self.events)
-                        and not any(self.stacks.values()))
-            return {"protocol_version": 1, "run_id": self.run_id, "operations": self.operations,
-                    "database_comparisons": self.comparisons, "error": self.error,
-                    "engine_logs_verified": self.logs_verified,
+            operation_settled = (not self.operation_checks or (self.operation_comparisons > 0
+                                 and all(event['ready'] for event in self.operation_events)
+                                 and self.operation_positions['java'] == self.operation_positions['rust']
+                                 == len(self.operation_events)))
+            settled = not any(self.pending.values()) and not any(self.stacks.values()) and operation_settled
+            return {"protocol_version": 2, "run_id": self.run_id, "start_epoch_ms": self.start_millis,
+                    "write_transactions": len(self.pairs), "database_comparisons": self.comparisons,
+                    "error": self.error, "transaction_counts": deepcopy(self.counts),
+                    "rust_only_writes": self.rust_only_writes,
+                    "unpaired_writes": {side: len(items) for side, items in self.pending.items()},
                     "operation_trace_counts": deepcopy(self.trace_counts),
-                    "operation_order_equal": complete and self.error is None,
-                    "per_transaction_databases_equal": complete and self.error is None
-                    and (self.logs_verified or not self.require_logs)
-                    and self.compare is not None and self.comparisons == self.operations,
-                    "events": deepcopy(self.events)}
+                    "operation_checks_enabled": self.operation_checks,
+                    "operation_order_equal": (operation_settled and self.error is None) if self.operation_checks else None,
+                    "operation_database_comparisons": self.operation_comparisons,
+                    "uncommitted_state_verified": False,
+                    "final_incremental_equal": self.final_incremental_equal,
+                    "operations": [{key: deepcopy(value) for key, value in event.items() if key != 'captured'}
+                                   for event in self.operation_events],
+                    "per_transaction_databases_equal": self.error is None and settled
+                    and bool(self.pairs) and self.compare is not None
+                    and self.cdc is not None and self.comparisons == len(self.pairs)
+                    and (not self.closed or self.final_incremental_equal is True),
+                    "pairs": deepcopy(self.pairs)}
 
-    def verify_logs(self):
+    def summarize_logs(self):
+        """Count each engine's trace kinds. Logs are diagnostics, not a parity gate."""
         with self.condition:
-            self.logs_verified = False
-            for side in self.positions:
-                path = self.evidence / f"{side}-deterministic.log"
+            self.trace_counts = {}
+            for side in self.sides:
+                counts = {}
                 try:
-                    records = [json.loads(line) for line in path.read_text().splitlines()]
-                    traces = [record for record in records if isinstance(record, dict) and record.get("event") == "trace"]
-                    counts = {}
-                    for sequence, trace in enumerate(traces, 1):
-                        if (set(trace) != {"version", "run_id", "engine", "event", "trace_sequence",
-                                          "kind", "action", "name", "outcome", "parent_sequence", "time_epoch_ms"}
-                                or type(trace["version"]) is not int or trace["version"] != 1
-                                or trace["run_id"] != self.run_id or trace["engine"] != side
-                                or type(trace["trace_sequence"]) is not int or trace["trace_sequence"] != sequence
-                                or any(not isinstance(trace[key], str) for key in ("kind", "action", "name"))
-                                or trace["outcome"] not in ("requested", "succeeded", "failed", "enter", "exit", "skipped")
-                                or (trace["parent_sequence"] is not None and
-                                    (type(trace["parent_sequence"]) is not int or trace["parent_sequence"] <= 0))
-                                or (trace["time_epoch_ms"] is not None and type(trace["time_epoch_ms"]) is not int)):
-                            raise ValueError("Invalid operation trace")
-                        counts[trace["kind"]] = counts.get(trace["kind"], 0) + 1
-                    self.trace_counts[side] = counts
-                    records = [record for record in records if not isinstance(record, dict) or record.get("event") != "trace"]
-                    expected = []
-                    for barrier in self.events:
-                        if not barrier["ready"]:
-                            raise ValueError("Unacknowledged transaction event")
-                        event = deepcopy(barrier["requests"][side])
-                        if event["event"] == "begin":
-                            event.update(barrier["response"])
-                        expected.append(event)
-                    if len(records) != len(expected) or any(
-                            not isinstance(actual, dict) or any(actual.get(key) != value
-                                                               for key, value in event.items())
-                            for actual, event in zip(records, expected)):
-                        raise ValueError("Engine log differs from acknowledged transaction stream")
-                except (OSError, ValueError, KeyError) as exc:
-                    self.fail(f"{side} deterministic.log verification failed: {exc}")
-                    return
-            self.logs_verified = True
+                    for line in (self.evidence / f"{side}-deterministic.log").read_text().splitlines():
+                        record = json.loads(line)
+                        if isinstance(record, dict) and record.get("event") == "trace":
+                            counts[str(record.get("kind"))] = counts.get(str(record.get("kind")), 0) + 1
+                except (OSError, ValueError):
+                    counts = None
+                self.trace_counts[side] = counts
 
     def close(self):
-        # Release any requests still waiting for an engine that exited.
         with self.condition:
-            if not self.report()["operation_order_equal"] and self.error is None:
-                self.fail("Incomplete deterministic transaction stream")
-        if self.require_logs and self.error is None:
-            self.verify_logs()
+            if self.error is None and (any(self.arrived.values())
+                                       or any(not event['ready'] for event in self.operation_events)):
+                self.fail('Controller closed with engines waiting at a barrier')
         if self.server:
             self.server.shutdown()
             self.server.server_close()
             self.thread.join()
+        # A late write still on one side has no peer: drain it so it is reported, not lost.
+        if self.cdc is not None and self.error is None:
+            for side in self.sides:
+                try:
+                    self.pending[side].extend({"operation_id": None, "outcome": "unhooked", "changes": changes}
+                                              for changes in self.cdc(side)
+                                              if not (side == "rust" and self._rust_only(changes)))
+                except Exception as exc:  # The database may be gone after a failed start.
+                    self.fail(f"Could not read {side} change data: {exc}")
+        with self.condition:
+            if self.error is None and self.operation_checks and not self.report()['operation_order_equal']:
+                self.fail('Incomplete operation stream')
+            if self.error is None and any(self.stacks.values()):
+                self.fail('Incomplete transaction stream')
+            if self.error is None and any(self.pending.values()):
+                self.fail(f"Unpaired write transactions: {self.report()['unpaired_writes']}")
+            if self.error is None and not self.pairs:
+                self.fail("No write transactions were paired")
+        if self.error is None and self.compare is not None:
+            try:
+                self.final_incremental_equal = bool(self.compare('final-drain'))
+                if not self.final_incremental_equal:
+                    self.fail('Database mismatch after final incremental drain')
+            except Exception as exc:
+                self.fail(f'Final incremental drain failed: {exc}')
+        self.closed = True
+        self.summarize_logs()
         path = self.evidence / "deterministic-report.json"
         path.write_text(json.dumps(self.report(), indent=2) + "\n")
