@@ -1,0 +1,18 @@
+{
+  "id": "activity-003",
+  "sourceLine": 20,
+  "headings": [
+    "Carrier Returns Undeliverable Shipment to Company",
+    "Story"
+  ],
+  "text": "If Customer does not want the item(s) CSR creates a return and sets the response type on the return to either store credit, refund, or replacement (may be partial payment, etc.; CSR sets other return fields) and sets return status to approved and complete (original package received).",
+  "route": null,
+  "dialog": null,
+  "mapping": "entry-candidate",
+  "limitation": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required.",
+  "source": "docs/business-processes/process-library/carrier-returns-undeliverable-shipment-to-company.md",
+  "mode": "vapps",
+  "coverage": "blocked",
+  "captures": [],
+  "reason": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required."
+}

@@ -1,0 +1,107 @@
+{
+  "id": "activity-030",
+  "sourceLine": 110,
+  "headings": [
+    "Ship Sales Order",
+    "Pack Shipments"
+  ],
+  "text": "1. for each item click on the **Issue & Pack** button after verifying the quantity and optionally specifying the package it should go in",
+  "route": "marble/Order/FindOrder?orderType=Sales",
+  "dialog": null,
+  "mapping": "entry-candidate",
+  "limitation": "Read-only screen/dialog evidence only. Prerequisite creation, field input, submissions, integrations and full story transitions are not executed.",
+  "source": "docs/business-processes/walkthroughs/ship-sales-order.md",
+  "mode": "vapps",
+  "coverage": "blocked",
+  "captures": [
+    {
+      "engine": "java",
+      "mode": "vapps",
+      "route": "marble/Order/FindOrder?orderType=Sales",
+      "dialog": null,
+      "authenticated": true,
+      "errors": [
+        "moqui is not defined",
+        "moqui is not defined"
+      ],
+      "failedRequests": [
+        {
+          "url": "http://127.0.0.1:18091/vapps/marble/dashboard",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:18091/vapps/marble/Order/FindOrder?orderType=Sales",
+          "error": "net::ERR_ABORTED"
+        }
+      ],
+      "httpErrors": [],
+      "consoleErrors": [
+        "Refused to apply style from 'http://127.0.0.1:18091/vapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not a supported stylesheet MIME type, and strict MIME checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/vapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/vapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to apply style from 'http://127.0.0.1:18091/vapps/marble/Order/FindOrder?orderType=Sales#?v=1a147e2' because its MIME type ('text/html') is not a supported stylesheet MIME type, and strict MIME checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/vapps/marble/Order/FindOrder?orderType=Sales#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/vapps/marble/Order/FindOrder?orderType=Sales#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled."
+      ],
+      "status": "blocked",
+      "reused": true,
+      "requestedURL": "http://127.0.0.1:18091/vapps/marble/Order/FindOrder?orderType=Sales",
+      "navigation": "documented-or-candidate-deep-link",
+      "httpStatus": 200,
+      "finalURL": "http://127.0.0.1:18091/vapps/marble/Order/FindOrder?orderType=Sales",
+      "directory": ".saved-runs/2026-10-17_03-22-50.677356Z/ui-test/_captures/b899b3bae130d2e4e2d1c07f"
+    },
+    {
+      "engine": "rust",
+      "mode": "vapps",
+      "route": "marble/Order/FindOrder?orderType=Sales",
+      "dialog": null,
+      "authenticated": true,
+      "errors": [
+        "HTTP 404",
+        "One or more HTTP resources failed (see httpErrors)"
+      ],
+      "failedRequests": [],
+      "httpErrors": [
+        {
+          "url": "http://127.0.0.1:18092/vapps/marble/dashboard",
+          "status": 404
+        },
+        {
+          "url": "http://127.0.0.1:18092/vapps/marble/Order/FindOrder?orderType=Sales",
+          "status": 404
+        }
+      ],
+      "consoleErrors": [
+        "Failed to load resource: the server responded with a status of 404 (Not Found)",
+        "Failed to load resource: the server responded with a status of 404 (Not Found)"
+      ],
+      "status": "blocked",
+      "reused": true,
+      "requestedURL": "http://127.0.0.1:18092/vapps/marble/Order/FindOrder?orderType=Sales",
+      "navigation": "documented-or-candidate-deep-link",
+      "httpStatus": 404,
+      "finalURL": "http://127.0.0.1:18092/vapps/marble/Order/FindOrder?orderType=Sales",
+      "directory": ".saved-runs/2026-10-17_03-22-50.677356Z/ui-test/_captures/5dd496977211fce062f32c6c"
+    }
+  ],
+  "comparison": {
+    "status": "diagnostic-only",
+    "equal": false,
+    "dimensions": [
+      {
+        "width": 1440,
+        "height": 1009
+      },
+      {
+        "width": 1440,
+        "height": 1000
+      }
+    ],
+    "dimensionsEqual": false,
+    "differentPixels": 154755,
+    "comparedPixels": 1452960,
+    "differencePercent": 10.65101585728444,
+    "threshold": 0.1
+  }
+}

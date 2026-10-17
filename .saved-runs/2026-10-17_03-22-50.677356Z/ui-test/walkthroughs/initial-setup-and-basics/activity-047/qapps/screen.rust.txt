@@ -1,0 +1,46 @@
+menu
+Applications
+chevron_right
+Marble ERP
+chevron_right
+Projects
+chevron_right
+Find Project
+search
+edit_location
+notifications
+history
+account_circle
+open_in_new
+New Project
+search
+Find Options
+No results found
+Project
+	
+Name
+	
+Priority
+	
+Status
+	
+Purpose
+	
+Due Date
+	
+Estimated Hours
+	
+Actual Hours
+Built on Moqui 0.1.0
+Site Map
+New Project
+close
+ID
+Project Name
+Client
+arrow_drop_down
+Vendor
+arrow_drop_down
+Purpose
+arrow_drop_down
+Create

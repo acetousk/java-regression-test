@@ -1,0 +1,18 @@
+{
+  "id": "activity-002",
+  "sourceLine": 14,
+  "headings": [
+    "OAGIS Procure to Pay",
+    "Introduction"
+  ],
+  "text": "This process covers purchasing/sourcing and manufacturing.",
+  "route": null,
+  "dialog": null,
+  "mapping": "entry-candidate",
+  "limitation": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required.",
+  "source": "docs/business-processes/process-library/oagis-procure-to-pay.md",
+  "mode": "apps",
+  "coverage": "blocked",
+  "captures": [],
+  "reason": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required."
+}

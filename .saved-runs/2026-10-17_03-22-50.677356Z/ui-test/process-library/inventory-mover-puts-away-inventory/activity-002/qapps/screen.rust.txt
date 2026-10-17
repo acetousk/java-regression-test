@@ -1,0 +1,54 @@
+menu
+Applications
+chevron_right
+Marble ERP
+chevron_right
+Asset
+chevron_right
+Asset
+chevron_right
+Find Summary
+search
+edit_location
+notifications
+history
+account_circle
+Find Individual Assets
+Move Asset
+Containers
+Lots
+Pools
+On Hand Report
+open_in_new
+Receive Direct
+open_in_new
+Physical Diff
+search
+Find Options
+table_chart
+Columns
+CSV
+XLS
+No results found
+Assets
+	
+Product ID
+Product Name
+Asset Class
+	
+Status
+Owner Party
+Asset Pool
+	
+Facility
+Location
+Lot
+	
+Available
+On Hand
+	
+PhI Qty
+	
+Move
+Built on Moqui 0.1.0
+Site Map

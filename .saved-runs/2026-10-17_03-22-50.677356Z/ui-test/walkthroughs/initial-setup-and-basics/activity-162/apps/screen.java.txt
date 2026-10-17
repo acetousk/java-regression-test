@@ -1,0 +1,101 @@
+Toggle navigation 
+Find Payment
+Payment Status Reference
+0 0 0 0
+Marble ERP - Dashboard
+ Shipments - Items
+ Orders - Order Detail
+ Orders - Find Order
+ Asset - Find Summary
+ Stores - Find Product Store
+ Facility - Find Facility
+ Products - Prices
+ Asset - Find Summary (AstTpInventory)
+ Products - Find Product
+ Invoices - Find Invoice
+ Parties - Time
+ Human Resources - Rates
+ Tasks - Find Task
+ Projects - Find Project
+ Customers - Customer
+ Customers - Find Customer
+ Parties - Party
+Applications
+Applications
+Applications
+Applications
+ Parties - Find Party
+Applications
+Applications
+Application
+Marble ERP
+My Account
+System
+Tools
+ZIRET: Ziziwork Retail & Wholesale
+ZISER: Ziziwork Services
+Marble ERP
+Dashboard
+Quick Search
+Accounting
+Asset
+Catalog
+Customers
+Facility
+Human Resources
+Manufacturing
+Orders
+Parties
+Projects
+Requests
+Returns
+Shipments
+Shipping
+Stores
+Suppliers
+Survey
+Tasks
+Wiki/Content
+Custom Reports
+Report Builder
+Accounting
+Dashboard
+Invoices
+Payments
+Financial Accounts
+Transactions
+GL Journals
+Time Period
+GL Accounts
+Budgets
+Reports
+New Incoming Payment New Outgoing Payment Bulk Checks
+Find Options
+Columns
+CSV
+
+Payment Type: Any Effective Date: Last 30 Days (2026-09-16 to 2026-10-16) Status: Proposed, Promised, Authorized
+
+
+Payment 
+Ref Num 
+	
+Effective Date 
+Status 
+	
+From
+To
+	
+Type
+Instrument
+	
+From Payment Method
+To Payment Method
+	
+Amount 
+	
+Unapplied 
+
+Built on Moqui Framework 4.0.0
+
+Site Map

@@ -1,0 +1,1007 @@
+{
+  "source": "docs/business-processes/process-library/b2b-sales-process.md",
+  "mode": "qapps",
+  "activities": [
+    {
+      "id": "activity-001",
+      "sourceLine": 8,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150251,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.434097222222222,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/b2b-sales-process/activity-001/qapps/comparison.json"
+    },
+    {
+      "id": "activity-002",
+      "sourceLine": 11,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150251,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.434097222222222,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/b2b-sales-process/activity-002/qapps/comparison.json"
+    },
+    {
+      "id": "activity-003",
+      "sourceLine": 14,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150251,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.434097222222222,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/b2b-sales-process/activity-003/qapps/comparison.json"
+    },
+    {
+      "id": "activity-004",
+      "sourceLine": 17,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150251,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.434097222222222,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/b2b-sales-process/activity-004/qapps/comparison.json"
+    },
+    {
+      "id": "activity-005",
+      "sourceLine": 20,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150251,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.434097222222222,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/b2b-sales-process/activity-005/qapps/comparison.json"
+    },
+    {
+      "id": "activity-006",
+      "sourceLine": 23,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150251,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.434097222222222,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/b2b-sales-process/activity-006/qapps/comparison.json"
+    },
+    {
+      "id": "activity-007",
+      "sourceLine": 26,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150251,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.434097222222222,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/b2b-sales-process/activity-007/qapps/comparison.json"
+    },
+    {
+      "id": "activity-008",
+      "sourceLine": 29,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150251,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.434097222222222,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/b2b-sales-process/activity-008/qapps/comparison.json"
+    },
+    {
+      "id": "activity-009",
+      "sourceLine": 32,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150251,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.434097222222222,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/b2b-sales-process/activity-009/qapps/comparison.json"
+    },
+    {
+      "id": "activity-010",
+      "sourceLine": 35,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150251,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.434097222222222,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/b2b-sales-process/activity-010/qapps/comparison.json"
+    },
+    {
+      "id": "activity-011",
+      "sourceLine": 39,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150251,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.434097222222222,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/b2b-sales-process/activity-011/qapps/comparison.json"
+    },
+    {
+      "id": "activity-012",
+      "sourceLine": 42,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150251,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.434097222222222,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/b2b-sales-process/activity-012/qapps/comparison.json"
+    },
+    {
+      "id": "activity-013",
+      "sourceLine": 45,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150251,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.434097222222222,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/b2b-sales-process/activity-013/qapps/comparison.json"
+    },
+    {
+      "id": "activity-014",
+      "sourceLine": 48,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150251,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.434097222222222,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/b2b-sales-process/activity-014/qapps/comparison.json"
+    },
+    {
+      "id": "activity-015",
+      "sourceLine": 51,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150251,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.434097222222222,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/b2b-sales-process/activity-015/qapps/comparison.json"
+    },
+    {
+      "id": "activity-016",
+      "sourceLine": 54,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150251,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.434097222222222,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/b2b-sales-process/activity-016/qapps/comparison.json"
+    },
+    {
+      "id": "activity-017",
+      "sourceLine": 57,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150251,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.434097222222222,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/b2b-sales-process/activity-017/qapps/comparison.json"
+    },
+    {
+      "id": "activity-018",
+      "sourceLine": 60,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150251,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.434097222222222,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/b2b-sales-process/activity-018/qapps/comparison.json"
+    },
+    {
+      "id": "activity-019",
+      "sourceLine": 63,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150251,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.434097222222222,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/b2b-sales-process/activity-019/qapps/comparison.json"
+    },
+    {
+      "id": "activity-020",
+      "sourceLine": 66,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150251,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.434097222222222,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/b2b-sales-process/activity-020/qapps/comparison.json"
+    },
+    {
+      "id": "activity-021",
+      "sourceLine": 69,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150251,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.434097222222222,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/b2b-sales-process/activity-021/qapps/comparison.json"
+    },
+    {
+      "id": "activity-022",
+      "sourceLine": 72,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150251,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.434097222222222,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/b2b-sales-process/activity-022/qapps/comparison.json"
+    },
+    {
+      "id": "activity-023",
+      "sourceLine": 75,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150251,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.434097222222222,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/b2b-sales-process/activity-023/qapps/comparison.json"
+    },
+    {
+      "id": "activity-024",
+      "sourceLine": 78,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150251,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.434097222222222,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/b2b-sales-process/activity-024/qapps/comparison.json"
+    },
+    {
+      "id": "activity-025",
+      "sourceLine": 81,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150251,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.434097222222222,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/b2b-sales-process/activity-025/qapps/comparison.json"
+    },
+    {
+      "id": "activity-026",
+      "sourceLine": 84,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150251,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.434097222222222,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/b2b-sales-process/activity-026/qapps/comparison.json"
+    },
+    {
+      "id": "activity-027",
+      "sourceLine": 87,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150251,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.434097222222222,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/b2b-sales-process/activity-027/qapps/comparison.json"
+    },
+    {
+      "id": "activity-028",
+      "sourceLine": 90,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150251,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.434097222222222,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/b2b-sales-process/activity-028/qapps/comparison.json"
+    },
+    {
+      "id": "activity-029",
+      "sourceLine": 93,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150251,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.434097222222222,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/b2b-sales-process/activity-029/qapps/comparison.json"
+    },
+    {
+      "id": "activity-030",
+      "sourceLine": 96,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150251,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.434097222222222,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/b2b-sales-process/activity-030/qapps/comparison.json"
+    },
+    {
+      "id": "activity-031",
+      "sourceLine": 99,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150251,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.434097222222222,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/b2b-sales-process/activity-031/qapps/comparison.json"
+    },
+    {
+      "id": "activity-032",
+      "sourceLine": 102,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150251,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.434097222222222,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/b2b-sales-process/activity-032/qapps/comparison.json"
+    },
+    {
+      "id": "activity-033",
+      "sourceLine": 105,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150251,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.434097222222222,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/b2b-sales-process/activity-033/qapps/comparison.json"
+    },
+    {
+      "id": "activity-034",
+      "sourceLine": 108,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150251,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.434097222222222,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/b2b-sales-process/activity-034/qapps/comparison.json"
+    },
+    {
+      "id": "activity-035",
+      "sourceLine": 111,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150251,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.434097222222222,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/b2b-sales-process/activity-035/qapps/comparison.json"
+    },
+    {
+      "id": "activity-036",
+      "sourceLine": 114,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150251,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.434097222222222,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/b2b-sales-process/activity-036/qapps/comparison.json"
+    },
+    {
+      "id": "activity-037",
+      "sourceLine": 117,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150251,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.434097222222222,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/b2b-sales-process/activity-037/qapps/comparison.json"
+    },
+    {
+      "id": "activity-038",
+      "sourceLine": 120,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150251,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.434097222222222,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/b2b-sales-process/activity-038/qapps/comparison.json"
+    },
+    {
+      "id": "activity-039",
+      "sourceLine": 123,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150251,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.434097222222222,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/b2b-sales-process/activity-039/qapps/comparison.json"
+    },
+    {
+      "id": "activity-040",
+      "sourceLine": 126,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150251,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.434097222222222,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/b2b-sales-process/activity-040/qapps/comparison.json"
+    }
+  ],
+  "note": "Evidence sweep only; no complete business-process execution is claimed."
+}

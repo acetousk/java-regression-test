@@ -1,0 +1,31 @@
+{
+  "source": "docs/business-processes/process-library/carrier-returns-undeliverable-shipment-to-company.md",
+  "mode": "vapps",
+  "activities": [
+    {
+      "id": "activity-001",
+      "sourceLine": 10,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/carrier-returns-undeliverable-shipment-to-company/activity-001/vapps/comparison.json"
+    },
+    {
+      "id": "activity-002",
+      "sourceLine": 16,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/carrier-returns-undeliverable-shipment-to-company/activity-002/vapps/comparison.json"
+    },
+    {
+      "id": "activity-003",
+      "sourceLine": 20,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/carrier-returns-undeliverable-shipment-to-company/activity-003/vapps/comparison.json"
+    },
+    {
+      "id": "activity-004",
+      "sourceLine": 24,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/carrier-returns-undeliverable-shipment-to-company/activity-004/vapps/comparison.json"
+    }
+  ],
+  "note": "Evidence sweep only; no complete business-process execution is claimed."
+}

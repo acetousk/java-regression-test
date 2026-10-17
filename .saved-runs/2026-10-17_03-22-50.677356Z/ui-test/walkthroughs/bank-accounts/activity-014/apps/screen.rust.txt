@@ -1,0 +1,36 @@
+Application 
+Marble ERP 
+Accounting 
+Find Payment
+ 0  0  0  0
+ Organization
+ New Incoming Payment  New Outgoing Payment Bulk Checks
+ Find Options
+ Columns
+CSV
+XLS
+
+Effective Date: 30d -1 Status: Proposed, Promised, Authorized 
+
+Payment
+Ref Num
+	
+Effective Date
+Status
+	
+From
+To
+	
+Type
+Instrument
+	
+From Payment Method
+To Payment Method
+	
+Amount
+	
+Unapplied
+
+Built on Moqui Framework 0.1.0
+
+Site Map

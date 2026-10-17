@@ -1,0 +1,36 @@
+{
+  "engine": "rust",
+  "mode": "vapps",
+  "route": "marble/ProductStore/FindProductStore",
+  "dialog": {
+    "label": "New Store",
+    "id": "NewStoreDialog",
+    "route": "ProductStore/FindProductStore"
+  },
+  "authenticated": true,
+  "errors": [
+    "HTTP 404",
+    "One or more HTTP resources failed (see httpErrors)"
+  ],
+  "failedRequests": [],
+  "httpErrors": [
+    {
+      "url": "http://127.0.0.1:18092/vapps/marble/dashboard",
+      "status": 404
+    },
+    {
+      "url": "http://127.0.0.1:18092/vapps/marble/ProductStore/FindProductStore",
+      "status": 404
+    }
+  ],
+  "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "status": "blocked",
+  "reused": false,
+  "requestedURL": "http://127.0.0.1:18092/vapps/marble/ProductStore/FindProductStore",
+  "navigation": "documented-or-candidate-deep-link",
+  "httpStatus": 404,
+  "finalURL": "http://127.0.0.1:18092/vapps/marble/ProductStore/FindProductStore"
+}

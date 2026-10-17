@@ -1,0 +1,18 @@
+{
+  "id": "activity-002",
+  "sourceLine": 16,
+  "headings": [
+    "Placing Customer Places a Sales Order - Through EBay",
+    "Story"
+  ],
+  "text": "eBay Marketer selects products to add to eBay Store and automatically sends them to eBay. eBay Marketer allocates inventory to warehouse for eBay auctions. eBay Marketer creates eBay Auctions from listings in the eBay Store.",
+  "route": null,
+  "dialog": null,
+  "mapping": "entry-candidate",
+  "limitation": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required.",
+  "source": "docs/business-processes/process-library/placing-customer-places-a-sales-order-through-ebay.md",
+  "mode": "qapps",
+  "coverage": "blocked",
+  "captures": [],
+  "reason": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required."
+}

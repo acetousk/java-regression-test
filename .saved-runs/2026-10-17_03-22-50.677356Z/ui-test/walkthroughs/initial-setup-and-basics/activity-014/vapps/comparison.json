@@ -1,0 +1,122 @@
+{
+  "id": "activity-014",
+  "sourceLine": 56,
+  "headings": [
+    "Initial Setup and Basics",
+    "Initial Setup",
+    "Create first Company (Internal Organization)",
+    "Add Contact Information"
+  ],
+  "text": "- under *Phone, Email, and Other* use **Add New** drop-down menu for the **Phone**, **Email**, **URL**, and **Other** dialogs",
+  "route": "marble/Party/EditParty",
+  "dialog": {
+    "label": "Phone",
+    "id": "AddPhoneInfo",
+    "route": "Party/EditParty"
+  },
+  "mapping": "documented-dialog-label",
+  "limitation": "Read-only screen/dialog evidence only. Prerequisite creation, field input, submissions, integrations and full story transitions are not executed.",
+  "source": "docs/business-processes/walkthroughs/initial-setup-and-basics.md",
+  "mode": "vapps",
+  "coverage": "blocked",
+  "captures": [
+    {
+      "engine": "java",
+      "mode": "vapps",
+      "route": "marble/Party/EditParty",
+      "dialog": {
+        "label": "Phone",
+        "id": "AddPhoneInfo",
+        "route": "Party/EditParty"
+      },
+      "authenticated": true,
+      "errors": [
+        "moqui is not defined",
+        "moqui is not defined",
+        "locator.click: Timeout 3500ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Phone', exact: true }).or(getByRole('link', { name: 'Phone', exact: true })).filter({ visible: true }).first()\u001b[22m\n"
+      ],
+      "failedRequests": [
+        {
+          "url": "http://127.0.0.1:18091/vapps/marble/dashboard",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:18091/vapps/marble/Party/EditParty",
+          "error": "net::ERR_ABORTED"
+        }
+      ],
+      "httpErrors": [],
+      "consoleErrors": [
+        "Refused to apply style from 'http://127.0.0.1:18091/vapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not a supported stylesheet MIME type, and strict MIME checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/vapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/vapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to apply style from 'http://127.0.0.1:18091/vapps/marble/Party/EditParty#?v=1a147e2' because its MIME type ('text/html') is not a supported stylesheet MIME type, and strict MIME checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/vapps/marble/Party/EditParty#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/vapps/marble/Party/EditParty#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled."
+      ],
+      "status": "blocked",
+      "reused": false,
+      "requestedURL": "http://127.0.0.1:18091/vapps/marble/Party/EditParty",
+      "navigation": "documented-or-candidate-deep-link",
+      "httpStatus": 200,
+      "finalURL": "http://127.0.0.1:18091/vapps/marble/Party/EditParty",
+      "directory": ".saved-runs/2026-10-17_03-22-50.677356Z/ui-test/_captures/0c7bbbc8a22b740b963c7b61"
+    },
+    {
+      "engine": "rust",
+      "mode": "vapps",
+      "route": "marble/Party/EditParty",
+      "dialog": {
+        "label": "Phone",
+        "id": "AddPhoneInfo",
+        "route": "Party/EditParty"
+      },
+      "authenticated": true,
+      "errors": [
+        "HTTP 404",
+        "One or more HTTP resources failed (see httpErrors)"
+      ],
+      "failedRequests": [],
+      "httpErrors": [
+        {
+          "url": "http://127.0.0.1:18092/vapps/marble/dashboard",
+          "status": 404
+        },
+        {
+          "url": "http://127.0.0.1:18092/vapps/marble/Party/EditParty",
+          "status": 404
+        }
+      ],
+      "consoleErrors": [
+        "Failed to load resource: the server responded with a status of 404 (Not Found)",
+        "Failed to load resource: the server responded with a status of 404 (Not Found)"
+      ],
+      "status": "blocked",
+      "reused": false,
+      "requestedURL": "http://127.0.0.1:18092/vapps/marble/Party/EditParty",
+      "navigation": "documented-or-candidate-deep-link",
+      "httpStatus": 404,
+      "finalURL": "http://127.0.0.1:18092/vapps/marble/Party/EditParty",
+      "directory": ".saved-runs/2026-10-17_03-22-50.677356Z/ui-test/_captures/54bfa9362633f6a2f80b60f1"
+    }
+  ],
+  "comparison": {
+    "status": "diagnostic-only",
+    "equal": false,
+    "dimensions": [
+      {
+        "width": 1440,
+        "height": 1009
+      },
+      {
+        "width": 1440,
+        "height": 1000
+      }
+    ],
+    "dimensionsEqual": false,
+    "differentPixels": 154782,
+    "comparedPixels": 1452960,
+    "differencePercent": 10.652874132804758,
+    "threshold": 0.1
+  }
+}

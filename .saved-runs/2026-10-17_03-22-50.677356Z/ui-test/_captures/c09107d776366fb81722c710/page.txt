@@ -1,0 +1,51 @@
+menu
+Applications
+chevron_right
+Marble ERP
+chevron_right
+Stores
+chevron_right
+Find Product Store
+search
+edit_location
+notifications
+history
+account_circle
+open_in_new
+New Store
+Payment Gateways
+Shipping Gateways
+search
+Find Options
+table_chart
+Columns
+CSV
+ID
+	
+Name
+	
+Organization
+	
+
+
+POPC_DEFAULT
+	
+Ziziwork Retail Store
+	
+ZIRET: Ziziwork Retail & Wholesale
+	
+
+
+Built on Moqui 0.1.0
+Site Map
+info
+Browser notifications disabled, if you want them use browser notification settings to allow
+X
+New Store
+close
+ID
+Name
+Organization Party
+ZIHR: Ziziwork Human Resources
+arrow_drop_down
+Create

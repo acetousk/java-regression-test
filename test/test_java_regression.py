@@ -93,6 +93,31 @@ class SnapshotCaptureTests(unittest.TestCase):
             self.assertEqual(json.loads(destination.read_text())["schema"], "schema")
 
 
+class VisualTests(unittest.TestCase):
+    def test_visual_runner_passes_urls_and_run_directory(self):
+        from types import SimpleNamespace
+        args = SimpleNamespace(java_port=18091, rust_port=18092,
+                               visual_spec="open-marble-login.visual.spec.js")
+        with patch.object(controller.subprocess, "run") as run:
+            controller.run_visual_tests(args, Path("/test/.runs/example"))
+        self.assertEqual(run.call_args.args[0],
+                         ["npm", "run", "test:visual", "--", args.visual_spec])
+        self.assertEqual(run.call_args.kwargs["cwd"], controller.ROOT / "ui-test")
+        environment = run.call_args.kwargs["env"]
+        self.assertEqual(environment["MOQUI_RUN_DIR"], "/test/.runs/example")
+        self.assertEqual(environment["JAVA_BASE_URL"], "http://127.0.0.1:18091")
+        self.assertEqual(environment["RUST_BASE_URL"], "http://127.0.0.1:18092")
+        self.assertTrue(run.call_args.kwargs["check"])
+
+    def test_visual_failure_propagates(self):
+        from types import SimpleNamespace
+        args = SimpleNamespace(java_port=8080, rust_port=8081, visual_spec="login")
+        with patch.object(controller.subprocess, "run",
+                          side_effect=subprocess.CalledProcessError(1, "npm")):
+            with self.assertRaises(subprocess.CalledProcessError):
+                controller.run_visual_tests(args, Path("/test/.runs/example"))
+
+
 class StartupTests(unittest.TestCase):
     def test_demo_configuration_preserves_settings_and_overrides_database(self):
         with tempfile.TemporaryDirectory() as directory:

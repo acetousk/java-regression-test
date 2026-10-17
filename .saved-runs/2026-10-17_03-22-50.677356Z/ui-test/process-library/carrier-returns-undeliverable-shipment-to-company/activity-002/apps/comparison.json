@@ -1,0 +1,18 @@
+{
+  "id": "activity-002",
+  "sourceLine": 16,
+  "headings": [
+    "Carrier Returns Undeliverable Shipment to Company",
+    "Story"
+  ],
+  "text": "Carrier Returns Undeliverable Shipment to Company. Shipment Receiver sets the package aside and notifies CSR. CSR contacts Customer to check and correct address and see if Customer still wants the item(s). CSR creates a new label (through any Carrier, preferably the original carrier), places a new label on the package(s), records the new tracking number (edit the same shipment), and ships them out again. CSR may choose to charge Customer for shipping after clearing it with Customer (create order for shipping only).",
+  "route": null,
+  "dialog": null,
+  "mapping": "entry-candidate",
+  "limitation": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required.",
+  "source": "docs/business-processes/process-library/carrier-returns-undeliverable-shipment-to-company.md",
+  "mode": "apps",
+  "coverage": "blocked",
+  "captures": [],
+  "reason": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required."
+}

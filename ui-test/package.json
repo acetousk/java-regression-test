@@ -1,0 +1,16 @@
+{
+  "name": "moqui-visual-tests",
+  "private": true,
+  "scripts": {
+    "test": "playwright test",
+    "test:visual": "playwright test",
+    "generate:processes": "node generate-process-specs.js",
+    "test:processes": "npm run generate:processes && playwright test --grep 'all documented activities'",
+    "test:unit": "node --test process-plan.test.js"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.61.1",
+    "pixelmatch": "7.1.0",
+    "pngjs": "7.0.0"
+  }
+}

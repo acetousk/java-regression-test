@@ -1,0 +1,20 @@
+menu
+Applications
+chevron_right
+Marble ERP
+chevron_right
+Stores
+chevron_right
+Promotions
+chevron_right
+Store Promotions
+search
+edit_location
+notifications
+history
+account_circle
+Built on Moqui 0.1.0
+Site Map
+warning
+Required parameter missing (productStoreId)
+X

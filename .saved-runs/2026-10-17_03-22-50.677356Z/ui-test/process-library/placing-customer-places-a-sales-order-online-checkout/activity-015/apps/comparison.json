@@ -1,0 +1,17 @@
+{
+  "id": "activity-015",
+  "sourceLine": 57,
+  "headings": [
+    "Placing Customer Places a Sales Order - Online Checkout"
+  ],
+  "text": "* the payment preference(s) for how to pay for the order, including payment methods associated with the PLC, financial accounts, or other payment method options not set up in advance (COD, offline pre-payment, etc.)",
+  "route": null,
+  "dialog": null,
+  "mapping": "entry-candidate",
+  "limitation": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required.",
+  "source": "docs/business-processes/process-library/placing-customer-places-a-sales-order-online-checkout.md",
+  "mode": "apps",
+  "coverage": "blocked",
+  "captures": [],
+  "reason": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required."
+}

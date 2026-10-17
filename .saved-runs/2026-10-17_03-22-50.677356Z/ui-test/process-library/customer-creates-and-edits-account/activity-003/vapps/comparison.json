@@ -1,0 +1,18 @@
+{
+  "id": "activity-003",
+  "sourceLine": 20,
+  "headings": [
+    "Customer Creates and Edits Account",
+    "Story"
+  ],
+  "text": "Customer may create, update, or delete various parts of this information (TODO: add detailed options and processes for each).",
+  "route": null,
+  "dialog": null,
+  "mapping": "entry-candidate",
+  "limitation": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required.",
+  "source": "docs/business-processes/process-library/customer-creates-and-edits-account.md",
+  "mode": "vapps",
+  "coverage": "blocked",
+  "captures": [],
+  "reason": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required."
+}

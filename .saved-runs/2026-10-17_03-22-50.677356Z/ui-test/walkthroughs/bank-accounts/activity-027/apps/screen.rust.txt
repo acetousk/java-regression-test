@@ -1,0 +1,39 @@
+Application 
+Marble ERP 
+Parties 
+Payment Method 
+Files
+ 0  0  0  0
+ Organization
+ZIRET: Ziziwork Retail & Wholesale
+Payment Method
+Transactions
+Checks
+Files
+Gateway Responses
+ Generate NACHA File  Generate Pos. Pay File
+ Find Options
+
+
+File ID
+	
+File Type
+	
+File Date
+	
+Entry Count
+	
+Debit Amount Total
+	
+Credit Amount Total
+	
+Payments Button
+	
+Is Cancelled
+	
+Messages
+	
+
+Built on Moqui Framework 0.1.0
+
+Site Map

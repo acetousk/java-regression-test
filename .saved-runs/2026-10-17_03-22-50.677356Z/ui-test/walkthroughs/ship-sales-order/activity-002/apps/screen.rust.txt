@@ -1,0 +1,46 @@
+Application 
+Marble ERP 
+Shipments 
+Find Shipments
+ 0  0  0  0
+ Organization
+ New Outgoing Shipment  New Incoming Shipment  New Transfer Shipment Package Tracking
+ Find Options
+ Columns
+CSV
+
+Type: Sales Shipment 
+
+Shipment
+Ship Method
+Type
+	
+Entry Date
+Status
+	
+Priority
+Picklist
+	
+Origin Facility
+Dest. Facility
+Store
+	
+From Party
+To Party
+Shipping Instructions
+	
+Their Order
+Orders
+Tracking Codes
+	
+Ship After
+Est. Ready
+Actual Start
+	
+Ship Before
+Est. Arrival
+Actual Arrival
+
+Built on Moqui Framework 0.1.0
+
+Site Map

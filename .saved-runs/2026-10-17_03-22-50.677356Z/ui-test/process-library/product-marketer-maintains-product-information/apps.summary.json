@@ -1,0 +1,157 @@
+{
+  "source": "docs/business-processes/process-library/product-marketer-maintains-product-information.md",
+  "mode": "apps",
+  "activities": [
+    {
+      "id": "activity-001",
+      "sourceLine": 10,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1987
+          },
+          {
+            "width": 1440,
+            "height": 1664
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 697774,
+        "comparedPixels": 2861280,
+        "differencePercent": 24.386777945534867,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/product-marketer-maintains-product-information/activity-001/apps/comparison.json"
+    },
+    {
+      "id": "activity-002",
+      "sourceLine": 13,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1987
+          },
+          {
+            "width": 1440,
+            "height": 1664
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 697774,
+        "comparedPixels": 2861280,
+        "differencePercent": 24.386777945534867,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/product-marketer-maintains-product-information/activity-002/apps/comparison.json"
+    },
+    {
+      "id": "activity-003",
+      "sourceLine": 16,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1987
+          },
+          {
+            "width": 1440,
+            "height": 1664
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 697774,
+        "comparedPixels": 2861280,
+        "differencePercent": 24.386777945534867,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/product-marketer-maintains-product-information/activity-003/apps/comparison.json"
+    },
+    {
+      "id": "activity-004",
+      "sourceLine": 19,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1987
+          },
+          {
+            "width": 1440,
+            "height": 1664
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 697774,
+        "comparedPixels": 2861280,
+        "differencePercent": 24.386777945534867,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/product-marketer-maintains-product-information/activity-004/apps/comparison.json"
+    },
+    {
+      "id": "activity-005",
+      "sourceLine": 22,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1987
+          },
+          {
+            "width": 1440,
+            "height": 1664
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 697774,
+        "comparedPixels": 2861280,
+        "differencePercent": 24.386777945534867,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/product-marketer-maintains-product-information/activity-005/apps/comparison.json"
+    },
+    {
+      "id": "activity-006",
+      "sourceLine": 25,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1987
+          },
+          {
+            "width": 1440,
+            "height": 1664
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 697774,
+        "comparedPixels": 2861280,
+        "differencePercent": 24.386777945534867,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/product-marketer-maintains-product-information/activity-006/apps/comparison.json"
+    }
+  ],
+  "note": "Evidence sweep only; no complete business-process execution is claimed."
+}

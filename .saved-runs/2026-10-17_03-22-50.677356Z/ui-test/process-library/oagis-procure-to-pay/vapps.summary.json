@@ -1,0 +1,31 @@
+{
+  "source": "docs/business-processes/process-library/oagis-procure-to-pay.md",
+  "mode": "vapps",
+  "activities": [
+    {
+      "id": "activity-001",
+      "sourceLine": 8,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-procure-to-pay/activity-001/vapps/comparison.json"
+    },
+    {
+      "id": "activity-002",
+      "sourceLine": 14,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-procure-to-pay/activity-002/vapps/comparison.json"
+    },
+    {
+      "id": "activity-003",
+      "sourceLine": 22,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-procure-to-pay/activity-003/vapps/comparison.json"
+    },
+    {
+      "id": "activity-004",
+      "sourceLine": 28,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-procure-to-pay/activity-004/vapps/comparison.json"
+    }
+  ],
+  "note": "Evidence sweep only; no complete business-process execution is claimed."
+}

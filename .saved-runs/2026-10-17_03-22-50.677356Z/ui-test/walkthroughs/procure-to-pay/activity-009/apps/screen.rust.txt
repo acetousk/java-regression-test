@@ -1,0 +1,42 @@
+Application 
+Marble ERP 
+Orders 
+Find Order
+ 0  0  0  0
+ Organization
+ Create Sales Order Sales Analysis Report Sales Summary Charts Issued and Invoiced Report
+ Create Purchase Order
+ Find Options
+ Columns
+CSV
+XLS
+
+Status: Quote Proposed by Vendor, Quote Requested by Customer, Placed by Customer, Approved, Held Entry Date: 30d -3 
+
+Order
+Their Order
+Source
+	
+Status
+Priority
+Total
+	
+Entry Date
+Placed Date
+Ship Before Date
+	
+Facility
+Store
+Shipping Instructions
+	
+Vendor
+Customer
+Other Parties
+	
+Ship Method
+Carrier
+Shipments
+
+Built on Moqui Framework 0.1.0
+
+Site Map

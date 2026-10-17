@@ -1,0 +1,113 @@
+{
+  "id": "activity-022",
+  "sourceLine": 82,
+  "headings": [
+    "Place and Approve Sales Order",
+    "Set Shipping, Payment, and Other options"
+  ],
+  "text": "- use the **Add Payment** dialog to record info about how the order will be paid",
+  "route": "marble/Order/OrderDetail",
+  "dialog": {
+    "label": "Add Payment",
+    "id": "AddPaymentInfo",
+    "route": "Order/OrderDetail"
+  },
+  "mapping": "documented-dialog-label",
+  "limitation": "Read-only screen/dialog evidence only. Prerequisite creation, field input, submissions, integrations and full story transitions are not executed.",
+  "source": "docs/business-processes/walkthroughs/place-and-approve-sales-order.md",
+  "mode": "qapps",
+  "coverage": "blocked",
+  "captures": [
+    {
+      "engine": "java",
+      "mode": "qapps",
+      "route": "marble/Order/OrderDetail",
+      "dialog": {
+        "label": "Add Payment",
+        "id": "AddPaymentInfo",
+        "route": "Order/OrderDetail"
+      },
+      "authenticated": true,
+      "errors": [
+        "$ is not defined",
+        "Vue is not defined",
+        "$ is not defined",
+        "Vue is not defined",
+        "locator.click: Timeout 3500ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Add Payment', exact: true }).or(getByRole('link', { name: 'Add Payment', exact: true })).filter({ visible: true }).first()\u001b[22m\n"
+      ],
+      "failedRequests": [
+        {
+          "url": "http://127.0.0.1:18091/qapps/marble/dashboard",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:18091/qapps/marble/Order/OrderDetail",
+          "error": "net::ERR_ABORTED"
+        }
+      ],
+      "httpErrors": [],
+      "consoleErrors": [
+        "Refused to apply style from 'http://127.0.0.1:18091/qapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not a supported stylesheet MIME type, and strict MIME checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to apply style from 'http://127.0.0.1:18091/qapps/marble/Order/OrderDetail#?v=1a147e2' because its MIME type ('text/html') is not a supported stylesheet MIME type, and strict MIME checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/Order/OrderDetail#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/Order/OrderDetail#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/Order/OrderDetail#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/Order/OrderDetail#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled."
+      ],
+      "status": "blocked",
+      "reused": false,
+      "requestedURL": "http://127.0.0.1:18091/qapps/marble/Order/OrderDetail",
+      "navigation": "documented-or-candidate-deep-link",
+      "httpStatus": 200,
+      "finalURL": "http://127.0.0.1:18091/qapps/marble/Order/OrderDetail",
+      "directory": ".saved-runs/2026-10-17_03-22-50.677356Z/ui-test/_captures/30103bc4148c8da9d5d58676"
+    },
+    {
+      "engine": "rust",
+      "mode": "qapps",
+      "route": "marble/Order/OrderDetail",
+      "dialog": {
+        "label": "Add Payment",
+        "id": "AddPaymentInfo",
+        "route": "Order/OrderDetail"
+      },
+      "authenticated": true,
+      "errors": [
+        "locator.click: Timeout 3500ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Add Payment', exact: true }).or(getByRole('link', { name: 'Add Payment', exact: true })).filter({ visible: true }).first()\u001b[22m\n"
+      ],
+      "failedRequests": [],
+      "httpErrors": [],
+      "consoleErrors": [],
+      "status": "blocked",
+      "reused": false,
+      "requestedURL": "http://127.0.0.1:18092/qapps/marble/Order/OrderDetail",
+      "navigation": "documented-or-candidate-deep-link",
+      "httpStatus": 200,
+      "finalURL": "http://127.0.0.1:18092/qapps/marble/Order/OrderDetail",
+      "directory": ".saved-runs/2026-10-17_03-22-50.677356Z/ui-test/_captures/e487b840a36f7443a266c4f0"
+    }
+  ],
+  "comparison": {
+    "status": "diagnostic-only",
+    "equal": false,
+    "dimensions": [
+      {
+        "width": 1440,
+        "height": 1000
+      },
+      {
+        "width": 1440,
+        "height": 1000
+      }
+    ],
+    "dimensionsEqual": true,
+    "differentPixels": 119312,
+    "comparedPixels": 1440000,
+    "differencePercent": 8.285555555555556,
+    "threshold": 0.1
+  }
+}

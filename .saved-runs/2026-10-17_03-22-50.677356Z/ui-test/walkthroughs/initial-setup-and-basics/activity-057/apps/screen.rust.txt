@@ -1,0 +1,49 @@
+Application 
+Marble ERP 
+Tasks 
+Find Task
+ 0  0  0  0
+ Organization
+Query String
+Text Search
+ New Task
+ Find Options
+ Columns
+CSV
+XLS
+
+Status: In Planning, Approved, In Progress, On Hold, Complete 
+
+Pri
+	
+ID
+	
+Name
+	
+Project
+	
+Parent
+	
+Milestone
+	
+Purpose
+	
+Status
+	
+Resolution
+	
+Assigned
+	
+Due Date
+	
+Last Updated
+	
+Est
+	
+Rem
+	
+Actual
+
+Built on Moqui Framework 0.1.0
+
+Site Map

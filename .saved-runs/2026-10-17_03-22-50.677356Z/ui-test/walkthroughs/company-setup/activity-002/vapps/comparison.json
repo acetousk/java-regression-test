@@ -1,0 +1,120 @@
+{
+  "id": "activity-002",
+  "sourceLine": 14,
+  "headings": [
+    "Company Setup",
+    "Internal Organizations (Companies)"
+  ],
+  "text": "Click the **New Organization** button to open its dialog, then enter the name of the company and create.",
+  "route": "marble/Party/FindParty",
+  "dialog": {
+    "label": "New Organization",
+    "id": "CreateOrganizationDialog",
+    "route": "Party/FindParty"
+  },
+  "mapping": "documented-dialog-label",
+  "limitation": "Read-only screen/dialog evidence only. Prerequisite creation, field input, submissions, integrations and full story transitions are not executed.",
+  "source": "docs/business-processes/walkthroughs/company-setup.md",
+  "mode": "vapps",
+  "coverage": "blocked",
+  "captures": [
+    {
+      "engine": "java",
+      "mode": "vapps",
+      "route": "marble/Party/FindParty",
+      "dialog": {
+        "label": "New Organization",
+        "id": "CreateOrganizationDialog",
+        "route": "Party/FindParty"
+      },
+      "authenticated": true,
+      "errors": [
+        "moqui is not defined",
+        "moqui is not defined",
+        "locator.click: Timeout 3500ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'New Organization', exact: true }).or(getByRole('link', { name: 'New Organization', exact: true })).filter({ visible: true }).first()\u001b[22m\n"
+      ],
+      "failedRequests": [
+        {
+          "url": "http://127.0.0.1:18091/vapps/marble/dashboard",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:18091/vapps/marble/Party/FindParty",
+          "error": "net::ERR_ABORTED"
+        }
+      ],
+      "httpErrors": [],
+      "consoleErrors": [
+        "Refused to apply style from 'http://127.0.0.1:18091/vapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not a supported stylesheet MIME type, and strict MIME checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/vapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/vapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to apply style from 'http://127.0.0.1:18091/vapps/marble/Party/FindParty#?v=1a147e2' because its MIME type ('text/html') is not a supported stylesheet MIME type, and strict MIME checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/vapps/marble/Party/FindParty#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/vapps/marble/Party/FindParty#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled."
+      ],
+      "status": "blocked",
+      "reused": false,
+      "requestedURL": "http://127.0.0.1:18091/vapps/marble/Party/FindParty",
+      "navigation": "documented-or-candidate-deep-link",
+      "httpStatus": 200,
+      "finalURL": "http://127.0.0.1:18091/vapps/marble/Party/FindParty",
+      "directory": ".saved-runs/2026-10-17_03-22-50.677356Z/ui-test/_captures/7779c3ca2c2b61b865276988"
+    },
+    {
+      "engine": "rust",
+      "mode": "vapps",
+      "route": "marble/Party/FindParty",
+      "dialog": {
+        "label": "New Organization",
+        "id": "CreateOrganizationDialog",
+        "route": "Party/FindParty"
+      },
+      "authenticated": true,
+      "errors": [
+        "HTTP 404",
+        "One or more HTTP resources failed (see httpErrors)"
+      ],
+      "failedRequests": [],
+      "httpErrors": [
+        {
+          "url": "http://127.0.0.1:18092/vapps/marble/dashboard",
+          "status": 404
+        },
+        {
+          "url": "http://127.0.0.1:18092/vapps/marble/Party/FindParty",
+          "status": 404
+        }
+      ],
+      "consoleErrors": [
+        "Failed to load resource: the server responded with a status of 404 (Not Found)",
+        "Failed to load resource: the server responded with a status of 404 (Not Found)"
+      ],
+      "status": "blocked",
+      "reused": false,
+      "requestedURL": "http://127.0.0.1:18092/vapps/marble/Party/FindParty",
+      "navigation": "documented-or-candidate-deep-link",
+      "httpStatus": 404,
+      "finalURL": "http://127.0.0.1:18092/vapps/marble/Party/FindParty",
+      "directory": ".saved-runs/2026-10-17_03-22-50.677356Z/ui-test/_captures/73792370d175cb624996d793"
+    }
+  ],
+  "comparison": {
+    "status": "diagnostic-only",
+    "equal": false,
+    "dimensions": [
+      {
+        "width": 1440,
+        "height": 1009
+      },
+      {
+        "width": 1440,
+        "height": 1000
+      }
+    ],
+    "dimensionsEqual": false,
+    "differentPixels": 154781,
+    "comparedPixels": 1452960,
+    "differencePercent": 10.652805307785487,
+    "threshold": 0.1
+  }
+}

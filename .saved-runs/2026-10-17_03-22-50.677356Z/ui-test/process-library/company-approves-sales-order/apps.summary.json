@@ -1,0 +1,157 @@
+{
+  "source": "docs/business-processes/process-library/company-approves-sales-order.md",
+  "mode": "apps",
+  "activities": [
+    {
+      "id": "activity-001",
+      "sourceLine": 10,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 131796,
+        "comparedPixels": 1452960,
+        "differencePercent": 9.070862239841427,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/company-approves-sales-order/activity-001/apps/comparison.json"
+    },
+    {
+      "id": "activity-002",
+      "sourceLine": 16,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 131796,
+        "comparedPixels": 1452960,
+        "differencePercent": 9.070862239841427,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/company-approves-sales-order/activity-002/apps/comparison.json"
+    },
+    {
+      "id": "activity-003",
+      "sourceLine": 20,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 131796,
+        "comparedPixels": 1452960,
+        "differencePercent": 9.070862239841427,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/company-approves-sales-order/activity-003/apps/comparison.json"
+    },
+    {
+      "id": "activity-004",
+      "sourceLine": 24,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 131796,
+        "comparedPixels": 1452960,
+        "differencePercent": 9.070862239841427,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/company-approves-sales-order/activity-004/apps/comparison.json"
+    },
+    {
+      "id": "activity-005",
+      "sourceLine": 28,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 131796,
+        "comparedPixels": 1452960,
+        "differencePercent": 9.070862239841427,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/company-approves-sales-order/activity-005/apps/comparison.json"
+    },
+    {
+      "id": "activity-006",
+      "sourceLine": 32,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 131796,
+        "comparedPixels": 1452960,
+        "differencePercent": 9.070862239841427,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/company-approves-sales-order/activity-006/apps/comparison.json"
+    }
+  ],
+  "note": "Evidence sweep only; no complete business-process execution is claimed."
+}

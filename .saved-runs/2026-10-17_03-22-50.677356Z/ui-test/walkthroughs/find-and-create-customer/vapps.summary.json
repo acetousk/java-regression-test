@@ -1,0 +1,232 @@
+{
+  "source": "docs/business-processes/walkthroughs/find-and-create-customer.md",
+  "mode": "vapps",
+  "activities": [
+    {
+      "id": "activity-001",
+      "sourceLine": 10,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 154884,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.6598942847704,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/find-and-create-customer/activity-001/vapps/comparison.json"
+    },
+    {
+      "id": "activity-002",
+      "sourceLine": 14,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 154884,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.6598942847704,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/find-and-create-customer/activity-002/vapps/comparison.json"
+    },
+    {
+      "id": "activity-003",
+      "sourceLine": 18,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 154884,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.6598942847704,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/find-and-create-customer/activity-003/vapps/comparison.json"
+    },
+    {
+      "id": "activity-004",
+      "sourceLine": 22,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 154884,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.6598942847704,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/find-and-create-customer/activity-004/vapps/comparison.json"
+    },
+    {
+      "id": "activity-005",
+      "sourceLine": 28,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 154884,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.6598942847704,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/find-and-create-customer/activity-005/vapps/comparison.json"
+    },
+    {
+      "id": "activity-006",
+      "sourceLine": 34,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 154884,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.6598942847704,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/find-and-create-customer/activity-006/vapps/comparison.json"
+    },
+    {
+      "id": "activity-007",
+      "sourceLine": 40,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 154884,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.6598942847704,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/find-and-create-customer/activity-007/vapps/comparison.json"
+    },
+    {
+      "id": "activity-008",
+      "sourceLine": 46,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 154884,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.6598942847704,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/find-and-create-customer/activity-008/vapps/comparison.json"
+    },
+    {
+      "id": "activity-009",
+      "sourceLine": 52,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 154884,
+        "comparedPixels": 1452960,
+        "differencePercent": 10.6598942847704,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/find-and-create-customer/activity-009/vapps/comparison.json"
+    }
+  ],
+  "note": "Evidence sweep only; no complete business-process execution is claimed."
+}

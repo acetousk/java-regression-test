@@ -1,0 +1,25 @@
+{
+  "source": "docs/business-processes/process-library/marketer-maintains-general-site-content.md",
+  "mode": "apps",
+  "activities": [
+    {
+      "id": "activity-001",
+      "sourceLine": 10,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/marketer-maintains-general-site-content/activity-001/apps/comparison.json"
+    },
+    {
+      "id": "activity-002",
+      "sourceLine": 14,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/marketer-maintains-general-site-content/activity-002/apps/comparison.json"
+    },
+    {
+      "id": "activity-003",
+      "sourceLine": 18,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/marketer-maintains-general-site-content/activity-003/apps/comparison.json"
+    }
+  ],
+  "note": "Evidence sweep only; no complete business-process execution is claimed."
+}

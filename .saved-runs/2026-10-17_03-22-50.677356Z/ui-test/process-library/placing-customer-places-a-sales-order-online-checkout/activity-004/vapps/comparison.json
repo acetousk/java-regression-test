@@ -1,0 +1,17 @@
+{
+  "id": "activity-004",
+  "sourceLine": 20,
+  "headings": [
+    "Placing Customer Places a Sales Order - Online Checkout"
+  ],
+  "text": "* primary contact phone number (home, work, or mobile)",
+  "route": null,
+  "dialog": null,
+  "mapping": "entry-candidate",
+  "limitation": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required.",
+  "source": "docs/business-processes/process-library/placing-customer-places-a-sales-order-online-checkout.md",
+  "mode": "vapps",
+  "coverage": "blocked",
+  "captures": [],
+  "reason": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required."
+}

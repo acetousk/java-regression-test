@@ -1,0 +1,103 @@
+Application 
+Marble ERP 
+Customers 
+Find Customer
+ 0  0  0  0
+ Organization
+ New Person Customer  New Sales Account (Organization Customer)  New Sales Contact Customer Data Search String Reference
+Any Field
+Search
+ Find Options
+Page 1 of 1 (1 - 4 of 4)
+CSV
+XLS
+
+Role: Customer Hidden: N 
+
+ID
+	
+Name
+	
+Username
+	
+Role
+	
+Class
+	
+Hidden
+	
+Dups
+	
+Matches
+	
+
+
+CustJqp
+	
+Joe Public
+	
+joe@public.com
+	
+Customer
+	
+	
+N
+	
+	
+Role Type ID: "Customer"
+	
+Sales Orders
+
+
+ORG_ACME
+	
+Another Company Making Everything
+	
+	
+Customer - Bill To, Customer
+	
+	
+N
+	
+	
+Role Type ID: "Customer"
+	
+Sales Orders
+
+
+ORG_BLUTH
+	
+Bluth Corp
+	
+	
+Customer - Bill To, Customer
+	
+	
+N
+	
+	
+Role Type ID: "Customer"
+	
+Sales Orders
+
+
+JoeDist
+	
+Joe & Joe's Distributing
+	
+	
+Customer
+	
+	
+N
+	
+	
+Role Type ID: "Customer"
+	
+Sales Orders
+Current Search String
+roles.roleTypeId:Customer AND disabled:N
+
+Built on Moqui Framework 0.1.0
+
+Site Map

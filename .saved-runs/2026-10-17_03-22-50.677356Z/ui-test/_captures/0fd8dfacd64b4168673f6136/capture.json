@@ -1,0 +1,47 @@
+{
+  "engine": "java",
+  "mode": "qapps",
+  "route": "marble/Task/FindTask",
+  "dialog": {
+    "label": "New Task",
+    "id": "NewTaskContainer",
+    "route": "Task/FindTask"
+  },
+  "authenticated": true,
+  "errors": [
+    "$ is not defined",
+    "Vue is not defined",
+    "$ is not defined",
+    "Vue is not defined",
+    "locator.click: Timeout 3500ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'New Task', exact: true }).or(getByRole('link', { name: 'New Task', exact: true })).filter({ visible: true }).first()\u001b[22m\n"
+  ],
+  "failedRequests": [
+    {
+      "url": "http://127.0.0.1:18091/qapps/marble/dashboard",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "url": "http://127.0.0.1:18091/qapps/marble/Task/FindTask",
+      "error": "net::ERR_ABORTED"
+    }
+  ],
+  "httpErrors": [],
+  "consoleErrors": [
+    "Refused to apply style from 'http://127.0.0.1:18091/qapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not a supported stylesheet MIME type, and strict MIME checking is enabled.",
+    "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+    "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+    "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+    "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+    "Refused to apply style from 'http://127.0.0.1:18091/qapps/marble/Task/FindTask#?v=1a147e2' because its MIME type ('text/html') is not a supported stylesheet MIME type, and strict MIME checking is enabled.",
+    "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/Task/FindTask#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+    "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/Task/FindTask#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+    "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/Task/FindTask#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+    "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/Task/FindTask#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled."
+  ],
+  "status": "blocked",
+  "reused": false,
+  "requestedURL": "http://127.0.0.1:18091/qapps/marble/Task/FindTask",
+  "navigation": "documented-or-candidate-deep-link",
+  "httpStatus": 200,
+  "finalURL": "http://127.0.0.1:18091/qapps/marble/Task/FindTask"
+}

@@ -1,0 +1,182 @@
+{
+  "source": "docs/business-processes/process-library/story-of-online-retail-company.md",
+  "mode": "qapps",
+  "activities": [
+    {
+      "id": "activity-001",
+      "sourceLine": 9,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150680,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.463888888888889,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/story-of-online-retail-company/activity-001/qapps/comparison.json"
+    },
+    {
+      "id": "activity-002",
+      "sourceLine": 14,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150680,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.463888888888889,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/story-of-online-retail-company/activity-002/qapps/comparison.json"
+    },
+    {
+      "id": "activity-003",
+      "sourceLine": 22,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150680,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.463888888888889,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/story-of-online-retail-company/activity-003/qapps/comparison.json"
+    },
+    {
+      "id": "activity-004",
+      "sourceLine": 27,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150680,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.463888888888889,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/story-of-online-retail-company/activity-004/qapps/comparison.json"
+    },
+    {
+      "id": "activity-005",
+      "sourceLine": 31,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150680,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.463888888888889,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/story-of-online-retail-company/activity-005/qapps/comparison.json"
+    },
+    {
+      "id": "activity-006",
+      "sourceLine": 38,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150680,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.463888888888889,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/story-of-online-retail-company/activity-006/qapps/comparison.json"
+    },
+    {
+      "id": "activity-007",
+      "sourceLine": 42,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150680,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.463888888888889,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/story-of-online-retail-company/activity-007/qapps/comparison.json"
+    }
+  ],
+  "note": "Evidence sweep only; no complete business-process execution is claimed."
+}

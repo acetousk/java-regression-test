@@ -1,0 +1,39 @@
+menu
+Applications
+chevron_right
+Marble ERP
+chevron_right
+Shipping
+chevron_right
+Picklists
+chevron_right
+Picklists
+search
+edit_location
+notifications
+history
+account_circle
+open_in_new
+New Picklist
+Bulk Create Picklists
+search
+Find Options
+table_chart
+Columns
+No results found
+Picklist
+Start Date
+	
+Status
+Facility
+	
+Store
+Owner Org
+	
+People
+	
+Equipment
+Shipments
+	
+Built on Moqui 0.1.0
+Site Map

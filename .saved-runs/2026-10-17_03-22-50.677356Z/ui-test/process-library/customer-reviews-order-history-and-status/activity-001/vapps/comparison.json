@@ -1,0 +1,18 @@
+{
+  "id": "activity-001",
+  "sourceLine": 12,
+  "headings": [
+    "Customer Reviews Order History and Status",
+    "Story"
+  ],
+  "text": "Customer reviews order history list with Order ID, Date, Total Amount, Status, and related Invoices for each. Customer requests information for a single order and reviews order detail including: status history, shipping and billing details, order item details, and order totals including tax, shipping, grand total. Customer requests printable copy of order, and Company generates a PDF file and sends it to Customer.",
+  "route": null,
+  "dialog": null,
+  "mapping": "entry-candidate",
+  "limitation": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required.",
+  "source": "docs/business-processes/process-library/customer-reviews-order-history-and-status.md",
+  "mode": "vapps",
+  "coverage": "blocked",
+  "captures": [],
+  "reason": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required."
+}

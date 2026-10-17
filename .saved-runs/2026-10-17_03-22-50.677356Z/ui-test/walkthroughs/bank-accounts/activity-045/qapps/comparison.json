@@ -1,0 +1,107 @@
+{
+  "id": "activity-045",
+  "sourceLine": 172,
+  "headings": [
+    "Bank Accounts",
+    "Reconcile Transactions"
+  ],
+  "text": "It is generally best to review and manually reconcile bank account transactions one day or week at a time. This can be done by selecting a date range for the **Posted Date** field in the Find Options dialog. To view only transactions that have not yet been reconciled select '**Y**' for the **Only Not Rec** field in the Find Options dialog. If you're looking for a specific bank account transaction you can search by various other fields as well.",
+  "route": "marble/Party/PaymentMethod/PaymentMethodTrans",
+  "dialog": null,
+  "mapping": "entry-candidate",
+  "limitation": "Read-only screen/dialog evidence only. Prerequisite creation, field input, submissions, integrations and full story transitions are not executed.",
+  "source": "docs/business-processes/walkthroughs/bank-accounts.md",
+  "mode": "qapps",
+  "coverage": "blocked",
+  "captures": [
+    {
+      "engine": "java",
+      "mode": "qapps",
+      "route": "marble/Party/PaymentMethod/PaymentMethodTrans",
+      "dialog": null,
+      "authenticated": true,
+      "errors": [
+        "$ is not defined",
+        "Vue is not defined",
+        "$ is not defined",
+        "Vue is not defined"
+      ],
+      "failedRequests": [
+        {
+          "url": "http://127.0.0.1:18091/qapps/marble/dashboard",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:18091/qapps/marble/Party/PaymentMethod/PaymentMethodTrans",
+          "error": "net::ERR_ABORTED"
+        }
+      ],
+      "httpErrors": [],
+      "consoleErrors": [
+        "Refused to apply style from 'http://127.0.0.1:18091/qapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not a supported stylesheet MIME type, and strict MIME checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to apply style from 'http://127.0.0.1:18091/qapps/marble/Party/PaymentMethod/PaymentMethodTrans#?v=1a147e2' because its MIME type ('text/html') is not a supported stylesheet MIME type, and strict MIME checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/Party/PaymentMethod/PaymentMethodTrans#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/Party/PaymentMethod/PaymentMethodTrans#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/Party/PaymentMethod/PaymentMethodTrans#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/Party/PaymentMethod/PaymentMethodTrans#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled."
+      ],
+      "status": "blocked",
+      "reused": true,
+      "requestedURL": "http://127.0.0.1:18091/qapps/marble/Party/PaymentMethod/PaymentMethodTrans",
+      "navigation": "documented-or-candidate-deep-link",
+      "httpStatus": 200,
+      "finalURL": "http://127.0.0.1:18091/qapps/marble/Party/PaymentMethod/PaymentMethodTrans",
+      "directory": ".saved-runs/2026-10-17_03-22-50.677356Z/ui-test/_captures/3f1f2a1bf79b62b3a0022b2f"
+    },
+    {
+      "engine": "rust",
+      "mode": "qapps",
+      "route": "marble/Party/PaymentMethod/PaymentMethodTrans",
+      "dialog": null,
+      "authenticated": true,
+      "errors": [
+        "One or more HTTP resources failed (see httpErrors)"
+      ],
+      "failedRequests": [],
+      "httpErrors": [
+        {
+          "url": "http://127.0.0.1:18092/apps/marble/Party/PaymentMethod/actions",
+          "status": 400
+        }
+      ],
+      "consoleErrors": [
+        "Failed to load resource: the server responded with a status of 400 (Bad Request)"
+      ],
+      "status": "blocked",
+      "reused": true,
+      "requestedURL": "http://127.0.0.1:18092/qapps/marble/Party/PaymentMethod/PaymentMethodTrans",
+      "navigation": "documented-or-candidate-deep-link",
+      "httpStatus": 200,
+      "finalURL": "http://127.0.0.1:18092/qapps/marble/Party/PaymentMethod/PaymentMethodTrans",
+      "directory": ".saved-runs/2026-10-17_03-22-50.677356Z/ui-test/_captures/5d894bc67ef0df921c3bf130"
+    }
+  ],
+  "comparison": {
+    "status": "diagnostic-only",
+    "equal": false,
+    "dimensions": [
+      {
+        "width": 1440,
+        "height": 1000
+      },
+      {
+        "width": 1440,
+        "height": 1000
+      }
+    ],
+    "dimensionsEqual": true,
+    "differentPixels": 115989,
+    "comparedPixels": 1440000,
+    "differencePercent": 8.054791666666667,
+    "threshold": 0.1
+  }
+}

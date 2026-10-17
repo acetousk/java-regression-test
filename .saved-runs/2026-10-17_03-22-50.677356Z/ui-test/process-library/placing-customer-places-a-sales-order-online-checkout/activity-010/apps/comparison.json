@@ -1,0 +1,17 @@
+{
+  "id": "activity-010",
+  "sourceLine": 40,
+  "headings": [
+    "Placing Customer Places a Sales Order - Online Checkout"
+  ],
+  "text": "If PLC wants to split the order into multiple ship-groups for shipping to different destinations and/or shipping by different carriers or shipment methods, then PLC specifies ship groups desired and which quantity units of each item is associated with which ship-group.",
+  "route": null,
+  "dialog": null,
+  "mapping": "entry-candidate",
+  "limitation": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required.",
+  "source": "docs/business-processes/process-library/placing-customer-places-a-sales-order-online-checkout.md",
+  "mode": "apps",
+  "coverage": "blocked",
+  "captures": [],
+  "reason": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required."
+}

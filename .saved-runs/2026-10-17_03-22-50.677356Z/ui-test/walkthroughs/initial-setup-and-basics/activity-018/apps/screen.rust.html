@@ -1,0 +1,150 @@
+<!DOCTYPE html><html lang="en-US" class="js"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="moquiSessionToken" content="c18a753b8d0d21c9174dddae03eee5db76fa923a">
+<meta name="moqui-notify" content="/notws">
+
+
+<title>Accounting - Dashboard</title>
+<link rel="apple-touch-icon" href="/MoquiLogo100.png">
+<link rel="icon" href="/favicon.ico">
+<link rel="stylesheet" href="/libs/fontawesome/css/font-awesome.min.css?v=1a147e2b156">
+<link rel="stylesheet" href="/css/moqui-html.css?v=1a147e2b156">
+<script src="/js/moqui-html.js?v=1a147e2b156" defer=""></script>
+</head>
+<body class="dev dashboard">
+<!-- BEGIN screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+<!-- BEGIN screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+<div id="top"><!-- BEGIN render-mode.text[@location=component://webroot/screen/includes/navbar.html.fancy][@template=true] --><header><nav class="navbar">
+<a class="brand" href="/apps/AppList"><img src="/images/MoquiLogoSmall.png" alt="Home"></a>
+
+<button type="button" class="nav-toggle" data-nav-toggle="" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
+<div id="navbar-buttons">
+<ul id="header-menus"><li><details id="header-menu" class="menu" data-move-to="header-menus"><summary>Application <i class="fa fa-chevron-right"></i></summary><ul><li><a href="/apps/marble/dashboard"><i class="fa fa-dashboard"></i> Marble ERP</a></li><li><a href="/apps/boss/QuickSearch"><i class="fa fa-search"></i> IronStone BOSS</a></li><li><a href="/apps/my"><i class="fa fa-user"></i> My Account</a></li><li><a href="/apps/system"><i class="fa fa-dashboard"></i> System</a></li><li><a href="/apps/tools"><i class="fa fa-dashboard"></i> Tools</a></li></ul></details></li><li><details id="MarbleErpPanel" class="menu" data-move-to="header-menus"><summary>Marble ERP <i class="fa fa-chevron-right"></i></summary><ul><li><a href="/apps/marble/dashboard"><i class="fa fa-dashboard"></i> Dashboard</a></li><li><a href="/apps/marble/QuickSearch"><i class="fa fa-search"></i> Quick Search</a></li><li class="active"><a href="/apps/marble/Accounting/dashboard"><img src="/ssstatic/images/Accounting.png" alt="Accounting" height="18"> Accounting</a></li><li><a href="/apps/marble/Asset/dashboard"><img src="/ssstatic/images/Asset.png" alt="Asset" height="18"> Asset</a></li><li><a href="/apps/marble/Catalog/dashboard"><img src="/ssstatic/images/Catalog.png" alt="Catalog" height="18"> Catalog</a></li><li><a href="/apps/marble/Customer/FindCustomer"><img src="/ssstatic/images/Customer.png" alt="Customers" height="18"> Customers</a></li><li><a href="/apps/marble/Facility/FindFacility"><img src="/ssstatic/images/Facility.png" alt="Facility" height="18"> Facility</a></li><li><a href="/apps/marble/HumanRes/dashboard"><i class="fa fa-user-plus"></i> Human Resources</a></li><li><a href="/apps/marble/Manufacturing/dashboard"><i class="fa fa-industry"></i> Manufacturing</a></li><li><a href="/apps/marble/Order/FindOrder"><img src="/ssstatic/images/Sales.png" alt="Orders" height="18"> Orders</a></li><li><a href="/apps/marble/Party/FindParty"><img src="/ssstatic/images/Parties.png" alt="Parties" height="18"> Parties</a></li><li><a href="/apps/marble/Project/FindProject"><img src="/ssstatic/images/project-business120.png" alt="Projects" height="18"> Projects</a></li><li><a href="/apps/marble/Request/FindRequest"><img src="/ssstatic/images/Request.png" alt="Requests" height="18"> Requests</a></li><li><a href="/apps/marble/Return/FindReturn"><img src="/ssstatic/images/Return.png" alt="Returns" height="18"> Returns</a></li><li><a href="/apps/marble/Shipment/FindShipment"><img src="/ssstatic/images/Shipping.png" alt="Shipments" height="18"> Shipments</a></li><li><a href="/apps/marble/Shipping/dashboard"><img src="/ssstatic/images/Picking.png" alt="Shipping" height="18"> Shipping</a></li><li><a href="/apps/marble/ProductStore/FindProductStore"><img src="/ssstatic/images/ProductStore.png" alt="Stores" height="18"> Stores</a></li><li><a href="/apps/marble/Supplier/FindSupplier"><img src="/ssstatic/images/Supplier.png" alt="Suppliers" height="18"> Suppliers</a></li><li><a href="/apps/marble/Survey/FindSurvey"><i class="fa fa-pencil-square-o"></i> Survey</a></li><li><a href="/apps/marble/Task/FindTask"><img src="/ssstatic/images/task-homework.png" alt="Tasks" height="18"> Tasks</a></li><li><a href="/apps/marble/Wiki/WikiSpaces"><img src="/ssstatic/images/Wiki.png" alt="Wiki/Content" height="18"> Wiki/Content</a></li><li><a href="/apps/marble/QuickViewReport"><i class="fa fa-database"></i> Custom Reports</a></li><li><a href="/apps/marble/SimpleReport/FindReport"><i class="fa fa-database"></i> Report Builder</a></li></ul></details></li><li><details id="accounting-panel" class="menu" data-move-to="header-menus"><summary>Accounting <i class="fa fa-chevron-right"></i></summary><ul><li class="active"><a href="/apps/marble/Accounting/dashboard"><img src="/ssstatic/images/Accounting.png" alt="Dashboard" height="18"> Dashboard</a></li><li><a href="/apps/marble/Accounting/Invoice/FindInvoice"><img src="/ssstatic/images/Accounting.png" alt="Invoices" height="18"> Invoices</a></li><li><a href="/apps/marble/Accounting/Payment/FindPayment"><img src="/ssstatic/images/Accounting.png" alt="Payments" height="18"> Payments</a></li><li><a href="/apps/marble/Accounting/FinancialAccount/FindFinancialAccount"><img src="/ssstatic/images/Accounting.png" alt="Financial Accounts" height="18"> Financial Accounts</a></li><li><a href="/apps/marble/Accounting/Transaction/FindTransaction"><img src="/ssstatic/images/Accounting.png" alt="Transactions" height="18"> Transactions</a></li><li><a href="/apps/marble/Accounting/FindJournal"><img src="/ssstatic/images/Accounting.png" alt="GL Journals" height="18"> GL Journals</a></li><li><a href="/apps/marble/Accounting/TimePeriod/FindTimePeriod"><img src="/ssstatic/images/Accounting.png" alt="Time Period" height="18"> Time Period</a></li><li><a href="/apps/marble/Accounting/GlAccount/FindGlAccount"><img src="/ssstatic/images/Accounting.png" alt="GL Accounts" height="18"> GL Accounts</a></li><li><a href="/apps/marble/Accounting/Budget/FindBudget"><img src="/ssstatic/images/Accounting.png" alt="Budgets" height="18"> Budgets</a></li><li><a href="/apps/marble/Accounting/Reports/ReportList"><img src="/ssstatic/images/Accounting.png" alt="Reports" height="18"> Reports</a></li></ul></details></li></ul>
+<div id="navbar-menu-crumbs"></div>
+<a class="current" href="/apps/marble/Accounting/dashboard">Dashboard</a>
+<span class="spacer"></span>
+<div class="btn-group navbar-right">
+    <a href="/apps/my/User/Notifications" data-toggle="tooltip" data-container="body" data-original-title="Notifications" data-placement="bottom" class="btn btn-default btn-sm navbar-btn">
+        <i class="fa fa-info-circle"></i>
+        <span id="navbar_notification_count" class="label label-info">0</span>
+    </a>
+    <a href="/apps/my/User/Messages/FindMessage?statusId=CeReceived&amp;toPartyId=EX_JOHN_DOE" data-toggle="tooltip" data-container="body" data-original-title="Messages" data-placement="bottom" class="btn btn-default btn-sm navbar-btn">
+        <i class="fa fa-envelope"></i>
+        <span class="label label-warning">0</span>
+    </a>
+    <a href="/apps/my/User/Calendar/MyCalendar" data-toggle="tooltip" data-container="body" data-original-title="Events This Week" data-placement="bottom" class="btn btn-default btn-sm navbar-btn">
+        <i class="fa fa-calendar"></i>
+        <span class="label label-primary">0</span>
+    </a>
+    <a href="/apps/my/User/Task/MyTasks" data-toggle="tooltip" data-container="body" data-original-title="Open Tasks" data-placement="bottom" class="btn btn-default btn-sm navbar-btn">
+        <i class="fa fa-check"></i>
+        <span class="label label-success">0</span>
+    </a>
+</div>
+
+<details id="history-menu" class="menu"><summary title="History"><i class="fa fa-list"></i></summary><ul>
+<li><a href="/apps/marble/dashboard"><i class="fa fa-link"></i> dashboard</a></li>
+<li><a href="/apps/marble/Party/FindParty?roleTypeId=OrgInternal"><i class="fa fa-link"></i> FindParty</a></li>
+<li><a href="/qapps/marble/dashboard"><i class="fa fa-link"></i> dashboard</a></li>
+<li><a href="/apps/marble/Shipment/FindShipment?shipmentTypeEnumId=ShpTpPurchase"><i class="fa fa-link"></i> FindShipment</a></li>
+<li><a href="/apps/marble/Shipment?shipmentTypeEnumId=ShpTpPurchase"><i class="fa fa-link"></i> Shipment</a></li>
+<li><a href="/qapps/marble/Shipment/FindShipment?shipmentTypeEnumId=ShpTpPurchase"><i class="fa fa-link"></i> FindShipment</a></li>
+<li><a href="/apps/marble/Request/FindRequest"><i class="fa fa-link"></i> FindRequest</a></li>
+<li><a href="/apps/marble/Catalog/Product/FindProduct"><i class="fa fa-link"></i> FindProduct</a></li>
+<li><a href="/apps/marble/Asset/Asset/FindSummary"><i class="fa fa-link"></i> FindSummary</a></li>
+<li><a href="/apps/marble/Asset/Asset"><i class="fa fa-link"></i> Asset</a></li>
+<li><a href="/qapps/marble/Asset/Asset/FindSummary"><i class="fa fa-link"></i> FindSummary</a></li>
+<li><a href="/apps/marble/Asset/PhysicalInventory/FindPhysicalInventory"><i class="fa fa-link"></i> FindPhysicalInventory</a></li>
+<li><a href="/qapps/marble/Asset/PhysicalInventory/FindPhysicalInventory"><i class="fa fa-link"></i> FindPhysicalInventory</a></li>
+<li><a href="/apps/marble/Return/FindReturn?returnType=Customer"><i class="fa fa-link"></i> FindReturn</a></li>
+<li><a href="/apps/marble/Shipping/dashboard"><i class="fa fa-link"></i> dashboard</a></li>
+<li><a href="/apps/marble/Order/FindOrder?orderType=Sales"><i class="fa fa-link"></i> FindOrder</a></li>
+<li><a href="/apps/marble/Order?orderType=Sales"><i class="fa fa-link"></i> Order</a></li>
+<li><a href="/apps/marble/Order/FindOrder?orderType=Purchase"><i class="fa fa-link"></i> FindOrder</a></li>
+<li><a href="/apps/marble/Order?orderType=Purchase"><i class="fa fa-link"></i> Order</a></li>
+<li><a href="/apps/marble/Customer/FindCustomer"><i class="fa fa-link"></i> FindCustomer</a></li>
+<li><a href="/apps/marble/Customer"><i class="fa fa-link"></i> Customer</a></li>
+<li><a href="/apps/marble/Accounting/Invoice/FindInvoice?invoiceType=Receivable"><i class="fa fa-link"></i> FindInvoice</a></li>
+<li><a href="/apps/marble/Accounting/Payment/FindPayment"><i class="fa fa-link"></i> FindPayment</a></li>
+<li><a href="/qapps/marble/Accounting/Payment/FindPayment"><i class="fa fa-link"></i> FindPayment</a></li>
+<li><a href="/apps/marble/Accounting/Invoice/FindInvoice?invoiceType=Payable"><i class="fa fa-link"></i> FindInvoice</a></li>
+</ul></details>
+<button type="button" data-theme-toggle="" data-pref-url="/apps/setPreference" title="Switch Dark/Light"><i class="fa fa-adjust"></i></button>
+<a class="logout" data-btn="danger" href="/Login/logout" title="Logout John Doe"><i class="fa fa-power-off"></i></a>
+<details id="active-org-menu" class="menu">
+                <summary id="active-org-menu-link" title="Organization">
+                    <i class="fa fa-globe"></i> Organization</summary>
+                <ul>
+                        <li><a href="/apps/setPrefGoLast?preferenceKey=ACTIVE_ORGANIZATION&amp;preferenceValue=ORG_ZIZI_RETAIL">ZIRET: Ziziwork Retail &amp; Wholesale</a></li>
+                        <li><a href="/apps/setPrefGoLast?preferenceKey=ACTIVE_ORGANIZATION&amp;preferenceValue=ORG_ZIZI_SERVICES">ZISER: Ziziwork Services</a></li>
+                </ul>
+            </details></div>
+</nav></header>
+<!-- END   render-mode.text[@location=component://webroot/screen/includes/navbar.html.fancy][@template=true] -->
+</div>
+<!-- END   screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+<div id="content"><div class="inner"><!-- BEGIN screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+<!-- BEGIN render-mode.text[@location=component://webroot/screen/includes/Messages.html.fancy][@template=true] --><!-- END   render-mode.text[@location=component://webroot/screen/includes/Messages.html.fancy][@template=true] --><!-- END   screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+<!-- BEGIN screen[@location=component://MarbleERP/screen/marble.xml].widgets -->
+<!-- BEGIN screen[@location=component://MarbleERP/screen/marble.xml].widgets -->
+<!-- BEGIN render-mode.text[inline][@template=true] -->
+            <script>
+                (() => {
+                    const menu = document.getElementById('active-org-menu');
+                    const navbar = document.getElementById('navbar-buttons');
+                    if (menu && navbar) navbar.append(menu);
+                })();
+            </script><!-- END   render-mode.text[inline][@template=true] --><!-- END   screen[@location=component://MarbleERP/screen/marble.xml].widgets -->
+
+<!-- BEGIN screen[@location=component://SimpleScreens/screen/SimpleScreens/Accounting.xml].widgets -->
+
+<!-- BEGIN screen[@location=component://SimpleScreens/screen/SimpleScreens/Accounting/dashboard.xml].widgets -->
+<div class="row"><div class="col" style="--md:6"><section class="box" data-type="default"><header><h5>Invoices and Payments</h5></header><div class="body"><a href="/apps/marble/Accounting/Invoice/FindInvoice" data-btn="primary">Invoices</a>
+<a href="/apps/marble/Accounting/Invoice/Aging" data-btn="primary">Aging</a>
+<a href="/apps/marble/Accounting/Payment/FindPayment" data-btn="primary">Payments</a>
+<a href="/apps/marble/Accounting/Payment/BulkPaymentCheck" data-btn="primary">Bulk Checks</a>
+<a href="/apps/marble/Accounting/FinancialAccount/FindFinancialAccount" data-btn="primary">Financial Accounts</a>
+</div></section>
+</div><div class="col" style="--md:6"><section class="box" data-type="default"><header><h5>General Ledger</h5><div class="toolbar"><a href="/apps/marble/Accounting/Reports/ReportList" data-btn="primary">Reports</a>
+</div></header><div class="body"><a href="/apps/marble/Accounting/Transaction/FindTransaction" data-btn="primary">Transactions</a>
+<a href="/apps/marble/Accounting/Transaction/FindTransactionEntry" data-btn="primary">Transaction Entries</a>
+<a href="/apps/marble/Accounting/GlAccount/FindGlAccount" data-btn="primary">GL Accounts</a>
+<a href="/apps/marble/Accounting/FindJournal" data-btn="primary">GL Journals</a>
+<a href="/apps/marble/Accounting/TimePeriod/FindTimePeriod" data-btn="primary">Time Periods</a>
+<a href="/apps/marble/Accounting/Budget/FindBudget" data-btn="primary">Budgets</a>
+</div></section>
+</div></div>
+<div id="OrgInternalSummary" data-load="/apps/marble/Accounting/dashboard/OrgInternalSummary?_dynamic_container_id=OrgInternalSummary" data-load-url="/apps/marble/Accounting/dashboard/OrgInternalSummary?_dynamic_container_id=OrgInternalSummary"><!-- BEGIN screen[@location=component://SimpleScreens/screen/SimpleScreens/Accounting/dashboard/OrgInternalSummary.xml].widgets -->
+<!-- BEGIN form-list[@name=OrgInternalForm] -->
+<div class="table-wrap"><table class="form-list" id="OrgInternalForm_table"><thead><tr><th><div class="title">Internal Organization</div></th><th><div class="title">Receivable</div></th><th><div class="title">Payable</div></th><th><div class="title">Bank Accounts</div></th><th><div class="title">Settings</div></th></tr></thead>
+<tbody>
+<tr><td><div><a href="/apps/marble/Party/EditParty?partyId=ORG_ZIZI_HR" id="OrgInternalForm_name_0_editParty">Ziziwork Human Resources </a></div></td><td><div><a href="/apps/marble/Accounting/Invoice/FindInvoice?fromPartyId=ORG_ZIZI_HR&amp;statusId=InvoiceFinalized%2CInvoiceSent%2CInvoiceAcked&amp;statusId_op=in" id="OrgInternalForm_recSummary_0_findInvoice">None</a></div></td><td><div><a href="/apps/marble/Accounting/Invoice/FindInvoice?toPartyId=ORG_ZIZI_HR&amp;statusId=InvoiceReceived%2CInvoiceApproved&amp;statusId_op=in" id="OrgInternalForm_pblSummary_0_findInvoice">None</a></div></td><td><div></div></td><td><div><a href="/apps/marble/Accounting/OrgSettings/AcctgPreference?partyId=ORG_ZIZI_HR" id="OrgInternalForm_settings_0_orgSettings">Settings</a></div></td></tr>
+<tr><td><div><a href="/apps/marble/Party/EditParty?partyId=ORG_ZIZI_CORP" id="OrgInternalForm_name_1_editParty">Ziziwork Industries </a></div></td><td><div><a href="/apps/marble/Accounting/Invoice/FindInvoice?fromPartyId=ORG_ZIZI_CORP&amp;statusId=InvoiceFinalized%2CInvoiceSent%2CInvoiceAcked&amp;statusId_op=in" id="OrgInternalForm_recSummary_1_findInvoice">None</a></div></td><td><div><a href="/apps/marble/Accounting/Invoice/FindInvoice?toPartyId=ORG_ZIZI_CORP&amp;statusId=InvoiceReceived%2CInvoiceApproved&amp;statusId_op=in" id="OrgInternalForm_pblSummary_1_findInvoice">None</a></div></td><td><div></div></td><td><div><a href="/apps/marble/Accounting/OrgSettings/AcctgPreference?partyId=ORG_ZIZI_CORP" id="OrgInternalForm_settings_1_orgSettings">Settings</a></div></td></tr>
+<tr><td><div><a href="/apps/marble/Party/EditParty?partyId=ORG_ZIZI_RETAIL" id="OrgInternalForm_name_2_editParty">Ziziwork Retail &amp; Wholesale </a></div></td><td><div><a href="/apps/marble/Accounting/Invoice/FindInvoice?fromPartyId=ORG_ZIZI_RETAIL&amp;statusId=InvoiceFinalized%2CInvoiceSent%2CInvoiceAcked&amp;statusId_op=in" id="OrgInternalForm_recSummary_2_findInvoice">None</a></div></td><td><div><a href="/apps/marble/Accounting/Invoice/FindInvoice?toPartyId=ORG_ZIZI_RETAIL&amp;statusId=InvoiceReceived%2CInvoiceApproved&amp;statusId_op=in" id="OrgInternalForm_pblSummary_2_findInvoice">None</a></div></td><td><div><!-- BEGIN screen[@location=component://SimpleScreens/screen/SimpleScreens/Accounting/dashboard/OrgInternalSummary.xml].widgets -->
+<div><a href="/apps/marble/Party/PaymentMethod/PaymentMethodTrans?partyId=ORG_ZIZI_RETAIL&amp;paymentMethodId=ZIRET_BA">Demo Bank Account</a>
+</div>
+<!-- END   screen[@location=component://SimpleScreens/screen/SimpleScreens/Accounting/dashboard/OrgInternalSummary.xml].widgets -->
+</div></td><td><div><a href="/apps/marble/Accounting/OrgSettings/AcctgPreference?partyId=ORG_ZIZI_RETAIL" id="OrgInternalForm_settings_orgSettings">Settings</a></div></td></tr>
+<tr><td><div><a href="/apps/marble/Party/EditParty?partyId=ORG_ZIZI_SALES" id="OrgInternalForm_name_3_editParty">Ziziwork Sales </a></div></td><td><div><a href="/apps/marble/Accounting/Invoice/FindInvoice?fromPartyId=ORG_ZIZI_SALES&amp;statusId=InvoiceFinalized%2CInvoiceSent%2CInvoiceAcked&amp;statusId_op=in" id="OrgInternalForm_recSummary_3_findInvoice">None</a></div></td><td><div><a href="/apps/marble/Accounting/Invoice/FindInvoice?toPartyId=ORG_ZIZI_SALES&amp;statusId=InvoiceReceived%2CInvoiceApproved&amp;statusId_op=in" id="OrgInternalForm_pblSummary_3_findInvoice">None</a></div></td><td><div></div></td><td><div><a href="/apps/marble/Accounting/OrgSettings/AcctgPreference?partyId=ORG_ZIZI_SALES" id="OrgInternalForm_settings_3_orgSettings">Settings</a></div></td></tr>
+<tr><td><div><a href="/apps/marble/Party/EditParty?partyId=ORG_ZIZI_SERVICES" id="OrgInternalForm_name_4_editParty">Ziziwork Services </a></div></td><td><div><a href="/apps/marble/Accounting/Invoice/FindInvoice?fromPartyId=ORG_ZIZI_SERVICES&amp;statusId=InvoiceFinalized%2CInvoiceSent%2CInvoiceAcked&amp;statusId_op=in" id="OrgInternalForm_recSummary_4_findInvoice">None</a></div></td><td><div><a href="/apps/marble/Accounting/Invoice/FindInvoice?toPartyId=ORG_ZIZI_SERVICES&amp;statusId=InvoiceReceived%2CInvoiceApproved&amp;statusId_op=in" id="OrgInternalForm_pblSummary_4_findInvoice">None</a></div></td><td><div></div></td><td><div><a href="/apps/marble/Accounting/OrgSettings/AcctgPreference?partyId=ORG_ZIZI_SERVICES" id="OrgInternalForm_settings_4_orgSettings">Settings</a></div></td></tr>
+</tbody></table></div>
+<!-- END   form-list[@name=OrgInternalForm] -->
+<!-- END   screen[@location=component://SimpleScreens/screen/SimpleScreens/Accounting/dashboard/OrgInternalSummary.xml].widgets -->
+</div>
+<!-- END   screen[@location=component://SimpleScreens/screen/SimpleScreens/Accounting/dashboard.xml].widgets -->
+<!-- END   screen[@location=component://SimpleScreens/screen/SimpleScreens/Accounting.xml].widgets -->
+<!-- END   screen[@location=component://MarbleERP/screen/marble.xml].widgets -->
+</div>
+</div>
+<!-- BEGIN screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+<div id="footer"><!-- BEGIN render-mode.text[inline][@template=true] -->                <div id="apps-footer-content">
+                        <p><a href="https://www.moqui.org/" target="_blank">Built on Moqui Framework 0.1.0</a></p>
+                        <p><a href="/apps/ScreenTree">Site Map</a></p>
+                </div><!-- END   render-mode.text[inline][@template=true] --></div>
+<!-- END   screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+<!-- END   screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+
+
+
+</body></html>

@@ -1,0 +1,98 @@
+{
+  "id": "activity-005",
+  "sourceLine": 30,
+  "headings": [
+    "Inventory Mover Puts Away Inventory",
+    "Story"
+  ],
+  "text": "Inventory Mover assigns location where items were placed to the inventory item previously received. If items were placed in multiple locations Inventory Mover does quick stock moves to record where inventory was actually placed, and checks to make sure the quantity that remains in the original location is the quantity actually placed there. If inventory is received into both bulk and pick/primary locations then original location should be the bulk location and the stock move should be done to the pick/primary location.",
+  "route": "marble/Asset/Asset/FindSummary",
+  "dialog": null,
+  "mapping": "entry-candidate",
+  "limitation": "Read-only screen/dialog evidence only. Prerequisite creation, field input, submissions, integrations and full story transitions are not executed.",
+  "source": "docs/business-processes/process-library/inventory-mover-puts-away-inventory.md",
+  "mode": "qapps",
+  "coverage": "blocked",
+  "captures": [
+    {
+      "engine": "java",
+      "mode": "qapps",
+      "route": "marble/Asset/Asset/FindSummary",
+      "dialog": null,
+      "authenticated": true,
+      "errors": [
+        "$ is not defined",
+        "Vue is not defined",
+        "$ is not defined",
+        "Vue is not defined"
+      ],
+      "failedRequests": [
+        {
+          "url": "http://127.0.0.1:18091/qapps/marble/dashboard",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:18091/qapps/marble/Asset/Asset/FindSummary",
+          "error": "net::ERR_ABORTED"
+        }
+      ],
+      "httpErrors": [],
+      "consoleErrors": [
+        "Refused to apply style from 'http://127.0.0.1:18091/qapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not a supported stylesheet MIME type, and strict MIME checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to apply style from 'http://127.0.0.1:18091/qapps/marble/Asset/Asset/FindSummary#?v=1a147e2' because its MIME type ('text/html') is not a supported stylesheet MIME type, and strict MIME checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/Asset/Asset/FindSummary#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/Asset/Asset/FindSummary#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/Asset/Asset/FindSummary#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/Asset/Asset/FindSummary#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled."
+      ],
+      "status": "blocked",
+      "reused": true,
+      "requestedURL": "http://127.0.0.1:18091/qapps/marble/Asset/Asset/FindSummary",
+      "navigation": "documented-or-candidate-deep-link",
+      "httpStatus": 200,
+      "finalURL": "http://127.0.0.1:18091/qapps/marble/Asset/Asset/FindSummary",
+      "directory": ".saved-runs/2026-10-17_03-22-50.677356Z/ui-test/_captures/f21858a3e7766cf5d4161f3e"
+    },
+    {
+      "engine": "rust",
+      "mode": "qapps",
+      "route": "marble/Asset/Asset/FindSummary",
+      "dialog": null,
+      "authenticated": true,
+      "errors": [],
+      "failedRequests": [],
+      "httpErrors": [],
+      "consoleErrors": [],
+      "status": "captured",
+      "reused": true,
+      "requestedURL": "http://127.0.0.1:18092/qapps/marble/Asset/Asset/FindSummary",
+      "navigation": "documented-or-candidate-deep-link",
+      "httpStatus": 200,
+      "finalURL": "http://127.0.0.1:18092/qapps/marble/Asset/Asset/FindSummary",
+      "directory": ".saved-runs/2026-10-17_03-22-50.677356Z/ui-test/_captures/95700a125e14b289a0544183"
+    }
+  ],
+  "comparison": {
+    "status": "diagnostic-only",
+    "equal": false,
+    "dimensions": [
+      {
+        "width": 1440,
+        "height": 1000
+      },
+      {
+        "width": 1440,
+        "height": 1000
+      }
+    ],
+    "dimensionsEqual": true,
+    "differentPixels": 121541,
+    "comparedPixels": 1440000,
+    "differencePercent": 8.440347222222222,
+    "threshold": 0.1
+  }
+}

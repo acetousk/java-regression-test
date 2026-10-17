@@ -1,0 +1,19 @@
+{
+  "id": "activity-031",
+  "sourceLine": 109,
+  "headings": [
+    "OAGIS Order to Cash",
+    "OAGIS Scenarios",
+    "Related Scenarios"
+  ],
+  "text": "* 23 - Manufacturing to Order Management Financials with Manufacturing for Engineer to Order and Configure to Order (Engineering - BOM, Inventory - Finished Goods, Order Management, Manufacturing, Inventory - Work In Progress, GL, Costing, AR)",
+  "route": null,
+  "dialog": null,
+  "mapping": "entry-candidate",
+  "limitation": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required.",
+  "source": "docs/business-processes/process-library/oagis-order-to-cash.md",
+  "mode": "apps",
+  "coverage": "blocked",
+  "captures": [],
+  "reason": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required."
+}

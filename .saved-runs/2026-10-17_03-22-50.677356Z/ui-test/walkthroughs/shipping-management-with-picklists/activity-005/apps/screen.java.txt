@@ -1,0 +1,90 @@
+Toggle navigation 
+Picklists
+0 0 0 0
+Marble ERP - Dashboard
+Applications (ShpTpSales)
+Applications
+Applications (ShpTpSales)
+Applications
+ Shipments - Find Shipments (ShpTpSales)
+Applications
+Applications (POPC_DEFAULT)
+Applications
+Applications (POPC_DEFAULT)
+ Promotions - Store Promotions
+ Promotions - Store Promotions (POPC_DEFAULT)
+Applications
+Applications
+Applications
+Applications
+ Orders - Order Detail
+ Customers - Find Customer
+Applications
+Applications
+ Time Period - Find Time Period
+Applications
+Applications
+Applications (Incoming)
+Applications
+Application
+Marble ERP
+My Account
+System
+Tools
+ZIRET: Ziziwork Retail & Wholesale
+ZISER: Ziziwork Services
+Marble ERP
+Dashboard
+Quick Search
+Accounting
+Asset
+Catalog
+Customers
+Facility
+Human Resources
+Manufacturing
+Orders
+Parties
+Projects
+Requests
+Returns
+Shipments
+Shipping
+Stores
+Suppliers
+Survey
+Tasks
+Wiki/Content
+Custom Reports
+Report Builder
+Shipping
+Dashboard
+Picklists
+Pick Location Moves
+Picklists
+New Picklist Bulk Create Picklists
+Find Options
+Columns
+
+Status: In Planning, Approved, In Progress, On Hold
+
+
+Picklist 
+Start Date 
+	
+Status 
+Facility 
+	
+Store 
+Owner Org
+	
+People
+	
+Equipment
+Shipments
+	
+ 
+
+Built on Moqui Framework 4.0.0
+
+Site Map

@@ -1,0 +1,18 @@
+{
+  "id": "activity-003",
+  "sourceLine": 16,
+  "headings": [
+    "Placing Customer Adds Product to Cart",
+    "Ideas to Incorporate"
+  ],
+  "text": "* Input Additional Information about Purchase (survey; product personalization, etc.)",
+  "route": null,
+  "dialog": null,
+  "mapping": "entry-candidate",
+  "limitation": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required.",
+  "source": "docs/business-processes/process-library/placing-customer-adds-product-to-cart.md",
+  "mode": "vapps",
+  "coverage": "blocked",
+  "captures": [],
+  "reason": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required."
+}

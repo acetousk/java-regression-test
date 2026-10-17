@@ -1,0 +1,133 @@
+{
+  "source": "docs/business-processes/process-library/oagis-work-plan-to-cash.md",
+  "mode": "qapps",
+  "activities": [
+    {
+      "id": "activity-001",
+      "sourceLine": 8,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-work-plan-to-cash/activity-001/qapps/comparison.json"
+    },
+    {
+      "id": "activity-002",
+      "sourceLine": 14,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-work-plan-to-cash/activity-002/qapps/comparison.json"
+    },
+    {
+      "id": "activity-003",
+      "sourceLine": 20,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-work-plan-to-cash/activity-003/qapps/comparison.json"
+    },
+    {
+      "id": "activity-004",
+      "sourceLine": 23,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-work-plan-to-cash/activity-004/qapps/comparison.json"
+    },
+    {
+      "id": "activity-005",
+      "sourceLine": 26,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-work-plan-to-cash/activity-005/qapps/comparison.json"
+    },
+    {
+      "id": "activity-006",
+      "sourceLine": 29,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-work-plan-to-cash/activity-006/qapps/comparison.json"
+    },
+    {
+      "id": "activity-007",
+      "sourceLine": 32,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-work-plan-to-cash/activity-007/qapps/comparison.json"
+    },
+    {
+      "id": "activity-008",
+      "sourceLine": 35,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-work-plan-to-cash/activity-008/qapps/comparison.json"
+    },
+    {
+      "id": "activity-009",
+      "sourceLine": 41,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-work-plan-to-cash/activity-009/qapps/comparison.json"
+    },
+    {
+      "id": "activity-010",
+      "sourceLine": 48,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-work-plan-to-cash/activity-010/qapps/comparison.json"
+    },
+    {
+      "id": "activity-011",
+      "sourceLine": 54,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-work-plan-to-cash/activity-011/qapps/comparison.json"
+    },
+    {
+      "id": "activity-012",
+      "sourceLine": 59,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-work-plan-to-cash/activity-012/qapps/comparison.json"
+    },
+    {
+      "id": "activity-013",
+      "sourceLine": 63,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-work-plan-to-cash/activity-013/qapps/comparison.json"
+    },
+    {
+      "id": "activity-014",
+      "sourceLine": 69,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-work-plan-to-cash/activity-014/qapps/comparison.json"
+    },
+    {
+      "id": "activity-015",
+      "sourceLine": 72,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-work-plan-to-cash/activity-015/qapps/comparison.json"
+    },
+    {
+      "id": "activity-016",
+      "sourceLine": 76,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-work-plan-to-cash/activity-016/qapps/comparison.json"
+    },
+    {
+      "id": "activity-017",
+      "sourceLine": 79,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-work-plan-to-cash/activity-017/qapps/comparison.json"
+    },
+    {
+      "id": "activity-018",
+      "sourceLine": 82,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-work-plan-to-cash/activity-018/qapps/comparison.json"
+    },
+    {
+      "id": "activity-019",
+      "sourceLine": 85,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-work-plan-to-cash/activity-019/qapps/comparison.json"
+    },
+    {
+      "id": "activity-020",
+      "sourceLine": 88,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-work-plan-to-cash/activity-020/qapps/comparison.json"
+    },
+    {
+      "id": "activity-021",
+      "sourceLine": 92,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/oagis-work-plan-to-cash/activity-021/qapps/comparison.json"
+    }
+  ],
+  "note": "Evidence sweep only; no complete business-process execution is claimed."
+}

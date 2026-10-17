@@ -1,0 +1,97 @@
+{
+  "id": "activity-006",
+  "sourceLine": 34,
+  "headings": [
+    "Customer Returns Product",
+    "Story"
+  ],
+  "text": "If Customer was sent the incorrect item and they do not want it, Customer contacts CSR. CSR creates return for replacement (cross-ship or wait). CSR adjusts inventory to increment QOH for item ordered and decrement QOH for item actually shipped (physical inventory adjustment reason: mis-shipped item).",
+  "route": "marble/Return/FindReturn?returnType=Customer",
+  "dialog": null,
+  "mapping": "entry-candidate",
+  "limitation": "Read-only screen/dialog evidence only. Prerequisite creation, field input, submissions, integrations and full story transitions are not executed.",
+  "source": "docs/business-processes/process-library/customer-returns-product.md",
+  "mode": "qapps",
+  "coverage": "blocked",
+  "captures": [
+    {
+      "engine": "java",
+      "mode": "qapps",
+      "route": "marble/Return/FindReturn?returnType=Customer",
+      "dialog": null,
+      "authenticated": true,
+      "errors": [
+        "$ is not defined",
+        "Vue is not defined",
+        "$ is not defined",
+        "Vue is not defined"
+      ],
+      "failedRequests": [
+        {
+          "url": "http://127.0.0.1:18091/qapps/marble/dashboard",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:18091/qapps/marble/Return/FindReturn?returnType=Customer",
+          "error": "net::ERR_ABORTED"
+        }
+      ],
+      "httpErrors": [],
+      "consoleErrors": [
+        "Refused to apply style from 'http://127.0.0.1:18091/qapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not a supported stylesheet MIME type, and strict MIME checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to apply style from 'http://127.0.0.1:18091/qapps/marble/Return/FindReturn?returnType=Customer#?v=1a147e2' because its MIME type ('text/html') is not a supported stylesheet MIME type, and strict MIME checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/Return/FindReturn?returnType=Customer#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/Return/FindReturn?returnType=Customer#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/Return/FindReturn?returnType=Customer#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/Return/FindReturn?returnType=Customer#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled."
+      ],
+      "status": "blocked",
+      "reused": true,
+      "requestedURL": "http://127.0.0.1:18091/qapps/marble/Return/FindReturn?returnType=Customer",
+      "navigation": "documented-or-candidate-deep-link",
+      "httpStatus": 200,
+      "finalURL": "http://127.0.0.1:18091/qapps/marble/Return/FindReturn?returnType=Customer",
+      "directory": ".saved-runs/2026-10-17_03-22-50.677356Z/ui-test/_captures/91382dfc3cf9e9b5243b4fa0"
+    },
+    {
+      "engine": "rust",
+      "mode": "qapps",
+      "route": "marble/Return/FindReturn?returnType=Customer",
+      "dialog": null,
+      "authenticated": true,
+      "errors": [],
+      "failedRequests": [],
+      "httpErrors": [],
+      "consoleErrors": [],
+      "status": "captured",
+      "reused": true,
+      "requestedURL": "http://127.0.0.1:18092/qapps/marble/Return/FindReturn?returnType=Customer",
+      "navigation": "dashboard-link",
+      "finalURL": "http://127.0.0.1:18092/qapps/marble/Return/FindReturn?returnType=Customer",
+      "directory": ".saved-runs/2026-10-17_03-22-50.677356Z/ui-test/_captures/3227c656571e677e96bb64f3"
+    }
+  ],
+  "comparison": {
+    "status": "diagnostic-only",
+    "equal": false,
+    "dimensions": [
+      {
+        "width": 1440,
+        "height": 1000
+      },
+      {
+        "width": 1440,
+        "height": 1000
+      }
+    ],
+    "dimensionsEqual": true,
+    "differentPixels": 150499,
+    "comparedPixels": 1440000,
+    "differencePercent": 10.451319444444444,
+    "threshold": 0.1
+  }
+}

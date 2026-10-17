@@ -11,6 +11,16 @@ Blank fields are planning placeholders, not test results. Use equivalent startin
 
 The walkthroughs are UI-oriented. The process library contains higher-level scenarios, including storefront, external/manual and OAGIS integration activities; these do not guarantee corresponding Marble ERP buttons. Some upstream pages are only short sketches.
 
+## Executable visual tests
+
+See [the visual-test runner](../../ui-test/README.md). All 42 documents and their
+visual placeholders are inventoried in a best-effort evidence sweep, not complete
+executable workflows. Blocked/partial activities are explicitly reported and do not
+pass the workflow gate. Specs stay under `ui-test/docs/business-process/`; screenshots,
+diffs and comparison reports go under `.runs/<run-id>/ui-test/`, grouped by process
+library activity and then render mode (`apps/`, `vapps/`, `qapps/`). Temporary `--skip-step-4` mode loads all demo data and skips the
+database comparison, not visual assertions.
+
 ## Marble ERP UI walkthroughs
 
 - [Initial Setup and Basics](walkthroughs/initial-setup-and-basics.md)

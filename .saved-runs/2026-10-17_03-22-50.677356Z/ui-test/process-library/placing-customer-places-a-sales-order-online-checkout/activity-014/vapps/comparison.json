@@ -1,0 +1,17 @@
+{
+  "id": "activity-014",
+  "sourceLine": 54,
+  "headings": [
+    "Placing Customer Places a Sales Order - Online Checkout"
+  ],
+  "text": "* whether to ship the order all at once or as inventory is available",
+  "route": null,
+  "dialog": null,
+  "mapping": "entry-candidate",
+  "limitation": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required.",
+  "source": "docs/business-processes/process-library/placing-customer-places-a-sales-order-online-checkout.md",
+  "mode": "vapps",
+  "coverage": "blocked",
+  "captures": [],
+  "reason": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required."
+}

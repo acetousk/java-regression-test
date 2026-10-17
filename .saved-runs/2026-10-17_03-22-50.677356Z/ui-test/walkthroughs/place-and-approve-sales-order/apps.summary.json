@@ -1,0 +1,707 @@
+{
+  "source": "docs/business-processes/walkthroughs/place-and-approve-sales-order.md",
+  "mode": "apps",
+  "activities": [
+    {
+      "id": "activity-001",
+      "sourceLine": 10,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2092667,
+        "comparedPixels": 3385440,
+        "differencePercent": 61.813737653008175,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/place-and-approve-sales-order/activity-001/apps/comparison.json"
+    },
+    {
+      "id": "activity-002",
+      "sourceLine": 13,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1594
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 982586,
+        "comparedPixels": 2295360,
+        "differencePercent": 42.807489892653,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/place-and-approve-sales-order/activity-002/apps/comparison.json"
+    },
+    {
+      "id": "activity-003",
+      "sourceLine": 16,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1594
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 982586,
+        "comparedPixels": 2295360,
+        "differencePercent": 42.807489892653,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/place-and-approve-sales-order/activity-003/apps/comparison.json"
+    },
+    {
+      "id": "activity-004",
+      "sourceLine": 19,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1594
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 984904,
+        "comparedPixels": 2295360,
+        "differencePercent": 42.908476230308096,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/place-and-approve-sales-order/activity-004/apps/comparison.json"
+    },
+    {
+      "id": "activity-005",
+      "sourceLine": 22,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1594
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 988258,
+        "comparedPixels": 2295360,
+        "differencePercent": 43.054597100237,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/place-and-approve-sales-order/activity-005/apps/comparison.json"
+    },
+    {
+      "id": "activity-006",
+      "sourceLine": 28,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2112559,
+        "comparedPixels": 3385440,
+        "differencePercent": 62.40131268018337,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/place-and-approve-sales-order/activity-006/apps/comparison.json"
+    },
+    {
+      "id": "activity-007",
+      "sourceLine": 31,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 131796,
+        "comparedPixels": 1452960,
+        "differencePercent": 9.070862239841427,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/place-and-approve-sales-order/activity-007/apps/comparison.json"
+    },
+    {
+      "id": "activity-008",
+      "sourceLine": 34,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2112559,
+        "comparedPixels": 3385440,
+        "differencePercent": 62.40131268018337,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/place-and-approve-sales-order/activity-008/apps/comparison.json"
+    },
+    {
+      "id": "activity-009",
+      "sourceLine": 37,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 135058,
+        "comparedPixels": 1452960,
+        "differencePercent": 9.295369452703447,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/place-and-approve-sales-order/activity-009/apps/comparison.json"
+    },
+    {
+      "id": "activity-010",
+      "sourceLine": 40,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 135058,
+        "comparedPixels": 1452960,
+        "differencePercent": 9.295369452703447,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/place-and-approve-sales-order/activity-010/apps/comparison.json"
+    },
+    {
+      "id": "activity-011",
+      "sourceLine": 43,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 135058,
+        "comparedPixels": 1452960,
+        "differencePercent": 9.295369452703447,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/place-and-approve-sales-order/activity-011/apps/comparison.json"
+    },
+    {
+      "id": "activity-012",
+      "sourceLine": 46,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 135058,
+        "comparedPixels": 1452960,
+        "differencePercent": 9.295369452703447,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/place-and-approve-sales-order/activity-012/apps/comparison.json"
+    },
+    {
+      "id": "activity-013",
+      "sourceLine": 52,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 135058,
+        "comparedPixels": 1452960,
+        "differencePercent": 9.295369452703447,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/place-and-approve-sales-order/activity-013/apps/comparison.json"
+    },
+    {
+      "id": "activity-014",
+      "sourceLine": 55,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 135058,
+        "comparedPixels": 1452960,
+        "differencePercent": 9.295369452703447,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/place-and-approve-sales-order/activity-014/apps/comparison.json"
+    },
+    {
+      "id": "activity-015",
+      "sourceLine": 58,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 135058,
+        "comparedPixels": 1452960,
+        "differencePercent": 9.295369452703447,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/place-and-approve-sales-order/activity-015/apps/comparison.json"
+    },
+    {
+      "id": "activity-016",
+      "sourceLine": 64,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 135058,
+        "comparedPixels": 1452960,
+        "differencePercent": 9.295369452703447,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/place-and-approve-sales-order/activity-016/apps/comparison.json"
+    },
+    {
+      "id": "activity-017",
+      "sourceLine": 67,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 135058,
+        "comparedPixels": 1452960,
+        "differencePercent": 9.295369452703447,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/place-and-approve-sales-order/activity-017/apps/comparison.json"
+    },
+    {
+      "id": "activity-018",
+      "sourceLine": 70,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 135058,
+        "comparedPixels": 1452960,
+        "differencePercent": 9.295369452703447,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/place-and-approve-sales-order/activity-018/apps/comparison.json"
+    },
+    {
+      "id": "activity-019",
+      "sourceLine": 73,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 135058,
+        "comparedPixels": 1452960,
+        "differencePercent": 9.295369452703447,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/place-and-approve-sales-order/activity-019/apps/comparison.json"
+    },
+    {
+      "id": "activity-020",
+      "sourceLine": 76,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 135058,
+        "comparedPixels": 1452960,
+        "differencePercent": 9.295369452703447,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/place-and-approve-sales-order/activity-020/apps/comparison.json"
+    },
+    {
+      "id": "activity-021",
+      "sourceLine": 79,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 135058,
+        "comparedPixels": 1452960,
+        "differencePercent": 9.295369452703447,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/place-and-approve-sales-order/activity-021/apps/comparison.json"
+    },
+    {
+      "id": "activity-022",
+      "sourceLine": 82,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": true,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 0,
+        "comparedPixels": 1440000,
+        "differencePercent": 0,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/place-and-approve-sales-order/activity-022/apps/comparison.json"
+    },
+    {
+      "id": "activity-023",
+      "sourceLine": 85,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2037586,
+        "comparedPixels": 3385440,
+        "differencePercent": 60.18674086677064,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/place-and-approve-sales-order/activity-023/apps/comparison.json"
+    },
+    {
+      "id": "activity-024",
+      "sourceLine": 88,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2037586,
+        "comparedPixels": 3385440,
+        "differencePercent": 60.18674086677064,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/place-and-approve-sales-order/activity-024/apps/comparison.json"
+    },
+    {
+      "id": "activity-025",
+      "sourceLine": 94,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": true,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 0,
+        "comparedPixels": 1440000,
+        "differencePercent": 0,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/place-and-approve-sales-order/activity-025/apps/comparison.json"
+    },
+    {
+      "id": "activity-026",
+      "sourceLine": 97,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2037586,
+        "comparedPixels": 3385440,
+        "differencePercent": 60.18674086677064,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/place-and-approve-sales-order/activity-026/apps/comparison.json"
+    },
+    {
+      "id": "activity-027",
+      "sourceLine": 100,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2037637,
+        "comparedPixels": 3385440,
+        "differencePercent": 60.18824731792618,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/place-and-approve-sales-order/activity-027/apps/comparison.json"
+    },
+    {
+      "id": "activity-028",
+      "sourceLine": 103,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2037586,
+        "comparedPixels": 3385440,
+        "differencePercent": 60.18674086677064,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/place-and-approve-sales-order/activity-028/apps/comparison.json"
+    }
+  ],
+  "note": "Evidence sweep only; no complete business-process execution is claimed."
+}

@@ -1,0 +1,107 @@
+{
+  "id": "activity-015",
+  "sourceLine": 53,
+  "headings": [
+    "Transfer Shipments",
+    "Create, Pack and Ship a Transfer Shipment"
+  ],
+  "text": "- check label data per package to make sure it is what was expected",
+  "route": "marble/Shipment/FindShipment",
+  "dialog": null,
+  "mapping": "entry-candidate",
+  "limitation": "Read-only screen/dialog evidence only. Prerequisite creation, field input, submissions, integrations and full story transitions are not executed.",
+  "source": "docs/business-processes/walkthroughs/transfer-shipments.md",
+  "mode": "vapps",
+  "coverage": "blocked",
+  "captures": [
+    {
+      "engine": "java",
+      "mode": "vapps",
+      "route": "marble/Shipment/FindShipment",
+      "dialog": null,
+      "authenticated": true,
+      "errors": [
+        "moqui is not defined",
+        "moqui is not defined"
+      ],
+      "failedRequests": [
+        {
+          "url": "http://127.0.0.1:18091/vapps/marble/dashboard",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:18091/vapps/marble/Shipment/FindShipment",
+          "error": "net::ERR_ABORTED"
+        }
+      ],
+      "httpErrors": [],
+      "consoleErrors": [
+        "Refused to apply style from 'http://127.0.0.1:18091/vapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not a supported stylesheet MIME type, and strict MIME checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/vapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/vapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to apply style from 'http://127.0.0.1:18091/vapps/marble/Shipment/FindShipment#?v=1a147e2' because its MIME type ('text/html') is not a supported stylesheet MIME type, and strict MIME checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/vapps/marble/Shipment/FindShipment#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/vapps/marble/Shipment/FindShipment#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled."
+      ],
+      "status": "blocked",
+      "reused": true,
+      "requestedURL": "http://127.0.0.1:18091/vapps/marble/Shipment/FindShipment",
+      "navigation": "documented-or-candidate-deep-link",
+      "httpStatus": 200,
+      "finalURL": "http://127.0.0.1:18091/vapps/marble/Shipment/FindShipment",
+      "directory": ".saved-runs/2026-10-17_03-22-50.677356Z/ui-test/_captures/6baca9abea45948aa1611661"
+    },
+    {
+      "engine": "rust",
+      "mode": "vapps",
+      "route": "marble/Shipment/FindShipment",
+      "dialog": null,
+      "authenticated": true,
+      "errors": [
+        "HTTP 404",
+        "One or more HTTP resources failed (see httpErrors)"
+      ],
+      "failedRequests": [],
+      "httpErrors": [
+        {
+          "url": "http://127.0.0.1:18092/vapps/marble/dashboard",
+          "status": 404
+        },
+        {
+          "url": "http://127.0.0.1:18092/vapps/marble/Shipment/FindShipment",
+          "status": 404
+        }
+      ],
+      "consoleErrors": [
+        "Failed to load resource: the server responded with a status of 404 (Not Found)",
+        "Failed to load resource: the server responded with a status of 404 (Not Found)"
+      ],
+      "status": "blocked",
+      "reused": true,
+      "requestedURL": "http://127.0.0.1:18092/vapps/marble/Shipment/FindShipment",
+      "navigation": "documented-or-candidate-deep-link",
+      "httpStatus": 404,
+      "finalURL": "http://127.0.0.1:18092/vapps/marble/Shipment/FindShipment",
+      "directory": ".saved-runs/2026-10-17_03-22-50.677356Z/ui-test/_captures/cd44babc3f236e8fd45f0e08"
+    }
+  ],
+  "comparison": {
+    "status": "diagnostic-only",
+    "equal": false,
+    "dimensions": [
+      {
+        "width": 1440,
+        "height": 1009
+      },
+      {
+        "width": 1440,
+        "height": 1000
+      }
+    ],
+    "dimensionsEqual": false,
+    "differentPixels": 154921,
+    "comparedPixels": 1452960,
+    "differencePercent": 10.662440810483426,
+    "threshold": 0.1
+  }
+}

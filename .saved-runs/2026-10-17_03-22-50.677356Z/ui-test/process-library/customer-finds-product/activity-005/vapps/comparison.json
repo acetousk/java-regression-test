@@ -1,0 +1,18 @@
+{
+  "id": "activity-005",
+  "sourceLine": 27,
+  "headings": [
+    "Customer Finds Product",
+    "Story"
+  ],
+  "text": "**Keyword and Parametric Search** If Customer does not see a category that matches what they have in mind, but they have some words to describe what they have in mind they may do a simple keyword search or go to an advanced search page that presents more searching options. If there is no category selected (ie Customer is not searching within a category) the advanced search options will be generic and may not include anything for a parameterized search (ie features of different types that can be selected to search by), but it may include some common parameters (features) to search by that are generally applicable across all or most of the available products.",
+  "route": null,
+  "dialog": null,
+  "mapping": "entry-candidate",
+  "limitation": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required.",
+  "source": "docs/business-processes/process-library/customer-finds-product.md",
+  "mode": "vapps",
+  "coverage": "blocked",
+  "captures": [],
+  "reason": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required."
+}

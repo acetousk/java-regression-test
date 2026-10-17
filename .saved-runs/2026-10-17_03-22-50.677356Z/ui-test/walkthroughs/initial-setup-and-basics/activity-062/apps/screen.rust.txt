@@ -1,0 +1,114 @@
+Application 
+Marble ERP 
+Human Resources 
+Rates
+ 0  0  0  0
+ Organization
+ Add Rate Amount
+Page 1 of 1 (1 - 5 of 5)
+
+
+Type
+Discounted
+Min Wage Adj
+No Charge
+NPT - RRP
+NPT - STD
+On-site
+Paid Break RRP
+Paid Break STD
+PTO - Holiday
+PTO - Other
+PTO - Sick
+PTO - Vacation
+Shift - Evening
+Shift - Holiday
+Shift - Night
+Shift - Weekend
+Standard
+Unpaid
+Purpose
+Client Billing
+Worker/Vendor Payment
+	
+Project
+Party
+	
+Position Class
+General Manager
+Programmer
+Project Manager
+Work Type
+General Labor
+General Office
+Management
+Paid Break
+Paid Non-productive Time
+Programming
+	
+From Date
+Thru Date
+	
+Rate Amount
+From 
+Thru 
+	
+Currency
+USD
+
+
+No Charge
+Client Billing
+	
+	
+	
+	
+	
+
+
+No Charge
+Worker/Vendor Payment
+	
+John Doe [EX_JOHN_DOE]
+	
+	
+	
+	
+United States Dollar
+
+
+Standard
+Client Billing
+	
+John Doe [EX_JOHN_DOE]
+	
+	
+	
+	
+United States Dollar
+
+
+Standard
+Worker/Vendor Payment
+	
+John Doe [EX_JOHN_DOE]
+	
+	
+	
+	
+United States Dollar
+
+
+Unpaid
+Worker/Vendor Payment
+	
+	
+	
+	
+	
+
+
+
+Built on Moqui Framework 0.1.0
+
+Site Map

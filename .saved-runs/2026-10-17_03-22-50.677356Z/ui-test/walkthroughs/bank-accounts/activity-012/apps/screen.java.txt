@@ -1,0 +1,79 @@
+Toggle navigation 
+Dashboard
+0 0 0 0
+Marble ERP - Dashboard
+ Parties - Find Party (OrgInternal)
+Applications
+Applications
+Applications (ShpTpPurchase)
+Applications (ShpTpPurchase)
+ Shipments - Find Shipments (ShpTpPurchase)
+Applications
+Applications
+ Requests - Find Request
+Applications
+Applications
+ Products - Find Product
+Applications
+Applications
+ Asset - Find Summary
+Applications
+Applications
+ Physical Inventory - Find Physical Inventory
+Applications (Customer)
+Applications (Customer)
+ Returns - Returns (Customer)
+Applications
+Applications
+ Shipping - Dashboard
+Application
+Marble ERP
+My Account
+System
+Tools
+ZIRET: Ziziwork Retail & Wholesale
+ZISER: Ziziwork Services
+Marble ERP
+Dashboard
+Quick Search
+Accounting
+Asset
+Catalog
+Customers
+Facility
+Human Resources
+Manufacturing
+Orders
+Parties
+Projects
+Requests
+Returns
+Shipments
+Shipping
+Stores
+Suppliers
+Survey
+Tasks
+Wiki/Content
+Custom Reports
+Report Builder
+Accounting
+Dashboard
+Invoices
+Payments
+Financial Accounts
+Transactions
+GL Journals
+Time Period
+GL Accounts
+Budgets
+Reports
+Invoices and Payments
+Invoices Aging Payments Bulk Checks Financial Accounts
+General Ledger
+Reports
+Transactions Transaction Entries GL Accounts GL Journals Time Periods Budgets
+
+Built on Moqui Framework 4.0.0
+
+Site Map

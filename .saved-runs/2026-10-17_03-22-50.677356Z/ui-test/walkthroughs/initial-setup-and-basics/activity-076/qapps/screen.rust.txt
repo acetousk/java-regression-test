@@ -1,0 +1,73 @@
+menu
+Applications
+chevron_right
+Marble ERP
+chevron_right
+Accounting
+chevron_right
+Invoices
+chevron_right
+Find Invoice
+help_outline
+search
+edit_location
+notifications
+history
+account_circle
+open_in_new
+New Payable
+open_in_new
+New Receivable
+open_in_new
+Customer Credit Memo
+open_in_new
+Supplier Credit Memo
+open_in_new
+Project Client Invoice
+open_in_new
+Project Worker Invoice
+open_in_new
+Worker Invoice
+open_in_new
+Customer Statement PDF
+search
+Find Options
+table_chart
+Columns
+CSV
+XLS
+No results found
+Invoice
+Type
+	
+Invoice Date
+Due Date
+	
+Their Invoice
+Their Order
+	
+Status
+	
+From
+Store
+	
+To
+	
+Total
+	
+Unpaid
+Built on Moqui 0.1.0
+Site Map
+Project Client Invoice
+close
+Project
+arrow_drop_down
+event
+Thru Date
+access_time
+Existing Invoice
+arrow_drop_down
+Grouping
+Item Per Worker
+arrow_drop_down
+Invoice Time and Expenses

@@ -1,0 +1,124 @@
+{
+  "id": "activity-014",
+  "sourceLine": 68,
+  "headings": [
+    "Pricing and Promotions",
+    "Promotions",
+    "Finding and Creating Promotions"
+  ],
+  "text": "Each promotion has an **Item Description** that is used as the Order Item Description when the promotion is applied. Each promotion also has a **Service** which defines the behavior of the promotion. Each promotion Service has parameters you can use to adjust behavior. There are a few standard promotion services to choose from and your system may have additional custom promotion services available.",
+  "route": "marble/ProductStore/Promotion/FindPromotion?productStoreId=POPC_DEFAULT",
+  "dialog": null,
+  "mapping": "entry-candidate",
+  "limitation": "Read-only screen/dialog evidence only. Prerequisite creation, field input, submissions, integrations and full story transitions are not executed.",
+  "source": "docs/business-processes/walkthroughs/pricing-and-promotions.md",
+  "mode": "apps",
+  "coverage": "blocked",
+  "captures": [
+    {
+      "engine": "java",
+      "mode": "apps",
+      "route": "marble/ProductStore/Promotion/FindPromotion?productStoreId=POPC_DEFAULT",
+      "dialog": null,
+      "authenticated": true,
+      "errors": [
+        "moqui is not defined",
+        "Cannot read properties of undefined (reading 'registerListener')",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "moqui is not defined",
+        "Cannot read properties of undefined (reading 'registerListener')",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined"
+      ],
+      "failedRequests": [
+        {
+          "url": "http://127.0.0.1:18091/apps/marble/dashboard",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:18091/apps/marble/ProductStore/Promotion/FindPromotion?productStoreId=POPC_DEFAULT",
+          "error": "net::ERR_ABORTED"
+        }
+      ],
+      "httpErrors": [],
+      "consoleErrors": [
+        "Refused to apply style from 'http://127.0.0.1:18091/apps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not a supported stylesheet MIME type, and strict MIME checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/apps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/apps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/apps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to apply style from 'http://127.0.0.1:18091/apps/marble/ProductStore/Promotion/FindPromotion?productStoreId=POPC_DEFAULT#?v=1a147e2' because its MIME type ('text/html') is not a supported stylesheet MIME type, and strict MIME checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/apps/marble/ProductStore/Promotion/FindPromotion?productStoreId=POPC_DEFAULT#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/apps/marble/ProductStore/Promotion/FindPromotion?productStoreId=POPC_DEFAULT#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/apps/marble/ProductStore/Promotion/FindPromotion?productStoreId=POPC_DEFAULT#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled."
+      ],
+      "status": "blocked",
+      "reused": true,
+      "requestedURL": "http://127.0.0.1:18091/apps/marble/ProductStore/Promotion/FindPromotion?productStoreId=POPC_DEFAULT",
+      "navigation": "documented-or-candidate-deep-link",
+      "httpStatus": 200,
+      "finalURL": "http://127.0.0.1:18091/apps/marble/ProductStore/Promotion/FindPromotion?productStoreId=POPC_DEFAULT",
+      "directory": ".saved-runs/2026-10-17_03-22-50.677356Z/ui-test/_captures/0fa0f19e114a6a30c8feadfd"
+    },
+    {
+      "engine": "rust",
+      "mode": "apps",
+      "route": "marble/ProductStore/Promotion/FindPromotion?productStoreId=POPC_DEFAULT",
+      "dialog": null,
+      "authenticated": true,
+      "errors": [],
+      "failedRequests": [],
+      "httpErrors": [],
+      "consoleErrors": [],
+      "status": "captured",
+      "reused": true,
+      "requestedURL": "http://127.0.0.1:18092/apps/marble/ProductStore/Promotion/FindPromotion?productStoreId=POPC_DEFAULT",
+      "navigation": "documented-or-candidate-deep-link",
+      "httpStatus": 200,
+      "finalURL": "http://127.0.0.1:18092/apps/marble/ProductStore/Promotion/FindPromotion?productStoreId=POPC_DEFAULT",
+      "directory": ".saved-runs/2026-10-17_03-22-50.677356Z/ui-test/_captures/2c137ee5f40be6d813dce213"
+    }
+  ],
+  "comparison": {
+    "status": "diagnostic-only",
+    "equal": false,
+    "dimensions": [
+      {
+        "width": 1440,
+        "height": 1262
+      },
+      {
+        "width": 1440,
+        "height": 1000
+      }
+    ],
+    "dimensionsEqual": false,
+    "differentPixels": 535658,
+    "comparedPixels": 1817280,
+    "differencePercent": 29.475810001760873,
+    "threshold": 0.1
+  }
+}

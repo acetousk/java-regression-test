@@ -1,0 +1,43 @@
+{
+  "source": "docs/business-processes/process-library/placing-customer-adds-product-to-cart.md",
+  "mode": "vapps",
+  "activities": [
+    {
+      "id": "activity-001",
+      "sourceLine": 10,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/placing-customer-adds-product-to-cart/activity-001/vapps/comparison.json"
+    },
+    {
+      "id": "activity-002",
+      "sourceLine": 13,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/placing-customer-adds-product-to-cart/activity-002/vapps/comparison.json"
+    },
+    {
+      "id": "activity-003",
+      "sourceLine": 16,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/placing-customer-adds-product-to-cart/activity-003/vapps/comparison.json"
+    },
+    {
+      "id": "activity-004",
+      "sourceLine": 22,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/placing-customer-adds-product-to-cart/activity-004/vapps/comparison.json"
+    },
+    {
+      "id": "activity-005",
+      "sourceLine": 26,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/placing-customer-adds-product-to-cart/activity-005/vapps/comparison.json"
+    },
+    {
+      "id": "activity-006",
+      "sourceLine": 30,
+      "coverage": "blocked",
+      "report": "ui-test/process-library/placing-customer-adds-product-to-cart/activity-006/vapps/comparison.json"
+    }
+  ],
+  "note": "Evidence sweep only; no complete business-process execution is claimed."
+}

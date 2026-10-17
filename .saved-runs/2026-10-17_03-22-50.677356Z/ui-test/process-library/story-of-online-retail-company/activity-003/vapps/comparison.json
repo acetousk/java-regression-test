@@ -1,0 +1,90 @@
+{
+  "id": "activity-003",
+  "sourceLine": 22,
+  "headings": [
+    "Story of Online Retail Company"
+  ],
+  "text": "[Customer Finds Product](https://moqui.org/docs/mantle/Business%20Process%20Library/Customer%20Finds%20Product). [Placing Customer Adds Product to Cart](https://moqui.org/docs/mantle/Business%20Process%20Library/Placing%20Customer%20Adds%20Product%20to%20Cart) \nand [Placing Customer Places a Sales Order - Online Checkout](https://moqui.org/docs/mantle/Business%20Process%20Library/Placing%20Customer%20Places%20a%20Sales%20Order%20-%20Online%20Checkout). \nAlternatively [Placing Customer Places a Sales Order - Through CSR](https://moqui.org/docs/mantle/Business%20Process%20Library/Placing%20Customer%20Places%20a%20Sales%20Order%20-%20Through%20CSR) \nor [Placing Customer Places a Sales Order - Through eBay](https://moqui.org/docs/mantle/Business%20Process%20Library/Placing%20Customer%20Places%20a%20Sales%20Order%20-%20Through%20EBay).\nIf Customer decides to, [Customer Cancels Order](https://moqui.org/docs/mantle/Business%20Process%20Library/Customer%20Cancels%20Order).",
+  "route": "marble/dashboard",
+  "dialog": null,
+  "mapping": "entry-candidate",
+  "limitation": "Read-only screen/dialog evidence only. Prerequisite creation, field input, submissions, integrations and full story transitions are not executed.",
+  "source": "docs/business-processes/process-library/story-of-online-retail-company.md",
+  "mode": "vapps",
+  "coverage": "blocked",
+  "captures": [
+    {
+      "engine": "java",
+      "mode": "vapps",
+      "route": "marble/dashboard",
+      "dialog": null,
+      "authenticated": true,
+      "errors": [
+        "moqui is not defined"
+      ],
+      "failedRequests": [
+        {
+          "url": "http://127.0.0.1:18091/vapps/marble/dashboard",
+          "error": "net::ERR_ABORTED"
+        }
+      ],
+      "httpErrors": [],
+      "consoleErrors": [
+        "Refused to apply style from 'http://127.0.0.1:18091/vapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not a supported stylesheet MIME type, and strict MIME checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/vapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/vapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled."
+      ],
+      "status": "blocked",
+      "reused": true,
+      "requestedURL": "http://127.0.0.1:18091/vapps/marble/dashboard",
+      "navigation": "dashboard-link",
+      "finalURL": "http://127.0.0.1:18091/vapps/marble/dashboard#",
+      "directory": ".saved-runs/2026-10-17_03-22-50.677356Z/ui-test/_captures/5dd3bdc5b10d1834d0cb2d6e"
+    },
+    {
+      "engine": "rust",
+      "mode": "vapps",
+      "route": "marble/dashboard",
+      "dialog": null,
+      "authenticated": true,
+      "errors": [
+        "page.waitForURL: Timeout 5000ms exceeded.\n=========================== logs ===========================\nwaiting for navigation until \"load\"\n============================================================"
+      ],
+      "failedRequests": [],
+      "httpErrors": [
+        {
+          "url": "http://127.0.0.1:18092/vapps/marble/dashboard",
+          "status": 404
+        }
+      ],
+      "consoleErrors": [
+        "Failed to load resource: the server responded with a status of 404 (Not Found)"
+      ],
+      "status": "blocked",
+      "reused": true,
+      "requestedURL": "http://127.0.0.1:18092/vapps/marble/dashboard",
+      "navigation": "dashboard-link",
+      "finalURL": "about:blank",
+      "directory": ".saved-runs/2026-10-17_03-22-50.677356Z/ui-test/_captures/1786dd3421e3ee2628f8a588"
+    }
+  ],
+  "comparison": {
+    "status": "diagnostic-only",
+    "equal": false,
+    "dimensions": [
+      {
+        "width": 1440,
+        "height": 1009
+      },
+      {
+        "width": 1440,
+        "height": 1000
+      }
+    ],
+    "dimensionsEqual": false,
+    "differentPixels": 143440,
+    "comparedPixels": 1452960,
+    "differencePercent": 9.872260764233014,
+    "threshold": 0.1
+  }
+}

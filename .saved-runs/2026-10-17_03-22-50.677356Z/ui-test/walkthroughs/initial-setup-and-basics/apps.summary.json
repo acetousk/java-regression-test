@@ -1,0 +1,4682 @@
+{
+  "source": "docs/business-processes/walkthroughs/initial-setup-and-basics.md",
+  "mode": "apps",
+  "activities": [
+    {
+      "id": "activity-001",
+      "sourceLine": 11,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2092667,
+        "comparedPixels": 3385440,
+        "differencePercent": 61.813737653008175,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-001/apps/comparison.json"
+    },
+    {
+      "id": "activity-002",
+      "sourceLine": 14,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2092667,
+        "comparedPixels": 3385440,
+        "differencePercent": 61.813737653008175,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-002/apps/comparison.json"
+    },
+    {
+      "id": "activity-003",
+      "sourceLine": 17,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2092667,
+        "comparedPixels": 3385440,
+        "differencePercent": 61.813737653008175,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-003/apps/comparison.json"
+    },
+    {
+      "id": "activity-004",
+      "sourceLine": 20,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2092667,
+        "comparedPixels": 3385440,
+        "differencePercent": 61.813737653008175,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-004/apps/comparison.json"
+    },
+    {
+      "id": "activity-005",
+      "sourceLine": 23,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2092667,
+        "comparedPixels": 3385440,
+        "differencePercent": 61.813737653008175,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-005/apps/comparison.json"
+    },
+    {
+      "id": "activity-006",
+      "sourceLine": 27,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2092667,
+        "comparedPixels": 3385440,
+        "differencePercent": 61.813737653008175,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-006/apps/comparison.json"
+    },
+    {
+      "id": "activity-007",
+      "sourceLine": 30,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2092667,
+        "comparedPixels": 3385440,
+        "differencePercent": 61.813737653008175,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-007/apps/comparison.json"
+    },
+    {
+      "id": "activity-008",
+      "sourceLine": 36,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 143932,
+        "comparedPixels": 1452960,
+        "differencePercent": 9.906122673714348,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-008/apps/comparison.json"
+    },
+    {
+      "id": "activity-009",
+      "sourceLine": 39,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2121272,
+        "comparedPixels": 3385440,
+        "differencePercent": 62.65867952171653,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-009/apps/comparison.json"
+    },
+    {
+      "id": "activity-010",
+      "sourceLine": 43,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": true,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 0,
+        "comparedPixels": 1440000,
+        "differencePercent": 0,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-010/apps/comparison.json"
+    },
+    {
+      "id": "activity-011",
+      "sourceLine": 46,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": true,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 0,
+        "comparedPixels": 1440000,
+        "differencePercent": 0,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-011/apps/comparison.json"
+    },
+    {
+      "id": "activity-012",
+      "sourceLine": 49,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": true,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 0,
+        "comparedPixels": 1440000,
+        "differencePercent": 0,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-012/apps/comparison.json"
+    },
+    {
+      "id": "activity-013",
+      "sourceLine": 53,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": true,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 0,
+        "comparedPixels": 1440000,
+        "differencePercent": 0,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-013/apps/comparison.json"
+    },
+    {
+      "id": "activity-014",
+      "sourceLine": 56,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2037007,
+        "comparedPixels": 3385440,
+        "differencePercent": 60.169638215416605,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-014/apps/comparison.json"
+    },
+    {
+      "id": "activity-015",
+      "sourceLine": 59,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2037004,
+        "comparedPixels": 3385440,
+        "differencePercent": 60.16954960064275,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-015/apps/comparison.json"
+    },
+    {
+      "id": "activity-016",
+      "sourceLine": 63,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1198
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 470851,
+        "comparedPixels": 1725120,
+        "differencePercent": 27.293811445000927,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-016/apps/comparison.json"
+    },
+    {
+      "id": "activity-017",
+      "sourceLine": 66,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1198
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 470851,
+        "comparedPixels": 1725120,
+        "differencePercent": 27.293811445000927,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-017/apps/comparison.json"
+    },
+    {
+      "id": "activity-018",
+      "sourceLine": 69,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1198
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 470851,
+        "comparedPixels": 1725120,
+        "differencePercent": 27.293811445000927,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-018/apps/comparison.json"
+    },
+    {
+      "id": "activity-019",
+      "sourceLine": 72,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1198
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 470851,
+        "comparedPixels": 1725120,
+        "differencePercent": 27.293811445000927,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-019/apps/comparison.json"
+    },
+    {
+      "id": "activity-020",
+      "sourceLine": 75,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1198
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 470851,
+        "comparedPixels": 1725120,
+        "differencePercent": 27.293811445000927,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-020/apps/comparison.json"
+    },
+    {
+      "id": "activity-021",
+      "sourceLine": 78,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1198
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 470851,
+        "comparedPixels": 1725120,
+        "differencePercent": 27.293811445000927,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-021/apps/comparison.json"
+    },
+    {
+      "id": "activity-022",
+      "sourceLine": 81,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1198
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 470851,
+        "comparedPixels": 1725120,
+        "differencePercent": 27.293811445000927,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-022/apps/comparison.json"
+    },
+    {
+      "id": "activity-023",
+      "sourceLine": 84,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1198
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 470851,
+        "comparedPixels": 1725120,
+        "differencePercent": 27.293811445000927,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-023/apps/comparison.json"
+    },
+    {
+      "id": "activity-024",
+      "sourceLine": 87,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1198
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 470851,
+        "comparedPixels": 1725120,
+        "differencePercent": 27.293811445000927,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-024/apps/comparison.json"
+    },
+    {
+      "id": "activity-025",
+      "sourceLine": 94,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1198
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 470851,
+        "comparedPixels": 1725120,
+        "differencePercent": 27.293811445000927,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-025/apps/comparison.json"
+    },
+    {
+      "id": "activity-026",
+      "sourceLine": 97,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1198
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 470851,
+        "comparedPixels": 1725120,
+        "differencePercent": 27.293811445000927,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-026/apps/comparison.json"
+    },
+    {
+      "id": "activity-027",
+      "sourceLine": 101,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1594
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 982586,
+        "comparedPixels": 2295360,
+        "differencePercent": 42.807489892653,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-027/apps/comparison.json"
+    },
+    {
+      "id": "activity-028",
+      "sourceLine": 104,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1594
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 988258,
+        "comparedPixels": 2295360,
+        "differencePercent": 43.054597100237,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-028/apps/comparison.json"
+    },
+    {
+      "id": "activity-029",
+      "sourceLine": 108,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": true,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 0,
+        "comparedPixels": 1440000,
+        "differencePercent": 0,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-029/apps/comparison.json"
+    },
+    {
+      "id": "activity-030",
+      "sourceLine": 111,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": true,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 0,
+        "comparedPixels": 1440000,
+        "differencePercent": 0,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-030/apps/comparison.json"
+    },
+    {
+      "id": "activity-031",
+      "sourceLine": 115,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": true,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 0,
+        "comparedPixels": 1440000,
+        "differencePercent": 0,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-031/apps/comparison.json"
+    },
+    {
+      "id": "activity-032",
+      "sourceLine": 118,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": true,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 0,
+        "comparedPixels": 1440000,
+        "differencePercent": 0,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-032/apps/comparison.json"
+    },
+    {
+      "id": "activity-033",
+      "sourceLine": 122,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": true,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 0,
+        "comparedPixels": 1440000,
+        "differencePercent": 0,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-033/apps/comparison.json"
+    },
+    {
+      "id": "activity-034",
+      "sourceLine": 125,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": true,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 0,
+        "comparedPixels": 1440000,
+        "differencePercent": 0,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-034/apps/comparison.json"
+    },
+    {
+      "id": "activity-035",
+      "sourceLine": 128,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": true,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 0,
+        "comparedPixels": 1440000,
+        "differencePercent": 0,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-035/apps/comparison.json"
+    },
+    {
+      "id": "activity-036",
+      "sourceLine": 131,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": true,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 0,
+        "comparedPixels": 1440000,
+        "differencePercent": 0,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-036/apps/comparison.json"
+    },
+    {
+      "id": "activity-037",
+      "sourceLine": 134,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": true,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 0,
+        "comparedPixels": 1440000,
+        "differencePercent": 0,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-037/apps/comparison.json"
+    },
+    {
+      "id": "activity-038",
+      "sourceLine": 140,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": true,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 0,
+        "comparedPixels": 1440000,
+        "differencePercent": 0,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-038/apps/comparison.json"
+    },
+    {
+      "id": "activity-039",
+      "sourceLine": 143,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 143932,
+        "comparedPixels": 1452960,
+        "differencePercent": 9.906122673714348,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-039/apps/comparison.json"
+    },
+    {
+      "id": "activity-040",
+      "sourceLine": 146,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2119487,
+        "comparedPixels": 3385440,
+        "differencePercent": 62.60595373127274,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-040/apps/comparison.json"
+    },
+    {
+      "id": "activity-041",
+      "sourceLine": 149,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 143932,
+        "comparedPixels": 1452960,
+        "differencePercent": 9.906122673714348,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-041/apps/comparison.json"
+    },
+    {
+      "id": "activity-042",
+      "sourceLine": 152,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 143932,
+        "comparedPixels": 1452960,
+        "differencePercent": 9.906122673714348,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-042/apps/comparison.json"
+    },
+    {
+      "id": "activity-043",
+      "sourceLine": 155,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 143932,
+        "comparedPixels": 1452960,
+        "differencePercent": 9.906122673714348,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-043/apps/comparison.json"
+    },
+    {
+      "id": "activity-044",
+      "sourceLine": 158,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 143932,
+        "comparedPixels": 1452960,
+        "differencePercent": 9.906122673714348,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-044/apps/comparison.json"
+    },
+    {
+      "id": "activity-045",
+      "sourceLine": 161,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 143932,
+        "comparedPixels": 1452960,
+        "differencePercent": 9.906122673714348,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-045/apps/comparison.json"
+    },
+    {
+      "id": "activity-046",
+      "sourceLine": 165,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 101764,
+        "comparedPixels": 1452960,
+        "differencePercent": 7.003909261094593,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-046/apps/comparison.json"
+    },
+    {
+      "id": "activity-047",
+      "sourceLine": 168,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2087164,
+        "comparedPixels": 3385440,
+        "differencePercent": 61.651188619499976,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-047/apps/comparison.json"
+    },
+    {
+      "id": "activity-048",
+      "sourceLine": 171,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 101764,
+        "comparedPixels": 1452960,
+        "differencePercent": 7.003909261094593,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-048/apps/comparison.json"
+    },
+    {
+      "id": "activity-049",
+      "sourceLine": 174,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 101764,
+        "comparedPixels": 1452960,
+        "differencePercent": 7.003909261094593,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-049/apps/comparison.json"
+    },
+    {
+      "id": "activity-050",
+      "sourceLine": 177,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 101764,
+        "comparedPixels": 1452960,
+        "differencePercent": 7.003909261094593,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-050/apps/comparison.json"
+    },
+    {
+      "id": "activity-051",
+      "sourceLine": 181,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 113145,
+        "comparedPixels": 1452960,
+        "differencePercent": 7.787206805417905,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-051/apps/comparison.json"
+    },
+    {
+      "id": "activity-052",
+      "sourceLine": 184,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2092137,
+        "comparedPixels": 3385440,
+        "differencePercent": 61.79808237629378,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-052/apps/comparison.json"
+    },
+    {
+      "id": "activity-053",
+      "sourceLine": 187,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 113145,
+        "comparedPixels": 1452960,
+        "differencePercent": 7.787206805417905,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-053/apps/comparison.json"
+    },
+    {
+      "id": "activity-054",
+      "sourceLine": 190,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 113145,
+        "comparedPixels": 1452960,
+        "differencePercent": 7.787206805417905,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-054/apps/comparison.json"
+    },
+    {
+      "id": "activity-055",
+      "sourceLine": 193,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 113145,
+        "comparedPixels": 1452960,
+        "differencePercent": 7.787206805417905,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-055/apps/comparison.json"
+    },
+    {
+      "id": "activity-056",
+      "sourceLine": 196,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 113145,
+        "comparedPixels": 1452960,
+        "differencePercent": 7.787206805417905,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-056/apps/comparison.json"
+    },
+    {
+      "id": "activity-057",
+      "sourceLine": 199,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 113145,
+        "comparedPixels": 1452960,
+        "differencePercent": 7.787206805417905,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-057/apps/comparison.json"
+    },
+    {
+      "id": "activity-058",
+      "sourceLine": 203,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1464
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 834376,
+        "comparedPixels": 2108160,
+        "differencePercent": 39.57840012143291,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-058/apps/comparison.json"
+    },
+    {
+      "id": "activity-059",
+      "sourceLine": 206,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2114148,
+        "comparedPixels": 3385440,
+        "differencePercent": 62.448248972068626,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-059/apps/comparison.json"
+    },
+    {
+      "id": "activity-060",
+      "sourceLine": 209,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1464
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 834376,
+        "comparedPixels": 2108160,
+        "differencePercent": 39.57840012143291,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-060/apps/comparison.json"
+    },
+    {
+      "id": "activity-061",
+      "sourceLine": 212,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1464
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 834376,
+        "comparedPixels": 2108160,
+        "differencePercent": 39.57840012143291,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-061/apps/comparison.json"
+    },
+    {
+      "id": "activity-062",
+      "sourceLine": 215,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1464
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 834376,
+        "comparedPixels": 2108160,
+        "differencePercent": 39.57840012143291,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-062/apps/comparison.json"
+    },
+    {
+      "id": "activity-063",
+      "sourceLine": 219,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1464
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 834376,
+        "comparedPixels": 2108160,
+        "differencePercent": 39.57840012143291,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-063/apps/comparison.json"
+    },
+    {
+      "id": "activity-064",
+      "sourceLine": 222,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1464
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 834376,
+        "comparedPixels": 2108160,
+        "differencePercent": 39.57840012143291,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-064/apps/comparison.json"
+    },
+    {
+      "id": "activity-065",
+      "sourceLine": 225,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1464
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 834376,
+        "comparedPixels": 2108160,
+        "differencePercent": 39.57840012143291,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-065/apps/comparison.json"
+    },
+    {
+      "id": "activity-066",
+      "sourceLine": 228,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1464
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 834376,
+        "comparedPixels": 2108160,
+        "differencePercent": 39.57840012143291,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-066/apps/comparison.json"
+    },
+    {
+      "id": "activity-067",
+      "sourceLine": 231,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": true,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 0,
+        "comparedPixels": 1440000,
+        "differencePercent": 0,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-067/apps/comparison.json"
+    },
+    {
+      "id": "activity-068",
+      "sourceLine": 234,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2036272,
+        "comparedPixels": 3385440,
+        "differencePercent": 60.14792759582211,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-068/apps/comparison.json"
+    },
+    {
+      "id": "activity-069",
+      "sourceLine": 237,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2036272,
+        "comparedPixels": 3385440,
+        "differencePercent": 60.14792759582211,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-069/apps/comparison.json"
+    },
+    {
+      "id": "activity-070",
+      "sourceLine": 240,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2036272,
+        "comparedPixels": 3385440,
+        "differencePercent": 60.14792759582211,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-070/apps/comparison.json"
+    },
+    {
+      "id": "activity-071",
+      "sourceLine": 243,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2036272,
+        "comparedPixels": 3385440,
+        "differencePercent": 60.14792759582211,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-071/apps/comparison.json"
+    },
+    {
+      "id": "activity-072",
+      "sourceLine": 246,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2036272,
+        "comparedPixels": 3385440,
+        "differencePercent": 60.14792759582211,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-072/apps/comparison.json"
+    },
+    {
+      "id": "activity-073",
+      "sourceLine": 250,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 101764,
+        "comparedPixels": 1452960,
+        "differencePercent": 7.003909261094593,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-073/apps/comparison.json"
+    },
+    {
+      "id": "activity-074",
+      "sourceLine": 253,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 101764,
+        "comparedPixels": 1452960,
+        "differencePercent": 7.003909261094593,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-074/apps/comparison.json"
+    },
+    {
+      "id": "activity-075",
+      "sourceLine": 256,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 101764,
+        "comparedPixels": 1452960,
+        "differencePercent": 7.003909261094593,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-075/apps/comparison.json"
+    },
+    {
+      "id": "activity-076",
+      "sourceLine": 259,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1182
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 438105,
+        "comparedPixels": 1702080,
+        "differencePercent": 25.739389452904682,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-076/apps/comparison.json"
+    },
+    {
+      "id": "activity-077",
+      "sourceLine": 262,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2123890,
+        "comparedPixels": 3385440,
+        "differencePercent": 62.736010681034074,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-077/apps/comparison.json"
+    },
+    {
+      "id": "activity-078",
+      "sourceLine": 265,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2123890,
+        "comparedPixels": 3385440,
+        "differencePercent": 62.736010681034074,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-078/apps/comparison.json"
+    },
+    {
+      "id": "activity-079",
+      "sourceLine": 269,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2123890,
+        "comparedPixels": 3385440,
+        "differencePercent": 62.736010681034074,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-079/apps/comparison.json"
+    },
+    {
+      "id": "activity-080",
+      "sourceLine": 272,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2123890,
+        "comparedPixels": 3385440,
+        "differencePercent": 62.736010681034074,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-080/apps/comparison.json"
+    },
+    {
+      "id": "activity-081",
+      "sourceLine": 275,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2123890,
+        "comparedPixels": 3385440,
+        "differencePercent": 62.736010681034074,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-081/apps/comparison.json"
+    },
+    {
+      "id": "activity-082",
+      "sourceLine": 279,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2123890,
+        "comparedPixels": 3385440,
+        "differencePercent": 62.736010681034074,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-082/apps/comparison.json"
+    },
+    {
+      "id": "activity-083",
+      "sourceLine": 282,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2123890,
+        "comparedPixels": 3385440,
+        "differencePercent": 62.736010681034074,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-083/apps/comparison.json"
+    },
+    {
+      "id": "activity-084",
+      "sourceLine": 285,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2123890,
+        "comparedPixels": 3385440,
+        "differencePercent": 62.736010681034074,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-084/apps/comparison.json"
+    },
+    {
+      "id": "activity-085",
+      "sourceLine": 292,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1987
+          },
+          {
+            "width": 1440,
+            "height": 1664
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 697774,
+        "comparedPixels": 2861280,
+        "differencePercent": 24.386777945534867,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-085/apps/comparison.json"
+    },
+    {
+      "id": "activity-086",
+      "sourceLine": 295,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1987
+          },
+          {
+            "width": 1440,
+            "height": 1664
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 697658,
+        "comparedPixels": 2861280,
+        "differencePercent": 24.382723815914556,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-086/apps/comparison.json"
+    },
+    {
+      "id": "activity-087",
+      "sourceLine": 298,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1987
+          },
+          {
+            "width": 1440,
+            "height": 1664
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 697774,
+        "comparedPixels": 2861280,
+        "differencePercent": 24.386777945534867,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-087/apps/comparison.json"
+    },
+    {
+      "id": "activity-088",
+      "sourceLine": 301,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1987
+          },
+          {
+            "width": 1440,
+            "height": 1664
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 697774,
+        "comparedPixels": 2861280,
+        "differencePercent": 24.386777945534867,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-088/apps/comparison.json"
+    },
+    {
+      "id": "activity-089",
+      "sourceLine": 304,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1987
+          },
+          {
+            "width": 1440,
+            "height": 1664
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 697774,
+        "comparedPixels": 2861280,
+        "differencePercent": 24.386777945534867,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-089/apps/comparison.json"
+    },
+    {
+      "id": "activity-090",
+      "sourceLine": 307,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1987
+          },
+          {
+            "width": 1440,
+            "height": 1664
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 697774,
+        "comparedPixels": 2861280,
+        "differencePercent": 24.386777945534867,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-090/apps/comparison.json"
+    },
+    {
+      "id": "activity-091",
+      "sourceLine": 310,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1090
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 302715,
+        "comparedPixels": 1569600,
+        "differencePercent": 19.28612385321101,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-091/apps/comparison.json"
+    },
+    {
+      "id": "activity-092",
+      "sourceLine": 313,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1090
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 302715,
+        "comparedPixels": 1569600,
+        "differencePercent": 19.28612385321101,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-092/apps/comparison.json"
+    },
+    {
+      "id": "activity-093",
+      "sourceLine": 316,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1090
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 302715,
+        "comparedPixels": 1569600,
+        "differencePercent": 19.28612385321101,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-093/apps/comparison.json"
+    },
+    {
+      "id": "activity-094",
+      "sourceLine": 319,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1090
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 302715,
+        "comparedPixels": 1569600,
+        "differencePercent": 19.28612385321101,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-094/apps/comparison.json"
+    },
+    {
+      "id": "activity-095",
+      "sourceLine": 323,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1090
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 302715,
+        "comparedPixels": 1569600,
+        "differencePercent": 19.28612385321101,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-095/apps/comparison.json"
+    },
+    {
+      "id": "activity-096",
+      "sourceLine": 326,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": true,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 0,
+        "comparedPixels": 1440000,
+        "differencePercent": 0,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-096/apps/comparison.json"
+    },
+    {
+      "id": "activity-097",
+      "sourceLine": 329,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2036871,
+        "comparedPixels": 3385440,
+        "differencePercent": 60.16562101233518,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-097/apps/comparison.json"
+    },
+    {
+      "id": "activity-098",
+      "sourceLine": 332,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2036871,
+        "comparedPixels": 3385440,
+        "differencePercent": 60.16562101233518,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-098/apps/comparison.json"
+    },
+    {
+      "id": "activity-099",
+      "sourceLine": 335,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2036871,
+        "comparedPixels": 3385440,
+        "differencePercent": 60.16562101233518,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-099/apps/comparison.json"
+    },
+    {
+      "id": "activity-100",
+      "sourceLine": 338,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2036871,
+        "comparedPixels": 3385440,
+        "differencePercent": 60.16562101233518,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-100/apps/comparison.json"
+    },
+    {
+      "id": "activity-101",
+      "sourceLine": 341,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2036871,
+        "comparedPixels": 3385440,
+        "differencePercent": 60.16562101233518,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-101/apps/comparison.json"
+    },
+    {
+      "id": "activity-102",
+      "sourceLine": 344,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2036871,
+        "comparedPixels": 3385440,
+        "differencePercent": 60.16562101233518,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-102/apps/comparison.json"
+    },
+    {
+      "id": "activity-103",
+      "sourceLine": 348,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 114633,
+        "comparedPixels": 1452960,
+        "differencePercent": 7.889618434093162,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-103/apps/comparison.json"
+    },
+    {
+      "id": "activity-104",
+      "sourceLine": 351,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2098050,
+        "comparedPixels": 3385440,
+        "differencePercent": 61.972742095562175,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-104/apps/comparison.json"
+    },
+    {
+      "id": "activity-105",
+      "sourceLine": 354,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 114633,
+        "comparedPixels": 1452960,
+        "differencePercent": 7.889618434093162,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-105/apps/comparison.json"
+    },
+    {
+      "id": "activity-106",
+      "sourceLine": 357,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 114633,
+        "comparedPixels": 1452960,
+        "differencePercent": 7.889618434093162,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-106/apps/comparison.json"
+    },
+    {
+      "id": "activity-107",
+      "sourceLine": 360,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 114633,
+        "comparedPixels": 1452960,
+        "differencePercent": 7.889618434093162,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-107/apps/comparison.json"
+    },
+    {
+      "id": "activity-108",
+      "sourceLine": 363,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 114633,
+        "comparedPixels": 1452960,
+        "differencePercent": 7.889618434093162,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-108/apps/comparison.json"
+    },
+    {
+      "id": "activity-109",
+      "sourceLine": 367,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 114970,
+        "comparedPixels": 1452960,
+        "differencePercent": 7.91281246558749,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-109/apps/comparison.json"
+    },
+    {
+      "id": "activity-110",
+      "sourceLine": 370,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2098954,
+        "comparedPixels": 3385440,
+        "differencePercent": 61.99944468075051,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-110/apps/comparison.json"
+    },
+    {
+      "id": "activity-111",
+      "sourceLine": 373,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 114970,
+        "comparedPixels": 1452960,
+        "differencePercent": 7.91281246558749,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-111/apps/comparison.json"
+    },
+    {
+      "id": "activity-112",
+      "sourceLine": 376,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 114970,
+        "comparedPixels": 1452960,
+        "differencePercent": 7.91281246558749,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-112/apps/comparison.json"
+    },
+    {
+      "id": "activity-113",
+      "sourceLine": 379,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 114970,
+        "comparedPixels": 1452960,
+        "differencePercent": 7.91281246558749,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-113/apps/comparison.json"
+    },
+    {
+      "id": "activity-114",
+      "sourceLine": 382,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 114970,
+        "comparedPixels": 1452960,
+        "differencePercent": 7.91281246558749,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-114/apps/comparison.json"
+    },
+    {
+      "id": "activity-115",
+      "sourceLine": 385,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 114970,
+        "comparedPixels": 1452960,
+        "differencePercent": 7.91281246558749,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-115/apps/comparison.json"
+    },
+    {
+      "id": "activity-116",
+      "sourceLine": 388,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 114970,
+        "comparedPixels": 1452960,
+        "differencePercent": 7.91281246558749,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-116/apps/comparison.json"
+    },
+    {
+      "id": "activity-117",
+      "sourceLine": 391,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 114970,
+        "comparedPixels": 1452960,
+        "differencePercent": 7.91281246558749,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-117/apps/comparison.json"
+    },
+    {
+      "id": "activity-118",
+      "sourceLine": 394,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 114970,
+        "comparedPixels": 1452960,
+        "differencePercent": 7.91281246558749,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-118/apps/comparison.json"
+    },
+    {
+      "id": "activity-119",
+      "sourceLine": 398,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1072
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 278418,
+        "comparedPixels": 1543680,
+        "differencePercent": 18.035991915422887,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-119/apps/comparison.json"
+    },
+    {
+      "id": "activity-120",
+      "sourceLine": 401,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1072
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 278341,
+        "comparedPixels": 1543680,
+        "differencePercent": 18.031003834991708,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-120/apps/comparison.json"
+    },
+    {
+      "id": "activity-121",
+      "sourceLine": 404,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1072
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 278418,
+        "comparedPixels": 1543680,
+        "differencePercent": 18.035991915422887,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-121/apps/comparison.json"
+    },
+    {
+      "id": "activity-122",
+      "sourceLine": 407,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1072
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 278418,
+        "comparedPixels": 1543680,
+        "differencePercent": 18.035991915422887,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-122/apps/comparison.json"
+    },
+    {
+      "id": "activity-123",
+      "sourceLine": 410,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1072
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 278418,
+        "comparedPixels": 1543680,
+        "differencePercent": 18.035991915422887,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-123/apps/comparison.json"
+    },
+    {
+      "id": "activity-124",
+      "sourceLine": 413,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1072
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 278418,
+        "comparedPixels": 1543680,
+        "differencePercent": 18.035991915422887,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-124/apps/comparison.json"
+    },
+    {
+      "id": "activity-125",
+      "sourceLine": 416,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1072
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 278418,
+        "comparedPixels": 1543680,
+        "differencePercent": 18.035991915422887,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-125/apps/comparison.json"
+    },
+    {
+      "id": "activity-126",
+      "sourceLine": 419,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1072
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 278418,
+        "comparedPixels": 1543680,
+        "differencePercent": 18.035991915422887,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-126/apps/comparison.json"
+    },
+    {
+      "id": "activity-127",
+      "sourceLine": 422,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1072
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 278418,
+        "comparedPixels": 1543680,
+        "differencePercent": 18.035991915422887,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-127/apps/comparison.json"
+    },
+    {
+      "id": "activity-128",
+      "sourceLine": 425,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1072
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 278418,
+        "comparedPixels": 1543680,
+        "differencePercent": 18.035991915422887,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-128/apps/comparison.json"
+    },
+    {
+      "id": "activity-129",
+      "sourceLine": 429,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 135058,
+        "comparedPixels": 1452960,
+        "differencePercent": 9.295369452703447,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-129/apps/comparison.json"
+    },
+    {
+      "id": "activity-130",
+      "sourceLine": 432,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2112559,
+        "comparedPixels": 3385440,
+        "differencePercent": 62.40131268018337,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-130/apps/comparison.json"
+    },
+    {
+      "id": "activity-131",
+      "sourceLine": 435,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 135058,
+        "comparedPixels": 1452960,
+        "differencePercent": 9.295369452703447,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-131/apps/comparison.json"
+    },
+    {
+      "id": "activity-132",
+      "sourceLine": 438,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 135058,
+        "comparedPixels": 1452960,
+        "differencePercent": 9.295369452703447,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-132/apps/comparison.json"
+    },
+    {
+      "id": "activity-133",
+      "sourceLine": 441,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 135058,
+        "comparedPixels": 1452960,
+        "differencePercent": 9.295369452703447,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-133/apps/comparison.json"
+    },
+    {
+      "id": "activity-134",
+      "sourceLine": 444,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 135058,
+        "comparedPixels": 1452960,
+        "differencePercent": 9.295369452703447,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-134/apps/comparison.json"
+    },
+    {
+      "id": "activity-135",
+      "sourceLine": 447,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 135058,
+        "comparedPixels": 1452960,
+        "differencePercent": 9.295369452703447,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-135/apps/comparison.json"
+    },
+    {
+      "id": "activity-136",
+      "sourceLine": 450,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 135058,
+        "comparedPixels": 1452960,
+        "differencePercent": 9.295369452703447,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-136/apps/comparison.json"
+    },
+    {
+      "id": "activity-137",
+      "sourceLine": 453,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 135058,
+        "comparedPixels": 1452960,
+        "differencePercent": 9.295369452703447,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-137/apps/comparison.json"
+    },
+    {
+      "id": "activity-138",
+      "sourceLine": 456,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 135058,
+        "comparedPixels": 1452960,
+        "differencePercent": 9.295369452703447,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-138/apps/comparison.json"
+    },
+    {
+      "id": "activity-139",
+      "sourceLine": 459,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1009
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 135058,
+        "comparedPixels": 1452960,
+        "differencePercent": 9.295369452703447,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-139/apps/comparison.json"
+    },
+    {
+      "id": "activity-140",
+      "sourceLine": 462,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": true,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 0,
+        "comparedPixels": 1440000,
+        "differencePercent": 0,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-140/apps/comparison.json"
+    },
+    {
+      "id": "activity-141",
+      "sourceLine": 465,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2037586,
+        "comparedPixels": 3385440,
+        "differencePercent": 60.18674086677064,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-141/apps/comparison.json"
+    },
+    {
+      "id": "activity-142",
+      "sourceLine": 468,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2037586,
+        "comparedPixels": 3385440,
+        "differencePercent": 60.18674086677064,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-142/apps/comparison.json"
+    },
+    {
+      "id": "activity-143",
+      "sourceLine": 471,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2037637,
+        "comparedPixels": 3385440,
+        "differencePercent": 60.18824731792618,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-143/apps/comparison.json"
+    },
+    {
+      "id": "activity-144",
+      "sourceLine": 474,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2037586,
+        "comparedPixels": 3385440,
+        "differencePercent": 60.18674086677064,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-144/apps/comparison.json"
+    },
+    {
+      "id": "activity-145",
+      "sourceLine": 477,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2037586,
+        "comparedPixels": 3385440,
+        "differencePercent": 60.18674086677064,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-145/apps/comparison.json"
+    },
+    {
+      "id": "activity-146",
+      "sourceLine": 480,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2037586,
+        "comparedPixels": 3385440,
+        "differencePercent": 60.18674086677064,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-146/apps/comparison.json"
+    },
+    {
+      "id": "activity-147",
+      "sourceLine": 483,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2037586,
+        "comparedPixels": 3385440,
+        "differencePercent": 60.18674086677064,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-147/apps/comparison.json"
+    },
+    {
+      "id": "activity-148",
+      "sourceLine": 487,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2037586,
+        "comparedPixels": 3385440,
+        "differencePercent": 60.18674086677064,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-148/apps/comparison.json"
+    },
+    {
+      "id": "activity-149",
+      "sourceLine": 490,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2037586,
+        "comparedPixels": 3385440,
+        "differencePercent": 60.18674086677064,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-149/apps/comparison.json"
+    },
+    {
+      "id": "activity-150",
+      "sourceLine": 493,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2037586,
+        "comparedPixels": 3385440,
+        "differencePercent": 60.18674086677064,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-150/apps/comparison.json"
+    },
+    {
+      "id": "activity-151",
+      "sourceLine": 496,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2037586,
+        "comparedPixels": 3385440,
+        "differencePercent": 60.18674086677064,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-151/apps/comparison.json"
+    },
+    {
+      "id": "activity-152",
+      "sourceLine": 499,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": true,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 0,
+        "comparedPixels": 1440000,
+        "differencePercent": 0,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-152/apps/comparison.json"
+    },
+    {
+      "id": "activity-153",
+      "sourceLine": 502,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2036762,
+        "comparedPixels": 3385440,
+        "differencePercent": 60.162401342218445,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-153/apps/comparison.json"
+    },
+    {
+      "id": "activity-154",
+      "sourceLine": 505,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2036762,
+        "comparedPixels": 3385440,
+        "differencePercent": 60.162401342218445,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-154/apps/comparison.json"
+    },
+    {
+      "id": "activity-155",
+      "sourceLine": 508,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2036762,
+        "comparedPixels": 3385440,
+        "differencePercent": 60.162401342218445,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-155/apps/comparison.json"
+    },
+    {
+      "id": "activity-156",
+      "sourceLine": 511,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2036762,
+        "comparedPixels": 3385440,
+        "differencePercent": 60.162401342218445,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-156/apps/comparison.json"
+    },
+    {
+      "id": "activity-157",
+      "sourceLine": 514,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2036762,
+        "comparedPixels": 3385440,
+        "differencePercent": 60.162401342218445,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-157/apps/comparison.json"
+    },
+    {
+      "id": "activity-158",
+      "sourceLine": 518,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2036762,
+        "comparedPixels": 3385440,
+        "differencePercent": 60.162401342218445,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-158/apps/comparison.json"
+    },
+    {
+      "id": "activity-159",
+      "sourceLine": 521,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2036762,
+        "comparedPixels": 3385440,
+        "differencePercent": 60.162401342218445,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-159/apps/comparison.json"
+    },
+    {
+      "id": "activity-160",
+      "sourceLine": 524,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2036762,
+        "comparedPixels": 3385440,
+        "differencePercent": 60.162401342218445,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-160/apps/comparison.json"
+    },
+    {
+      "id": "activity-161",
+      "sourceLine": 529,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1182
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 417662,
+        "comparedPixels": 1702080,
+        "differencePercent": 24.53832957322805,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-161/apps/comparison.json"
+    },
+    {
+      "id": "activity-162",
+      "sourceLine": 532,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1182
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 417662,
+        "comparedPixels": 1702080,
+        "differencePercent": 24.53832957322805,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-162/apps/comparison.json"
+    },
+    {
+      "id": "activity-163",
+      "sourceLine": 535,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2123890,
+        "comparedPixels": 3385440,
+        "differencePercent": 62.736010681034074,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-163/apps/comparison.json"
+    },
+    {
+      "id": "activity-164",
+      "sourceLine": 538,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2123890,
+        "comparedPixels": 3385440,
+        "differencePercent": 62.736010681034074,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-164/apps/comparison.json"
+    },
+    {
+      "id": "activity-165",
+      "sourceLine": 541,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": true,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 0,
+        "comparedPixels": 1440000,
+        "differencePercent": 0,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-165/apps/comparison.json"
+    },
+    {
+      "id": "activity-166",
+      "sourceLine": 544,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2037965,
+        "comparedPixels": 3385440,
+        "differencePercent": 60.19793586653434,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-166/apps/comparison.json"
+    },
+    {
+      "id": "activity-167",
+      "sourceLine": 547,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2037965,
+        "comparedPixels": 3385440,
+        "differencePercent": 60.19793586653434,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-167/apps/comparison.json"
+    },
+    {
+      "id": "activity-168",
+      "sourceLine": 550,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2037965,
+        "comparedPixels": 3385440,
+        "differencePercent": 60.19793586653434,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-168/apps/comparison.json"
+    },
+    {
+      "id": "activity-169",
+      "sourceLine": 553,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2037965,
+        "comparedPixels": 3385440,
+        "differencePercent": 60.19793586653434,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-169/apps/comparison.json"
+    },
+    {
+      "id": "activity-170",
+      "sourceLine": 556,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2037965,
+        "comparedPixels": 3385440,
+        "differencePercent": 60.19793586653434,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-170/apps/comparison.json"
+    },
+    {
+      "id": "activity-171",
+      "sourceLine": 559,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2037965,
+        "comparedPixels": 3385440,
+        "differencePercent": 60.19793586653434,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-171/apps/comparison.json"
+    },
+    {
+      "id": "activity-172",
+      "sourceLine": 562,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2037965,
+        "comparedPixels": 3385440,
+        "differencePercent": 60.19793586653434,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-172/apps/comparison.json"
+    },
+    {
+      "id": "activity-173",
+      "sourceLine": 565,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2037965,
+        "comparedPixels": 3385440,
+        "differencePercent": 60.19793586653434,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-173/apps/comparison.json"
+    },
+    {
+      "id": "activity-174",
+      "sourceLine": 572,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 3776
+          },
+          {
+            "width": 1440,
+            "height": 2148
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2657704,
+        "comparedPixels": 5437440,
+        "differencePercent": 48.877854284369114,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-174/apps/comparison.json"
+    },
+    {
+      "id": "activity-175",
+      "sourceLine": 575,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 3776
+          },
+          {
+            "width": 1440,
+            "height": 2148
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2657704,
+        "comparedPixels": 5437440,
+        "differencePercent": 48.877854284369114,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-175/apps/comparison.json"
+    },
+    {
+      "id": "activity-176",
+      "sourceLine": 578,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1198
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 470851,
+        "comparedPixels": 1725120,
+        "differencePercent": 27.293811445000927,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-176/apps/comparison.json"
+    },
+    {
+      "id": "activity-177",
+      "sourceLine": 581,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1198
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 470851,
+        "comparedPixels": 1725120,
+        "differencePercent": 27.293811445000927,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-177/apps/comparison.json"
+    },
+    {
+      "id": "activity-178",
+      "sourceLine": 584,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1198
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 470851,
+        "comparedPixels": 1725120,
+        "differencePercent": 27.293811445000927,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-178/apps/comparison.json"
+    },
+    {
+      "id": "activity-179",
+      "sourceLine": 587,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1198
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 470851,
+        "comparedPixels": 1725120,
+        "differencePercent": 27.293811445000927,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-179/apps/comparison.json"
+    },
+    {
+      "id": "activity-180",
+      "sourceLine": 590,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1198
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 470851,
+        "comparedPixels": 1725120,
+        "differencePercent": 27.293811445000927,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-180/apps/comparison.json"
+    },
+    {
+      "id": "activity-181",
+      "sourceLine": 593,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 2148
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 652162,
+        "comparedPixels": 3385440,
+        "differencePercent": 19.26372938229595,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-181/apps/comparison.json"
+    },
+    {
+      "id": "activity-182",
+      "sourceLine": 596,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 3776
+          },
+          {
+            "width": 1440,
+            "height": 2148
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2657704,
+        "comparedPixels": 5437440,
+        "differencePercent": 48.877854284369114,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-182/apps/comparison.json"
+    },
+    {
+      "id": "activity-183",
+      "sourceLine": 599,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 3776
+          },
+          {
+            "width": 1440,
+            "height": 2148
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2657704,
+        "comparedPixels": 5437440,
+        "differencePercent": 48.877854284369114,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-183/apps/comparison.json"
+    },
+    {
+      "id": "activity-184",
+      "sourceLine": 602,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 3776
+          },
+          {
+            "width": 1440,
+            "height": 2148
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2657704,
+        "comparedPixels": 5437440,
+        "differencePercent": 48.877854284369114,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-184/apps/comparison.json"
+    },
+    {
+      "id": "activity-185",
+      "sourceLine": 605,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 3776
+          },
+          {
+            "width": 1440,
+            "height": 2148
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2657704,
+        "comparedPixels": 5437440,
+        "differencePercent": 48.877854284369114,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-185/apps/comparison.json"
+    },
+    {
+      "id": "activity-186",
+      "sourceLine": 608,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 2351
+          },
+          {
+            "width": 1440,
+            "height": 2148
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 652039,
+        "comparedPixels": 3385440,
+        "differencePercent": 19.26009617656789,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-186/apps/comparison.json"
+    },
+    {
+      "id": "activity-187",
+      "sourceLine": 611,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 3776
+          },
+          {
+            "width": 1440,
+            "height": 2148
+          }
+        ],
+        "dimensionsEqual": false,
+        "differentPixels": 2657704,
+        "comparedPixels": 5437440,
+        "differencePercent": 48.877854284369114,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/initial-setup-and-basics/activity-187/apps/comparison.json"
+    }
+  ],
+  "note": "Evidence sweep only; no complete business-process execution is claimed."
+}

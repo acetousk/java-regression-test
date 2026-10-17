@@ -1,0 +1,36 @@
+Application 
+Marble ERP 
+Parties 
+Find Party
+ 0  0  0  0
+ Organization
+ New Person  New Person Customer  New Employee  New Organization  New Sales Account (Organization Customer)  New Sales Contact Search String Reference
+Any Field
+Search
+ Find Options
+CSV
+XLS
+
+
+ID
+	
+Name
+	
+Username
+	
+Role
+	
+Class
+	
+Hidden
+	
+Dups
+	
+Matches
+	
+Current Search String
+No Current Search
+
+Built on Moqui Framework 0.1.0
+
+Site Map

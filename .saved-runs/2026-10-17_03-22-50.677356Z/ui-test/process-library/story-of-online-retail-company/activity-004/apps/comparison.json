@@ -1,0 +1,91 @@
+{
+  "id": "activity-004",
+  "sourceLine": 27,
+  "headings": [
+    "Story of Online Retail Company"
+  ],
+  "text": "If desired during checkout or for other reasons, [Customer Creates and Edits Account](https://moqui.org/docs/mantle/Business%20Process%20Library/Customer%20Creates%20and%20Edits%20Account). \nAs desired [Customer Reviews Order History and Status](https://moqui.org/docs/mantle/Business%20Process%20Library/Customer%20Reviews%20Order%20History%20and%20Status).",
+  "route": "marble/dashboard",
+  "dialog": null,
+  "mapping": "entry-candidate",
+  "limitation": "Read-only screen/dialog evidence only. Prerequisite creation, field input, submissions, integrations and full story transitions are not executed.",
+  "source": "docs/business-processes/process-library/story-of-online-retail-company.md",
+  "mode": "apps",
+  "coverage": "blocked",
+  "captures": [
+    {
+      "engine": "java",
+      "mode": "apps",
+      "route": "marble/dashboard",
+      "dialog": null,
+      "authenticated": true,
+      "errors": [
+        "moqui is not defined",
+        "Cannot read properties of undefined (reading 'registerListener')",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "locator.click: Timeout 5000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('a[href]').filter({ visible: true }).nth(1)\u001b[22m\n\u001b[2m    - locator resolved to <a class=\"navbar-text\" href=\"http://127.0.0.1:18091/apps/marble/dashboard\">Dashboard</a>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <a href=\"#\" data-toggle=\"dropdown\" class=\"dropdown-toggle\">…</a> from <li id=\"header-menu\" class=\"dropdown\">…</li> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <a href=\"#\" data-toggle=\"dropdown\" class=\"dropdown-toggle\">…</a> from <li id=\"header-menu\" class=\"dropdown\">…</li> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    10 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <a href=\"#\" data-toggle=\"dropdown\" class=\"dropdown-toggle\">…</a> from <li id=\"header-menu\" class=\"dropdown\">…</li> subtree intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n"
+      ],
+      "failedRequests": [
+        {
+          "url": "http://127.0.0.1:18091/apps/marble/dashboard",
+          "error": "net::ERR_ABORTED"
+        }
+      ],
+      "httpErrors": [],
+      "consoleErrors": [
+        "Refused to apply style from 'http://127.0.0.1:18091/apps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not a supported stylesheet MIME type, and strict MIME checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/apps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/apps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/apps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled."
+      ],
+      "status": "blocked",
+      "reused": true,
+      "requestedURL": "http://127.0.0.1:18091/apps/marble/dashboard",
+      "navigation": "dashboard-link",
+      "finalURL": "http://127.0.0.1:18091/apps/marble/dashboard",
+      "directory": ".saved-runs/2026-10-17_03-22-50.677356Z/ui-test/_captures/17f9ddcafd7bab7b7972bc12"
+    },
+    {
+      "engine": "rust",
+      "mode": "apps",
+      "route": "marble/dashboard",
+      "dialog": null,
+      "authenticated": true,
+      "errors": [],
+      "failedRequests": [],
+      "httpErrors": [],
+      "consoleErrors": [],
+      "status": "captured",
+      "reused": true,
+      "requestedURL": "http://127.0.0.1:18092/apps/marble/dashboard",
+      "navigation": "dashboard-link",
+      "finalURL": "http://127.0.0.1:18092/apps/marble/dashboard",
+      "directory": ".saved-runs/2026-10-17_03-22-50.677356Z/ui-test/_captures/5f6df2b4fa3314c7cd7f7d85"
+    }
+  ],
+  "comparison": {
+    "status": "diagnostic-only",
+    "equal": false,
+    "dimensions": [
+      {
+        "width": 1440,
+        "height": 2351
+      },
+      {
+        "width": 1440,
+        "height": 1000
+      }
+    ],
+    "dimensionsEqual": false,
+    "differentPixels": 2092667,
+    "comparedPixels": 3385440,
+    "differencePercent": 61.813737653008175,
+    "threshold": 0.1
+  }
+}

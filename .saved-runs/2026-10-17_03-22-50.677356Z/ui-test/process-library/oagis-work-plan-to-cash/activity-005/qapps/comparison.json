@@ -1,0 +1,18 @@
+{
+  "id": "activity-005",
+  "sourceLine": 26,
+  "headings": [
+    "OAGIS Work Plan to Cash",
+    "OAGIS Scenarios"
+  ],
+  "text": "* 11 - Human Resources to Manufacturing",
+  "route": null,
+  "dialog": null,
+  "mapping": "entry-candidate",
+  "limitation": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required.",
+  "source": "docs/business-processes/process-library/oagis-work-plan-to-cash.md",
+  "mode": "qapps",
+  "coverage": "blocked",
+  "captures": [],
+  "reason": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required."
+}

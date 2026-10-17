@@ -1,0 +1,118 @@
+Application 
+Marble ERP 
+Parties 
+Find Party
+ 0  0  0  0
+ Organization
+ New Person  New Person Customer  New Employee  New Organization  New Sales Account (Organization Customer)  New Sales Contact Search String Reference
+Any Field
+Search
+ Find Options
+Page 1 of 1 (1 - 5 of 5)
+CSV
+XLS
+
+Role: Internal Organization 
+
+ID
+	
+Name
+	
+Username
+	
+Role
+	
+Class
+	
+Hidden
+	
+Dups
+	
+Matches
+	
+
+
+ZICORP
+	
+Ziziwork Industries
+	
+	
+Internal Organization
+	
+	
+N
+	
+	
+Role Type ID: "OrgInternal"
+	
+Sales OrdersPurchase Orders
+
+
+ZIHR
+	
+Ziziwork Human Resources
+	
+	
+Internal Organization
+	
+	
+N
+	
+	
+Role Type ID: "OrgInternal"
+	
+Sales OrdersPurchase Orders
+
+
+ZIRET
+	
+Ziziwork Retail & Wholesale
+	
+	
+Internal Organization
+	
+	
+N
+	
+	
+Role Type ID: "OrgInternal"
+	
+Sales OrdersPurchase Orders
+
+
+ZISAL
+	
+Ziziwork Sales
+	
+	
+Internal Organization, Vendor
+	
+	
+N
+	
+	
+Role Type ID: "OrgInternal"
+	
+Sales OrdersPurchase Orders
+
+
+ZISER
+	
+Ziziwork Services
+	
+	
+Internal Organization, Vendor
+	
+	
+N
+	
+	
+Role Type ID: "OrgInternal"
+	
+Sales OrdersPurchase Orders
+Current Search String
+roles.roleTypeId:OrgInternal
+
+Built on Moqui Framework 0.1.0
+
+Site Map

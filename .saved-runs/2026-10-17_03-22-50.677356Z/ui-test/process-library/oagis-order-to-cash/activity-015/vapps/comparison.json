@@ -1,0 +1,19 @@
+{
+  "id": "activity-015",
+  "sourceLine": 58,
+  "headings": [
+    "OAGIS Order to Cash",
+    "OAGIS Scenarios",
+    "Incorporated Scenarios"
+  ],
+  "text": "* 47 - Full Cycle Purchasing",
+  "route": null,
+  "dialog": null,
+  "mapping": "entry-candidate",
+  "limitation": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required.",
+  "source": "docs/business-processes/process-library/oagis-order-to-cash.md",
+  "mode": "vapps",
+  "coverage": "blocked",
+  "captures": [],
+  "reason": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required."
+}

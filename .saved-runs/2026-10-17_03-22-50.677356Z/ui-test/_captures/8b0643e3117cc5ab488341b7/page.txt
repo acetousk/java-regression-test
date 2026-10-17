@@ -1,0 +1,103 @@
+menu
+Applications
+chevron_right
+Marble ERP
+chevron_right
+Accounting
+chevron_right
+Reports
+chevron_right
+Report List
+search
+edit_location
+notifications
+history
+account_circle
+Financial Reports
+keyboard_arrow_up
+open_in_new
+Balance Sheet
+open_in_new
+Income Statement
+open_in_new
+Cash Flow
+open_in_new
+Retained Earnings
+open_in_new
+Financial Ratios
+Sales and Invoice Reports
+keyboard_arrow_up
+Sales Summary
+Sales Order Analysis
+Sales Invoice Analysis
+open_in_new
+Customer Statement PDF
+Order Item Summary
+Order Issued and Invoiced
+Invoice Item Summary
+Quick Aging
+Invoice Aging Detail
+AR Aging Summary
+Invoice Reconciliation
+Transaction Reports
+keyboard_arrow_up
+open_in_new
+Account Ledger
+open_in_new
+Account Balance History
+Transactions
+Transaction Entries
+open_in_new
+Posted Amount Summary
+open_in_new
+Posted Balance Summary
+Asset and Inventory Reports
+keyboard_arrow_up
+Inventory Valuation
+Receipt Transactions
+Status by Receipt
+On Hand
+On Hand Summary
+Shipment Package Summary
+Organization Party ID
+ZIHR: Ziziwork Human Resources
+arrow_drop_down
+Time Period Type ID
+Month
+arrow_drop_down
+Periods
+event
+Thru Date
+View Charts
+Operating Revenue and Expense
+Get CSV
+keyboard_arrow_up
+Current Assets and Liabilities
+Get CSV
+keyboard_arrow_up
+Net Income History
+Get CSV
+keyboard_arrow_up
+Balance Sheet History
+Get CSV
+keyboard_arrow_up
+Net Income Year Over Year
+Get CSV
+keyboard_arrow_up
+Built on Moqui 0.1.0
+Site Map
+info
+Browser notifications disabled, if you want them use browser notification settings to allow
+X
+Balance Sheet
+close
+Organization
+ZIHR: Ziziwork Human Resources
+arrow_drop_down
+Time Periods
+arrow_drop_down
+Detail
+Beginning And Posted
+Percent of Assets
+Child Org Periods
+Run

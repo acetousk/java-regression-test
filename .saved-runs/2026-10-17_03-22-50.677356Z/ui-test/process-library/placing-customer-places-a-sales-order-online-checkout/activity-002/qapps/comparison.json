@@ -1,0 +1,17 @@
+{
+  "id": "activity-002",
+  "sourceLine": 13,
+  "headings": [
+    "Placing Customer Places a Sales Order - Online Checkout"
+  ],
+  "text": "Placing Customer (PLC for this story) reviews list of items to order and decides to place a sales order with that set of items.\nPLC specifies general profile information including:",
+  "route": null,
+  "dialog": null,
+  "mapping": "entry-candidate",
+  "limitation": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required.",
+  "source": "docs/business-processes/process-library/placing-customer-places-a-sales-order-online-checkout.md",
+  "mode": "qapps",
+  "coverage": "blocked",
+  "captures": [],
+  "reason": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required."
+}

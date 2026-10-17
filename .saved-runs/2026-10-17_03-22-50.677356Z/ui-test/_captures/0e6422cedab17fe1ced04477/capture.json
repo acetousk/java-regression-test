@@ -1,0 +1,23 @@
+{
+  "engine": "rust",
+  "mode": "apps",
+  "route": "marble/Party/PaymentMethod/PaymentMethodTrans",
+  "dialog": {
+    "label": "Auto Match and Reconcile",
+    "id": "AutoMatchReconcileDialog",
+    "route": "Party/PaymentMethod/PaymentMethodTrans"
+  },
+  "authenticated": true,
+  "errors": [
+    "locator.click: Timeout 3500ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Auto Match and Reconcile', exact: true }).or(getByRole('link', { name: 'Auto Match and Reconcile', exact: true })).filter({ visible: true }).first()\u001b[22m\n"
+  ],
+  "failedRequests": [],
+  "httpErrors": [],
+  "consoleErrors": [],
+  "status": "blocked",
+  "reused": false,
+  "requestedURL": "http://127.0.0.1:18092/apps/marble/Party/PaymentMethod/PaymentMethodTrans",
+  "navigation": "documented-or-candidate-deep-link",
+  "httpStatus": 200,
+  "finalURL": "http://127.0.0.1:18092/apps/marble/Party/PaymentMethod/PaymentMethodTrans"
+}

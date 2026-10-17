@@ -1,0 +1,53 @@
+menu
+Applications
+chevron_right
+Marble ERP
+chevron_right
+Orders
+chevron_right
+Find Order
+help_outline
+search
+edit_location
+notifications
+history
+account_circle
+open_in_new
+Create Sales Order
+Sales Analysis Report
+Sales Summary Charts
+Issued and Invoiced Report
+open_in_new
+Create Purchase Order
+search
+Find Options
+table_chart
+Columns
+CSV
+XLS
+No results found
+Order
+Their Order
+Source
+	
+Status
+Priority
+Total
+	
+Entry Date
+Placed Date
+Ship Before Date
+	
+Facility
+Store
+Shipping Instructions
+	
+Vendor
+Customer
+Other Parties
+	
+Ship Method
+Carrier
+Shipments
+Built on Moqui 0.1.0
+Site Map

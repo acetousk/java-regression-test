@@ -1,0 +1,92 @@
+menu
+Applications
+chevron_right
+Marble ERP
+chevron_right
+Asset
+chevron_right
+Asset
+chevron_right
+Find Summary
+search
+edit_location
+notifications
+history
+account_circle
+Find Individual Assets
+Move Asset
+Containers
+Lots
+Pools
+On Hand Report
+open_in_new
+Receive Direct
+open_in_new
+Physical Diff
+search
+Find Options
+table_chart
+Columns
+CSV
+XLS
+No results found
+Assets
+	
+Product ID
+Product Name
+Asset Class
+	
+Status
+Owner Party
+Asset Pool
+	
+Facility
+Location
+Lot
+	
+Available
+On Hand
+	
+PhI Qty
+	
+Move
+Built on Moqui 0.1.0
+Site Map
+Receive Direct
+close
+
+NOTE: only receive inventory here if there is no Purchase Order and no Incoming Shipment for the inventory.
+
+Product*
+arrow_drop_down
+Status
+Available
+cancel
+arrow_drop_down
+event
+Received Date
+access_time
+Quantity*
+Facility*
+arrow_drop_down
+Asset Owner will default to Facility owner
+Owner
+arrow_drop_down
+Pool
+arrow_drop_down
+Location
+arrow_drop_down
+Container
+arrow_drop_down
+Manufacturer
+arrow_drop_down
+Lot
+arrow_drop_down
+Lot Number
+event
+Manufactured
+event
+Expiration
+Acquire Cost
+Notes
+Receive

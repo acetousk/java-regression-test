@@ -1,0 +1,18 @@
+{
+  "id": "activity-001",
+  "sourceLine": 10,
+  "headings": [
+    "Marketer Maintains General Site Content",
+    "Story"
+  ],
+  "text": "Marketer writes copy and creates or gathers images to be included in the public facing web site. Marketer reviews list of existing content on the site (associated with named placeholders or content-managed pages) and finds the content to update with the new text and/or images. Marketer uploads images and edits or pastes text to modify the selected content.",
+  "route": null,
+  "dialog": null,
+  "mapping": "entry-candidate",
+  "limitation": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required.",
+  "source": "docs/business-processes/process-library/marketer-maintains-general-site-content.md",
+  "mode": "qapps",
+  "coverage": "blocked",
+  "captures": [],
+  "reason": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required."
+}

@@ -1,0 +1,90 @@
+Toggle navigation 
+Find Party
+0 0 0 0
+Marble ERP - Dashboard
+Applications
+Applications
+Applications
+Applications (ORG_ZIZI_RETAIL, ZIRET_BA)
+Applications
+Applications
+Applications (OrgInternal)
+Applications
+Applications
+Applications
+Applications (ORG_ZIZI_RETAIL, ZIRET_BA)
+Applications
+Applications
+Applications (OrgInternal)
+ Payment Method - Transactions
+ Payment Method - Files
+ Payment Method - Files (ZIRET_BA, ORG_ZIZI_RETAIL)
+ Payments - Find Payment
+ Accounting - Dashboard
+ Parties - Find Party (OrgInternal)
+Applications (ShpTpPurchase)
+Applications (ShpTpPurchase)
+ Shipments - Find Shipments (ShpTpPurchase)
+Applications
+Application
+Marble ERP
+My Account
+System
+Tools
+ZIRET: Ziziwork Retail & Wholesale
+ZISER: Ziziwork Services
+Marble ERP
+Dashboard
+Quick Search
+Accounting
+Asset
+Catalog
+Customers
+Facility
+Human Resources
+Manufacturing
+Orders
+Parties
+Projects
+Requests
+Returns
+Shipments
+Shipping
+Stores
+Suppliers
+Survey
+Tasks
+Wiki/Content
+Custom Reports
+Report Builder
+Parties New Person New Person Customer New Employee New Organization New Sales Account (Organization Customer) New Sales Contact Search String Reference
+ 
+Search
+Find Options
+CSV
+
+
+
+ID 
+	
+Name 
+	
+Username 
+	
+Role
+	
+Class
+	
+Hidden
+	
+Dups
+	
+Matches
+	
+ 
+Current Search String
+No Current Search
+
+Built on Moqui Framework 4.0.0
+
+Site Map

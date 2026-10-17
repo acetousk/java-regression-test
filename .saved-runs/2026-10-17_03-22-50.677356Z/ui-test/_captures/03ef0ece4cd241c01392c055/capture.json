@@ -1,0 +1,22 @@
+{
+  "engine": "rust",
+  "mode": "apps",
+  "route": "marble/Catalog/Product/FindProduct",
+  "dialog": {
+    "label": "New Product",
+    "id": "NewProductDialog",
+    "route": "Catalog/Product/FindProduct"
+  },
+  "authenticated": true,
+  "errors": [
+    "locator.click: Timeout 3500ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'New Product', exact: true }).or(getByRole('link', { name: 'New Product', exact: true })).filter({ visible: true }).first()\u001b[22m\n"
+  ],
+  "failedRequests": [],
+  "httpErrors": [],
+  "consoleErrors": [],
+  "status": "blocked",
+  "reused": false,
+  "requestedURL": "http://127.0.0.1:18092/apps/marble/Catalog/Product/FindProduct",
+  "navigation": "dashboard-link",
+  "finalURL": "http://127.0.0.1:18092/apps/marble/Catalog/Product/FindProduct"
+}

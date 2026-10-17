@@ -1,0 +1,2 @@
+# Authentication state must never be published.
+**/_sessions/

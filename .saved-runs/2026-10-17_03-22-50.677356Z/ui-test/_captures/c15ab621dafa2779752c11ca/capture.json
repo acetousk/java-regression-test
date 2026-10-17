@@ -1,0 +1,17 @@
+{
+  "engine": "rust",
+  "mode": "apps",
+  "route": "marble/Shipment/FindShipment?shipmentTypeEnumId=ShpTpSales",
+  "dialog": null,
+  "authenticated": true,
+  "errors": [],
+  "failedRequests": [],
+  "httpErrors": [],
+  "consoleErrors": [],
+  "status": "captured",
+  "reused": false,
+  "requestedURL": "http://127.0.0.1:18092/apps/marble/Shipment/FindShipment?shipmentTypeEnumId=ShpTpSales",
+  "navigation": "documented-or-candidate-deep-link",
+  "httpStatus": 200,
+  "finalURL": "http://127.0.0.1:18092/apps/marble/Shipment/FindShipment?shipmentTypeEnumId=ShpTpSales"
+}

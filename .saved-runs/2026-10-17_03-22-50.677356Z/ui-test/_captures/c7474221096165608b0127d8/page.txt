@@ -1,0 +1,45 @@
+Application 
+Marble ERP 
+Accounting 
+Reports 
+Report List
+ 0  0  0  0
+ Organization
+Financial Reports
+ Balance Sheet  Income Statement  Cash Flow  Retained Earnings  Financial Ratios
+Sales and Invoice Reports
+Sales Summary Sales Order Analysis Sales Invoice Analysis  Customer Statement PDF
+Order Item Summary Order Issued and Invoiced Invoice Item Summary
+Quick Aging Invoice Aging Detail AR Aging Summary Invoice Reconciliation
+Transaction Reports
+ Account Ledger  Account Balance History Transactions Transaction Entries
+ Posted Amount Summary  Posted Balance Summary
+Asset and Inventory Reports
+Inventory Valuation Receipt Transactions Status by Receipt
+On Hand On Hand Summary Shipment Package Summary
+Organization Party ID
+ZIHR: Ziziwork Human Resources
+ZICORP: Ziziwork Industries
+ZIRET: Ziziwork Retail & Wholesale
+ZISAL: Ziziwork Sales
+ZISER: Ziziwork Services
+Time Period Type ID
+Month
+Quarter
+Periods
+Thru Date
+View Charts
+Operating Revenue and Expense
+Get CSV
+Current Assets and Liabilities
+Get CSV
+Net Income History
+Get CSV
+Balance Sheet History
+Get CSV
+Net Income Year Over Year
+Get CSV
+
+Built on Moqui Framework 0.1.0
+
+Site Map

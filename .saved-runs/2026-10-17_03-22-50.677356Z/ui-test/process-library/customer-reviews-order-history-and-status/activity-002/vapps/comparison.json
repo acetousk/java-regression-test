@@ -1,0 +1,18 @@
+{
+  "id": "activity-002",
+  "sourceLine": 16,
+  "headings": [
+    "Customer Reviews Order History and Status",
+    "Story"
+  ],
+  "text": "Customer may add all or any order items (with ordered quantities) to the cart for repurchase, or add to a recurring order (type of shopping list) to receive the products periodically as specified by Customer.",
+  "route": null,
+  "dialog": null,
+  "mapping": "entry-candidate",
+  "limitation": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required.",
+  "source": "docs/business-processes/process-library/customer-reviews-order-history-and-status.md",
+  "mode": "vapps",
+  "coverage": "blocked",
+  "captures": [],
+  "reason": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required."
+}

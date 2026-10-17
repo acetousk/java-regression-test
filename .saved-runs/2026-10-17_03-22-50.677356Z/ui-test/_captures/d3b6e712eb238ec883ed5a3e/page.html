@@ -1,0 +1,164 @@
+<!DOCTYPE html><html lang="en-US" class="js"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="moquiSessionToken" content="c18a753b8d0d21c9174dddae03eee5db76fa923a">
+<meta name="moqui-notify" content="/notws">
+
+
+<title>Payment Method - Files</title>
+<link rel="apple-touch-icon" href="/MoquiLogo100.png">
+<link rel="icon" href="/favicon.ico">
+<link rel="stylesheet" href="/libs/fontawesome/css/font-awesome.min.css?v=1a147e2b156">
+<link rel="stylesheet" href="/css/moqui-html.css?v=1a147e2b156">
+<script src="/js/moqui-html.js?v=1a147e2b156" defer=""></script>
+</head>
+<body class="dev PaymentMethodFiles">
+<!-- BEGIN screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+<!-- BEGIN screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+<div id="top"><!-- BEGIN render-mode.text[@location=component://webroot/screen/includes/navbar.html.fancy][@template=true] --><header><nav class="navbar">
+<a class="brand" href="/apps/AppList"><img src="/images/MoquiLogoSmall.png" alt="Home"></a>
+
+<button type="button" class="nav-toggle" data-nav-toggle="" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
+<div id="navbar-buttons">
+<ul id="header-menus"><li><details id="header-menu" class="menu" data-move-to="header-menus"><summary>Application <i class="fa fa-chevron-right"></i></summary><ul><li><a href="/apps/marble/dashboard"><i class="fa fa-dashboard"></i> Marble ERP</a></li><li><a href="/apps/boss/QuickSearch"><i class="fa fa-search"></i> IronStone BOSS</a></li><li><a href="/apps/my"><i class="fa fa-user"></i> My Account</a></li><li><a href="/apps/system"><i class="fa fa-dashboard"></i> System</a></li><li><a href="/apps/tools"><i class="fa fa-dashboard"></i> Tools</a></li></ul></details></li><li><details id="MarbleErpPanel" class="menu" data-move-to="header-menus"><summary>Marble ERP <i class="fa fa-chevron-right"></i></summary><ul><li><a href="/apps/marble/dashboard"><i class="fa fa-dashboard"></i> Dashboard</a></li><li><a href="/apps/marble/QuickSearch"><i class="fa fa-search"></i> Quick Search</a></li><li><a href="/apps/marble/Accounting/dashboard"><img src="/ssstatic/images/Accounting.png" alt="Accounting" height="18"> Accounting</a></li><li><a href="/apps/marble/Asset/dashboard"><img src="/ssstatic/images/Asset.png" alt="Asset" height="18"> Asset</a></li><li><a href="/apps/marble/Catalog/dashboard"><img src="/ssstatic/images/Catalog.png" alt="Catalog" height="18"> Catalog</a></li><li><a href="/apps/marble/Customer/FindCustomer"><img src="/ssstatic/images/Customer.png" alt="Customers" height="18"> Customers</a></li><li><a href="/apps/marble/Facility/FindFacility"><img src="/ssstatic/images/Facility.png" alt="Facility" height="18"> Facility</a></li><li><a href="/apps/marble/HumanRes/dashboard"><i class="fa fa-user-plus"></i> Human Resources</a></li><li><a href="/apps/marble/Manufacturing/dashboard"><i class="fa fa-industry"></i> Manufacturing</a></li><li><a href="/apps/marble/Order/FindOrder"><img src="/ssstatic/images/Sales.png" alt="Orders" height="18"> Orders</a></li><li><a href="/apps/marble/Party/FindParty"><img src="/ssstatic/images/Parties.png" alt="Parties" height="18"> Parties</a></li><li><a href="/apps/marble/Project/FindProject"><img src="/ssstatic/images/project-business120.png" alt="Projects" height="18"> Projects</a></li><li><a href="/apps/marble/Request/FindRequest"><img src="/ssstatic/images/Request.png" alt="Requests" height="18"> Requests</a></li><li><a href="/apps/marble/Return/FindReturn"><img src="/ssstatic/images/Return.png" alt="Returns" height="18"> Returns</a></li><li><a href="/apps/marble/Shipment/FindShipment"><img src="/ssstatic/images/Shipping.png" alt="Shipments" height="18"> Shipments</a></li><li><a href="/apps/marble/Shipping/dashboard"><img src="/ssstatic/images/Picking.png" alt="Shipping" height="18"> Shipping</a></li><li><a href="/apps/marble/ProductStore/FindProductStore"><img src="/ssstatic/images/ProductStore.png" alt="Stores" height="18"> Stores</a></li><li><a href="/apps/marble/Supplier/FindSupplier"><img src="/ssstatic/images/Supplier.png" alt="Suppliers" height="18"> Suppliers</a></li><li><a href="/apps/marble/Survey/FindSurvey"><i class="fa fa-pencil-square-o"></i> Survey</a></li><li><a href="/apps/marble/Task/FindTask"><img src="/ssstatic/images/task-homework.png" alt="Tasks" height="18"> Tasks</a></li><li><a href="/apps/marble/Wiki/WikiSpaces"><img src="/ssstatic/images/Wiki.png" alt="Wiki/Content" height="18"> Wiki/Content</a></li><li><a href="/apps/marble/QuickViewReport"><i class="fa fa-database"></i> Custom Reports</a></li><li><a href="/apps/marble/SimpleReport/FindReport"><i class="fa fa-database"></i> Report Builder</a></li></ul></details></li></ul>
+<div id="navbar-menu-crumbs"><a id="PartyPanel-menu-crumb" class="crumb" href="/apps/marble/Party/FindParty" data-move-to="navbar-menu-crumbs">Parties <i class="fa fa-chevron-right"></i></a><a id="PaymentMethodPanel-menu-crumb" class="crumb" href="/apps/marble/Party/PaymentMethod/EditPaymentMethod" data-move-to="navbar-menu-crumbs">Payment Method <i class="fa fa-chevron-right"></i></a></div>
+<a class="current" href="/apps/marble/Party/PaymentMethod/PaymentMethodFiles?partyId=ORG_ZIZI_RETAIL&amp;paymentMethodId=ZIRET_BA">Files</a>
+<span class="spacer"></span>
+<div class="btn-group navbar-right">
+    <a href="/apps/my/User/Notifications" data-toggle="tooltip" data-container="body" data-original-title="Notifications" data-placement="bottom" class="btn btn-default btn-sm navbar-btn">
+        <i class="fa fa-info-circle"></i>
+        <span id="navbar_notification_count" class="label label-info">0</span>
+    </a>
+    <a href="/apps/my/User/Messages/FindMessage?statusId=CeReceived&amp;toPartyId=EX_JOHN_DOE" data-toggle="tooltip" data-container="body" data-original-title="Messages" data-placement="bottom" class="btn btn-default btn-sm navbar-btn">
+        <i class="fa fa-envelope"></i>
+        <span class="label label-warning">0</span>
+    </a>
+    <a href="/apps/my/User/Calendar/MyCalendar" data-toggle="tooltip" data-container="body" data-original-title="Events This Week" data-placement="bottom" class="btn btn-default btn-sm navbar-btn">
+        <i class="fa fa-calendar"></i>
+        <span class="label label-primary">0</span>
+    </a>
+    <a href="/apps/my/User/Task/MyTasks" data-toggle="tooltip" data-container="body" data-original-title="Open Tasks" data-placement="bottom" class="btn btn-default btn-sm navbar-btn">
+        <i class="fa fa-check"></i>
+        <span class="label label-success">0</span>
+    </a>
+</div>
+
+<details id="history-menu" class="menu"><summary title="History"><i class="fa fa-list"></i></summary><ul>
+<li><a href="/apps/marble/dashboard"><i class="fa fa-link"></i> dashboard</a></li>
+<li><a href="/apps/marble/Accounting/Payment/FindPayment"><i class="fa fa-link"></i> FindPayment</a></li>
+<li><a href="/apps/marble/Accounting/dashboard"><i class="fa fa-link"></i> dashboard</a></li>
+<li><a href="/apps/marble/Party/FindParty?roleTypeId=OrgInternal"><i class="fa fa-link"></i> FindParty</a></li>
+<li><a href="/qapps/marble/dashboard"><i class="fa fa-link"></i> dashboard</a></li>
+<li><a href="/apps/marble/Shipment/FindShipment?shipmentTypeEnumId=ShpTpPurchase"><i class="fa fa-link"></i> FindShipment</a></li>
+<li><a href="/apps/marble/Shipment?shipmentTypeEnumId=ShpTpPurchase"><i class="fa fa-link"></i> Shipment</a></li>
+<li><a href="/qapps/marble/Shipment/FindShipment?shipmentTypeEnumId=ShpTpPurchase"><i class="fa fa-link"></i> FindShipment</a></li>
+<li><a href="/apps/marble/Request/FindRequest"><i class="fa fa-link"></i> FindRequest</a></li>
+<li><a href="/apps/marble/Catalog/Product/FindProduct"><i class="fa fa-link"></i> FindProduct</a></li>
+<li><a href="/apps/marble/Asset/Asset/FindSummary"><i class="fa fa-link"></i> FindSummary</a></li>
+<li><a href="/apps/marble/Asset/Asset"><i class="fa fa-link"></i> Asset</a></li>
+<li><a href="/qapps/marble/Asset/Asset/FindSummary"><i class="fa fa-link"></i> FindSummary</a></li>
+<li><a href="/apps/marble/Asset/PhysicalInventory/FindPhysicalInventory"><i class="fa fa-link"></i> FindPhysicalInventory</a></li>
+<li><a href="/qapps/marble/Asset/PhysicalInventory/FindPhysicalInventory"><i class="fa fa-link"></i> FindPhysicalInventory</a></li>
+<li><a href="/apps/marble/Return/FindReturn?returnType=Customer"><i class="fa fa-link"></i> FindReturn</a></li>
+<li><a href="/apps/marble/Shipping/dashboard"><i class="fa fa-link"></i> dashboard</a></li>
+<li><a href="/apps/marble/Order/FindOrder?orderType=Sales"><i class="fa fa-link"></i> FindOrder</a></li>
+<li><a href="/apps/marble/Order?orderType=Sales"><i class="fa fa-link"></i> Order</a></li>
+<li><a href="/apps/marble/Order/FindOrder?orderType=Purchase"><i class="fa fa-link"></i> FindOrder</a></li>
+<li><a href="/apps/marble/Order?orderType=Purchase"><i class="fa fa-link"></i> Order</a></li>
+<li><a href="/apps/marble/Customer/FindCustomer"><i class="fa fa-link"></i> FindCustomer</a></li>
+<li><a href="/apps/marble/Customer"><i class="fa fa-link"></i> Customer</a></li>
+<li><a href="/apps/marble/Accounting/Invoice/FindInvoice?invoiceType=Receivable"><i class="fa fa-link"></i> FindInvoice</a></li>
+<li><a href="/qapps/marble/Accounting/Payment/FindPayment"><i class="fa fa-link"></i> FindPayment</a></li>
+</ul></details>
+<button type="button" data-theme-toggle="" data-pref-url="/apps/setPreference" title="Switch Dark/Light"><i class="fa fa-adjust"></i></button>
+<a class="logout" data-btn="danger" href="/Login/logout" title="Logout John Doe"><i class="fa fa-power-off"></i></a>
+<details id="active-org-menu" class="menu">
+                <summary id="active-org-menu-link" title="Organization">
+                    <i class="fa fa-globe"></i> Organization</summary>
+                <ul>
+                        <li><a href="/apps/setPrefGoLast?preferenceKey=ACTIVE_ORGANIZATION&amp;preferenceValue=ORG_ZIZI_RETAIL">ZIRET: Ziziwork Retail &amp; Wholesale</a></li>
+                        <li><a href="/apps/setPrefGoLast?preferenceKey=ACTIVE_ORGANIZATION&amp;preferenceValue=ORG_ZIZI_SERVICES">ZISER: Ziziwork Services</a></li>
+                </ul>
+            </details></div>
+</nav></header>
+<!-- END   render-mode.text[@location=component://webroot/screen/includes/navbar.html.fancy][@template=true] -->
+</div>
+<!-- END   screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+<div id="content"><div class="inner"><!-- BEGIN screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+<!-- BEGIN render-mode.text[@location=component://webroot/screen/includes/Messages.html.fancy][@template=true] --><!-- END   render-mode.text[@location=component://webroot/screen/includes/Messages.html.fancy][@template=true] --><!-- END   screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+<!-- BEGIN screen[@location=component://MarbleERP/screen/marble.xml].widgets -->
+<!-- BEGIN screen[@location=component://MarbleERP/screen/marble.xml].widgets -->
+<!-- BEGIN render-mode.text[inline][@template=true] -->
+            <script>
+                (() => {
+                    const menu = document.getElementById('active-org-menu');
+                    const navbar = document.getElementById('navbar-buttons');
+                    if (menu && navbar) navbar.append(menu);
+                })();
+            </script><!-- END   render-mode.text[inline][@template=true] --><!-- END   screen[@location=component://MarbleERP/screen/marble.xml].widgets -->
+
+<!-- BEGIN screen[@location=component://SimpleScreens/screen/SimpleScreens/Party.xml].widgets -->
+<strong>ZIRET: Ziziwork Retail &amp; Wholesale</strong>
+<div id="PartyPanel-tabpanel" class="tabpanel">
+<!-- BEGIN screen[@location=component://SimpleScreens/screen/SimpleScreens/Party/PaymentMethod.xml].widgets -->
+<div id="PaymentMethodPanel-tabpanel" class="tabpanel"><nav id="PaymentMethodPanel-menu" class="tabs"><ul><li><a href="/apps/marble/Party/PaymentMethod/EditPaymentMethod?partyId=ORG_ZIZI_RETAIL&amp;paymentMethodId=ZIRET_BA">Payment Method</a></li><li><a href="/apps/marble/Party/PaymentMethod/PaymentMethodTrans?partyId=ORG_ZIZI_RETAIL&amp;paymentMethodId=ZIRET_BA">Transactions</a></li><li><a href="/apps/marble/Party/PaymentMethod/PaymentMethodChecks?partyId=ORG_ZIZI_RETAIL&amp;paymentMethodId=ZIRET_BA">Checks</a></li><li class="active"><a href="/apps/marble/Party/PaymentMethod/PaymentMethodFiles?partyId=ORG_ZIZI_RETAIL&amp;paymentMethodId=ZIRET_BA">Files</a></li><li><a href="/apps/marble/Party/PaymentMethod/PaymentGatewayResponses?partyId=ORG_ZIZI_RETAIL&amp;paymentMethodId=ZIRET_BA">Gateway Responses</a></li></ul></nav>
+<!-- BEGIN screen[@location=component://SimpleScreens/screen/SimpleScreens/Party/PaymentMethod/PaymentMethodFiles.xml].widgets -->
+<!-- BEGIN screen[@location=component://SimpleScreens/screen/SimpleScreens/Party/PaymentMethod/PaymentMethodFiles.xml].widgets -->
+<button type="button" id="GenerateNachaFileDialog-button" data-dialog="GenerateNachaFileDialog" data-btn="primary" title="Generate NACHA File"><i class="fa fa-share"></i> Generate NACHA File</button><dialog id="GenerateNachaFileDialog" class="container-dialog" style="--w:760px"><header><h4>Generate NACHA File</h4><button type="button" class="close" data-close="" aria-label="Close">×</button></header><div class="body">
+<!-- BEGIN form-single[@name=GenerateNachaFile] -->
+<form name="GenerateNachaFile" id="GenerateNachaFile" method="post" action="/apps/marble/Party/PaymentMethod/PaymentMethodFiles/generateNachaFile"><input type="hidden" name="moquiFormName" value="GenerateNachaFile" style=""><input type="hidden" name="moquiSessionToken" value="[REDACTED]" style=""><fieldset><input type="hidden" name="paymentMethodId" id="GenerateNachaFile_paymentMethodId" value="ZIRET_BA" style="">
+<div class="field"><label for="GenerateNachaFile_fromDate">From Date</label><div class="widget"><input type="datetime-local" name="fromDate" id="GenerateNachaFile_fromDate" value="" step="300" style=""></div></div>
+<div class="field"><label for="GenerateNachaFile_thruDate">Thru Date</label><div class="widget"><input type="datetime-local" name="thruDate" id="GenerateNachaFile_thruDate" value="" step="300" style=""></div></div>
+<div class="field"><label for="GenerateNachaFile_fileDate">File Date</label><div class="widget"><input type="datetime-local" name="fileDate" id="GenerateNachaFile_fileDate" value="2026-10-16T22:26" step="300" style=""></div></div>
+<div class="field"><label for="GenerateNachaFile_effectiveEntryDate">Effective Entry Date</label><div class="widget"><input type="date" name="effectiveEntryDate" id="GenerateNachaFile_effectiveEntryDate" value="" title="Transaction settle/post date. Defaults to next week day after File Date." style=""></div></div>
+<div class="field"><label for="GenerateNachaFile_nachaEntryDescription">NACHA Entry Description</label><div class="widget"><input type="text" id="GenerateNachaFile_nachaEntryDescription" name="nachaEntryDescription" value="Operations" size="10" maxlength="10" style=""></div></div>
+<div class="field" data-submit=""><span class="label"></span><div class="widget"><button type="submit" name="submitButton" value="submitButton" id="GenerateNachaFile_submitButton" data-btn="primary">Generate</button></div></div>
+</fieldset></form>
+<!-- END   form-single[@name=GenerateNachaFile] -->
+</div></dialog>
+<!-- END   screen[@location=component://SimpleScreens/screen/SimpleScreens/Party/PaymentMethod/PaymentMethodFiles.xml].widgets -->
+<!-- BEGIN screen[@location=component://SimpleScreens/screen/SimpleScreens/Party/PaymentMethod/PaymentMethodFiles.xml].widgets -->
+<button type="button" id="GeneratePosPayFileDialog-button" data-dialog="GeneratePosPayFileDialog" data-btn="primary" title="Generate Pos. Pay File"><i class="fa fa-share"></i> Generate Pos. Pay File</button><dialog id="GeneratePosPayFileDialog" class="container-dialog" style="--w:760px"><header><h4>Generate Pos. Pay File</h4><button type="button" class="close" data-close="" aria-label="Close">×</button></header><div class="body">
+<!-- BEGIN form-single[@name=GeneratePosPayFile] -->
+<form name="GeneratePosPayFile" id="GeneratePosPayFile" method="post" action="/apps/marble/Party/PaymentMethod/PaymentMethodFiles/generatePosPayFile"><input type="hidden" name="moquiFormName" value="GeneratePosPayFile" style=""><input type="hidden" name="moquiSessionToken" value="[REDACTED]" style=""><fieldset><input type="hidden" name="paymentMethodId" id="GeneratePosPayFile_paymentMethodId" value="ZIRET_BA" style="">
+<div class="field"><label for="GeneratePosPayFile_fromDate">From Date</label><div class="widget"><input type="datetime-local" name="fromDate" id="GeneratePosPayFile_fromDate" value="" step="300" style=""></div></div>
+<div class="field"><label for="GeneratePosPayFile_thruDate">Thru Date</label><div class="widget"><input type="datetime-local" name="thruDate" id="GeneratePosPayFile_thruDate" value="" step="300" style=""></div></div>
+<div class="field"><label for="GeneratePosPayFile_fileDate">File Date</label><div class="widget"><input type="datetime-local" name="fileDate" id="GeneratePosPayFile_fileDate" value="2026-10-16T22:26" step="300" style=""></div></div>
+<div class="field" data-submit=""><span class="label"></span><div class="widget"><button type="submit" name="submitButton" value="submitButton" id="GeneratePosPayFile_submitButton" data-btn="primary">Generate</button></div></div>
+</fieldset></form>
+<!-- END   form-single[@name=GeneratePosPayFile] -->
+</div></dialog>
+<!-- END   screen[@location=component://SimpleScreens/screen/SimpleScreens/Party/PaymentMethod/PaymentMethodFiles.xml].widgets -->
+<!-- BEGIN form-list[@name=FileList] -->
+<dialog id="FileList_hdialog" style="--w:800px"><header><h4>Find Options</h4><button type="button" class="close" data-close="" aria-label="Close">×</button></header><div class="body"><h4>Saved Finds</h4><form id="FileList_NewFind" method="post" action="/apps/marble/Party/PaymentMethod/PaymentMethodFiles/formSaveFind"><input type="hidden" name="moquiSessionToken" value="[REDACTED]" style=""><input type="hidden" name="formLocation" value="FileList" style=""><input type="hidden" name="partyId" value="ORG_ZIZI_RETAIL" style=""><input type="hidden" name="paymentMethodId" value="ZIRET_BA" style=""><input type="text" name="_findDescription" size="40" placeholder="Description" aria-label="Description" style=""><button type="submit" data-btn="primary">Save New Find</button></form><h4>Find Parameters</h4><form name="FileList_header" id="FileList_header" method="post" action="/apps/marble/Party/PaymentMethod/PaymentMethodFiles"><input type="hidden" name="moquiSessionToken" value="[REDACTED]" style=""><fieldset><div class="field"><span class="label"></span><div class="widget"><button type="button" data-clear="FileList_header">Clear Parameters</button></div></div><div class="field"><label for="FileList_header_orderBySelect-ts-control" id="FileList_header_orderBySelect-ts-label">Order By</label><div class="widget"><select multiple="multiple" id="FileList_header_orderBySelect" data-ts="select" data-orderby="FileList_header_orderByField" tabindex="-1" class="tomselected ts-hidden-accessible"><option value="paymentMethodFileId">File ID (Asc)</option><option value="-paymentMethodFileId">File ID (Desc)</option><option value="fileTypeEnumId">File Type (Asc)</option><option value="-fileTypeEnumId">File Type (Desc)</option><option value="fileDate">File Date (Asc)</option><option value="entryCount">Entry Count (Asc)</option><option value="-entryCount">Entry Count (Desc)</option><option value="debitAmountTotal">Debit Amount Total (Asc)</option><option value="-debitAmountTotal">Debit Amount Total (Desc)</option><option value="creditAmountTotal">Credit Amount Total (Asc)</option><option value="-creditAmountTotal">Credit Amount Total (Desc)</option><option value="-fileDate">File Date (Desc)</option></select><div class="ts-wrapper multi plugin-remove_button has-items"><div class="ts-control"><div data-value="-fileDate" class="item" data-ts-item="">File Date (Desc)<div class="remove" title="Remove" role="button" tabindex="-1">×</div></div><input type="text" autocomplete="off" size="1" tabindex="0" role="combobox" aria-haspopup="listbox" aria-expanded="false" aria-controls="FileList_header_orderBySelect-ts-dropdown" id="FileList_header_orderBySelect-ts-control" aria-labelledby="FileList_header_orderBySelect-ts-label" aria-activedescendant="FileList_header_orderBySelect-opt-1" style=""></div><div class="ts-dropdown multi plugin-remove_button" style="display: none;"><div role="listbox" tabindex="-1" class="ts-dropdown-content" id="FileList_header_orderBySelect-ts-dropdown" aria-labelledby="FileList_header_orderBySelect-ts-label"><div data-selectable="" data-value="paymentMethodFileId" class="option active" role="option" id="FileList_header_orderBySelect-opt-1" aria-selected="true">File ID (Asc)</div><div data-selectable="" data-value="-paymentMethodFileId" class="option" role="option" id="FileList_header_orderBySelect-opt-2">File ID (Desc)</div><div data-selectable="" data-value="fileTypeEnumId" class="option" role="option" id="FileList_header_orderBySelect-opt-3">File Type (Asc)</div><div data-selectable="" data-value="-fileTypeEnumId" class="option" role="option" id="FileList_header_orderBySelect-opt-4">File Type (Desc)</div><div data-selectable="" data-value="fileDate" class="option" role="option" id="FileList_header_orderBySelect-opt-5">File Date (Asc)</div><div data-selectable="" data-value="entryCount" class="option" role="option" id="FileList_header_orderBySelect-opt-7">Entry Count (Asc)</div><div data-selectable="" data-value="-entryCount" class="option" role="option" id="FileList_header_orderBySelect-opt-8">Entry Count (Desc)</div><div data-selectable="" data-value="debitAmountTotal" class="option" role="option" id="FileList_header_orderBySelect-opt-9">Debit Amount Total (Asc)</div><div data-selectable="" data-value="-debitAmountTotal" class="option" role="option" id="FileList_header_orderBySelect-opt-10">Debit Amount Total (Desc)</div><div data-selectable="" data-value="creditAmountTotal" class="option" role="option" id="FileList_header_orderBySelect-opt-11">Credit Amount Total (Asc)</div><div data-selectable="" data-value="-creditAmountTotal" class="option" role="option" id="FileList_header_orderBySelect-opt-12">Credit Amount Total (Desc)</div></div></div></div><input id="FileList_header_orderByField" type="hidden" name="orderByField" value="-fileDate" style=""></div></div><div class="field"><label for="FileList_header_paymentMethodFileId">File ID</label><div class="widget"><span class="find text-find"><input type="hidden" name="paymentMethodFileId_op" value="begins" form="FileList_header" style=""><input type="text" name="paymentMethodFileId" value="" size="20" id="FileList_header_paymentMethodFileId" form="FileList_header" style=""><input type="hidden" name="paymentMethodFileId_ic" value="Y" form="FileList_header" style=""></span></div></div>
+<div class="field"><label for="FileList_header_fileDate">File Date</label><div class="widget"><span class="find date-period"><select name="fileDate_poffset" id="FileList_header_fileDate_poffset" form="FileList_header"><option value=""></option><option value="0">This</option><option value="-1">Last</option><option value="1">Next</option><option value="-2">-2</option><option value="2">+2</option><option value="-3">-3</option><option value="-4">-4</option><option value="-6">-6</option><option value="-12">-12</option></select><select name="fileDate_period" id="FileList_header_fileDate_period" form="FileList_header"><option value=""></option><option value="day">Day</option><option value="7d">7 Days</option><option value="30d">30 Days</option><option value="week">Week</option><option value="weeks">Weeks</option><option value="month">Month</option><option value="months">Months</option><option value="quarter">Quarter</option><option value="year">Year</option><option value="7r">+/-7d</option><option value="30r">+/-30d</option></select><input type="date" name="fileDate_pdate" id="FileList_header_fileDate_pdate" value="" form="FileList_header" style=""></span></div></div>
+<div class="field"><label for="FileList_header_debitAmountTotal">Debit Amount Total</label><div class="widget"><span class="find range-find"><label><span>From</span> <input name="debitAmountTotal_from" id="FileList_header_debitAmountTotal_from" value="" type="text" size="10" form="FileList_header" style=""></label> <label><span>Thru</span> <input name="debitAmountTotal_thru" id="FileList_header_debitAmountTotal_thru" value="" type="text" size="10" form="FileList_header" style=""></label></span></div></div>
+<div class="field"><label for="FileList_header_creditAmountTotal">Credit Amount Total</label><div class="widget"><span class="find range-find"><label><span>From</span> <input name="creditAmountTotal_from" id="FileList_header_creditAmountTotal_from" value="" type="text" size="10" form="FileList_header" style=""></label> <label><span>Thru</span> <input name="creditAmountTotal_thru" id="FileList_header_creditAmountTotal_thru" value="" type="text" size="10" form="FileList_header" style=""></label></span></div></div>
+<div class="field" data-submit=""><span class="label"></span><div class="widget"><button type="submit" name="downloadButton" value="downloadButton" id="FileList_header_downloadButton" data-btn="primary" form="FileList_header">Find</button></div></div>
+</fieldset></form></div></dialog>
+<div class="table-wrap"><table class="form-list" id="FileList_table"><thead><tr class="nav-row"><th colspan="10"><nav><button type="button" data-dialog="FileList_hdialog" title="Find Options"><i class="fa fa-share"></i> Find Options</button></nav></th></tr>
+<tr><th><div class="title">File ID<span class="order-by"><a href="/apps/marble/Party/PaymentMethod/PaymentMethodFiles?partyId=ORG_ZIZI_RETAIL&amp;paymentMethodId=ZIRET_BA&amp;orderByField=paymentMethodFileId"><i class="fa fa-caret-up"></i></a><a href="/apps/marble/Party/PaymentMethod/PaymentMethodFiles?partyId=ORG_ZIZI_RETAIL&amp;paymentMethodId=ZIRET_BA&amp;orderByField=-paymentMethodFileId"><i class="fa fa-caret-down"></i></a></span></div></th><th><div class="title">File Type<span class="order-by"><a href="/apps/marble/Party/PaymentMethod/PaymentMethodFiles?partyId=ORG_ZIZI_RETAIL&amp;paymentMethodId=ZIRET_BA&amp;orderByField=fileTypeEnumId"><i class="fa fa-caret-up"></i></a><a href="/apps/marble/Party/PaymentMethod/PaymentMethodFiles?partyId=ORG_ZIZI_RETAIL&amp;paymentMethodId=ZIRET_BA&amp;orderByField=-fileTypeEnumId"><i class="fa fa-caret-down"></i></a></span></div></th><th><div class="title">File Date<span class="order-by"><a href="/apps/marble/Party/PaymentMethod/PaymentMethodFiles?partyId=ORG_ZIZI_RETAIL&amp;paymentMethodId=ZIRET_BA&amp;orderByField=fileDate"><i class="fa fa-caret-up"></i></a><a href="/apps/marble/Party/PaymentMethod/PaymentMethodFiles?partyId=ORG_ZIZI_RETAIL&amp;paymentMethodId=ZIRET_BA&amp;orderByField=fileDate" class="active"><i class="fa fa-caret-down"></i></a></span></div></th><th><div class="title">Entry Count<span class="order-by"><a href="/apps/marble/Party/PaymentMethod/PaymentMethodFiles?partyId=ORG_ZIZI_RETAIL&amp;paymentMethodId=ZIRET_BA&amp;orderByField=entryCount"><i class="fa fa-caret-up"></i></a><a href="/apps/marble/Party/PaymentMethod/PaymentMethodFiles?partyId=ORG_ZIZI_RETAIL&amp;paymentMethodId=ZIRET_BA&amp;orderByField=-entryCount"><i class="fa fa-caret-down"></i></a></span></div></th><th><div class="title">Debit Amount Total<span class="order-by"><a href="/apps/marble/Party/PaymentMethod/PaymentMethodFiles?partyId=ORG_ZIZI_RETAIL&amp;paymentMethodId=ZIRET_BA&amp;orderByField=debitAmountTotal"><i class="fa fa-caret-up"></i></a><a href="/apps/marble/Party/PaymentMethod/PaymentMethodFiles?partyId=ORG_ZIZI_RETAIL&amp;paymentMethodId=ZIRET_BA&amp;orderByField=-debitAmountTotal"><i class="fa fa-caret-down"></i></a></span></div></th><th><div class="title">Credit Amount Total<span class="order-by"><a href="/apps/marble/Party/PaymentMethod/PaymentMethodFiles?partyId=ORG_ZIZI_RETAIL&amp;paymentMethodId=ZIRET_BA&amp;orderByField=creditAmountTotal"><i class="fa fa-caret-up"></i></a><a href="/apps/marble/Party/PaymentMethod/PaymentMethodFiles?partyId=ORG_ZIZI_RETAIL&amp;paymentMethodId=ZIRET_BA&amp;orderByField=-creditAmountTotal"><i class="fa fa-caret-down"></i></a></span></div></th><th><div class="title">Payments Button</div></th><th><div class="title">Is Cancelled</div></th><th><div class="title">Messages</div></th><th><div class="title"></div></th></tr></thead>
+<tbody>
+</tbody></table></div>
+<!-- END   form-list[@name=FileList] -->
+<!-- END   screen[@location=component://SimpleScreens/screen/SimpleScreens/Party/PaymentMethod/PaymentMethodFiles.xml].widgets -->
+</div>
+<!-- END   screen[@location=component://SimpleScreens/screen/SimpleScreens/Party/PaymentMethod.xml].widgets -->
+</div>
+<!-- END   screen[@location=component://SimpleScreens/screen/SimpleScreens/Party.xml].widgets -->
+<!-- END   screen[@location=component://MarbleERP/screen/marble.xml].widgets -->
+</div>
+</div>
+<!-- BEGIN screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+<div id="footer"><!-- BEGIN render-mode.text[inline][@template=true] -->                <div id="apps-footer-content">
+                        <p><a href="https://www.moqui.org/" target="_blank">Built on Moqui Framework 0.1.0</a></p>
+                        <p><a href="/apps/ScreenTree">Site Map</a></p>
+                </div><!-- END   render-mode.text[inline][@template=true] --></div>
+<!-- END   screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+<!-- END   screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+
+<link rel="stylesheet" href="/libs/tom-select/tom-select.css">
+<script src="/libs/tom-select/tom-select.complete.min.js"></script>
+
+
+</body></html>

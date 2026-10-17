@@ -1,0 +1,28 @@
+Application 
+Marble ERP 
+Returns 
+Returns
+ 0  0  0  0
+ Organization
+ Create Customer Return  Create Supplier Return
+ Find Options
+
+Status: Created, Requested, Approved, Shipped, Received Entry Date: 30d -3 
+
+Return ID
+	
+Status
+	
+Entry Date
+	
+Vendor
+	
+Customer
+	
+Warehouse
+	
+Order IDs
+
+Built on Moqui Framework 0.1.0
+
+Site Map

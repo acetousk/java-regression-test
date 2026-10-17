@@ -1,0 +1,17 @@
+{
+  "engine": "rust",
+  "mode": "qapps",
+  "route": "marble/Party/PaymentMethod/PaymentMethodFiles?paymentMethodId=ZIRET_BA&partyId=ORG_ZIZI_RETAIL",
+  "dialog": null,
+  "authenticated": true,
+  "errors": [],
+  "failedRequests": [],
+  "httpErrors": [],
+  "consoleErrors": [],
+  "status": "captured",
+  "reused": false,
+  "requestedURL": "http://127.0.0.1:18092/qapps/marble/Party/PaymentMethod/PaymentMethodFiles?paymentMethodId=ZIRET_BA&partyId=ORG_ZIZI_RETAIL",
+  "navigation": "documented-or-candidate-deep-link",
+  "httpStatus": 200,
+  "finalURL": "http://127.0.0.1:18092/qapps/marble/Party/PaymentMethod/PaymentMethodFiles?paymentMethodId=ZIRET_BA&partyId=ORG_ZIZI_RETAIL"
+}

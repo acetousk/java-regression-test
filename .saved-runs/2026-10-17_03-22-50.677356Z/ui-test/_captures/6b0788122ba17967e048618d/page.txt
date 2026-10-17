@@ -1,0 +1,58 @@
+menu
+Applications
+chevron_right
+Marble ERP
+chevron_right
+Parties
+chevron_right
+Find Party
+search
+edit_location
+notifications
+history
+account_circle
+open_in_new
+New Person
+open_in_new
+New Person Customer
+open_in_new
+New Employee
+open_in_new
+New Organization
+open_in_new
+New Sales Account (Organization Customer)
+open_in_new
+New Sales Contact
+Search String Reference
+Any Field
+Search
+search
+Find Options
+CSV
+XLS
+No results found
+ID
+	
+Name
+	
+Username
+	
+Role
+	
+Class
+	
+Hidden
+	
+Dups
+	
+Matches
+	
+Current Search String
+No Current Search
+Built on Moqui 0.1.0
+Site Map
+Matches whole words, use the asterisk (*) wildcard to match partial words; use field:term to search a specific field
+New Organization
+close
+Organization Name
+Create

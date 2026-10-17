@@ -1,0 +1,84 @@
+menu
+Applications
+chevron_right
+Marble ERP
+chevron_right
+Tasks
+chevron_right
+Find Task
+search
+edit_location
+notifications
+history
+account_circle
+Query String
+Text Search
+open_in_new
+New Task
+search
+Find Options
+table_chart
+Columns
+CSV
+XLS
+No results found
+build
+	
+Pri
+	
+ID
+	
+Name
+	
+Project
+	
+Parent
+	
+Milestone
+	
+Purpose
+	
+Status
+	
+Resolution
+	
+Assigned
+	
+Due Date
+	
+Last Updated
+	
+Est
+	
+Rem
+	
+Actual
+Built on Moqui 0.1.0
+Site Map
+New Task
+close
+Project
+arrow_drop_down
+Milestone
+arrow_drop_down
+Parent Task
+arrow_drop_down
+Assign To
+EX_JOHN_DOE: John Doe
+cancel
+arrow_drop_down
+Task Name
+Priority
+5
+arrow_drop_down
+Purpose
+Task
+arrow_drop_down
+Status
+In Planning
+arrow_drop_down
+event
+Due Date
+Estimated Hours
+Description
+Create

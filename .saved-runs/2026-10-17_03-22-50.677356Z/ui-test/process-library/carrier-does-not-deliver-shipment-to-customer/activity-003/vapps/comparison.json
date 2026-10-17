@@ -1,0 +1,18 @@
+{
+  "id": "activity-003",
+  "sourceLine": 20,
+  "headings": [
+    "Carrier Does Not Deliver Shipment to Customer",
+    "Story"
+  ],
+  "text": "If the item has been shipped CSR notifies Customer and asks them to check at the post office for the package. If Customer contacts CSR again saying package has not arrived and is not at the post office and it has been more than a reasonable number of days (decided by the CSR based on feedback from Customer) then package is considered lost. CSR contacts Customer to check the address and if it is not correct updates it. If the package is insured, CSR places a new zero amount order for a replacement item. If the package is not insured CSR contacts Customer to see if it is okay to send another item and charge them shipping. If Customer agrees CSR places replacement order with the price of the item(s) discounted but with full shipping cost. If Customer does not agree to shipping CSR negotiates with Customer, and may send out replacement totally free of charge. CSR may also upgrade the shipping method on the replacement order for customer satisfaction reasons.",
+  "route": null,
+  "dialog": null,
+  "mapping": "entry-candidate",
+  "limitation": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required.",
+  "source": "docs/business-processes/process-library/carrier-does-not-deliver-shipment-to-customer.md",
+  "mode": "vapps",
+  "coverage": "blocked",
+  "captures": [],
+  "reason": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required."
+}

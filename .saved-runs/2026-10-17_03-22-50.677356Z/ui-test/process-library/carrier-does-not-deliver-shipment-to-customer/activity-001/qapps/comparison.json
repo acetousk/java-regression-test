@@ -1,0 +1,18 @@
+{
+  "id": "activity-001",
+  "sourceLine": 10,
+  "headings": [
+    "Carrier Does Not Deliver Shipment to Customer",
+    "Dependencies"
+  ],
+  "text": "* [Company Fulfills Sales Order](https://moqui.org/docs/mantle/Business%20Process%20Library/Company%20Fulfills%20Sales%20Order)",
+  "route": null,
+  "dialog": null,
+  "mapping": "entry-candidate",
+  "limitation": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required.",
+  "source": "docs/business-processes/process-library/carrier-does-not-deliver-shipment-to-customer.md",
+  "mode": "qapps",
+  "coverage": "blocked",
+  "captures": [],
+  "reason": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required."
+}

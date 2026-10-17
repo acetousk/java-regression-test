@@ -1,0 +1,82 @@
+Toggle navigation 
+Returns
+0 0 0 0
+Marble ERP - Dashboard
+Applications
+Applications
+Applications
+Applications
+ Shipping - Dashboard
+Applications (Sales)
+Applications (Sales)
+ Orders - Find Order (Sales)
+Applications (Purchase)
+Applications (Purchase)
+ Orders - Find Order (Purchase)
+Applications
+Applications
+ Customers - Find Customer
+Applications (Receivable)
+Applications (Receivable)
+ Invoices - Find Invoice (Receivable)
+Applications
+Applications
+ Payments - Find Payment
+Applications (Payable)
+Applications (Payable)
+ Invoices - Find Invoice (Payable)
+Applications
+Application
+Marble ERP
+My Account
+System
+Tools
+ZIRET: Ziziwork Retail & Wholesale
+ZISER: Ziziwork Services
+Marble ERP
+Dashboard
+Quick Search
+Accounting
+Asset
+Catalog
+Customers
+Facility
+Human Resources
+Manufacturing
+Orders
+Parties
+Projects
+Requests
+Returns
+Shipments
+Shipping
+Stores
+Suppliers
+Survey
+Tasks
+Wiki/Content
+Custom Reports
+Report Builder
+Returns Create Customer Return Create Supplier Return
+Find Options
+
+Return Type: Customer Status: Created, Requested, Approved, Shipped, Received Entry Date: -3 30 Days (2026-07-18 to 2026-10-16)
+
+
+Return ID 
+	
+Status 
+	
+Entry Date 
+	
+Vendor
+	
+Customer
+	
+Warehouse
+	
+Order IDs
+
+Built on Moqui Framework 4.0.0
+
+Site Map

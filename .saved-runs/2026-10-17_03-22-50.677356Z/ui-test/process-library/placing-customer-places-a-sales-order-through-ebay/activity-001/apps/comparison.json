@@ -1,0 +1,17 @@
+{
+  "id": "activity-001",
+  "sourceLine": 8,
+  "headings": [
+    "Placing Customer Places a Sales Order - Through EBay"
+  ],
+  "text": "Source: [Business Process Library/Placing Customer Places a Sales Order - Through EBay](https://moqui.org/docs/mantle/Business%20Process%20Library/Placing%20Customer%20Places%20a%20Sales%20Order%20-%20Through%20EBay)\n\nType: Business-process description; verify UI applicability.\n\nNOTE: This story is historical. There is no eBay integration component in the current Moqui add-ons, and this process is not implemented as a Moqui add-on.",
+  "route": null,
+  "dialog": null,
+  "mapping": "entry-candidate",
+  "limitation": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required.",
+  "source": "docs/business-processes/process-library/placing-customer-places-a-sales-order-through-ebay.md",
+  "mode": "apps",
+  "coverage": "blocked",
+  "captures": [],
+  "reason": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required."
+}

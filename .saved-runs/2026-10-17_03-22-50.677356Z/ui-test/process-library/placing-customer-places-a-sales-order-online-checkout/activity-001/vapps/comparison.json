@@ -1,0 +1,17 @@
+{
+  "id": "activity-001",
+  "sourceLine": 8,
+  "headings": [
+    "Placing Customer Places a Sales Order - Online Checkout"
+  ],
+  "text": "Source: [Business Process Library/Placing Customer Places a Sales Order - Online Checkout](https://moqui.org/docs/mantle/Business%20Process%20Library/Placing%20Customer%20Places%20a%20Sales%20Order%20-%20Online%20Checkout)\n\nType: Business-process description; verify UI applicability.\n\nThis story starts once Placing Customer has added products to a list in order to place a sales order. The interactions could take place through various mediums to send the information to the company, including internet, phone, fax, mail, or in-person.",
+  "route": null,
+  "dialog": null,
+  "mapping": "entry-candidate",
+  "limitation": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required.",
+  "source": "docs/business-processes/process-library/placing-customer-places-a-sales-order-online-checkout.md",
+  "mode": "vapps",
+  "coverage": "blocked",
+  "captures": [],
+  "reason": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required."
+}

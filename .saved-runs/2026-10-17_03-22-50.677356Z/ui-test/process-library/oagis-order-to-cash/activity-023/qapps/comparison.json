@@ -1,0 +1,19 @@
+{
+  "id": "activity-023",
+  "sourceLine": 82,
+  "headings": [
+    "OAGIS Order to Cash",
+    "OAGIS Scenarios",
+    "Incorporated Scenarios"
+  ],
+  "text": "* 61 - High Tech Logistics - Customer Operated Hub",
+  "route": null,
+  "dialog": null,
+  "mapping": "entry-candidate",
+  "limitation": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required.",
+  "source": "docs/business-processes/process-library/oagis-order-to-cash.md",
+  "mode": "qapps",
+  "coverage": "blocked",
+  "captures": [],
+  "reason": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required."
+}

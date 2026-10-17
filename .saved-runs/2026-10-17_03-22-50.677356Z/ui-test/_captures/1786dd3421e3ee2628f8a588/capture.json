@@ -1,0 +1,25 @@
+{
+  "engine": "rust",
+  "mode": "vapps",
+  "route": "marble/dashboard",
+  "dialog": null,
+  "authenticated": true,
+  "errors": [
+    "page.waitForURL: Timeout 5000ms exceeded.\n=========================== logs ===========================\nwaiting for navigation until \"load\"\n============================================================"
+  ],
+  "failedRequests": [],
+  "httpErrors": [
+    {
+      "url": "http://127.0.0.1:18092/vapps/marble/dashboard",
+      "status": 404
+    }
+  ],
+  "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "status": "blocked",
+  "reused": false,
+  "requestedURL": "http://127.0.0.1:18092/vapps/marble/dashboard",
+  "navigation": "dashboard-link",
+  "finalURL": "about:blank"
+}

@@ -1,0 +1,9 @@
+Toggle navigation 
+{{histItem.title}}
+{{histItem.time}} {{histItem.message}}
+{{screenDoc.title}}
+ 
+
+Built on Moqui Framework 4.0.0
+
+Site Map

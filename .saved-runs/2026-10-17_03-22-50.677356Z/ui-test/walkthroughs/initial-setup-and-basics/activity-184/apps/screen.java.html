@@ -1,0 +1,2193 @@
+<!DOCTYPE html><html><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    
+    <title>Reports - Report List</title>
+    <link rel="apple-touch-icon" href="/MoquiLogo100.png">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="http://127.0.0.1:18091/css/webroot-layout.css?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="http://127.0.0.1:18091/css/webroot-theme.css?v=1a147e2" rel="stylesheet" type="text/css">
+    <script src="#?v=1a147e2" type="text/javascript"></script>
+    <script src="#?v=1a147e2" type="text/javascript"></script>
+    <script src="#?v=1a147e2" type="text/javascript"></script>
+    <link rel="shortcut icon" href="http://127.0.0.1:18091/favicon.ico">
+<style type="text/css">/* Chart.js */
+@keyframes chartjs-render-animation{from{opacity:.99}to{opacity:1}}.chartjs-render-monitor{animation:chartjs-render-animation 1ms}.chartjs-size-monitor,.chartjs-size-monitor-expand,.chartjs-size-monitor-shrink{position:absolute;direction:ltr;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1}.chartjs-size-monitor-expand>div{position:absolute;width:1000000px;height:1000000px;left:0;top:0}.chartjs-size-monitor-shrink>div{position:absolute;width:200%;height:200%;left:0;top:0}</style></head>
+<body class="dev bg-light ReportList">
+        
+        
+        
+        
+    <!-- BEGIN screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+        <!-- BEGIN render-mode.text[inline][@template=true] -->
+<script>var notificationClient = new moqui.NotificationClient((location.protocol === 'https:' ? 'wss' : 'ws') + "://127.0.0.1:18091/notws");</script>        <!-- END   render-mode.text[inline][@template=true] -->
+    <!-- BEGIN section[@name=TopNavSection] -->
+        <!-- BEGIN screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+    <div id="top">
+        <!-- BEGIN render-mode.text[@location=component://webroot/screen/includes/navbar.html.ftl][@template=true] -->
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <header class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a href="http://127.0.0.1:18091/apps/AppList" class="navbar-brand"><img src="http://127.0.0.1:18091/images/MoquiLogoSmall.png" alt="Home"></a>
+        
+    </header>
+    <div id="navbar-buttons" class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul id="header-menus" class="nav navbar-nav">
+        </ul>
+        <div id="navbar-menu-crumbs">
+        </div>
+        <a class="navbar-text" href="http://127.0.0.1:18091/apps/marble/Accounting/Reports/ReportList">Report List</a>
+        <a href="http://127.0.0.1:18091/Login/logout" data-toggle="tooltip" data-original-title="Logout John Doe" data-placement="bottom" class="btn btn-danger btn-sm navbar-btn navbar-right">
+            <i class="fa fa-power-off"></i>
+        </a>
+        <a href="#" onclick="switchDarkLight();" data-toggle="tooltip" data-original-title="Switch Dark/Light" data-placement="bottom" class="btn btn-default btn-sm navbar-btn navbar-right">
+            <i class="fa fa-adjust"></i>
+        </a>
+
+<div class="btn-group navbar-right">
+    <a href="/apps/my/User/Notifications" data-toggle="tooltip" data-container="body" data-original-title="Notifications" data-placement="bottom" class="btn btn-default btn-sm navbar-btn">
+        <i class="fa fa-info-circle"></i>
+        <span id="navbar_notification_count" class="label label-info">0</span>
+    </a>
+    <a href="/apps/my/User/Messages/FindMessage?statusId=CeReceived&amp;toPartyId=EX_JOHN_DOE" data-toggle="tooltip" data-container="body" data-original-title="Messages" data-placement="bottom" class="btn btn-default btn-sm navbar-btn">
+        <i class="fa fa-envelope"></i>
+        <span class="label label-warning">0</span>
+    </a>
+    <a href="/apps/my/User/Calendar/MyCalendar" data-toggle="tooltip" data-container="body" data-original-title="Events This Week" data-placement="bottom" class="btn btn-default btn-sm navbar-btn">
+        <i class="fa fa-calendar"></i>
+        <span class="label label-primary">0</span>
+    </a>
+    <a href="/apps/my/User/Task/MyTasks" data-toggle="tooltip" data-container="body" data-original-title="Open Tasks" data-placement="bottom" class="btn btn-default btn-sm navbar-btn">
+        <i class="fa fa-check"></i>
+        <span class="label label-success">0</span>
+    </a>
+</div>
+    <script>
+        var navbarNotificationListener = function(jsonObj, webSocket) {
+            if (jsonObj && jsonObj.persistOnSend === true) {
+                var countElement = $("#navbar_notification_count");
+                countElement.text((parseInt(countElement.text()) + 1).toString());
+            }
+            notificationClient.displayNotify(jsonObj, webSocket);
+        };
+        notificationClient.registerListener("ALL", navbarNotificationListener);
+    </script>
+        <div id="history-menu" class="nav navbar-right dropdown">
+            <a id="history-menu-link" href="#" class="dropdown-toggle btn btn-default btn-sm navbar-btn" data-toggle="dropdown" title="History">
+                <i class="fa fa-list"></i></a>
+            <ul class="dropdown-menu">
+                <li><a href="http://127.0.0.1:18091/apps/marble/dashboard">
+                            <i class="fa fa-dashboard" style="padding-right: 8px;"></i>
+                    Marble ERP - Dashboard
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Accounting/Invoice/EditInvoice">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Accounting.png" alt="Invoices - Invoice" height="18" style="padding-right: 4px;">
+                    Invoices - Invoice
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Accounting/Payment/FindPayment?paymentType=Incoming">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Accounting.png" alt="Payments - Find Payment (Incoming)" height="18" style="padding-right: 4px;">
+                    Payments - Find Payment (Incoming)
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Shipment/ShipmentItems">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Shipping.png" alt="Shipments - Items" height="18" style="padding-right: 4px;">
+                    Shipments - Items
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Order/OrderDetail">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Sales.png" alt="Orders - Order Detail" height="18" style="padding-right: 4px;">
+                    Orders - Order Detail
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Order/FindOrder">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Sales.png" alt="Orders - Find Order" height="18" style="padding-right: 4px;">
+                    Orders - Find Order
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Asset/Asset/FindSummary">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Asset.png" alt="Asset - Find Summary" height="18" style="padding-right: 4px;">
+                    Asset - Find Summary
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/ProductStore/FindProductStore">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/ProductStore.png" alt="Stores - Find Product Store" height="18" style="padding-right: 4px;">
+                    Stores - Find Product Store
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Facility/FindFacility">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Facility.png" alt="Facility - Find Facility" height="18" style="padding-right: 4px;">
+                    Facility - Find Facility
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Catalog/Product/EditPrices">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Catalog.png" alt="Products - Prices" height="18" style="padding-right: 4px;">
+                    Products - Prices
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Asset/Asset/FindSummary?assetTypeEnumId=AstTpInventory">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Asset.png" alt="Asset - Find Summary (AstTpInventory)" height="18" style="padding-right: 4px;">
+                    Asset - Find Summary (AstTpInventory)
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Catalog/Product/FindProduct">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Catalog.png" alt="Products - Find Product" height="18" style="padding-right: 4px;">
+                    Products - Find Product
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Accounting/Invoice/FindInvoice">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Accounting.png" alt="Invoices - Find Invoice" height="18" style="padding-right: 4px;">
+                    Invoices - Find Invoice
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Party/PartyTimeEntries">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Parties.png" alt="Parties - Time" height="18" style="padding-right: 4px;">
+                    Parties - Time
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/HumanRes/EditRateAmounts">
+                            <img src="#" alt="Human Resources - Rates" height="18" style="padding-right: 4px;">
+                    Human Resources - Rates
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Task/FindTask">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/task-homework.png" alt="Tasks - Find Task" height="18" style="padding-right: 4px;">
+                    Tasks - Find Task
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Project/FindProject">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/project-business120.png" alt="Projects - Find Project" height="18" style="padding-right: 4px;">
+                    Projects - Find Project
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Customer/EditCustomer">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Customer.png" alt="Customers - Customer" height="18" style="padding-right: 4px;">
+                    Customers - Customer
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Customer/FindCustomer">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Customer.png" alt="Customers - Find Customer" height="18" style="padding-right: 4px;">
+                    Customers - Find Customer
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Party/EditParty">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Parties.png" alt="Parties - Party" height="18" style="padding-right: 4px;">
+                    Parties - Party
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Party/FindParty">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/dashboard">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/vapps/marble/Party/FindParty">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/vapps/marble/dashboard">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Party/FindParty">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Parties.png" alt="Parties - Find Party" height="18" style="padding-right: 4px;">
+                    Parties - Find Party
+                </a></li>
+            </ul>
+        </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+    $('.navbar [data-toggle="tooltip"]').tooltip({ placement:'bottom', trigger:'hover' });
+    $('#history-menu-link').tooltip({ placement:'bottom', trigger:'hover' });
+    $('#document-menu-link').tooltip({ placement:'bottom', trigger:'hover' });
+    function switchDarkLight() {
+        $("body").toggleClass("bg-dark");
+        $("body").toggleClass("bg-light");
+        var currentStyle = $("body").hasClass("bg-dark") ? "bg-dark" : "bg-light";
+        $.ajax({ type:'POST', url:'http://127.0.0.1:18091/apps/setPreference', data:{ 'moquiSessionToken': '[REDACTED]','preferenceKey': 'OUTER_STYLE', 'preferenceValue': currentStyle }, dataType:'json' });
+    }
+</script>
+
+        <!-- END   render-mode.text[@location=component://webroot/screen/includes/navbar.html.ftl][@template=true] -->
+        <!-- BEGIN render-mode.text[inline][@template=true] -->
+        <!-- END   render-mode.text[inline][@template=true] -->
+        <li id="header-menu" class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Application <i class="fa fa-chevron-right"></i></a>
+            <ul class="dropdown-menu">
+                        <li class="active"><a href="http://127.0.0.1:18091/apps/marble/dashboard"><i class="fa fa-cogs" style="padding-right: 8px;"></i>Marble ERP</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/my"><i class="fa fa-user" style="padding-right: 8px;"></i>My Account</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/system"><i class="fa fa-cog" style="padding-right: 8px;"></i>System</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/tools"><i class="fa fa-wrench" style="padding-right: 8px;"></i>Tools</a></li>
+            </ul>
+        </li>
+        <script>$("#header-menus").append($("#header-menu"));</script>
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    <!-- END   screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+
+    <!-- END   section[@name=TopNavSection] -->
+    <div id="content">
+    <div class="inner">
+    <div class="container-fluid">
+    <!-- BEGIN section[@name=MessagesSection] -->
+        <!-- BEGIN screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+    <!-- BEGIN section-iterate[@name=headerMessageInfos] -->
+    
+    <!-- END   section-iterate[@name=headerMessageInfos] -->
+    <!-- BEGIN section-iterate[@name=headerErrors] -->
+    
+    <!-- END   section-iterate[@name=headerErrors] -->
+    <!-- BEGIN section-iterate[@name=headerValidationErrors] -->
+    
+    <!-- END   section-iterate[@name=headerValidationErrors] -->
+    <!-- BEGIN section-iterate[@name=headerSavedMessages] -->
+    
+    <!-- END   section-iterate[@name=headerSavedMessages] -->
+    <!-- BEGIN section-iterate[@name=headerSavedErrors] -->
+    
+    <!-- END   section-iterate[@name=headerSavedErrors] -->
+    <!-- BEGIN section-iterate[@name=headerSavedValidationErrors] -->
+    
+    <!-- END   section-iterate[@name=headerSavedValidationErrors] -->
+    <!-- END   screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+
+    <!-- END   section[@name=MessagesSection] -->
+        <!-- BEGIN screen[@location=component://MarbleERP/screen/marble.xml].widgets -->
+    <!-- BEGIN section[@name=OrgChooserSection] -->
+        <!-- BEGIN screen[@location=component://MarbleERP/screen/marble.xml].widgets -->
+        <!-- BEGIN render-mode.text[inline][@template=true] -->
+<div id="active-org-menu" class="nav navbar-right dropdown">
+                <a id="active-org-menu-link" href="#" class="dropdown-toggle btn btn-default btn-sm navbar-btn" data-toggle="dropdown" title="Organization">
+                    <i class="fa fa-globe"></i> </a>
+                <ul class="dropdown-menu">
+                        <li><a href="http://127.0.0.1:18091/apps/setPrefGoLast?preferenceKey=ACTIVE_ORGANIZATION&amp;preferenceValue=ORG_ZIZI_RETAIL">ZIRET: Ziziwork Retail &amp; Wholesale</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/setPrefGoLast?preferenceKey=ACTIVE_ORGANIZATION&amp;preferenceValue=ORG_ZIZI_SERVICES">ZISER: Ziziwork Services</a></li>
+                </ul>
+            </div>
+            <script>$("#navbar-buttons").append($("#active-org-menu")); $('#active-org-menu-link').tooltip({ placement:'bottom', trigger:'hover' });</script>        <!-- END   render-mode.text[inline][@template=true] -->
+    <!-- END   screen[@location=component://MarbleERP/screen/marble.xml].widgets -->
+
+    <!-- END   section[@name=OrgChooserSection] -->
+        <li id="MarbleErpPanel-menu" class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Marble ERP <i class="fa fa-chevron-right"></i></a>
+            <ul class="dropdown-menu">
+                        <li><a href="http://127.0.0.1:18091/apps/marble/dashboard"><i class="fa fa-dashboard" style="padding-right: 8px;"></i>Dashboard</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/QuickSearch"><i class="fa fa-search" style="padding-right: 8px;"></i>Quick Search</a></li>
+                        <li class="active"><a href="http://127.0.0.1:18091/apps/marble/Accounting/dashboard"><img src="http://127.0.0.1:18091/ssstatic/images/Accounting.png" alt="Accounting" height="18" style="padding-right: 4px;">Accounting</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Asset/dashboard"><img src="http://127.0.0.1:18091/ssstatic/images/Asset.png" alt="Asset" height="18" style="padding-right: 4px;">Asset</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Catalog/dashboard"><img src="http://127.0.0.1:18091/ssstatic/images/Catalog.png" alt="Catalog" height="18" style="padding-right: 4px;">Catalog</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Customer/FindCustomer"><img src="http://127.0.0.1:18091/ssstatic/images/Customer.png" alt="Customers" height="18" style="padding-right: 4px;">Customers</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Facility/FindFacility"><img src="http://127.0.0.1:18091/ssstatic/images/Facility.png" alt="Facility" height="18" style="padding-right: 4px;">Facility</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/HumanRes/dashboard"><i class="fa fa-user-plus" style="padding-right: 8px;"></i>Human Resources</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Manufacturing/dashboard"><i class="fa fa-industry" style="padding-right: 8px;"></i>Manufacturing</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Order/FindOrder"><img src="http://127.0.0.1:18091/ssstatic/images/Sales.png" alt="Orders" height="18" style="padding-right: 4px;">Orders</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Party/FindParty"><img src="http://127.0.0.1:18091/ssstatic/images/Parties.png" alt="Parties" height="18" style="padding-right: 4px;">Parties</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Project/FindProject"><img src="http://127.0.0.1:18091/ssstatic/images/project-business120.png" alt="Projects" height="18" style="padding-right: 4px;">Projects</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Request/FindRequest"><img src="http://127.0.0.1:18091/ssstatic/images/Request.png" alt="Requests" height="18" style="padding-right: 4px;">Requests</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Return/FindReturn"><img src="http://127.0.0.1:18091/ssstatic/images/Return.png" alt="Returns" height="18" style="padding-right: 4px;">Returns</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Shipment/FindShipment"><img src="http://127.0.0.1:18091/ssstatic/images/Shipping.png" alt="Shipments" height="18" style="padding-right: 4px;">Shipments</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Shipping/dashboard"><img src="http://127.0.0.1:18091/ssstatic/images/Picking.png" alt="Shipping" height="18" style="padding-right: 4px;">Shipping</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/ProductStore/FindProductStore"><img src="http://127.0.0.1:18091/ssstatic/images/ProductStore.png" alt="Stores" height="18" style="padding-right: 4px;">Stores</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Supplier/FindSupplier"><img src="http://127.0.0.1:18091/ssstatic/images/Supplier.png" alt="Suppliers" height="18" style="padding-right: 4px;">Suppliers</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Survey/FindSurvey"><i class="fa fa-pencil-square-o" style="padding-right: 8px;"></i>Survey</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Task/FindTask"><img src="http://127.0.0.1:18091/ssstatic/images/task-homework.png" alt="Tasks" height="18" style="padding-right: 4px;">Tasks</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Wiki/WikiSpaces"><img src="http://127.0.0.1:18091/ssstatic/images/Wiki.png" alt="Wiki/Content" height="18" style="padding-right: 4px;">Wiki/Content</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/QuickViewReport"><i class="fa fa-database" style="padding-right: 8px;"></i>Custom Reports</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/SimpleReport/FindReport"><i class="fa fa-database" style="padding-right: 8px;"></i>Report Builder</a></li>
+            </ul>
+        </li>
+        <script>$("#header-menus").append($("#MarbleErpPanel-menu"));</script>
+            <!-- BEGIN screen[@location=component://SimpleScreens/screen/SimpleScreens/Accounting.xml].widgets -->
+        <li id="accounting-panel-menu" class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Accounting <i class="fa fa-chevron-right"></i></a>
+            <ul class="dropdown-menu">
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Accounting/dashboard"><img src="http://127.0.0.1:18091/ssstatic/images/Accounting.png" alt="Dashboard" height="18" style="padding-right: 4px;">Dashboard</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Accounting/Invoice/FindInvoice"><img src="http://127.0.0.1:18091/ssstatic/images/Accounting.png" alt="Invoices" height="18" style="padding-right: 4px;">Invoices</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Accounting/Payment/FindPayment"><img src="http://127.0.0.1:18091/ssstatic/images/Accounting.png" alt="Payments" height="18" style="padding-right: 4px;">Payments</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Accounting/FinancialAccount/FindFinancialAccount"><img src="http://127.0.0.1:18091/ssstatic/images/Accounting.png" alt="Financial Accounts" height="18" style="padding-right: 4px;">Financial Accounts</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Accounting/Transaction/FindTransaction"><img src="http://127.0.0.1:18091/ssstatic/images/Accounting.png" alt="Transactions" height="18" style="padding-right: 4px;">Transactions</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Accounting/FindJournal"><img src="http://127.0.0.1:18091/ssstatic/images/Accounting.png" alt="GL Journals" height="18" style="padding-right: 4px;">GL Journals</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Accounting/TimePeriod/FindTimePeriod"><img src="http://127.0.0.1:18091/ssstatic/images/Accounting.png" alt="Time Period" height="18" style="padding-right: 4px;">Time Period</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Accounting/GlAccount/FindGlAccount"><img src="http://127.0.0.1:18091/ssstatic/images/Accounting.png" alt="GL Accounts" height="18" style="padding-right: 4px;">GL Accounts</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Accounting/Budget/FindBudget"><img src="http://127.0.0.1:18091/ssstatic/images/Accounting.png" alt="Budgets" height="18" style="padding-right: 4px;">Budgets</a></li>
+                        <li class="active"><a href="http://127.0.0.1:18091/apps/marble/Accounting/Reports/ReportList"><img src="http://127.0.0.1:18091/ssstatic/images/Accounting.png" alt="Reports" height="18" style="padding-right: 4px;">Reports</a></li>
+            </ul>
+        </li>
+        <script>$("#header-menus").append($("#accounting-panel-menu"));</script>
+            <!-- BEGIN screen[@location=component://SimpleScreens/screen/SimpleScreens/Accounting/Reports.xml].widgets -->
+        <li id="reports-panel-menu" class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Reports <i class="fa fa-chevron-right"></i></a>
+            <ul class="dropdown-menu">
+                        <li class="active"><a href="http://127.0.0.1:18091/apps/marble/Accounting/Reports/ReportList"><img src="http://127.0.0.1:18091/ssstatic/images/Accounting.png" alt="Report List" height="18" style="padding-right: 4px;">Report List</a></li>
+            </ul>
+        </li>
+        <script>$("#header-menus").append($("#reports-panel-menu"));</script>
+            <!-- BEGIN screen[@location=component://SimpleScreens/screen/SimpleScreens/Accounting/Reports/ReportList.xml].widgets -->
+    <div class="row">
+            <div class=" col-md-6">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h5>Financial Reports</h5>
+        </div>
+            <div class="panel-body">
+        <button id="BalanceSheetDialog-button" type="button" data-toggle="modal" data-target="#BalanceSheetDialog" data-original-title="Balance Sheet" data-placement="bottom" class="btn btn-primary btn-sm "><i class="fa fa-share"></i> Balance Sheet</button>
+
+        <div id="BalanceSheetDialog" class="modal container-dialog" aria-hidden="true" style="display: none;" tabindex="-1">
+            <div class="modal-dialog" style="width: 760px;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">Balance Sheet</h4>
+                    </div>
+                    <div class="modal-body">
+    <!-- BEGIN form-single[@name=BalanceSheetForm] -->
+    <form name="BalanceSheetForm" id="BalanceSheetForm" method="post" action="http://127.0.0.1:18091/apps/marble/Accounting/Reports/BalanceSheet">
+        <input type="hidden" name="moquiFormName" value="BalanceSheetForm" style="">
+        <input type="hidden" name="moquiSessionToken" value="[REDACTED]" style="">
+        
+        <fieldset class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="BalanceSheetForm_organizationPartyId">Organization</label>
+            <div class="col-sm-10">
+    
+    <select name="organizationPartyId" class="" id="BalanceSheetForm_organizationPartyId">
+            <option value="ORG_ZIZI_HR">ZIHR: Ziziwork Human Resources</option>
+            <option value="ORG_ZIZI_CORP">ZICORP: Ziziwork Industries</option>
+            <option value="ORG_ZIZI_RETAIL">ZIRET: Ziziwork Retail &amp; Wholesale</option>
+            <option value="ORG_ZIZI_SALES">ZISAL: Ziziwork Sales</option>
+            <option value="ORG_ZIZI_SERVICES">ZISER: Ziziwork Services</option>
+    </select>
+    
+    
+        <script>$("#BalanceSheetForm_organizationPartyId").select2({  });</script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="BalanceSheetForm_timePeriodIdList">Time Periods</label>
+            <div class="col-sm-10">
+    
+    <select name="timePeriodIdList" class=" dynamic-options noResetSelect2" style="min-width:200px;" id="BalanceSheetForm_timePeriodIdList" multiple="multiple">
+    </select>
+    
+    <input type="hidden" id="BalanceSheetForm_timePeriodIdList_op" name="timePeriodIdList_op" value="in" style="">
+        <script>
+            var BalanceSheetForm_timePeriodIdListS2Opts = { 
+                closeOnSelect:false,
+                minimumResultsForSearch:0, width:"100%", minimumInputLength:0,
+                ajax:{ url:"http://127.0.0.1:18091/apps/marble/Accounting/Reports/ReportList/getTimePeriodList", type:"POST", dataType:"json", cache:true, delay:300,
+                    data:function(params) { return { moquiSessionToken: "[REDACTED]", term:(params.term || ''), pageIndex:(params.page || 1) - 1
+                        , "partyId": $("#BalanceSheetForm_organizationPartyId").val()
+                        , "timePeriodTypeId":"FiscalYear,FiscalQuarter,FiscalMonth", "pastOnly":"true"
+                    }},
+                    processResults:function(data, params) {
+                        var isDataArray = moqui.isArray(data);
+                        var list = isDataArray ? data : data.options;
+                        var newData = [];
+                        // funny case where select2 specifies no option.@value if empty so &nbsp; ends up passed with form submit; now filtered on server for \u00a0 only and set to null
+                        
+                        var labelField = "label"; var valueField = "value";
+                        $.each(list, function(idx, curObj) {
+                            var idVal = curObj[valueField]; if (!idVal) idVal = '\u00a0';
+                            newData.push({ id:idVal, text:curObj[labelField] })
+                        });
+                        var outObj = { results:newData };
+                        if (!isDataArray) {
+                            params.page = params.page || 1; // NOTE: 1 based index, is 0 based on server side
+                            var pageSize = data.pageSize || 20;
+                            outObj.pagination = { more: (data.count ? (params.page * pageSize) < data.count : false) };
+                        }
+                        return outObj;
+                    }
+                }
+            };
+            $("#BalanceSheetForm_timePeriodIdList").select2(BalanceSheetForm_timePeriodIdListS2Opts);
+            function populate_BalanceSheetForm_timePeriodIdList(params) {
+                    var hasAllParms = true;
+                    if (!$('#BalanceSheetForm_organizationPartyId').val()) { hasAllParms = false; } 
+                    if (!hasAllParms) { $("#BalanceSheetForm_timePeriodIdList").select2("destroy"); $('#BalanceSheetForm_timePeriodIdList').html(""); $("#BalanceSheetForm_timePeriodIdList").select2({ });  return; }
+                $.ajax({ type:"POST", url:"http://127.0.0.1:18091/apps/marble/Accounting/Reports/ReportList/getTimePeriodList", data:{ moquiSessionToken: "[REDACTED]", "partyId": $("#BalanceSheetForm_organizationPartyId").val(), "timePeriodTypeId":"FiscalYear,FiscalQuarter,FiscalMonth", "pastOnly":"true", term:((params && params.term) || '')}, dataType:"json"}).done(                    function(data) {
+                        var list = moqui.isArray(data) ? data : data.options;
+                        if (list) {
+                            var jqEl = $("#BalanceSheetForm_timePeriodIdList");
+                            var bWasFocused = jqEl.next().hasClass('select2-container--focus');
+                            jqEl.select2("destroy");
+                            jqEl.html("");
+                            var currentValues = [""];
+                            $.each(list, function(key, value) {
+                                var optionValue = value["value"];
+                                if (currentValues.indexOf(optionValue) >= 0) {
+                                    jqEl.append("<option selected='selected' value='" + optionValue + "'>" + value["label"] + "</option>");
+                                } else {
+                                    jqEl.append("<option value='" + optionValue + "'>" + value["label"] + "</option>");
+                                }
+                            });
+                            $("#BalanceSheetForm_timePeriodIdList").select2(BalanceSheetForm_timePeriodIdListS2Opts);
+                            if( bWasFocused ) jqEl.focus();
+                            setTimeout(function() { jqEl.trigger('change'); }, 50);
+                        }
+                    }
+                );
+            }
+            $("#BalanceSheetForm_organizationPartyId").on('change', function() { populate_BalanceSheetForm_timePeriodIdList(); });
+            
+                
+
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="BalanceSheetForm_detail">Detail</label>
+            <div class="col-sm-10">
+    
+        <span id="BalanceSheetForm_detail"><input type="checkbox" name="detail" value="true" style=""><span class="checkbox-label" onclick="$('#BalanceSheetForm_detail').children('input[type=checkbox]').click()" style="cursor: default"> </span></span>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="BalanceSheetForm_beginningAndPosted">Beginning And Posted</label>
+            <div class="col-sm-10">
+    
+        <span id="BalanceSheetForm_beginningAndPosted"><input type="checkbox" name="beginningAndPosted" value="true" style=""><span class="checkbox-label" onclick="$('#BalanceSheetForm_beginningAndPosted').children('input[type=checkbox]').click()" style="cursor: default"> </span></span>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="BalanceSheetForm_percents">Percent of Assets</label>
+            <div class="col-sm-10">
+    
+        <span id="BalanceSheetForm_percents"><input type="checkbox" name="percents" value="true" style=""><span class="checkbox-label" onclick="$('#BalanceSheetForm_percents').children('input[type=checkbox]').click()" style="cursor: default"> </span></span>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="BalanceSheetForm_childOrgPeriods">Child Org Periods</label>
+            <div class="col-sm-10">
+    
+        <span id="BalanceSheetForm_childOrgPeriods"><input type="checkbox" name="childOrgPeriods" value="true" style=""><span class="checkbox-label" onclick="$('#BalanceSheetForm_childOrgPeriods').children('input[type=checkbox]').click()" style="cursor: default"> </span></span>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <div class="col-sm-2 hidden-xs">&nbsp;</div>
+            <div class="col-sm-10">
+    
+    <button type="submit" name="submitButton" value="submitButton" id="BalanceSheetForm_submitButton" class="btn btn-primary btn-sm">
+Run    </button>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        </fieldset>
+    </form>
+        <script>
+            $("#BalanceSheetForm").validate({ errorClass: 'help-block', errorElement: 'span',
+                highlight: function(element, errorClass, validClass) { $(element).parents('.form-group').removeClass('has-success').addClass('has-error'); },
+                unhighlight: function(element, errorClass, validClass) { $(element).parents('.form-group').removeClass('has-error').addClass('has-success'); }
+            });
+            $('#BalanceSheetForm [data-toggle="tooltip"]').tooltip({placement:'auto top'});
+
+        </script>
+    <!-- END   form-single[@name=BalanceSheetForm] -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>$('#BalanceSheetDialog').on('shown.bs.modal', function() {
+            $("#BalanceSheetDialog :not(.noResetSelect2)>select:not(.noResetSelect2)").select2({ });
+            var defFocus = $("#BalanceSheetDialog .default-focus");
+            if (defFocus.length) { defFocus.focus(); } else { $("#BalanceSheetDialog form :input:visible:first").focus(); }
+        });</script>
+        <button id="IncomeStatementDialog-button" type="button" data-toggle="modal" data-target="#IncomeStatementDialog" data-original-title="Income Statement" data-placement="bottom" class="btn btn-primary btn-sm "><i class="fa fa-share"></i> Income Statement</button>
+
+        <div id="IncomeStatementDialog" class="modal container-dialog" aria-hidden="true" style="display: none;" tabindex="-1">
+            <div class="modal-dialog" style="width: 760px;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">Income Statement</h4>
+                    </div>
+                    <div class="modal-body">
+    <!-- BEGIN form-single[@name=IncomeStatementForm] -->
+    <form name="IncomeStatementForm" id="IncomeStatementForm" method="post" action="http://127.0.0.1:18091/apps/marble/Accounting/Reports/IncomeStatement">
+        <input type="hidden" name="moquiFormName" value="IncomeStatementForm" style="">
+        <input type="hidden" name="moquiSessionToken" value="[REDACTED]" style="">
+        
+        <fieldset class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="IncomeStatementForm_organizationPartyId">Organization</label>
+            <div class="col-sm-10">
+    
+    <select name="organizationPartyId" class="" id="IncomeStatementForm_organizationPartyId">
+            <option value="ORG_ZIZI_HR">ZIHR: Ziziwork Human Resources</option>
+            <option value="ORG_ZIZI_CORP">ZICORP: Ziziwork Industries</option>
+            <option value="ORG_ZIZI_RETAIL">ZIRET: Ziziwork Retail &amp; Wholesale</option>
+            <option value="ORG_ZIZI_SALES">ZISAL: Ziziwork Sales</option>
+            <option value="ORG_ZIZI_SERVICES">ZISER: Ziziwork Services</option>
+    </select>
+    
+    
+        <script>$("#IncomeStatementForm_organizationPartyId").select2({  });</script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="IncomeStatementForm_timePeriodIdList">Time Periods</label>
+            <div class="col-sm-10">
+    
+    <select name="timePeriodIdList" class=" dynamic-options noResetSelect2" style="min-width:200px;" id="IncomeStatementForm_timePeriodIdList" multiple="multiple">
+    </select>
+    
+    <input type="hidden" id="IncomeStatementForm_timePeriodIdList_op" name="timePeriodIdList_op" value="in" style="">
+        <script>
+            var IncomeStatementForm_timePeriodIdListS2Opts = { 
+                closeOnSelect:false,
+                minimumResultsForSearch:0, width:"100%", minimumInputLength:0,
+                ajax:{ url:"http://127.0.0.1:18091/apps/marble/Accounting/Reports/ReportList/getTimePeriodList", type:"POST", dataType:"json", cache:true, delay:300,
+                    data:function(params) { return { moquiSessionToken: "[REDACTED]", term:(params.term || ''), pageIndex:(params.page || 1) - 1
+                        , "partyId": $("#IncomeStatementForm_organizationPartyId").val()
+                        , "timePeriodTypeId":"FiscalYear,FiscalQuarter,FiscalMonth", "pastOnly":"true"
+                    }},
+                    processResults:function(data, params) {
+                        var isDataArray = moqui.isArray(data);
+                        var list = isDataArray ? data : data.options;
+                        var newData = [];
+                        // funny case where select2 specifies no option.@value if empty so &nbsp; ends up passed with form submit; now filtered on server for \u00a0 only and set to null
+                        
+                        var labelField = "label"; var valueField = "value";
+                        $.each(list, function(idx, curObj) {
+                            var idVal = curObj[valueField]; if (!idVal) idVal = '\u00a0';
+                            newData.push({ id:idVal, text:curObj[labelField] })
+                        });
+                        var outObj = { results:newData };
+                        if (!isDataArray) {
+                            params.page = params.page || 1; // NOTE: 1 based index, is 0 based on server side
+                            var pageSize = data.pageSize || 20;
+                            outObj.pagination = { more: (data.count ? (params.page * pageSize) < data.count : false) };
+                        }
+                        return outObj;
+                    }
+                }
+            };
+            $("#IncomeStatementForm_timePeriodIdList").select2(IncomeStatementForm_timePeriodIdListS2Opts);
+            function populate_IncomeStatementForm_timePeriodIdList(params) {
+                    var hasAllParms = true;
+                    if (!$('#IncomeStatementForm_organizationPartyId').val()) { hasAllParms = false; } 
+                    if (!hasAllParms) { $("#IncomeStatementForm_timePeriodIdList").select2("destroy"); $('#IncomeStatementForm_timePeriodIdList').html(""); $("#IncomeStatementForm_timePeriodIdList").select2({ });  return; }
+                $.ajax({ type:"POST", url:"http://127.0.0.1:18091/apps/marble/Accounting/Reports/ReportList/getTimePeriodList", data:{ moquiSessionToken: "[REDACTED]", "partyId": $("#IncomeStatementForm_organizationPartyId").val(), "timePeriodTypeId":"FiscalYear,FiscalQuarter,FiscalMonth", "pastOnly":"true", term:((params && params.term) || '')}, dataType:"json"}).done(                    function(data) {
+                        var list = moqui.isArray(data) ? data : data.options;
+                        if (list) {
+                            var jqEl = $("#IncomeStatementForm_timePeriodIdList");
+                            var bWasFocused = jqEl.next().hasClass('select2-container--focus');
+                            jqEl.select2("destroy");
+                            jqEl.html("");
+                            var currentValues = [""];
+                            $.each(list, function(key, value) {
+                                var optionValue = value["value"];
+                                if (currentValues.indexOf(optionValue) >= 0) {
+                                    jqEl.append("<option selected='selected' value='" + optionValue + "'>" + value["label"] + "</option>");
+                                } else {
+                                    jqEl.append("<option value='" + optionValue + "'>" + value["label"] + "</option>");
+                                }
+                            });
+                            $("#IncomeStatementForm_timePeriodIdList").select2(IncomeStatementForm_timePeriodIdListS2Opts);
+                            if( bWasFocused ) jqEl.focus();
+                            setTimeout(function() { jqEl.trigger('change'); }, 50);
+                        }
+                    }
+                );
+            }
+            $("#IncomeStatementForm_organizationPartyId").on('change', function() { populate_IncomeStatementForm_timePeriodIdList(); });
+            
+                
+
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="IncomeStatementForm_detail">Detail</label>
+            <div class="col-sm-10">
+    
+        <span id="IncomeStatementForm_detail"><input type="checkbox" name="detail" value="true" style=""><span class="checkbox-label" onclick="$('#IncomeStatementForm_detail').children('input[type=checkbox]').click()" style="cursor: default"> </span></span>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="IncomeStatementForm_percents">Percent of Revenue</label>
+            <div class="col-sm-10">
+    
+        <span id="IncomeStatementForm_percents"><input type="checkbox" name="percents" value="true" style=""><span class="checkbox-label" onclick="$('#IncomeStatementForm_percents').children('input[type=checkbox]').click()" style="cursor: default"> </span></span>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="IncomeStatementForm_charts">Charts</label>
+            <div class="col-sm-10">
+    
+        <span id="IncomeStatementForm_charts"><input type="checkbox" name="charts" value="true" style=""><span class="checkbox-label" onclick="$('#IncomeStatementForm_charts').children('input[type=checkbox]').click()" style="cursor: default"> </span></span>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="IncomeStatementForm_childOrgPeriods">Child Org Periods</label>
+            <div class="col-sm-10">
+    
+        <span id="IncomeStatementForm_childOrgPeriods"><input type="checkbox" name="childOrgPeriods" value="true" style=""><span class="checkbox-label" onclick="$('#IncomeStatementForm_childOrgPeriods').children('input[type=checkbox]').click()" style="cursor: default"> </span></span>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <div class="col-sm-2 hidden-xs">&nbsp;</div>
+            <div class="col-sm-10">
+    
+    <button type="submit" name="submitButton" value="submitButton" id="IncomeStatementForm_submitButton" class="btn btn-primary btn-sm">
+Run    </button>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        </fieldset>
+    </form>
+        <script>
+            $("#IncomeStatementForm").validate({ errorClass: 'help-block', errorElement: 'span',
+                highlight: function(element, errorClass, validClass) { $(element).parents('.form-group').removeClass('has-success').addClass('has-error'); },
+                unhighlight: function(element, errorClass, validClass) { $(element).parents('.form-group').removeClass('has-error').addClass('has-success'); }
+            });
+            $('#IncomeStatementForm [data-toggle="tooltip"]').tooltip({placement:'auto top'});
+
+        </script>
+    <!-- END   form-single[@name=IncomeStatementForm] -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>$('#IncomeStatementDialog').on('shown.bs.modal', function() {
+            $("#IncomeStatementDialog :not(.noResetSelect2)>select:not(.noResetSelect2)").select2({ });
+            var defFocus = $("#IncomeStatementDialog .default-focus");
+            if (defFocus.length) { defFocus.focus(); } else { $("#IncomeStatementDialog form :input:visible:first").focus(); }
+        });</script>
+        <button id="CashFlowStatementDialog-button" type="button" data-toggle="modal" data-target="#CashFlowStatementDialog" data-original-title="Cash Flow" data-placement="bottom" class="btn btn-primary btn-sm "><i class="fa fa-share"></i> Cash Flow</button>
+
+        <div id="CashFlowStatementDialog" class="modal container-dialog" aria-hidden="true" style="display: none;" tabindex="-1">
+            <div class="modal-dialog" style="width: 760px;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">Cash Flow</h4>
+                    </div>
+                    <div class="modal-body">
+    <!-- BEGIN form-single[@name=CashFlowStatementForm] -->
+    <form name="CashFlowStatementForm" id="CashFlowStatementForm" method="post" action="http://127.0.0.1:18091/apps/marble/Accounting/Reports/CashFlowStatement">
+        <input type="hidden" name="moquiFormName" value="CashFlowStatementForm" style="">
+        <input type="hidden" name="moquiSessionToken" value="[REDACTED]" style="">
+        
+        <fieldset class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="CashFlowStatementForm_organizationPartyId">Organization</label>
+            <div class="col-sm-10">
+    
+    <select name="organizationPartyId" class="" id="CashFlowStatementForm_organizationPartyId">
+            <option value="ORG_ZIZI_HR">ZIHR: Ziziwork Human Resources</option>
+            <option value="ORG_ZIZI_CORP">ZICORP: Ziziwork Industries</option>
+            <option value="ORG_ZIZI_RETAIL">ZIRET: Ziziwork Retail &amp; Wholesale</option>
+            <option value="ORG_ZIZI_SALES">ZISAL: Ziziwork Sales</option>
+            <option value="ORG_ZIZI_SERVICES">ZISER: Ziziwork Services</option>
+    </select>
+    
+    
+        <script>$("#CashFlowStatementForm_organizationPartyId").select2({  });</script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="CashFlowStatementForm_timePeriodIdList">Time Periods</label>
+            <div class="col-sm-10">
+    
+    <select name="timePeriodIdList" class=" dynamic-options noResetSelect2" style="min-width:200px;" id="CashFlowStatementForm_timePeriodIdList" multiple="multiple">
+    </select>
+    
+    <input type="hidden" id="CashFlowStatementForm_timePeriodIdList_op" name="timePeriodIdList_op" value="in" style="">
+        <script>
+            var CashFlowStatementForm_timePeriodIdListS2Opts = { 
+                closeOnSelect:false,
+                minimumResultsForSearch:0, width:"100%", minimumInputLength:0,
+                ajax:{ url:"http://127.0.0.1:18091/apps/marble/Accounting/Reports/ReportList/getTimePeriodList", type:"POST", dataType:"json", cache:true, delay:300,
+                    data:function(params) { return { moquiSessionToken: "[REDACTED]", term:(params.term || ''), pageIndex:(params.page || 1) - 1
+                        , "partyId": $("#CashFlowStatementForm_organizationPartyId").val()
+                        , "timePeriodTypeId":"FiscalYear,FiscalQuarter,FiscalMonth", "pastOnly":"true"
+                    }},
+                    processResults:function(data, params) {
+                        var isDataArray = moqui.isArray(data);
+                        var list = isDataArray ? data : data.options;
+                        var newData = [];
+                        // funny case where select2 specifies no option.@value if empty so &nbsp; ends up passed with form submit; now filtered on server for \u00a0 only and set to null
+                        
+                        var labelField = "label"; var valueField = "value";
+                        $.each(list, function(idx, curObj) {
+                            var idVal = curObj[valueField]; if (!idVal) idVal = '\u00a0';
+                            newData.push({ id:idVal, text:curObj[labelField] })
+                        });
+                        var outObj = { results:newData };
+                        if (!isDataArray) {
+                            params.page = params.page || 1; // NOTE: 1 based index, is 0 based on server side
+                            var pageSize = data.pageSize || 20;
+                            outObj.pagination = { more: (data.count ? (params.page * pageSize) < data.count : false) };
+                        }
+                        return outObj;
+                    }
+                }
+            };
+            $("#CashFlowStatementForm_timePeriodIdList").select2(CashFlowStatementForm_timePeriodIdListS2Opts);
+            function populate_CashFlowStatementForm_timePeriodIdList(params) {
+                    var hasAllParms = true;
+                    if (!$('#CashFlowStatementForm_organizationPartyId').val()) { hasAllParms = false; } 
+                    if (!hasAllParms) { $("#CashFlowStatementForm_timePeriodIdList").select2("destroy"); $('#CashFlowStatementForm_timePeriodIdList').html(""); $("#CashFlowStatementForm_timePeriodIdList").select2({ });  return; }
+                $.ajax({ type:"POST", url:"http://127.0.0.1:18091/apps/marble/Accounting/Reports/ReportList/getTimePeriodList", data:{ moquiSessionToken: "[REDACTED]", "partyId": $("#CashFlowStatementForm_organizationPartyId").val(), "timePeriodTypeId":"FiscalYear,FiscalQuarter,FiscalMonth", "pastOnly":"true", term:((params && params.term) || '')}, dataType:"json"}).done(                    function(data) {
+                        var list = moqui.isArray(data) ? data : data.options;
+                        if (list) {
+                            var jqEl = $("#CashFlowStatementForm_timePeriodIdList");
+                            var bWasFocused = jqEl.next().hasClass('select2-container--focus');
+                            jqEl.select2("destroy");
+                            jqEl.html("");
+                            var currentValues = [""];
+                            $.each(list, function(key, value) {
+                                var optionValue = value["value"];
+                                if (currentValues.indexOf(optionValue) >= 0) {
+                                    jqEl.append("<option selected='selected' value='" + optionValue + "'>" + value["label"] + "</option>");
+                                } else {
+                                    jqEl.append("<option value='" + optionValue + "'>" + value["label"] + "</option>");
+                                }
+                            });
+                            $("#CashFlowStatementForm_timePeriodIdList").select2(CashFlowStatementForm_timePeriodIdListS2Opts);
+                            if( bWasFocused ) jqEl.focus();
+                            setTimeout(function() { jqEl.trigger('change'); }, 50);
+                        }
+                    }
+                );
+            }
+            $("#CashFlowStatementForm_organizationPartyId").on('change', function() { populate_CashFlowStatementForm_timePeriodIdList(); });
+            
+                
+
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="CashFlowStatementForm_detail">Detail</label>
+            <div class="col-sm-10">
+    
+        <span id="CashFlowStatementForm_detail"><input type="checkbox" name="detail" value="true" style=""><span class="checkbox-label" onclick="$('#CashFlowStatementForm_detail').children('input[type=checkbox]').click()" style="cursor: default"> </span></span>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="CashFlowStatementForm_childOrgPeriods">Child Org Periods</label>
+            <div class="col-sm-10">
+    
+        <span id="CashFlowStatementForm_childOrgPeriods"><input type="checkbox" name="childOrgPeriods" value="true" style=""><span class="checkbox-label" onclick="$('#CashFlowStatementForm_childOrgPeriods').children('input[type=checkbox]').click()" style="cursor: default"> </span></span>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <div class="col-sm-2 hidden-xs">&nbsp;</div>
+            <div class="col-sm-10">
+    
+    <button type="submit" name="submitButton" value="submitButton" id="CashFlowStatementForm_submitButton" class="btn btn-primary btn-sm">
+Run    </button>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        </fieldset>
+    </form>
+        <script>
+            $("#CashFlowStatementForm").validate({ errorClass: 'help-block', errorElement: 'span',
+                highlight: function(element, errorClass, validClass) { $(element).parents('.form-group').removeClass('has-success').addClass('has-error'); },
+                unhighlight: function(element, errorClass, validClass) { $(element).parents('.form-group').removeClass('has-error').addClass('has-success'); }
+            });
+            $('#CashFlowStatementForm [data-toggle="tooltip"]').tooltip({placement:'auto top'});
+
+        </script>
+    <!-- END   form-single[@name=CashFlowStatementForm] -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>$('#CashFlowStatementDialog').on('shown.bs.modal', function() {
+            $("#CashFlowStatementDialog :not(.noResetSelect2)>select:not(.noResetSelect2)").select2({ });
+            var defFocus = $("#CashFlowStatementDialog .default-focus");
+            if (defFocus.length) { defFocus.focus(); } else { $("#CashFlowStatementDialog form :input:visible:first").focus(); }
+        });</script>
+        <button id="RetainedEarningsStatementDialog-button" type="button" data-toggle="modal" data-target="#RetainedEarningsStatementDialog" data-original-title="Retained Earnings" data-placement="bottom" class="btn btn-primary btn-sm "><i class="fa fa-share"></i> Retained Earnings</button>
+
+        <div id="RetainedEarningsStatementDialog" class="modal container-dialog" aria-hidden="true" style="display: none;" tabindex="-1">
+            <div class="modal-dialog" style="width: 760px;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">Retained Earnings</h4>
+                    </div>
+                    <div class="modal-body">
+    <!-- BEGIN form-single[@name=RetainedEarningsStatementForm] -->
+    <form name="RetainedEarningsStatementForm" id="RetainedEarningsStatementForm" method="post" action="http://127.0.0.1:18091/apps/marble/Accounting/Reports/RetainedEarningsStatement">
+        <input type="hidden" name="moquiFormName" value="RetainedEarningsStatementForm" style="">
+        <input type="hidden" name="moquiSessionToken" value="[REDACTED]" style="">
+        
+        <fieldset class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="RetainedEarningsStatementForm_organizationPartyId">Organization</label>
+            <div class="col-sm-10">
+    
+    <select name="organizationPartyId" class="" id="RetainedEarningsStatementForm_organizationPartyId">
+            <option value="ORG_ZIZI_HR">ZIHR: Ziziwork Human Resources</option>
+            <option value="ORG_ZIZI_CORP">ZICORP: Ziziwork Industries</option>
+            <option value="ORG_ZIZI_RETAIL">ZIRET: Ziziwork Retail &amp; Wholesale</option>
+            <option value="ORG_ZIZI_SALES">ZISAL: Ziziwork Sales</option>
+            <option value="ORG_ZIZI_SERVICES">ZISER: Ziziwork Services</option>
+    </select>
+    
+    
+        <script>$("#RetainedEarningsStatementForm_organizationPartyId").select2({  });</script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="RetainedEarningsStatementForm_timePeriodIdList">Time Periods</label>
+            <div class="col-sm-10">
+    
+    <select name="timePeriodIdList" class=" dynamic-options noResetSelect2" style="min-width:200px;" id="RetainedEarningsStatementForm_timePeriodIdList" multiple="multiple">
+    </select>
+    
+    <input type="hidden" id="RetainedEarningsStatementForm_timePeriodIdList_op" name="timePeriodIdList_op" value="in" style="">
+        <script>
+            var RetainedEarningsStatementForm_timePeriodIdListS2Opts = { 
+                closeOnSelect:false,
+                minimumResultsForSearch:0, width:"100%", minimumInputLength:0,
+                ajax:{ url:"http://127.0.0.1:18091/apps/marble/Accounting/Reports/ReportList/getTimePeriodList", type:"POST", dataType:"json", cache:true, delay:300,
+                    data:function(params) { return { moquiSessionToken: "[REDACTED]", term:(params.term || ''), pageIndex:(params.page || 1) - 1
+                        , "partyId": $("#RetainedEarningsStatementForm_organizationPartyId").val()
+                        , "timePeriodTypeId":"FiscalYear,FiscalQuarter,FiscalMonth", "pastOnly":"true"
+                    }},
+                    processResults:function(data, params) {
+                        var isDataArray = moqui.isArray(data);
+                        var list = isDataArray ? data : data.options;
+                        var newData = [];
+                        // funny case where select2 specifies no option.@value if empty so &nbsp; ends up passed with form submit; now filtered on server for \u00a0 only and set to null
+                        
+                        var labelField = "label"; var valueField = "value";
+                        $.each(list, function(idx, curObj) {
+                            var idVal = curObj[valueField]; if (!idVal) idVal = '\u00a0';
+                            newData.push({ id:idVal, text:curObj[labelField] })
+                        });
+                        var outObj = { results:newData };
+                        if (!isDataArray) {
+                            params.page = params.page || 1; // NOTE: 1 based index, is 0 based on server side
+                            var pageSize = data.pageSize || 20;
+                            outObj.pagination = { more: (data.count ? (params.page * pageSize) < data.count : false) };
+                        }
+                        return outObj;
+                    }
+                }
+            };
+            $("#RetainedEarningsStatementForm_timePeriodIdList").select2(RetainedEarningsStatementForm_timePeriodIdListS2Opts);
+            function populate_RetainedEarningsStatementForm_timePeriodIdList(params) {
+                    var hasAllParms = true;
+                    if (!$('#RetainedEarningsStatementForm_organizationPartyId').val()) { hasAllParms = false; } 
+                    if (!hasAllParms) { $("#RetainedEarningsStatementForm_timePeriodIdList").select2("destroy"); $('#RetainedEarningsStatementForm_timePeriodIdList').html(""); $("#RetainedEarningsStatementForm_timePeriodIdList").select2({ });  return; }
+                $.ajax({ type:"POST", url:"http://127.0.0.1:18091/apps/marble/Accounting/Reports/ReportList/getTimePeriodList", data:{ moquiSessionToken: "[REDACTED]", "partyId": $("#RetainedEarningsStatementForm_organizationPartyId").val(), "timePeriodTypeId":"FiscalYear,FiscalQuarter,FiscalMonth", "pastOnly":"true", term:((params && params.term) || '')}, dataType:"json"}).done(                    function(data) {
+                        var list = moqui.isArray(data) ? data : data.options;
+                        if (list) {
+                            var jqEl = $("#RetainedEarningsStatementForm_timePeriodIdList");
+                            var bWasFocused = jqEl.next().hasClass('select2-container--focus');
+                            jqEl.select2("destroy");
+                            jqEl.html("");
+                            var currentValues = [""];
+                            $.each(list, function(key, value) {
+                                var optionValue = value["value"];
+                                if (currentValues.indexOf(optionValue) >= 0) {
+                                    jqEl.append("<option selected='selected' value='" + optionValue + "'>" + value["label"] + "</option>");
+                                } else {
+                                    jqEl.append("<option value='" + optionValue + "'>" + value["label"] + "</option>");
+                                }
+                            });
+                            $("#RetainedEarningsStatementForm_timePeriodIdList").select2(RetainedEarningsStatementForm_timePeriodIdListS2Opts);
+                            if( bWasFocused ) jqEl.focus();
+                            setTimeout(function() { jqEl.trigger('change'); }, 50);
+                        }
+                    }
+                );
+            }
+            $("#RetainedEarningsStatementForm_organizationPartyId").on('change', function() { populate_RetainedEarningsStatementForm_timePeriodIdList(); });
+            
+                
+
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="RetainedEarningsStatementForm_childOrgPeriods">Child Org Periods</label>
+            <div class="col-sm-10">
+    
+        <span id="RetainedEarningsStatementForm_childOrgPeriods"><input type="checkbox" name="childOrgPeriods" value="true" style=""><span class="checkbox-label" onclick="$('#RetainedEarningsStatementForm_childOrgPeriods').children('input[type=checkbox]').click()" style="cursor: default"> </span></span>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <div class="col-sm-2 hidden-xs">&nbsp;</div>
+            <div class="col-sm-10">
+    
+    <button type="submit" name="submitButton" value="submitButton" id="RetainedEarningsStatementForm_submitButton" class="btn btn-primary btn-sm">
+Run    </button>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        </fieldset>
+    </form>
+        <script>
+            $("#RetainedEarningsStatementForm").validate({ errorClass: 'help-block', errorElement: 'span',
+                highlight: function(element, errorClass, validClass) { $(element).parents('.form-group').removeClass('has-success').addClass('has-error'); },
+                unhighlight: function(element, errorClass, validClass) { $(element).parents('.form-group').removeClass('has-error').addClass('has-success'); }
+            });
+            $('#RetainedEarningsStatementForm [data-toggle="tooltip"]').tooltip({placement:'auto top'});
+
+        </script>
+    <!-- END   form-single[@name=RetainedEarningsStatementForm] -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>$('#RetainedEarningsStatementDialog').on('shown.bs.modal', function() {
+            $("#RetainedEarningsStatementDialog :not(.noResetSelect2)>select:not(.noResetSelect2)").select2({ });
+            var defFocus = $("#RetainedEarningsStatementDialog .default-focus");
+            if (defFocus.length) { defFocus.focus(); } else { $("#RetainedEarningsStatementDialog form :input:visible:first").focus(); }
+        });</script>
+        <button id="FinancialRatiosDialog-button" type="button" data-toggle="modal" data-target="#FinancialRatiosDialog" data-original-title="Financial Ratios" data-placement="bottom" class="btn btn-primary btn-sm "><i class="fa fa-share"></i> Financial Ratios</button>
+
+        <div id="FinancialRatiosDialog" class="modal container-dialog" aria-hidden="true" style="display: none;" tabindex="-1">
+            <div class="modal-dialog" style="width: 760px;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">Financial Ratios</h4>
+                    </div>
+                    <div class="modal-body">
+    <!-- BEGIN form-single[@name=FinancialRatiosForm] -->
+    <form name="FinancialRatiosForm" id="FinancialRatiosForm" method="post" action="http://127.0.0.1:18091/apps/marble/Accounting/Reports/FinancialRatios">
+        <input type="hidden" name="moquiFormName" value="FinancialRatiosForm" style="">
+        <input type="hidden" name="moquiSessionToken" value="[REDACTED]" style="">
+        
+        <fieldset class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="FinancialRatiosForm_organizationPartyId">Organization</label>
+            <div class="col-sm-10">
+    
+    <select name="organizationPartyId" class="" id="FinancialRatiosForm_organizationPartyId">
+            <option value="ORG_ZIZI_HR">ZIHR: Ziziwork Human Resources</option>
+            <option value="ORG_ZIZI_CORP">ZICORP: Ziziwork Industries</option>
+            <option value="ORG_ZIZI_RETAIL">ZIRET: Ziziwork Retail &amp; Wholesale</option>
+            <option value="ORG_ZIZI_SALES">ZISAL: Ziziwork Sales</option>
+            <option value="ORG_ZIZI_SERVICES">ZISER: Ziziwork Services</option>
+    </select>
+    
+    
+        <script>$("#FinancialRatiosForm_organizationPartyId").select2({  });</script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="FinancialRatiosForm_timePeriodIdList">Time Periods</label>
+            <div class="col-sm-10">
+    
+    <select name="timePeriodIdList" class=" dynamic-options noResetSelect2" style="min-width:200px;" id="FinancialRatiosForm_timePeriodIdList" multiple="multiple">
+    </select>
+    
+    <input type="hidden" id="FinancialRatiosForm_timePeriodIdList_op" name="timePeriodIdList_op" value="in" style="">
+        <script>
+            var FinancialRatiosForm_timePeriodIdListS2Opts = { 
+                closeOnSelect:false,
+                minimumResultsForSearch:0, width:"100%", minimumInputLength:0,
+                ajax:{ url:"http://127.0.0.1:18091/apps/marble/Accounting/Reports/ReportList/getTimePeriodList", type:"POST", dataType:"json", cache:true, delay:300,
+                    data:function(params) { return { moquiSessionToken: "[REDACTED]", term:(params.term || ''), pageIndex:(params.page || 1) - 1
+                        , "partyId": $("#FinancialRatiosForm_organizationPartyId").val()
+                        , "timePeriodTypeId":"FiscalYear,FiscalQuarter,FiscalMonth", "pastOnly":"true"
+                    }},
+                    processResults:function(data, params) {
+                        var isDataArray = moqui.isArray(data);
+                        var list = isDataArray ? data : data.options;
+                        var newData = [];
+                        // funny case where select2 specifies no option.@value if empty so &nbsp; ends up passed with form submit; now filtered on server for \u00a0 only and set to null
+                        
+                        var labelField = "label"; var valueField = "value";
+                        $.each(list, function(idx, curObj) {
+                            var idVal = curObj[valueField]; if (!idVal) idVal = '\u00a0';
+                            newData.push({ id:idVal, text:curObj[labelField] })
+                        });
+                        var outObj = { results:newData };
+                        if (!isDataArray) {
+                            params.page = params.page || 1; // NOTE: 1 based index, is 0 based on server side
+                            var pageSize = data.pageSize || 20;
+                            outObj.pagination = { more: (data.count ? (params.page * pageSize) < data.count : false) };
+                        }
+                        return outObj;
+                    }
+                }
+            };
+            $("#FinancialRatiosForm_timePeriodIdList").select2(FinancialRatiosForm_timePeriodIdListS2Opts);
+            function populate_FinancialRatiosForm_timePeriodIdList(params) {
+                    var hasAllParms = true;
+                    if (!$('#FinancialRatiosForm_organizationPartyId').val()) { hasAllParms = false; } 
+                    if (!hasAllParms) { $("#FinancialRatiosForm_timePeriodIdList").select2("destroy"); $('#FinancialRatiosForm_timePeriodIdList').html(""); $("#FinancialRatiosForm_timePeriodIdList").select2({ });  return; }
+                $.ajax({ type:"POST", url:"http://127.0.0.1:18091/apps/marble/Accounting/Reports/ReportList/getTimePeriodList", data:{ moquiSessionToken: "[REDACTED]", "partyId": $("#FinancialRatiosForm_organizationPartyId").val(), "timePeriodTypeId":"FiscalYear,FiscalQuarter,FiscalMonth", "pastOnly":"true", term:((params && params.term) || '')}, dataType:"json"}).done(                    function(data) {
+                        var list = moqui.isArray(data) ? data : data.options;
+                        if (list) {
+                            var jqEl = $("#FinancialRatiosForm_timePeriodIdList");
+                            var bWasFocused = jqEl.next().hasClass('select2-container--focus');
+                            jqEl.select2("destroy");
+                            jqEl.html("");
+                            var currentValues = [""];
+                            $.each(list, function(key, value) {
+                                var optionValue = value["value"];
+                                if (currentValues.indexOf(optionValue) >= 0) {
+                                    jqEl.append("<option selected='selected' value='" + optionValue + "'>" + value["label"] + "</option>");
+                                } else {
+                                    jqEl.append("<option value='" + optionValue + "'>" + value["label"] + "</option>");
+                                }
+                            });
+                            $("#FinancialRatiosForm_timePeriodIdList").select2(FinancialRatiosForm_timePeriodIdListS2Opts);
+                            if( bWasFocused ) jqEl.focus();
+                            setTimeout(function() { jqEl.trigger('change'); }, 50);
+                        }
+                    }
+                );
+            }
+            $("#FinancialRatiosForm_organizationPartyId").on('change', function() { populate_FinancialRatiosForm_timePeriodIdList(); });
+            
+                
+
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="FinancialRatiosForm_childOrgPeriods">Child Org Periods</label>
+            <div class="col-sm-10">
+    
+        <span id="FinancialRatiosForm_childOrgPeriods"><input type="checkbox" name="childOrgPeriods" value="true" style=""><span class="checkbox-label" onclick="$('#FinancialRatiosForm_childOrgPeriods').children('input[type=checkbox]').click()" style="cursor: default"> </span></span>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <div class="col-sm-2 hidden-xs">&nbsp;</div>
+            <div class="col-sm-10">
+    
+    <button type="submit" name="submitButton" value="submitButton" id="FinancialRatiosForm_submitButton" class="btn btn-primary btn-sm">
+Run    </button>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        </fieldset>
+    </form>
+        <script>
+            $("#FinancialRatiosForm").validate({ errorClass: 'help-block', errorElement: 'span',
+                highlight: function(element, errorClass, validClass) { $(element).parents('.form-group').removeClass('has-success').addClass('has-error'); },
+                unhighlight: function(element, errorClass, validClass) { $(element).parents('.form-group').removeClass('has-error').addClass('has-success'); }
+            });
+            $('#FinancialRatiosForm [data-toggle="tooltip"]').tooltip({placement:'auto top'});
+
+        </script>
+    <!-- END   form-single[@name=FinancialRatiosForm] -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>$('#FinancialRatiosDialog').on('shown.bs.modal', function() {
+            $("#FinancialRatiosDialog :not(.noResetSelect2)>select:not(.noResetSelect2)").select2({ });
+            var defFocus = $("#FinancialRatiosDialog .default-focus");
+            if (defFocus.length) { defFocus.focus(); } else { $("#FinancialRatiosDialog form :input:visible:first").focus(); }
+        });</script>
+            </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h5>Sales and Invoice Reports</h5>
+        </div>
+            <div class="panel-body">
+    <div>
+            <a href="http://127.0.0.1:18091/apps/marble/Accounting/Reports/SalesSummary" class="btn btn-primary btn-sm">Sales Summary</a>            <a href="http://127.0.0.1:18091/apps/marble/Accounting/Reports/SalesAnalysis" class="btn btn-primary btn-sm">Sales Order Analysis</a>            <a href="http://127.0.0.1:18091/apps/marble/Accounting/Reports/SalesInvoiceAnalysis" class="btn btn-primary btn-sm">Sales Invoice Analysis</a>        <button id="CustomerStatementDialog-button" type="button" data-toggle="modal" data-target="#CustomerStatementDialog" data-original-title="Customer Statement PDF" data-placement="bottom" class="btn btn-primary btn-sm "><i class="fa fa-share"></i> Customer Statement PDF</button>
+
+        <div id="CustomerStatementDialog" class="modal container-dialog" aria-hidden="true" style="display: none;" tabindex="-1">
+            <div class="modal-dialog" style="width: 760px;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">Customer Statement PDF</h4>
+                    </div>
+                    <div class="modal-body">
+    <!-- BEGIN form-single[@name=CustomerStatementForm] -->
+    <form name="CustomerStatementForm" id="CustomerStatementForm" method="post" action="http://127.0.0.1:18091/apps/marble/Accounting/Reports/ReportList/receivableStatement">
+        <input type="hidden" name="moquiFormName" value="CustomerStatementForm" style="">
+        <input type="hidden" name="moquiSessionToken" value="[REDACTED]" style="">
+        
+        <fieldset class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="CustomerStatementForm_fromPartyId">Organization</label>
+            <div class="col-sm-10">
+    
+    <select name="fromPartyId" class="" id="CustomerStatementForm_fromPartyId">
+            <option value="">&nbsp;</option>
+            <option value="ORG_ZIZI_HR">ZIHR: Ziziwork Human Resources</option>
+            <option value="ORG_ZIZI_CORP">ZICORP: Ziziwork Industries</option>
+            <option value="ORG_ZIZI_RETAIL">ZIRET: Ziziwork Retail &amp; Wholesale</option>
+            <option value="ORG_ZIZI_SALES">ZISAL: Ziziwork Sales</option>
+            <option value="ORG_ZIZI_SERVICES">ZISER: Ziziwork Services</option>
+    </select>
+    
+    
+        <script>$("#CustomerStatementForm_fromPartyId").select2({  });</script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="CustomerStatementForm_toPartyId">Customer</label>
+            <div class="col-sm-10">
+    
+    <select name="toPartyId" class=" dynamic-options noResetSelect2" style="min-width:200px;" id="CustomerStatementForm_toPartyId">
+            <option value="">&nbsp;</option>
+    </select>
+    
+    
+        <script>
+            var CustomerStatementForm_toPartyIdS2Opts = { 
+                
+                minimumResultsForSearch:0, width:"100%", minimumInputLength:2,
+                ajax:{ url:"http://127.0.0.1:18091/apps/marble/Accounting/Reports/ReportList/searchPartyList", type:"POST", dataType:"json", cache:true, delay:300,
+                    data:function(params) { return { moquiSessionToken: "[REDACTED]", term:(params.term || ''), pageIndex:(params.page || 1) - 1
+                        
+                        
+                    }},
+                    processResults:function(data, params) {
+                        var isDataArray = moqui.isArray(data);
+                        var list = isDataArray ? data : data.options;
+                        var newData = [];
+                        // funny case where select2 specifies no option.@value if empty so &nbsp; ends up passed with form submit; now filtered on server for \u00a0 only and set to null
+                        
+                        var labelField = "label"; var valueField = "value";
+                        $.each(list, function(idx, curObj) {
+                            var idVal = curObj[valueField]; if (!idVal) idVal = '\u00a0';
+                            newData.push({ id:idVal, text:curObj[labelField] })
+                        });
+                        var outObj = { results:newData };
+                        if (!isDataArray) {
+                            params.page = params.page || 1; // NOTE: 1 based index, is 0 based on server side
+                            var pageSize = data.pageSize || 20;
+                            outObj.pagination = { more: (data.count ? (params.page * pageSize) < data.count : false) };
+                        }
+                        return outObj;
+                    }
+                }
+            };
+            $("#CustomerStatementForm_toPartyId").select2(CustomerStatementForm_toPartyIdS2Opts);
+            function populate_CustomerStatementForm_toPartyId(params) {
+                    var hasAllParms = true;
+                    
+                    if (!hasAllParms) { $("#CustomerStatementForm_toPartyId").select2("destroy"); $('#CustomerStatementForm_toPartyId').html(""); $("#CustomerStatementForm_toPartyId").select2({ });  return; }
+                $.ajax({ type:"POST", url:"http://127.0.0.1:18091/apps/marble/Accounting/Reports/ReportList/searchPartyList", data:{ moquiSessionToken: "[REDACTED]", term:((params && params.term) || '')}, dataType:"json"}).done(                    function(data) {
+                        var list = moqui.isArray(data) ? data : data.options;
+                        if (list) {
+                            var jqEl = $("#CustomerStatementForm_toPartyId");
+                            var bWasFocused = jqEl.next().hasClass('select2-container--focus');
+                            jqEl.select2("destroy");
+                            jqEl.html("");
+                            
+                            $.each(list, function(key, value) {
+                                var optionValue = value["value"];
+                                if (optionValue === "") {
+                                    jqEl.append("<option selected='selected' value='" + optionValue + "'>" + value["label"] + "</option>");
+                                } else {
+                                    jqEl.append("<option value='" + optionValue + "'>" + value["label"] + "</option>");
+                                }
+                            });
+                            $("#CustomerStatementForm_toPartyId").select2(CustomerStatementForm_toPartyIdS2Opts);
+                            if( bWasFocused ) jqEl.focus();
+                            setTimeout(function() { jqEl.trigger('change'); }, 50);
+                        }
+                    }
+                );
+            }
+            
+                
+
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="CustomerStatementForm_asOfDate">As Of Date</label>
+            <div class="col-sm-10">
+    
+
+
+
+        <div class="input-group date" id="CustomerStatementForm_asOfDate">
+            <input type="text" class="form-control" name="asOfDate" value="2026-10-16" size="10" maxlength="10" style="">
+            <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+        </div>
+        <script>
+            $('#CustomerStatementForm_asOfDate').datetimepicker({toolbarPlacement:'top', showClose:true, showClear:true, showTodayButton:true,
+                useStrict:true, defaultDate: '2026-10-16' && moment('2026-10-16','YYYY-MM-DD'),
+                format:'YYYY-MM-DD', extraFormats:['l', 'L', 'YYYY-MM-DD'], stepping:5, locale:"en-US",
+                keyBinds: {t: function() {this.date(moment());}, up: function () { this.date(this.date().clone().add(1, 'd')); }, down: function () { this.date(this.date().clone().subtract(1, 'd')); }, 'control up': function () { this.date(this.date().clone().add(1, 'd')); }, 'control down': function () { this.date(this.date().clone().subtract(1, 'd')); }}});
+            $('#CustomerStatementForm_asOfDate').on("dp.change", function() { var jqEl = $('#CustomerStatementForm_asOfDate'); jqEl.val(jqEl.find("input").first().val()); jqEl.trigger("change"); });
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <div class="col-sm-2 hidden-xs">&nbsp;</div>
+            <div class="col-sm-10">
+    
+    <button type="submit" name="submitButton" value="submitButton" id="CustomerStatementForm_submitButton" class="btn btn-primary btn-sm">
+Download PDF    </button>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        </fieldset>
+    </form>
+        <script>
+            $("#CustomerStatementForm").validate({ errorClass: 'help-block', errorElement: 'span',
+                highlight: function(element, errorClass, validClass) { $(element).parents('.form-group').removeClass('has-success').addClass('has-error'); },
+                unhighlight: function(element, errorClass, validClass) { $(element).parents('.form-group').removeClass('has-error').addClass('has-success'); }
+            });
+            $('#CustomerStatementForm [data-toggle="tooltip"]').tooltip({placement:'auto top'});
+
+        </script>
+    <!-- END   form-single[@name=CustomerStatementForm] -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>$('#CustomerStatementDialog').on('shown.bs.modal', function() {
+            $("#CustomerStatementDialog :not(.noResetSelect2)>select:not(.noResetSelect2)").select2({ });
+            var defFocus = $("#CustomerStatementDialog .default-focus");
+            if (defFocus.length) { defFocus.focus(); } else { $("#CustomerStatementDialog form :input:visible:first").focus(); }
+        });</script>
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    <div>
+            <a href="http://127.0.0.1:18091/apps/marble/Accounting/Reports/OrderItemSummary" class="btn btn-primary btn-sm">Order Item Summary</a>            <a href="http://127.0.0.1:18091/apps/marble/Accounting/Reports/OrderIssuedInvoiced" class="btn btn-primary btn-sm">Order Issued and Invoiced</a>            <a href="http://127.0.0.1:18091/apps/marble/Accounting/Reports/InvoiceItemSummary" class="btn btn-primary btn-sm">Invoice Item Summary</a>    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    <div>
+            <a href="http://127.0.0.1:18091/apps/marble/Accounting/Invoice/Aging" class="btn btn-primary btn-sm">Quick Aging</a>            <a href="http://127.0.0.1:18091/apps/marble/Accounting/Reports/InvoiceAgingDetail" class="btn btn-primary btn-sm">Invoice Aging Detail</a>            <a href="http://127.0.0.1:18091/apps/marble/Accounting/Reports/ArAgingSummary" class="btn btn-primary btn-sm">AR Aging Summary</a>            <a href="http://127.0.0.1:18091/apps/marble/Accounting/Reports/InvoiceReconciliation" class="btn btn-primary btn-sm">Invoice Reconciliation</a>    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+            </div>
+    </div>
+            </div>
+            <div class=" col-md-6">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h5>Transaction Reports</h5>
+        </div>
+            <div class="panel-body">
+        <button id="AccountLedgerDialog-button" type="button" data-toggle="modal" data-target="#AccountLedgerDialog" data-original-title="Account Ledger" data-placement="bottom" class="btn btn-primary btn-sm "><i class="fa fa-share"></i> Account Ledger</button>
+
+        <div id="AccountLedgerDialog" class="modal container-dialog" aria-hidden="true" style="display: none;" tabindex="-1">
+            <div class="modal-dialog" style="width: 760px;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">Account Ledger</h4>
+                    </div>
+                    <div class="modal-body">
+    <!-- BEGIN form-single[@name=AccountLedgerForm] -->
+    <form name="AccountLedgerForm" id="AccountLedgerForm" method="post" action="http://127.0.0.1:18091/apps/marble/Accounting/Reports/AccountLedger">
+        <input type="hidden" name="moquiFormName" value="AccountLedgerForm" style="">
+        <input type="hidden" name="moquiSessionToken" value="[REDACTED]" style="">
+        
+        <fieldset class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="AccountLedgerForm_organizationPartyId">Organization</label>
+            <div class="col-sm-10">
+    
+    <select name="organizationPartyId" class="" id="AccountLedgerForm_organizationPartyId">
+            <option value="ORG_ZIZI_HR">ZIHR: Ziziwork Human Resources</option>
+            <option value="ORG_ZIZI_CORP">ZICORP: Ziziwork Industries</option>
+            <option value="ORG_ZIZI_RETAIL">ZIRET: Ziziwork Retail &amp; Wholesale</option>
+            <option value="ORG_ZIZI_SALES">ZISAL: Ziziwork Sales</option>
+            <option value="ORG_ZIZI_SERVICES">ZISER: Ziziwork Services</option>
+    </select>
+    
+    
+        <script>$("#AccountLedgerForm_organizationPartyId").select2({  });</script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="AccountLedgerForm_timePeriodId">Time Period</label>
+            <div class="col-sm-10">
+    
+    <select name="timePeriodId" class=" dynamic-options noResetSelect2" style="min-width:200px;" id="AccountLedgerForm_timePeriodId">
+            <option value="">&nbsp;</option>
+    </select>
+    
+    
+        <script>
+            var AccountLedgerForm_timePeriodIdS2Opts = { 
+                
+                minimumResultsForSearch:0, width:"100%", minimumInputLength:0,
+                ajax:{ url:"http://127.0.0.1:18091/apps/marble/Accounting/Reports/ReportList/getTimePeriodList", type:"POST", dataType:"json", cache:true, delay:300,
+                    data:function(params) { return { moquiSessionToken: "[REDACTED]", term:(params.term || ''), pageIndex:(params.page || 1) - 1
+                        , "partyId": $("#AccountLedgerForm_organizationPartyId").val()
+                        , "timePeriodTypeId":"FiscalYear,FiscalQuarter,FiscalMonth", "pastOnly":"true"
+                    }},
+                    processResults:function(data, params) {
+                        var isDataArray = moqui.isArray(data);
+                        var list = isDataArray ? data : data.options;
+                        var newData = [];
+                        // funny case where select2 specifies no option.@value if empty so &nbsp; ends up passed with form submit; now filtered on server for \u00a0 only and set to null
+                        
+                        var labelField = "label"; var valueField = "value";
+                        $.each(list, function(idx, curObj) {
+                            var idVal = curObj[valueField]; if (!idVal) idVal = '\u00a0';
+                            newData.push({ id:idVal, text:curObj[labelField] })
+                        });
+                        var outObj = { results:newData };
+                        if (!isDataArray) {
+                            params.page = params.page || 1; // NOTE: 1 based index, is 0 based on server side
+                            var pageSize = data.pageSize || 20;
+                            outObj.pagination = { more: (data.count ? (params.page * pageSize) < data.count : false) };
+                        }
+                        return outObj;
+                    }
+                }
+            };
+            $("#AccountLedgerForm_timePeriodId").select2(AccountLedgerForm_timePeriodIdS2Opts);
+            function populate_AccountLedgerForm_timePeriodId(params) {
+                    var hasAllParms = true;
+                    if (!$('#AccountLedgerForm_organizationPartyId').val()) { hasAllParms = false; } 
+                    if (!hasAllParms) { $("#AccountLedgerForm_timePeriodId").select2("destroy"); $('#AccountLedgerForm_timePeriodId').html(""); $("#AccountLedgerForm_timePeriodId").select2({ });  return; }
+                $.ajax({ type:"POST", url:"http://127.0.0.1:18091/apps/marble/Accounting/Reports/ReportList/getTimePeriodList", data:{ moquiSessionToken: "[REDACTED]", "partyId": $("#AccountLedgerForm_organizationPartyId").val(), "timePeriodTypeId":"FiscalYear,FiscalQuarter,FiscalMonth", "pastOnly":"true", term:((params && params.term) || '')}, dataType:"json"}).done(                    function(data) {
+                        var list = moqui.isArray(data) ? data : data.options;
+                        if (list) {
+                            var jqEl = $("#AccountLedgerForm_timePeriodId");
+                            var bWasFocused = jqEl.next().hasClass('select2-container--focus');
+                            jqEl.select2("destroy");
+                            jqEl.html("");
+                            
+                            $.each(list, function(key, value) {
+                                var optionValue = value["value"];
+                                if (optionValue === "") {
+                                    jqEl.append("<option selected='selected' value='" + optionValue + "'>" + value["label"] + "</option>");
+                                } else {
+                                    jqEl.append("<option value='" + optionValue + "'>" + value["label"] + "</option>");
+                                }
+                            });
+                            $("#AccountLedgerForm_timePeriodId").select2(AccountLedgerForm_timePeriodIdS2Opts);
+                            if( bWasFocused ) jqEl.focus();
+                            setTimeout(function() { jqEl.trigger('change'); }, 50);
+                        }
+                    }
+                );
+            }
+            $("#AccountLedgerForm_organizationPartyId").on('change', function() { populate_AccountLedgerForm_timePeriodId(); });
+            
+                
+
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="AccountLedgerForm_glAccountIdList">GL Accounts</label>
+            <div class="col-sm-10">
+    
+    <select name="glAccountIdList" class=" dynamic-options noResetSelect2" style="min-width:200px;" id="AccountLedgerForm_glAccountIdList" multiple="multiple">
+    </select>
+    
+    <input type="hidden" id="AccountLedgerForm_glAccountIdList_op" name="glAccountIdList_op" value="in" style="">
+        <script>
+            var AccountLedgerForm_glAccountIdListS2Opts = { 
+                closeOnSelect:false,
+                minimumResultsForSearch:0, width:"100%", minimumInputLength:0,
+                ajax:{ url:"http://127.0.0.1:18091/apps/marble/Accounting/Reports/ReportList/getGlAccountListPaginated", type:"POST", dataType:"json", cache:true, delay:300,
+                    data:function(params) { return { moquiSessionToken: "[REDACTED]", term:(params.term || ''), pageIndex:(params.page || 1) - 1
+                        
+                        
+                    }},
+                    processResults:function(data, params) {
+                        var isDataArray = moqui.isArray(data);
+                        var list = isDataArray ? data : data.options;
+                        var newData = [];
+                        // funny case where select2 specifies no option.@value if empty so &nbsp; ends up passed with form submit; now filtered on server for \u00a0 only and set to null
+                        
+                        var labelField = "label"; var valueField = "value";
+                        $.each(list, function(idx, curObj) {
+                            var idVal = curObj[valueField]; if (!idVal) idVal = '\u00a0';
+                            newData.push({ id:idVal, text:curObj[labelField] })
+                        });
+                        var outObj = { results:newData };
+                        if (!isDataArray) {
+                            params.page = params.page || 1; // NOTE: 1 based index, is 0 based on server side
+                            var pageSize = data.pageSize || 20;
+                            outObj.pagination = { more: (data.count ? (params.page * pageSize) < data.count : false) };
+                        }
+                        return outObj;
+                    }
+                }
+            };
+            $("#AccountLedgerForm_glAccountIdList").select2(AccountLedgerForm_glAccountIdListS2Opts);
+            function populate_AccountLedgerForm_glAccountIdList(params) {
+                    var hasAllParms = true;
+                    
+                    if (!hasAllParms) { $("#AccountLedgerForm_glAccountIdList").select2("destroy"); $('#AccountLedgerForm_glAccountIdList').html(""); $("#AccountLedgerForm_glAccountIdList").select2({ });  return; }
+                $.ajax({ type:"POST", url:"http://127.0.0.1:18091/apps/marble/Accounting/Reports/ReportList/getGlAccountListPaginated", data:{ moquiSessionToken: "[REDACTED]", term:((params && params.term) || '')}, dataType:"json"}).done(                    function(data) {
+                        var list = moqui.isArray(data) ? data : data.options;
+                        if (list) {
+                            var jqEl = $("#AccountLedgerForm_glAccountIdList");
+                            var bWasFocused = jqEl.next().hasClass('select2-container--focus');
+                            jqEl.select2("destroy");
+                            jqEl.html("");
+                            var currentValues = [""];
+                            $.each(list, function(key, value) {
+                                var optionValue = value["value"];
+                                if (currentValues.indexOf(optionValue) >= 0) {
+                                    jqEl.append("<option selected='selected' value='" + optionValue + "'>" + value["label"] + "</option>");
+                                } else {
+                                    jqEl.append("<option value='" + optionValue + "'>" + value["label"] + "</option>");
+                                }
+                            });
+                            $("#AccountLedgerForm_glAccountIdList").select2(AccountLedgerForm_glAccountIdListS2Opts);
+                            if( bWasFocused ) jqEl.focus();
+                            setTimeout(function() { jqEl.trigger('change'); }, 50);
+                        }
+                    }
+                );
+            }
+            
+                
+
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <div class="col-sm-2 hidden-xs">&nbsp;</div>
+            <div class="col-sm-10">
+    
+    <button type="submit" name="submitButton" value="submitButton" id="AccountLedgerForm_submitButton" class="btn btn-primary btn-sm">
+Run    </button>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        </fieldset>
+    </form>
+        <script>
+            $("#AccountLedgerForm").validate({ errorClass: 'help-block', errorElement: 'span',
+                highlight: function(element, errorClass, validClass) { $(element).parents('.form-group').removeClass('has-success').addClass('has-error'); },
+                unhighlight: function(element, errorClass, validClass) { $(element).parents('.form-group').removeClass('has-error').addClass('has-success'); }
+            });
+            $('#AccountLedgerForm [data-toggle="tooltip"]').tooltip({placement:'auto top'});
+
+        </script>
+    <!-- END   form-single[@name=AccountLedgerForm] -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>$('#AccountLedgerDialog').on('shown.bs.modal', function() {
+            $("#AccountLedgerDialog :not(.noResetSelect2)>select:not(.noResetSelect2)").select2({ });
+            var defFocus = $("#AccountLedgerDialog .default-focus");
+            if (defFocus.length) { defFocus.focus(); } else { $("#AccountLedgerDialog form :input:visible:first").focus(); }
+        });</script>
+        <button id="AccountBalanceDialog-button" type="button" data-toggle="modal" data-target="#AccountBalanceDialog" data-original-title="Account Balance History" data-placement="bottom" class="btn btn-primary btn-sm "><i class="fa fa-share"></i> Account Balance History</button>
+
+        <div id="AccountBalanceDialog" class="modal container-dialog" aria-hidden="true" style="display: none;" tabindex="-1">
+            <div class="modal-dialog" style="width: 760px;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">Account Balance History</h4>
+                    </div>
+                    <div class="modal-body">
+    <!-- BEGIN form-single[@name=AccountBalanceForm] -->
+    <form name="AccountBalanceForm" id="AccountBalanceForm" method="post" action="http://127.0.0.1:18091/apps/marble/Accounting/Reports/AccountBalance">
+        <input type="hidden" name="moquiFormName" value="AccountBalanceForm" style="">
+        <input type="hidden" name="moquiSessionToken" value="[REDACTED]" style="">
+        
+        <fieldset class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="AccountBalanceForm_organizationPartyId">Organization</label>
+            <div class="col-sm-10">
+    
+    <select name="organizationPartyId" class="" id="AccountBalanceForm_organizationPartyId">
+            <option value="ORG_ZIZI_HR">ZIHR: Ziziwork Human Resources</option>
+            <option value="ORG_ZIZI_CORP">ZICORP: Ziziwork Industries</option>
+            <option value="ORG_ZIZI_RETAIL">ZIRET: Ziziwork Retail &amp; Wholesale</option>
+            <option value="ORG_ZIZI_SALES">ZISAL: Ziziwork Sales</option>
+            <option value="ORG_ZIZI_SERVICES">ZISER: Ziziwork Services</option>
+    </select>
+    
+    
+        <script>$("#AccountBalanceForm_organizationPartyId").select2({  });</script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="AccountBalanceForm_timePeriodTypeId">Type</label>
+            <div class="col-sm-10">
+    
+    <select name="timePeriodTypeId" class="" id="AccountBalanceForm_timePeriodTypeId">
+            <option value="FiscalYear">Year</option>
+            <option value="FiscalQuarter">Quarter</option>
+            <option value="FiscalMonth">Month</option>
+    </select>
+    
+    
+        <script>$("#AccountBalanceForm_timePeriodTypeId").select2({  });</script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="AccountBalanceForm_glAccountId">GL Account</label>
+            <div class="col-sm-10">
+    
+    <select name="glAccountId" class=" dynamic-options noResetSelect2" style="min-width:200px;" id="AccountBalanceForm_glAccountId">
+            <option value="">&nbsp;</option>
+    </select>
+    
+    
+        <script>
+            var AccountBalanceForm_glAccountIdS2Opts = { 
+                
+                minimumResultsForSearch:0, width:"100%", minimumInputLength:0,
+                ajax:{ url:"http://127.0.0.1:18091/apps/marble/Accounting/Reports/ReportList/getGlAccountListPaginated", type:"POST", dataType:"json", cache:true, delay:300,
+                    data:function(params) { return { moquiSessionToken: "[REDACTED]", term:(params.term || ''), pageIndex:(params.page || 1) - 1
+                        
+                        
+                    }},
+                    processResults:function(data, params) {
+                        var isDataArray = moqui.isArray(data);
+                        var list = isDataArray ? data : data.options;
+                        var newData = [];
+                        // funny case where select2 specifies no option.@value if empty so &nbsp; ends up passed with form submit; now filtered on server for \u00a0 only and set to null
+                        if (!params.page || params.page <= 1) newData.push({ id:'\u00a0', text:'\u00a0' });
+                        var labelField = "label"; var valueField = "value";
+                        $.each(list, function(idx, curObj) {
+                            var idVal = curObj[valueField]; if (!idVal) idVal = '\u00a0';
+                            newData.push({ id:idVal, text:curObj[labelField] })
+                        });
+                        var outObj = { results:newData };
+                        if (!isDataArray) {
+                            params.page = params.page || 1; // NOTE: 1 based index, is 0 based on server side
+                            var pageSize = data.pageSize || 20;
+                            outObj.pagination = { more: (data.count ? (params.page * pageSize) < data.count : false) };
+                        }
+                        return outObj;
+                    }
+                }
+            };
+            $("#AccountBalanceForm_glAccountId").select2(AccountBalanceForm_glAccountIdS2Opts);
+            function populate_AccountBalanceForm_glAccountId(params) {
+                    var hasAllParms = true;
+                    
+                    if (!hasAllParms) { $("#AccountBalanceForm_glAccountId").select2("destroy"); $('#AccountBalanceForm_glAccountId').html(""); $("#AccountBalanceForm_glAccountId").select2({ });  return; }
+                $.ajax({ type:"POST", url:"http://127.0.0.1:18091/apps/marble/Accounting/Reports/ReportList/getGlAccountListPaginated", data:{ moquiSessionToken: "[REDACTED]", term:((params && params.term) || '')}, dataType:"json"}).done(                    function(data) {
+                        var list = moqui.isArray(data) ? data : data.options;
+                        if (list) {
+                            var jqEl = $("#AccountBalanceForm_glAccountId");
+                            var bWasFocused = jqEl.next().hasClass('select2-container--focus');
+                            jqEl.select2("destroy");
+                            jqEl.html("");
+                            jqEl.append('<option value="">&nbsp;</option>');
+                            
+                            $.each(list, function(key, value) {
+                                var optionValue = value["value"];
+                                if (optionValue === "") {
+                                    jqEl.append("<option selected='selected' value='" + optionValue + "'>" + value["label"] + "</option>");
+                                } else {
+                                    jqEl.append("<option value='" + optionValue + "'>" + value["label"] + "</option>");
+                                }
+                            });
+                            $("#AccountBalanceForm_glAccountId").select2(AccountBalanceForm_glAccountIdS2Opts);
+                            if( bWasFocused ) jqEl.focus();
+                            setTimeout(function() { jqEl.trigger('change'); }, 50);
+                        }
+                    }
+                );
+            }
+            
+                
+
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <div class="col-sm-2 hidden-xs">&nbsp;</div>
+            <div class="col-sm-10">
+    
+    <button type="submit" name="submitButton" value="submitButton" id="AccountBalanceForm_submitButton" class="btn btn-primary btn-sm">
+Run    </button>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        </fieldset>
+    </form>
+        <script>
+            $("#AccountBalanceForm").validate({ errorClass: 'help-block', errorElement: 'span',
+                highlight: function(element, errorClass, validClass) { $(element).parents('.form-group').removeClass('has-success').addClass('has-error'); },
+                unhighlight: function(element, errorClass, validClass) { $(element).parents('.form-group').removeClass('has-error').addClass('has-success'); }
+            });
+            $('#AccountBalanceForm [data-toggle="tooltip"]').tooltip({placement:'auto top'});
+
+        </script>
+    <!-- END   form-single[@name=AccountBalanceForm] -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>$('#AccountBalanceDialog').on('shown.bs.modal', function() {
+            $("#AccountBalanceDialog :not(.noResetSelect2)>select:not(.noResetSelect2)").select2({ });
+            var defFocus = $("#AccountBalanceDialog .default-focus");
+            if (defFocus.length) { defFocus.focus(); } else { $("#AccountBalanceDialog form :input:visible:first").focus(); }
+        });</script>
+            <a href="http://127.0.0.1:18091/apps/marble/Accounting/Transaction/FindTransaction" class="btn btn-primary btn-sm">Transactions</a>            <a href="http://127.0.0.1:18091/apps/marble/Accounting/Transaction/FindTransactionEntry" class="btn btn-primary btn-sm">Transaction Entries</a>    <div>
+        <button id="PostedAmountSummaryDialog-button" type="button" data-toggle="modal" data-target="#PostedAmountSummaryDialog" data-original-title="Posted Amount Summary" data-placement="bottom" class="btn btn-primary btn-sm "><i class="fa fa-share"></i> Posted Amount Summary</button>
+
+        <div id="PostedAmountSummaryDialog" class="modal container-dialog" aria-hidden="true" style="display: none;" tabindex="-1">
+            <div class="modal-dialog" style="width: 760px;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">Posted Amount Summary</h4>
+                    </div>
+                    <div class="modal-body">
+    <!-- BEGIN form-single[@name=PostedAmountSummaryForm] -->
+    <form name="PostedAmountSummaryForm" id="PostedAmountSummaryForm" method="post" action="http://127.0.0.1:18091/apps/marble/Accounting/Reports/PostedAmountSummary">
+        <input type="hidden" name="moquiFormName" value="PostedAmountSummaryForm" style="">
+        <input type="hidden" name="moquiSessionToken" value="[REDACTED]" style="">
+        
+        <fieldset class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="PostedAmountSummaryForm_organizationPartyId">Organization</label>
+            <div class="col-sm-10">
+    
+    <select name="organizationPartyId" class=" " id="PostedAmountSummaryForm_organizationPartyId">
+            <option value="ORG_ZIZI_HR">ZIHR: Ziziwork Human Resources</option>
+            <option value="ORG_ZIZI_CORP">ZICORP: Ziziwork Industries</option>
+            <option value="ORG_ZIZI_RETAIL">ZIRET: Ziziwork Retail &amp; Wholesale</option>
+            <option value="ORG_ZIZI_SALES">ZISAL: Ziziwork Sales</option>
+            <option value="ORG_ZIZI_SERVICES">ZISER: Ziziwork Services</option>
+    </select>
+    
+    
+        <script>$("#PostedAmountSummaryForm_organizationPartyId").select2({  });</script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="PostedAmountSummaryForm_dateRange">Date Range</label>
+            <div class="col-sm-10">
+    
+    <div class="date-period">
+        <select name="dateRange_poffset" id="PostedAmountSummaryForm_dateRange_poffset">
+            <option value="0">This</option>
+            <option value="-1">Last</option>
+            <option value="1">Next</option>
+            <option value="-2">-2</option>
+            <option value="2">+2</option>
+            <option value="-3">-3</option>
+            <option value="-4">-4</option>
+            <option value="-6">-6</option>
+            <option value="-12">-12</option>
+        </select>
+        <select name="dateRange_period" id="PostedAmountSummaryForm_dateRange_period">
+            <option value="day">Day</option>
+            <option value="7d">7 Days</option>
+            <option value="30d">30 Days</option>
+            <option value="week">Week</option>
+            <option value="weeks">Weeks</option>
+            <option value="month">Month</option>
+            <option value="months">Months</option>
+            <option value="quarter">Quarter</option>
+            <option value="year">Year</option>
+            <option value="7r">+/-7d</option>
+            <option value="30r">+/-30d</option>
+        </select>
+        <div class="input-group date" id="PostedAmountSummaryForm_dateRange_pdate">
+            <input type="text" class="form-control" name="dateRange_pdate" value="" size="10" maxlength="10" style="">
+            <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+        </div>
+        <script>
+            $("#PostedAmountSummaryForm_dateRange_poffset").select2({ }); $("#PostedAmountSummaryForm_dateRange_period").select2({ });
+            $('#PostedAmountSummaryForm_dateRange_pdate').datetimepicker({toolbarPlacement:'top', showClose:true, showClear:true, showTodayButton:true, useStrict:true, defaultDate: '' && moment('','YYYY-MM-DD'), format:'YYYY-MM-DD', extraFormats:['l', 'L', 'YYYY-MM-DD'], locale:"en-US", keyBinds: {t: function() {this.date(moment());}, up: function () { this.date(this.date().clone().add(1, 'd')); }, down: function () { this.date(this.date().clone().subtract(1, 'd')); }, 'control up': function () { this.date(this.date().clone().add(1, 'd')); }, 'control down': function () { this.date(this.date().clone().subtract(1, 'd')); }}});
+        </script>
+    </div>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <div class="col-sm-2 hidden-xs">&nbsp;</div>
+            <div class="col-sm-10">
+    
+    <button type="submit" name="submitButton" value="submitButton" id="PostedAmountSummaryForm_submitButton" class="btn btn-primary btn-sm">
+Run    </button>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        </fieldset>
+    </form>
+        <script>
+            $("#PostedAmountSummaryForm").validate({ errorClass: 'help-block', errorElement: 'span',
+                highlight: function(element, errorClass, validClass) { $(element).parents('.form-group').removeClass('has-success').addClass('has-error'); },
+                unhighlight: function(element, errorClass, validClass) { $(element).parents('.form-group').removeClass('has-error').addClass('has-success'); }
+            });
+            $('#PostedAmountSummaryForm [data-toggle="tooltip"]').tooltip({placement:'auto top'});
+
+        </script>
+    <!-- END   form-single[@name=PostedAmountSummaryForm] -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>$('#PostedAmountSummaryDialog').on('shown.bs.modal', function() {
+            $("#PostedAmountSummaryDialog :not(.noResetSelect2)>select:not(.noResetSelect2)").select2({ });
+            var defFocus = $("#PostedAmountSummaryDialog .default-focus");
+            if (defFocus.length) { defFocus.focus(); } else { $("#PostedAmountSummaryDialog form :input:visible:first").focus(); }
+        });</script>
+        <button id="PostedBalanceSummaryDialog-button" type="button" data-toggle="modal" data-target="#PostedBalanceSummaryDialog" data-original-title="Posted Balance Summary" data-placement="bottom" class="btn btn-primary btn-sm "><i class="fa fa-share"></i> Posted Balance Summary</button>
+
+        <div id="PostedBalanceSummaryDialog" class="modal container-dialog" aria-hidden="true" style="display: none;" tabindex="-1">
+            <div class="modal-dialog" style="width: 760px;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">Posted Balance Summary</h4>
+                    </div>
+                    <div class="modal-body">
+    <!-- BEGIN form-single[@name=PostedBalanceSummaryForm] -->
+    <form name="PostedBalanceSummaryForm" id="PostedBalanceSummaryForm" method="post" action="http://127.0.0.1:18091/apps/marble/Accounting/Reports/PostedBalanceSummary">
+        <input type="hidden" name="moquiFormName" value="PostedBalanceSummaryForm" style="">
+        <input type="hidden" name="moquiSessionToken" value="[REDACTED]" style="">
+        
+        <fieldset class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="PostedBalanceSummaryForm_organizationPartyId">Organization</label>
+            <div class="col-sm-10">
+    
+    <select name="organizationPartyId" class="" id="PostedBalanceSummaryForm_organizationPartyId">
+            <option value="ORG_ZIZI_HR">ZIHR: Ziziwork Human Resources</option>
+            <option value="ORG_ZIZI_CORP">ZICORP: Ziziwork Industries</option>
+            <option value="ORG_ZIZI_RETAIL">ZIRET: Ziziwork Retail &amp; Wholesale</option>
+            <option value="ORG_ZIZI_SALES">ZISAL: Ziziwork Sales</option>
+            <option value="ORG_ZIZI_SERVICES">ZISER: Ziziwork Services</option>
+    </select>
+    
+    
+        <script>$("#PostedBalanceSummaryForm_organizationPartyId").select2({  });</script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="PostedBalanceSummaryForm_timePeriodId">Time Period</label>
+            <div class="col-sm-10">
+    
+    <select name="timePeriodId" class=" dynamic-options noResetSelect2" style="min-width:200px;" id="PostedBalanceSummaryForm_timePeriodId">
+            <option value="">&nbsp;</option>
+    </select>
+    
+    
+        <script>
+            var PostedBalanceSummaryForm_timePeriodIdS2Opts = { 
+                
+                minimumResultsForSearch:0, width:"100%", minimumInputLength:0,
+                ajax:{ url:"http://127.0.0.1:18091/apps/marble/Accounting/Reports/ReportList/getTimePeriodList", type:"POST", dataType:"json", cache:true, delay:300,
+                    data:function(params) { return { moquiSessionToken: "[REDACTED]", term:(params.term || ''), pageIndex:(params.page || 1) - 1
+                        , "partyId": $("#PostedBalanceSummaryForm_organizationPartyId").val()
+                        , "timePeriodTypeId":"FiscalYear,FiscalQuarter,FiscalMonth", "pastOnly":"true"
+                    }},
+                    processResults:function(data, params) {
+                        var isDataArray = moqui.isArray(data);
+                        var list = isDataArray ? data : data.options;
+                        var newData = [];
+                        // funny case where select2 specifies no option.@value if empty so &nbsp; ends up passed with form submit; now filtered on server for \u00a0 only and set to null
+                        
+                        var labelField = "label"; var valueField = "value";
+                        $.each(list, function(idx, curObj) {
+                            var idVal = curObj[valueField]; if (!idVal) idVal = '\u00a0';
+                            newData.push({ id:idVal, text:curObj[labelField] })
+                        });
+                        var outObj = { results:newData };
+                        if (!isDataArray) {
+                            params.page = params.page || 1; // NOTE: 1 based index, is 0 based on server side
+                            var pageSize = data.pageSize || 20;
+                            outObj.pagination = { more: (data.count ? (params.page * pageSize) < data.count : false) };
+                        }
+                        return outObj;
+                    }
+                }
+            };
+            $("#PostedBalanceSummaryForm_timePeriodId").select2(PostedBalanceSummaryForm_timePeriodIdS2Opts);
+            function populate_PostedBalanceSummaryForm_timePeriodId(params) {
+                    var hasAllParms = true;
+                    if (!$('#PostedBalanceSummaryForm_organizationPartyId').val()) { hasAllParms = false; } 
+                    if (!hasAllParms) { $("#PostedBalanceSummaryForm_timePeriodId").select2("destroy"); $('#PostedBalanceSummaryForm_timePeriodId').html(""); $("#PostedBalanceSummaryForm_timePeriodId").select2({ });  return; }
+                $.ajax({ type:"POST", url:"http://127.0.0.1:18091/apps/marble/Accounting/Reports/ReportList/getTimePeriodList", data:{ moquiSessionToken: "[REDACTED]", "partyId": $("#PostedBalanceSummaryForm_organizationPartyId").val(), "timePeriodTypeId":"FiscalYear,FiscalQuarter,FiscalMonth", "pastOnly":"true", term:((params && params.term) || '')}, dataType:"json"}).done(                    function(data) {
+                        var list = moqui.isArray(data) ? data : data.options;
+                        if (list) {
+                            var jqEl = $("#PostedBalanceSummaryForm_timePeriodId");
+                            var bWasFocused = jqEl.next().hasClass('select2-container--focus');
+                            jqEl.select2("destroy");
+                            jqEl.html("");
+                            
+                            $.each(list, function(key, value) {
+                                var optionValue = value["value"];
+                                if (optionValue === "") {
+                                    jqEl.append("<option selected='selected' value='" + optionValue + "'>" + value["label"] + "</option>");
+                                } else {
+                                    jqEl.append("<option value='" + optionValue + "'>" + value["label"] + "</option>");
+                                }
+                            });
+                            $("#PostedBalanceSummaryForm_timePeriodId").select2(PostedBalanceSummaryForm_timePeriodIdS2Opts);
+                            if( bWasFocused ) jqEl.focus();
+                            setTimeout(function() { jqEl.trigger('change'); }, 50);
+                        }
+                    }
+                );
+            }
+            $("#PostedBalanceSummaryForm_organizationPartyId").on('change', function() { populate_PostedBalanceSummaryForm_timePeriodId(); });
+            
+                
+
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <div class="col-sm-2 hidden-xs">&nbsp;</div>
+            <div class="col-sm-10">
+    
+    <button type="submit" name="submitButton" value="submitButton" id="PostedBalanceSummaryForm_submitButton" class="btn btn-primary btn-sm">
+Run    </button>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        </fieldset>
+    </form>
+        <script>
+            $("#PostedBalanceSummaryForm").validate({ errorClass: 'help-block', errorElement: 'span',
+                highlight: function(element, errorClass, validClass) { $(element).parents('.form-group').removeClass('has-success').addClass('has-error'); },
+                unhighlight: function(element, errorClass, validClass) { $(element).parents('.form-group').removeClass('has-error').addClass('has-success'); }
+            });
+            $('#PostedBalanceSummaryForm [data-toggle="tooltip"]').tooltip({placement:'auto top'});
+
+        </script>
+    <!-- END   form-single[@name=PostedBalanceSummaryForm] -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>$('#PostedBalanceSummaryDialog').on('shown.bs.modal', function() {
+            $("#PostedBalanceSummaryDialog :not(.noResetSelect2)>select:not(.noResetSelect2)").select2({ });
+            var defFocus = $("#PostedBalanceSummaryDialog .default-focus");
+            if (defFocus.length) { defFocus.focus(); } else { $("#PostedBalanceSummaryDialog form :input:visible:first").focus(); }
+        });</script>
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+            </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h5>Asset and Inventory Reports</h5>
+        </div>
+            <div class="panel-body">
+    <div>
+            <a href="http://127.0.0.1:18091/apps/marble/Accounting/Reports/AssetValuation" class="btn btn-primary btn-sm">Inventory Valuation</a>            <a href="http://127.0.0.1:18091/apps/marble/Accounting/Reports/AssetReceiptTransaction" class="btn btn-primary btn-sm">Receipt Transactions</a>            <a href="http://127.0.0.1:18091/apps/marble/Accounting/Reports/AssetStatusByReceipt" class="btn btn-primary btn-sm">Status by Receipt</a>    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    <div>
+            <a href="http://127.0.0.1:18091/apps/marble/Accounting/Reports/AssetOnHand" class="btn btn-primary btn-sm">On Hand</a>            <a href="http://127.0.0.1:18091/apps/marble/Accounting/Reports/AssetOnHandSummary" class="btn btn-primary btn-sm">On Hand Summary</a>            <a href="http://127.0.0.1:18091/apps/marble/Accounting/Reports/ShipmentPackageSummary" class="btn btn-primary btn-sm">Shipment Package Summary</a>    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+            </div>
+    </div>
+            </div>
+    </div>
+    <!-- BEGIN section-include[@name=SelectOrganization] -->
+    <!-- BEGIN screen[@location=component://SimpleScreens/screen/SimpleScreens/Accounting/Reports/ReportList.xml].widgets -->
+    <!-- BEGIN form-single[@name=SelectOrganizationForm] -->
+    <form name="SelectOrganizationForm" id="SelectOrganizationForm" method="post" action="http://127.0.0.1:18091/apps/marble/Accounting/Reports/ReportList">
+        <input type="hidden" name="moquiFormName" value="SelectOrganizationForm" style="">
+        <input type="hidden" name="moquiSessionToken" value="[REDACTED]" style="">
+        
+        <fieldset class="form-horizontal">
+    <div class="form-group">
+        <div class="col-sm-12">
+            <div class="big-row-item">
+            <div class="form-group">
+    
+    <select name="organizationPartyId" class="" id="SelectOrganizationForm_organizationPartyId">
+            <option selected="selected" value="ORG_ZIZI_HR">ZIHR: Ziziwork Human Resources</option>
+            <option value="ORG_ZIZI_CORP">ZICORP: Ziziwork Industries</option>
+            <option value="ORG_ZIZI_RETAIL">ZIRET: Ziziwork Retail &amp; Wholesale</option>
+            <option value="ORG_ZIZI_SALES">ZISAL: Ziziwork Sales</option>
+            <option value="ORG_ZIZI_SERVICES">ZISER: Ziziwork Services</option>
+    </select>
+    
+    
+        <script>$("#SelectOrganizationForm_organizationPartyId").select2({  });</script>
+            </div><!-- /form-group -->
+        </div><!-- /field-row-item -->
+        <div class="big-row-item">
+            <div class="form-group">
+    
+    <select name="timePeriodTypeId" class="" id="SelectOrganizationForm_timePeriodTypeId">
+            <option value="FiscalMonth">Month</option>
+            <option value="FiscalQuarter">Quarter</option>
+    </select>
+    
+    
+        <script>$("#SelectOrganizationForm_timePeriodTypeId").select2({  });</script>
+            </div><!-- /form-group -->
+        </div><!-- /field-row-item -->
+        <div class="big-row-item">
+            <div class="form-group">
+    
+<input id="SelectOrganizationForm_periods" type="text" name="periods" value="13" size="2" class="form-control" style="">
+        
+            </div><!-- /form-group -->
+        </div><!-- /field-row-item -->
+        <div class="big-row-item">
+            <div class="form-group">
+    
+
+
+
+        <div class="input-group date" id="SelectOrganizationForm_thruDate">
+            <input type="text" class="form-control" name="thruDate" value="" size="10" maxlength="10" style="">
+            <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+        </div>
+        <script>
+            $('#SelectOrganizationForm_thruDate').datetimepicker({toolbarPlacement:'top', showClose:true, showClear:true, showTodayButton:true,
+                useStrict:true, defaultDate: '' && moment('','YYYY-MM-DD'),
+                format:'YYYY-MM-DD', extraFormats:['l', 'L', 'YYYY-MM-DD'], stepping:5, locale:"en-US",
+                keyBinds: {t: function() {this.date(moment());}, up: function () { this.date(this.date().clone().add(1, 'd')); }, down: function () { this.date(this.date().clone().subtract(1, 'd')); }, 'control up': function () { this.date(this.date().clone().add(1, 'd')); }, 'control down': function () { this.date(this.date().clone().subtract(1, 'd')); }}});
+            $('#SelectOrganizationForm_thruDate').on("dp.change", function() { var jqEl = $('#SelectOrganizationForm_thruDate'); jqEl.val(jqEl.find("input").first().val()); jqEl.trigger("change"); });
+        </script>
+            </div><!-- /form-group -->
+        </div><!-- /field-row-item -->
+        <div class="big-row-item">
+            <div class="form-group">
+    
+    <button type="submit" name="setOrg" value="setOrg" id="SelectOrganizationForm_setOrg" class="btn btn-primary btn-sm">
+View Charts    </button>
+            </div><!-- /form-group -->
+        </div><!-- /field-row-item -->
+        </div>
+    </div>
+        </fieldset>
+    </form>
+        <script>
+            $("#SelectOrganizationForm").validate({ errorClass: 'help-block', errorElement: 'span',
+                highlight: function(element, errorClass, validClass) { $(element).parents('.form-group').removeClass('has-success').addClass('has-error'); },
+                unhighlight: function(element, errorClass, validClass) { $(element).parents('.form-group').removeClass('has-error').addClass('has-success'); }
+            });
+            $('#SelectOrganizationForm [data-toggle="tooltip"]').tooltip({placement:'auto top'});
+
+        </script>
+    <!-- END   form-single[@name=SelectOrganizationForm] -->
+    <!-- END   screen[@location=component://SimpleScreens/screen/SimpleScreens/Accounting/Reports/ReportList.xml].widgets -->
+
+    <!-- END   section-include[@name=SelectOrganization] -->
+    <div class="row">
+            <div class=" col-md-6">
+    <!-- BEGIN section-include[@name=OperatingRevenueExpenseChart] -->
+    <!-- BEGIN screen[@location=component://SimpleScreens/screen/SimpleScreens/Accounting/Reports/ReportList.xml].widgets -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h5>Operating Revenue and Expense</h5>
+                <div class="panel-toolbar">
+        <!-- BEGIN render-mode.text[inline][@template=true] -->
+<button type="button" class="btn btn-primary btn-sm" onclick="moqui.downloadData('', 'OperatingRevenueExpense.csv', 'text/csv')">Get CSV</button>        <!-- END   render-mode.text[inline][@template=true] -->
+                </div>
+        </div>
+            <div class="panel-body">
+        <!-- BEGIN render-mode.text[inline][@template=true] -->
+<div class="chart-container" style="position:relative; height:400px; width:100%;"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div><canvas id="RevenueExpenseChart" width="1408" height="400" style="display: block; width: 1408px; height: 400px;" class="chartjs-render-monitor"></canvas></div>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" type="text/javascript"></script>
+                <script>
+                var revenueExpenseChart = new Chart(document.getElementById("RevenueExpenseChart"), {
+                    type: 'bar',
+                    data: { labels:"",
+                        datasets:[{"classGroupEnumId":"EngGlcNetRevenue"},{"label":"Cost of Sales","classes":["COST_OF_SALES"],"stack":"Expense"},{"label":"Sales Expense","classes":["SALES_EXPENSE"],"stack":"Expense"},{"label":"Gen/Admin Expense","classes":["GEN_ADMIN_EXPENSE"],"stack":"Expense"},{"label":"Other Expense","classes":["CONTRIBUTIONS","NON_CASH_EXPENSE"],"stack":"Expense"},{"classGroupEnumId":"EngGlcNetOpIncome","type":"line","fill":false}] },
+                    options: {
+                        scales:{ yAxes:[{ ticks:{ beginAtZero:true } }] }, maintainAspectRatio:false,
+                        tooltips:{ callbacks:{ label: function(tooltipItem, data) {
+                            var dataset = data.datasets[tooltipItem.datasetIndex];
+                            var datasetLabel = dataset.label || '';
+                            var curValue = dataset.data[tooltipItem.index];
+                            // NOTE: datasetIndex 0 is net revenue, the first dataset in the list
+                            if (tooltipItem.datasetIndex == 0) { return datasetLabel + ": " + moqui.format(curValue, null, "currency"); }
+                            // calculate and show percent of net revenue for expenses
+                            var netRevenue = data.datasets[0].data[tooltipItem.index];
+                            var percentOfNet = netRevenue ? (curValue / netRevenue) * 100.0 : 0.0;
+                            return datasetLabel + ": " + moqui.format(dataset.data[tooltipItem.index], null, "currency") + " (" + percentOfNet.toFixed(1) + "% net)";
+                        }}}
+                    }
+                });
+                </script>        <!-- END   render-mode.text[inline][@template=true] -->
+            </div>
+    </div>
+    <!-- END   screen[@location=component://SimpleScreens/screen/SimpleScreens/Accounting/Reports/ReportList.xml].widgets -->
+
+    <!-- END   section-include[@name=OperatingRevenueExpenseChart] -->
+            </div>
+            <div class=" col-md-6">
+    <!-- BEGIN section-include[@name=CurrentAssetLiabilityChart] -->
+    <!-- BEGIN screen[@location=component://SimpleScreens/screen/SimpleScreens/Accounting/Reports/ReportList.xml].widgets -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h5>Current Assets and Liabilities</h5>
+                <div class="panel-toolbar">
+        <!-- BEGIN render-mode.text[inline][@template=true] -->
+<button type="button" class="btn btn-primary btn-sm" onclick="moqui.downloadData('', 'CurrentAssetLiability.csv', 'text/csv')">Get CSV</button>        <!-- END   render-mode.text[inline][@template=true] -->
+                </div>
+        </div>
+            <div class="panel-body">
+        <!-- BEGIN render-mode.text[inline][@template=true] -->
+<div class="chart-container" style="position:relative; height:400px; width:100%;"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div><canvas id="AssetLiabilityChart" width="1408" height="400" style="display: block; width: 1408px; height: 400px;" class="chartjs-render-monitor"></canvas></div>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" type="text/javascript"></script>
+                <script>
+                var assetLiabilityChart = new Chart(document.getElementById("AssetLiabilityChart"), {
+                    type: 'bar',
+                    data: { labels:"",
+                        datasets:[{"label":"Cash","classes":["CASH_EQUIVALENT"],"totalBasis":"Ending","stack":"Asset"},{"label":"Inventory","classes":["INVENTORY_ASSET"],"totalBasis":"Ending","stack":"Asset"},{"label":"Receivable","classes":["ACCOUNTS_RECEIVABLE"],"totalBasis":"Ending","stack":"Asset"},{"label":"Other Cur Asset","classes":["LOANS_RECEIVABLE","PREPAID_EXPENSE","ACCRUED_REVENUE"],"totalBasis":"Ending","stack":"Asset"},{"label":"Payable","classes":["ACCOUNTS_PAYABLE"],"totalBasis":"Ending","stack":"Liability"},{"label":"Other Cur Liability","classes":["ACCRUED_EXPENSES","UNEARNED_REVENUE","THIRD_PARTY_HOLDINGS"],"totalBasis":"Ending","stack":"Liability"},{"classGroupEnumId":"EngGlcNetIncome","type":"line","fill":false}] },
+                    options: {
+                        scales:{ yAxes:[{ ticks:{ beginAtZero:true } }] }, maintainAspectRatio:false,
+                        tooltips:{ callbacks:{ label: function(tooltipItem, data) {
+                            var dataset = data.datasets[tooltipItem.datasetIndex]; var datasetLabel = dataset.label || '';
+                            return datasetLabel + ": " + moqui.format(dataset.data[tooltipItem.index], null, "currency");
+                        }}}
+                    }
+                });
+                </script>        <!-- END   render-mode.text[inline][@template=true] -->
+            </div>
+    </div>
+    <!-- END   screen[@location=component://SimpleScreens/screen/SimpleScreens/Accounting/Reports/ReportList.xml].widgets -->
+
+    <!-- END   section-include[@name=CurrentAssetLiabilityChart] -->
+            </div>
+    </div>
+    <div class="row">
+            <div class=" col-md-6">
+    <!-- BEGIN section-include[@name=NetIncomeChart] -->
+    <!-- BEGIN screen[@location=component://SimpleScreens/screen/SimpleScreens/Accounting/Reports/ReportList.xml].widgets -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h5>Net Income History</h5>
+                <div class="panel-toolbar">
+        <!-- BEGIN render-mode.text[inline][@template=true] -->
+<button type="button" class="btn btn-primary btn-sm" onclick="moqui.downloadData('', 'NetIncomeHistory.csv', 'text/csv')">Get CSV</button>        <!-- END   render-mode.text[inline][@template=true] -->
+                </div>
+        </div>
+            <div class="panel-body">
+        <!-- BEGIN render-mode.text[inline][@template=true] -->
+<div class="chart-container" style="position:relative; height:400px; width:100%;"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div><canvas id="NetIncomeChart" width="1408" height="400" style="display: block; width: 1408px; height: 400px;" class="chartjs-render-monitor"></canvas></div>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" type="text/javascript"></script>
+                <script>
+                var netIncomeChart = new Chart(document.getElementById("NetIncomeChart"), {
+                    type: 'bar',
+                    data: { labels:"",
+                        datasets:[{"classGroupEnumId":"EngGlcNetRevenue","stack":"Income"},{"label":"Non Op Income","classes":["INCOME"],"stack":"Income"},{"label":"Cost of Sales","classes":["COST_OF_SALES"],"stack":"Expense"},{"label":"Operating Expense","classes":["EXPENSE"],"stack":"Expense"},{"label":"Non Op Expense","classes":["NON_OP_EXPENSE"],"stack":"Expense"},{"classGroupEnumId":"EngGlcNetIncome","type":"line","fill":false}] },
+                    options: {
+                        scales:{ yAxes:[{ ticks:{ beginAtZero:true } }] }, maintainAspectRatio:false,
+                        tooltips:{ callbacks:{ label: function(tooltipItem, data) {
+                            var dataset = data.datasets[tooltipItem.datasetIndex]; var datasetLabel = dataset.label || '';
+                            return datasetLabel + ": " + moqui.format(dataset.data[tooltipItem.index], null, "currency");
+                        }}}
+                    }
+                });
+                </script>        <!-- END   render-mode.text[inline][@template=true] -->
+            </div>
+    </div>
+    <!-- END   screen[@location=component://SimpleScreens/screen/SimpleScreens/Accounting/Reports/ReportList.xml].widgets -->
+
+    <!-- END   section-include[@name=NetIncomeChart] -->
+            </div>
+            <div class=" col-md-6">
+    <!-- BEGIN section-include[@name=BalanceSheetChart] -->
+    <!-- BEGIN screen[@location=component://SimpleScreens/screen/SimpleScreens/Accounting/Reports/ReportList.xml].widgets -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h5>Balance Sheet History</h5>
+                <div class="panel-toolbar">
+        <!-- BEGIN render-mode.text[inline][@template=true] -->
+<button type="button" class="btn btn-primary btn-sm" onclick="moqui.downloadData('', 'BalanceSheetHistory.csv', 'text/csv')">Get CSV</button>        <!-- END   render-mode.text[inline][@template=true] -->
+                </div>
+        </div>
+            <div class="panel-body">
+        <!-- BEGIN render-mode.text[inline][@template=true] -->
+<div class="chart-container" style="position:relative; height:400px; width:100%;"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div><canvas id="BalanceSheetChart" width="1408" height="400" style="display: block; width: 1408px; height: 400px;" class="chartjs-render-monitor"></canvas></div>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" type="text/javascript"></script>
+                <script>
+                var balanceSheetChart = new Chart(document.getElementById("BalanceSheetChart"), {
+                    type: 'bar',
+                    data: { labels:"",
+                        datasets:[{"classGroupEnumId":"EngGlcNetAsset","totalBasis":"Ending","stack":"Asset"},{"classGroupEnumId":"EngGlcNetEquity","totalBasis":"Ending","stack":"LiabilityEquity"},{"classGroupEnumId":"EngGlcLiability","totalBasis":"Ending","stack":"LiabilityEquity"},{"label":"Unbooked Net Income","classGroupEnumId":"EngGlcNetIncome","totalBasis":"Posted","stack":"LiabilityEquity"},{"classGroupEnumId":"EngGlcNetIncome","type":"line","fill":false}] },
+                    options: {
+                        scales:{ yAxes:[{ ticks:{ beginAtZero:true } }] }, maintainAspectRatio:false,
+                        tooltips:{ callbacks:{ label: function(tooltipItem, data) {
+                            var dataset = data.datasets[tooltipItem.datasetIndex]; var datasetLabel = dataset.label || '';
+                            return datasetLabel + ": " + moqui.format(dataset.data[tooltipItem.index], null, "currency");
+                        }}}
+                    }
+                });
+                </script>        <!-- END   render-mode.text[inline][@template=true] -->
+            </div>
+    </div>
+    <!-- END   screen[@location=component://SimpleScreens/screen/SimpleScreens/Accounting/Reports/ReportList.xml].widgets -->
+
+    <!-- END   section-include[@name=BalanceSheetChart] -->
+            </div>
+    </div>
+    <div class="row">
+            <div class=" col-md-6">
+    <!-- BEGIN section-include[@name=NetIncomeYoyChart] -->
+    <!-- BEGIN screen[@location=component://SimpleScreens/screen/SimpleScreens/Accounting/Reports/ReportList.xml].widgets -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h5>Net Income Year Over Year</h5>
+                <div class="panel-toolbar">
+        <!-- BEGIN render-mode.text[inline][@template=true] -->
+<button type="button" class="btn btn-primary btn-sm" onclick="moqui.downloadData('', 'NetIncomeYoyHistory.csv', 'text/csv')">Get CSV</button>        <!-- END   render-mode.text[inline][@template=true] -->
+                </div>
+        </div>
+            <div class="panel-body">
+        <!-- BEGIN render-mode.text[inline][@template=true] -->
+<div class="chart-container" style="position:relative; height:400px; width:100%;"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div><canvas id="NetIncomeYoyChart" width="1408" height="400" style="display: block; width: 1408px; height: 400px;" class="chartjs-render-monitor"></canvas></div>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" type="text/javascript"></script>
+                <script>
+                var netIncomeYoyChart = new Chart(document.getElementById("NetIncomeYoyChart"), {
+                    type: 'line',
+                    data: { labels:"",
+                        datasets:[{"classGroupEnumId":"EngGlcNetIncome","fill":false},{"classGroupEnumId":"EngGlcNetOpIncome","fill":false}] },
+                    options: {
+                        scales:{ yAxes:[{ ticks:{ beginAtZero:true } }] }, maintainAspectRatio:false,
+                        tooltips:{ callbacks:{ label: function(tooltipItem, data) {
+                            var dataset = data.datasets[tooltipItem.datasetIndex]; var datasetLabel = dataset.label || '';
+                            return datasetLabel + ": " + moqui.format(dataset.data[tooltipItem.index], null, "currency");
+                        }}}
+                    }
+                });
+                </script>        <!-- END   render-mode.text[inline][@template=true] -->
+            </div>
+    </div>
+    <!-- END   screen[@location=component://SimpleScreens/screen/SimpleScreens/Accounting/Reports/ReportList.xml].widgets -->
+
+    <!-- END   section-include[@name=NetIncomeYoyChart] -->
+            </div>
+            <div class=" col-md-6">
+            </div>
+    </div>
+    <!-- END   screen[@location=component://SimpleScreens/screen/SimpleScreens/Accounting/Reports/ReportList.xml].widgets -->
+
+    <!-- END   screen[@location=component://SimpleScreens/screen/SimpleScreens/Accounting/Reports.xml].widgets -->
+
+    <!-- END   screen[@location=component://SimpleScreens/screen/SimpleScreens/Accounting.xml].widgets -->
+
+    <!-- END   screen[@location=component://MarbleERP/screen/marble.xml].widgets -->
+
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    <!-- BEGIN section[@name=BottomNavSection] -->
+        <!-- BEGIN screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+    <div id="footer" class="bg-dark">
+        <!-- BEGIN render-mode.text[inline][@template=true] -->
+                <div id="apps-footer-content">
+<p><a href="https://www.moqui.org/" target="_blank">Built on Moqui Framework 4.0.0</a></p><p><a href="/vapps/ScreenTree">Site Map</a></p>                </div>        <!-- END   render-mode.text[inline][@template=true] -->
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    <!-- END   screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+
+    <!-- END   section[@name=BottomNavSection] -->
+    <!-- END   screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+        
+
+
+
+
+        
+        
+        
+    
+</body></html>

@@ -1,0 +1,18 @@
+{
+  "id": "activity-003",
+  "sourceLine": 19,
+  "headings": [
+    "Customer Finds Product",
+    "Story"
+  ],
+  "text": "Customer reviews marketing materials and catalog resources to search among available products to find the product that meets their applicable needs or desires.",
+  "route": null,
+  "dialog": null,
+  "mapping": "entry-candidate",
+  "limitation": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required.",
+  "source": "docs/business-processes/process-library/customer-finds-product.md",
+  "mode": "vapps",
+  "coverage": "blocked",
+  "captures": [],
+  "reason": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required."
+}

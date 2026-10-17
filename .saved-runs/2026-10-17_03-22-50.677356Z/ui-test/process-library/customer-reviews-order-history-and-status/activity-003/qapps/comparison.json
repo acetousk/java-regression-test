@@ -1,0 +1,18 @@
+{
+  "id": "activity-003",
+  "sourceLine": 20,
+  "headings": [
+    "Customer Reviews Order History and Status",
+    "Story"
+  ],
+  "text": "If Order is not completed (items not yet packed for shipping) Customer may request cancellation of part or all of the order. See [Customer Cancels Order](https://moqui.org/docs/mantle/Business%20Process%20Library/Customer%20Cancels%20Order) for the process once Customer has initiated this.",
+  "route": null,
+  "dialog": null,
+  "mapping": "entry-candidate",
+  "limitation": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required.",
+  "source": "docs/business-processes/process-library/customer-reviews-order-history-and-status.md",
+  "mode": "qapps",
+  "coverage": "blocked",
+  "captures": [],
+  "reason": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required."
+}

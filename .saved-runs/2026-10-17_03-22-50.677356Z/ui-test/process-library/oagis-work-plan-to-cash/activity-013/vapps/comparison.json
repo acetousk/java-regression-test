@@ -1,0 +1,18 @@
+{
+  "id": "activity-013",
+  "sourceLine": 63,
+  "headings": [
+    "OAGIS Work Plan to Cash",
+    "Process Story"
+  ],
+  "text": "HR pays worker. HR sends PostJournalEntry to GL and GL sends PostAcknowledgeJournalEntry to HR.",
+  "route": null,
+  "dialog": null,
+  "mapping": "entry-candidate",
+  "limitation": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required.",
+  "source": "docs/business-processes/process-library/oagis-work-plan-to-cash.md",
+  "mode": "vapps",
+  "coverage": "blocked",
+  "captures": [],
+  "reason": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required."
+}

@@ -1,0 +1,18 @@
+{
+  "id": "activity-001",
+  "sourceLine": 10,
+  "headings": [
+    "Customer Finds Product",
+    "Ideas to Incorporate"
+  ],
+  "text": "* Product Selection Wizards",
+  "route": null,
+  "dialog": null,
+  "mapping": "entry-candidate",
+  "limitation": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required.",
+  "source": "docs/business-processes/process-library/customer-finds-product.md",
+  "mode": "apps",
+  "coverage": "blocked",
+  "captures": [],
+  "reason": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required."
+}

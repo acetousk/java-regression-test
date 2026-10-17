@@ -1,0 +1,224 @@
+<!DOCTYPE html><html><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    
+    <title>Webroot - Applications</title>
+    <link rel="apple-touch-icon" href="/MoquiLogo100.png">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="http://127.0.0.1:18091/css/WebrootVue.qvt.css?v=1a147e2" rel="stylesheet" type="text/css">
+    <script src="#?v=1a147e2" type="text/javascript"></script>
+    <script src="#?v=1a147e2" type="text/javascript"></script>
+    <script src="http://127.0.0.1:18091/js/MoquiLib.js?v=1a147e2" type="text/javascript"></script>
+    <link rel="shortcut icon" href="http://127.0.0.1:18091/favicon.ico">
+</head>
+<body class="dev qapps">
+        
+        
+        
+        
+    <!-- BEGIN screen[@location=component://webroot/screen/webroot/qapps.xml].widgets -->
+        <!-- BEGIN render-mode.text[@location=component://webroot/screen/includes/WebrootVue.qvt.ftl][@template=true] -->
+<div id="apps-root" style="display:none;">
+    <input type="hidden" id="confMoquiSessionToken" value="l1ZzsN6m74cpMmc7TQ4Q" style="">
+    <input type="hidden" id="confAppHost" value="127.0.0.1:18091" style="">
+    <input type="hidden" id="confAppRootPath" value="" style="">
+    <input type="hidden" id="confBasePath" value="/apps" style="">
+    <input type="hidden" id="confLinkBasePath" value="/qapps" style="">
+    <input type="hidden" id="confUserId" value="EX_JOHN_DOE" style="">
+    <input type="hidden" id="confUsername" value="john.doe" style="">
+    <input type="hidden" id="confLocale" value="en-US" style="">
+    <input type="hidden" id="confDarkMode" value="false" style="">
+    <input type="hidden" id="confLeftOpen" value="false" style="">
+    <input type="hidden" id="confAssistOpen" value="false" style="">
+    <input type="hidden" id="confAssist" value="true" style="">
+    <input type="hidden" class="confNavPluginUrl" value="/ssstatic/lib/QuickSearch.qvue" style=""><input type="hidden" class="confNavPluginUrl" value="/ssstatic/lib/ActiveOrgNav.qvue" style="">
+    <input type="hidden" class="confAccountPluginUrl" value="/ssstatic/lib/MyAccountNav.qvue" style="">
+
+    <q-layout view="hHh LpR fFf">
+        <q-header reveal="" bordered="" class="bg-black text-white" id="top"><q-toolbar style="font-size:15px;">
+            <q-btn v-if="assistEnabled" dense="" flat="" icon="forum" :color="assistOpen ? 'amber' : 'white'" @click="toggleAssist()">
+                <q-tooltip>Assist</q-tooltip>
+            </q-btn>
+            <q-btn dense="" flat="" icon="menu" @click="toggleLeftOpen()"></q-btn>
+
+                <m-link href="/apps"><div class="q-mx-md q-mt-sm">
+                    <img src="http://127.0.0.1:18091/images/MoquiLogoSmall.png" alt="Home" height="32">
+                </div></m-link>
+
+            <template v-for="(navMenuItem, menuIndex) in navMenuList"><template v-if="menuIndex &lt; (navMenuList.length - 1)">
+                <m-link v-if="navMenuItem.hasTabMenu" :href="getNavHref(menuIndex)" class="gt-xs">{{navMenuItem.title}}</m-link>
+                <div v-else-if="navMenuItem.subscreens &amp;&amp; navMenuItem.subscreens.length" class="cursor-pointer gt-xs">
+                    {{navMenuItem.title}}
+                    <q-menu anchor="bottom left" self="top left"><q-list dense="" style="min-width: 200px">
+                        <q-item v-for="subscreen in navMenuItem.subscreens" :key="subscreen.name" :class="{'bg-primary':subscreen.active, 'text-white':subscreen.active}" clickable="" v-close-popup=""><q-item-section>
+                            <m-link :href="subscreen.pathWithParams">
+                                <template v-if="subscreen.image">
+                                    <i v-if="subscreen.imageType === 'icon'" :class="subscreen.image" style="padding-right: 4px;"></i>
+                                    <img v-else="" :src="subscreen.image" :alt="subscreen.title" width="18" class="invertible" style="padding-right: 4px;">
+                                </template>
+                                <i v-else="" class="fa fa-link" style="padding-right: 8px;"></i>
+                                {{subscreen.title}}
+                            </m-link>
+                        </q-item-section></q-item>
+                    </q-list></q-menu>
+                </div>
+                <m-link v-else="" :href="getNavHref(menuIndex)" class="gt-xs">{{navMenuItem.title}}</m-link>
+
+                <q-icon size="1.5em" name="chevron_right" color="grey" class="gt-xs"></q-icon>
+            </template></template>
+            <m-link v-if="navMenuList.length &gt; 0" :href="getNavHref(navMenuList.length - 1)" class="gt-xs">{{navMenuList[navMenuList.length - 1].title}}</m-link>
+
+            <q-space></q-space>
+
+            <q-circular-progress indeterminate="" size="20px" color="light-blue" class="q-ma-xs" :class="{ hidden: loading &lt; 1 }"></q-circular-progress>
+
+            <component :is="qzVue" ref="qzVue"></component>
+
+            <q-btn dense="" flat="" icon="help_outline" color="info" :class="{hidden:!documentMenuList.length}">
+                <q-tooltip>Documentation</q-tooltip>
+                <q-menu><q-list dense="" class="q-my-md">
+                    <q-item v-for="screenDoc in documentMenuList" :key="screenDoc.index"><q-item-section>
+                        <m-dynamic-dialog :url="currentPath + '/screenDoc?docIndex=' + screenDoc.index" :button-text="screenDoc.title" :title="screenDoc.title"></m-dynamic-dialog>
+                    </q-item-section></q-item>
+                </q-list></q-menu>
+            </q-btn>
+
+            <template v-for="navPlugin in navPlugins"><component :is="navPlugin"></component></template>
+
+            <q-btn dense="" flat="" icon="notifications">
+                <q-tooltip>Notify History</q-tooltip>
+                <q-menu><q-list dense="" style="min-width: 300px">
+                    <q-item v-for="histItem in notifyHistoryList"><q-item-section>
+                        <q-banner dense="" rounded="" class="text-white" :class="'bg-' + getQuasarColor(histItem.type)">
+                            <strong>{{histItem.time}}</strong> <span>{{histItem.message}}</span>
+                            <template v-if="histItem.link != null" v-slot:action="">
+                                <q-btn :to="histItem.link" flat="" color="white" label="View">
+                            </q-btn></template>
+                        </q-banner>
+                    </q-item-section></q-item>
+                </q-list></q-menu>
+            </q-btn>
+
+            <q-btn dense="" flat="" icon="history">
+                <q-tooltip>Screen History</q-tooltip>
+                <q-menu><q-list dense="" style="min-width: 300px">
+                    <q-item v-for="histItem in navHistoryList" :key="histItem.pathWithParams" clickable="" v-close-popup=""><q-item-section>
+                        <m-link :href="histItem.pathWithParams">
+                            <template v-if="histItem.image">
+                                <i v-if="histItem.imageType === 'icon'" :class="histItem.image" style="padding-right: 8px;"></i>
+                                <img v-else="" :src="histItem.image" :alt="histItem.title" width="18" style="padding-right: 4px;">
+                            </template>
+                            <i v-else="" class="fa fa-link" style="padding-right: 8px;"></i>
+                            {{histItem.title}}
+                        </m-link>
+                    </q-item-section></q-item>
+                </q-list></q-menu>
+            </q-btn>
+
+
+            <q-btn dense="" flat="" icon="account_circle">
+                <q-tooltip>John Doe</q-tooltip>
+                <q-menu><q-card flat="" bordered="">
+                    <q-card-section horizontal="" class="q-pa-md">
+                        <q-card-section>
+                            <div class="q-mb-sm text-strong">Welcome John Doe</div>
+
+                            <template v-for="accountPlugin in accountPlugins"><component :is="accountPlugin"></component></template>
+                        </q-card-section>
+                        <q-separator vertical=""></q-separator>
+                        <q-card-actions vertical="" class="justify-around q-px-md">
+                            <q-btn flat="" dense="" icon="settings_power" color="negative" type="a" href="http://127.0.0.1:18091/Login/logout" onclick="return confirm('Logout John Doe?')">
+                                <q-tooltip>Logout John Doe</q-tooltip></q-btn>
+                            <q-btn flat="" dense="" @click.prevent="switchDarkLight()" icon="invert_colors">
+                                <q-tooltip>Switch Dark/Light</q-tooltip></q-btn>
+                            <q-btn flat="" dense="" icon="autorenew" color="negative" @click="reLoginShowDialog"><q-tooltip>Re-Login</q-tooltip></q-btn>
+                        </q-card-actions>
+                    </q-card-section>
+                </q-card></q-menu>
+            </q-btn>
+        </q-toolbar></q-header>
+
+        <q-page-container>
+            <div class="assist-shell-row">
+                <div v-show="assistEnabled &amp;&amp; assistOpen &amp;&amp; !assistNarrow &amp;&amp; assistSide==='left'" class="assist-panel-wrap" :style="{ width: assistPanelPx + 'px' }">
+                    <div id="assist-panel-slot" class="assist-panel-slot"></div>
+                    <div class="assist-panel-grip" @mousedown.prevent="startAssistResize"></div>
+                </div>
+                <div v-show="leftOpen" class="app-menu-col" :class="{ 'app-menu-overlay': menuOverlay }" :style="menuOverlay &amp;&amp; assistEnabled &amp;&amp; assistOpen &amp;&amp; !assistNarrow &amp;&amp; assistSide==='left' ? { left: assistPanelPx + 'px' } : null">
+                    <q-btn dense="" flat="" icon="menu" @click="toggleLeftOpen()" class="lt-sm"></q-btn>
+                    <q-list dense="" padding=""><m-menu-nav-item :menu-index="0"></m-menu-nav-item></q-list>
+                </div>
+                <q-page class="assist-page-col">
+                    <div id="assist-canvas-slot" v-show="assistCanvasOn" class="assist-canvas-slot"></div>
+                    <div v-show="!assistCanvasOn" class="q-ma-sm">
+                        <m-subscreens-active></m-subscreens-active>
+                    </div>
+                </q-page>
+                <div v-show="assistEnabled &amp;&amp; assistOpen &amp;&amp; !assistNarrow &amp;&amp; assistSide==='right'" class="assist-panel-wrap" :style="{ width: assistPanelPx + 'px' }">
+                    <div class="assist-panel-grip" @mousedown.prevent="startAssistResize"></div>
+                    <div id="assist-panel-slot-right" class="assist-panel-slot"></div>
+                </div>
+            </div>
+            <div id="assist-panel-slot-narrow" v-show="assistEnabled &amp;&amp; assistOpen &amp;&amp; assistNarrow" class="assist-narrow-overlay" :class="assistSide==='right' ? 'assist-narrow-right' : 'assist-narrow-left'"></div>
+        </q-page-container>
+
+        <q-footer reveal="" bordered="" class="bg-grey-9 text-white row q-pa-xs" id="footer">
+<div class="col-md-6 text-center q-px-md"><a class="text-grey-1" href="https://www.moqui.org/" target="_blank">Built on Moqui 4.0.0</a></div><div class="col-md-6 text-center q-px-md"><a class="text-grey-1" href="/qapps/ScreenTree">Site Map</a></div>        </q-footer>
+    </q-layout>
+    <m-dialog v-model="reLoginShow" width="400" title="Re-Login">
+        <div v-if="reLoginMfaData">
+            <div style="text-align:center;padding-bottom:10px">User <strong>{{username}}</strong> requires an authentication code, you have these options:</div>
+            <div style="text-align:center;padding-bottom:10px">{{reLoginMfaData.factorTypeDescriptions.join(", ")}}</div>
+            <q-form @submit.prevent="reLoginVerifyOtp" autocapitalize="off" autocomplete="off">
+                <q-input v-model="reLoginOtp" name="code" type="password" :autofocus="true" :nopasstoggle="false" outlined="" stack-label="" label="Authentication Code"></q-input>
+                <q-btn outline="" no-caps="" color="primary" type="submit" label="Sign in"></q-btn>
+            </q-form>
+            <div v-for="sendableFactor in reLoginMfaData.sendableFactors" style="padding:8px">
+                <q-btn outline="" no-caps="" dense="" :label="'Send code to ' + sendableFactor.factorOption" @click.prevent="reLoginSendOtp(sendableFactor.factorId)"></q-btn>
+            </div>
+        </div>
+        <div v-else="">
+            <div style="text-align:center;padding-bottom:10px">Please sign in to continue as user <strong>{{username}}</strong></div>
+            <q-form @submit.prevent="reLoginSubmit" autocapitalize="off" autocomplete="off">
+                <q-input v-model="reLoginPassword" name="password" type="password" :autofocus="true" outlined="" stack-label="" label="Password"></q-input>
+                <q-btn outline="" no-caps="" color="primary" type="submit" label="Sign in"></q-btn>
+                <q-btn outline="" no-caps="" color="negative" @click.prevent="reLoginReload" label="Reload Page"></q-btn>
+            </q-form>
+        </div>
+    </m-dialog>
+    <div id="assist-mount" style="display:none"><component v-if="assistComp" :is="assistComp" :shell="true"></component></div>
+</div>
+
+<script>
+    window.quasarConfig = {
+        brand: { // this will NOT work on IE 11
+            // primary: '#e46262',
+            info:'#1e7b8e'
+        },
+        notify: { progress:true, closeBtn:'X', position:'top-right' }, // default set of options for Notify Quasar plugin
+        // loading: {...}, // default set of options for Loading Quasar plugin
+        loadingBar: { color:'primary' }, // settings for LoadingBar Quasar plugin
+        // ..and many more (check Installation card on each Quasar component/directive/plugin)
+    }
+</script>
+        <!-- END   render-mode.text[@location=component://webroot/screen/includes/WebrootVue.qvt.ftl][@template=true] -->
+        <!-- BEGIN render-mode.text[inline][@template=true] -->
+        <!-- END   render-mode.text[inline][@template=true] -->
+    <!-- END   screen[@location=component://webroot/screen/webroot/qapps.xml].widgets -->
+        
+
+
+    <script src="#?v=1a147e2" type="text/javascript"></script>
+    <script src="http://127.0.0.1:18091/js/http-vue-loader/httpVueLoader.js?v=1a147e2" type="text/javascript"></script>
+    <script src="#?v=1a147e2" type="text/javascript"></script>
+    <script src="http://127.0.0.1:18091/js/WebrootVue.qvt.js?v=1a147e2" type="text/javascript"></script>
+
+
+        
+        
+        
+    
+</body></html>

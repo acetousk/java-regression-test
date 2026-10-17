@@ -1,0 +1,38 @@
+Application 
+Marble ERP 
+Accounting 
+Invoices 
+Find Invoice
+ 0  0  0  0
+ Organization
+ New Payable  New Receivable  Customer Credit Memo  Supplier Credit Memo  Project Client Invoice  Project Worker Invoice  Worker Invoice  Customer Statement PDF
+ Find Options
+ Columns
+CSV
+XLS
+
+Invoice Date: 30d -3 Status: In-Process, Finalized, Sent, Acknowledged, Incoming, Received, Approved 
+
+Invoice
+Type
+	
+Invoice Date
+Due Date
+	
+Their Invoice
+Their Order
+	
+Status
+	
+From
+Store
+	
+To
+	
+Total
+	
+Unpaid
+
+Built on Moqui Framework 0.1.0
+
+Site Map

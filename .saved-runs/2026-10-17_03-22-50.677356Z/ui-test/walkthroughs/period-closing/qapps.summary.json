@@ -1,0 +1,657 @@
+{
+  "source": "docs/business-processes/walkthroughs/period-closing.md",
+  "mode": "qapps",
+  "activities": [
+    {
+      "id": "activity-001",
+      "sourceLine": 9,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 140102,
+        "comparedPixels": 1440000,
+        "differencePercent": 9.729305555555555,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/period-closing/activity-001/qapps/comparison.json"
+    },
+    {
+      "id": "activity-002",
+      "sourceLine": 13,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 155997,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.833125,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/period-closing/activity-002/qapps/comparison.json"
+    },
+    {
+      "id": "activity-003",
+      "sourceLine": 17,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 155997,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.833125,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/period-closing/activity-003/qapps/comparison.json"
+    },
+    {
+      "id": "activity-004",
+      "sourceLine": 23,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 155997,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.833125,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/period-closing/activity-004/qapps/comparison.json"
+    },
+    {
+      "id": "activity-005",
+      "sourceLine": 29,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 155997,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.833125,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/period-closing/activity-005/qapps/comparison.json"
+    },
+    {
+      "id": "activity-006",
+      "sourceLine": 34,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 155997,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.833125,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/period-closing/activity-006/qapps/comparison.json"
+    },
+    {
+      "id": "activity-007",
+      "sourceLine": 38,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 155997,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.833125,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/period-closing/activity-007/qapps/comparison.json"
+    },
+    {
+      "id": "activity-008",
+      "sourceLine": 42,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 155997,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.833125,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/period-closing/activity-008/qapps/comparison.json"
+    },
+    {
+      "id": "activity-009",
+      "sourceLine": 46,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 155997,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.833125,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/period-closing/activity-009/qapps/comparison.json"
+    },
+    {
+      "id": "activity-010",
+      "sourceLine": 50,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 155997,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.833125,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/period-closing/activity-010/qapps/comparison.json"
+    },
+    {
+      "id": "activity-011",
+      "sourceLine": 54,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 155997,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.833125,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/period-closing/activity-011/qapps/comparison.json"
+    },
+    {
+      "id": "activity-012",
+      "sourceLine": 60,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 155997,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.833125,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/period-closing/activity-012/qapps/comparison.json"
+    },
+    {
+      "id": "activity-013",
+      "sourceLine": 66,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 155997,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.833125,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/period-closing/activity-013/qapps/comparison.json"
+    },
+    {
+      "id": "activity-014",
+      "sourceLine": 72,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 155997,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.833125,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/period-closing/activity-014/qapps/comparison.json"
+    },
+    {
+      "id": "activity-015",
+      "sourceLine": 78,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 155997,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.833125,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/period-closing/activity-015/qapps/comparison.json"
+    },
+    {
+      "id": "activity-016",
+      "sourceLine": 84,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 155997,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.833125,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/period-closing/activity-016/qapps/comparison.json"
+    },
+    {
+      "id": "activity-017",
+      "sourceLine": 89,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 155997,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.833125,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/period-closing/activity-017/qapps/comparison.json"
+    },
+    {
+      "id": "activity-018",
+      "sourceLine": 93,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 155997,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.833125,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/period-closing/activity-018/qapps/comparison.json"
+    },
+    {
+      "id": "activity-019",
+      "sourceLine": 97,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 155997,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.833125,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/period-closing/activity-019/qapps/comparison.json"
+    },
+    {
+      "id": "activity-020",
+      "sourceLine": 101,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 155997,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.833125,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/period-closing/activity-020/qapps/comparison.json"
+    },
+    {
+      "id": "activity-021",
+      "sourceLine": 105,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 155997,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.833125,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/period-closing/activity-021/qapps/comparison.json"
+    },
+    {
+      "id": "activity-022",
+      "sourceLine": 109,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 155997,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.833125,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/period-closing/activity-022/qapps/comparison.json"
+    },
+    {
+      "id": "activity-023",
+      "sourceLine": 113,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 155997,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.833125,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/period-closing/activity-023/qapps/comparison.json"
+    },
+    {
+      "id": "activity-024",
+      "sourceLine": 119,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 155997,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.833125,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/period-closing/activity-024/qapps/comparison.json"
+    },
+    {
+      "id": "activity-025",
+      "sourceLine": 125,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 155997,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.833125,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/period-closing/activity-025/qapps/comparison.json"
+    },
+    {
+      "id": "activity-026",
+      "sourceLine": 131,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 155997,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.833125,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/period-closing/activity-026/qapps/comparison.json"
+    }
+  ],
+  "note": "Evidence sweep only; no complete business-process execution is claimed."
+}

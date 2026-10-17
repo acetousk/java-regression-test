@@ -1,0 +1,1418 @@
+<!DOCTYPE html><html><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    
+    <title>Payments - Find Payment</title>
+    <link rel="apple-touch-icon" href="/MoquiLogo100.png">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="#?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="http://127.0.0.1:18091/css/webroot-layout.css?v=1a147e2" rel="stylesheet" type="text/css">
+    <link href="http://127.0.0.1:18091/css/webroot-theme.css?v=1a147e2" rel="stylesheet" type="text/css">
+    <script src="#?v=1a147e2" type="text/javascript"></script>
+    <script src="#?v=1a147e2" type="text/javascript"></script>
+    <script src="#?v=1a147e2" type="text/javascript"></script>
+    <link rel="shortcut icon" href="http://127.0.0.1:18091/favicon.ico">
+</head>
+<body class="dev bg-light FindPayment">
+        
+        
+        
+        
+    <!-- BEGIN screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+        <!-- BEGIN render-mode.text[inline][@template=true] -->
+<script>var notificationClient = new moqui.NotificationClient((location.protocol === 'https:' ? 'wss' : 'ws') + "://127.0.0.1:18091/notws");</script>        <!-- END   render-mode.text[inline][@template=true] -->
+    <!-- BEGIN section[@name=TopNavSection] -->
+        <!-- BEGIN screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+    <div id="top">
+        <!-- BEGIN render-mode.text[@location=component://webroot/screen/includes/navbar.html.ftl][@template=true] -->
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <header class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a href="http://127.0.0.1:18091/apps/AppList" class="navbar-brand"><img src="http://127.0.0.1:18091/images/MoquiLogoSmall.png" alt="Home"></a>
+        
+    </header>
+    <div id="navbar-buttons" class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul id="header-menus" class="nav navbar-nav">
+        </ul>
+        <div id="navbar-menu-crumbs">
+        </div>
+        <a class="navbar-text" href="http://127.0.0.1:18091/apps/marble/Accounting/Payment/FindPayment">Find Payment</a>
+        <a href="http://127.0.0.1:18091/Login/logout" data-toggle="tooltip" data-original-title="Logout John Doe" data-placement="bottom" class="btn btn-danger btn-sm navbar-btn navbar-right">
+            <i class="fa fa-power-off"></i>
+        </a>
+            <div id="document-menu" class="nav navbar-right dropdown">
+                <a id="document-menu-link" href="#" class="dropdown-toggle btn btn-info btn-sm navbar-btn" data-toggle="dropdown" title="Documentation">
+                    <i class="fa fa-question-circle"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#" onclick="showScreenDocDialog('100')">Payment Status Reference</a></li>
+                </ul>
+            </div>
+        <a href="#" onclick="switchDarkLight();" data-toggle="tooltip" data-original-title="Switch Dark/Light" data-placement="bottom" class="btn btn-default btn-sm navbar-btn navbar-right">
+            <i class="fa fa-adjust"></i>
+        </a>
+
+<div class="btn-group navbar-right">
+    <a href="/apps/my/User/Notifications" data-toggle="tooltip" data-container="body" data-original-title="Notifications" data-placement="bottom" class="btn btn-default btn-sm navbar-btn">
+        <i class="fa fa-info-circle"></i>
+        <span id="navbar_notification_count" class="label label-info">0</span>
+    </a>
+    <a href="/apps/my/User/Messages/FindMessage?statusId=CeReceived&amp;toPartyId=EX_JOHN_DOE" data-toggle="tooltip" data-container="body" data-original-title="Messages" data-placement="bottom" class="btn btn-default btn-sm navbar-btn">
+        <i class="fa fa-envelope"></i>
+        <span class="label label-warning">0</span>
+    </a>
+    <a href="/apps/my/User/Calendar/MyCalendar" data-toggle="tooltip" data-container="body" data-original-title="Events This Week" data-placement="bottom" class="btn btn-default btn-sm navbar-btn">
+        <i class="fa fa-calendar"></i>
+        <span class="label label-primary">0</span>
+    </a>
+    <a href="/apps/my/User/Task/MyTasks" data-toggle="tooltip" data-container="body" data-original-title="Open Tasks" data-placement="bottom" class="btn btn-default btn-sm navbar-btn">
+        <i class="fa fa-check"></i>
+        <span class="label label-success">0</span>
+    </a>
+</div>
+    <script>
+        var navbarNotificationListener = function(jsonObj, webSocket) {
+            if (jsonObj && jsonObj.persistOnSend === true) {
+                var countElement = $("#navbar_notification_count");
+                countElement.text((parseInt(countElement.text()) + 1).toString());
+            }
+            notificationClient.displayNotify(jsonObj, webSocket);
+        };
+        notificationClient.registerListener("ALL", navbarNotificationListener);
+    </script>
+        <div id="history-menu" class="nav navbar-right dropdown">
+            <a id="history-menu-link" href="#" class="dropdown-toggle btn btn-default btn-sm navbar-btn" data-toggle="dropdown" title="History">
+                <i class="fa fa-list"></i></a>
+            <ul class="dropdown-menu">
+                <li><a href="http://127.0.0.1:18091/apps/marble/dashboard">
+                            <i class="fa fa-dashboard" style="padding-right: 8px;"></i>
+                    Marble ERP - Dashboard
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Accounting/dashboard">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Accounting.png" alt="Accounting - Dashboard" height="18" style="padding-right: 4px;">
+                    Accounting - Dashboard
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Party/FindParty?roleTypeId=OrgInternal">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Parties.png" alt="Parties - Find Party (OrgInternal)" height="18" style="padding-right: 4px;">
+                    Parties - Find Party (OrgInternal)
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/dashboard">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/vapps/marble/dashboard">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Shipment/FindShipment?shipmentTypeEnumId=ShpTpPurchase">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications (ShpTpPurchase)
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/vapps/marble/Shipment/FindShipment?shipmentTypeEnumId=ShpTpPurchase">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications (ShpTpPurchase)
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Shipment/FindShipment?shipmentTypeEnumId=ShpTpPurchase">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Shipping.png" alt="Shipments - Find Shipments (ShpTpPurchase)" height="18" style="padding-right: 4px;">
+                    Shipments - Find Shipments (ShpTpPurchase)
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Request/FindRequest">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/vapps/marble/Request/FindRequest">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Request/FindRequest">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Request.png" alt="Requests - Find Request" height="18" style="padding-right: 4px;">
+                    Requests - Find Request
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Catalog/Product/FindProduct">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/vapps/marble/Catalog/Product/FindProduct">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Catalog/Product/FindProduct">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Catalog.png" alt="Products - Find Product" height="18" style="padding-right: 4px;">
+                    Products - Find Product
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Asset/Asset/FindSummary">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/vapps/marble/Asset/Asset/FindSummary">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Asset/Asset/FindSummary">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Asset.png" alt="Asset - Find Summary" height="18" style="padding-right: 4px;">
+                    Asset - Find Summary
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Asset/PhysicalInventory/FindPhysicalInventory">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/vapps/marble/Asset/PhysicalInventory/FindPhysicalInventory">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Asset/PhysicalInventory/FindPhysicalInventory">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Asset.png" alt="Physical Inventory - Find Physical Inventory" height="18" style="padding-right: 4px;">
+                    Physical Inventory - Find Physical Inventory
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Return/FindReturn?returnType=Customer">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications (Customer)
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/vapps/marble/Return/FindReturn?returnType=Customer">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications (Customer)
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/apps/marble/Return/FindReturn?returnType=Customer">
+                            <img src="http://127.0.0.1:18091/ssstatic/images/Return.png" alt="Returns - Returns (Customer)" height="18" style="padding-right: 4px;">
+                    Returns - Returns (Customer)
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/qapps/marble/Shipping/dashboard">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            
+                <li><a href="http://127.0.0.1:18091/vapps/marble/Shipping/dashboard">
+                        <i class="fa fa-link" style="padding-right: 8px;"></i>
+                    Applications
+                </a></li>
+            </ul>
+        </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+    $('.navbar [data-toggle="tooltip"]').tooltip({ placement:'bottom', trigger:'hover' });
+    $('#history-menu-link').tooltip({ placement:'bottom', trigger:'hover' });
+    $('#document-menu-link').tooltip({ placement:'bottom', trigger:'hover' });
+    function switchDarkLight() {
+        $("body").toggleClass("bg-dark");
+        $("body").toggleClass("bg-light");
+        var currentStyle = $("body").hasClass("bg-dark") ? "bg-dark" : "bg-light";
+        $.ajax({ type:'POST', url:'http://127.0.0.1:18091/apps/setPreference', data:{ 'moquiSessionToken': '[REDACTED]','preferenceKey': 'OUTER_STYLE', 'preferenceValue': currentStyle }, dataType:'json' });
+    }
+</script>
+
+        <!-- END   render-mode.text[@location=component://webroot/screen/includes/navbar.html.ftl][@template=true] -->
+        <!-- BEGIN render-mode.text[inline][@template=true] -->
+        <!-- END   render-mode.text[inline][@template=true] -->
+        <li id="header-menu" class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Application <i class="fa fa-chevron-right"></i></a>
+            <ul class="dropdown-menu">
+                        <li class="active"><a href="http://127.0.0.1:18091/apps/marble/dashboard"><i class="fa fa-cogs" style="padding-right: 8px;"></i>Marble ERP</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/my"><i class="fa fa-user" style="padding-right: 8px;"></i>My Account</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/system"><i class="fa fa-cog" style="padding-right: 8px;"></i>System</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/tools"><i class="fa fa-wrench" style="padding-right: 8px;"></i>Tools</a></li>
+            </ul>
+        </li>
+        <script>$("#header-menus").append($("#header-menu"));</script>
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    <!-- END   screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+
+    <!-- END   section[@name=TopNavSection] -->
+    <div id="content">
+    <div class="inner">
+    <div class="container-fluid">
+    <!-- BEGIN section[@name=MessagesSection] -->
+        <!-- BEGIN screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+    <!-- BEGIN section-iterate[@name=headerMessageInfos] -->
+    
+    <!-- END   section-iterate[@name=headerMessageInfos] -->
+    <!-- BEGIN section-iterate[@name=headerErrors] -->
+    
+    <!-- END   section-iterate[@name=headerErrors] -->
+    <!-- BEGIN section-iterate[@name=headerValidationErrors] -->
+    
+    <!-- END   section-iterate[@name=headerValidationErrors] -->
+    <!-- BEGIN section-iterate[@name=headerSavedMessages] -->
+    
+    <!-- END   section-iterate[@name=headerSavedMessages] -->
+    <!-- BEGIN section-iterate[@name=headerSavedErrors] -->
+    
+    <!-- END   section-iterate[@name=headerSavedErrors] -->
+    <!-- BEGIN section-iterate[@name=headerSavedValidationErrors] -->
+    
+    <!-- END   section-iterate[@name=headerSavedValidationErrors] -->
+    <!-- END   screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+
+    <!-- END   section[@name=MessagesSection] -->
+        <!-- BEGIN screen[@location=component://MarbleERP/screen/marble.xml].widgets -->
+    <!-- BEGIN section[@name=OrgChooserSection] -->
+        <!-- BEGIN screen[@location=component://MarbleERP/screen/marble.xml].widgets -->
+        <!-- BEGIN render-mode.text[inline][@template=true] -->
+<div id="active-org-menu" class="nav navbar-right dropdown">
+                <a id="active-org-menu-link" href="#" class="dropdown-toggle btn btn-default btn-sm navbar-btn" data-toggle="dropdown" title="Organization">
+                    <i class="fa fa-globe"></i> </a>
+                <ul class="dropdown-menu">
+                        <li><a href="http://127.0.0.1:18091/apps/setPrefGoLast?preferenceKey=ACTIVE_ORGANIZATION&amp;preferenceValue=ORG_ZIZI_RETAIL">ZIRET: Ziziwork Retail &amp; Wholesale</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/setPrefGoLast?preferenceKey=ACTIVE_ORGANIZATION&amp;preferenceValue=ORG_ZIZI_SERVICES">ZISER: Ziziwork Services</a></li>
+                </ul>
+            </div>
+            <script>$("#navbar-buttons").append($("#active-org-menu")); $('#active-org-menu-link').tooltip({ placement:'bottom', trigger:'hover' });</script>        <!-- END   render-mode.text[inline][@template=true] -->
+    <!-- END   screen[@location=component://MarbleERP/screen/marble.xml].widgets -->
+
+    <!-- END   section[@name=OrgChooserSection] -->
+        <li id="MarbleErpPanel-menu" class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Marble ERP <i class="fa fa-chevron-right"></i></a>
+            <ul class="dropdown-menu">
+                        <li><a href="http://127.0.0.1:18091/apps/marble/dashboard"><i class="fa fa-dashboard" style="padding-right: 8px;"></i>Dashboard</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/QuickSearch"><i class="fa fa-search" style="padding-right: 8px;"></i>Quick Search</a></li>
+                        <li class="active"><a href="http://127.0.0.1:18091/apps/marble/Accounting/dashboard"><img src="http://127.0.0.1:18091/ssstatic/images/Accounting.png" alt="Accounting" height="18" style="padding-right: 4px;">Accounting</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Asset/dashboard"><img src="http://127.0.0.1:18091/ssstatic/images/Asset.png" alt="Asset" height="18" style="padding-right: 4px;">Asset</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Catalog/dashboard"><img src="http://127.0.0.1:18091/ssstatic/images/Catalog.png" alt="Catalog" height="18" style="padding-right: 4px;">Catalog</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Customer/FindCustomer"><img src="http://127.0.0.1:18091/ssstatic/images/Customer.png" alt="Customers" height="18" style="padding-right: 4px;">Customers</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Facility/FindFacility"><img src="http://127.0.0.1:18091/ssstatic/images/Facility.png" alt="Facility" height="18" style="padding-right: 4px;">Facility</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/HumanRes/dashboard"><i class="fa fa-user-plus" style="padding-right: 8px;"></i>Human Resources</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Manufacturing/dashboard"><i class="fa fa-industry" style="padding-right: 8px;"></i>Manufacturing</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Order/FindOrder"><img src="http://127.0.0.1:18091/ssstatic/images/Sales.png" alt="Orders" height="18" style="padding-right: 4px;">Orders</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Party/FindParty"><img src="http://127.0.0.1:18091/ssstatic/images/Parties.png" alt="Parties" height="18" style="padding-right: 4px;">Parties</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Project/FindProject"><img src="http://127.0.0.1:18091/ssstatic/images/project-business120.png" alt="Projects" height="18" style="padding-right: 4px;">Projects</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Request/FindRequest"><img src="http://127.0.0.1:18091/ssstatic/images/Request.png" alt="Requests" height="18" style="padding-right: 4px;">Requests</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Return/FindReturn"><img src="http://127.0.0.1:18091/ssstatic/images/Return.png" alt="Returns" height="18" style="padding-right: 4px;">Returns</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Shipment/FindShipment"><img src="http://127.0.0.1:18091/ssstatic/images/Shipping.png" alt="Shipments" height="18" style="padding-right: 4px;">Shipments</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Shipping/dashboard"><img src="http://127.0.0.1:18091/ssstatic/images/Picking.png" alt="Shipping" height="18" style="padding-right: 4px;">Shipping</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/ProductStore/FindProductStore"><img src="http://127.0.0.1:18091/ssstatic/images/ProductStore.png" alt="Stores" height="18" style="padding-right: 4px;">Stores</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Supplier/FindSupplier"><img src="http://127.0.0.1:18091/ssstatic/images/Supplier.png" alt="Suppliers" height="18" style="padding-right: 4px;">Suppliers</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Survey/FindSurvey"><i class="fa fa-pencil-square-o" style="padding-right: 8px;"></i>Survey</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Task/FindTask"><img src="http://127.0.0.1:18091/ssstatic/images/task-homework.png" alt="Tasks" height="18" style="padding-right: 4px;">Tasks</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Wiki/WikiSpaces"><img src="http://127.0.0.1:18091/ssstatic/images/Wiki.png" alt="Wiki/Content" height="18" style="padding-right: 4px;">Wiki/Content</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/QuickViewReport"><i class="fa fa-database" style="padding-right: 8px;"></i>Custom Reports</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/SimpleReport/FindReport"><i class="fa fa-database" style="padding-right: 8px;"></i>Report Builder</a></li>
+            </ul>
+        </li>
+        <script>$("#header-menus").append($("#MarbleErpPanel-menu"));</script>
+            <!-- BEGIN screen[@location=component://SimpleScreens/screen/SimpleScreens/Accounting.xml].widgets -->
+        <li id="accounting-panel-menu" class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Accounting <i class="fa fa-chevron-right"></i></a>
+            <ul class="dropdown-menu">
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Accounting/dashboard"><img src="http://127.0.0.1:18091/ssstatic/images/Accounting.png" alt="Dashboard" height="18" style="padding-right: 4px;">Dashboard</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Accounting/Invoice/FindInvoice"><img src="http://127.0.0.1:18091/ssstatic/images/Accounting.png" alt="Invoices" height="18" style="padding-right: 4px;">Invoices</a></li>
+                        <li class="active"><a href="http://127.0.0.1:18091/apps/marble/Accounting/Payment/FindPayment"><img src="http://127.0.0.1:18091/ssstatic/images/Accounting.png" alt="Payments" height="18" style="padding-right: 4px;">Payments</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Accounting/FinancialAccount/FindFinancialAccount"><img src="http://127.0.0.1:18091/ssstatic/images/Accounting.png" alt="Financial Accounts" height="18" style="padding-right: 4px;">Financial Accounts</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Accounting/Transaction/FindTransaction"><img src="http://127.0.0.1:18091/ssstatic/images/Accounting.png" alt="Transactions" height="18" style="padding-right: 4px;">Transactions</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Accounting/FindJournal"><img src="http://127.0.0.1:18091/ssstatic/images/Accounting.png" alt="GL Journals" height="18" style="padding-right: 4px;">GL Journals</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Accounting/TimePeriod/FindTimePeriod"><img src="http://127.0.0.1:18091/ssstatic/images/Accounting.png" alt="Time Period" height="18" style="padding-right: 4px;">Time Period</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Accounting/GlAccount/FindGlAccount"><img src="http://127.0.0.1:18091/ssstatic/images/Accounting.png" alt="GL Accounts" height="18" style="padding-right: 4px;">GL Accounts</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Accounting/Budget/FindBudget"><img src="http://127.0.0.1:18091/ssstatic/images/Accounting.png" alt="Budgets" height="18" style="padding-right: 4px;">Budgets</a></li>
+                        <li><a href="http://127.0.0.1:18091/apps/marble/Accounting/Reports/ReportList"><img src="http://127.0.0.1:18091/ssstatic/images/Accounting.png" alt="Reports" height="18" style="padding-right: 4px;">Reports</a></li>
+            </ul>
+        </li>
+        <script>$("#header-menus").append($("#accounting-panel-menu"));</script>
+            <!-- BEGIN screen[@location=component://SimpleScreens/screen/SimpleScreens/Accounting/Payment.xml].widgets -->
+        <!-- BEGIN screen[@location=component://SimpleScreens/screen/SimpleScreens/Accounting/Payment/FindPayment.xml].widgets -->
+        <button id="NewInPaymentDialog-button" type="button" data-toggle="modal" data-target="#NewInPaymentDialog" data-original-title="New Incoming Payment" data-placement="bottom" class="btn btn-primary btn-sm "><i class="fa fa-share"></i> New Incoming Payment</button>
+
+        <div id="NewInPaymentDialog" class="modal container-dialog" aria-hidden="true" style="display: none;" tabindex="-1">
+            <div class="modal-dialog" style="width: 760px;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">New Incoming Payment</h4>
+                    </div>
+                    <div class="modal-body">
+    <!-- BEGIN form-single[@name=NewInPaymentForm] -->
+    <form name="NewInPaymentForm" id="NewInPaymentForm" method="post" action="http://127.0.0.1:18091/apps/marble/Accounting/Payment/FindPayment/createPayment">
+        <input type="hidden" name="moquiFormName" value="NewInPaymentForm" style="">
+        <input type="hidden" name="moquiSessionToken" value="[REDACTED]" style="">
+        
+        <fieldset class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="NewInPaymentForm_fromPartyId">From</label>
+            <div class="col-sm-10">
+    
+    <select name="fromPartyId" class=" dynamic-options required noResetSelect2" style="min-width:200px;" id="NewInPaymentForm_fromPartyId">
+            <option value="">&nbsp;</option>
+    </select>
+    
+    
+        <script>
+            var NewInPaymentForm_fromPartyIdS2Opts = { 
+                
+                minimumResultsForSearch:0, width:"100%", minimumInputLength:2,
+                ajax:{ url:"http://127.0.0.1:18091/apps/marble/Accounting/Payment/FindPayment/searchPartyList", type:"POST", dataType:"json", cache:true, delay:300,
+                    data:function(params) { return { moquiSessionToken: "[REDACTED]", term:(params.term || ''), pageIndex:(params.page || 1) - 1
+                        
+                        
+                    }},
+                    processResults:function(data, params) {
+                        var isDataArray = moqui.isArray(data);
+                        var list = isDataArray ? data : data.options;
+                        var newData = [];
+                        // funny case where select2 specifies no option.@value if empty so &nbsp; ends up passed with form submit; now filtered on server for \u00a0 only and set to null
+                        if (!params.page || params.page <= 1) newData.push({ id:'\u00a0', text:'\u00a0' });
+                        var labelField = "label"; var valueField = "value";
+                        $.each(list, function(idx, curObj) {
+                            var idVal = curObj[valueField]; if (!idVal) idVal = '\u00a0';
+                            newData.push({ id:idVal, text:curObj[labelField] })
+                        });
+                        var outObj = { results:newData };
+                        if (!isDataArray) {
+                            params.page = params.page || 1; // NOTE: 1 based index, is 0 based on server side
+                            var pageSize = data.pageSize || 20;
+                            outObj.pagination = { more: (data.count ? (params.page * pageSize) < data.count : false) };
+                        }
+                        return outObj;
+                    }
+                }
+            };
+            $("#NewInPaymentForm_fromPartyId").select2(NewInPaymentForm_fromPartyIdS2Opts);
+            function populate_NewInPaymentForm_fromPartyId(params) {
+                    var hasAllParms = true;
+                    
+                    if (!hasAllParms) { $("#NewInPaymentForm_fromPartyId").select2("destroy"); $('#NewInPaymentForm_fromPartyId').html(""); $("#NewInPaymentForm_fromPartyId").select2({ });  return; }
+                $.ajax({ type:"POST", url:"http://127.0.0.1:18091/apps/marble/Accounting/Payment/FindPayment/searchPartyList", data:{ moquiSessionToken: "[REDACTED]", term:((params && params.term) || '')}, dataType:"json"}).done(                    function(data) {
+                        var list = moqui.isArray(data) ? data : data.options;
+                        if (list) {
+                            var jqEl = $("#NewInPaymentForm_fromPartyId");
+                            var bWasFocused = jqEl.next().hasClass('select2-container--focus');
+                            jqEl.select2("destroy");
+                            jqEl.html("");
+                            jqEl.append('<option value="">&nbsp;</option>');
+                            
+                            $.each(list, function(key, value) {
+                                var optionValue = value["value"];
+                                if (optionValue === "") {
+                                    jqEl.append("<option selected='selected' value='" + optionValue + "'>" + value["label"] + "</option>");
+                                } else {
+                                    jqEl.append("<option value='" + optionValue + "'>" + value["label"] + "</option>");
+                                }
+                            });
+                            $("#NewInPaymentForm_fromPartyId").select2(NewInPaymentForm_fromPartyIdS2Opts);
+                            if( bWasFocused ) jqEl.focus();
+                            setTimeout(function() { jqEl.trigger('change'); }, 50);
+                        }
+                    }
+                );
+            }
+            
+                
+
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="NewInPaymentForm_toPartyId">To</label>
+            <div class="col-sm-10">
+    
+    <select name="toPartyId" class=" required" id="NewInPaymentForm_toPartyId">
+            <option value="ORG_ZIZI_HR">ZIHR: Ziziwork Human Resources</option>
+            <option value="ORG_ZIZI_CORP">ZICORP: Ziziwork Industries</option>
+            <option value="ORG_ZIZI_RETAIL">ZIRET: Ziziwork Retail &amp; Wholesale</option>
+            <option value="ORG_ZIZI_SALES">ZISAL: Ziziwork Sales</option>
+            <option value="ORG_ZIZI_SERVICES">ZISER: Ziziwork Services</option>
+    </select>
+    
+    
+        <script>$("#NewInPaymentForm_toPartyId").select2({  });</script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="NewInPaymentForm_paymentInstrumentEnumId">Instrument</label>
+            <div class="col-sm-10">
+    
+    <select name="paymentInstrumentEnumId" class=" " id="NewInPaymentForm_paymentInstrumentEnumId">
+            <option value="PiAch">ACH Direct</option>
+            <option value="PiAmazonPay">Amazon Pay</option>
+            <option value="PiBillingAccount">Billing Account</option>
+            <option value="PiBitcoinWallet">Bitcoin</option>
+            <option value="PiCash">Cash</option>
+            <option value="PiCod">Cash On Delivery</option>
+            <option value="PiCertifiedCheck">Certified Check</option>
+            <option value="PiCompanyAccount">Company Account</option>
+            <option selected="selected" value="PiCompanyCheck">Company Check</option>
+            <option value="PiCreditCard">Credit Card</option>
+            <option value="PiDebitCard">Debit Card</option>
+            <option value="PiFinancialAccount">Financial Account</option>
+            <option value="PiGiftCard">Gift Card</option>
+            <option value="PiGiftCertificate">Gift Certificate</option>
+            <option value="PiMoneyOrder">Money Order</option>
+            <option value="PiOther">Other</option>
+            <option value="PiPayPalAccount">PayPal Account</option>
+            <option value="PiPersonalCheck">Personal Check</option>
+            <option value="PiWireTransfer">Wire Transfer</option>
+    </select>
+    
+    
+        <script>$("#NewInPaymentForm_paymentInstrumentEnumId").select2({  });</script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="NewInPaymentForm_paymentTypeEnumId">Payment Type</label>
+            <div class="col-sm-10">
+    
+    <select name="paymentTypeEnumId" class=" " id="NewInPaymentForm_paymentTypeEnumId">
+            <option value="PtDisbursement">Disbursement</option>
+            <option value="PtFinancialAccount">Financial Account Transaction</option>
+            <option selected="selected" value="PtInvoicePayment">Invoice Payment</option>
+            <option value="PtOrderPref">Order Payment Preference</option>
+            <option value="PtPayrollPayment">Payroll Employee Payment</option>
+            <option value="PtPayrollOtherPayment">Payroll Other Payment</option>
+            <option value="PtPrePayment">Pre Payment - Expense</option>
+            <option value="PtPrePaymentInventory">Pre Payment - Inventory</option>
+            <option value="PtRefund">Refund</option>
+    </select>
+    
+    
+        <script>$("#NewInPaymentForm_paymentTypeEnumId").select2({  });</script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="NewInPaymentForm_amount">Amount</label>
+            <div class="col-sm-10">
+    
+<input id="NewInPaymentForm_amount" type="text" name="amount" value="" size="12" class="form-control number" style="">
+        
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="NewInPaymentForm_effectiveDate">Effective Date</label>
+            <div class="col-sm-10">
+    
+
+
+
+        <div class="input-group date" id="NewInPaymentForm_effectiveDate">
+            <input type="text" class="form-control" name="effectiveDate" value="2026-10-16 22:25" size="16" maxlength="23" style="">
+            <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+        </div>
+        <script>
+            $('#NewInPaymentForm_effectiveDate').datetimepicker({toolbarPlacement:'top', showClose:true, showClear:true, showTodayButton:true,
+                useStrict:true, defaultDate: '2026-10-16 22:25' && moment('2026-10-16 22:25','YYYY-MM-DD HH:mm'),
+                format:'YYYY-MM-DD HH:mm', extraFormats:['YYYY-MM-DD HH:mm', 'YYYY-MM-DD HH:mm:ss', 'MM/DD/YYYY HH:mm'], stepping:5, locale:"en-US",
+                keyBinds: {t: function() {this.date(moment());}, up: function () { this.date(this.date().clone().add(1, 'd')); }, down: function () { this.date(this.date().clone().subtract(1, 'd')); }, 'control up': function () { this.date(this.date().clone().add(1, 'd')); }, 'control down': function () { this.date(this.date().clone().subtract(1, 'd')); }}});
+            $('#NewInPaymentForm_effectiveDate').on("dp.change", function() { var jqEl = $('#NewInPaymentForm_effectiveDate'); jqEl.val(jqEl.find("input").first().val()); jqEl.trigger("change"); });
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <div class="col-sm-2 hidden-xs">&nbsp;</div>
+            <div class="col-sm-10">
+    
+    <button type="submit" name="submitButton" value="submitButton" id="NewInPaymentForm_submitButton" class="btn btn-primary btn-sm">
+Create Payment    </button>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        </fieldset>
+    </form>
+        <script>
+            $("#NewInPaymentForm").validate({ errorClass: 'help-block', errorElement: 'span',
+                highlight: function(element, errorClass, validClass) { $(element).parents('.form-group').removeClass('has-success').addClass('has-error'); },
+                unhighlight: function(element, errorClass, validClass) { $(element).parents('.form-group').removeClass('has-error').addClass('has-success'); }
+            });
+            $('#NewInPaymentForm [data-toggle="tooltip"]').tooltip({placement:'auto top'});
+
+        </script>
+    <!-- END   form-single[@name=NewInPaymentForm] -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>$('#NewInPaymentDialog').on('shown.bs.modal', function() {
+            $("#NewInPaymentDialog :not(.noResetSelect2)>select:not(.noResetSelect2)").select2({ });
+            var defFocus = $("#NewInPaymentDialog .default-focus");
+            if (defFocus.length) { defFocus.focus(); } else { $("#NewInPaymentDialog form :input:visible:first").focus(); }
+        });</script>
+        <button id="NewOutPaymentDialog-button" type="button" data-toggle="modal" data-target="#NewOutPaymentDialog" data-original-title="New Outgoing Payment" data-placement="bottom" class="btn btn-primary btn-sm "><i class="fa fa-share"></i> New Outgoing Payment</button>
+
+        <div id="NewOutPaymentDialog" class="modal container-dialog" aria-hidden="true" style="display: none;" tabindex="-1">
+            <div class="modal-dialog" style="width: 760px;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">New Outgoing Payment</h4>
+                    </div>
+                    <div class="modal-body">
+    <!-- BEGIN form-single[@name=NewOutPaymentForm] -->
+    <form name="NewOutPaymentForm" id="NewOutPaymentForm" method="post" action="http://127.0.0.1:18091/apps/marble/Accounting/Payment/FindPayment/createPayment">
+        <input type="hidden" name="moquiFormName" value="NewOutPaymentForm" style="">
+        <input type="hidden" name="moquiSessionToken" value="[REDACTED]" style="">
+        
+        <fieldset class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="NewOutPaymentForm_fromPartyId">From</label>
+            <div class="col-sm-10">
+    
+    <select name="fromPartyId" class=" required" id="NewOutPaymentForm_fromPartyId">
+            <option value="ORG_ZIZI_HR">ZIHR: Ziziwork Human Resources</option>
+            <option value="ORG_ZIZI_CORP">ZICORP: Ziziwork Industries</option>
+            <option value="ORG_ZIZI_RETAIL">ZIRET: Ziziwork Retail &amp; Wholesale</option>
+            <option value="ORG_ZIZI_SALES">ZISAL: Ziziwork Sales</option>
+            <option value="ORG_ZIZI_SERVICES">ZISER: Ziziwork Services</option>
+    </select>
+    
+    
+        <script>$("#NewOutPaymentForm_fromPartyId").select2({  });</script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="NewOutPaymentForm_toPartyId">To</label>
+            <div class="col-sm-10">
+    
+    <select name="toPartyId" class=" dynamic-options required noResetSelect2" style="min-width:200px;" id="NewOutPaymentForm_toPartyId">
+            <option value="">&nbsp;</option>
+    </select>
+    
+    
+        <script>
+            var NewOutPaymentForm_toPartyIdS2Opts = { 
+                
+                minimumResultsForSearch:0, width:"100%", minimumInputLength:2,
+                ajax:{ url:"http://127.0.0.1:18091/apps/marble/Accounting/Payment/FindPayment/searchPartyList", type:"POST", dataType:"json", cache:true, delay:300,
+                    data:function(params) { return { moquiSessionToken: "[REDACTED]", term:(params.term || ''), pageIndex:(params.page || 1) - 1
+                        
+                        
+                    }},
+                    processResults:function(data, params) {
+                        var isDataArray = moqui.isArray(data);
+                        var list = isDataArray ? data : data.options;
+                        var newData = [];
+                        // funny case where select2 specifies no option.@value if empty so &nbsp; ends up passed with form submit; now filtered on server for \u00a0 only and set to null
+                        if (!params.page || params.page <= 1) newData.push({ id:'\u00a0', text:'\u00a0' });
+                        var labelField = "label"; var valueField = "value";
+                        $.each(list, function(idx, curObj) {
+                            var idVal = curObj[valueField]; if (!idVal) idVal = '\u00a0';
+                            newData.push({ id:idVal, text:curObj[labelField] })
+                        });
+                        var outObj = { results:newData };
+                        if (!isDataArray) {
+                            params.page = params.page || 1; // NOTE: 1 based index, is 0 based on server side
+                            var pageSize = data.pageSize || 20;
+                            outObj.pagination = { more: (data.count ? (params.page * pageSize) < data.count : false) };
+                        }
+                        return outObj;
+                    }
+                }
+            };
+            $("#NewOutPaymentForm_toPartyId").select2(NewOutPaymentForm_toPartyIdS2Opts);
+            function populate_NewOutPaymentForm_toPartyId(params) {
+                    var hasAllParms = true;
+                    
+                    if (!hasAllParms) { $("#NewOutPaymentForm_toPartyId").select2("destroy"); $('#NewOutPaymentForm_toPartyId').html(""); $("#NewOutPaymentForm_toPartyId").select2({ });  return; }
+                $.ajax({ type:"POST", url:"http://127.0.0.1:18091/apps/marble/Accounting/Payment/FindPayment/searchPartyList", data:{ moquiSessionToken: "[REDACTED]", term:((params && params.term) || '')}, dataType:"json"}).done(                    function(data) {
+                        var list = moqui.isArray(data) ? data : data.options;
+                        if (list) {
+                            var jqEl = $("#NewOutPaymentForm_toPartyId");
+                            var bWasFocused = jqEl.next().hasClass('select2-container--focus');
+                            jqEl.select2("destroy");
+                            jqEl.html("");
+                            jqEl.append('<option value="">&nbsp;</option>');
+                            
+                            $.each(list, function(key, value) {
+                                var optionValue = value["value"];
+                                if (optionValue === "") {
+                                    jqEl.append("<option selected='selected' value='" + optionValue + "'>" + value["label"] + "</option>");
+                                } else {
+                                    jqEl.append("<option value='" + optionValue + "'>" + value["label"] + "</option>");
+                                }
+                            });
+                            $("#NewOutPaymentForm_toPartyId").select2(NewOutPaymentForm_toPartyIdS2Opts);
+                            if( bWasFocused ) jqEl.focus();
+                            setTimeout(function() { jqEl.trigger('change'); }, 50);
+                        }
+                    }
+                );
+            }
+            
+                
+
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="NewOutPaymentForm_paymentInstrumentEnumId">Instrument</label>
+            <div class="col-sm-10">
+    
+    <select name="paymentInstrumentEnumId" class=" " id="NewOutPaymentForm_paymentInstrumentEnumId">
+            <option value="PiAch">ACH Direct</option>
+            <option value="PiAmazonPay">Amazon Pay</option>
+            <option value="PiBillingAccount">Billing Account</option>
+            <option value="PiBitcoinWallet">Bitcoin</option>
+            <option value="PiCash">Cash</option>
+            <option value="PiCod">Cash On Delivery</option>
+            <option value="PiCertifiedCheck">Certified Check</option>
+            <option value="PiCompanyAccount">Company Account</option>
+            <option selected="selected" value="PiCompanyCheck">Company Check</option>
+            <option value="PiCreditCard">Credit Card</option>
+            <option value="PiDebitCard">Debit Card</option>
+            <option value="PiFinancialAccount">Financial Account</option>
+            <option value="PiGiftCard">Gift Card</option>
+            <option value="PiGiftCertificate">Gift Certificate</option>
+            <option value="PiMoneyOrder">Money Order</option>
+            <option value="PiOther">Other</option>
+            <option value="PiPayPalAccount">PayPal Account</option>
+            <option value="PiPersonalCheck">Personal Check</option>
+            <option value="PiWireTransfer">Wire Transfer</option>
+    </select>
+    
+    
+        <script>$("#NewOutPaymentForm_paymentInstrumentEnumId").select2({  });</script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="NewOutPaymentForm_paymentTypeEnumId">Payment Type</label>
+            <div class="col-sm-10">
+    
+    <select name="paymentTypeEnumId" class=" " id="NewOutPaymentForm_paymentTypeEnumId">
+            <option value="PtDisbursement">Disbursement</option>
+            <option value="PtFinancialAccount">Financial Account Transaction</option>
+            <option selected="selected" value="PtInvoicePayment">Invoice Payment</option>
+            <option value="PtOrderPref">Order Payment Preference</option>
+            <option value="PtPayrollPayment">Payroll Employee Payment</option>
+            <option value="PtPayrollOtherPayment">Payroll Other Payment</option>
+            <option value="PtPrePayment">Pre Payment - Expense</option>
+            <option value="PtPrePaymentInventory">Pre Payment - Inventory</option>
+            <option value="PtRefund">Refund</option>
+    </select>
+    
+    
+        <script>$("#NewOutPaymentForm_paymentTypeEnumId").select2({  });</script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="NewOutPaymentForm_amount">Amount</label>
+            <div class="col-sm-10">
+    
+<input id="NewOutPaymentForm_amount" type="text" name="amount" value="" size="12" class="form-control number" style="">
+        
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="NewOutPaymentForm_effectiveDate">Effective Date</label>
+            <div class="col-sm-10">
+    
+
+
+
+        <div class="input-group date" id="NewOutPaymentForm_effectiveDate">
+            <input type="text" class="form-control" name="effectiveDate" value="2026-10-16 22:25" size="16" maxlength="23" style="">
+            <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+        </div>
+        <script>
+            $('#NewOutPaymentForm_effectiveDate').datetimepicker({toolbarPlacement:'top', showClose:true, showClear:true, showTodayButton:true,
+                useStrict:true, defaultDate: '2026-10-16 22:25' && moment('2026-10-16 22:25','YYYY-MM-DD HH:mm'),
+                format:'YYYY-MM-DD HH:mm', extraFormats:['YYYY-MM-DD HH:mm', 'YYYY-MM-DD HH:mm:ss', 'MM/DD/YYYY HH:mm'], stepping:5, locale:"en-US",
+                keyBinds: {t: function() {this.date(moment());}, up: function () { this.date(this.date().clone().add(1, 'd')); }, down: function () { this.date(this.date().clone().subtract(1, 'd')); }, 'control up': function () { this.date(this.date().clone().add(1, 'd')); }, 'control down': function () { this.date(this.date().clone().subtract(1, 'd')); }}});
+            $('#NewOutPaymentForm_effectiveDate').on("dp.change", function() { var jqEl = $('#NewOutPaymentForm_effectiveDate'); jqEl.val(jqEl.find("input").first().val()); jqEl.trigger("change"); });
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        <div class="form-group">
+            <div class="col-sm-2 hidden-xs">&nbsp;</div>
+            <div class="col-sm-10">
+    
+    <button type="submit" name="submitButton" value="submitButton" id="NewOutPaymentForm_submitButton" class="btn btn-primary btn-sm">
+Create Payment    </button>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+        </fieldset>
+    </form>
+        <script>
+            $("#NewOutPaymentForm").validate({ errorClass: 'help-block', errorElement: 'span',
+                highlight: function(element, errorClass, validClass) { $(element).parents('.form-group').removeClass('has-success').addClass('has-error'); },
+                unhighlight: function(element, errorClass, validClass) { $(element).parents('.form-group').removeClass('has-error').addClass('has-success'); }
+            });
+            $('#NewOutPaymentForm [data-toggle="tooltip"]').tooltip({placement:'auto top'});
+
+        </script>
+    <!-- END   form-single[@name=NewOutPaymentForm] -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>$('#NewOutPaymentDialog').on('shown.bs.modal', function() {
+            $("#NewOutPaymentDialog :not(.noResetSelect2)>select:not(.noResetSelect2)").select2({ });
+            var defFocus = $("#NewOutPaymentDialog .default-focus");
+            if (defFocus.length) { defFocus.focus(); } else { $("#NewOutPaymentDialog form :input:visible:first").focus(); }
+        });</script>
+            <a href="http://127.0.0.1:18091/apps/marble/Accounting/Payment/BulkPaymentCheck" class="btn btn-primary btn-sm">Bulk Checks</a>    <!-- BEGIN form-list[@name=PaymentList] -->
+
+        <div id="PaymentList_hdialog" class="modal" aria-hidden="true" style="display: none;" tabindex="-1">
+            <div class="modal-dialog" style="width: 800px;"><div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Find Options</h4>
+                </div>
+                <div class="modal-body">
+                <h4 style="margin-top: 0;">Saved Finds</h4>
+                        <p>No find parameters, choose some to save a new find or update existing</p>
+                <h4>Find Parameters</h4>
+                    <form name="PaymentList_header" id="PaymentList_header" method="post" action="http://127.0.0.1:18091/apps/marble/Accounting/Payment/FindPayment">
+                        <input type="hidden" name="moquiSessionToken" value="[REDACTED]" style="">
+                        
+                        
+                        <fieldset class="form-horizontal">
+                            <div class="form-group"><div class="col-sm-2">&nbsp;</div><div class="col-sm-10">
+                                <button type="button" class="btn btn-primary btn-sm" onclick="PaymentList_header_clearForm()">Clear Parameters</button></div></div>
+
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="PaymentList_header_orderByField">Order By</label>
+                                <div class="col-sm-10">
+                                    <select name="orderBySelect" id="PaymentList_header_orderBySelect" multiple="multiple" style="width: 100%;" class="noResetSelect2">
+                                                <option value="paymentId">Payment (Asc)</option>
+                                                <option value="-paymentId">Payment (Desc)</option>
+                                                <option value="paymentRefNum">Ref Num (Asc)</option>
+                                                <option value="-paymentRefNum">Ref Num (Desc)</option>
+                                                <option value="effectiveDate">Effective Date (Asc)</option>
+                                                <option value="-effectiveDate">Effective Date (Desc)</option>
+                                                <option value="statusId">Status (Asc)</option>
+                                                <option value="-statusId">Status (Desc)</option>
+                                                <option value="amount">Amount (Asc)</option>
+                                                <option value="-amount">Amount (Desc)</option>
+                                                <option value="unappliedTotal">Unapplied (Asc)</option>
+                                                <option value="-unappliedTotal">Unapplied (Desc)</option>
+                                    </select>
+                                    <input type="hidden" id="PaymentList_header_orderByField" name="orderByField" value="-effectiveDate" style="">
+                                </div>
+                            </div>
+                            <script>
+                                function PaymentList_header_clearForm() {
+                                    var jqEl = $("#PaymentList_header");
+                                    jqEl.find(':radio, :checkbox').removeAttr('checked');
+                                    jqEl.find('textarea, :text, select').val('').trigger('change');
+                                    return false;
+                                }
+                                $("#PaymentList_header_orderBySelect").selectivity({ positionDropdown: function(dropdownEl, selectEl) { dropdownEl.css("width", "300px"); } })[0].selectivity.filterResults = function(results) {
+                                    // Filter out asc and desc options if anyone selected.
+                                    return results.filter(function(item){return !this._data.some(function(data_item) {return data_item.id.substring(1) === item.id.substring(1);});}, this);
+                                };
+                                    $("#PaymentList_header_orderBySelect").selectivity("value", ['-effectiveDate']);
+                                $("div#PaymentList_header_orderBySelect").on("change", function(evt) {
+                                    if (evt.value) $("#PaymentList_header_orderByField").val(evt.value.join(","));
+                                });
+                            </script>
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="PaymentList_header_paymentType">Payment Type</label>
+            <div class="col-sm-10">
+    
+        <span id="PaymentList_header_paymentType"><input type="radio" name="paymentType" value="Any" checked="checked" style="">&nbsp;Any</span>
+        <span id="PaymentList_header_paymentType_1"><input type="radio" name="paymentType" value="Incoming" style="">&nbsp;Incoming</span>
+        <span id="PaymentList_header_paymentType_2"><input type="radio" name="paymentType" value="Outgoing" style="">&nbsp;Outgoing</span>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="PaymentList_header_onlyNotRec">Only Not Rec</label>
+            <div class="col-sm-10">
+    
+        <span id="PaymentList_header_onlyNotRec"><input type="radio" name="onlyNotRec" value="Y" style="">&nbsp;Y</span>
+        <span id="PaymentList_header_onlyNotRec_1"><input type="radio" name="onlyNotRec" value="N" checked="checked" style="">&nbsp;N</span>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="PaymentList_header_paymentId">Payment</label>
+            <div class="col-sm-10">
+    
+<span class="form-text-find">
+        <span><input type="checkbox" class="form-control" name="paymentId_not" value="Y" style="">&nbsp;Not</span>
+        <select name="paymentId_op" class="form-control">
+            <option value="equals">Equals</option>
+            <option value="like">Like</option>
+            <option value="contains">Contains</option>
+            <option value="begins" selected="selected">Begins With</option>
+            <option value="empty">Empty</option>        </select>
+    <input type="text" class="form-control" name="paymentId" value="" size="30" id="PaymentList_header_paymentId" style="">
+        <span><input type="checkbox" class="form-control" name="paymentId_ic" value="Y" checked="checked" style="">&nbsp;Ignore Case</span>
+</span>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="PaymentList_header_paymentRefNum">Ref Num</label>
+            <div class="col-sm-10">
+    
+<span class="form-text-find">
+        <span><input type="checkbox" class="form-control" name="paymentRefNum_not" value="Y" style="">&nbsp;Not</span>
+        <select name="paymentRefNum_op" class="form-control">
+            <option value="equals">Equals</option>
+            <option value="like">Like</option>
+            <option value="contains">Contains</option>
+            <option value="begins" selected="selected">Begins With</option>
+            <option value="empty">Empty</option>        </select>
+    <input type="text" class="form-control" name="paymentRefNum" value="" size="30" id="PaymentList_header_paymentRefNum" style="">
+        <span><input type="checkbox" class="form-control" name="paymentRefNum_ic" value="Y" checked="checked" style="">&nbsp;Ignore Case</span>
+</span>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="PaymentList_header_effectiveDate">Effective Date</label>
+            <div class="col-sm-10">
+    
+    <div class="date-period">
+        <select name="effectiveDate_poffset" id="PaymentList_header_effectiveDate_poffset">
+                <option value="">&nbsp;</option>
+            <option value="0">This</option>
+            <option value="-1" selected="selected">Last</option>
+            <option value="1">Next</option>
+            <option value="-2">-2</option>
+            <option value="2">+2</option>
+            <option value="-3">-3</option>
+            <option value="-4">-4</option>
+            <option value="-6">-6</option>
+            <option value="-12">-12</option>
+        </select>
+        <select name="effectiveDate_period" id="PaymentList_header_effectiveDate_period">
+            <option value="">&nbsp;</option>
+            <option value="day">Day</option>
+            <option value="7d">7 Days</option>
+            <option value="30d" selected="selected">30 Days</option>
+            <option value="week">Week</option>
+            <option value="weeks">Weeks</option>
+            <option value="month">Month</option>
+            <option value="months">Months</option>
+            <option value="quarter">Quarter</option>
+            <option value="year">Year</option>
+            <option value="7r">+/-7d</option>
+            <option value="30r">+/-30d</option>
+        </select>
+        <div class="input-group date" id="PaymentList_header_effectiveDate_pdate">
+            <input type="text" class="form-control" name="effectiveDate_pdate" value="" size="10" maxlength="10" style="">
+            <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+        </div>
+        <script>
+            $("#PaymentList_header_effectiveDate_poffset").select2({ }); $("#PaymentList_header_effectiveDate_period").select2({ });
+            $('#PaymentList_header_effectiveDate_pdate').datetimepicker({toolbarPlacement:'top', showClose:true, showClear:true, showTodayButton:true, useStrict:true, defaultDate: '' && moment('','YYYY-MM-DD'), format:'YYYY-MM-DD', extraFormats:['l', 'L', 'YYYY-MM-DD'], locale:"en-US", keyBinds: {t: function() {this.date(moment());}, up: function () { this.date(this.date().clone().add(1, 'd')); }, down: function () { this.date(this.date().clone().subtract(1, 'd')); }, 'control up': function () { this.date(this.date().clone().add(1, 'd')); }, 'control down': function () { this.date(this.date().clone().subtract(1, 'd')); }}});
+        </script>
+    </div>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="PaymentList_header_statusId">Status</label>
+            <div class="col-sm-10">
+    
+    <select name="statusId" class="  noResetSelect2" id="PaymentList_header_statusId" multiple="multiple">
+            <option selected="selected" value="PmntProposed">Proposed</option>
+            <option selected="selected" value="PmntPromised">Promised</option>
+            <option selected="selected" value="PmntAuthorized">Authorized</option>
+            <option value="PmntDelivered">Delivered</option>
+            <option value="PmntConfirmed">Confirmed Paid</option>
+            <option value="PmntCancelled">Cancelled</option>
+            <option value="PmntVoid">Void</option>
+            <option value="PmntDeclined">Declined</option>
+    </select>
+    <span><input type="checkbox" class="form-control" name="statusId_not" value="Y" style="">&nbsp;Not</span>
+    <input type="hidden" id="PaymentList_header_statusId_op" name="statusId_op" value="in" style="">
+        <script>$("#PaymentList_header_statusId").select2({ closeOnSelect:false, width:"100%",  });</script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="PaymentList_header_fromPartyId">From</label>
+            <div class="col-sm-10">
+    
+    <select name="fromPartyId" class=" dynamic-options noResetSelect2" style="min-width:200px;" id="PaymentList_header_fromPartyId">
+            <option value="">&nbsp;</option>
+    </select>
+    
+    
+        <script>
+            var PaymentList_header_fromPartyIdS2Opts = { 
+                
+                minimumResultsForSearch:0, width:"100%", minimumInputLength:2,
+                ajax:{ url:"http://127.0.0.1:18091/apps/marble/Accounting/Payment/FindPayment/searchPartyList", type:"POST", dataType:"json", cache:true, delay:300,
+                    data:function(params) { return { moquiSessionToken: "[REDACTED]", term:(params.term || ''), pageIndex:(params.page || 1) - 1
+                        
+                        
+                    }},
+                    processResults:function(data, params) {
+                        var isDataArray = moqui.isArray(data);
+                        var list = isDataArray ? data : data.options;
+                        var newData = [];
+                        // funny case where select2 specifies no option.@value if empty so &nbsp; ends up passed with form submit; now filtered on server for \u00a0 only and set to null
+                        if (!params.page || params.page <= 1) newData.push({ id:'\u00a0', text:'\u00a0' });
+                        var labelField = "label"; var valueField = "value";
+                        $.each(list, function(idx, curObj) {
+                            var idVal = curObj[valueField]; if (!idVal) idVal = '\u00a0';
+                            newData.push({ id:idVal, text:curObj[labelField] })
+                        });
+                        var outObj = { results:newData };
+                        if (!isDataArray) {
+                            params.page = params.page || 1; // NOTE: 1 based index, is 0 based on server side
+                            var pageSize = data.pageSize || 20;
+                            outObj.pagination = { more: (data.count ? (params.page * pageSize) < data.count : false) };
+                        }
+                        return outObj;
+                    }
+                }
+            };
+            $("#PaymentList_header_fromPartyId").select2(PaymentList_header_fromPartyIdS2Opts);
+            function populate_PaymentList_header_fromPartyId(params) {
+                    var hasAllParms = true;
+                    
+                    if (!hasAllParms) { $("#PaymentList_header_fromPartyId").select2("destroy"); $('#PaymentList_header_fromPartyId').html(""); $("#PaymentList_header_fromPartyId").select2({ });  return; }
+                $.ajax({ type:"POST", url:"http://127.0.0.1:18091/apps/marble/Accounting/Payment/FindPayment/searchPartyList", data:{ moquiSessionToken: "[REDACTED]", term:((params && params.term) || '')}, dataType:"json"}).done(                    function(data) {
+                        var list = moqui.isArray(data) ? data : data.options;
+                        if (list) {
+                            var jqEl = $("#PaymentList_header_fromPartyId");
+                            var bWasFocused = jqEl.next().hasClass('select2-container--focus');
+                            jqEl.select2("destroy");
+                            jqEl.html("");
+                            jqEl.append('<option value="">&nbsp;</option>');
+                            
+                            $.each(list, function(key, value) {
+                                var optionValue = value["value"];
+                                if (optionValue === "") {
+                                    jqEl.append("<option selected='selected' value='" + optionValue + "'>" + value["label"] + "</option>");
+                                } else {
+                                    jqEl.append("<option value='" + optionValue + "'>" + value["label"] + "</option>");
+                                }
+                            });
+                            $("#PaymentList_header_fromPartyId").select2(PaymentList_header_fromPartyIdS2Opts);
+                            if( bWasFocused ) jqEl.focus();
+                            setTimeout(function() { jqEl.trigger('change'); }, 50);
+                        }
+                    }
+                );
+            }
+            
+                
+
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="PaymentList_header_toPartyId">To</label>
+            <div class="col-sm-10">
+    
+    <select name="toPartyId" class=" dynamic-options noResetSelect2" style="min-width:200px;" id="PaymentList_header_toPartyId">
+            <option value="">&nbsp;</option>
+    </select>
+    
+    
+        <script>
+            var PaymentList_header_toPartyIdS2Opts = { 
+                
+                minimumResultsForSearch:0, width:"100%", minimumInputLength:2,
+                ajax:{ url:"http://127.0.0.1:18091/apps/marble/Accounting/Payment/FindPayment/searchPartyList", type:"POST", dataType:"json", cache:true, delay:300,
+                    data:function(params) { return { moquiSessionToken: "[REDACTED]", term:(params.term || ''), pageIndex:(params.page || 1) - 1
+                        
+                        
+                    }},
+                    processResults:function(data, params) {
+                        var isDataArray = moqui.isArray(data);
+                        var list = isDataArray ? data : data.options;
+                        var newData = [];
+                        // funny case where select2 specifies no option.@value if empty so &nbsp; ends up passed with form submit; now filtered on server for \u00a0 only and set to null
+                        if (!params.page || params.page <= 1) newData.push({ id:'\u00a0', text:'\u00a0' });
+                        var labelField = "label"; var valueField = "value";
+                        $.each(list, function(idx, curObj) {
+                            var idVal = curObj[valueField]; if (!idVal) idVal = '\u00a0';
+                            newData.push({ id:idVal, text:curObj[labelField] })
+                        });
+                        var outObj = { results:newData };
+                        if (!isDataArray) {
+                            params.page = params.page || 1; // NOTE: 1 based index, is 0 based on server side
+                            var pageSize = data.pageSize || 20;
+                            outObj.pagination = { more: (data.count ? (params.page * pageSize) < data.count : false) };
+                        }
+                        return outObj;
+                    }
+                }
+            };
+            $("#PaymentList_header_toPartyId").select2(PaymentList_header_toPartyIdS2Opts);
+            function populate_PaymentList_header_toPartyId(params) {
+                    var hasAllParms = true;
+                    
+                    if (!hasAllParms) { $("#PaymentList_header_toPartyId").select2("destroy"); $('#PaymentList_header_toPartyId').html(""); $("#PaymentList_header_toPartyId").select2({ });  return; }
+                $.ajax({ type:"POST", url:"http://127.0.0.1:18091/apps/marble/Accounting/Payment/FindPayment/searchPartyList", data:{ moquiSessionToken: "[REDACTED]", term:((params && params.term) || '')}, dataType:"json"}).done(                    function(data) {
+                        var list = moqui.isArray(data) ? data : data.options;
+                        if (list) {
+                            var jqEl = $("#PaymentList_header_toPartyId");
+                            var bWasFocused = jqEl.next().hasClass('select2-container--focus');
+                            jqEl.select2("destroy");
+                            jqEl.html("");
+                            jqEl.append('<option value="">&nbsp;</option>');
+                            
+                            $.each(list, function(key, value) {
+                                var optionValue = value["value"];
+                                if (optionValue === "") {
+                                    jqEl.append("<option selected='selected' value='" + optionValue + "'>" + value["label"] + "</option>");
+                                } else {
+                                    jqEl.append("<option value='" + optionValue + "'>" + value["label"] + "</option>");
+                                }
+                            });
+                            $("#PaymentList_header_toPartyId").select2(PaymentList_header_toPartyIdS2Opts);
+                            if( bWasFocused ) jqEl.focus();
+                            setTimeout(function() { jqEl.trigger('change'); }, 50);
+                        }
+                    }
+                );
+            }
+            
+                
+
+        </script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="PaymentList_header_paymentTypeEnumId">Type</label>
+            <div class="col-sm-10">
+    
+    <select name="paymentTypeEnumId" class="  " id="PaymentList_header_paymentTypeEnumId">
+            <option value="">&nbsp;</option>
+            <option value="PtDisbursement">Disbursement</option>
+            <option value="PtFinancialAccount">Financial Account Transaction</option>
+            <option value="PtInvoicePayment">Invoice Payment</option>
+            <option value="PtOrderPref">Order Payment Preference</option>
+            <option value="PtPayrollPayment">Payroll Employee Payment</option>
+            <option value="PtPayrollOtherPayment">Payroll Other Payment</option>
+            <option value="PtPrePayment">Pre Payment - Expense</option>
+            <option value="PtPrePaymentInventory">Pre Payment - Inventory</option>
+            <option value="PtRefund">Refund</option>
+    </select>
+    
+    
+        <script>$("#PaymentList_header_paymentTypeEnumId").select2({  });</script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="PaymentList_header_paymentInstrumentEnumId">Instrument</label>
+            <div class="col-sm-10">
+    
+    <select name="paymentInstrumentEnumId" class="  " id="PaymentList_header_paymentInstrumentEnumId">
+            <option value="">&nbsp;</option>
+            <option value="PiAch">ACH Direct</option>
+            <option value="PiAmazonPay">Amazon Pay</option>
+            <option value="PiBillingAccount">Billing Account</option>
+            <option value="PiBitcoinWallet">Bitcoin</option>
+            <option value="PiCash">Cash</option>
+            <option value="PiCod">Cash On Delivery</option>
+            <option value="PiCertifiedCheck">Certified Check</option>
+            <option value="PiCompanyAccount">Company Account</option>
+            <option value="PiCompanyCheck">Company Check</option>
+            <option value="PiCreditCard">Credit Card</option>
+            <option value="PiDebitCard">Debit Card</option>
+            <option value="PiFinancialAccount">Financial Account</option>
+            <option value="PiGiftCard">Gift Card</option>
+            <option value="PiGiftCertificate">Gift Certificate</option>
+            <option value="PiMoneyOrder">Money Order</option>
+            <option value="PiOther">Other</option>
+            <option value="PiPayPalAccount">PayPal Account</option>
+            <option value="PiPersonalCheck">Personal Check</option>
+            <option value="PiWireTransfer">Wire Transfer</option>
+    </select>
+    
+    
+        <script>$("#PaymentList_header_paymentInstrumentEnumId").select2({  });</script>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="PaymentList_header_eitherPaymentMethodId">Either PM</label>
+            <div class="col-sm-10">
+    
+<span class="text-inline">&nbsp;</span>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="PaymentList_header_amount">Amount</label>
+            <div class="col-sm-10">
+    
+<span class="form-range-find">
+    <span>From&nbsp;</span><input type="text" class="form-control" name="amount_from" value="" size="10" id="PaymentList_header_amount_from" style="">
+</span>
+<span class="form-range-find">
+    <span>Thru&nbsp;</span><input type="text" class="form-control" name="amount_thru" value="" size="10" id="PaymentList_header_amount_thru" style="">
+</span>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="PaymentList_header_unappliedTotal">Unapplied</label>
+            <div class="col-sm-10">
+    
+<span class="form-range-find">
+    <span>From&nbsp;</span><input type="text" class="form-control" name="unappliedTotal_from" value="" size="10" id="PaymentList_header_unappliedTotal_from" style="">
+</span>
+<span class="form-range-find">
+    <span>Thru&nbsp;</span><input type="text" class="form-control" name="unappliedTotal_thru" value="" size="10" id="PaymentList_header_unappliedTotal_thru" style="">
+</span>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+
+        <div class="form-group">
+            <div class="col-sm-2 hidden-xs">&nbsp;</div>
+            <div class="col-sm-10">
+    
+    <button type="submit" name="findButton" value="findButton" id="PaymentList_header_findButton" class="btn btn-primary btn-sm">
+Find    </button>
+            </div><!-- /col -->
+        </div><!-- /form-group -->
+                        </fieldset>
+                    </form>
+                </div>
+            </div></div>
+        </div>
+        <script>$('#PaymentList_hdialog').on('shown.bs.modal', function() {
+            $("#PaymentList_hdialog :not(.noResetSelect2)>select:not(.noResetSelect2)").select2({ });
+        })</script>
+        <div id="PaymentList_SelColsDialog" class="modal" aria-hidden="true" style="display: none;" tabindex="-1">
+            <div class="modal-dialog" style="width: 600px;"><div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Column Fields</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Drag fields to the desired column or do not display</p>
+                    <ul id="PaymentList_SelColsSortable">
+                        <li id="hidden"><div>Do Not Display</div>
+                        </li>
+                            <li id="column_0"><div>Column 1</div><ul>
+                                <li id="paymentId"><div>Payment</div></li>
+                                <li id="paymentRefNum"><div>Ref Num</div></li>
+                            </ul></li>
+                            <li id="column_1"><div>Column 2</div><ul>
+                                <li id="effectiveDate"><div>Effective Date</div></li>
+                                <li id="statusId"><div>Status</div></li>
+                            </ul></li>
+                            <li id="column_2"><div>Column 3</div><ul>
+                                <li id="fromPartyId"><div>From</div></li>
+                                <li id="toPartyId"><div>To</div></li>
+                            </ul></li>
+                            <li id="column_3"><div>Column 4</div><ul>
+                                <li id="paymentTypeEnumId"><div>Type</div></li>
+                                <li id="paymentInstrumentEnumId"><div>Instrument</div></li>
+                            </ul></li>
+                            <li id="column_4"><div>Column 5</div><ul>
+                                <li id="paymentMethodId"><div>From Payment Method</div></li>
+                                <li id="toPaymentMethodId"><div>To Payment Method</div></li>
+                            </ul></li>
+                            <li id="column_5"><div>Column 6</div><ul>
+                                <li id="amount"><div>Amount</div></li>
+                            </ul></li>
+                            <li id="column_6"><div>Column 7</div><ul>
+                                <li id="unappliedTotal"><div>Unapplied</div></li>
+                            </ul></li>
+                            <li id="column_7"><div>Column 8</div></li>
+                            <li id="column_8"><div>Column 9</div></li>
+                            <li id="column_9"><div>Column 10</div></li>
+                    </ul>
+                    <form class="form-inline" id="PaymentList_SelColsForm" method="post" action="http://127.0.0.1:18091/apps/marble/Accounting/Payment/FindPayment/formSelectColumns">
+                        <input type="hidden" name="moquiSessionToken" value="[REDACTED]" style="">
+                        <input type="hidden" name="formLocation" value="component://SimpleScreens/screen/SimpleScreens/Accounting/Payment/FindPayment.xml.form_list$PaymentList" style="">
+                        <input type="hidden" id="PaymentList_SelColsForm_columnsTree" name="columnsTree" value="" style="">
+                        <input type="submit" name="SaveColumns" value="Save Columns" class="btn btn-primary btn-sm" style="">
+                        <input type="submit" name="ResetColumns" value="Reset to Default" class="btn btn-primary btn-sm" style="">
+                    </form>
+                </div>
+            </div></div>
+        </div>
+        <script>$('#PaymentList_SelColsDialog').on('shown.bs.modal', function() {
+            $("#PaymentList_SelColsSortable").sortableLists({
+                isAllowed: function(currEl, hint, target) {
+                    if (currEl.attr('id') === 'hidden' || currEl.attr('id').startsWith('column_')) {
+                        if (!target.attr('id') || (target.attr('id') != 'hidden' && !currEl.attr('id').startsWith('column_'))) { hint.css('background-color', '#99ff99'); return true; }
+                        else { hint.css('background-color', '#ff9999'); return false; }
+                    }
+                    if (target.attr('id') && (target.attr('id') === 'hidden' || target.attr('id').startsWith('column_'))) { hint.css('background-color', '#99ff99'); return true; }
+                    else { hint.css('background-color', '#ff9999'); return false; }
+                },
+                placeholderCss: {'background-color':'#999999'}, insertZone: 50,
+                opener: { active:false, as:'html', close:'', open:'' },
+                onChange: function(cEl) {
+                    var sortableHierarchy = $('#PaymentList_SelColsSortable').sortableListsToHierarchy();
+                    // console.log(sortableHierarchy); console.log(JSON.stringify(sortableHierarchy));
+                    $("#PaymentList_SelColsForm_columnsTree").val(JSON.stringify(sortableHierarchy));
+                }
+            });
+            $("#PaymentList_SelColsForm_columnsTree").val(JSON.stringify($('#PaymentList_SelColsSortable').sortableListsToHierarchy()));
+        })</script>
+        <div class="table-scroll-wrapper"><table class="table table-striped table-hover table-condensed" id="PaymentList_table">
+            <thead>
+        <tr class="form-list-nav-row"><th colspan="7">
+        <nav class="form-list-nav">
+            <button id="PaymentList_hdialog_button" type="button" data-toggle="modal" data-target="#PaymentList_hdialog" data-original-title="Find Options" data-placement="bottom" class="btn btn-default"><i class="fa fa-share"></i> Find Options</button>
+            <button id="PaymentList_SelColsDialog_button" type="button" data-toggle="modal" data-target="#PaymentList_SelColsDialog" data-original-title="Columns" data-placement="bottom" class="btn btn-default"><i class="fa fa-share"></i> Columns</button>
+
+
+                <a href="http://127.0.0.1:18091/apps/marble/Accounting/Payment/FindPayment?renderMode=csv&amp;saveFilename=PaymentList.csv&amp;pageNoLimit=true&amp;lastStandalone=true" class="btn btn-default">CSV</a>
+        </nav>
+        </th></tr>
+
+            <tr><th colspan="7" style="font-weight: normal">
+                        
+                                <span style="white-space:nowrap;"><strong>Payment Type:</strong> <span class="text-success">Any</span></span>
+                        
+                        
+                        
+                        
+                                <span style="white-space:nowrap;"><strong>Effective Date:</strong> <span class="text-success">Last 30 Days (2026-09-16 to 2026-10-16)</span></span>
+                        
+                                <span style="white-space:nowrap;"><strong>Status:</strong> <span class="text-success">Proposed, Promised, Authorized</span></span>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    <form name="PaymentList_header" id="PaymentList_header" method="post" action="http://127.0.0.1:18091/apps/marble/Accounting/Payment/FindPayment">
+                        
+                        <button id="PaymentList_header-quick-clear" type="submit" name="clearParameters" style="float:left; padding: 0 5px 0 5px; margin: 0 4px 0 0;" class="btn btn-primary btn-sm"><i class="fa fa-remove"></i></button>
+                    </form>
+            </th></tr>
+
+                <tr>
+                    <th>
+                        <div><div class="form-title">Payment            <span class="form-order-by">
+                <a href="http://127.0.0.1:18091/apps/marble/Accounting/Payment/FindPayment?orderByField=paymentId"><i class="fa fa-caret-up"></i></a>
+                <a href="http://127.0.0.1:18091/apps/marble/Accounting/Payment/FindPayment?orderByField=-paymentId"><i class="fa fa-caret-down"></i></a>
+            </span>
+</div>    </div>
+                        <div><div class="form-title">Ref Num            <span class="form-order-by">
+                <a href="http://127.0.0.1:18091/apps/marble/Accounting/Payment/FindPayment?orderByField=paymentRefNum"><i class="fa fa-caret-up"></i></a>
+                <a href="http://127.0.0.1:18091/apps/marble/Accounting/Payment/FindPayment?orderByField=-paymentRefNum"><i class="fa fa-caret-down"></i></a>
+            </span>
+</div>    </div>
+                    </th>
+                    <th>
+                        <div><div class="form-title">Effective Date            <span class="form-order-by">
+                <a href="http://127.0.0.1:18091/apps/marble/Accounting/Payment/FindPayment?orderByField=effectiveDate"><i class="fa fa-caret-up"></i></a>
+                <a href="http://127.0.0.1:18091/apps/marble/Accounting/Payment/FindPayment?orderByField=effectiveDate" class="active"><i class="fa fa-caret-down"></i></a>
+            </span>
+</div>    </div>
+                        <div><div class="form-title">Status            <span class="form-order-by">
+                <a href="http://127.0.0.1:18091/apps/marble/Accounting/Payment/FindPayment?orderByField=statusId"><i class="fa fa-caret-up"></i></a>
+                <a href="http://127.0.0.1:18091/apps/marble/Accounting/Payment/FindPayment?orderByField=-statusId"><i class="fa fa-caret-down"></i></a>
+            </span>
+</div>    </div>
+                    </th>
+                    <th>
+                        <div><div class="form-title">From</div>    </div>
+                        <div><div class="form-title">To</div>    </div>
+                    </th>
+                    <th>
+                        <div><div class="form-title">Type</div>    </div>
+                        <div><div class="form-title">Instrument</div>    </div>
+                    </th>
+                    <th>
+                        <div><div class="form-title">From Payment Method</div>    </div>
+                        <div><div class="form-title">To Payment Method</div>    </div>
+                    </th>
+                    <th>
+                        <div><div class="form-title text-right">Amount            <span class="form-order-by">
+                <a href="http://127.0.0.1:18091/apps/marble/Accounting/Payment/FindPayment?orderByField=amount"><i class="fa fa-caret-up"></i></a>
+                <a href="http://127.0.0.1:18091/apps/marble/Accounting/Payment/FindPayment?orderByField=-amount"><i class="fa fa-caret-down"></i></a>
+            </span>
+</div>    </div>
+                    </th>
+                    <th>
+                        <div><div class="form-title text-right">Unapplied            <span class="form-order-by">
+                <a href="http://127.0.0.1:18091/apps/marble/Accounting/Payment/FindPayment?orderByField=unappliedTotal"><i class="fa fa-caret-up"></i></a>
+                <a href="http://127.0.0.1:18091/apps/marble/Accounting/Payment/FindPayment?orderByField=-unappliedTotal"><i class="fa fa-caret-down"></i></a>
+            </span>
+</div>    </div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                </tbody>
+        </table></div>
+    
+    <!-- END   form-list[@name=PaymentList] -->
+    <!-- END   screen[@location=component://SimpleScreens/screen/SimpleScreens/Accounting/Payment/FindPayment.xml].widgets -->
+
+    <!-- END   screen[@location=component://SimpleScreens/screen/SimpleScreens/Accounting/Payment.xml].widgets -->
+
+    <!-- END   screen[@location=component://SimpleScreens/screen/SimpleScreens/Accounting.xml].widgets -->
+
+    <!-- END   screen[@location=component://MarbleERP/screen/marble.xml].widgets -->
+
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    <!-- BEGIN section[@name=BottomNavSection] -->
+        <!-- BEGIN screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+    <div id="footer" class="bg-dark">
+        <!-- BEGIN render-mode.text[inline][@template=true] -->
+                <div id="apps-footer-content">
+<p><a href="https://www.moqui.org/" target="_blank">Built on Moqui Framework 4.0.0</a></p><p><a href="/vapps/ScreenTree">Site Map</a></p>                </div>        <!-- END   render-mode.text[inline][@template=true] -->
+    </div><!-- CONTAINER OVERRIDE EXAMPLE -->
+    <!-- END   screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+
+    <!-- END   section[@name=BottomNavSection] -->
+    <!-- END   screen[@location=component://webroot/screen/webroot/apps.xml].widgets -->
+        
+    <div id="screen-document-dialog" class="modal dynamic-dialog" aria-hidden="true" style="display: none;" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Documentation</h4>
+                </div>
+                <div class="modal-body" id="screen-document-dialog-body">
+                    <img src="/images/wait_anim_16x16.gif" alt="Loading...">
+                </div>
+                <div class="modal-footer"><button type="button" class="btn btn-primary" data-dismiss="modal">Close</button></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function showScreenDocDialog(docIndex) {
+            $("#screen-document-dialog").modal("show");
+            $("#screen-document-dialog-body").load('http://127.0.0.1:18091/apps/marble/Accounting/Payment/FindPayment/screenDoc?docIndex=' + docIndex);
+        }
+        $("#screen-document-dialog").on("hidden.bs.modal", function () { var jqEl = $("#screen-document-dialog-body"); jqEl.empty(); jqEl.append('<img src="/images/wait_anim_16x16.gif" alt="Loading...">'); });
+    </script>
+
+
+
+
+        
+        
+        
+    
+</body></html>

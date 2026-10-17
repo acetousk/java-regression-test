@@ -1,0 +1,111 @@
+{
+  "id": "activity-004",
+  "sourceLine": 19,
+  "headings": [
+    "Place and Approve Sales Order",
+    "Find or Create a Customer"
+  ],
+  "text": "- search for or select a customer, or use the **New Person Customer** dialog to create a new one",
+  "route": "marble/Customer/FindCustomer",
+  "dialog": {
+    "label": "New Person Customer",
+    "id": "CreatePersonDialog",
+    "route": "Customer/FindCustomer"
+  },
+  "mapping": "documented-dialog-label",
+  "limitation": "Read-only screen/dialog evidence only. Prerequisite creation, field input, submissions, integrations and full story transitions are not executed.",
+  "source": "docs/business-processes/walkthroughs/place-and-approve-sales-order.md",
+  "mode": "qapps",
+  "coverage": "blocked",
+  "captures": [
+    {
+      "engine": "java",
+      "mode": "qapps",
+      "route": "marble/Customer/FindCustomer",
+      "dialog": {
+        "label": "New Person Customer",
+        "id": "CreatePersonDialog",
+        "route": "Customer/FindCustomer"
+      },
+      "authenticated": true,
+      "errors": [
+        "$ is not defined",
+        "Vue is not defined",
+        "$ is not defined",
+        "Vue is not defined",
+        "locator.click: Timeout 3500ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'New Person Customer', exact: true }).or(getByRole('link', { name: 'New Person Customer', exact: true })).filter({ visible: true }).first()\u001b[22m\n"
+      ],
+      "failedRequests": [
+        {
+          "url": "http://127.0.0.1:18091/qapps/marble/dashboard",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:18091/qapps/marble/Customer/FindCustomer",
+          "error": "net::ERR_ABORTED"
+        }
+      ],
+      "httpErrors": [],
+      "consoleErrors": [
+        "Refused to apply style from 'http://127.0.0.1:18091/qapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not a supported stylesheet MIME type, and strict MIME checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to apply style from 'http://127.0.0.1:18091/qapps/marble/Customer/FindCustomer#?v=1a147e2' because its MIME type ('text/html') is not a supported stylesheet MIME type, and strict MIME checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/Customer/FindCustomer#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/Customer/FindCustomer#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/Customer/FindCustomer#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/qapps/marble/Customer/FindCustomer#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled."
+      ],
+      "status": "blocked",
+      "reused": false,
+      "requestedURL": "http://127.0.0.1:18091/qapps/marble/Customer/FindCustomer",
+      "navigation": "documented-or-candidate-deep-link",
+      "httpStatus": 200,
+      "finalURL": "http://127.0.0.1:18091/qapps/marble/Customer/FindCustomer",
+      "directory": ".saved-runs/2026-10-17_03-22-50.677356Z/ui-test/_captures/137cabab78533fc5e17ac929"
+    },
+    {
+      "engine": "rust",
+      "mode": "qapps",
+      "route": "marble/Customer/FindCustomer",
+      "dialog": {
+        "label": "New Person Customer",
+        "id": "CreatePersonDialog",
+        "route": "Customer/FindCustomer"
+      },
+      "authenticated": true,
+      "errors": [],
+      "failedRequests": [],
+      "httpErrors": [],
+      "consoleErrors": [],
+      "status": "captured",
+      "reused": false,
+      "requestedURL": "http://127.0.0.1:18092/qapps/marble/Customer/FindCustomer",
+      "navigation": "dashboard-link",
+      "finalURL": "http://127.0.0.1:18092/qapps/marble/Customer/FindCustomer",
+      "dialogOpened": true,
+      "directory": ".saved-runs/2026-10-17_03-22-50.677356Z/ui-test/_captures/636167cad4f5277348b388df"
+    }
+  ],
+  "comparison": {
+    "status": "diagnostic-only",
+    "equal": false,
+    "dimensions": [
+      {
+        "width": 1440,
+        "height": 1000
+      },
+      {
+        "width": 1440,
+        "height": 1000
+      }
+    ],
+    "dimensionsEqual": true,
+    "differentPixels": 876562,
+    "comparedPixels": 1440000,
+    "differencePercent": 60.87236111111111,
+    "threshold": 0.1
+  }
+}

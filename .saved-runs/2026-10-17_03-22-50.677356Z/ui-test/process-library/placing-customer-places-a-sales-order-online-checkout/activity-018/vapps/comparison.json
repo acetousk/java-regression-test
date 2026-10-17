@@ -1,0 +1,17 @@
+{
+  "id": "activity-018",
+  "sourceLine": 68,
+  "headings": [
+    "Placing Customer Places a Sales Order - Online Checkout"
+  ],
+  "text": "Company will communicate to Customer all order information including what PLC specified and what Company calculated based on that. If everything looks correct and according to what PLC wants and/or needs, PLC will finalize the order, officially placing it with Company.",
+  "route": null,
+  "dialog": null,
+  "mapping": "entry-candidate",
+  "limitation": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required.",
+  "source": "docs/business-processes/process-library/placing-customer-places-a-sales-order-online-checkout.md",
+  "mode": "vapps",
+  "coverage": "blocked",
+  "captures": [],
+  "reason": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required."
+}

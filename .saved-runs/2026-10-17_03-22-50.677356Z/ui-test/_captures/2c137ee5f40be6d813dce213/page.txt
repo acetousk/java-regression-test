@@ -1,0 +1,61 @@
+Application 
+Marble ERP 
+Stores 
+Promotions 
+Store Promotions
+ 0  0  0  0
+ Organization
+POPC_DEFAULT: Ziziwork Retail Store
+Product Store
+Promotions
+Emails
+Categories
+Parties
+Facilities
+Settings
+ New Store Promotion
+
+NOTE: Promotions are applied in the order of the Sequence Num. Higher value promotions should have lower sequence numbers.
+
+ Find Options
+Page 1 of 1 (1 - 2 of 2)
+
+
+Seq Num
+	
+ID
+	
+Item Description
+	
+Service
+	
+From Date
+	
+Thru Date
+	
+
+
+	
+PopcBuyGet
+	
+Buy 1 Get 1 Half Off
+	
+Buy X Get Y at Z% Discount
+	
+	
+	
+
+	
+PopcNewCustomer
+	
+20% Discount for New Customers
+	
+New Customer Discount
+	
+	
+	
+Update
+
+Built on Moqui Framework 0.1.0
+
+Site Map

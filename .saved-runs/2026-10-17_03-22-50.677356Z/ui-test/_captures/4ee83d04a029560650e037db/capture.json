@@ -1,0 +1,21 @@
+{
+  "engine": "rust",
+  "mode": "qapps",
+  "route": "marble/Customer/FindCustomer",
+  "dialog": {
+    "label": "New Sales Account (Organization Customer)",
+    "id": "CreateAccountDialog",
+    "route": "Customer/FindCustomer"
+  },
+  "authenticated": true,
+  "errors": [],
+  "failedRequests": [],
+  "httpErrors": [],
+  "consoleErrors": [],
+  "status": "captured",
+  "reused": false,
+  "requestedURL": "http://127.0.0.1:18092/qapps/marble/Customer/FindCustomer",
+  "navigation": "dashboard-link",
+  "finalURL": "http://127.0.0.1:18092/qapps/marble/Customer/FindCustomer",
+  "dialogOpened": true
+}

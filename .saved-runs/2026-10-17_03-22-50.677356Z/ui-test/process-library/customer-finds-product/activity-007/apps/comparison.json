@@ -1,0 +1,18 @@
+{
+  "id": "activity-007",
+  "sourceLine": 35,
+  "headings": [
+    "Customer Finds Product",
+    "Story"
+  ],
+  "text": "**Multi-Category Search** If Customer is browsing categories and finds two categories that are not specific enough to match the form or function they have in mind, but that together seem to describe it Customer may search with both categories as constraints and the results will be the products that are in (or in categories under) both of the selected categories.",
+  "route": null,
+  "dialog": null,
+  "mapping": "entry-candidate",
+  "limitation": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required.",
+  "source": "docs/business-processes/process-library/customer-finds-product.md",
+  "mode": "apps",
+  "coverage": "blocked",
+  "captures": [],
+  "reason": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required."
+}

@@ -1,0 +1,82 @@
+{
+  "source": "docs/business-processes/process-library/inventory-mover-does-stock-move.md",
+  "mode": "qapps",
+  "activities": [
+    {
+      "id": "activity-001",
+      "sourceLine": 8,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 121541,
+        "comparedPixels": 1440000,
+        "differencePercent": 8.440347222222222,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/inventory-mover-does-stock-move/activity-001/qapps/comparison.json"
+    },
+    {
+      "id": "activity-002",
+      "sourceLine": 18,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 121541,
+        "comparedPixels": 1440000,
+        "differencePercent": 8.440347222222222,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/inventory-mover-does-stock-move/activity-002/qapps/comparison.json"
+    },
+    {
+      "id": "activity-003",
+      "sourceLine": 22,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 121541,
+        "comparedPixels": 1440000,
+        "differencePercent": 8.440347222222222,
+        "threshold": 0.1
+      },
+      "report": "ui-test/process-library/inventory-mover-does-stock-move/activity-003/qapps/comparison.json"
+    }
+  ],
+  "note": "Evidence sweep only; no complete business-process execution is claimed."
+}

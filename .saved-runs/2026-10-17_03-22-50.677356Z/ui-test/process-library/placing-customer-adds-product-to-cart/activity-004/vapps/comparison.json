@@ -1,0 +1,18 @@
+{
+  "id": "activity-004",
+  "sourceLine": 22,
+  "headings": [
+    "Placing Customer Adds Product to Cart",
+    "Story"
+  ],
+  "text": "**Simple Add to Cart** Once a product is selected Customer adds it to the list to be ordered (which may be a shopping cart to order now, or shopping list to order later), specifying the quantity of the product desired.",
+  "route": null,
+  "dialog": null,
+  "mapping": "entry-candidate",
+  "limitation": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required.",
+  "source": "docs/business-processes/process-library/placing-customer-adds-product-to-cart.md",
+  "mode": "vapps",
+  "coverage": "blocked",
+  "captures": [],
+  "reason": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required."
+}

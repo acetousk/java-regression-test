@@ -1,0 +1,17 @@
+{
+  "id": "activity-001",
+  "sourceLine": 8,
+  "headings": [
+    "OAGIS Work Plan to Cash"
+  ],
+  "text": "Source: [Business Process Library/OAGIS Work Plan to Cash](https://moqui.org/docs/mantle/Business%20Process%20Library/OAGIS%20Work%20Plan%20to%20Cash)\n\nType: Business-process description; verify UI applicability.\n\nNOTE: These pages describe OAGIS document-exchange scenarios. The `mantle-oagis` component is listed in addons.xml with no releases and is not required to run Moqui, Mantle USL, or Marble ERP.",
+  "route": null,
+  "dialog": null,
+  "mapping": "entry-candidate",
+  "limitation": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required.",
+  "source": "docs/business-processes/process-library/oagis-work-plan-to-cash.md",
+  "mode": "vapps",
+  "coverage": "blocked",
+  "captures": [],
+  "reason": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required."
+}

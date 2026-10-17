@@ -1,0 +1,21 @@
+{
+  "engine": "rust",
+  "mode": "qapps",
+  "route": "marble/Facility/FindFacility",
+  "dialog": {
+    "label": "New Facility",
+    "id": "NewFacilityDialog",
+    "route": "Facility/FindFacility"
+  },
+  "authenticated": true,
+  "errors": [],
+  "failedRequests": [],
+  "httpErrors": [],
+  "consoleErrors": [],
+  "status": "captured",
+  "reused": false,
+  "requestedURL": "http://127.0.0.1:18092/qapps/marble/Facility/FindFacility",
+  "navigation": "dashboard-link",
+  "finalURL": "http://127.0.0.1:18092/qapps/marble/Facility/FindFacility",
+  "dialogOpened": true
+}

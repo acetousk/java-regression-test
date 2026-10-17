@@ -1,0 +1,70 @@
+menu
+Applications
+chevron_right
+Marble ERP
+chevron_right
+Shipments
+chevron_right
+Find Shipments
+help_outline
+search
+edit_location
+notifications
+history
+account_circle
+open_in_new
+New Outgoing Shipment
+open_in_new
+New Incoming Shipment
+open_in_new
+New Transfer Shipment
+Package Tracking
+search
+Find Options
+table_chart
+Columns
+CSV
+No results found
+Shipment
+Ship Method
+Type
+	
+Entry Date
+Status
+	
+Priority
+Picklist
+	
+Origin Facility
+Dest. Facility
+Store
+	
+From Party
+To Party
+Shipping Instructions
+	
+Their Order
+Orders
+Tracking Codes
+	
+Ship After
+Est. Ready
+Actual Start
+	
+Ship Before
+Est. Arrival
+Actual Arrival
+Built on Moqui 0.1.0
+Site Map
+New Transfer Shipment
+close
+Origin Facility
+arrow_drop_down
+Destination Facility
+arrow_drop_down
+To Party
+arrow_drop_down
+event
+Ready Date
+access_time
+Create

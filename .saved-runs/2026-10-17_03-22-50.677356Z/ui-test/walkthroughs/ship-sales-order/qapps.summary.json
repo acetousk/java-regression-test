@@ -1,0 +1,1107 @@
+{
+  "source": "docs/business-processes/walkthroughs/ship-sales-order.md",
+  "mode": "qapps",
+  "activities": [
+    {
+      "id": "activity-001",
+      "sourceLine": 10,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 123168,
+        "comparedPixels": 1440000,
+        "differencePercent": 8.553333333333333,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/ship-sales-order/activity-001/qapps/comparison.json"
+    },
+    {
+      "id": "activity-002",
+      "sourceLine": 14,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 123168,
+        "comparedPixels": 1440000,
+        "differencePercent": 8.553333333333333,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/ship-sales-order/activity-002/qapps/comparison.json"
+    },
+    {
+      "id": "activity-003",
+      "sourceLine": 20,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 123168,
+        "comparedPixels": 1440000,
+        "differencePercent": 8.553333333333333,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/ship-sales-order/activity-003/qapps/comparison.json"
+    },
+    {
+      "id": "activity-004",
+      "sourceLine": 23,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150680,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.463888888888889,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/ship-sales-order/activity-004/qapps/comparison.json"
+    },
+    {
+      "id": "activity-005",
+      "sourceLine": 26,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150680,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.463888888888889,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/ship-sales-order/activity-005/qapps/comparison.json"
+    },
+    {
+      "id": "activity-006",
+      "sourceLine": 29,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150680,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.463888888888889,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/ship-sales-order/activity-006/qapps/comparison.json"
+    },
+    {
+      "id": "activity-007",
+      "sourceLine": 32,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150680,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.463888888888889,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/ship-sales-order/activity-007/qapps/comparison.json"
+    },
+    {
+      "id": "activity-008",
+      "sourceLine": 35,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150680,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.463888888888889,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/ship-sales-order/activity-008/qapps/comparison.json"
+    },
+    {
+      "id": "activity-009",
+      "sourceLine": 38,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150680,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.463888888888889,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/ship-sales-order/activity-009/qapps/comparison.json"
+    },
+    {
+      "id": "activity-010",
+      "sourceLine": 41,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150680,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.463888888888889,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/ship-sales-order/activity-010/qapps/comparison.json"
+    },
+    {
+      "id": "activity-011",
+      "sourceLine": 44,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150680,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.463888888888889,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/ship-sales-order/activity-011/qapps/comparison.json"
+    },
+    {
+      "id": "activity-012",
+      "sourceLine": 47,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150680,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.463888888888889,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/ship-sales-order/activity-012/qapps/comparison.json"
+    },
+    {
+      "id": "activity-013",
+      "sourceLine": 50,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150680,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.463888888888889,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/ship-sales-order/activity-013/qapps/comparison.json"
+    },
+    {
+      "id": "activity-014",
+      "sourceLine": 53,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150680,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.463888888888889,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/ship-sales-order/activity-014/qapps/comparison.json"
+    },
+    {
+      "id": "activity-015",
+      "sourceLine": 56,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150680,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.463888888888889,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/ship-sales-order/activity-015/qapps/comparison.json"
+    },
+    {
+      "id": "activity-016",
+      "sourceLine": 59,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150680,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.463888888888889,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/ship-sales-order/activity-016/qapps/comparison.json"
+    },
+    {
+      "id": "activity-017",
+      "sourceLine": 65,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150680,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.463888888888889,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/ship-sales-order/activity-017/qapps/comparison.json"
+    },
+    {
+      "id": "activity-018",
+      "sourceLine": 68,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150680,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.463888888888889,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/ship-sales-order/activity-018/qapps/comparison.json"
+    },
+    {
+      "id": "activity-019",
+      "sourceLine": 71,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150680,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.463888888888889,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/ship-sales-order/activity-019/qapps/comparison.json"
+    },
+    {
+      "id": "activity-020",
+      "sourceLine": 74,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150680,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.463888888888889,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/ship-sales-order/activity-020/qapps/comparison.json"
+    },
+    {
+      "id": "activity-021",
+      "sourceLine": 77,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150680,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.463888888888889,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/ship-sales-order/activity-021/qapps/comparison.json"
+    },
+    {
+      "id": "activity-022",
+      "sourceLine": 80,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150680,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.463888888888889,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/ship-sales-order/activity-022/qapps/comparison.json"
+    },
+    {
+      "id": "activity-023",
+      "sourceLine": 83,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150680,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.463888888888889,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/ship-sales-order/activity-023/qapps/comparison.json"
+    },
+    {
+      "id": "activity-024",
+      "sourceLine": 86,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150680,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.463888888888889,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/ship-sales-order/activity-024/qapps/comparison.json"
+    },
+    {
+      "id": "activity-025",
+      "sourceLine": 92,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150680,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.463888888888889,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/ship-sales-order/activity-025/qapps/comparison.json"
+    },
+    {
+      "id": "activity-026",
+      "sourceLine": 95,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150680,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.463888888888889,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/ship-sales-order/activity-026/qapps/comparison.json"
+    },
+    {
+      "id": "activity-027",
+      "sourceLine": 101,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150680,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.463888888888889,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/ship-sales-order/activity-027/qapps/comparison.json"
+    },
+    {
+      "id": "activity-028",
+      "sourceLine": 104,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150680,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.463888888888889,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/ship-sales-order/activity-028/qapps/comparison.json"
+    },
+    {
+      "id": "activity-029",
+      "sourceLine": 107,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150680,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.463888888888889,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/ship-sales-order/activity-029/qapps/comparison.json"
+    },
+    {
+      "id": "activity-030",
+      "sourceLine": 110,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150680,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.463888888888889,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/ship-sales-order/activity-030/qapps/comparison.json"
+    },
+    {
+      "id": "activity-031",
+      "sourceLine": 113,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150680,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.463888888888889,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/ship-sales-order/activity-031/qapps/comparison.json"
+    },
+    {
+      "id": "activity-032",
+      "sourceLine": 116,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150680,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.463888888888889,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/ship-sales-order/activity-032/qapps/comparison.json"
+    },
+    {
+      "id": "activity-033",
+      "sourceLine": 119,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150680,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.463888888888889,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/ship-sales-order/activity-033/qapps/comparison.json"
+    },
+    {
+      "id": "activity-034",
+      "sourceLine": 122,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150680,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.463888888888889,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/ship-sales-order/activity-034/qapps/comparison.json"
+    },
+    {
+      "id": "activity-035",
+      "sourceLine": 128,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150680,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.463888888888889,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/ship-sales-order/activity-035/qapps/comparison.json"
+    },
+    {
+      "id": "activity-036",
+      "sourceLine": 131,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150680,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.463888888888889,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/ship-sales-order/activity-036/qapps/comparison.json"
+    },
+    {
+      "id": "activity-037",
+      "sourceLine": 134,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150680,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.463888888888889,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/ship-sales-order/activity-037/qapps/comparison.json"
+    },
+    {
+      "id": "activity-038",
+      "sourceLine": 137,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150680,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.463888888888889,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/ship-sales-order/activity-038/qapps/comparison.json"
+    },
+    {
+      "id": "activity-039",
+      "sourceLine": 140,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150680,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.463888888888889,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/ship-sales-order/activity-039/qapps/comparison.json"
+    },
+    {
+      "id": "activity-040",
+      "sourceLine": 143,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150680,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.463888888888889,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/ship-sales-order/activity-040/qapps/comparison.json"
+    },
+    {
+      "id": "activity-041",
+      "sourceLine": 146,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150680,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.463888888888889,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/ship-sales-order/activity-041/qapps/comparison.json"
+    },
+    {
+      "id": "activity-042",
+      "sourceLine": 149,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150680,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.463888888888889,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/ship-sales-order/activity-042/qapps/comparison.json"
+    },
+    {
+      "id": "activity-043",
+      "sourceLine": 152,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150680,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.463888888888889,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/ship-sales-order/activity-043/qapps/comparison.json"
+    },
+    {
+      "id": "activity-044",
+      "sourceLine": 155,
+      "coverage": "blocked",
+      "comparison": {
+        "status": "diagnostic-only",
+        "equal": false,
+        "dimensions": [
+          {
+            "width": 1440,
+            "height": 1000
+          },
+          {
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "dimensionsEqual": true,
+        "differentPixels": 150680,
+        "comparedPixels": 1440000,
+        "differencePercent": 10.463888888888889,
+        "threshold": 0.1
+      },
+      "report": "ui-test/walkthroughs/ship-sales-order/activity-044/qapps/comparison.json"
+    }
+  ],
+  "note": "Evidence sweep only; no complete business-process execution is claimed."
+}

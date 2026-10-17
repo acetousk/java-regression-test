@@ -1,0 +1,150 @@
+{
+  "id": "activity-003",
+  "sourceLine": 22,
+  "headings": [
+    "Shipment Receiver Receives Shipment",
+    "Story"
+  ],
+  "text": "When Carrier delivers shipment, Shipment Receiver briefly reviews incoming shipment and signs for receipt of the product from Carrier. If the quantity is not the quantity ordered or it is clearly a different product Shipment Receiver will contact Supplier and resolve issue before signing for receipt. If no resolution is reached Shipment Receiver will not sign for receipt and the shipment will be returned to Supplier.",
+  "route": "marble/Shipment/FindShipment?shipmentTypeEnumId=ShpTpPurchase",
+  "dialog": null,
+  "mapping": "entry-candidate",
+  "limitation": "Read-only screen/dialog evidence only. Prerequisite creation, field input, submissions, integrations and full story transitions are not executed.",
+  "source": "docs/business-processes/process-library/shipment-receiver-receives-shipment.md",
+  "mode": "apps",
+  "coverage": "blocked",
+  "captures": [
+    {
+      "engine": "java",
+      "mode": "apps",
+      "route": "marble/Shipment/FindShipment?shipmentTypeEnumId=ShpTpPurchase",
+      "dialog": null,
+      "authenticated": true,
+      "errors": [
+        "moqui is not defined",
+        "Cannot read properties of undefined (reading 'registerListener')",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "moqui is not defined",
+        "Cannot read properties of undefined (reading 'registerListener')",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined"
+      ],
+      "failedRequests": [
+        {
+          "url": "http://127.0.0.1:18091/apps/marble/dashboard",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:18091/apps/marble/Shipment/FindShipment?shipmentTypeEnumId=ShpTpPurchase",
+          "error": "net::ERR_ABORTED"
+        }
+      ],
+      "httpErrors": [],
+      "consoleErrors": [
+        "Refused to apply style from 'http://127.0.0.1:18091/apps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not a supported stylesheet MIME type, and strict MIME checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/apps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/apps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/apps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to apply style from 'http://127.0.0.1:18091/apps/marble/Shipment/FindShipment?shipmentTypeEnumId=ShpTpPurchase#?v=1a147e2' because its MIME type ('text/html') is not a supported stylesheet MIME type, and strict MIME checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/apps/marble/Shipment/FindShipment?shipmentTypeEnumId=ShpTpPurchase#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/apps/marble/Shipment/FindShipment?shipmentTypeEnumId=ShpTpPurchase#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/apps/marble/Shipment/FindShipment?shipmentTypeEnumId=ShpTpPurchase#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled."
+      ],
+      "status": "blocked",
+      "reused": true,
+      "requestedURL": "http://127.0.0.1:18091/apps/marble/Shipment/FindShipment?shipmentTypeEnumId=ShpTpPurchase",
+      "navigation": "documented-or-candidate-deep-link",
+      "httpStatus": 200,
+      "finalURL": "http://127.0.0.1:18091/apps/marble/Shipment/FindShipment?shipmentTypeEnumId=ShpTpPurchase",
+      "directory": ".saved-runs/2026-10-17_03-22-50.677356Z/ui-test/_captures/96811ab74b897fa592e18f6a"
+    },
+    {
+      "engine": "rust",
+      "mode": "apps",
+      "route": "marble/Shipment/FindShipment?shipmentTypeEnumId=ShpTpPurchase",
+      "dialog": null,
+      "authenticated": true,
+      "errors": [],
+      "failedRequests": [],
+      "httpErrors": [],
+      "consoleErrors": [],
+      "status": "captured",
+      "reused": true,
+      "requestedURL": "http://127.0.0.1:18092/apps/marble/Shipment/FindShipment?shipmentTypeEnumId=ShpTpPurchase",
+      "navigation": "documented-or-candidate-deep-link",
+      "httpStatus": 200,
+      "finalURL": "http://127.0.0.1:18092/apps/marble/Shipment/FindShipment?shipmentTypeEnumId=ShpTpPurchase",
+      "directory": ".saved-runs/2026-10-17_03-22-50.677356Z/ui-test/_captures/e5a659c9ef5ede053a1e0027"
+    }
+  ],
+  "comparison": {
+    "status": "diagnostic-only",
+    "equal": false,
+    "dimensions": [
+      {
+        "width": 1440,
+        "height": 1009
+      },
+      {
+        "width": 1440,
+        "height": 1000
+      }
+    ],
+    "dimensionsEqual": false,
+    "differentPixels": 129997,
+    "comparedPixels": 1452960,
+    "differencePercent": 8.947046030172888,
+    "threshold": 0.1
+  }
+}

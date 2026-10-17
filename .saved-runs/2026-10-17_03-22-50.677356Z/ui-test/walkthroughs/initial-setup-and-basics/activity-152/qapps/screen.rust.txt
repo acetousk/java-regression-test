@@ -1,0 +1,19 @@
+menu
+Applications
+chevron_right
+Marble ERP
+chevron_right
+Shipments
+chevron_right
+Items
+search
+edit_location
+notifications
+history
+account_circle
+Required parameter missing (shipmentId)
+Built on Moqui 0.1.0
+Site Map
+info
+Browser notifications disabled, if you want them use browser notification settings to allow
+X

@@ -1,0 +1,19 @@
+{
+  "id": "activity-011",
+  "sourceLine": 46,
+  "headings": [
+    "OAGIS Order to Cash",
+    "OAGIS Scenarios",
+    "Incorporated Scenarios"
+  ],
+  "text": "* 29 - Sales Force Automation to Order Management and Shipping",
+  "route": null,
+  "dialog": null,
+  "mapping": "entry-candidate",
+  "limitation": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required.",
+  "source": "docs/business-processes/process-library/oagis-order-to-cash.md",
+  "mode": "apps",
+  "coverage": "blocked",
+  "captures": [],
+  "reason": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required."
+}

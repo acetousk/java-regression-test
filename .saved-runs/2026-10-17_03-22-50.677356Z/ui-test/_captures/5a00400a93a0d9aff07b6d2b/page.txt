@@ -1,0 +1,174 @@
+menu
+Applications
+chevron_right
+Marble ERP
+chevron_right
+Human Resources
+chevron_right
+Rates
+search
+edit_location
+notifications
+history
+account_circle
+open_in_new
+Add Rate Amount
+skip_previous
+fast_rewind
+1 / 1 (1-5 / 5)
+fast_forward
+skip_next
+Type
+Type
+arrow_drop_down
+Purpose
+Purpose
+arrow_drop_down
+	
+Project
+Project
+arrow_drop_down
+Party
+Party
+arrow_drop_down
+	
+Position Class
+Position Class
+arrow_drop_down
+Work Type
+Work Type
+arrow_drop_down
+	
+From Date
+Thru Date
+	
+Rate Amount
+Rate Amount From
+Rate Amount Thru
+	
+Currency
+Currency
+arrow_drop_down
+
+
+RatpNoCharge
+RaprClient
+	
+	
+	
+event
+From Date
+access_time
+event
+Thru Date
+access_time
+	
+Rate Amount
+	
+
+
+RatpNoCharge
+RaprVendor
+	
+EX_JOHN_DOE
+	
+	
+event
+From Date
+access_time
+event
+Thru Date
+access_time
+	
+Rate Amount
+	
+USD
+
+
+RatpStandard
+RaprClient
+	
+EX_JOHN_DOE
+	
+	
+event
+From Date
+access_time
+event
+Thru Date
+access_time
+	
+Rate Amount
+	
+USD
+
+
+RatpStandard
+RaprVendor
+	
+EX_JOHN_DOE
+	
+	
+event
+From Date
+access_time
+event
+Thru Date
+access_time
+	
+Rate Amount
+	
+USD
+
+
+RatpUnpaid
+RaprVendor
+	
+	
+	
+event
+From Date
+access_time
+event
+Thru Date
+access_time
+	
+Rate Amount
+	
+
+
+
+skip_previous
+fast_rewind
+1 / 1 (1-5 / 5)
+fast_forward
+skip_next
+Built on Moqui 0.1.0
+Site Map
+Add Rate Amount
+close
+Type
+Standard
+arrow_drop_down
+Purpose
+Client Billing
+arrow_drop_down
+Project
+arrow_drop_down
+Person
+arrow_drop_down
+Position Class
+arrow_drop_down
+Work Type
+arrow_drop_down
+event
+From Date
+access_time
+event
+Thru Date
+access_time
+Rate Amount
+Currency
+USD
+arrow_drop_down
+Create Rate Amount

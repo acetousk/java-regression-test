@@ -1,0 +1,89 @@
+Toggle navigation 
+Find Invoice
+Invoice Status Reference
+0 0 0 0
+Marble ERP - Dashboard
+Applications
+Applications
+Applications
+Applications
+ Payments - Find Payment
+Applications (Payable)
+Applications (Payable)
+ Invoices - Find Invoice (Payable)
+Applications
+Application
+Marble ERP
+My Account
+System
+Tools
+ZIRET: Ziziwork Retail & Wholesale
+ZISER: Ziziwork Services
+Marble ERP
+Dashboard
+Quick Search
+Accounting
+Asset
+Catalog
+Customers
+Facility
+Human Resources
+Manufacturing
+Orders
+Parties
+Projects
+Requests
+Returns
+Shipments
+Shipping
+Stores
+Suppliers
+Survey
+Tasks
+Wiki/Content
+Custom Reports
+Report Builder
+Accounting
+Dashboard
+Invoices
+Payments
+Financial Accounts
+Transactions
+GL Journals
+Time Period
+GL Accounts
+Budgets
+Reports
+Invoices New Payable New Receivable Customer Credit Memo Supplier Credit Memo Project Client Invoice Project Worker Invoice Worker Invoice Customer Statement PDF
+Clear Current Find
+AR Customer Statement
+Find Options
+Columns
+CSV
+
+Invoice Type: Receivable Invoice Date: -3 30 Days (2026-07-18 to 2026-10-16) Status: In-Process, Finalized, Sent, Acknowledged, Incoming, Received, Approved
+
+
+Invoice 
+Type 
+	
+Invoice Date 
+Due Date 
+	
+Their Invoice
+Their Order
+	
+Status 
+	
+From
+Store
+	
+To
+	
+Total 
+	
+Unpaid 
+
+Built on Moqui Framework 4.0.0
+
+Site Map

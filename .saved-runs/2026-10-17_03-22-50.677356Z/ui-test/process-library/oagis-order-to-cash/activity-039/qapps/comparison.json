@@ -1,0 +1,19 @@
+{
+  "id": "activity-039",
+  "sourceLine": 143,
+  "headings": [
+    "OAGIS Order to Cash",
+    "Process Story",
+    "Catalog"
+  ],
+  "text": "Supplier Catalog Management sends SyncCatalog to Supplier Order Management and Purchasing, and each sends ConfirmBOD to Catalog.\nCatalog sends SyncPriceList to OM and Purchasing, and each sends ConfirmBOD to Catalog.\nInventory sends SyncItemMaster to OM, Catalog, and Purchasing and each sends ConfirmBOD to Inventory.",
+  "route": null,
+  "dialog": null,
+  "mapping": "entry-candidate",
+  "limitation": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required.",
+  "source": "docs/business-processes/process-library/oagis-order-to-cash.md",
+  "mode": "qapps",
+  "coverage": "blocked",
+  "captures": [],
+  "reason": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required."
+}

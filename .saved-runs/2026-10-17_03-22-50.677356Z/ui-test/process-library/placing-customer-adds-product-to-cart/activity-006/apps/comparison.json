@@ -1,0 +1,18 @@
+{
+  "id": "activity-006",
+  "sourceLine": 30,
+  "headings": [
+    "Placing Customer Adds Product to Cart",
+    "Story"
+  ],
+  "text": "As product is added or removed from a list to be ordered (that is a cart list) Company will calculate promotions and other adjustments based on the combination of items on the list.",
+  "route": null,
+  "dialog": null,
+  "mapping": "entry-candidate",
+  "limitation": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required.",
+  "source": "docs/business-processes/process-library/placing-customer-adds-product-to-cart.md",
+  "mode": "apps",
+  "coverage": "blocked",
+  "captures": [],
+  "reason": "No verified browser workflow in the installed Marble components; storefront, integration, manual action or mapping required."
+}

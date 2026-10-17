@@ -1,0 +1,108 @@
+{
+  "id": "activity-024",
+  "sourceLine": 119,
+  "headings": [
+    "Period Closing",
+    "Net Income Closing Transactions",
+    "View Unbooked Net Income"
+  ],
+  "text": "TODO",
+  "route": "marble/Accounting/dashboard",
+  "dialog": null,
+  "mapping": "entry-candidate",
+  "limitation": "Read-only screen/dialog evidence only. Prerequisite creation, field input, submissions, integrations and full story transitions are not executed.",
+  "source": "docs/business-processes/walkthroughs/period-closing.md",
+  "mode": "apps",
+  "coverage": "blocked",
+  "captures": [
+    {
+      "engine": "java",
+      "mode": "apps",
+      "route": "marble/Accounting/dashboard",
+      "dialog": null,
+      "authenticated": true,
+      "errors": [
+        "moqui is not defined",
+        "Cannot read properties of undefined (reading 'registerListener')",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "moqui is not defined",
+        "Cannot read properties of undefined (reading 'registerListener')",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined",
+        "$ is not defined"
+      ],
+      "failedRequests": [
+        {
+          "url": "http://127.0.0.1:18091/apps/marble/dashboard",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:18091/apps/marble/Accounting/dashboard",
+          "error": "net::ERR_ABORTED"
+        }
+      ],
+      "httpErrors": [],
+      "consoleErrors": [
+        "Refused to apply style from 'http://127.0.0.1:18091/apps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not a supported stylesheet MIME type, and strict MIME checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/apps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/apps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/apps/marble/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to apply style from 'http://127.0.0.1:18091/apps/marble/Accounting/dashboard#?v=1a147e2' because its MIME type ('text/html') is not a supported stylesheet MIME type, and strict MIME checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/apps/marble/Accounting/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/apps/marble/Accounting/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+        "Refused to execute script from 'http://127.0.0.1:18091/apps/marble/Accounting/dashboard#?v=1a147e2' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled."
+      ],
+      "status": "blocked",
+      "reused": true,
+      "requestedURL": "http://127.0.0.1:18091/apps/marble/Accounting/dashboard",
+      "navigation": "dashboard-link",
+      "finalURL": "http://127.0.0.1:18091/apps/marble/Accounting/dashboard",
+      "directory": ".saved-runs/2026-10-17_03-22-50.677356Z/ui-test/_captures/bd5ba4d910ce273ffca7fba0"
+    },
+    {
+      "engine": "rust",
+      "mode": "apps",
+      "route": "marble/Accounting/dashboard",
+      "dialog": null,
+      "authenticated": true,
+      "errors": [],
+      "failedRequests": [],
+      "httpErrors": [],
+      "consoleErrors": [],
+      "status": "captured",
+      "reused": true,
+      "requestedURL": "http://127.0.0.1:18092/apps/marble/Accounting/dashboard",
+      "navigation": "dashboard-link",
+      "finalURL": "http://127.0.0.1:18092/apps/marble/Accounting/dashboard",
+      "directory": ".saved-runs/2026-10-17_03-22-50.677356Z/ui-test/_captures/32b28397f7d846d360b0eddb"
+    }
+  ],
+  "comparison": {
+    "status": "diagnostic-only",
+    "equal": false,
+    "dimensions": [
+      {
+        "width": 1440,
+        "height": 1198
+      },
+      {
+        "width": 1440,
+        "height": 1000
+      }
+    ],
+    "dimensionsEqual": false,
+    "differentPixels": 470851,
+    "comparedPixels": 1725120,
+    "differencePercent": 27.293811445000927,
+    "threshold": 0.1
+  }
+}

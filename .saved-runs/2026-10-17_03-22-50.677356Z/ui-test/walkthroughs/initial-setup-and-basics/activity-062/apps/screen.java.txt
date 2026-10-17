@@ -1,0 +1,195 @@
+Toggle navigation 
+Rates
+0 0 0 0
+Marble ERP - Dashboard
+ Tasks - Find Task
+ Projects - Find Project
+ Customers - Customer
+ Customers - Find Customer
+ Parties - Party
+Applications
+Applications
+Applications
+Applications
+ Parties - Find Party
+Applications
+Applications
+Applications (ORG_ZIZI_RETAIL, ZIRET_BA)
+Applications
+Applications
+Applications (OrgInternal)
+Applications
+Applications
+Applications (ORG_ZIZI_RETAIL, ZIRET_BA)
+Applications
+Applications
+Applications (OrgInternal)
+ Payment Method - Transactions
+ Payment Method - Files
+Application
+Marble ERP
+My Account
+System
+Tools
+ZIRET: Ziziwork Retail & Wholesale
+ZISER: Ziziwork Services
+Marble ERP
+Dashboard
+Quick Search
+Accounting
+Asset
+Catalog
+Customers
+Facility
+Human Resources
+Manufacturing
+Orders
+Parties
+Projects
+Requests
+Returns
+Shipments
+Shipping
+Stores
+Suppliers
+Survey
+Tasks
+Wiki/Content
+Custom Reports
+Report Builder
+Human Resources
+HR Dashboard
+Rates
+Add Rate Amount
+Page 1 of 1 (1 - 5 of 5)
+
+
+Type 
+ 
+Discounted
+Min Wage Adj
+No Charge
+NPT - RRP
+NPT - STD
+On-site
+Paid Break RRP
+Paid Break STD
+PTO - Holiday
+PTO - Other
+PTO - Sick
+PTO - Vacation
+Shift - Evening
+Shift - Holiday
+Shift - Night
+Shift - Weekend
+Standard
+Unpaid
+Purpose 
+ 
+Client Billing
+Worker/Vendor Payment
+	
+Project 
+ 
+Party
+ 
+	
+Position Class 
+ 
+General Manager
+Programmer
+Project Manager
+Work Type 
+ 
+General Labor
+General Office
+Management
+Paid Break
+Paid Non-productive Time
+Programming
+	
+From Date 
+Thru Date 
+	
+Rate Amount
+From  Thru 
+	
+Currency
+ 
+USD
+
+
+No Charge
+Client Billing
+	
+ 
+ 
+	
+ 
+ 
+	
+	
+	
+ 
+
+
+No Charge
+Worker/Vendor Payment
+	
+ 
+John Doe [EX_JOHN_DOE]
+	
+ 
+ 
+	
+	
+	
+United States Dollar
+
+
+Standard
+Client Billing
+	
+ 
+John Doe [EX_JOHN_DOE]
+	
+ 
+ 
+	
+	
+	
+United States Dollar
+
+
+Standard
+Worker/Vendor Payment
+	
+ 
+John Doe [EX_JOHN_DOE]
+	
+ 
+ 
+	
+	
+	
+United States Dollar
+
+
+Unpaid
+Worker/Vendor Payment
+	
+ 
+ 
+	
+ 
+ 
+	
+	
+	
+ 
+
+Update
+
+Built on Moqui Framework 4.0.0
+
+Site Map
