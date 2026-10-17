@@ -1,5 +1,7 @@
 {
   "transaction_exemptions": [
+    {"engine": "rust", "when": {"approved_difference": "seed_statistics"}},
+    {"engine": "rust", "when": {"approved_difference": "rust_only_statistics"}},
     {"engine": "rust", "when": {"all": [
       {"path": "kind", "in": ["insert", "update", "delete", "truncate"]},
       {"path": "table", "in": {"ref": "rust_only_tables"}}
