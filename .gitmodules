@@ -1,7 +1,7 @@
 [submodule "moqui-framework"]
 	path = moqui-framework
 	url = https://github.com/moqui/moqui-framework.git
-	branch = master
+	branch = llm-client
 [submodule "mr-moqui"]
 	path = mr-moqui
 	url = https://github.com/moqui/mr-moqui.git
