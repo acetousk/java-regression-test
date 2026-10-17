@@ -18,6 +18,7 @@ import os
 from pathlib import Path
 import re
 import secrets
+import shutil
 import signal
 import socket
 import subprocess
@@ -25,6 +26,7 @@ import time
 import urllib.request
 import xml.etree.ElementTree as ET
 
+import cargo_cache
 from deterministic import DeterministicCoordinator
 from incremental import DatabaseState, EVENT_PREFIX, INSTALL_SQL, TRACKING_SCHEMA
 
@@ -683,12 +685,24 @@ def build_engines(java_home=None, directories=None):
         if runtime.is_symlink() or not (runtime / "conf" / "MoquiDevConf.xml").is_file():
             raise SystemExit(f"Missing private runtime configuration: {runtime}")
         print(f"Building {name}: {' '.join(command)}", flush=True)
-        subprocess.run(command, cwd=directory, env=environment, check=True)
-        executable = rust_artifact(directory) if name == "rust" else directory / artifact
+        private = manifest.parent / "bin" / "moqui"
+        if name == "rust" and environment.get("CARGO_TARGET_DIR"):
+            cargo_cache.build(command, directory, environment, private)
+            executable = private
+        else:
+            subprocess.run(command, cwd=directory, env=environment, check=True)
+            executable = rust_artifact(directory) if name == "rust" else directory / artifact
         if not executable.is_file():
             raise SystemExit(f"Build did not produce {executable}")
         if name == "rust" and not os.access(executable, os.X_OK):
             raise SystemExit(f"Rust artifact is not executable: {executable}")
+        if name == "rust" and executable != private:
+            # Copy, don't hard-link; replace atomically so an existing process keeps its inode.
+            private.parent.mkdir(parents=True, exist_ok=True)
+            temporary = private.with_suffix(".tmp")
+            shutil.copy2(executable, temporary)
+            temporary.replace(private)
+            executable = private
         with executable.open("rb") as stream:
             checksum = hashlib.file_digest(stream, "sha256").hexdigest()
         artifacts[name] = {
@@ -1286,8 +1300,10 @@ def boot_and_stop(args):
     approved = getattr(args, "approved_differences", APPROVED_STARTUP_DIFFERENCES)
     (evidence / "approved-differences.json").write_text(json.dumps(approved, indent=2) + "\n")
     manifest = ROOT / ".runs/build.json"
+    artifacts = {}
     if manifest.exists():
         (evidence / "build.json").write_bytes(manifest.read_bytes())
+        artifacts = json.loads(manifest.read_text())
     containers, processes, logs = {}, {}, []
     directories = engine_directories(args)
     coordinator = None
@@ -1417,7 +1433,7 @@ def boot_and_stop(args):
                 command = ["java", f"-Dmoqui.runtime={runtime}", f"-Dmoqui.conf={conf}",
                            "-jar", str(directory / "moqui.war"), f"port={ports[name]}", "no-run-es"]
             else:
-                command = [str(rust_artifact(directory)), "--conf", str(conf),
+                command = [str(artifacts.get("rust", {}).get("artifact", rust_artifact(directory))), "--conf", str(conf),
                            "--port", str(ports[name]), "--https-port", "off", "--no-run-es"]
             log = (evidence / f"{name}-boot.log").open("wb")
             logs.append(log)

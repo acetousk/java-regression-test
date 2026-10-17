@@ -28,7 +28,9 @@ class BuildTests(unittest.TestCase):
             (conf / "MoquiDevConf.xml").write_text("<moqui-conf/>")
 
     def fake_build(self, command, *, cwd, env, check):
-        artifact = cwd / ("moqui.war" if command[0] == "./gradlew" else "target/debug/moqui")
+        if command[1] == "clean":
+            return
+        artifact = cwd / "moqui.war" if command[0] == "./gradlew" else controller.rust_artifact(cwd)
         artifact.parent.mkdir(parents=True, exist_ok=True)
         artifact.write_bytes(b"test build artifact")
         artifact.chmod(0o755)
@@ -63,6 +65,32 @@ class BuildTests(unittest.TestCase):
             self.assertEqual(controller.rust_artifact(self.root / "rust"), Path("/test/rust-cache/debug/moqui"))
         with patch.dict(controller.os.environ, {"CARGO_TARGET_DIR": "cache"}):
             self.assertEqual(controller.rust_artifact(self.root / "rust"), self.root / "rust/cache/debug/moqui")
+
+    def test_shared_build_copies_private_executable(self):
+        shared = self.root / "shared-target"
+        metadata = json.dumps({"packages": [{"name": "moqui", "source": None},
+                                           {"name": "dependency", "source": "registry+test"}]})
+        with patch.dict(controller.os.environ, {"CARGO_TARGET_DIR": str(shared)}), \
+                patch.object(controller.cargo_cache.subprocess, "check_output", return_value=metadata):
+            with patch.object(controller.subprocess, "run", side_effect=self.fake_build):
+                controller.build_engines()
+            manifest = json.loads((self.root / ".runs/build.json").read_text())
+            private = Path(manifest["rust"]["artifact"])
+            self.assertEqual(private, self.root / ".runs/bin/moqui")
+            self.assertTrue(controller.os.access(private, controller.os.X_OK))
+            # A later build in a different checkout must not alter the tested executable.
+            cached = controller.rust_artifact(self.root / "mr-moqui")
+            self.assertNotEqual(private.stat().st_ino, cached.stat().st_ino)
+            cached.write_bytes(b"another checkout's binary")
+            self.assertEqual(private.read_bytes(), b"test build artifact")
+            self.assertEqual(controller.hashlib.sha256(private.read_bytes()).hexdigest(),
+                             manifest["rust"]["sha256"])
+            # Rebuilding replaces, rather than truncates, a potentially running private copy.
+            with private.open("rb") as running:
+                with patch.object(controller.subprocess, "run", side_effect=self.fake_build):
+                    controller.build_engines()
+                self.assertNotEqual(controller.os.fstat(running.fileno()).st_ino, private.stat().st_ino)
+                self.assertEqual(running.read(), b"test build artifact")
 
     def test_missing_artifact_fails(self):
         with patch.object(controller.subprocess, "run"), self.assertRaises(SystemExit):
