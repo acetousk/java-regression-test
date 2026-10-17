@@ -45,6 +45,18 @@ checksums, and their separate runtime paths are recorded in `.runs/build.json`
 only after both builds succeed. Gradle comes from the Java checkout's wrapper;
 the controller has no third-party Python dependencies.
 
+Rust builds share `${XDG_CACHE_HOME:-$HOME/.cache}/moqui/target` by default.
+Set `CARGO_TARGET_DIR=/path` to override, or `CARGO_TARGET_DIR=` to opt out and
+use the original checkout-local build/run paths.
+
+Shared mode locks build-and-copy with the same protocol as guarded `moq`, records
+and launches private `.runs/bin/moqui`, and preserves running executable inodes.
+Checkout switches invalidate local/path packages only; registry/git dependencies
+stay cached and same-checkout builds remain incremental. No existing processes are
+stopped or restarted, and old checkout caches are not migrated or removed.
+Use guarded controller/`moq` builds only; bare Cargo bypasses these safeguards.
+Do not run `cargo clean` against a shared cache in use.
+
 Step 3 creates two fresh, disposable PostgreSQL containers using PostgreSQL 18.6,
 locked to the immutable image index
 `postgres:18.6@sha256:74935e72241653ca55e0414067e6d8763aceb8a810eb51b452253ec3dcfc4336`

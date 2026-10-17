@@ -25,6 +25,7 @@ import time
 import urllib.request
 import xml.etree.ElementTree as ET
 
+import cargo_cache
 from deterministic import DeterministicCoordinator
 from incremental import DatabaseState, EVENT_PREFIX, INSTALL_SQL, TRACKING_SCHEMA
 
@@ -655,8 +656,13 @@ def engine_directories(args=None):
             for name, checkout in zip(("java", "rust"), REPOSITORIES)}
 
 
+def rust_target():
+    cache = Path(os.environ.get("XDG_CACHE_HOME") or Path.home() / ".cache")
+    return os.environ.get("CARGO_TARGET_DIR", str(cache / "moqui/target"))
+
+
 def rust_artifact(directory):
-    target = Path(os.environ.get("CARGO_TARGET_DIR", "target"))
+    target = Path(rust_target() or "target")
     if not target.is_absolute():
         target = directory / target
     return target / "debug/moqui"
@@ -664,6 +670,9 @@ def rust_artifact(directory):
 
 def build_engines(java_home=None, directories=None):
     environment = os.environ.copy()
+    environment.setdefault("CARGO_TARGET_DIR", rust_target())
+    if not environment["CARGO_TARGET_DIR"]:
+        environment.pop("CARGO_TARGET_DIR")  # Cargo rejects an explicitly empty value.
     if java_home:
         environment["JAVA_HOME"] = str(Path(java_home).resolve())
         environment["PATH"] = str(Path(java_home).resolve() / "bin") + os.pathsep + environment.get("PATH", "")
@@ -683,8 +692,12 @@ def build_engines(java_home=None, directories=None):
         if runtime.is_symlink() or not (runtime / "conf" / "MoquiDevConf.xml").is_file():
             raise SystemExit(f"Missing private runtime configuration: {runtime}")
         print(f"Building {name}: {' '.join(command)}", flush=True)
-        subprocess.run(command, cwd=directory, env=environment, check=True)
-        executable = rust_artifact(directory) if name == "rust" else directory / artifact
+        if name == "rust" and environment.get("CARGO_TARGET_DIR"):
+            executable = manifest.parent / "bin" / "moqui"
+            cargo_cache.build(command, directory, environment, executable)
+        else:
+            subprocess.run(command, cwd=directory, env=environment, check=True)
+            executable = rust_artifact(directory) if name == "rust" else directory / artifact
         if not executable.is_file():
             raise SystemExit(f"Build did not produce {executable}")
         if name == "rust" and not os.access(executable, os.X_OK):
@@ -1286,8 +1299,10 @@ def boot_and_stop(args):
     approved = getattr(args, "approved_differences", APPROVED_STARTUP_DIFFERENCES)
     (evidence / "approved-differences.json").write_text(json.dumps(approved, indent=2) + "\n")
     manifest = ROOT / ".runs/build.json"
+    artifacts = {}
     if manifest.exists():
         (evidence / "build.json").write_bytes(manifest.read_bytes())
+        artifacts = json.loads(manifest.read_text())
     containers, processes, logs = {}, {}, []
     directories = engine_directories(args)
     coordinator = None
@@ -1417,7 +1432,7 @@ def boot_and_stop(args):
                 command = ["java", f"-Dmoqui.runtime={runtime}", f"-Dmoqui.conf={conf}",
                            "-jar", str(directory / "moqui.war"), f"port={ports[name]}", "no-run-es"]
             else:
-                command = [str(rust_artifact(directory)), "--conf", str(conf),
+                command = [str(artifacts.get("rust", {}).get("artifact", rust_artifact(directory))), "--conf", str(conf),
                            "--port", str(ports[name]), "--https-port", "off", "--no-run-es"]
             log = (evidence / f"{name}-boot.log").open("wb")
             logs.append(log)
