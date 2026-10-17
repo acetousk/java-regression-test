@@ -7,7 +7,7 @@ const runDir = process.env.MOQUI_RUN_DIR
 
 module.exports = defineConfig({
   testDir: './docs/business-process',
-  testMatch: '**/*.visual.spec.js',
+  testMatch: ['**/*.visual.spec.js', '**/*.activity.spec.js'],
   workers: 1,
   globalTeardown: './summarize-run.js',
   retries: 0,

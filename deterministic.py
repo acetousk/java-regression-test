@@ -259,6 +259,19 @@ class DeterministicCoordinator:
         coordinator = self
 
         class Handler(BaseHTTPRequestHandler):
+            def do_GET(self):
+                # Read-only progress for UI drivers: proves an action's writes were paired and compared.
+                if self.path == "/status":
+                    payload, status = coordinator.status(), 200
+                else:
+                    payload, status = {"error": "Unknown status path"}, 404
+                body = json.dumps(payload).encode()
+                self.send_response(status)
+                self.send_header("Content-Type", "application/json")
+                self.send_header("Content-Length", str(len(body)))
+                self.end_headers()
+                self.wfile.write(body)
+
             def do_POST(self):
                 try:
                     if self.path != "/transaction":
@@ -292,6 +305,13 @@ class DeterministicCoordinator:
         self.thread = threading.Thread(target=self.server.serve_forever, daemon=True)
         self.thread.start()
         return f"http://127.0.0.1:{self.server.server_port}/transaction"
+
+    def status(self):
+        with self.condition:
+            return {"error": self.error, "write_transactions": len(self.pairs),
+                    "database_comparisons": self.comparisons, "rust_only_writes": self.rust_only_writes,
+                    "unpaired_writes": {side: len(items) for side, items in self.pending.items()},
+                    "waiting_at_barrier": {side: self.arrived[side] is not None for side in self.sides}}
 
     def report(self):
         with self.condition:

@@ -1281,6 +1281,15 @@ def run_visual_tests(args, evidence):
              "RUST_BASE_URL": f"http://127.0.0.1:{args.rust_port}"}, check=True)
 
 
+def run_activity_tests(args, evidence, status_url):
+    """Step 5: drive business-process activities on both engines under the transaction harness."""
+    subprocess.run(
+        ["npm", "run", "test:activities", "--", args.activity_spec], cwd=ROOT / "ui-test",
+        env={**os.environ, "MOQUI_RUN_DIR": str(evidence), "MOQUI_HARNESS_STATUS_URL": status_url,
+             "JAVA_BASE_URL": f"http://127.0.0.1:{args.java_port}",
+             "RUST_BASE_URL": f"http://127.0.0.1:{args.rust_port}"}, check=True)
+
+
 def boot_and_stop(args):
     # Reject occupied HTTP ports so another application's listener cannot pass readiness.
     for port in (args.java_port, args.rust_port):
@@ -1302,7 +1311,7 @@ def boot_and_stop(args):
     hook_url = None
     verification = {"deterministic_requested": bool(getattr(args, "deterministic", False)),
                     "servers_started": False, "shutdown_verified": False,
-                    "final_databases_equal": None, "passed": False,
+                    "activity_tests_passed": None, "final_databases_equal": None, "passed": False,
                     "approved_differences_sha256": hashlib.sha256(
                         (evidence / "approved-differences.json").read_bytes()).hexdigest()}
     started = False
@@ -1451,6 +1460,13 @@ def boot_and_stop(args):
             print("All demo data loaded; running visual tests before shutdown (Step 4 skipped).", flush=True)
             run_visual_tests(args, evidence)
             verification["visual_tests_passed"] = True
+        if coordinator and getattr(args, "activity_spec", None):
+            # Step 5: user-driven activities while both engines are paired at every write.
+            print("Step 5: performing business-process activities under the transaction harness.", flush=True)
+            verification["activity_tests_passed"] = False
+            run_activity_tests(args, evidence, hook_url.rsplit("/", 1)[0] + "/status")
+            coordinator.check_health()
+            verification["activity_tests_passed"] = True
         print("Both engines started; stopping both processes.", flush=True)
     finally:
         shutdown = stop_engines(processes, {name: evidence / f"{name}-boot.log" for name in processes},
@@ -1471,7 +1487,10 @@ def boot_and_stop(args):
                         capture_snapshot(container, evidence / f"{name}-snapshot.json")
                     except (subprocess.CalledProcessError, subprocess.TimeoutExpired):
                         print(f"Could not capture failed-startup database for {name}", flush=True)
-            if started:
+            if started and verification["activity_tests_passed"] is False:
+                # A failed activity step fails every later step, including the Step 4 comparison.
+                print(f"Step 5 failed; Step 4 skipped. Inspect {evidence / 'ui-test/activities'}", flush=True)
+            elif started:
                 if coordinator and not coordinator.report()["per_transaction_databases_equal"]:
                     raise RuntimeError(f"Deterministic verification failed; inspect {evidence / 'deterministic-report.json'}")
                 if any(result["errors"] for result in shutdown.values()):
@@ -1515,6 +1534,9 @@ def main():
                         help="Temporary visual mode: load all demo data, run UI tests, skip database comparison")
     parser.add_argument("--visual-spec", default=".visual.spec.js",
                         help="Visual spec filter for --skip-step-4 (default: all business-process specs)")
+    parser.add_argument("--activity-spec", default=".activity.spec.js",
+                        help="Step 5 activity spec filter, run under the transaction harness "
+                             "(default: all activity specs; empty string skips Step 5)")
     parser.add_argument("--differences", type=Path, default=ROOT / "approved-differences.json",
                         help="Reviewed differences JSON; copied into the run evidence")
     parser.add_argument("--java-port", type=int, default=8080)

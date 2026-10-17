@@ -31,6 +31,29 @@ snapshots/comparison, not browser diagnostics. It cannot be combined with
 is unchanged. Both runtimes need application dependencies, including Java's
 `moqui-fop`. `--visual-spec` limits execution; the default runs all specs.
 
+## Step 5: activities performed like a user
+
+`*.activity.spec.js` specs submit real data through the UI. They run as Step 5 of
+every deterministic run (the default) while both engines are up, before shutdown:
+
+```sh
+mise exec -- python java-regression-test.py            # all activity specs
+mise exec -- python java-regression-test.py --activity-spec find-and-create-customer
+mise exec -- python java-regression-test.py --activity-spec ''   # skip Step 5
+```
+
+`activity-harness.js` issues every action to Java and Rust **at the same time**. A
+committed write blocks at the transaction barrier until the peer commits its
+matching write, so sequential driving would deadlock. After each step it reads
+the coordinator's `/status` and requires no harness error, no unpaired writes,
+and a database comparison for every paired write. Steps marked `writes: true`
+must also produce at least one paired write. Steps run serially, so a failed
+step skips the rest of the activity. A failed Step 5 also skips Step 4. Evidence:
+`.runs/<run-id>/ui-test/activities/<document>/<activity>/step-NN/{java,rust}.png, step.json`.
+Activity specs refuse to run without `MOQUI_HARNESS_STATUS_URL`.
+
+Implemented: `walkthroughs/find-and-create-customer.md` → Create Individual Customer.
+
 For already-running **isolated test servers** (no data loading/reset):
 
 ```sh

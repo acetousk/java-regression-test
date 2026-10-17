@@ -4,6 +4,7 @@
   "scripts": {
     "test": "playwright test",
     "test:visual": "playwright test",
+    "test:activities": "playwright test",
     "generate:processes": "node generate-process-specs.js",
     "test:processes": "npm run generate:processes && playwright test --grep 'all documented activities'",
     "test:unit": "node --test process-plan.test.js"

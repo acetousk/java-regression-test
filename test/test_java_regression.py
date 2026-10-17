@@ -118,6 +118,22 @@ class VisualTests(unittest.TestCase):
                 controller.run_visual_tests(args, Path("/test/.runs/example"))
 
 
+class ActivityTests(unittest.TestCase):
+    def test_activity_runner_passes_harness_status_and_fails_on_error(self):
+        from types import SimpleNamespace
+        args = SimpleNamespace(java_port=18091, rust_port=18092, activity_spec=".activity.spec.js")
+        with patch.object(controller.subprocess, "run") as run:
+            controller.run_activity_tests(args, Path("/test/.runs/example"), "http://127.0.0.1:9/status")
+        self.assertEqual(run.call_args.args[0], ["npm", "run", "test:activities", "--", ".activity.spec.js"])
+        environment = run.call_args.kwargs["env"]
+        self.assertEqual(environment["MOQUI_HARNESS_STATUS_URL"], "http://127.0.0.1:9/status")
+        self.assertEqual(environment["JAVA_BASE_URL"], "http://127.0.0.1:18091")
+        self.assertTrue(run.call_args.kwargs["check"])
+        with patch.object(controller.subprocess, "run", side_effect=subprocess.CalledProcessError(1, "npm")):
+            with self.assertRaises(subprocess.CalledProcessError):
+                controller.run_activity_tests(args, Path("/test/.runs/example"), "http://127.0.0.1:9/status")
+
+
 class StartupTests(unittest.TestCase):
     def test_demo_configuration_preserves_settings_and_overrides_database(self):
         with tempfile.TemporaryDirectory() as directory:

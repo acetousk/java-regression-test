@@ -202,6 +202,19 @@ class DeterministicTests(unittest.TestCase):
         self.assertEqual(report["database_comparisons"], 1)
         self.assertEqual(report["operation_trace_counts"], {"java": {"jdbc": 1}, "rust": None})
 
+    def test_status_endpoint_reports_paired_and_compared_writes(self):
+        url = self.coordinator.start()
+        self.addCleanup(self.coordinator.server.shutdown)
+        status_url = url.rsplit("/", 1)[0] + "/status"
+        with urllib.request.urlopen(status_url, timeout=2) as response:
+            self.assertEqual(json.load(response)["write_transactions"], 0)
+        self.write()
+        with urllib.request.urlopen(status_url, timeout=2) as response:
+            status = json.load(response)
+        self.assertEqual(status, {"error": None, "write_transactions": 1, "database_comparisons": 1,
+                                  "rust_only_writes": 0, "unpaired_writes": {"java": 0, "rust": 0},
+                                  "waiting_at_barrier": {"java": False, "rust": False}})
+
     def test_unpaired_write_at_close_fails(self):
         self.write()
         self.cdc.commit("rust", "INSERT late")
