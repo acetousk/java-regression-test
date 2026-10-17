@@ -252,7 +252,6 @@ def apply_approved_differences(java, rust, approved):
         applied.append({"kind": "java_seed_addition", "table": rule["table"], "rows": len(found)})
 
     applied.extend(apply_rust_only_statistics(snapshots, approved.get("rust_only_statistics")))
-    applied.extend(apply_java_restart(snapshots, approved.get("java_restart")))
     applied.extend(apply_seed_statistics(snapshots, seed_row_deltas))
 
     for rule in approved.get("statistics_timing", []):
@@ -611,40 +610,6 @@ def apply_rust_only_statistics(snapshots, rule):
                   key=lambda row: (row["artifact_sub_type"], row["artifact_name"]))
     return [{"kind": "rust_only_statistics", "rows": rows,
              "hit_count": sum(row["hit_count"] for row in rows)}]
-
-
-def apply_java_restart(snapshots, rule):
-    """Java restarts its factory after the empty-database load; Rust does not. The second Java factory starts
-    with no counts and a fresh hit bin id bank, so its bins are written after an id gap. Only the exact
-    approved bins, after a gap, are set aside; then the ArtifactHitBin sequence
-    row may be exactly one bank ahead of Rust's."""
-    if not rule:
-        return []
-    identity = ("artifact_type", "artifact_sub_type", "artifact_name", "hit_count")
-    java = sorted(bin_rows(snapshots[0]), key=lambda item: int(item["row"]["hit_bin_id"]))
-    expected = rule["post_restart_bins"]
-    if len(java) <= len(expected):
-        return []
-    before, after = java[:-len(expected)], java[-len(expected):]
-    found = [{field: (int(item["row"][field]) if field == "hit_count" else item["row"][field])
-              for field in identity} for item in after]
-    if (sorted(found, key=repr) != sorted(expected, key=repr)
-            or int(after[0]["row"]["hit_bin_id"]) <= int(before[-1]["row"]["hit_bin_id"]) + 1):
-        return []
-    for item in after:
-        snapshots[0]["records"].remove(item)
-    applied = [{"kind": "java_restart_bins", "rows": found}]
-    sequence = rule.get("sequence")
-    if sequence:
-        rows = [[item for item in snapshot["records"] if item.get("table") == "public.sequence_value_item"
-                 and item["row"].get("seq_name") == sequence["seq_name"]] for snapshot in snapshots]
-        if all(len(side) == 1 for side in rows):
-            java_num, rust_num = (int(side[0]["row"]["seq_num"]) for side in rows)
-            if java_num - rust_num == sequence["java_ahead_by"]:
-                rows[0][0]["row"]["seq_num"] = rows[1][0]["row"]["seq_num"]
-                applied.append({"kind": "java_restart_sequence", "seq_name": sequence["seq_name"],
-                                "java_seq_num": java_num, "rust_seq_num": rust_num})
-    return applied
 
 
 def git(*args):

@@ -254,25 +254,19 @@ class ApprovedDifferencesTests(unittest.TestCase):
         return {"table": "public.sequence_value_item", "row": {
             "seq_name": "moqui.server.ArtifactHitBin", "seq_num": seq_num, "last_updated_stamp": None}}
 
-    def test_java_restart_bins_and_sequence_bank_are_set_aside(self):
+    def test_restart_bins_and_sequence_bank_must_match(self):
         feed = "moqui.entity.feed.DataFeed"
         java = [self.bin("100000", feed, "list", 1), self.bin("100001", "other", "list", 1),
                 self.bin("100101", feed, "list", 1), self.sequence(100201)]
-        rust = [self.bin("100000", feed, "list", 1), self.bin("100001", "other", "list", 1), self.sequence(100101)]
-        equal, report, _ = self.compare(java, rust)
-        self.assertTrue(equal)
-        kinds = [item["kind"] for item in report["approved_differences_applied"]]
-        self.assertIn("java_restart_bins", kinds)
-        self.assertIn("java_restart_sequence", kinds)
-        # Without the id gap of a new bank it is not the restarted factory.
-        java[2]["row"]["hit_bin_id"] = "100002"
+        rust = deepcopy(java)
+        self.assertTrue(self.compare(java, rust)[0])
+        # A missing restart bin must fail on either side.
+        self.assertFalse(self.compare(java, rust[:2] + rust[3:])[0])
+        self.assertFalse(self.compare(java[:2] + java[3:], rust)[0])
+        # The formerly approved Java-only sequence bank must fail independently.
+        rust[3]["row"]["seq_num"] = 100101
         self.assertFalse(self.compare(java, rust)[0])
-        java[2]["row"]["hit_bin_id"] = "100101"
-        # Any other sequence difference still fails.
-        java[3]["row"]["seq_num"] = 100202
-        self.assertFalse(self.compare(java, rust)[0])
-        java[3]["row"]["seq_num"] = 100201
-        # A second Java read after the restart is not approved.
+        rust[3]["row"]["seq_num"] = 100201
         java[2]["row"]["hit_count"] = 2
         self.assertFalse(self.compare(java, rust)[0])
 
