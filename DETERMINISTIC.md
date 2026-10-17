@@ -54,9 +54,16 @@ remains available in the coordinator for focused tests, not the harness contract
   differences, and both engines continue only on a match. Each side must
   have committed exactly one non-exempt transaction since the previous pair;
   batches fail closed because their intermediate states have not been compared.
-- A Rust transaction that changes only approved `rust_only_tables` or inserts
-  listed Rust seed rows has no Java peer; it is counted (`rust_only_writes`) and
-  not paired. Its state remains subject to the reviewed rules at the next comparison.
+- `transaction_exemptions` in the selected differences JSON controls which
+  transactions have no peer. `approvals.py` matches PostgreSQL events using
+  `all`, `any`, field `equals`/`in`/`all_in`/`empty`, keyed rows, and JSON references.
+  No table names or DDL tags are embedded in that matcher. Missing policy means
+  no exemptions; unknown operators/references fail closed. Every event must match.
+  The default JSON covers approved Rust-only table changes, listed seed inserts,
+  table/index creation on approved tables, and no-op table drops. PostgreSQL
+  identifies index owners; mixed/shared or unidentified DDL remains strict.
+  Exemptions are counted in `exempt_writes` (`rust_only_writes` is retained).
+  Their replayed state is still compared under the reviewed snapshot rules.
 
 Test containers run with `wal_level=logical` and `autovacuum=off`; autoanalyze
 otherwise commits catalog-only transactions at arbitrary points in the stream.

@@ -218,17 +218,136 @@ class CdcTests(unittest.TestCase):
             with self.assertRaisesRegex(RuntimeError, "inside a transaction"):
                 controller.read_cdc("container")
 
-    def test_rust_only_change_covers_rust_only_tables_and_listed_seed_inserts(self):
-        covered = controller.rust_only_change({
-            "rust_only_tables": ["search.document_index"],
-            "rust_seed_additions": [{"table": "public.service_job", "key": ["job_name"],
-                                     "values": [["Rust's_job"]]}]})
-        self.assertTrue(covered("table search.document_index: INSERT: document_id[text]:'x'"))
-        self.assertTrue(covered("table public.service_job: INSERT: job_name[character varying]:'Rust''s_job' "
-                                "description[text]:null"))
-        self.assertFalse(covered("table public.service_job: INSERT: job_name[character varying]:'other'"))
-        self.assertFalse(covered("table public.service_job: UPDATE: job_name[character varying]:'Rust''s_job'"))
-        self.assertFalse(covered("table public.enumeration: INSERT: enum_id[character varying]:'Rust''s_job'"))
+    def test_catalog_readback_batches_only_affected_tables_and_preserves_rows(self):
+        metadata = lambda name, columns: json.dumps({"relation": name, "kind": "r", "columns": columns})
+        state = controller.DatabaseState({"schema": "", "records": []})
+        state.catalog = [metadata("public.changed", []), metadata("public.untouched", [])]
+        state.readback = {"public.first", "public.empty"}
+        state.rows["public.changed"] = {"previous": 1}
+        catalog = {"schema": "", "records": [metadata("public.first", []), metadata("public.empty", []),
+                   metadata("public.changed", ["new-column"]), metadata("public.untouched", [])]}
+        record = '{"table":"public.first","row":{"amount":123456789.123456789}}'
+        with patch.object(controller.subprocess, "check_output", return_value=record + "\n" + record + "\n") as call:
+            rows = controller.catalog_row_readback("db", state, catalog)
+        call.assert_called_once()
+        sql = call.call_args.kwargs["input"]
+        self.assertIn("BEGIN ISOLATION LEVEL REPEATABLE READ READ ONLY", sql)
+        self.assertIn('FROM ONLY "public"."changed"', sql)
+        self.assertIn('FROM ONLY "public"."empty"', sql)
+        self.assertNotIn('"untouched"', sql)
+        self.assertTrue(sql.endswith("COMMIT;"))
+        self.assertEqual(rows, {"public.first": [record, record], "public.empty": [], "public.changed": []})
+        state.readback.clear()
+        state.rows.clear()
+        with patch.object(controller.subprocess, "check_output") as call:
+            self.assertEqual(controller.catalog_row_readback("db", state, catalog), {})
+        call.assert_not_called()
+        state.readback.add("public.first")
+        with patch.object(controller.subprocess, "check_output", side_effect=subprocess.CalledProcessError(1, "psql")):
+            with self.assertRaises(subprocess.CalledProcessError):
+                controller.catalog_row_readback("db", state, catalog)
+
+    def test_approval_snapshots_refresh_dirty_peer_catalog_before_reading(self):
+        states = {side: controller.DatabaseState({"schema": "", "records": []})
+                  for side in ("java", "rust")}
+        containers = {"java": "java-db", "rust": "rust-db"}
+        states["java"].schema_dirty = True
+        with self.assertRaisesRegex(ValueError, "catalog refresh"):
+            states["java"].snapshot()
+        def refreshed(container, state, destination):
+            self.assertEqual(container, "java-db")
+            self.assertEqual(destination, Path("evidence/java-catalog.json"))
+            state.schema = "refreshed Java DDL"
+            state.schema_dirty = False
+        with patch.object(controller, "refresh_incremental_catalog", side_effect=refreshed) as refresh:
+            snapshots = controller.approval_snapshots(states, containers, Path("evidence"))
+            self.assertEqual(snapshots[0]["schema"], "refreshed Java DDL")
+            self.assertEqual(snapshots[1]["schema"], "")
+            refresh.assert_called_once()
+            controller.approval_snapshots(states, containers, Path("evidence"))
+            refresh.assert_called_once()
+        states["java"].schema_dirty = True
+        with patch.object(controller, "refresh_incremental_catalog", side_effect=RuntimeError("capture lost")):
+            with self.assertRaisesRegex(RuntimeError, "capture lost"):
+                controller.approval_snapshots(states, containers, Path("evidence"))
+
+    def test_rust_only_statistics_exemption_uses_existing_snapshot_approval(self):
+        from test.test_approvals import row_change
+        approved = {"theme_resources": [], "full_text_indexes": [],
+                    "rust_only_statistics": {"artifact_sub_types": ["update-probe"]},
+                    "transaction_exemptions": [
+                        {"engine": "rust", "when": {"approved_difference": "rust_only_statistics"}}]}
+        row = {"hit_bin_id": "100091", "artifact_type": "AT_ENTITY", "artifact_sub_type": "update-probe",
+               "artifact_name": "moqui.basic.Enumeration", "hit_count": 219}
+        shared = {**row, "hit_bin_id": "100090", "artifact_sub_type": "create"}
+        record = {"table": "public.artifact_hit_bin", "row": row}
+        records = [[{"table": "public.artifact_hit_bin", "row": shared}],
+                   [{"table": "public.artifact_hit_bin", "row": shared}, record]]
+        snapshots = lambda: [{"schema": "", "records": [json.dumps(item) for item in side]} for side in records]
+        engine = controller.ApprovalEngine(approved, lambda event, kind:
+            controller.approved_statistics_change(event, kind, snapshots, approved))
+        transaction = lambda: row_change("public.artifact_hit_bin", row)
+        self.assertTrue(engine.exempt_transaction("rust", transaction()))
+        sequence = row_change("public.sequence_value_item", {"seq_name": "moqui.server.ArtifactHitBin",
+                              "seq_num": 100201}, "update")
+        self.assertFalse(engine.exempt_transaction("rust", sequence))
+        self.assertFalse(engine.exempt_transaction("rust", transaction() + sequence))
+        self.assertFalse(engine.exempt_transaction("java", transaction()))
+        self.assertFalse(engine.exempt_transaction("rust", row_change("public.artifact_hit_bin", row, "update")))
+        self.assertFalse(engine.exempt_transaction("rust", row_change("public.artifact_hit_bin", shared)))
+        records[0].append(record)
+        self.assertFalse(engine.exempt_transaction("rust", transaction()))
+        records[0].pop()
+        records[1].append(record)
+        self.assertFalse(engine.exempt_transaction("rust", transaction()))
+        records[1].pop()
+        row["hit_bin_id"] = "100089"
+        self.assertFalse(engine.exempt_transaction("rust", transaction()))
+        row["hit_bin_id"] = "100091"
+        records[1].remove(record)
+        self.assertFalse(engine.exempt_transaction("rust", transaction()))
+        records[1].append(record)
+        del approved["rust_only_statistics"]
+        self.assertFalse(engine.exempt_transaction("rust", transaction()))
+
+    def test_seed_statistics_exemption_requires_complete_database_evidence(self):
+        from test.test_approvals import row_change
+        approved = {"theme_resources": [], "full_text_indexes": [], "rust_seed_additions": [
+            {"table": "public.system_message_remote", "entity": "moqui.service.message.SystemMessageRemote",
+             "key": ["system_message_remote_id"], "values": [["ExampleSftpLocal"]]}],
+            "transaction_exemptions": [{"engine": "rust", "when": {"approved_difference": "seed_statistics"}}]}
+        seed = {"table": "public.system_message_remote", "row": {"system_message_remote_id": "ExampleSftpLocal"}}
+        row = {"hit_bin_id": "100004", "artifact_type": "AT_ENTITY", "artifact_sub_type": "create",
+               "artifact_name": "moqui.service.message.SystemMessageRemote", "hit_count": 1}
+        bin_record = {"table": "public.artifact_hit_bin", "row": row}
+        records = [[], [seed, bin_record]]
+        snapshots = lambda: [{"schema": "", "records": [json.dumps(item) for item in side]} for side in records]
+        engine = controller.ApprovalEngine(approved, lambda event, kind:
+            controller.approved_statistics_change(event, kind, snapshots, approved))
+        def covered(kind="insert"):
+            return engine.exempt_transaction("rust", row_change("public.artifact_hit_bin", row, kind))
+        self.assertTrue(covered())
+        self.assertFalse(covered("update"))
+        self.assertFalse(engine.exempt_transaction("java", row_change("public.artifact_hit_bin", row)))
+        self.assertFalse(controller.ApprovalEngine(approved).exempt_transaction(
+            "rust", row_change("public.artifact_hit_bin", row)))
+        row["hit_count"] = 2
+        self.assertFalse(covered())
+        row["hit_count"] = 1
+        records[1].append(bin_record)
+        self.assertFalse(covered())
+        records[1].pop()
+        records[1].remove(seed)
+        self.assertFalse(covered())
+        records[1].append(seed)
+        records[0].append(seed)
+        self.assertFalse(covered())
+        records[0][:] = [bin_record]
+        self.assertFalse(covered())
+        records[0].clear()
+        approved["transaction_exemptions"].clear()
+        self.assertFalse(controller.ApprovalEngine(approved).exempt_transaction(
+            "rust", row_change("public.artifact_hit_bin", row)))
 
 
 if __name__ == "__main__":

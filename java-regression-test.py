@@ -25,8 +25,9 @@ import time
 import urllib.request
 import xml.etree.ElementTree as ET
 
+from approvals import ApprovalEngine
 from deterministic import DeterministicCoordinator
-from incremental import DatabaseState, EVENT_PREFIX, INSTALL_SQL, TRACKING_SCHEMA
+from incremental import DatabaseState, INSTALL_SQL, TRACKING_SCHEMA
 
 ROOT = Path(__file__).resolve().parent
 REPOSITORIES = ("moqui-framework", "mr-moqui")
@@ -1110,36 +1111,38 @@ COMMIT;
 
 
 CDC_SLOT = "moqui_regression_cdc"
-CDC_COLUMN = re.compile(r"(\w+)\[[^\]]*\]:('(?:[^']|'')*'|\S+)")
 
 
-def rust_only_change(approved):
-    """A predicate for test_decoding change lines covered by an approved Rust-only difference:
-    any change to a Rust-only table, or the insert of a listed Rust seed row."""
-    tables = set(approved.get("rust_only_tables", ()))
-    seeds = {}
-    for rule in approved.get("rust_seed_additions", []):
-        for values in rule["values"]:
-            seeds.setdefault(rule["table"], set()).add(tuple(zip(rule["key"], values)))
+def approval_snapshots(states, containers, evidence):
+    """Approval validators need current DDL metadata, just like paired comparisons."""
+    for side, state in states.items():
+        if state.schema_dirty:
+            refresh_incremental_catalog(containers[side], state, evidence / f"{side}-catalog.json")
+    return [states[side].snapshot() for side in ("java", "rust")]
 
-    def covered(change):
-        if change.startswith(EVENT_PREFIX):
-            # The original PostgreSQL row change must independently satisfy the
-            # approval predicate. Schema markers must never be skipped this way.
-            literal = change[len(EVENT_PREFIX):]
-            return json.loads(literal[1:-1].replace("''", "'"))["kind"] != "schema"
-        head, _, rest = change.partition(": ")
-        table = head.removeprefix("table ")
-        if table in tables:
-            return True
-        if not rest.startswith("INSERT: ") or table not in seeds:
+
+def approved_statistics_change(event, kind, snapshots, approved):
+    """Exempt only extra bins validated by the existing snapshot approvals."""
+    row = event.get("new", {})
+    if (kind not in ("seed_statistics", "rust_only_statistics") or event.get("kind") != "insert"
+            or event.get("table") != "public.artifact_hit_bin"
+            or not isinstance(row, dict) or row.get("artifact_type") != "AT_ENTITY"):
+        return False
+    captured = snapshots()
+    _, applied = apply_approved_differences(*captured, approved)
+    if kind == "rust_only_statistics":
+        bins = [json.loads(record, parse_int=Decimal, parse_float=Decimal)["row"]
+                for record in captured[1]["records"]
+                if json.loads(record).get("table") == "public.artifact_hit_bin"]
+        if [item for item in bins if item.get("hit_bin_id") == row.get("hit_bin_id")] != [row]:
             return False
-        row = {name: (None if value == "null" else value[1:-1].replace("''", "'")
-                      if value.startswith("'") else value)
-               for name, value in CDC_COLUMN.findall(rest.removeprefix("INSERT: "))}
-        return any(all(row.get(field) == value for field, value in key) for key in seeds[table])
-
-    return covered
+        return any(rule["kind"] == kind and any(
+            all(row.get(field) == value for field, value in item.items()) for item in rule["rows"])
+            for rule in applied)
+    return any(rule["kind"] == kind and rule["java_hit_count"] == 0
+               and rule["artifact_name"] == row.get("artifact_name")
+               and rule["artifact_sub_type"] == row.get("artifact_sub_type")
+               and rule["rust_hit_count"] == row.get("hit_count") for rule in applied)
 
 
 def create_cdc_slot(container):
@@ -1242,16 +1245,9 @@ END $$;
     if state.schema_dirty:
         capture_snapshot(container, destination, include_rows=False)
 
-        def reload_rows(table):
-            schema, name = table.split('.', 1)
-            identifier = '.'.join('"' + part.replace('"', '""') + '"' for part in (schema, name))
-            sql = ("SET timezone='UTC'; SELECT json_build_object('table', "
-                   + "'" + table.replace("'", "''") + "', 'row', row_to_json(t)) FROM ONLY " + identifier + " t")
-            return subprocess.check_output(['docker', 'exec', container, 'psql', '-X', '-qAt', '-v',
-                                            'ON_ERROR_STOP=1', '-U', 'moqui', '-d', 'moqui', '-c', sql],
-                                           text=True, timeout=60).splitlines()
-
-        state.refresh_catalog(json.loads(destination.read_text()), reload_rows=reload_rows)
+        catalog = json.loads(destination.read_text())
+        readback = catalog_row_readback(container, state, catalog)
+        state.refresh_catalog(catalog, reload_rows=readback.__getitem__)
     else:
         sql = r"""
 BEGIN ISOLATION LEVEL REPEATABLE READ READ ONLY;
@@ -1271,6 +1267,32 @@ COMMIT;
         if old != sequences:
             state.dirty.update(json.loads(record)['sequence'] for record in old + sequences)
         state.catalog = [record for record in state.catalog if 'sequence' not in json.loads(record)] + sequences
+
+
+def catalog_row_readback(container, state, catalog):
+    """Read DDL-affected rows in one PostgreSQL snapshot, not one process per table."""
+    old_columns = {item['relation']: item.get('columns') for item in map(json.loads, state.catalog)
+                   if 'relation' in item}
+    tables = sorted(item['relation'] for item in map(json.loads, catalog['records'])
+                    if 'relation' in item and (item['relation'] in state.readback or (
+                        state.rows.get(item['relation']) and item['relation'] in old_columns
+                        and old_columns[item['relation']] != item.get('columns'))))
+    rows = {table: [] for table in tables}
+    if not tables:
+        return rows
+    statements = ["BEGIN ISOLATION LEVEL REPEATABLE READ READ ONLY;",
+                  "SET LOCAL statement_timeout='10s'; SET LOCAL timezone='UTC';"]
+    for table in tables:
+        identifier = '.'.join('"' + part.replace('"', '""') + '"' for part in table.split('.', 1))
+        statements.append("SELECT json_build_object('table', '" + table.replace("'", "''")
+                          + "', 'row', row_to_json(t)) FROM ONLY " + identifier + " t;")
+    statements.append('COMMIT;')
+    output = subprocess.check_output(
+        ['docker', 'exec', '-i', container, 'psql', '-X', '-qAt', '-v', 'ON_ERROR_STOP=1',
+         '-U', 'moqui', '-d', 'moqui'], input='\n'.join(statements), text=True, timeout=60)
+    for record in output.splitlines():
+        rows[json.loads(record)['table']].append(record)
+    return rows
 
 
 def boot_and_stop(args):
@@ -1403,9 +1425,13 @@ def boot_and_stop(args):
                     refresh_incremental_catalog(containers[side], state, evidence / f"{side}-catalog.json")
                 return diff_compare(states['java'], states['rust'], step, approved_differences=approved)
 
+            def approved_difference(event, kind):
+                return approved_statistics_change(event, kind,
+                    lambda: approval_snapshots(states, containers, evidence), approved)
+
             coordinator = DeterministicCoordinator(run_id, evidence, compare=compare_transaction,
                                                    cdc=changes,
-                                                   rust_only=rust_only_change(approved),
+                                                   exempt=ApprovalEngine(approved, approved_difference).exempt_transaction,
                                                    operation_checks=False, timeout=args.boot_timeout)
             hook_url = coordinator.start()
 
@@ -1418,7 +1444,8 @@ def boot_and_stop(args):
                            "-jar", str(directory / "moqui.war"), f"port={ports[name]}", "no-run-es"]
             else:
                 command = [str(rust_artifact(directory)), "--conf", str(conf),
-                           "--port", str(ports[name]), "--https-port", "off", "--no-run-es"]
+                           "--port", str(ports[name]), "--https-port", "off", "--no-run-es",
+                           "-D", "create-or-update=true"]
             log = (evidence / f"{name}-boot.log").open("wb")
             logs.append(log)
             overrides = {node.get("name"): node.get("value")
