@@ -993,7 +993,7 @@ def snapshot_compare(left, right, report_dir, *, rust_only_manifest=None, source
     return equal
 
 
-def diff_compare(left, right, report_dir, *, approved_differences=None):
+def diff_compare(left, right, report_dir, *, approved_differences=None, activity_baselines=None):
     """Compare PostgreSQL-replayed state without recapturing user rows.
 
     Rebuild canonical counters only for affected relations and approval dependencies.
@@ -1027,17 +1027,30 @@ def diff_compare(left, right, report_dir, *, approved_differences=None):
                 cache[name][json.dumps(canonical(record), ensure_ascii=True, separators=(",", ":"))] += 1
         state.comparison_cache = cache
         state.compared_schema = state.schema
+    baseline_counters = []
+    for snapshot in activity_baselines or ():
+        grouped = {}
+        for record in snapshot['records']:
+            value = json.dumps(canonical(record), ensure_ascii=True, separators=(",", ":"))
+            grouped.setdefault(group(record), Counter())[value] += 1
+        baseline_counters.append(grouped)
     differences = []
     for name in sorted(set(left.comparison_cache) | set(right.comparison_cache)):
         java, rust = (state.comparison_cache.get(name, Counter()) for state in (left, right))
+        if activity_baselines:
+            java, rust = java.copy(), rust.copy()
+            java.subtract(baseline_counters[0].get(name, Counter()))
+            rust.subtract(baseline_counters[1].get(name, Counter()))
         for side, items in (("java", java - rust), ("rust", rust - java)):
             differences.extend({"relation": name, "side": side, "count": count,
                                 "hex": record.encode("utf-8").hex()} for record, count in sorted(items.items()))
-    schema_equal = normalized[0]["schema"] == normalized[1]["schema"]
+    schema_equal = (all(current['schema'] == baseline['schema']
+                        for current, baseline in zip(normalized, activity_baselines))
+                    if activity_baselines else normalized[0]["schema"] == normalized[1]["schema"])
     equal = schema_equal and not differences
     report_dir = Path(report_dir)
     report_dir.mkdir(parents=True, exist_ok=True, mode=0o700)
-    report = {"mode": "postgresql-incremental", "comparison_passed": equal,
+    report = {"mode": "activity-delta" if activity_baselines else "postgresql-incremental", "comparison_passed": equal,
               "compared_relations": sorted(touched), "schema_equal_after_approved_differences": schema_equal,
               "unapproved_record_byte_differences": differences, "approved_differences_applied": applied,
               "transactions_replayed": {side: state.transactions for side, state in (("java", left), ("rust", right))},
@@ -1337,6 +1350,8 @@ def boot_and_stop(args):
                     "approved_differences_sha256": hashlib.sha256(
                         (evidence / "approved-differences.json").read_bytes()).hexdigest()}
     started = False
+    activity_only = bool(getattr(args, 'skip_step_4', False) and getattr(args, 'deterministic', False))
+    activity_baselines = None
     password = secrets.token_hex(24)
     crypt_pass = secrets.token_hex(32)
     environment = os.environ.copy()
@@ -1440,7 +1455,8 @@ def boot_and_stop(args):
                 step = evidence / "transactions" / write_id
                 for side, state in states.items():
                     refresh_incremental_catalog(containers[side], state, evidence / f"{side}-catalog.json")
-                return diff_compare(states['java'], states['rust'], step, approved_differences=approved)
+                return diff_compare(states['java'], states['rust'], step, approved_differences=approved,
+                                    activity_baselines=activity_baselines)
 
             def approved_difference(event, kind):
                 return approved_statistics_change(event, kind,
@@ -1449,7 +1465,8 @@ def boot_and_stop(args):
             coordinator = DeterministicCoordinator(run_id, evidence, compare=compare_transaction,
                                                    cdc=changes,
                                                    exempt=ApprovalEngine(approved, approved_difference).exempt_transaction,
-                                                   operation_checks=False, timeout=args.boot_timeout)
+                                                   operation_checks=False, timeout=args.boot_timeout,
+                                                   bootstrap=activity_only, random_seed=getattr(args, 'random_seed', None))
             hook_url = coordinator.start()
 
         for name, checkout in zip(("java", "rust"), REPOSITORIES):
@@ -1469,6 +1486,7 @@ def boot_and_stop(args):
             deterministic_env = ({
                 "MOQUI_DETERMINISTIC": "true", "MOQUI_DETERMINISTIC_HOOK": hook_url,
                 "MOQUI_DETERMINISTIC_OPERATIONS": "false",
+                "MOQUI_DETERMINISTIC_TIMEOUT_SECONDS": str(min(3600, max(120, int(args.boot_timeout)))),
                 "MOQUI_DETERMINISTIC_ENGINE": name, "MOQUI_DETERMINISTIC_RUN": run_id,
                 "MOQUI_DETERMINISTIC_LOG": str(evidence / f"{name}-deterministic.log"),
             } if coordinator else {})
@@ -1482,7 +1500,25 @@ def boot_and_stop(args):
                        failure_check=coordinator.check_health if coordinator else None)
         started = True
         verification["servers_started"] = True
-        if getattr(args, "skip_step_4", False):
+        if activity_only:
+            def establish_activity_baselines():
+                nonlocal activity_baselines
+                for side, container in containers.items():
+                    baseline = evidence / f'{side}-activity-baseline.json'
+                    capture_snapshot(container, baseline)
+                    # Loading is outside Step 5. Retain its CDC separately, without pairing it.
+                    transactions, cursor = read_cdc(container, with_cursor=True)
+                    (evidence / f'{side}-loading-cdc.json').write_text(json.dumps({
+                        'transactions': transactions, 'cursor': cursor}) + '\n')
+                    states[side] = DatabaseState(json.loads(baseline.read_text()))
+                    states[side].capture_cursor = cursor['after']
+                activity_baselines, _ = apply_approved_differences(
+                    states['java'].snapshot(), states['rust'].snapshot(), approved)
+            coordinator.activate(establish_activity_baselines)
+            verification['loading_equality_checked'] = False
+            print('Step 5 baselines captured after loading; pairing and comparing activity writes only.', flush=True)
+        # The read-only visual sweep drives engines one at a time, so it cannot run under transaction barriers.
+        if getattr(args, "skip_step_4", False) and not coordinator:
             print("All demo data loaded; running visual tests before shutdown (Step 4 skipped).", flush=True)
             run_visual_tests(args, evidence)
             verification["visual_tests_passed"] = True
@@ -1524,7 +1560,8 @@ def boot_and_stop(args):
                 print("Both engines shut down gracefully and flushed artifact bins.", flush=True)
                 if getattr(args, "skip_step_4", False):
                     verification["step_4_skipped"] = True
-                    verification["passed"] = verification.get("visual_tests_passed", False)
+                    verification["passed"] = bool(verification.get(
+                        "activity_tests_passed" if coordinator else "visual_tests_passed", False))
                 else:
                     # Step 4: Snapshot and compare only after verified graceful shutdown.
                     for name, container in containers.items():
@@ -1556,8 +1593,10 @@ def main():
     parser.add_argument("--rust-checkout", type=Path, help="Use an existing private Rust worktree (not reset)")
     parser.add_argument("--deterministic", action="store_true",
                         help="Pair transaction hooks and compare committed databases after every transaction")
+    parser.add_argument("--random-seed", help="Deterministic entropy seed: 64 lowercase hex characters; default: fresh per run")
     parser.add_argument("--skip-step-4", action="store_true",
-                        help="Temporary visual mode: load all demo data, run UI tests, skip database comparison")
+                        help="Skip the Step 4 database comparison; without --deterministic also runs the visual "
+                             "sweep, with it runs Step 5 activities only")
     parser.add_argument("--visual-spec", default=".visual.spec.js",
                         help="Visual spec filter for --skip-step-4 (default: all business-process specs)")
     parser.add_argument("--activity-spec", default=".activity.spec.js",
@@ -1577,8 +1616,6 @@ def main():
     parser.add_argument("--source-root", type=Path, default=ROOT,
                         help="Parent of mr-moqui source checkout for Rust only source attribution")
     args = parser.parse_args()
-    if args.skip_step_4 and args.deterministic:
-        parser.error("--skip-step-4 cannot be combined with --deterministic")
     args.approved_differences = json.loads(args.differences.read_text())
     if not isinstance(args.approved_differences, dict) or not all(
             key in args.approved_differences for key in ("theme_resources", "full_text_indexes")):
@@ -1587,6 +1624,10 @@ def main():
         parser.error("Java and Rust need distinct valid HTTP ports")
     if args.boot_timeout <= 0 or args.shutdown_timeout <= 0:
         parser.error("--boot-timeout and --shutdown-timeout must be positive")
+
+    if args.random_seed is not None and (not args.deterministic or len(args.random_seed) != 64
+            or any(char not in '0123456789abcdef' for char in args.random_seed)):
+        parser.error('--random-seed requires --deterministic and 64 lowercase hex characters')
 
     # Step 1: Initialize the pinned framework submodules and Java's private runtime.
     defaults = [checkout for name, checkout in zip(("java", "rust"), REPOSITORIES)
