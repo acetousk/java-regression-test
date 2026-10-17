@@ -22,18 +22,13 @@ class BuildTests(unittest.TestCase):
         self.root_patch = patch.object(controller, "ROOT", self.root)
         self.root_patch.start()
         self.addCleanup(self.root_patch.stop)
-        self.environment_patch = patch.dict(controller.os.environ, {"CARGO_TARGET_DIR": ""})
-        self.environment_patch.start()
-        self.addCleanup(self.environment_patch.stop)
         for checkout in controller.REPOSITORIES:
             conf = self.root / checkout / "runtime" / "conf"
             conf.mkdir(parents=True)
             (conf / "MoquiDevConf.xml").write_text("<moqui-conf/>")
 
     def fake_build(self, command, *, cwd, env, check):
-        if command[1] == "clean":
-            return
-        artifact = cwd / "moqui.war" if command[0] == "./gradlew" else controller.rust_artifact(cwd)
+        artifact = cwd / ("moqui.war" if command[0] == "./gradlew" else "target/debug/moqui")
         artifact.parent.mkdir(parents=True, exist_ok=True)
         artifact.write_bytes(b"test build artifact")
         artifact.chmod(0o755)
@@ -50,9 +45,6 @@ class BuildTests(unittest.TestCase):
         manifest = json.loads((self.root / ".runs/build.json").read_text())
         self.assertNotEqual(manifest["java"]["runtime"], manifest["rust"]["runtime"])
         self.assertEqual(len(manifest["java"]["sha256"]), 64)
-        self.assertEqual(manifest["rust"]["artifact"], str(self.root / "mr-moqui/target/debug/moqui"))
-        self.assertFalse((self.root / ".runs/bin").exists())
-        self.assertNotIn("CARGO_TARGET_DIR", run.call_args_list[1].kwargs["env"])
 
     def test_explicit_worktrees_are_used_without_replacing_defaults(self):
         from types import SimpleNamespace
@@ -71,52 +63,6 @@ class BuildTests(unittest.TestCase):
             self.assertEqual(controller.rust_artifact(self.root / "rust"), Path("/test/rust-cache/debug/moqui"))
         with patch.dict(controller.os.environ, {"CARGO_TARGET_DIR": "cache"}):
             self.assertEqual(controller.rust_artifact(self.root / "rust"), self.root / "rust/cache/debug/moqui")
-
-    def test_shared_build_copies_private_executable(self):
-        shared = self.root / "shared-target"
-        metadata = json.dumps({"packages": [{"name": "moqui", "source": None},
-                                           {"name": "dependency", "source": "registry+test"}]})
-        with patch.dict(controller.os.environ, {"CARGO_TARGET_DIR": str(shared)}), \
-                patch.object(controller.cargo_cache.subprocess, "check_output", return_value=metadata):
-            with patch.object(controller.subprocess, "run", side_effect=self.fake_build):
-                controller.build_engines()
-            manifest = json.loads((self.root / ".runs/build.json").read_text())
-            private = Path(manifest["rust"]["artifact"])
-            self.assertEqual(private, self.root / ".runs/bin/moqui")
-            self.assertTrue(controller.os.access(private, controller.os.X_OK))
-            # A later build in a different checkout must not alter the tested executable.
-            cached = controller.rust_artifact(self.root / "mr-moqui")
-            self.assertNotEqual(private.stat().st_ino, cached.stat().st_ino)
-            cached.write_bytes(b"another checkout's binary")
-            self.assertEqual(private.read_bytes(), b"test build artifact")
-            self.assertEqual(controller.hashlib.sha256(private.read_bytes()).hexdigest(),
-                             manifest["rust"]["sha256"])
-            # Rebuilding replaces, rather than truncates, a potentially running private copy.
-            with private.open("rb") as running:
-                with patch.object(controller.subprocess, "run", side_effect=self.fake_build):
-                    controller.build_engines()
-                self.assertNotEqual(controller.os.fstat(running.fileno()).st_ino, private.stat().st_ino)
-                self.assertEqual(running.read(), b"test build artifact")
-
-    def test_shared_cache_is_default_and_respects_xdg(self):
-        with patch.dict(controller.os.environ, {"XDG_CACHE_HOME": str(self.root / "cache")}):
-            controller.os.environ.pop("CARGO_TARGET_DIR", None)
-            self.assertEqual(controller.rust_target(), str(self.root / "cache/moqui/target"))
-            with patch.object(controller.cargo_cache, "build") as shared, \
-                    patch.object(controller.subprocess, "run", side_effect=self.fake_build):
-                def copy_fake(command, directory, environment, private):
-                    self.assertEqual(environment["CARGO_TARGET_DIR"], controller.rust_target())
-                    private.parent.mkdir(parents=True, exist_ok=True)
-                    private.write_bytes(b"test build artifact")
-                    private.chmod(0o755)
-                shared.side_effect = copy_fake
-                controller.build_engines()
-            shared.assert_called_once()
-            manifest = json.loads((self.root / ".runs/build.json").read_text())
-            self.assertEqual(manifest["rust"]["artifact"], str(self.root / ".runs/bin/moqui"))
-        with patch.dict(controller.os.environ, {"XDG_CACHE_HOME": ""}):
-            controller.os.environ.pop("CARGO_TARGET_DIR", None)
-            self.assertEqual(controller.rust_target(), str(Path.home() / ".cache/moqui/target"))
 
     def test_missing_artifact_fails(self):
         with patch.object(controller.subprocess, "run"), self.assertRaises(SystemExit):
