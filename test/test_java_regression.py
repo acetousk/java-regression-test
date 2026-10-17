@@ -218,6 +218,35 @@ class CdcTests(unittest.TestCase):
             with self.assertRaisesRegex(RuntimeError, "inside a transaction"):
                 controller.read_cdc("container")
 
+    def test_catalog_readback_batches_only_affected_tables_and_preserves_rows(self):
+        metadata = lambda name, columns: json.dumps({"relation": name, "kind": "r", "columns": columns})
+        state = controller.DatabaseState({"schema": "", "records": []})
+        state.catalog = [metadata("public.changed", []), metadata("public.untouched", [])]
+        state.readback = {"public.first", "public.empty"}
+        state.rows["public.changed"] = {"previous": 1}
+        catalog = {"schema": "", "records": [metadata("public.first", []), metadata("public.empty", []),
+                   metadata("public.changed", ["new-column"]), metadata("public.untouched", [])]}
+        record = '{"table":"public.first","row":{"amount":123456789.123456789}}'
+        with patch.object(controller.subprocess, "check_output", return_value=record + "\n" + record + "\n") as call:
+            rows = controller.catalog_row_readback("db", state, catalog)
+        call.assert_called_once()
+        sql = call.call_args.kwargs["input"]
+        self.assertIn("BEGIN ISOLATION LEVEL REPEATABLE READ READ ONLY", sql)
+        self.assertIn('FROM ONLY "public"."changed"', sql)
+        self.assertIn('FROM ONLY "public"."empty"', sql)
+        self.assertNotIn('"untouched"', sql)
+        self.assertTrue(sql.endswith("COMMIT;"))
+        self.assertEqual(rows, {"public.first": [record, record], "public.empty": [], "public.changed": []})
+        state.readback.clear()
+        state.rows.clear()
+        with patch.object(controller.subprocess, "check_output") as call:
+            self.assertEqual(controller.catalog_row_readback("db", state, catalog), {})
+        call.assert_not_called()
+        state.readback.add("public.first")
+        with patch.object(controller.subprocess, "check_output", side_effect=subprocess.CalledProcessError(1, "psql")):
+            with self.assertRaises(subprocess.CalledProcessError):
+                controller.catalog_row_readback("db", state, catalog)
+
     def test_approval_snapshots_refresh_dirty_peer_catalog_before_reading(self):
         states = {side: controller.DatabaseState({"schema": "", "records": []})
                   for side in ("java", "rust")}
