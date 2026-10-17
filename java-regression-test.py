@@ -1509,8 +1509,9 @@ def main():
     parser.add_argument("--java-home", help="JDK home for the Java build (Java 21 recommended)")
     parser.add_argument("--java-checkout", type=Path, help="Use an existing private Java worktree (not reset)")
     parser.add_argument("--rust-checkout", type=Path, help="Use an existing private Rust worktree (not reset)")
-    parser.add_argument("--deterministic", action="store_true",
-                        help="Pair transaction hooks and compare committed databases after every transaction")
+    parser.add_argument("--deterministic", action=argparse.BooleanOptionalAction, default=True,
+                        help="Pair transaction hooks and compare committed databases after every transaction "
+                             "(default: on)")
     parser.add_argument("--skip-step-4", action="store_true",
                         help="Temporary visual mode: load all demo data, run UI tests, skip database comparison")
     parser.add_argument("--visual-spec", default=".visual.spec.js",
@@ -1530,7 +1531,7 @@ def main():
                         help="Parent of mr-moqui source checkout for Rust only source attribution")
     args = parser.parse_args()
     if args.skip_step_4 and args.deterministic:
-        parser.error("--skip-step-4 cannot be combined with --deterministic")
+        parser.error("--skip-step-4 cannot be combined with --deterministic; pass --no-deterministic")
     args.approved_differences = json.loads(args.differences.read_text())
     if not isinstance(args.approved_differences, dict) or not all(
             key in args.approved_differences for key in ("theme_resources", "full_text_indexes")):

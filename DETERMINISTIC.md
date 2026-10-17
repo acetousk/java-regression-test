@@ -6,9 +6,11 @@ See [integration results](DETERMINISTIC-RESULTS.md) for actual evidence.
 
 ## Running the isolated implementations
 
+Deterministic mode is on by default; `--no-deterministic` disables it.
+
 ```sh
 CARGO_TARGET_DIR=/home/user/moqui/mr-moqui-deterministic-target \
-mise exec -- python java-regression-test.py --deterministic \
+mise exec -- python java-regression-test.py \
   --java-checkout /home/user/moqui/moqui-framework-deterministic \
   --rust-checkout /home/user/moqui/mr-moqui-deterministic \
   --differences approved-differences.json

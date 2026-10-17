@@ -20,16 +20,16 @@ npm ci
 npx playwright install chromium
 npm run generate:processes
 cd ..
-mise exec -- python java-regression-test.py --skip-step-4
+mise exec -- python java-regression-test.py --skip-step-4 --no-deterministic
 ```
 
 `--skip-step-4` loads all demo data in fresh isolated databases (the existing
 startup default), collects evidence while both servers are alive, then shuts
 them down and cleans up, including after visual failures. It skips database
 snapshots/comparison, not browser diagnostics. It cannot be combined with
-`--deterministic`. Without this flag the existing database regression workflow
-is unchanged. Both runtimes need application dependencies, including Java's
-`moqui-fop`. `--visual-spec` limits execution; the default runs all specs.
+deterministic mode (on by default), so pass `--no-deterministic`. Without this flag
+the existing database regression workflow is unchanged. Both runtimes need
+application dependencies, including Java's `moqui-fop`. `--visual-spec` limits execution; the default runs all specs.
 
 For already-running **isolated test servers** (no data loading/reset):
 
