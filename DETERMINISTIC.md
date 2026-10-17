@@ -2,7 +2,9 @@
 
 This mode tests an interface and database parity; enabling it does not establish parity.
 The engines must commit writes at matching boundaries and persist matching state.
-See [integration results](DETERMINISTIC-RESULTS.md) for actual evidence.
+See [integration results](DETERMINISTIC-RESULTS.md) for actual evidence and the
+[randomness audit](DETERMINISTIC-RANDOMNESS.md) for seeded application entropy,
+source coverage and explicit cryptographic/browser/external boundaries.
 
 ## Running the isolated implementations
 
@@ -166,5 +168,6 @@ Java's loader does), or the first mismatching pair stops the run.
 
 Captures compare committed state, not uncommitted parent transaction contents.
 Sequence values are non-MVCC and remain strict. Concurrent writers inside one engine
-fail the run. Deterministic time does not by itself control entropy, external
-services, or arbitrary third-party clocks.
+fail the run. The seeded randomness adapter controls audited framework application
+sources, not arbitrary dependencies, browser entropy, external services or third-party
+clocks. Test mode generates predictable secrets and must never be enabled in production.

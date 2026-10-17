@@ -1,8 +1,12 @@
 """Per-write-transaction database barriers for the Java/Rust regression harness (stdlib only)."""
 from copy import deepcopy
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+import hashlib
+import hmac
 import json
+import os
 from pathlib import Path
+import secrets
 import threading
 import time
 
@@ -20,8 +24,14 @@ class DeterministicCoordinator:
     continues. A pair whose sides committed different numbers of transactions fails.
     """
     def __init__(self, run_id, evidence, compare=None, cdc=None, timeout=120, start_millis=None,
-                 rust_only=None, operation_checks=False, exempt=None):
+                 rust_only=None, operation_checks=False, exempt=None, bootstrap=False, random_seed=None):
         self.run_id = run_id
+        self.bootstrap = bootstrap
+        self.random_seed = secrets.token_hex(32) if random_seed is None else random_seed
+        if (not isinstance(self.random_seed, str) or len(self.random_seed) != 64
+                or any(char not in '0123456789abcdef' for char in self.random_seed)):
+            raise ValueError('random_seed must be 64 lowercase hex characters')
+        self.random_counts = {side: {} for side in ('java', 'rust')}
         self.operation_checks = operation_checks
         self.operation_events = []
         self.operation_positions = {side: 0 for side in ('java', 'rust')}
@@ -60,6 +70,15 @@ class DeterministicCoordinator:
             if self.error is None:
                 self.error = message
             self.condition.notify_all()
+
+    def activate(self, establish_baselines):
+        """Switch from unverified loading to paired activity writes at an idle boundary."""
+        with self.condition:
+            self.check_health()
+            if not self.bootstrap or any(self.stacks.values()):
+                raise RuntimeError("Activity activation requires idle engines in bootstrap mode")
+            establish_baselines()
+            self.bootstrap = False
 
     def check_health(self):
         with self.condition:
@@ -116,11 +135,45 @@ class DeterministicCoordinator:
     def _time(self):
         return self.start_millis + len(self.pairs)
 
+    def _random(self, request):
+        """Independent semantic streams: internal draws cannot shift entity ids or the peer's stream."""
+        if (set(request) != {'version', 'run_id', 'engine', 'event', 'domain', 'length'}
+                or type(request['version']) is not int or request['version'] != 1
+                or request['run_id'] != self.run_id or request['engine'] not in self.sides):
+            raise ValueError('Invalid random request envelope')
+        domain, length = request['domain'], request['length']
+        if (not isinstance(domain, str) or not 1 <= len(domain) <= 256
+                or any(ord(char) < 32 or ord(char) > 126 for char in domain)
+                or type(length) is not int or not 1 <= length <= 4096):
+            raise ValueError('Invalid random domain or length')
+        phase = 'loading' if self.bootstrap else 'activity'
+        key = f'{phase}:{domain}'
+        counts = self.random_counts[request['engine']]
+        index = counts.get(key, 0)
+        output = bytearray()
+        for block in range((length + 31) // 32):
+            message = json.dumps(['moqui-random-v1', phase, domain, index, block],
+                                 separators=(',', ':')).encode('ascii')
+            output.extend(hmac.digest(bytes.fromhex(self.random_seed), message, hashlib.sha256))
+        # Persist the seed and draw metadata, never generated credentials/tokens, before acknowledging.
+        self.evidence.mkdir(parents=True, exist_ok=True, mode=0o700)
+        seed_file = self.evidence / 'random-seed.json'
+        if not seed_file.exists():
+            with open(seed_file, 'x', opener=lambda path, flags: os.open(path, flags, 0o600)) as file:
+                json.dump({'algorithm': 'hmac-sha256-v1', 'seed': self.random_seed}, file)
+        with (self.evidence / 'random-draws.jsonl').open('a') as file:
+            file.write(json.dumps({'engine': request['engine'], 'phase': phase, 'domain': domain,
+                                   'index': index, 'length': length}) + '\n')
+        counts[key] = index + 1
+        return {'bytes': output[:length].hex()}
+
     def exchange(self, request):
         with self.condition:
             try:
                 if self.error:
                     raise ValueError(self.error)
+                if request.get('event') == 'random':
+                    return self._random(request)
                 side, sequence, event = self._validate(request)
                 if event == 'operation':
                     return self._operation(side, request)
@@ -132,6 +185,8 @@ class DeterministicCoordinator:
                     return {"operation_id": operation_id, "time_epoch_ms": self._time()}
                 self.stacks[side] = [entry for entry in self.stacks[side] if entry[0] != sequence]
                 self.counts[side][request["outcome"]] += 1
+                if self.bootstrap:
+                    return {"ok": True}
                 changes = []
                 if self.cdc is not None:
                     # Read outside the lock so the peer can arrive meanwhile.
@@ -333,6 +388,7 @@ class DeterministicCoordinator:
                     "exempt_writes": deepcopy(self.exempt_writes),
                     "unpaired_writes": {side: len(items) for side, items in self.pending.items()},
                     "operation_trace_counts": deepcopy(self.trace_counts),
+                    "random_algorithm": "hmac-sha256-v1", "random_draw_counts": deepcopy(self.random_counts),
                     "operation_checks_enabled": self.operation_checks,
                     "operation_order_equal": (operation_settled and self.error is None) if self.operation_checks else None,
                     "operation_database_comparisons": self.operation_comparisons,
