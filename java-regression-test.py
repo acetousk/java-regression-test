@@ -18,7 +18,6 @@ import os
 from pathlib import Path
 import re
 import secrets
-import shutil
 import signal
 import socket
 import subprocess
@@ -685,10 +684,9 @@ def build_engines(java_home=None, directories=None):
         if runtime.is_symlink() or not (runtime / "conf" / "MoquiDevConf.xml").is_file():
             raise SystemExit(f"Missing private runtime configuration: {runtime}")
         print(f"Building {name}: {' '.join(command)}", flush=True)
-        private = manifest.parent / "bin" / "moqui"
         if name == "rust" and environment.get("CARGO_TARGET_DIR"):
-            cargo_cache.build(command, directory, environment, private)
-            executable = private
+            executable = manifest.parent / "bin" / "moqui"
+            cargo_cache.build(command, directory, environment, executable)
         else:
             subprocess.run(command, cwd=directory, env=environment, check=True)
             executable = rust_artifact(directory) if name == "rust" else directory / artifact
@@ -696,13 +694,6 @@ def build_engines(java_home=None, directories=None):
             raise SystemExit(f"Build did not produce {executable}")
         if name == "rust" and not os.access(executable, os.X_OK):
             raise SystemExit(f"Rust artifact is not executable: {executable}")
-        if name == "rust" and executable != private:
-            # Copy, don't hard-link; replace atomically so an existing process keeps its inode.
-            private.parent.mkdir(parents=True, exist_ok=True)
-            temporary = private.with_suffix(".tmp")
-            shutil.copy2(executable, temporary)
-            temporary.replace(private)
-            executable = private
         with executable.open("rb") as stream:
             checksum = hashlib.file_digest(stream, "sha256").hexdigest()
         artifacts[name] = {

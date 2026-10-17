@@ -47,6 +47,8 @@ class BuildTests(unittest.TestCase):
         manifest = json.loads((self.root / ".runs/build.json").read_text())
         self.assertNotEqual(manifest["java"]["runtime"], manifest["rust"]["runtime"])
         self.assertEqual(len(manifest["java"]["sha256"]), 64)
+        self.assertEqual(manifest["rust"]["artifact"], str(self.root / "mr-moqui/target/debug/moqui"))
+        self.assertFalse((self.root / ".runs/bin").exists())
 
     def test_explicit_worktrees_are_used_without_replacing_defaults(self):
         from types import SimpleNamespace

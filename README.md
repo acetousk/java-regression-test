@@ -40,30 +40,25 @@ and creates new empty databases. Rust compiler caches are preserved. Existing da
 even with `--keep-databases`. Local source edits are not discarded.
 
 Step 1 initializes the pinned repositories and private Java runtime. Step 2 builds
-`moqui-framework/moqui.war` and `mr-moqui/target/debug/moqui` (or the target selected
-by `CARGO_TARGET_DIR`). Rust is copied to the controller's private `.runs/bin/moqui`
-before recording its checksum; startup uses that copy, not Cargo's replaceable output. Artifact paths,
+`moqui-framework/moqui.war` and `mr-moqui/target/debug/moqui`. Artifact paths,
 checksums, and their separate runtime paths are recorded in `.runs/build.json`
 only after both builds succeed. Gradle comes from the Java checkout's wrapper;
 the controller has no third-party Python dependencies.
 
-To reuse Rust dependencies across checkouts, set the same absolute target directory:
+Optional shared cache (unset means unchanged local build/run):
 
 ```sh
 export CARGO_TARGET_DIR=/home/user/moqui/mr-moqui/target
 mise run build
 ```
 
-Registry/git dependency artifacts are reused. Local/path packages are invalidated
-when switching checkouts, avoiding Cargo's false-fresh A → B → A outputs;
-incremental compilation is preserved within the same checkout. Build-and-copy is
-locked using the same protocol as `mr-moqui`'s shared-cache `moq`, so another
-checkout cannot replace this controller's private executable.
-
-Use the controller or shared-cache-aware `moq` for all builds into this target;
-bare `cargo build` bypasses these safeguards. Keep the Rust toolchain and build
-flags consistent for best reuse. Old checkout-local caches are not removed
-automatically. Do not run `cargo clean` against a shared cache in use.
+Shared mode locks build-and-copy with the same protocol as guarded `moq`, records
+and launches private `.runs/bin/moqui`, and preserves running executable inodes.
+Checkout switches invalidate local/path packages only; registry/git dependencies
+stay cached and same-checkout builds remain incremental. No existing processes are
+stopped or restarted, and old checkout caches are not migrated or removed.
+Use guarded controller/`moq` builds only; bare Cargo bypasses these safeguards.
+Do not run `cargo clean` against a shared cache in use.
 
 Step 3 creates two fresh, disposable PostgreSQL containers using PostgreSQL 18.6,
 locked to the immutable image index
