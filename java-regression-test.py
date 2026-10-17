@@ -591,15 +591,18 @@ def bin_rows(snapshot):
 def apply_rust_only_statistics(snapshots, rule):
     """Rust counts reads Java does not make (FK existence checks, the load report counts) under sub types of
     their own. Those bins are set aside here and listed in the report, not compared with Java. Java must have
-    no bin of these sub types, and Rust gives them the ids after every bin Java also has, so no other id moves."""
+    no bin of these sub types, and Rust gives them the ids after shared bins in the same flush, so no other id moves."""
     if not rule:
         return []
     sub_types = set(rule["artifact_sub_types"])
     if any(item["row"].get("artifact_sub_type") in sub_types for item in bin_rows(snapshots[0])):
         return []
     rust_only = [item for item in bin_rows(snapshots[1]) if item["row"].get("artifact_sub_type") in sub_types]
-    others = [int(item["row"]["hit_bin_id"]) for item in bin_rows(snapshots[1]) if item not in rust_only]
-    if not rust_only or (others and min(int(item["row"]["hit_bin_id"]) for item in rust_only) < max(others)):
+    others = [item["row"] for item in bin_rows(snapshots[1]) if item not in rust_only]
+    if not rust_only or any(
+            row.get("bin_end_date_time") == item["row"].get("bin_end_date_time")
+            and int(item["row"]["hit_bin_id"]) < int(row["hit_bin_id"])
+            for item in rust_only for row in others):
         return []
     for item in rust_only:
         snapshots[1]["records"].remove(item)

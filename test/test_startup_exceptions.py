@@ -241,7 +241,19 @@ class ApprovedDifferencesTests(unittest.TestCase):
         # Raw evidence keeps the Rust-only bins.
         self.assertFalse(report["row_and_sequence_values_equal"])
 
-    def test_rust_only_statistics_must_follow_every_shared_bin_and_be_rust_only(self):
+    def test_rust_only_statistics_remain_excluded_after_restart(self):
+        java = [self.bin("100000", "moqui.basic.StatusItem", "one", 31),
+                self.bin("100101", "moqui.entity.feed.DataFeed", "list", 1,
+                         end="2026-01-01T00:00:10")]
+        rust = deepcopy(java) + [self.bin("100001", "moqui.basic.Enumeration", "load-report", 1)]
+        equal, report, _ = self.compare(java, rust)
+        self.assertTrue(equal)
+        self.assertIn("rust_only_statistics", [item["kind"] for item in report["approved_differences_applied"]])
+        # A shared bin later in the same flush still invalidates the exclusion.
+        rust[1]["row"]["bin_end_date_time"] = java[0]["row"]["bin_end_date_time"]
+        self.assertFalse(self.compare(java, rust)[0])
+
+    def test_rust_only_statistics_must_follow_shared_bins_in_flush_and_be_rust_only(self):
         shared = self.bin("100001", "moqui.basic.StatusItem", "one", 31)
         java = [self.bin("100000", "moqui.basic.StatusItem", "one", 31)]
         # An FK bin ahead of a shared bin moves its id.
