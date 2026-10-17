@@ -1245,16 +1245,9 @@ END $$;
     if state.schema_dirty:
         capture_snapshot(container, destination, include_rows=False)
 
-        def reload_rows(table):
-            schema, name = table.split('.', 1)
-            identifier = '.'.join('"' + part.replace('"', '""') + '"' for part in (schema, name))
-            sql = ("SET timezone='UTC'; SELECT json_build_object('table', "
-                   + "'" + table.replace("'", "''") + "', 'row', row_to_json(t)) FROM ONLY " + identifier + " t")
-            return subprocess.check_output(['docker', 'exec', container, 'psql', '-X', '-qAt', '-v',
-                                            'ON_ERROR_STOP=1', '-U', 'moqui', '-d', 'moqui', '-c', sql],
-                                           text=True, timeout=60).splitlines()
-
-        state.refresh_catalog(json.loads(destination.read_text()), reload_rows=reload_rows)
+        catalog = json.loads(destination.read_text())
+        readback = catalog_row_readback(container, state, catalog)
+        state.refresh_catalog(catalog, reload_rows=readback.__getitem__)
     else:
         sql = r"""
 BEGIN ISOLATION LEVEL REPEATABLE READ READ ONLY;
@@ -1274,6 +1267,32 @@ COMMIT;
         if old != sequences:
             state.dirty.update(json.loads(record)['sequence'] for record in old + sequences)
         state.catalog = [record for record in state.catalog if 'sequence' not in json.loads(record)] + sequences
+
+
+def catalog_row_readback(container, state, catalog):
+    """Read DDL-affected rows in one PostgreSQL snapshot, not one process per table."""
+    old_columns = {item['relation']: item.get('columns') for item in map(json.loads, state.catalog)
+                   if 'relation' in item}
+    tables = sorted(item['relation'] for item in map(json.loads, catalog['records'])
+                    if 'relation' in item and (item['relation'] in state.readback or (
+                        state.rows.get(item['relation']) and item['relation'] in old_columns
+                        and old_columns[item['relation']] != item.get('columns'))))
+    rows = {table: [] for table in tables}
+    if not tables:
+        return rows
+    statements = ["BEGIN ISOLATION LEVEL REPEATABLE READ READ ONLY;",
+                  "SET LOCAL statement_timeout='10s'; SET LOCAL timezone='UTC';"]
+    for table in tables:
+        identifier = '.'.join('"' + part.replace('"', '""') + '"' for part in table.split('.', 1))
+        statements.append("SELECT json_build_object('table', '" + table.replace("'", "''")
+                          + "', 'row', row_to_json(t)) FROM ONLY " + identifier + " t;")
+    statements.append('COMMIT;')
+    output = subprocess.check_output(
+        ['docker', 'exec', '-i', container, 'psql', '-X', '-qAt', '-v', 'ON_ERROR_STOP=1',
+         '-U', 'moqui', '-d', 'moqui'], input='\n'.join(statements), text=True, timeout=60)
+    for record in output.splitlines():
+        rows[json.loads(record)['table']].append(record)
+    return rows
 
 
 def boot_and_stop(args):
