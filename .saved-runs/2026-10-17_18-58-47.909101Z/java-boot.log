@@ -1,0 +1,1001 @@
+Using temporary directory: /home/user/moqui/moqui-framework-deterministic/execwartmp
+Found temporary directory execwartmp, deleting
+Determined runtime from Java system property: /home/user/moqui/moqui-framework-deterministic/runtime
+Canonicalized runtimePath: /home/user/moqui/moqui-framework-deterministic/runtime
+Determined conf from Java system property: /home/user/moqui/java-regression-remove-restart/.runs/2026-10-17_18-58-47.909101Z/java-demo.xml
+Running Jetty server on port 18080 max threads 100 with args [{port=18080, no-run-es=}]
+Creating Jetty FileSessionDataStore with directory /home/user/moqui/moqui-framework-deterministic/runtime/sessions
+Jetty min threads 8, max threads 100
+[32m18:59:02.358  INFO         main                   o.eclipse.j.s.Server[m jetty-12.1.12; built: 2026-08-03T22:37:55.389Z; git: 10dd3948f37767b84cc2c62358364f042e51dbbe; jvm 21.0.12.1+1-LTS
+[32m18:59:02.369  INFO         main  o.eclipse.j.s.DefaultSessionIdManager[m Session workerName=node0
+[32m18:59:03.187  INFO         main ipse.j.e.w.StandardDescriptorProcessor[m NO JSP Support for /, did not find org.eclipse.jetty.ee11.jsp.JettyJspServlet
+[32m18:59:03.630  INFO         main         o.eclipse.j.s.h.ContextHandler[m Started oeje11w.WebAppContext@6e0ff644{Moqui Root Webapp,/,b=file:///home/user/moqui/moqui-framework-deterministic/execwartmp/ROOT/webapp/,a=AVAILABLE,h=oeje11s.SessionHandler@348ad293{STARTED}}{file:/home/user/moqui/moqui-framework-deterministic/moqui.war}
+[32m18:59:03.735  INFO         main       o.moqui.i.w.MoquiContextListener[m Loading Webapp 'webroot' (Moqui Root Webapp) on ROOT, located at: /home/user/moqui/moqui-framework-deterministic/execwartmp/ROOT/webapp/
+[32m18:59:04.097  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Initializing Moqui Framework version 4.0.0
+ - runtime directory: /home/user/moqui/moqui-framework-deterministic/runtime
+ - runtime config:    /home/user/moqui/java-regression-remove-restart/.runs/2026-10-17_18-58-47.909101Z/java-demo.xml
+[32m18:59:04.097  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Running on Java 21.0.12.1 VM 21.0.12.1+1-LTS Runtime 21.0.12.1+1-LTS
+[32m18:59:04.440  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Added component tools              at file:/home/user/moqui/moqui-framework-deterministic/runtime/base-component/tools
+[32m18:59:04.451  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Added component webroot            at file:/home/user/moqui/moqui-framework-deterministic/runtime/base-component/webroot
+[32m18:59:04.452  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Components after depends-on sort: [tools, webroot]
+[32m18:59:04.462  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Merging MoquiConf.xml file from component tools
+[32m18:59:04.474  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Merging runtime configuration at /home/user/moqui/java-regression-remove-restart/.runs/2026-10-17_18-58-47.909101Z/java-demo.xml
+[32m18:59:04.492  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Setting property instance_purpose from env var with value [dev]
+[32m18:59:04.492  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Setting property default_locale from default with value [en_US]
+[32m18:59:04.493  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Setting property default_time_zone from default with value [UTC]
+[32m18:59:04.493  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Setting property database_time_zone from default with value [UTC]
+[32m18:59:04.493  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Setting property webapp_http_port from env var with value [18080]
+[32m18:59:04.493  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Setting property webapp_https_enabled from env var with value [false]
+[32m18:59:04.493  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Setting property webapp_allow_origins from env var with value [*]
+[32m18:59:04.493  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Setting property webapp_handle_cors from default with value [true]
+[32m18:59:04.493  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Setting property webapp_status_ips from default with value [127.0.0.1]
+[32m18:59:04.493  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Setting property webapp_require_session_token from default with value [true]
+[32m18:59:04.493  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Setting property webapp_upload_executable_allow from default with value [false]
+[32m18:59:04.493  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Setting property user_privileged_groups from default with value [ADMIN,ADMIN_ADV]
+[32m18:59:04.493  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Setting property user_sealed_permissions from default with value [GROOVY_SHELL_WEB,SQL_RUNNER_WEB,SERVICE_LOAD_RUNNER,ADMIN_LOGIN_AS,ADMIN_PASSWORD,ElasticRemote,KibanaRemote,REST_SCHEMA,LlmGateway]
+[32m18:59:04.493  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Setting property entity_ds_db_conf from env var with value [postgres]
+[32m18:59:04.493  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Setting property entity_ds_host from env var with value [127.0.0.1]
+[32m18:59:04.494  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Setting property entity_ds_port from env var with value [33945]
+[32m18:59:04.494  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Setting property entity_ds_database from env var with value [moqui]
+[32m18:59:04.509  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Setting property entity_ds_url from default with value [jdbc:h2:/home/user/moqui/moqui-framework-deterministic/runtime/db/h2/moqui;lock_timeout=30000]
+[32m18:59:04.510  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Setting property entity_ds_schema from env var with value [public]
+[32m18:59:04.510  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Setting property entity_ds_user from env var with value [moqui]
+[32m18:59:04.510  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Setting secret property entity_ds_password from env var
+[32m18:59:04.510  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Setting secret property entity_ds_crypt_pass from env var
+[32m18:59:04.510  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Setting secret property entity_ds_crypt_pass_old from default
+[32m18:59:04.511  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Setting property entity_add_missing_runtime from default with value [false]
+[32m18:59:04.511  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Setting property entity_add_missing_startup from default with value [true]
+[32m18:59:04.511  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Setting property entity_lock_track from env var with value [true]
+[32m18:59:04.511  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Setting property entity_statement_timeout from default with value [false]
+[32m18:59:04.511  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Setting property entity_empty_db_load from env var with value [all]
+[32m18:59:04.511  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Setting property entity_on_start_load_types from default with value [none]
+[32m18:59:04.511  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Setting property entity_ds_c1_disabled from default with value [true]
+[32m18:59:04.511  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Setting property entity_ds_c1_db_conf from default with value [mysql]
+[32m18:59:04.511  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Setting property scheduled_job_check_time from default with value [60]
+[32m18:59:04.511  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Setting property elasticsearch_url from default with value [http://127.0.0.1:9200]
+[32m18:59:04.512  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Setting property llm_openai_url from default with value [https://api.openai.com]
+[32m18:59:04.512  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Setting property llm_log_content from default with value [false]
+[32m18:59:04.512  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Setting property a2a_enabled from default with value [false]
+[32m18:59:04.512  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Setting property a2a_trust_forwarded_headers from default with value [false]
+[32m18:59:04.512  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Setting property a2a_default_profile from default with value [assist]
+[32m18:59:04.512  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Setting property a2a_agent_name from default with value [Moqui]
+[32m18:59:04.512  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Setting property a2a_agent_description from default with value [Moqui enterprise application agent]
+[32m18:59:04.512  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Setting property a2a_agent_version from default with value [1.0.0]
+[32m18:59:04.512  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Setting property a2a_max_part_bytes from default with value [65536]
+[32m18:59:04.512  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Setting property a2a_max_parts from default with value [32]
+[32m18:59:04.512  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Setting property a2a_replay_wait_ms from default with value [600000]
+[32m18:59:04.512  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Setting property kibana_host from default with value [127.0.0.1]
+[32m18:59:04.512  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Setting property kibana_port from default with value [5601]
+[32m18:59:04.513  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Setting property entity_ds_sslmode from env var with value [disable]
+[32m18:59:04.513  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Setting property cluster_https_port from env var with value [0]
+[32m18:59:04.513  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Setting property opensearch_run from env var with value [false]
+[32m18:59:04.516  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Found default_time_zone UTC: sun.util.calendar.ZoneInfo[id="UTC",offset=0,dstSavings=0,useDaylight=false,transitions=0,lastRule=null]
+[32m18:59:04.519  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Default locale en_US, time zone sun.util.calendar.ZoneInfo[id="UTC",offset=0,dstSavings=0,useDaylight=false,transitions=0,lastRule=null]
+[33m18:59:04.563  WARN         main .moqui.i.c.ExecutionContextFactoryImpl[m DETERMINISTIC MODE: autonomous scheduled job polling and background Elastic logging are DISABLED. Elastic client/index startup enabled: true. Artifact statistics are collected normally and persisted synchronously at factory shutdown. Explicit job/distributed/periodic requests fail; async services run inline. See DETERMINISTIC.md.
+[32m18:59:04.569  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Initializing MClassLoader context org.eclipse.jetty.ee.webapp.WebAppClassLoader cur class org.eclipse.jetty.ee.webapp.WebAppClassLoader system null
+Starting MClassLoader with parent org.eclipse.jetty.ee.webapp.WebAppClassLoader
+[32m18:59:04.576  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Initialized MClassLoader with parent org.eclipse.jetty.ee.webapp.WebAppClassLoader
+[32m18:59:04.577  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Added JAR from runtime/lib: postgresql-42.7.7.jar
+[32m18:59:04.577  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Initialized ClassLoaders in 12ms
+[32m18:59:04.587  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Not loading disabled ToolFactory with class: org.moqui.impl.tools.JackrabbitRunToolFactory
+[32m18:59:04.587  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Not loading disabled ToolFactory with class: org.moqui.impl.tools.SubEthaSmtpToolFactory
+[32m18:59:04.589  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Loading ToolFactory with class: org.moqui.impl.tools.MCacheToolFactory
+[32m18:59:04.592  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Loading ToolFactory with class: org.moqui.impl.tools.H2ServerToolFactory
+[32m18:59:04.601  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Cache Facade initialized
+[32m18:59:04.712  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Resource Facade initialized
+[33m18:59:04.758  WARN         main                     b.tm.Configuration[m Cannot get the unique server ID for this JVM ('bitronix.tm.serverId'). Make sure it is configured and you use only US-ASCII characters. Will use IP address instead (unsafe for production usage!).
+[33m18:59:04.767  WARN         main                     b.tm.j.DiskJournal[m active log file is unclean, did you call BitronixTransactionManager.shutdown() at the end of the last run?
+[32m18:59:04.818  INFO         main      o.moqui.i.c.TransactionFacadeImpl[m Internal transaction manager initialized: UserTransaction class bitronix.tm.BitronixTransactionManager, TransactionManager class bitronix.tm.BitronixTransactionManager
+[32m18:59:04.818  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Transaction Facade initialized
+[32m18:59:04.872  INFO         main           o.moqui.i.e.EntityFacadeImpl[m Database time zone is sun.util.calendar.ZoneInfo[id="UTC",offset=0,dstSavings=0,useDaylight=false,transitions=0,lastRule=null]
+[32m18:59:05.009  INFO         main .moqui.i.c.TransactionInternalBitronix[m Initializing DataSource transactional_DS (postgres) with properties: [databaseName:moqui, serverName:127.0.0.1, user:moqui, portNumber:33945]
+[32m18:59:05.219  INFO         main .moqui.i.c.TransactionInternalBitronix[m Init DataSource transactional_DS (postgres) isolation READ_COMMITTED (2), max pool 90
+[32m18:59:05.231  INFO         main           o.moqui.i.e.EntityFacadeImpl[m Skipping disabled datasource transactional#clone1
+[32m18:59:05.245  INFO         main                o.moqui.i.e.EntityCache[m Entity Cache initialized, distributed cache invalidate enabled: false
+[32m18:59:05.254  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Entity Facade initialized
+[32m18:59:05.317  INFO         main                    o.moqui.i.s.RestApi[m Loaded REST API from moqui.rest.xml (83 paths, 89 methods)
+[32m18:59:05.317  INFO         main                    o.moqui.i.s.RestApi[m Loaded REST API files, 1 roots, in 35ms
+[32m18:59:05.317  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Service Facade initialized
+[32m18:59:05.329  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Screen Facade initialized
+[32m18:59:05.329  INFO         main           o.moqui.i.e.EntityFacadeImpl[m Loading entity definitions
+[32m18:59:05.356  INFO         main           o.moqui.i.e.EntityFacadeImpl[m Found entities in 13 files in 26ms
+[32m18:59:05.978  INFO         main           o.moqui.i.e.EntityFacadeImpl[m Found 0 view-entity definitions in database (DbViewEntity records)
+[32m18:59:06.292  INFO         main           o.moqui.i.e.EntityFacadeImpl[m Loaded 214 entity definitions in 962ms
+[32m18:59:06.309  INFO         main           o.moqui.i.e.EntityFacadeImpl[m Checking tables for entities in groups [transactional]
+[32m18:59:06.339  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.a2a.A2AArtifact pks: [taskId, artifactId]
+[32m18:59:06.355  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.A2_A_ARTIFACT for entity moqui.a2a.A2AArtifact in group transactional
+[32m18:59:06.362  INFO         main           o.moqui.i.e.EntityFacadeImpl[m Created 199 automatic reverse relationships
+[32m18:59:06.372  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXA2AArtifactA2ATask for entity moqui.a2a.A2AArtifact
+[32m18:59:06.374  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.a2a.A2AArtifactPart pks: [taskId, artifactId, artifactPartSeqId]
+[32m18:59:06.377  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.A2_A_ARTIFACT_PART for entity moqui.a2a.A2AArtifactPart in group transactional
+[32m18:59:06.380  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index A2AARTPART_SEQ for entity moqui.a2a.A2AArtifactPart
+[32m18:59:06.386  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXA2AArtifactPartA2AArtifac for entity moqui.a2a.A2AArtifactPart
+[32m18:59:06.388  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXA2AArtifactPartAAPartTypeEnumeration for entity moqui.a2a.A2AArtifactPart
+[32m18:59:06.392  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.a2a.A2AContext pks: [contextId]
+[32m18:59:06.395  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.A2_A_CONTEXT for entity moqui.a2a.A2AContext in group transactional
+[32m18:59:06.396  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index A2ACTX_USER for entity moqui.a2a.A2AContext
+[32m18:59:06.397  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.a2a.A2AMessage pks: [a2aMessageId]
+[32m18:59:06.400  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.A2_A_MESSAGE for entity moqui.a2a.A2AMessage in group transactional
+[32m18:59:06.402  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index A2AMSG_USER_MSG for entity moqui.a2a.A2AMessage
+[32m18:59:06.404  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index A2AMSG_TASK_SEQ for entity moqui.a2a.A2AMessage
+[32m18:59:06.406  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index A2AMSG_CONTEXT for entity moqui.a2a.A2AMessage
+[32m18:59:06.408  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXA2AMessageA2AContext for entity moqui.a2a.A2AMessage
+[32m18:59:06.409  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXA2AMessageA2ATask for entity moqui.a2a.A2AMessage
+[32m18:59:06.411  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.a2a.A2AMessagePart pks: [a2aMessageId, messagePartSeqId]
+[32m18:59:06.413  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.A2_A_MESSAGE_PART for entity moqui.a2a.A2AMessagePart in group transactional
+[32m18:59:06.414  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index A2AMSGPART_SEQ for entity moqui.a2a.A2AMessagePart
+[32m18:59:06.415  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXA2AMessagePartA2AMessage for entity moqui.a2a.A2AMessagePart
+[32m18:59:06.416  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXA2AMessagePartAAPartTypeEnumeration for entity moqui.a2a.A2AMessagePart
+[32m18:59:06.417  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.a2a.A2APushConfig pks: [configId]
+[32m18:59:06.419  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.A2_A_PUSH_CONFIG for entity moqui.a2a.A2APushConfig in group transactional
+[32m18:59:06.419  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index A2APUSH_TASK for entity moqui.a2a.A2APushConfig
+[32m18:59:06.420  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXA2APushConfigA2ATask for entity moqui.a2a.A2APushConfig
+[32m18:59:06.421  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.a2a.A2ATask pks: [taskId]
+[32m18:59:06.423  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.A2_A_TASK for entity moqui.a2a.A2ATask in group transactional
+[32m18:59:06.424  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index A2ATASK_USER for entity moqui.a2a.A2ATask
+[32m18:59:06.425  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index A2ATASK_CONTEXT for entity moqui.a2a.A2ATask
+[32m18:59:06.426  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXA2ATaskA2AContext for entity moqui.a2a.A2ATask
+[32m18:59:06.428  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.a2a.A2ATaskEvent pks: [taskEventId]
+[32m18:59:06.429  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.A2_A_TASK_EVENT for entity moqui.a2a.A2ATaskEvent in group transactional
+[32m18:59:06.430  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index A2AEVT_TASK_SEQ for entity moqui.a2a.A2ATaskEvent
+[32m18:59:06.432  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXA2ATaskEventA2ATask for entity moqui.a2a.A2ATaskEvent
+[32m18:59:06.433  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXA2ATaskEventA2AContex for entity moqui.a2a.A2ATaskEvent
+[32m18:59:06.434  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXA2ATaskEventAATETypeEnumeration for entity moqui.a2a.A2ATaskEvent
+[32m18:59:06.436  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXA2ATaskEventA2ATaskStatus for entity moqui.a2a.A2ATaskEvent
+[32m18:59:06.437  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXA2ATaskEventA2AMessage for entity moqui.a2a.A2ATaskEvent
+[32m18:59:06.443  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.a2a.A2ATaskStatus pks: [taskStatusId]
+[32m18:59:06.445  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.A2_A_TASK_STATUS for entity moqui.a2a.A2ATaskStatus in group transactional
+[32m18:59:06.447  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index A2ASTAT_TASK_SEQ for entity moqui.a2a.A2ATaskStatus
+[32m18:59:06.448  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index A2ASTAT_TASK_TS for entity moqui.a2a.A2ATaskStatus
+[32m18:59:06.450  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXA2ATaskStatusA2ATask for entity moqui.a2a.A2ATaskStatus
+[32m18:59:06.451  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXA2ATaskStatusA2AContext for entity moqui.a2a.A2ATaskStatus
+[32m18:59:06.452  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXA2ATaskStatusA2AMessage for entity moqui.a2a.A2ATaskStatus
+[32m18:59:06.453  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXA2ATaskStatusStatusEnumeration for entity moqui.a2a.A2ATaskStatus
+[32m18:59:06.457  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.basic.DataSource pks: [dataSourceId]
+[32m18:59:06.458  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.DATA_SOURCE for entity moqui.basic.DataSource in group transactional
+[32m18:59:06.460  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXDataSourceDSTypeEnumeration for entity moqui.basic.DataSource
+[32m18:59:06.460  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.basic.EnumGroupMember pks: [enumGroupEnumId, enumId]
+[32m18:59:06.462  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.ENUM_GROUP_MEMBER for entity moqui.basic.EnumGroupMember in group transactional
+[32m18:59:06.464  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXEnumGroupMemberEGEnumeration for entity moqui.basic.EnumGroupMember
+[32m18:59:06.465  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXEnumGroupMemberEnumeration for entity moqui.basic.EnumGroupMember
+[32m18:59:06.465  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.basic.Enumeration pks: [enumId]
+[32m18:59:06.468  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.ENUMERATION for entity moqui.basic.Enumeration in group transactional
+[32m18:59:06.470  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXEnumerationEnumerationType for entity moqui.basic.Enumeration
+[32m18:59:06.471  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXEnumerationStatusFlow for entity moqui.basic.Enumeration
+[32m18:59:06.472  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.basic.EnumerationType pks: [enumTypeId]
+[32m18:59:06.473  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.ENUMERATION_TYPE for entity moqui.basic.EnumerationType in group transactional
+[32m18:59:06.474  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.basic.Geo pks: [geoId]
+[32m18:59:06.476  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.GEO for entity moqui.basic.Geo in group transactional
+[32m18:59:06.477  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXGeoGTypeEnumeration for entity moqui.basic.Geo
+[32m18:59:06.479  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.basic.GeoAssoc pks: [geoId, toGeoId]
+[32m18:59:06.480  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.GEO_ASSOC for entity moqui.basic.GeoAssoc in group transactional
+[32m18:59:06.482  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXGeoAssocMainGeo for entity moqui.basic.GeoAssoc
+[32m18:59:06.483  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXGeoAssocAssocGeo for entity moqui.basic.GeoAssoc
+[32m18:59:06.485  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXGeoAssocGATypeEnumeration for entity moqui.basic.GeoAssoc
+[32m18:59:06.493  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.basic.GeoPoint pks: [geoPointId]
+[32m18:59:06.495  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.GEO_POINT for entity moqui.basic.GeoPoint in group transactional
+[32m18:59:06.498  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXGeoPointGPTypeEnumeration for entity moqui.basic.GeoPoint
+[32m18:59:06.500  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXGeoPointDataSource for entity moqui.basic.GeoPoint
+[32m18:59:06.502  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXGeoPointElevationUom for entity moqui.basic.GeoPoint
+[32m18:59:06.507  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.basic.LocalizedEntityField pks: [entityName, fieldName, pkValue, locale]
+[32m18:59:06.511  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.LOCALIZED_ENTITY_FIELD for entity moqui.basic.LocalizedEntityField in group transactional
+[32m18:59:06.511  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.basic.LocalizedMessage pks: [original, locale]
+[32m18:59:06.514  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.LOCALIZED_MESSAGE for entity moqui.basic.LocalizedMessage in group transactional
+[32m18:59:06.514  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.basic.StatusFlow pks: [statusFlowId]
+[32m18:59:06.517  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.STATUS_FLOW for entity moqui.basic.StatusFlow in group transactional
+[32m18:59:06.520  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXStatusFlowStatusType for entity moqui.basic.StatusFlow
+[32m18:59:06.520  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.basic.StatusFlowItem pks: [statusFlowId, statusId]
+[32m18:59:06.523  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.STATUS_FLOW_ITEM for entity moqui.basic.StatusFlowItem in group transactional
+[32m18:59:06.526  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXStatusFlowItemStatusFlow for entity moqui.basic.StatusFlowItem
+[32m18:59:06.529  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXStatusFlowItemStatusI for entity moqui.basic.StatusFlowItem
+[32m18:59:06.533  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.basic.StatusFlowTransition pks: [statusFlowId, statusId, toStatusId]
+[32m18:59:06.536  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.STATUS_FLOW_TRANSITION for entity moqui.basic.StatusFlowTransition in group transactional
+[32m18:59:06.538  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXStatusFlowTransitionStatusFlow for entity moqui.basic.StatusFlowTransition
+[32m18:59:06.541  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXStatusFlowTransitionStatusItem for entity moqui.basic.StatusFlowTransition
+[32m18:59:06.544  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXStatusFlowTransitionToStatusItem for entity moqui.basic.StatusFlowTransition
+[32m18:59:06.547  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.basic.StatusItem pks: [statusId]
+[32m18:59:06.550  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.STATUS_ITEM for entity moqui.basic.StatusItem in group transactional
+[32m18:59:06.552  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXStatusItemStatusType for entity moqui.basic.StatusItem
+[32m18:59:06.553  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.basic.StatusType pks: [statusTypeId]
+[32m18:59:06.555  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.STATUS_TYPE for entity moqui.basic.StatusType in group transactional
+[32m18:59:06.557  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXStatusTypeParentST for entity moqui.basic.StatusType
+[32m18:59:06.560  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.basic.Uom pks: [uomId]
+[32m18:59:06.562  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.UOM for entity moqui.basic.Uom in group transactional
+[32m18:59:06.564  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXUomUTypeEnumeration for entity moqui.basic.Uom
+[32m18:59:06.566  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.basic.UomConversion pks: [uomConversionId]
+[32m18:59:06.567  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.UOM_CONVERSION for entity moqui.basic.UomConversion in group transactional
+[32m18:59:06.569  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXUomConversionUom for entity moqui.basic.UomConversion
+[32m18:59:06.571  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXUomConversionToUom for entity moqui.basic.UomConversion
+[32m18:59:06.573  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXUomConversionUCPurposeEnumerat for entity moqui.basic.UomConversion
+[32m18:59:06.578  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.basic.UomDimTypeGroupMember pks: [uomDimTypeGroupEnumId, uomDimensionTypeId]
+[32m18:59:06.580  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.UOM_DIM_TYPE_GROUP_MEMBER for entity moqui.basic.UomDimTypeGroupMember in group transactional
+[32m18:59:06.582  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXUomDimTypeGroupMemberUDTGEnumeration for entity moqui.basic.UomDimTypeGroupMember
+[32m18:59:06.583  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXUomDimTypeGroupMemberUomDimensionType for entity moqui.basic.UomDimTypeGroupMember
+[32m18:59:06.585  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.basic.UomDimensionType pks: [uomDimensionTypeId]
+[32m18:59:06.586  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.UOM_DIMENSION_TYPE for entity moqui.basic.UomDimensionType in group transactional
+[32m18:59:06.588  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXUomDimensionTypeUTypeEnumeration for entity moqui.basic.UomDimensionType
+[32m18:59:06.589  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXUomDimensionTypeDefaultUom for entity moqui.basic.UomDimensionType
+[32m18:59:06.592  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.basic.UomGroupMember pks: [uomGroupEnumId, uomId]
+[32m18:59:06.594  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.UOM_GROUP_MEMBER for entity moqui.basic.UomGroupMember in group transactional
+[32m18:59:06.596  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXUomGroupMemberUGEnumeration for entity moqui.basic.UomGroupMember
+[32m18:59:06.597  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXUomGroupMemberUom for entity moqui.basic.UomGroupMember
+[32m18:59:06.601  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.basic.email.EmailMessage pks: [emailMessageId]
+[32m18:59:06.604  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.EMAIL_MESSAGE for entity moqui.basic.email.EmailMessage in group transactional
+[32m18:59:06.606  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index EMAIL_MSG_ID for entity moqui.basic.email.EmailMessage
+[32m18:59:06.608  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXEmailMessageEMStatusItem for entity moqui.basic.email.EmailMessage
+[32m18:59:06.609  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXEmailMessageETypeEnumeration for entity moqui.basic.email.EmailMessage
+[32m18:59:06.610  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXEmailMessageRootEM for entity moqui.basic.email.EmailMessage
+[32m18:59:06.612  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXEmailMessageParentEM for entity moqui.basic.email.EmailMessage
+[32m18:59:06.615  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXEmailMessageFromUserAccount for entity moqui.basic.email.EmailMessage
+[32m18:59:06.617  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXEmailMessageToUserAccount for entity moqui.basic.email.EmailMessage
+[32m18:59:06.618  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXEmailMessageEmailTemplate for entity moqui.basic.email.EmailMessage
+[32m18:59:06.619  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXEmailMessageEmailServer for entity moqui.basic.email.EmailMessage
+[32m18:59:06.629  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.basic.email.EmailServer pks: [emailServerId]
+[32m18:59:06.631  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.EMAIL_SERVER for entity moqui.basic.email.EmailServer in group transactional
+[32m18:59:06.631  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.basic.email.EmailTemplate pks: [emailTemplateId]
+[32m18:59:06.633  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.EMAIL_TEMPLATE for entity moqui.basic.email.EmailTemplate in group transactional
+[32m18:59:06.635  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXEmailTemplateEmailServer for entity moqui.basic.email.EmailTemplate
+[32m18:59:06.636  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXEmailTemplateETypeEnumeration for entity moqui.basic.email.EmailTemplate
+[32m18:59:06.640  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.basic.email.EmailTemplateAttachment pks: [emailTemplateId, fileName]
+[32m18:59:06.642  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.EMAIL_TEMPLATE_ATTACHMENT for entity moqui.basic.email.EmailTemplateAttachment in group transactional
+[32m18:59:06.644  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXEmailTemplateAttachmentEmailTemplate for entity moqui.basic.email.EmailTemplateAttachment
+[32m18:59:06.647  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.basic.print.NetworkPrinter pks: [networkPrinterId]
+[32m18:59:06.649  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.NETWORK_PRINTER for entity moqui.basic.print.NetworkPrinter in group transactional
+[32m18:59:06.650  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.basic.print.PrintJob pks: [printJobId]
+[32m18:59:06.653  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.PRINT_JOB for entity moqui.basic.print.PrintJob in group transactional
+[32m18:59:06.655  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXPrintJobNetworkPrinter for entity moqui.basic.print.PrintJob
+[32m18:59:06.656  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXPrintJobPJStatusItem for entity moqui.basic.print.PrintJob
+[32m18:59:06.659  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.entity.EntityAuditLog pks: [auditHistorySeqId]
+[32m18:59:06.661  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.ENTITY_AUDIT_LOG for entity moqui.entity.EntityAuditLog in group transactional
+[32m18:59:06.663  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index ENTAUDLOG_FLD1PK for entity moqui.entity.EntityAuditLog
+[32m18:59:06.665  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index ENTAUDLOG_ENTPKPR for entity moqui.entity.EntityAuditLog
+[32m18:59:06.667  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index ENTAUDLOG_PKPRIM for entity moqui.entity.EntityAuditLog
+[32m18:59:06.667  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.entity.SequenceValueItem pks: [seqName]
+[32m18:59:06.670  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.SEQUENCE_VALUE_ITEM for entity moqui.entity.SequenceValueItem in group transactional
+[32m18:59:06.670  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.entity.document.DataDocument pks: [dataDocumentId]
+[32m18:59:06.672  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.DATA_DOCUMENT for entity moqui.entity.document.DataDocument in group transactional
+[32m18:59:06.673  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.entity.document.DataDocumentCondition pks: [dataDocumentId, conditionSeqId]
+[32m18:59:06.675  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.DATA_DOCUMENT_CONDITION for entity moqui.entity.document.DataDocumentCondition in group transactional
+[32m18:59:06.677  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXDataDocumentConditionDataDocument for entity moqui.entity.document.DataDocumentCondition
+[32m18:59:06.679  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.entity.document.DataDocumentField pks: [dataDocumentId, fieldSeqId]
+[32m18:59:06.682  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.DATA_DOCUMENT_FIELD for entity moqui.entity.document.DataDocumentField in group transactional
+[32m18:59:06.685  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXDataDocumentFieldDataDocument for entity moqui.entity.document.DataDocumentField
+[32m18:59:06.686  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.entity.document.DataDocumentLink pks: [dataDocumentId, linkSeqId]
+[32m18:59:06.689  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.DATA_DOCUMENT_LINK for entity moqui.entity.document.DataDocumentLink in group transactional
+[32m18:59:06.692  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXDataDocumentLinkDataDocument for entity moqui.entity.document.DataDocumentLink
+[32m18:59:06.694  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.entity.document.DataDocumentRelAlias pks: [dataDocumentId, relationshipName]
+[32m18:59:06.696  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.DATA_DOCUMENT_REL_ALIAS for entity moqui.entity.document.DataDocumentRelAlias in group transactional
+[32m18:59:06.697  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXDataDocumentRelAliasDataDocument for entity moqui.entity.document.DataDocumentRelAlias
+[32m18:59:06.699  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.entity.document.DataDocumentUserGroup pks: [dataDocumentId, userGroupId]
+[32m18:59:06.701  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.DATA_DOCUMENT_USER_GROUP for entity moqui.entity.document.DataDocumentUserGroup in group transactional
+[32m18:59:06.704  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXDataDocumentUserGroupDataDocument for entity moqui.entity.document.DataDocumentUserGroup
+[32m18:59:06.706  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXDataDocumentUserGroupUG for entity moqui.entity.document.DataDocumentUserGroup
+[32m18:59:06.708  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.entity.feed.DataFeed pks: [dataFeedId]
+[32m18:59:06.710  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.DATA_FEED for entity moqui.entity.feed.DataFeed in group transactional
+[32m18:59:06.712  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXDataFeedDFTypeEnumeration for entity moqui.entity.feed.DataFeed
+[32m18:59:06.714  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.entity.feed.DataFeedDocument pks: [dataFeedId, dataDocumentId]
+[32m18:59:06.716  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.DATA_FEED_DOCUMENT for entity moqui.entity.feed.DataFeedDocument in group transactional
+[32m18:59:06.717  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXDataFeedDocumentDataFeed for entity moqui.entity.feed.DataFeedDocument
+[32m18:59:06.719  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXDataFeedDocumentDataD for entity moqui.entity.feed.DataFeedDocument
+[32m18:59:06.724  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.entity.sync.EntitySync pks: [entitySyncId]
+[32m18:59:06.727  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.ENTITY_SYNC for entity moqui.entity.sync.EntitySync in group transactional
+[32m18:59:06.728  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXEntitySyncESStatusItem for entity moqui.entity.sync.EntitySync
+[32m18:59:06.730  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.entity.sync.EntitySyncArtifact pks: [entitySyncId, artifactGroupId]
+[32m18:59:06.732  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.ENTITY_SYNC_ARTIFACT for entity moqui.entity.sync.EntitySyncArtifact in group transactional
+[32m18:59:06.734  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXEntitySyncArtifactEntitySync for entity moqui.entity.sync.EntitySyncArtifact
+[32m18:59:06.735  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXEntitySyncArtifactArtifactGroup for entity moqui.entity.sync.EntitySyncArtifact
+[32m18:59:06.737  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXEntitySyncArtifactESAApplEnumeration for entity moqui.entity.sync.EntitySyncArtifact
+[32m18:59:06.741  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.entity.sync.EntitySyncHistory pks: [entitySyncId, startDate]
+[32m18:59:06.744  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.ENTITY_SYNC_HISTORY for entity moqui.entity.sync.EntitySyncHistory in group transactional
+[32m18:59:06.747  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXEntitySyncHistoryEntitySync for entity moqui.entity.sync.EntitySyncHistory
+[32m18:59:06.749  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXEntitySyncHistoryESStatusItem for entity moqui.entity.sync.EntitySyncHistory
+[32m18:59:06.754  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.entity.sync.EntitySyncRemove pks: [entitySyncRemoveId, entityName]
+[32m18:59:06.757  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.ENTITY_SYNC_REMOVE for entity moqui.entity.sync.EntitySyncRemove in group transactional
+[32m18:59:06.757  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.entity.view.DbViewEntity pks: [dbViewEntityName]
+[32m18:59:06.760  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.DB_VIEW_ENTITY for entity moqui.entity.view.DbViewEntity in group transactional
+[32m18:59:06.761  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.entity.view.DbViewEntityAlias pks: [dbViewEntityName, fieldAlias]
+[32m18:59:06.764  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.DB_VIEW_ENTITY_ALIAS for entity moqui.entity.view.DbViewEntityAlias in group transactional
+[32m18:59:06.767  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXDbViewEntityAliasDbViewEntity for entity moqui.entity.view.DbViewEntityAlias
+[32m18:59:06.770  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXDbViewEntityAliasDbViewEntityMember for entity moqui.entity.view.DbViewEntityAlias
+[32m18:59:06.773  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.entity.view.DbViewEntityKeyMap pks: [dbViewEntityName, joinFromAlias, entityAlias, fieldName]
+[32m18:59:06.777  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.DB_VIEW_ENTITY_KEY_MAP for entity moqui.entity.view.DbViewEntityKeyMap in group transactional
+[32m18:59:06.780  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXDbViewEntityKeyMapDbViewEntity for entity moqui.entity.view.DbViewEntityKeyMap
+[32m18:59:06.783  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXDbViewEntityKeyMapDbViewEntityMember for entity moqui.entity.view.DbViewEntityKeyMap
+[32m18:59:06.787  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.entity.view.DbViewEntityMember pks: [dbViewEntityName, entityAlias]
+[32m18:59:06.791  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.DB_VIEW_ENTITY_MEMBER for entity moqui.entity.view.DbViewEntityMember in group transactional
+[32m18:59:06.795  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXDbViewEntityMemberDbViewEntity for entity moqui.entity.view.DbViewEntityMember
+[32m18:59:06.798  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXDbViewEntityMemberJoinFromDVEM for entity moqui.entity.view.DbViewEntityMember
+[32m18:59:06.804  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.llm.LlmCallLog pks: [callId]
+[32m18:59:06.809  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.LLM_CALL_LOG for entity moqui.llm.LlmCallLog in group transactional
+[32m18:59:06.811  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index LLMCALL_CONV for entity moqui.llm.LlmCallLog
+[32m18:59:06.814  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index LLMCALL_USER_DATE for entity moqui.llm.LlmCallLog
+[32m18:59:06.816  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index LLMCALL_PROF_DATE for entity moqui.llm.LlmCallLog
+[32m18:59:06.818  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index LLMCALL_START for entity moqui.llm.LlmCallLog
+[32m18:59:06.818  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.llm.LlmConversation pks: [conversationId]
+[32m18:59:06.821  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.LLM_CONVERSATION for entity moqui.llm.LlmConversation in group transactional
+[32m18:59:06.823  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index LLMCONV_CONTEXT for entity moqui.llm.LlmConversation
+[32m18:59:06.825  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index LLMCONV_USER for entity moqui.llm.LlmConversation
+[32m18:59:06.827  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index LLMCONV_USER_DATE for entity moqui.llm.LlmConversation
+[32m18:59:06.828  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index LLMCONV_STATUS for entity moqui.llm.LlmConversation
+[32m18:59:06.830  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXLlmConversationStatusEnumer for entity moqui.llm.LlmConversation
+[32m18:59:06.844  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.llm.LlmLesson pks: [lessonId]
+[32m18:59:06.848  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.LLM_LESSON for entity moqui.llm.LlmLesson in group transactional
+[32m18:59:06.851  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXLlmLessonProvenanceEnumeration for entity moqui.llm.LlmLesson
+[32m18:59:06.854  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXLlmLessonStatusEnumeration for entity moqui.llm.LlmLesson
+[32m18:59:06.859  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.llm.LlmMessage pks: [messageId]
+[32m18:59:06.862  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.LLM_MESSAGE for entity moqui.llm.LlmMessage in group transactional
+[32m18:59:06.864  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index LLMMSG_CONV_ORD for entity moqui.llm.LlmMessage
+[32m18:59:06.866  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index LLMMSG_SENT for entity moqui.llm.LlmMessage
+[32m18:59:06.868  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXLlmMessageLlmConversation for entity moqui.llm.LlmMessage
+[32m18:59:06.871  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.llm.LlmSkill pks: [skillId]
+[32m18:59:06.874  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.LLM_SKILL for entity moqui.llm.LlmSkill in group transactional
+[32m18:59:06.877  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index LLMSKILL_NAME for entity moqui.llm.LlmSkill
+[32m18:59:06.880  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index LLMSKILL_STATUS for entity moqui.llm.LlmSkill
+[32m18:59:06.882  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXLlmSkillRiskEnumeration for entity moqui.llm.LlmSkill
+[32m18:59:06.886  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXLlmSkillStatusEnumeration for entity moqui.llm.LlmSkill
+[32m18:59:06.889  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXLlmSkillProvenanceEnumeration for entity moqui.llm.LlmSkill
+[32m18:59:06.891  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXLlmSkillSupersededLS for entity moqui.llm.LlmSkill
+[32m18:59:06.920  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.llm.LlmSkillUse pks: [skillUseId]
+[32m18:59:06.923  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.LLM_SKILL_USE for entity moqui.llm.LlmSkillUse in group transactional
+[32m18:59:06.925  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index LLMSKILLUSE_SKILL for entity moqui.llm.LlmSkillUse
+[32m18:59:06.927  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index LLMSKILLUSE_USED for entity moqui.llm.LlmSkillUse
+[32m18:59:06.930  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXLlmSkillUseLlmSkill for entity moqui.llm.LlmSkillUse
+[32m18:59:06.933  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.olap.CurrencyDimension pks: [dimensionId]
+[32m18:59:06.936  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.CURRENCY_DIMENSION for entity moqui.olap.CurrencyDimension in group transactional
+[32m18:59:06.936  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.olap.DateDayDimension pks: [dimensionId]
+[32m18:59:06.939  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.DATE_DAY_DIMENSION for entity moqui.olap.DateDayDimension in group transactional
+[32m18:59:06.939  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.resource.DbResource pks: [resourceId]
+[32m18:59:06.943  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.DB_RESOURCE for entity moqui.resource.DbResource in group transactional
+[32m18:59:06.946  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index DB_RES_PARENT for entity moqui.resource.DbResource
+[32m18:59:06.949  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index DB_RES_PAR_FN for entity moqui.resource.DbResource
+[32m18:59:06.949  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.resource.DbResourceFile pks: [resourceId]
+[32m18:59:06.953  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.DB_RESOURCE_FILE for entity moqui.resource.DbResourceFile in group transactional
+[32m18:59:06.955  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXDbResourceFileDbResourc for entity moqui.resource.DbResourceFile
+[32m18:59:06.958  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.resource.DbResourceFileHistory pks: [resourceId, versionName]
+[32m18:59:06.961  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.DB_RESOURCE_FILE_HISTORY for entity moqui.resource.DbResourceFileHistory in group transactional
+[32m18:59:06.965  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXDbResourceFileHistoryDbResourceFile for entity moqui.resource.DbResourceFileHistory
+[32m18:59:06.968  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.resource.wiki.WikiBlog pks: [wikiBlogId]
+[32m18:59:06.972  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.WIKI_BLOG for entity moqui.resource.wiki.WikiBlog in group transactional
+[32m18:59:06.975  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXWikiBlogWikiPage for entity moqui.resource.wiki.WikiBlog
+[32m18:59:06.976  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.resource.wiki.WikiBlogCategory pks: [wikiPageCategoryId, wikiBlogId]
+[32m18:59:06.979  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.WIKI_BLOG_CATEGORY for entity moqui.resource.wiki.WikiBlogCategory in group transactional
+[32m18:59:06.982  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXWikiBlogCategoryWikiPageC for entity moqui.resource.wiki.WikiBlogCategory
+[32m18:59:06.985  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXWikiBlogCategoryWikiBlog for entity moqui.resource.wiki.WikiBlogCategory
+[32m18:59:06.988  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.resource.wiki.WikiPage pks: [wikiPageId]
+[32m18:59:06.991  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.WIKI_PAGE for entity moqui.resource.wiki.WikiPage in group transactional
+[32m18:59:06.994  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index WIKIPAGE_SPCPTH for entity moqui.resource.wiki.WikiPage
+[32m18:59:06.997  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXWikiPageWikiSpace for entity moqui.resource.wiki.WikiPage
+[32m18:59:06.997  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.resource.wiki.WikiPageAlias pks: [wikiSpaceId, aliasPath]
+[32m18:59:07.000  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.WIKI_PAGE_ALIAS for entity moqui.resource.wiki.WikiPageAlias in group transactional
+[32m18:59:07.004  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXWikiPageAliasWikiSpace for entity moqui.resource.wiki.WikiPageAlias
+[32m18:59:07.006  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXWikiPageAliasWikiPage for entity moqui.resource.wiki.WikiPageAlias
+[32m18:59:07.009  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.resource.wiki.WikiPageCategory pks: [wikiPageCategoryId]
+[32m18:59:07.012  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.WIKI_PAGE_CATEGORY for entity moqui.resource.wiki.WikiPageCategory in group transactional
+[32m18:59:07.012  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.resource.wiki.WikiPageCategoryMember pks: [wikiPageCategoryId, wikiPageId]
+[32m18:59:07.016  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.WIKI_PAGE_CATEGORY_MEMBER for entity moqui.resource.wiki.WikiPageCategoryMember in group transactional
+[32m18:59:07.019  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXWikiPageCategoryMemberWikiPageCategory for entity moqui.resource.wiki.WikiPageCategoryMember
+[32m18:59:07.023  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXWikiPageCategoryMemberWikiPage for entity moqui.resource.wiki.WikiPageCategoryMember
+[32m18:59:07.029  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.resource.wiki.WikiPageHistory pks: [wikiPageId, historySeqId]
+[32m18:59:07.033  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.WIKI_PAGE_HISTORY for entity moqui.resource.wiki.WikiPageHistory in group transactional
+[32m18:59:07.036  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXWikiPageHistoryWikiPage for entity moqui.resource.wiki.WikiPageHistory
+[32m18:59:07.038  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.resource.wiki.WikiPageUser pks: [wikiPageId, userId]
+[32m18:59:07.041  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.WIKI_PAGE_USER for entity moqui.resource.wiki.WikiPageUser in group transactional
+[32m18:59:07.044  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXWikiPageUserWikiPage for entity moqui.resource.wiki.WikiPageUser
+[32m18:59:07.048  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.resource.wiki.WikiSpace pks: [wikiSpaceId]
+[32m18:59:07.052  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.WIKI_SPACE for entity moqui.resource.wiki.WikiSpace in group transactional
+[32m18:59:07.057  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXWikiSpaceScreenTheme for entity moqui.resource.wiki.WikiSpace
+[32m18:59:07.057  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.resource.wiki.WikiSpaceUser pks: [wikiSpaceId, userId]
+[32m18:59:07.061  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.WIKI_SPACE_USER for entity moqui.resource.wiki.WikiSpaceUser in group transactional
+[32m18:59:07.064  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXWikiSpaceUserWikiSpace for entity moqui.resource.wiki.WikiSpaceUser
+[32m18:59:07.067  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.screen.ScreenDocument pks: [screenLocation, docIndex]
+[32m18:59:07.071  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.SCREEN_DOCUMENT for entity moqui.screen.ScreenDocument in group transactional
+[32m18:59:07.071  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.screen.ScreenPathAlias pks: [aliasPath, fromDate]
+[32m18:59:07.074  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.SCREEN_PATH_ALIAS for entity moqui.screen.ScreenPathAlias in group transactional
+[32m18:59:07.074  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.screen.ScreenScheduled pks: [screenScheduledId]
+[32m18:59:07.078  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.SCREEN_SCHEDULED for entity moqui.screen.ScreenScheduled in group transactional
+[32m18:59:07.082  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXScreenScheduledFormListFin for entity moqui.screen.ScreenScheduled
+[32m18:59:07.085  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXScreenScheduledEmailTemplate for entity moqui.screen.ScreenScheduled
+[32m18:59:07.088  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXScreenScheduledUserAccount for entity moqui.screen.ScreenScheduled
+[32m18:59:07.092  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXScreenScheduledUserGroup for entity moqui.screen.ScreenScheduled
+[32m18:59:07.098  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.screen.ScreenScheduledLock pks: [screenScheduledId]
+[32m18:59:07.103  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.SCREEN_SCHEDULED_LOCK for entity moqui.screen.ScreenScheduledLock in group transactional
+[32m18:59:07.107  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXScreenScheduledLockScreenScheduled for entity moqui.screen.ScreenScheduledLock
+[32m18:59:07.112  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.screen.ScreenTheme pks: [screenThemeId]
+[32m18:59:07.116  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.SCREEN_THEME for entity moqui.screen.ScreenTheme in group transactional
+[32m18:59:07.121  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXScreenThemeSTTypeEnumeration for entity moqui.screen.ScreenTheme
+[32m18:59:07.125  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.screen.ScreenThemeIcon pks: [screenThemeId, textPattern]
+[32m18:59:07.130  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.SCREEN_THEME_ICON for entity moqui.screen.ScreenThemeIcon in group transactional
+[32m18:59:07.134  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXScreenThemeIconScreenTheme for entity moqui.screen.ScreenThemeIcon
+[32m18:59:07.138  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.screen.ScreenThemeResource pks: [screenThemeId, sequenceNum]
+[32m18:59:07.142  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.SCREEN_THEME_RESOURCE for entity moqui.screen.ScreenThemeResource in group transactional
+[32m18:59:07.146  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXScreenThemeResourceScreenThem for entity moqui.screen.ScreenThemeResource
+[32m18:59:07.149  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXScreenThemeResourceSTRTypeEnumeration for entity moqui.screen.ScreenThemeResource
+[32m18:59:07.158  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.screen.SubscreensDefault pks: [screenLocation, defaultSeqId]
+[32m18:59:07.163  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.SUBSCREENS_DEFAULT for entity moqui.screen.SubscreensDefault in group transactional
+[32m18:59:07.163  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.screen.SubscreensItem pks: [screenLocation, subscreenName, userGroupId]
+[32m18:59:07.169  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.SUBSCREENS_ITEM for entity moqui.screen.SubscreensItem in group transactional
+[32m18:59:07.173  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXSubscreensItemUserGroup for entity moqui.screen.SubscreensItem
+[32m18:59:07.173  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.screen.form.DbForm pks: [formId]
+[32m18:59:07.177  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.DB_FORM for entity moqui.screen.form.DbForm in group transactional
+[32m18:59:07.182  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXDbFormDFPurposeEnumeration for entity moqui.screen.form.DbForm
+[32m18:59:07.186  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.screen.form.DbFormField pks: [formId, fieldName]
+[32m18:59:07.191  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.DB_FORM_FIELD for entity moqui.screen.form.DbFormField in group transactional
+[32m18:59:07.195  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXDbFormFieldDbForm for entity moqui.screen.form.DbFormField
+[32m18:59:07.199  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXDbFormFieldDFFTypeEnumeration for entity moqui.screen.form.DbFormField
+[32m18:59:07.210  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.screen.form.DbFormFieldAttribute pks: [formId, fieldName, attributeName]
+[32m18:59:07.215  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.DB_FORM_FIELD_ATTRIBUTE for entity moqui.screen.form.DbFormFieldAttribute in group transactional
+[32m18:59:07.219  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXDbFormFieldAttributeDbFormField for entity moqui.screen.form.DbFormFieldAttribute
+[32m18:59:07.223  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.screen.form.DbFormFieldEntOpts pks: [formId, fieldName, sequenceNum]
+[32m18:59:07.228  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.DB_FORM_FIELD_ENT_OPTS for entity moqui.screen.form.DbFormFieldEntOpts in group transactional
+[32m18:59:07.232  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXDbFormFieldEntOptsDbFormField for entity moqui.screen.form.DbFormFieldEntOpts
+[32m18:59:07.237  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.screen.form.DbFormFieldEntOptsCond pks: [formId, fieldName, sequenceNum, entityFieldName]
+[32m18:59:07.242  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.DB_FORM_FIELD_ENT_OPTS_COND for entity moqui.screen.form.DbFormFieldEntOptsCond in group transactional
+[32m18:59:07.246  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXDbFormFieldEntOptsCondDbFormFieldEntOpts for entity moqui.screen.form.DbFormFieldEntOptsCond
+[32m18:59:07.252  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.screen.form.DbFormFieldEntOptsOrder pks: [formId, fieldName, sequenceNum, orderSequenceNum]
+[32m18:59:07.257  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.DB_FORM_FIELD_ENT_OPTS_ORDER for entity moqui.screen.form.DbFormFieldEntOptsOrder in group transactional
+[32m18:59:07.261  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXDbFormFieldEntOptsOrderDbFormFieldEntOpts for entity moqui.screen.form.DbFormFieldEntOptsOrder
+[32m18:59:07.265  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.screen.form.DbFormFieldOption pks: [formId, fieldName, sequenceNum]
+[32m18:59:07.269  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.DB_FORM_FIELD_OPTION for entity moqui.screen.form.DbFormFieldOption in group transactional
+[32m18:59:07.273  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXDbFormFieldOptionDbFormField for entity moqui.screen.form.DbFormFieldOption
+[32m18:59:07.277  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.screen.form.DbFormUserGroup pks: [formId, userGroupId]
+[32m18:59:07.282  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.DB_FORM_USER_GROUP for entity moqui.screen.form.DbFormUserGroup in group transactional
+[32m18:59:07.287  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXDbFormUserGroupDbForm for entity moqui.screen.form.DbFormUserGroup
+[32m18:59:07.291  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXDbFormUserGroupUG for entity moqui.screen.form.DbFormUserGroup
+[32m18:59:07.296  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.screen.form.FormConfig pks: [formConfigId]
+[32m18:59:07.300  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.FORM_CONFIG for entity moqui.screen.form.FormConfig in group transactional
+[32m18:59:07.305  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXFormConfigFCTypeEnumeration for entity moqui.screen.form.FormConfig
+[32m18:59:07.309  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.screen.form.FormConfigField pks: [formConfigId, fieldName]
+[32m18:59:07.314  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.FORM_CONFIG_FIELD for entity moqui.screen.form.FormConfigField in group transactional
+[32m18:59:07.320  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXFormConfigFieldFormConfig for entity moqui.screen.form.FormConfigField
+[32m18:59:07.325  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.screen.form.FormConfigUser pks: [formLocation, userId]
+[32m18:59:07.331  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.FORM_CONFIG_USER for entity moqui.screen.form.FormConfigUser in group transactional
+[32m18:59:07.337  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXFormConfigUserFormConfig for entity moqui.screen.form.FormConfigUser
+[32m18:59:07.343  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.screen.form.FormConfigUserGroup pks: [formConfigId, userGroupId]
+[32m18:59:07.348  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.FORM_CONFIG_USER_GROUP for entity moqui.screen.form.FormConfigUserGroup in group transactional
+[32m18:59:07.353  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXFormConfigUserGroupFormConfig for entity moqui.screen.form.FormConfigUserGroup
+[32m18:59:07.357  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXFormConfigUserGroupUG for entity moqui.screen.form.FormConfigUserGroup
+[32m18:59:07.363  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.screen.form.FormConfigUserType pks: [formLocation, userId, configTypeEnumId]
+[32m18:59:07.370  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.FORM_CONFIG_USER_TYPE for entity moqui.screen.form.FormConfigUserType in group transactional
+[32m18:59:07.378  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXFormConfigUserTypeFCTypeEnumeration for entity moqui.screen.form.FormConfigUserType
+[32m18:59:07.385  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXFormConfigUserTypeFormConfig for entity moqui.screen.form.FormConfigUserType
+[32m18:59:07.397  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.screen.form.FormListFind pks: [formListFindId]
+[32m18:59:07.404  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.FORM_LIST_FIND for entity moqui.screen.form.FormListFind in group transactional
+[32m18:59:07.409  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXFormListFindFormConfig for entity moqui.screen.form.FormListFind
+[32m18:59:07.416  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.screen.form.FormListFindField pks: [formListFindId, fieldName]
+[32m18:59:07.424  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.FORM_LIST_FIND_FIELD for entity moqui.screen.form.FormListFindField in group transactional
+[32m18:59:07.430  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXFormListFindFieldFormListFin for entity moqui.screen.form.FormListFindField
+[32m18:59:07.438  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.screen.form.FormListFindUser pks: [formListFindId, userId]
+[32m18:59:07.445  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.FORM_LIST_FIND_USER for entity moqui.screen.form.FormListFindUser in group transactional
+[32m18:59:07.451  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXFormListFindUserFormListFind for entity moqui.screen.form.FormListFindUser
+[32m18:59:07.457  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.screen.form.FormListFindUserDefault pks: [screenLocation, userId]
+[32m18:59:07.463  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.FORM_LIST_FIND_USER_DEFAULT for entity moqui.screen.form.FormListFindUserDefault in group transactional
+[32m18:59:07.469  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXFormListFindUserDefaultFormListFind for entity moqui.screen.form.FormListFindUserDefault
+[32m18:59:07.477  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.screen.form.FormListFindUserGroup pks: [formListFindId, userGroupId]
+[32m18:59:07.485  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.FORM_LIST_FIND_USER_GROUP for entity moqui.screen.form.FormListFindUserGroup in group transactional
+[32m18:59:07.489  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXFormListFindUserGroupFormListFind for entity moqui.screen.form.FormListFindUserGroup
+[32m18:59:07.493  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXFormListFindUserGroupUG for entity moqui.screen.form.FormListFindUserGroup
+[32m18:59:07.499  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.screen.form.FormResponse pks: [formResponseId]
+[32m18:59:07.504  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.FORM_RESPONSE for entity moqui.screen.form.FormResponse in group transactional
+[32m18:59:07.510  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXFormResponseDbForm for entity moqui.screen.form.FormResponse
+[32m18:59:07.517  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXFormResponseUserAccount for entity moqui.screen.form.FormResponse
+[32m18:59:07.522  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.screen.form.FormResponseAnswer pks: [formResponseAnswerId]
+[32m18:59:07.528  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.FORM_RESPONSE_ANSWER for entity moqui.screen.form.FormResponseAnswer in group transactional
+[32m18:59:07.534  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXFormResponseAnswerFormResponse for entity moqui.screen.form.FormResponseAnswer
+[32m18:59:07.539  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXFormResponseAnswerDbForm for entity moqui.screen.form.FormResponseAnswer
+[32m18:59:07.549  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.security.ArtifactAuthz pks: [artifactAuthzId]
+[32m18:59:07.554  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.ARTIFACT_AUTHZ for entity moqui.security.ArtifactAuthz in group transactional
+[32m18:59:07.560  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXArtifactAuthzUserGroup for entity moqui.security.ArtifactAuthz
+[32m18:59:07.566  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXArtifactAuthzArtifactGroup for entity moqui.security.ArtifactAuthz
+[32m18:59:07.572  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXArtifactAuthzAuthzTypeEnumeration for entity moqui.security.ArtifactAuthz
+[32m18:59:07.577  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXArtifactAuthzAuthzActionEnumeration for entity moqui.security.ArtifactAuthz
+[32m18:59:07.587  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.security.ArtifactAuthzFailure pks: [failureId]
+[32m18:59:07.593  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.ARTIFACT_AUTHZ_FAILURE for entity moqui.security.ArtifactAuthzFailure in group transactional
+[32m18:59:07.598  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXArtifactAuthzFailureATypeEnumeration for entity moqui.security.ArtifactAuthzFailure
+[32m18:59:07.603  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXArtifactAuthzFailureAuthzActionEnumeration for entity moqui.security.ArtifactAuthzFailure
+[32m18:59:07.614  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.security.ArtifactAuthzFilter pks: [artifactAuthzId, entityFilterSetId]
+[32m18:59:07.619  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.ARTIFACT_AUTHZ_FILTER for entity moqui.security.ArtifactAuthzFilter in group transactional
+[32m18:59:07.624  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXArtifactAuthzFilterArtifactAuthz for entity moqui.security.ArtifactAuthzFilter
+[32m18:59:07.630  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXArtifactAuthzFilterEntityFilterSet for entity moqui.security.ArtifactAuthzFilter
+[32m18:59:07.635  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.security.ArtifactGroup pks: [artifactGroupId]
+[32m18:59:07.645  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.ARTIFACT_GROUP for entity moqui.security.ArtifactGroup in group transactional
+[32m18:59:07.645  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.security.ArtifactGroupMember pks: [artifactGroupId, artifactName, artifactTypeEnumId]
+[32m18:59:07.654  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.ARTIFACT_GROUP_MEMBER for entity moqui.security.ArtifactGroupMember in group transactional
+[32m18:59:07.662  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXArtifactGroupMemberArtifactGroup for entity moqui.security.ArtifactGroupMember
+[32m18:59:07.670  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXArtifactGroupMemberATypeEnumeration for entity moqui.security.ArtifactGroupMember
+[32m18:59:07.689  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.security.ArtifactTarpit pks: [userGroupId, artifactGroupId]
+[32m18:59:07.697  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.ARTIFACT_TARPIT for entity moqui.security.ArtifactTarpit in group transactional
+[32m18:59:07.703  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXArtifactTarpitUserGroup for entity moqui.security.ArtifactTarpit
+[32m18:59:07.708  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXArtifactTarpitArtifactGroup for entity moqui.security.ArtifactTarpit
+[32m18:59:07.713  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.security.ArtifactTarpitLock pks: [artifactTarpitLockId]
+[32m18:59:07.719  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.ARTIFACT_TARPIT_LOCK for entity moqui.security.ArtifactTarpitLock in group transactional
+[32m18:59:07.724  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXArtifactTarpitLockATypeEnumeration for entity moqui.security.ArtifactTarpitLock
+[32m18:59:07.730  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.security.EntityFilter pks: [entityFilterId]
+[32m18:59:07.737  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.ENTITY_FILTER for entity moqui.security.EntityFilter in group transactional
+[32m18:59:07.743  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXEntityFilterEntityFilterSet for entity moqui.security.EntityFilter
+[32m18:59:07.748  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXEntityFilterComparisonOperatorEnumeration for entity moqui.security.EntityFilter
+[32m18:59:07.754  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.security.EntityFilterSet pks: [entityFilterSetId]
+[32m18:59:07.760  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.ENTITY_FILTER_SET for entity moqui.security.EntityFilterSet in group transactional
+[32m18:59:07.761  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.security.UserAccount pks: [userId]
+[32m18:59:07.767  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.USER_ACCOUNT for entity moqui.security.UserAccount in group transactional
+[32m18:59:07.772  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index USERACCT_USERNAME for entity moqui.security.UserAccount
+[32m18:59:07.777  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index USERACCT_EMAILADDR for entity moqui.security.UserAccount
+[32m18:59:07.783  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXUserAccountCurrencyUom for entity moqui.security.UserAccount
+[32m18:59:07.792  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.security.UserAuthcFactor pks: [factorId]
+[32m18:59:07.800  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.USER_AUTHC_FACTOR for entity moqui.security.UserAuthcFactor in group transactional
+[32m18:59:07.806  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXUserAuthcFactorUAFTypeEnumeration for entity moqui.security.UserAuthcFactor
+[32m18:59:07.812  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.security.UserGroup pks: [userGroupId]
+[32m18:59:07.818  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.USER_GROUP for entity moqui.security.UserGroup in group transactional
+[32m18:59:07.824  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXUserGroupUGTypeEnumeration for entity moqui.security.UserGroup
+[32m18:59:07.830  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.security.UserGroupMember pks: [userGroupId, userId, fromDate]
+[32m18:59:07.838  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.USER_GROUP_MEMBER for entity moqui.security.UserGroupMember in group transactional
+[32m18:59:07.844  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXUserGroupMemberUserGroup for entity moqui.security.UserGroupMember
+[32m18:59:07.850  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.security.UserGroupPermission pks: [userGroupId, userPermissionId, fromDate]
+[32m18:59:07.856  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.USER_GROUP_PERMISSION for entity moqui.security.UserGroupPermission in group transactional
+[32m18:59:07.862  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXUserGroupPermissionUserGroup for entity moqui.security.UserGroupPermission
+[32m18:59:07.868  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.security.UserGroupPreference pks: [userGroupId, preferenceKey]
+[32m18:59:07.877  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.USER_GROUP_PREFERENCE for entity moqui.security.UserGroupPreference in group transactional
+[32m18:59:07.878  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.security.UserGroupScreenTheme pks: [userGroupId, screenThemeTypeEnumId]
+[32m18:59:07.884  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.USER_GROUP_SCREEN_THEME for entity moqui.security.UserGroupScreenTheme in group transactional
+[32m18:59:07.890  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXUserGroupScreenThemeScreenThemeTypeEnumeration for entity moqui.security.UserGroupScreenTheme
+[32m18:59:07.895  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXUserGroupScreenThemeST for entity moqui.security.UserGroupScreenTheme
+[32m18:59:07.909  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.security.UserLoginHistory pks: [userId, fromDate]
+[32m18:59:07.916  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.USER_LOGIN_HISTORY for entity moqui.security.UserLoginHistory in group transactional
+[32m18:59:07.921  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXUserLoginHistoryVisit for entity moqui.security.UserLoginHistory
+[32m18:59:07.921  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.security.UserLoginKey pks: [loginKey]
+[32m18:59:07.927  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.USER_LOGIN_KEY for entity moqui.security.UserLoginKey in group transactional
+[32m18:59:07.933  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXUserLoginKeyUserAccount for entity moqui.security.UserLoginKey
+[32m18:59:07.939  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.security.UserPasswordHistory pks: [userId, fromDate]
+[32m18:59:07.945  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.USER_PASSWORD_HISTORY for entity moqui.security.UserPasswordHistory in group transactional
+[32m18:59:07.945  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.security.UserPermission pks: [userPermissionId]
+[32m18:59:07.952  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.USER_PERMISSION for entity moqui.security.UserPermission in group transactional
+[32m18:59:07.952  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.security.UserPreference pks: [userId, preferenceKey]
+[32m18:59:07.960  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.USER_PREFERENCE for entity moqui.security.UserPreference in group transactional
+[32m18:59:07.961  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.security.UserScreenTheme pks: [userId, screenThemeTypeEnumId]
+[32m18:59:07.969  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.USER_SCREEN_THEME for entity moqui.security.UserScreenTheme in group transactional
+[32m18:59:07.975  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXUserScreenThemeScreenThemeTypeEnumeration for entity moqui.security.UserScreenTheme
+[32m18:59:07.981  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXUserScreenThemeST for entity moqui.security.UserScreenTheme
+[32m18:59:07.994  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.security.user.NotificationMessage pks: [notificationMessageId]
+[32m18:59:08.002  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.NOTIFICATION_MESSAGE for entity moqui.security.user.NotificationMessage in group transactional
+[32m18:59:08.008  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXNotificationMessageUserGroup for entity moqui.security.user.NotificationMessage
+[32m18:59:08.015  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.security.user.NotificationMessageUser pks: [notificationMessageId, userId]
+[32m18:59:08.022  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.NOTIFICATION_MESSAGE_USER for entity moqui.security.user.NotificationMessageUser in group transactional
+[32m18:59:08.029  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index NOTMSGUSR_UID_VD for entity moqui.security.user.NotificationMessageUser
+[32m18:59:08.035  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXNotificationMessageUserNotificationMessage for entity moqui.security.user.NotificationMessageUser
+[32m18:59:08.042  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXNotificationMessageUserEmailMessage for entity moqui.security.user.NotificationMessageUser
+[32m18:59:08.063  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.security.user.NotificationTopic pks: [topic]
+[32m18:59:08.072  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.NOTIFICATION_TOPIC for entity moqui.security.user.NotificationTopic in group transactional
+[32m18:59:08.078  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXNotificationTopicEmailTemplate for entity moqui.security.user.NotificationTopic
+[32m18:59:08.086  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.security.user.NotificationTopicUser pks: [topic, userId]
+[32m18:59:08.093  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.NOTIFICATION_TOPIC_USER for entity moqui.security.user.NotificationTopicUser in group transactional
+[32m18:59:08.093  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.server.ArtifactHit pks: [hitId]
+[32m18:59:08.101  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.ARTIFACT_HIT for entity moqui.server.ArtifactHit in group transactional
+[32m18:59:08.109  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index ARTIFACT_HIT_VST for entity moqui.server.ArtifactHit
+[32m18:59:08.116  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index ARTIFACT_HIT_USR for entity moqui.server.ArtifactHit
+[32m18:59:08.117  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.server.ArtifactHitBin pks: [hitBinId]
+[32m18:59:08.124  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.ARTIFACT_HIT_BIN for entity moqui.server.ArtifactHitBin in group transactional
+[32m18:59:08.125  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.server.Visit pks: [visitId]
+[32m18:59:08.137  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.VISIT for entity moqui.server.Visit in group transactional
+[32m18:59:08.148  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index VISIT_USER_ACC for entity moqui.server.Visit
+[32m18:59:08.160  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index VISIT_VISITOR for entity moqui.server.Visit
+[32m18:59:08.160  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.server.Visitor pks: [visitorId]
+[32m18:59:08.177  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.VISITOR for entity moqui.server.Visitor in group transactional
+[32m18:59:08.178  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.server.instance.AppInstance pks: [appInstanceId]
+[32m18:59:08.190  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.APP_INSTANCE for entity moqui.server.instance.AppInstance in group transactional
+[32m18:59:08.198  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXAppInstanceInstanceImage for entity moqui.server.instance.AppInstance
+[32m18:59:08.205  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXAppInstanceInstanceHost for entity moqui.server.instance.AppInstance
+[32m18:59:08.213  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXAppInstanceDatabaseHost for entity moqui.server.instance.AppInstance
+[32m18:59:08.214  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.server.instance.AppInstanceEnv pks: [appInstanceId, envName]
+[32m18:59:08.222  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.APP_INSTANCE_ENV for entity moqui.server.instance.AppInstanceEnv in group transactional
+[32m18:59:08.230  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXAppInstanceEnvAppInstance for entity moqui.server.instance.AppInstanceEnv
+[32m18:59:08.239  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.server.instance.AppInstanceHostConfig pks: [appInstanceId, hostConfigName]
+[32m18:59:08.247  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.APP_INSTANCE_HOST_CONFIG for entity moqui.server.instance.AppInstanceHostConfig in group transactional
+[32m18:59:08.255  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXAppInstanceHostConfigAppInstance for entity moqui.server.instance.AppInstanceHostConfig
+[32m18:59:08.262  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.server.instance.AppInstanceLink pks: [appInstanceId, instanceName]
+[32m18:59:08.270  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.APP_INSTANCE_LINK for entity moqui.server.instance.AppInstanceLink in group transactional
+[32m18:59:08.277  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXAppInstanceLinkAppInstance for entity moqui.server.instance.AppInstanceLink
+[32m18:59:08.285  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.server.instance.AppInstanceVolume pks: [appInstanceId, mountPoint]
+[32m18:59:08.293  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.APP_INSTANCE_VOLUME for entity moqui.server.instance.AppInstanceVolume in group transactional
+[32m18:59:08.300  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXAppInstanceVolumeAppInstanc for entity moqui.server.instance.AppInstanceVolume
+[32m18:59:08.308  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.server.instance.DatabaseHost pks: [databaseHostId]
+[32m18:59:08.316  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.DATABASE_HOST for entity moqui.server.instance.DatabaseHost in group transactional
+[32m18:59:08.324  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXDatabaseHostDatabaseType for entity moqui.server.instance.DatabaseHost
+[32m18:59:08.325  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.server.instance.DatabaseType pks: [databaseTypeId]
+[32m18:59:08.333  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.DATABASE_TYPE for entity moqui.server.instance.DatabaseType in group transactional
+[32m18:59:08.333  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.server.instance.InstanceHost pks: [instanceHostId]
+[32m18:59:08.341  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.INSTANCE_HOST for entity moqui.server.instance.InstanceHost in group transactional
+[32m18:59:08.352  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXInstanceHostInstanceHostType for entity moqui.server.instance.InstanceHost
+[32m18:59:08.352  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.server.instance.InstanceHostType pks: [hostTypeId]
+[32m18:59:08.360  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.INSTANCE_HOST_TYPE for entity moqui.server.instance.InstanceHostType in group transactional
+[32m18:59:08.360  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.server.instance.InstanceImage pks: [instanceImageId]
+[32m18:59:08.371  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.INSTANCE_IMAGE for entity moqui.server.instance.InstanceImage in group transactional
+[32m18:59:08.381  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXInstanceImageInstanceImageType for entity moqui.server.instance.InstanceImage
+[32m18:59:08.393  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXInstanceImageInstanceHostType for entity moqui.server.instance.InstanceImage
+[32m18:59:08.401  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.server.instance.InstanceImageType pks: [imageTypeId]
+[32m18:59:08.409  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.INSTANCE_IMAGE_TYPE for entity moqui.server.instance.InstanceImageType in group transactional
+[32m18:59:08.409  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.server.instance.InstanceImageTypeEnv pks: [imageTypeId, envName]
+[32m18:59:08.418  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.INSTANCE_IMAGE_TYPE_ENV for entity moqui.server.instance.InstanceImageTypeEnv in group transactional
+[32m18:59:08.426  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXInstanceImageTypeEnvInstanceImageType for entity moqui.server.instance.InstanceImageTypeEnv
+[32m18:59:08.435  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.server.instance.InstanceImageTypeHostConfig pks: [imageTypeId, hostConfigName]
+[32m18:59:08.443  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.INSTANCE_IMAGE_TYPE_HOST_CONFIG for entity moqui.server.instance.InstanceImageTypeHostConfig in group transactional
+[32m18:59:08.451  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXInstanceImageTypeHostConfigInstanceImageType for entity moqui.server.instance.InstanceImageTypeHostConfig
+[32m18:59:08.458  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.server.instance.InstanceImageTypeLink pks: [imageTypeId, instanceName]
+[32m18:59:08.467  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.INSTANCE_IMAGE_TYPE_LINK for entity moqui.server.instance.InstanceImageTypeLink in group transactional
+[32m18:59:08.478  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXInstanceImageTypeLinkInstanceImageType for entity moqui.server.instance.InstanceImageTypeLink
+[32m18:59:08.488  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.server.instance.InstanceImageTypeVolume pks: [imageTypeId, mountPoint]
+[32m18:59:08.496  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.INSTANCE_IMAGE_TYPE_VOLUME for entity moqui.server.instance.InstanceImageTypeVolume in group transactional
+[32m18:59:08.505  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXInstanceImageTypeVolumeInstanceImageTyp for entity moqui.server.instance.InstanceImageTypeVolume
+[32m18:59:08.513  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.service.ServiceRegister pks: [serviceRegisterId]
+[32m18:59:08.525  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.SERVICE_REGISTER for entity moqui.service.ServiceRegister in group transactional
+[32m18:59:08.536  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXServiceRegisterSRTypeEnumeration for entity moqui.service.ServiceRegister
+[32m18:59:08.545  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.service.job.ServiceJob pks: [jobName]
+[32m18:59:08.556  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.SERVICE_JOB for entity moqui.service.job.ServiceJob in group transactional
+[32m18:59:08.556  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.service.job.ServiceJobParameter pks: [jobName, parameterName]
+[32m18:59:08.565  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.SERVICE_JOB_PARAMETER for entity moqui.service.job.ServiceJobParameter in group transactional
+[32m18:59:08.576  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXServiceJobParameterServiceJob for entity moqui.service.job.ServiceJobParameter
+[32m18:59:08.587  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.service.job.ServiceJobRun pks: [jobRunId]
+[32m18:59:08.598  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.SERVICE_JOB_RUN for entity moqui.service.job.ServiceJobRun in group transactional
+[32m18:59:08.605  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index SVC_JOBRUN_NAME for entity moqui.service.job.ServiceJobRun
+[32m18:59:08.613  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXServiceJobRunServiceJob for entity moqui.service.job.ServiceJobRun
+[32m18:59:08.622  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.service.job.ServiceJobRunLock pks: [jobName]
+[32m18:59:08.631  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.SERVICE_JOB_RUN_LOCK for entity moqui.service.job.ServiceJobRunLock in group transactional
+[32m18:59:08.641  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXServiceJobRunLockServiceJob for entity moqui.service.job.ServiceJobRunLock
+[32m18:59:08.650  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXServiceJobRunLockServiceJobRun for entity moqui.service.job.ServiceJobRunLock
+[32m18:59:08.672  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.service.job.ServiceJobUser pks: [jobName, userId]
+[32m18:59:08.681  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.SERVICE_JOB_USER for entity moqui.service.job.ServiceJobUser in group transactional
+[32m18:59:08.690  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXServiceJobUserServiceJob for entity moqui.service.job.ServiceJobUser
+[32m18:59:08.699  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.service.message.SystemMessage pks: [systemMessageId]
+[32m18:59:08.708  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.SYSTEM_MESSAGE for entity moqui.service.message.SystemMessage in group transactional
+[32m18:59:08.717  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index SYS_MSG_MSGID for entity moqui.service.message.SystemMessage
+[32m18:59:08.725  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index SYS_MSG_RMSGID for entity moqui.service.message.SystemMessage
+[32m18:59:08.734  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXSystemMessageSystemMessageType for entity moqui.service.message.SystemMessage
+[32m18:59:08.743  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXSystemMessageSystemMessageRemote for entity moqui.service.message.SystemMessage
+[32m18:59:08.752  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXSystemMessageSMStatusItem for entity moqui.service.message.SystemMessage
+[32m18:59:08.760  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXSystemMessageParentSM for entity moqui.service.message.SystemMessage
+[32m18:59:08.768  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXSystemMessageAckSM for entity moqui.service.message.SystemMessage
+[32m18:59:08.777  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXSystemMessageTriggerVisit for entity moqui.service.message.SystemMessage
+[32m18:59:08.813  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.service.message.SystemMessageEnumMap pks: [systemMessageRemoteId, enumId]
+[32m18:59:08.824  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.SYSTEM_MESSAGE_ENUM_MAP for entity moqui.service.message.SystemMessageEnumMap in group transactional
+[32m18:59:08.835  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXSystemMessageEnumMapSystemMessageRemote for entity moqui.service.message.SystemMessageEnumMap
+[32m18:59:08.849  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXSystemMessageEnumMapEnumeration for entity moqui.service.message.SystemMessageEnumMap
+[32m18:59:08.863  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.service.message.SystemMessageError pks: [systemMessageId, errorDate]
+[32m18:59:08.877  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.SYSTEM_MESSAGE_ERROR for entity moqui.service.message.SystemMessageError in group transactional
+[32m18:59:08.889  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXSystemMessageErrorSystemMessage for entity moqui.service.message.SystemMessageError
+[32m18:59:08.902  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.service.message.SystemMessageRemote pks: [systemMessageRemoteId]
+[32m18:59:08.918  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.SYSTEM_MESSAGE_REMOTE for entity moqui.service.message.SystemMessageRemote in group transactional
+[32m18:59:08.932  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXSystemMessageRemoteSMAuthTypeEnumeration for entity moqui.service.message.SystemMessageRemote
+[32m18:59:08.945  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXSystemMessageRemoteSendMessageAuthTypeEnumeration for entity moqui.service.message.SystemMessageRemote
+[32m18:59:08.960  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXSystemMessageRemoteSystemMessageTyp for entity moqui.service.message.SystemMessageRemote
+[32m18:59:08.974  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXSystemMessageRemotePreAuthSMR for entity moqui.service.message.SystemMessageRemote
+[32m18:59:09.021  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.service.message.SystemMessageType pks: [systemMessageTypeId]
+[32m18:59:09.037  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.SYSTEM_MESSAGE_TYPE for entity moqui.service.message.SystemMessageType in group transactional
+[32m18:59:09.049  INFO         main               o.moqui.i.e.EntityDbMeta[m Created index IDXSystemMessageTypeMessageReceiveResponseEnumeration for entity moqui.service.message.SystemMessageType
+[32m18:59:09.061  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.service.semaphore.ServiceParameterSemaphore pks: [serviceName, parameterValue]
+[32m18:59:09.077  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.SERVICE_PARAMETER_SEMAPHORE for entity moqui.service.semaphore.ServiceParameterSemaphore in group transactional
+[32m18:59:09.077  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.test.Bar pks: [barId]
+[32m18:59:09.094  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.BAR for entity moqui.test.Bar in group transactional
+[32m18:59:09.095  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.test.Foo pks: [fooId]
+[32m18:59:09.110  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.FOO for entity moqui.test.Foo in group transactional
+[32m18:59:09.111  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.test.TestEntity pks: [testId]
+[32m18:59:09.122  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.TEST_ENTITY for entity moqui.test.TestEntity in group transactional
+[32m18:59:09.122  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.test.TestFts pks: [testFtsId]
+[32m18:59:09.132  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.TEST_FTS for entity moqui.test.TestFts in group transactional
+[32m18:59:09.153  INFO         main               o.moqui.i.e.EntityDbMeta[m Creating table for moqui.test.TestIntPk pks: [intId]
+[32m18:59:09.164  INFO         main               o.moqui.i.e.EntityDbMeta[m Created table public.TEST_INT_PK for entity moqui.test.TestIntPk in group transactional
+[32m18:59:12.924  INFO         main               o.moqui.i.e.EntityDbMeta[m Tables were created, checking FKs for all entities in group transactional
+[33m18:59:12.940  WARN         main               o.moqui.i.e.EntityDbMeta[m Bulk find imported keys got no results for group transactional, getting per table (slower)
+[32m18:59:14.803  INFO         main               o.moqui.i.e.EntityDbMeta[m Created 1 FKs out of 1 type one relationships for entity moqui.a2a.A2AArtifact
+[32m18:59:14.808  INFO         main               o.moqui.i.e.EntityDbMeta[m Created 1 FKs out of 2 type one relationships for entity moqui.a2a.A2AArtifactPart
+[32m18:59:14.813  INFO         main               o.moqui.i.e.EntityDbMeta[m Created 1 FKs out of 2 type one relationships for entity moqui.a2a.A2AMessage
+[32m18:59:14.818  INFO         main               o.moqui.i.e.EntityDbMeta[m Created 1 FKs out of 2 type one relationships for entity moqui.a2a.A2AMessagePart
+[32m18:59:14.823  INFO         main               o.moqui.i.e.EntityDbMeta[m Created 1 FKs out of 1 type one relationships for entity moqui.a2a.A2APushConfig
+[32m18:59:14.831  INFO         main               o.moqui.i.e.EntityDbMeta[m Created 2 FKs out of 5 type one relationships for entity moqui.a2a.A2ATaskEvent
+[32m18:59:14.837  INFO         main               o.moqui.i.e.EntityDbMeta[m Created 1 FKs out of 4 type one relationships for entity moqui.a2a.A2ATaskStatus
+[32m18:59:14.840  INFO         main               o.moqui.i.e.EntityDbMeta[m Created 1 FKs out of 1 type one relationships for entity moqui.basic.DataSource
+[32m18:59:14.845  INFO         main               o.moqui.i.e.EntityDbMeta[m Created 2 FKs out of 2 type one relationships for entity moqui.basic.EnumGroupMember
+[32m18:59:14.851  INFO         main               o.moqui.i.e.EntityDbMeta[m Created 2 FKs out of 2 type one relationships for entity moqui.basic.Enumeration
+[32m18:59:14.854  INFO         main               o.moqui.i.e.EntityDbMeta[m Created 1 FKs out of 3 type one relationships for entity moqui.basic.GeoPoint
+[32m18:59:14.857  INFO         main               o.moqui.i.e.EntityDbMeta[m Created 1 FKs out of 1 type one relationships for entity moqui.basic.StatusFlow
+[32m18:59:14.860  INFO         main               o.moqui.i.e.EntityDbMeta[m Created 1 FKs out of 2 type one relationships for entity moqui.basic.StatusFlowItem
+[32m18:59:14.868  INFO         main               o.moqui.i.e.EntityDbMeta[m Created 2 FKs out of 3 type one relationships for entity moqui.basic.StatusFlowTransition
+[32m18:59:14.871  INFO         main               o.moqui.i.e.EntityDbMeta[m Created 1 FKs out of 1 type one relationships for entity moqui.basic.StatusItem
+[32m18:59:14.875  INFO         main               o.moqui.i.e.EntityDbMeta[m Created 1 FKs out of 2 type one relationships for entity moqui.basic.UomDimTypeGroupMember
+[32m18:59:14.890  INFO         main               o.moqui.i.e.EntityDbMeta[m Created 4 FKs out of 8 type one relationships for entity moqui.basic.email.EmailMessage
+[32m18:59:14.893  INFO         main               o.moqui.i.e.EntityDbMeta[m Created 1 FKs out of 2 type one relationships for entity moqui.entity.document.DataDocumentUserGroup
+[32m18:59:14.896  INFO         main               o.moqui.i.e.EntityDbMeta[m Created 1 FKs out of 3 type one relationships for entity moqui.entity.sync.EntitySyncArtifact
+[32m18:59:14.900  INFO         main               o.moqui.i.e.EntityDbMeta[m Created 1 FKs out of 2 type one relationships for entity moqui.entity.view.DbViewEntityAlias
+[32m18:59:14.903  INFO         main               o.moqui.i.e.EntityDbMeta[m Created 1 FKs out of 2 type one relationships for entity moqui.entity.view.DbViewEntityKeyMap
+[32m18:59:14.907  INFO         main               o.moqui.i.e.EntityDbMeta[m Created 1 FKs out of 1 type one relationships for entity moqui.resource.wiki.WikiBlog
+[32m18:59:14.913  INFO         main               o.moqui.i.e.EntityDbMeta[m Created 1 FKs out of 2 type one relationships for entity moqui.resource.wiki.WikiBlogCategory
+[32m18:59:14.918  INFO         main               o.moqui.i.e.EntityDbMeta[m Created 1 FKs out of 1 type one relationships for entity moqui.resource.wiki.WikiPage
+[32m18:59:14.922  INFO         main               o.moqui.i.e.EntityDbMeta[m Created 1 FKs out of 2 type one relationships for entity moqui.resource.wiki.WikiPageAlias
+[32m18:59:14.926  INFO         main               o.moqui.i.e.EntityDbMeta[m Created 1 FKs out of 1 type one relationships for entity moqui.resource.wiki.WikiSpace
+[32m18:59:14.940  INFO         main               o.moqui.i.e.EntityDbMeta[m Created 3 FKs out of 4 type one relationships for entity moqui.screen.ScreenScheduled
+[32m18:59:14.945  INFO         main               o.moqui.i.e.EntityDbMeta[m Created 1 FKs out of 1 type one relationships for entity moqui.screen.SubscreensItem
+[32m18:59:14.949  INFO         main               o.moqui.i.e.EntityDbMeta[m Created 1 FKs out of 2 type one relationships for entity moqui.screen.form.DbFormUserGroup
+[32m18:59:14.953  INFO         main               o.moqui.i.e.EntityDbMeta[m Created 1 FKs out of 2 type one relationships for entity moqui.screen.form.FormConfigUserGroup
+[32m18:59:14.956  INFO         main               o.moqui.i.e.EntityDbMeta[m Created 1 FKs out of 2 type one relationships for entity moqui.screen.form.FormListFindUserGroup
+[32m18:59:14.960  INFO         main               o.moqui.i.e.EntityDbMeta[m Created 1 FKs out of 2 type one relationships for entity moqui.screen.form.FormResponse
+[32m18:59:14.966  INFO         main               o.moqui.i.e.EntityDbMeta[m Created 2 FKs out of 4 type one relationships for entity moqui.security.ArtifactAuthz
+[32m18:59:14.970  INFO         main               o.moqui.i.e.EntityDbMeta[m Created 1 FKs out of 2 type one relationships for entity moqui.security.ArtifactAuthzFilter
+[32m18:59:14.973  INFO         main               o.moqui.i.e.EntityDbMeta[m Created 1 FKs out of 2 type one relationships for entity moqui.security.ArtifactTarpit
+[32m18:59:14.977  INFO         main               o.moqui.i.e.EntityDbMeta[m Created 1 FKs out of 2 type one relationships for entity moqui.security.EntityFilter
+[32m18:59:14.980  INFO         main               o.moqui.i.e.EntityDbMeta[m Created 1 FKs out of 1 type one relationships for entity moqui.security.UserLoginHistory
+[32m18:59:14.990  INFO         main               o.moqui.i.e.EntityDbMeta[m Created 3 FKs out of 3 type one relationships for entity moqui.server.instance.AppInstance
+[32m18:59:14.993  INFO         main               o.moqui.i.e.EntityDbMeta[m Created 1 FKs out of 1 type one relationships for entity moqui.server.instance.DatabaseHost
+[32m18:59:14.996  INFO         main               o.moqui.i.e.EntityDbMeta[m Created 1 FKs out of 1 type one relationships for entity moqui.server.instance.InstanceHost
+[32m18:59:14.999  INFO         main               o.moqui.i.e.EntityDbMeta[m Created 1 FKs out of 2 type one relationships for entity moqui.server.instance.InstanceImage
+[32m18:59:15.009  INFO         main               o.moqui.i.e.EntityDbMeta[m Created 2 FKs out of 6 type one relationships for entity moqui.service.message.SystemMessage
+[32m18:59:15.013  INFO         main               o.moqui.i.e.EntityDbMeta[m Created 1 FKs out of 2 type one relationships for entity moqui.service.message.SystemMessageEnumMap
+[32m18:59:15.018  INFO         main               o.moqui.i.e.EntityDbMeta[m Created 1 FKs out of 4 type one relationships for entity moqui.service.message.SystemMessageRemote
+[32m18:59:19.016  INFO         main           o.moqui.i.e.EntityFacadeImpl[m Checked tables for all entities in 12.723 seconds
+[32m18:59:19.024  INFO         main           o.moqui.i.e.EntityFacadeImpl[m Loaded 8 Entity ECA rules from 2 .eecas.xml files, 0 rules have no id, 8 EECA rules active
+[32m18:59:19.024  INFO         main          o.moqui.i.s.ServiceFacadeImpl[m Loaded 0 Service ECA rules from 0 .secas.xml files, 0 rules have no id, 0 SECA rules active
+[32m18:59:19.025  INFO         main          o.moqui.i.s.ServiceFacadeImpl[m No distributed-factory specified, distributed async service calls will be run local only
+[33m18:59:19.025  WARN         main          o.moqui.i.s.ServiceFacadeImpl[m Not starting Scheduled Service Job Runner (config:0)
+[32m18:59:19.025  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Initializing ToolFactory: MCache
+[32m18:59:19.025  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Initializing ToolFactory: H2Server
+[32m18:59:19.025  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Deterministic mode: artifact hits and completed bins are queued for synchronous shutdown persistence; no background statistics writer
+[32m18:59:19.120  INFO         main          o.moqui.i.c.ElasticFacadeImpl[m Initializing ElasticFacade Client for cluster default at http://127.0.0.1:9200
+[33m18:59:19.195  WARN         main               o.eclipse.j.u.s.S.config[m Trusting all certificates configured for oejus.SslContextFactory$Client@2aaa89c2[provider=null,keyStore=null,trustStore=null]
+[33m18:59:19.195  WARN         main               o.eclipse.j.u.s.S.config[m No Client EndPointIdentificationAlgorithm configured for oejus.SslContextFactory$Client@2aaa89c2[provider=null,keyStore=null,trustStore=null]
+[32m18:59:19.319  INFO         main          o.moqui.i.c.ElasticFacadeImpl[m Connected to ElasticSearch cluster default at http://127.0.0.1:9200 distribution elasticsearch version 7.4.2, ES earlier than 7.0? false
+[name:614c06c77743, cluster_name:docker-cluster, cluster_uuid:BFA5ODDzS1SnnHRB2Ba7mg, version:[number:7.4.2, build_flavor:oss, build_type:docker, build_hash:2f90bbf7b93631e52bafb59b3b049cb44ec25e96, build_date:2019-10-28T20:40:44.881551Z, build_snapshot:false, lucene_version:8.2.0, minimum_wire_compatibility_version:6.8.0, minimum_index_compatibility_version:6.0.0-beta1], tagline:You Know, for Search]
+[32m18:59:19.319  INFO         main          o.moqui.i.c.ElasticFacadeImpl[m Deterministic mode: background ElasticSearchLogger disabled
+[32m18:59:19.839  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Elastic Facade initialized
+[33m18:59:19.891  WARN         main               o.eclipse.j.u.s.S.config[m Trusting all certificates configured for oejus.SslContextFactory$Client@42a97053[provider=null,keyStore=null,trustStore=null]
+[33m18:59:19.891  WARN         main               o.eclipse.j.u.s.S.config[m No Client EndPointIdentificationAlgorithm configured for oejus.SslContextFactory$Client@42a97053[provider=null,keyStore=null,trustStore=null]
+[32m18:59:19.894  INFO         main              o.moqui.i.l.LlmFacadeImpl[m Initialized LlmFacade profile default at https://api.openai.com/v1/chat/completions protocol openai-compat
+[33m18:59:19.928  WARN         main               o.eclipse.j.u.s.S.config[m Trusting all certificates configured for oejus.SslContextFactory$Client@3f33bb6f[provider=null,keyStore=null,trustStore=null]
+[33m18:59:19.928  WARN         main               o.eclipse.j.u.s.S.config[m No Client EndPointIdentificationAlgorithm configured for oejus.SslContextFactory$Client@3f33bb6f[provider=null,keyStore=null,trustStore=null]
+[32m18:59:19.930  INFO         main              o.moqui.i.l.LlmFacadeImpl[m Initialized LlmFacade profile assist at https://api.openai.com/v1/chat/completions protocol openai-compat
+[32m18:59:19.931  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Llm Facade initialized
+[32m18:59:19.932  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Execution Context Factory initialized in 15.887 seconds
+[32m18:59:21.057  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Found 0 Enumeration records, loading empty-db-load data types (all)
+[32m18:59:21.769  INFO         main       o.moqui.i.e.EntityDataLoaderImpl[m Loading entity data from the following locations: 
+ - classpath://entity/BasicEntities.xml
+ - classpath://entity/EntityEntities.xml
+ - classpath://entity/OlapEntities.xml
+ - classpath://entity/ResourceEntities.xml
+ - classpath://entity/ScreenEntities.xml
+ - classpath://entity/SecurityEntities.xml
+ - classpath://entity/ServerEntities.xml
+ - classpath://entity/ServiceEntities.xml
+ - classpath://entity/TestEntities.xml
+ - classpath://entity/LlmEntities.xml
+ - classpath://entity/A2AEntities.xml
+ - classpath://data/CommonL10nData.xml
+ - classpath://data/CurrencyData.xml
+ - classpath://data/EntityTypeData.xml
+ - classpath://data/GeoCountryData.xml
+ - classpath://data/SecurityTypeData.xml
+ - classpath://data/LlmTypeData.xml
+ - classpath://data/UnitData.xml
+ - classpath://data/MoquiSetupData.xml
+ - file:/home/user/moqui/moqui-framework-deterministic/runtime/base-component/tools/data/ToolsSecurityData.xml
+ - file:/home/user/moqui/moqui-framework-deterministic/runtime/base-component/webroot/data/WebrootL10nData.xml
+ - file:/home/user/moqui/moqui-framework-deterministic/runtime/base-component/webroot/data/WebrootQuasarThemeData.xml
+ - file:/home/user/moqui/moqui-framework-deterministic/runtime/base-component/webroot/data/WebrootSecurityData.xml
+ - file:/home/user/moqui/moqui-framework-deterministic/runtime/base-component/webroot/data/WebrootSecurityDemoData.xml
+ - file:/home/user/moqui/moqui-framework-deterministic/runtime/base-component/webroot/data/WebrootThemeData.xml
+[32m18:59:21.769  INFO         main       o.moqui.i.e.EntityDataLoaderImpl[m Loading data types: ALL
+[32m18:59:21.774  INFO         main       o.moqui.i.e.EntityDataLoaderImpl[m Loading entity data from classpath://entity/BasicEntities.xml
+[32m18:59:21.785  INFO         main             o.moqui.i.e.EntityDataFeed[m Built entity.data.feed.info cache in 2ms, entries for 0 entities
+[32m18:59:21.949  INFO         main       o.moqui.i.e.EntityDataLoaderImpl[m Loaded 125 records from classpath://entity/BasicEntities.xml in 0.175s
+[32m18:59:25.636  INFO         main       o.moqui.i.e.EntityDataLoaderImpl[m Loading entity data from classpath://entity/EntityEntities.xml
+[32m18:59:25.663  INFO         main       o.moqui.i.e.EntityDataLoaderImpl[m Loaded 18 records from classpath://entity/EntityEntities.xml in 0.027s
+[32m18:59:27.398  INFO         main       o.moqui.i.e.EntityDataLoaderImpl[m Loading entity data from classpath://entity/OlapEntities.xml
+[32m18:59:27.399  INFO         main       o.moqui.i.e.EntityDataLoaderImpl[m Loaded 0 records from classpath://entity/OlapEntities.xml in 0.001s
+[32m18:59:27.839  INFO         main       o.moqui.i.e.EntityDataLoaderImpl[m Loading entity data from classpath://entity/ResourceEntities.xml
+[32m18:59:27.842  INFO         main       o.moqui.i.e.EntityDataLoaderImpl[m Loaded 1 records from classpath://entity/ResourceEntities.xml in 0.003s
+[32m18:59:29.440  INFO         main       o.moqui.i.e.EntityDataLoaderImpl[m Loading entity data from classpath://entity/ScreenEntities.xml
+[32m18:59:29.464  INFO         main       o.moqui.i.e.EntityDataLoaderImpl[m Loaded 46 records from classpath://entity/ScreenEntities.xml in 0.024s
+[32m18:59:31.192  INFO         main       o.moqui.i.e.EntityDataLoaderImpl[m Loading entity data from classpath://entity/SecurityEntities.xml
+[32m18:59:33.303  INFO         main       o.moqui.i.e.EntityDataLoaderImpl[m Loaded 28 records from classpath://entity/SecurityEntities.xml in 2.111s
+[32m18:59:35.659  INFO         main       o.moqui.i.e.EntityDataLoaderImpl[m Loading entity data from classpath://entity/ServerEntities.xml
+[32m18:59:35.680  INFO         main       o.moqui.i.e.EntityDataLoaderImpl[m Loaded 28 records from classpath://entity/ServerEntities.xml in 0.021s
+[32m18:59:37.364  INFO         main       o.moqui.i.e.EntityDataLoaderImpl[m Loading entity data from classpath://entity/ServiceEntities.xml
+[32m18:59:37.396  INFO         main       o.moqui.i.e.EntityDataLoaderImpl[m Loaded 56 records from classpath://entity/ServiceEntities.xml in 0.032s
+[32m18:59:38.953  INFO         main       o.moqui.i.e.EntityDataLoaderImpl[m Loading entity data from classpath://entity/TestEntities.xml
+[32m18:59:38.954  INFO         main       o.moqui.i.e.EntityDataLoaderImpl[m Loaded 0 records from classpath://entity/TestEntities.xml in 0.001s
+[32m18:59:39.346  INFO         main       o.moqui.i.e.EntityDataLoaderImpl[m Loading entity data from classpath://entity/LlmEntities.xml
+[32m18:59:39.351  INFO         main       o.moqui.i.e.EntityDataLoaderImpl[m Loaded 7 records from classpath://entity/LlmEntities.xml in 0.005s
+[32m18:59:41.030  INFO         main       o.moqui.i.e.EntityDataLoaderImpl[m Loading entity data from classpath://entity/A2AEntities.xml
+[32m18:59:41.038  INFO         main       o.moqui.i.e.EntityDataLoaderImpl[m Loaded 18 records from classpath://entity/A2AEntities.xml in 0.008s
+[32m18:59:42.774  INFO         main       o.moqui.i.e.EntityDataLoaderImpl[m Loading entity data from classpath://data/CommonL10nData.xml
+[32m18:59:42.794  INFO         main       o.moqui.i.e.EntityDataLoaderImpl[m Loaded 56 records from classpath://data/CommonL10nData.xml in 0.02s
+[32m18:59:44.500  INFO         main       o.moqui.i.e.EntityDataLoaderImpl[m Loading entity data from classpath://data/CurrencyData.xml
+[32m18:59:44.560  INFO         main       o.moqui.i.e.EntityDataLoaderImpl[m Loaded 170 records from classpath://data/CurrencyData.xml in 0.06s
+[32m18:59:46.356  INFO         main       o.moqui.i.e.EntityDataLoaderImpl[m Loading entity data from classpath://data/EntityTypeData.xml
+[32m18:59:46.362  INFO         main       o.moqui.i.e.EntityDataLoaderImpl[m Loaded 15 records from classpath://data/EntityTypeData.xml in 0.006s
+[32m18:59:48.013  INFO         main       o.moqui.i.e.EntityDataLoaderImpl[m Loading entity data from classpath://data/GeoCountryData.xml
+[32m18:59:48.081  INFO         main       o.moqui.i.e.EntityDataLoaderImpl[m Loaded 242 records from classpath://data/GeoCountryData.xml in 0.068s
+[32m18:59:49.850  INFO         main       o.moqui.i.e.EntityDataLoaderImpl[m Loading entity data from classpath://data/SecurityTypeData.xml
+[32m18:59:50.043  INFO         main       o.moqui.i.e.EntityDataLoaderImpl[m Loaded 24 records from classpath://data/SecurityTypeData.xml in 0.193s
+[32m18:59:51.863  INFO         main       o.moqui.i.e.EntityDataLoaderImpl[m Loading entity data from classpath://data/LlmTypeData.xml
+[32m18:59:51.875  INFO         main       o.moqui.i.e.EntityDataLoaderImpl[m Loaded 31 records from classpath://data/LlmTypeData.xml in 0.012s
+[32m18:59:53.584  INFO         main       o.moqui.i.e.EntityDataLoaderImpl[m Loading entity data from classpath://data/UnitData.xml
+[32m18:59:53.693  INFO         main       o.moqui.i.e.EntityDataLoaderImpl[m Loaded 392 records from classpath://data/UnitData.xml in 0.109s
+[32m18:59:55.505  INFO         main       o.moqui.i.e.EntityDataLoaderImpl[m Loading entity data from classpath://data/MoquiSetupData.xml
+[32m18:59:55.532  INFO         main       o.moqui.i.e.EntityDataLoaderImpl[m Loaded 43 records from classpath://data/MoquiSetupData.xml in 0.027s
+[32m18:59:57.186  INFO         main       o.moqui.i.e.EntityDataLoaderImpl[m Loading entity data from file:/home/user/moqui/moqui-framework-deterministic/runtime/base-component/tools/data/ToolsSecurityData.xml
+[32m18:59:57.191  INFO         main       o.moqui.i.e.EntityDataLoaderImpl[m Loaded 9 records from file:/home/user/moqui/moqui-framework-deterministic/runtime/base-component/tools/data/ToolsSecurityData.xml in 0.004s
+[32m18:59:59.198  INFO         main       o.moqui.i.e.EntityDataLoaderImpl[m Loading entity data from file:/home/user/moqui/moqui-framework-deterministic/runtime/base-component/webroot/data/WebrootL10nData.xml
+[32m18:59:59.199  INFO         main       o.moqui.i.e.EntityDataLoaderImpl[m Loaded 1 records from file:/home/user/moqui/moqui-framework-deterministic/runtime/base-component/webroot/data/WebrootL10nData.xml in 0.001s
+[32m19:00:00.879  INFO         main       o.moqui.i.e.EntityDataLoaderImpl[m Loading entity data from file:/home/user/moqui/moqui-framework-deterministic/runtime/base-component/webroot/data/WebrootQuasarThemeData.xml
+[32m19:00:00.888  INFO         main       o.moqui.i.e.EntityDataLoaderImpl[m Loaded 12 records from file:/home/user/moqui/moqui-framework-deterministic/runtime/base-component/webroot/data/WebrootQuasarThemeData.xml in 0.009s
+[32m19:00:02.608  INFO         main       o.moqui.i.e.EntityDataLoaderImpl[m Loading entity data from file:/home/user/moqui/moqui-framework-deterministic/runtime/base-component/webroot/data/WebrootSecurityData.xml
+[32m19:00:02.613  INFO         main       o.moqui.i.e.EntityDataLoaderImpl[m Loaded 7 records from file:/home/user/moqui/moqui-framework-deterministic/runtime/base-component/webroot/data/WebrootSecurityData.xml in 0.004s
+[32m19:00:04.663  INFO         main       o.moqui.i.e.EntityDataLoaderImpl[m Loading entity data from file:/home/user/moqui/moqui-framework-deterministic/runtime/base-component/webroot/data/WebrootSecurityDemoData.xml
+[32m19:00:04.692  INFO         main       o.moqui.i.e.EntityDataLoaderImpl[m Loaded 9 records from file:/home/user/moqui/moqui-framework-deterministic/runtime/base-component/webroot/data/WebrootSecurityDemoData.xml in 0.029s
+[32m19:00:07.678  INFO         main       o.moqui.i.e.EntityDataLoaderImpl[m Loading entity data from file:/home/user/moqui/moqui-framework-deterministic/runtime/base-component/webroot/data/WebrootThemeData.xml
+[32m19:00:07.704  INFO         main       o.moqui.i.e.EntityDataLoaderImpl[m Loaded 16 records from file:/home/user/moqui/moqui-framework-deterministic/runtime/base-component/webroot/data/WebrootThemeData.xml in 0.026s
+[32m19:00:09.593  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Loaded [1354] records (with types from empty-db-load: all) in 47.84 seconds.
+[33m19:00:09.946  WARN         main                          o.moqui.Moqui[m Data loaded into empty DB, re-initializing ExecutionContextFactory
+[32m19:03:01.397  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m ArtifactHitBins stored
+[32m19:03:01.397  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Shutting scheduled executor
+[32m19:03:01.398  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Shutting down worker pool
+[32m19:03:01.398  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Scheduled executor shut down and terminated
+[32m19:03:01.398  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Worker pool shut down and terminated
+[32m19:03:01.398  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Destroying ToolFactory: H2Server
+[32m19:03:01.398  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Destroying ToolFactory: MCache
+[32m19:03:01.405  INFO         main .moqui.i.c.TransactionInternalBitronix[m Shutting down Bitronix
+Facades destroyed
+[32m19:03:01.441  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Facades destroyed
+Moqui ExecutionContextFactory Destroyed
+[32m19:03:01.974  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Initializing Moqui Framework version 4.0.0
+ - runtime directory: /home/user/moqui/moqui-framework-deterministic/runtime
+ - runtime config:    /home/user/moqui/java-regression-remove-restart/.runs/2026-10-17_18-58-47.909101Z/java-demo.xml
+[32m19:03:01.974  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Running on Java 21.0.12.1 VM 21.0.12.1+1-LTS Runtime 21.0.12.1+1-LTS
+[32m19:03:01.981  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Added component tools              at file:/home/user/moqui/moqui-framework-deterministic/runtime/base-component/tools
+[32m19:03:01.986  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Added component webroot            at file:/home/user/moqui/moqui-framework-deterministic/runtime/base-component/webroot
+[32m19:03:01.986  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Components after depends-on sort: [tools, webroot]
+[32m19:03:01.986  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Merging MoquiConf.xml file from component tools
+[32m19:03:01.987  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Merging runtime configuration at /home/user/moqui/java-regression-remove-restart/.runs/2026-10-17_18-58-47.909101Z/java-demo.xml
+[32m19:03:01.987  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Found property instance_purpose with value [dev], not setting from env var or default
+[32m19:03:01.987  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Found property default_locale with value [en_US], not setting from env var or default
+[32m19:03:01.987  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Found property default_time_zone with value [UTC], not setting from env var or default
+[32m19:03:01.987  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Found property database_time_zone with value [UTC], not setting from env var or default
+[32m19:03:01.987  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Found property webapp_http_port with value [18080], not setting from env var or default
+[32m19:03:01.987  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Found property webapp_https_enabled with value [false], not setting from env var or default
+[32m19:03:01.987  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Found property webapp_allow_origins with value [*], not setting from env var or default
+[32m19:03:01.987  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Found property webapp_handle_cors with value [true], not setting from env var or default
+[32m19:03:01.987  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Found property webapp_status_ips with value [127.0.0.1], not setting from env var or default
+[32m19:03:01.987  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Found property webapp_require_session_token with value [true], not setting from env var or default
+[32m19:03:01.987  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Found property webapp_upload_executable_allow with value [false], not setting from env var or default
+[32m19:03:01.987  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Found property user_privileged_groups with value [ADMIN,ADMIN_ADV], not setting from env var or default
+[32m19:03:01.987  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Found property user_sealed_permissions with value [GROOVY_SHELL_WEB,SQL_RUNNER_WEB,SERVICE_LOAD_RUNNER,ADMIN_LOGIN_AS,ADMIN_PASSWORD,ElasticRemote,KibanaRemote,REST_SCHEMA,LlmGateway], not setting from env var or default
+[32m19:03:01.988  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Found property entity_ds_db_conf with value [postgres], not setting from env var or default
+[32m19:03:01.988  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Found property entity_ds_host with value [127.0.0.1], not setting from env var or default
+[32m19:03:01.988  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Found property entity_ds_port with value [33945], not setting from env var or default
+[32m19:03:01.988  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Found property entity_ds_database with value [moqui], not setting from env var or default
+[32m19:03:01.988  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Found property entity_ds_url with value [jdbc:h2:/home/user/moqui/moqui-framework-deterministic/runtime/db/h2/moqui;lock_timeout=30000], not setting from env var or default
+[32m19:03:01.988  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Found property entity_ds_schema with value [public], not setting from env var or default
+[32m19:03:01.988  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Found property entity_ds_user with value [moqui], not setting from env var or default
+[32m19:03:01.988  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Found secret property entity_ds_password, not setting from env var or default
+[32m19:03:01.988  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Found secret property entity_ds_crypt_pass, not setting from env var or default
+[32m19:03:01.988  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Found secret property entity_ds_crypt_pass_old, not setting from env var or default
+[32m19:03:01.988  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Found property entity_add_missing_runtime with value [false], not setting from env var or default
+[32m19:03:01.988  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Found property entity_add_missing_startup with value [true], not setting from env var or default
+[32m19:03:01.988  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Found property entity_lock_track with value [true], not setting from env var or default
+[32m19:03:01.988  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Found property entity_statement_timeout with value [false], not setting from env var or default
+[32m19:03:01.988  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Found property entity_empty_db_load with value [all], not setting from env var or default
+[32m19:03:01.988  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Found property entity_on_start_load_types with value [none], not setting from env var or default
+[32m19:03:01.988  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Found property entity_ds_c1_disabled with value [true], not setting from env var or default
+[32m19:03:01.988  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Found property entity_ds_c1_db_conf with value [mysql], not setting from env var or default
+[32m19:03:01.988  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Found property scheduled_job_check_time with value [60], not setting from env var or default
+[32m19:03:01.988  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Found property elasticsearch_url with value [http://127.0.0.1:9200], not setting from env var or default
+[32m19:03:01.988  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Found property llm_openai_url with value [https://api.openai.com], not setting from env var or default
+[32m19:03:01.988  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Found property llm_log_content with value [false], not setting from env var or default
+[32m19:03:01.988  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Found property a2a_enabled with value [false], not setting from env var or default
+[32m19:03:01.988  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Found property a2a_trust_forwarded_headers with value [false], not setting from env var or default
+[32m19:03:01.988  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Found property a2a_default_profile with value [assist], not setting from env var or default
+[32m19:03:01.988  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Found property a2a_agent_name with value [Moqui], not setting from env var or default
+[32m19:03:01.988  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Found property a2a_agent_description with value [Moqui enterprise application agent], not setting from env var or default
+[32m19:03:01.988  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Found property a2a_agent_version with value [1.0.0], not setting from env var or default
+[32m19:03:01.988  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Found property a2a_max_part_bytes with value [65536], not setting from env var or default
+[32m19:03:01.988  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Found property a2a_max_parts with value [32], not setting from env var or default
+[32m19:03:01.988  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Found property a2a_replay_wait_ms with value [600000], not setting from env var or default
+[32m19:03:01.988  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Found property kibana_host with value [127.0.0.1], not setting from env var or default
+[32m19:03:01.988  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Found property kibana_port with value [5601], not setting from env var or default
+[32m19:03:01.988  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Found property entity_ds_sslmode with value [disable], not setting from env var or default
+[32m19:03:01.988  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Found property cluster_https_port with value [0], not setting from env var or default
+[32m19:03:01.988  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Found property opensearch_run with value [false], not setting from env var or default
+[32m19:03:01.988  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Found default_time_zone UTC: sun.util.calendar.ZoneInfo[id="UTC",offset=0,dstSavings=0,useDaylight=false,transitions=0,lastRule=null]
+[32m19:03:01.988  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Default locale en_US, time zone sun.util.calendar.ZoneInfo[id="UTC",offset=0,dstSavings=0,useDaylight=false,transitions=0,lastRule=null]
+[33m19:03:01.997  WARN         main .moqui.i.c.ExecutionContextFactoryImpl[m DETERMINISTIC MODE: autonomous scheduled job polling and background Elastic logging are DISABLED. Elastic client/index startup enabled: true. Artifact statistics are collected normally and persisted synchronously at factory shutdown. Explicit job/distributed/periodic requests fail; async services run inline. See DETERMINISTIC.md.
+[32m19:03:01.997  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Initializing MClassLoader context org.moqui.util.MClassLoader cur class org.eclipse.jetty.ee.webapp.WebAppClassLoader system null
+Starting MClassLoader with parent org.moqui.util.MClassLoader
+[32m19:03:01.999  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Initialized MClassLoader with parent org.moqui.util.MClassLoader
+[32m19:03:01.999  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Added JAR from runtime/lib: postgresql-42.7.7.jar
+[32m19:03:01.999  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Initialized ClassLoaders in 2ms
+[32m19:03:01.999  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Not loading disabled ToolFactory with class: org.moqui.impl.tools.JackrabbitRunToolFactory
+[32m19:03:01.999  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Not loading disabled ToolFactory with class: org.moqui.impl.tools.SubEthaSmtpToolFactory
+[32m19:03:01.999  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Loading ToolFactory with class: org.moqui.impl.tools.MCacheToolFactory
+[32m19:03:01.999  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Loading ToolFactory with class: org.moqui.impl.tools.H2ServerToolFactory
+[32m19:03:01.999  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Cache Facade initialized
+[32m19:03:02.002  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Resource Facade initialized
+[33m19:03:02.012  WARN         main                     b.tm.Configuration[m Cannot get the unique server ID for this JVM ('bitronix.tm.serverId'). Make sure it is configured and you use only US-ASCII characters. Will use IP address instead (unsafe for production usage!).
+[32m19:03:02.027  INFO         main      o.moqui.i.c.TransactionFacadeImpl[m Internal transaction manager initialized: UserTransaction class bitronix.tm.BitronixTransactionManager, TransactionManager class bitronix.tm.BitronixTransactionManager
+[32m19:03:02.027  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Transaction Facade initialized
+[32m19:03:02.033  INFO         main           o.moqui.i.e.EntityFacadeImpl[m Database time zone is sun.util.calendar.ZoneInfo[id="UTC",offset=0,dstSavings=0,useDaylight=false,transitions=0,lastRule=null]
+[32m19:03:02.065  INFO         main .moqui.i.c.TransactionInternalBitronix[m Initializing DataSource transactional_DS (postgres) with properties: [databaseName:moqui, serverName:127.0.0.1, user:moqui, portNumber:33945]
+[32m19:03:02.090  INFO         main .moqui.i.c.TransactionInternalBitronix[m Init DataSource transactional_DS (postgres) isolation READ_COMMITTED (2), max pool 90
+[32m19:03:02.095  INFO         main           o.moqui.i.e.EntityFacadeImpl[m Skipping disabled datasource transactional#clone1
+[32m19:03:02.095  INFO         main                o.moqui.i.e.EntityCache[m Entity Cache initialized, distributed cache invalidate enabled: false
+[32m19:03:02.095  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Entity Facade initialized
+[32m19:03:02.101  INFO         main                    o.moqui.i.s.RestApi[m Loaded REST API from moqui.rest.xml (83 paths, 89 methods)
+[32m19:03:02.102  INFO         main                    o.moqui.i.s.RestApi[m Loaded REST API files, 1 roots, in 7ms
+[32m19:03:02.102  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Service Facade initialized
+[32m19:03:02.102  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Screen Facade initialized
+[32m19:03:02.102  INFO         main           o.moqui.i.e.EntityFacadeImpl[m Loading entity definitions
+[32m19:03:02.108  INFO         main           o.moqui.i.e.EntityFacadeImpl[m Found entities in 13 files in 6ms
+[32m19:03:02.635  INFO         main           o.moqui.i.e.EntityFacadeImpl[m Found 0 view-entity definitions in database (DbViewEntity records)
+[32m19:03:02.690  INFO         main           o.moqui.i.e.EntityFacadeImpl[m Loaded 214 entity definitions in 588ms
+[32m19:03:02.700  INFO         main           o.moqui.i.e.EntityFacadeImpl[m Checking tables for entities in groups [transactional]
+[32m19:03:06.448  INFO         main           o.moqui.i.e.EntityFacadeImpl[m Checked tables for all entities in 3.758 seconds
+[32m19:03:06.450  INFO         main           o.moqui.i.e.EntityFacadeImpl[m Loaded 8 Entity ECA rules from 2 .eecas.xml files, 0 rules have no id, 8 EECA rules active
+[32m19:03:06.450  INFO         main          o.moqui.i.s.ServiceFacadeImpl[m Loaded 0 Service ECA rules from 0 .secas.xml files, 0 rules have no id, 0 SECA rules active
+[32m19:03:06.450  INFO         main          o.moqui.i.s.ServiceFacadeImpl[m No distributed-factory specified, distributed async service calls will be run local only
+[33m19:03:06.450  WARN         main          o.moqui.i.s.ServiceFacadeImpl[m Not starting Scheduled Service Job Runner (config:0)
+[32m19:03:06.450  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Initializing ToolFactory: MCache
+[32m19:03:06.450  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Initializing ToolFactory: H2Server
+[32m19:03:06.450  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Deterministic mode: artifact hits and completed bins are queued for synchronous shutdown persistence; no background statistics writer
+[32m19:03:06.508  INFO         main          o.moqui.i.c.ElasticFacadeImpl[m Initializing ElasticFacade Client for cluster default at http://127.0.0.1:9200
+[33m19:03:06.521  WARN         main               o.eclipse.j.u.s.S.config[m Trusting all certificates configured for oejus.SslContextFactory$Client@613a608e[provider=null,keyStore=null,trustStore=null]
+[33m19:03:06.521  WARN         main               o.eclipse.j.u.s.S.config[m No Client EndPointIdentificationAlgorithm configured for oejus.SslContextFactory$Client@613a608e[provider=null,keyStore=null,trustStore=null]
+[32m19:03:06.526  INFO         main          o.moqui.i.c.ElasticFacadeImpl[m Connected to ElasticSearch cluster default at http://127.0.0.1:9200 distribution elasticsearch version 7.4.2, ES earlier than 7.0? false
+[name:614c06c77743, cluster_name:docker-cluster, cluster_uuid:BFA5ODDzS1SnnHRB2Ba7mg, version:[number:7.4.2, build_flavor:oss, build_type:docker, build_hash:2f90bbf7b93631e52bafb59b3b049cb44ec25e96, build_date:2019-10-28T20:40:44.881551Z, build_snapshot:false, lucene_version:8.2.0, minimum_wire_compatibility_version:6.8.0, minimum_index_compatibility_version:6.0.0-beta1], tagline:You Know, for Search]
+[32m19:03:06.526  INFO         main          o.moqui.i.c.ElasticFacadeImpl[m Deterministic mode: background ElasticSearchLogger disabled
+[32m19:03:06.912  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Elastic Facade initialized
+[33m19:03:06.943  WARN         main               o.eclipse.j.u.s.S.config[m Trusting all certificates configured for oejus.SslContextFactory$Client@3472f3ab[provider=null,keyStore=null,trustStore=null]
+[33m19:03:06.944  WARN         main               o.eclipse.j.u.s.S.config[m No Client EndPointIdentificationAlgorithm configured for oejus.SslContextFactory$Client@3472f3ab[provider=null,keyStore=null,trustStore=null]
+[32m19:03:06.945  INFO         main              o.moqui.i.l.LlmFacadeImpl[m Initialized LlmFacade profile default at https://api.openai.com/v1/chat/completions protocol openai-compat
+[33m19:03:06.971  WARN         main               o.eclipse.j.u.s.S.config[m Trusting all certificates configured for oejus.SslContextFactory$Client@1f235a0a[provider=null,keyStore=null,trustStore=null]
+[33m19:03:06.971  WARN         main               o.eclipse.j.u.s.S.config[m No Client EndPointIdentificationAlgorithm configured for oejus.SslContextFactory$Client@1f235a0a[provider=null,keyStore=null,trustStore=null]
+[32m19:03:06.973  INFO         main              o.moqui.i.l.LlmFacadeImpl[m Initialized LlmFacade profile assist at https://api.openai.com/v1/chat/completions protocol openai-compat
+[32m19:03:06.973  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Llm Facade initialized
+[32m19:03:06.973  INFO         main .moqui.i.c.ExecutionContextFactoryImpl[m Execution Context Factory initialized in 5 seconds
+[32m19:03:07.439  INFO         main ExecutionContextFactoryImpl$WebappInfo[m Initializing webapp webroot http://null:18080 https://null:null https enabled? false
+[32m19:03:07.443  INFO         main       o.moqui.i.w.MoquiContextListener[m Added webapp filter ElasticAuthFilter on: [/elastic/*], []
+[32m19:03:07.444  INFO         main       o.moqui.i.w.MoquiContextListener[m Added webapp filter KibanaAuthFilter on: [/kibana/*], []
+[32m19:03:07.444  INFO         main       o.moqui.i.w.MoquiContextListener[m Added webapp filter LlmAuthFilter on: [/llm/*], []
+[32m19:03:07.446  INFO         main       o.moqui.i.w.MoquiContextListener[m Added webapp listener org.moqui.impl.webapp.MoquiSessionListener
+[32m19:03:07.455  INFO         main       o.moqui.i.w.MoquiContextListener[m Added servlet MoquiServlet on: [/*]
+[32m19:03:07.458  INFO         main       o.moqui.i.w.MoquiContextListener[m Added servlet MoquiFopServlet on: [/fop/*]
+[32m19:03:07.461  INFO         main       o.moqui.i.w.MoquiContextListener[m Added servlet A2AServlet on: [/llm/a2a/*]
+[32m19:03:07.465  INFO         main       o.moqui.i.w.MoquiContextListener[m Added servlet A2ACardServlet on: [/.well-known/agent-card.json]
+[32m19:03:07.472  INFO         main       o.moqui.i.w.MoquiContextListener[m Added servlet LlmServlet on: [/llm/*]
+[32m19:03:07.485  INFO         main       o.moqui.i.w.MoquiContextListener[m Added servlet ElasticSearchProxy on: [/elastic/*]
+[32m19:03:07.495  INFO         main       o.moqui.i.w.MoquiContextListener[m Added servlet KibanaProxy on: [/kibana/*]
+[32m19:03:07.499  INFO         main       o.moqui.i.w.MoquiContextListener[m Added servlet H2Console on: [/h2/*]
+[32m19:03:07.499  INFO         main       o.moqui.i.w.MoquiContextListener[m Session cookie HttpOnly=true SameSite=Lax
+[32m19:03:07.499  INFO         main       o.moqui.i.w.MoquiContextListener[m Found WebSocket ServerContainer org.eclipse.jetty.ee11.websocket.jakarta.server.JakartaWebSocketServerContainer
+[32m19:03:07.514  INFO         main       o.moqui.i.w.MoquiContextListener[m Added WebSocket endpoint /notws for class org.moqui.impl.webapp.NotificationEndpoint
+[32m19:03:07.514  INFO         main       o.moqui.i.w.MoquiContextListener[m Added WebSocket endpoint /groovysh for class org.moqui.impl.webapp.GroovyShellEndpoint
+[32m19:03:07.514  INFO         main       o.moqui.i.w.MoquiContextListener[m Moqui Framework initialized in 243.884 seconds
+[32m19:03:07.565  INFO         main                 o.moqui.i.w.A2AServlet[m A2AServlet initialized for webapp webroot
+[32m19:03:07.565  INFO         main                 o.moqui.i.w.LlmServlet[m LlmServlet initialized for webapp webroot
+[32m19:03:07.565  INFO         main            o.moqui.i.w.MoquiFopServlet[m MoquiFopServlet initialized for webapp webroot
+[32m19:03:07.565  INFO         main               o.moqui.i.w.MoquiServlet[m MoquiServlet initialized for webapp webroot
+[32m19:03:07.565  INFO         main  o.eclipse.j.e.s.ServletContextHandler[m Started oeje11w.WebAppContext@6e0ff644{Moqui Root Webapp,/,b=file:///home/user/moqui/moqui-framework-deterministic/execwartmp/ROOT/webapp/,a=AVAILABLE,h=oeje11s.SessionHandler@348ad293{STARTED}}{file:/home/user/moqui/moqui-framework-deterministic/moqui.war}
+[32m19:03:07.572  INFO         main        o.eclipse.j.s.AbstractConnector[m Started oejs.ServerConnector@24bdd996{HTTP/1.1, (http/1.1)}{0.0.0.0:18080}
+[32m19:03:07.572  INFO         main                   o.eclipse.j.s.Server[m Started oejs.Server@5949eba8{STARTING}[12.1.12,sto=30000] @245224ms
+[32m19:03:08.330  INFO utdownThread                   o.eclipse.j.s.Server[m Stopped oejs.Server@5949eba8{STOPPING}[12.1.12,sto=30000]
+[32m19:03:08.330  INFO utdownThread                   o.eclipse.j.s.Server[m Shutdown oejs.Server@5949eba8{STOPPING}[12.1.12,sto=30000]
+[32m19:03:08.334  INFO utdownThread        o.eclipse.j.s.AbstractConnector[m Stopped oejs.ServerConnector@24bdd996{HTTP/1.1, (http/1.1)}{0.0.0.0:18080}
+[32m19:03:08.338  INFO utdownThread       o.moqui.i.w.MoquiContextListener[m Context Destroyed for Moqui webapp [ROOT]
+[32m19:03:08.357  INFO utdownThread             o.moqui.i.e.EntityDataFeed[m Built entity.data.feed.info cache in 8ms, entries for 0 entities
+[32m19:03:08.360  INFO utdownThread           o.moqui.i.e.EntityFacadeImpl[m Created 199 automatic reverse relationships
+[32m19:03:12.044  INFO utdownThread .moqui.i.c.ExecutionContextFactoryImpl[m ArtifactHitBins stored
+[32m19:03:12.044  INFO utdownThread .moqui.i.c.ExecutionContextFactoryImpl[m Shutting scheduled executor
+[32m19:03:12.044  INFO utdownThread .moqui.i.c.ExecutionContextFactoryImpl[m Shutting down worker pool
+[32m19:03:12.044  INFO utdownThread .moqui.i.c.ExecutionContextFactoryImpl[m Scheduled executor shut down and terminated
+[32m19:03:12.044  INFO utdownThread .moqui.i.c.ExecutionContextFactoryImpl[m Worker pool shut down and terminated
+[32m19:03:12.044  INFO utdownThread .moqui.i.c.ExecutionContextFactoryImpl[m Destroying ToolFactory: H2Server
+[32m19:03:12.044  INFO utdownThread .moqui.i.c.ExecutionContextFactoryImpl[m Destroying ToolFactory: MCache
+[32m19:03:12.046  INFO utdownThread .moqui.i.c.TransactionInternalBitronix[m Shutting down Bitronix
+Facades destroyed
+[32m19:03:12.550  INFO utdownThread .moqui.i.c.ExecutionContextFactoryImpl[m Facades destroyed
+Moqui ExecutionContextFactory Destroyed
+[32m19:03:12.896  INFO utdownThread       o.moqui.i.w.MoquiContextListener[m Destroyed Moqui Execution Context Factory for webapp [ROOT]
+[32m19:03:12.903  INFO utdownThread  o.eclipse.j.e.s.ServletContextHandler[m Stopped oeje11w.WebAppContext@6e0ff644{Moqui Root Webapp,/,b=null,a=AVAILABLE,h=oeje11s.SessionHandler@348ad293{STOPPED}}{file:/home/user/moqui/moqui-framework-deterministic/moqui.war}

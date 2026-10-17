@@ -1,0 +1,1688 @@
+{
+  "protocol_version": 2,
+  "run_id": "2026-10-17_18-58-47.909101Z",
+  "start_epoch_ms": 1792263541494,
+  "write_transactions": 116,
+  "database_comparisons": 116,
+  "error": null,
+  "transaction_counts": {
+    "java": {
+      "begin": 130,
+      "committed": 130,
+      "rolled_back": 0,
+      "begin_failed": 0
+    },
+    "rust": {
+      "begin": 156,
+      "committed": 156,
+      "rolled_back": 0,
+      "begin_failed": 0
+    }
+  },
+  "rust_only_writes": 12,
+  "exempt_writes": {
+    "java": 0,
+    "rust": 12
+  },
+  "unpaired_writes": {
+    "java": 0,
+    "rust": 0
+  },
+  "operation_trace_counts": {
+    "java": {
+      "phase": 2,
+      "coordinator": 130,
+      "metadata": 428,
+      "AT_ENTITY": 5798,
+      "cache": 111,
+      "jdbc": 7584,
+      "AT_OTHER": 1,
+      "data": 2688,
+      "AT_SERVICE": 4
+    },
+    "rust": {
+      "coordinator": 156,
+      "phase": 8,
+      "metadata": 450,
+      "AT_ENTITY": 5590,
+      "jdbc": 16182,
+      "cache": 1400,
+      "AT_OTHER": 2,
+      "data": 2836,
+      "AT_SERVICE": 4
+    }
+  },
+  "operation_checks_enabled": false,
+  "operation_order_equal": null,
+  "operation_database_comparisons": 0,
+  "uncommitted_state_verified": false,
+  "final_incremental_equal": true,
+  "operations": [],
+  "per_transaction_databases_equal": true,
+  "pairs": [
+    {
+      "index": 1,
+      "time_epoch_ms": 1792263541494,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000003",
+        "changes": 572
+      },
+      "rust": {
+        "operation_id": "rust-00000003",
+        "changes": 670
+      }
+    },
+    {
+      "index": 2,
+      "time_epoch_ms": 1792263541495,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000004",
+        "changes": 57
+      },
+      "rust": {
+        "operation_id": "rust-00000004",
+        "changes": 59
+      }
+    },
+    {
+      "index": 3,
+      "time_epoch_ms": 1792263541496,
+      "transactions": 1,
+      "cdc_equal": true,
+      "java": {
+        "operation_id": "java-00000010",
+        "changes": 250
+      },
+      "rust": {
+        "operation_id": "rust-00000015",
+        "changes": 250
+      }
+    },
+    {
+      "index": 4,
+      "time_epoch_ms": 1792263541497,
+      "transactions": 1,
+      "cdc_equal": true,
+      "java": {
+        "operation_id": "java-00000011",
+        "changes": 36
+      },
+      "rust": {
+        "operation_id": "rust-00000016",
+        "changes": 36
+      }
+    },
+    {
+      "index": 5,
+      "time_epoch_ms": 1792263541498,
+      "transactions": 1,
+      "cdc_equal": true,
+      "java": {
+        "operation_id": "java-00000013",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000018",
+        "changes": 2
+      }
+    },
+    {
+      "index": 6,
+      "time_epoch_ms": 1792263541499,
+      "transactions": 1,
+      "cdc_equal": true,
+      "java": {
+        "operation_id": "java-00000014",
+        "changes": 92
+      },
+      "rust": {
+        "operation_id": "rust-00000019",
+        "changes": 92
+      }
+    },
+    {
+      "index": 7,
+      "time_epoch_ms": 1792263541500,
+      "transactions": 1,
+      "cdc_equal": true,
+      "java": {
+        "operation_id": "java-00000016",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000021",
+        "changes": 2
+      }
+    },
+    {
+      "index": 8,
+      "time_epoch_ms": 1792263541501,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000015",
+        "changes": 58
+      },
+      "rust": {
+        "operation_id": "rust-00000020",
+        "changes": 132
+      }
+    },
+    {
+      "index": 9,
+      "time_epoch_ms": 1792263541502,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000017",
+        "changes": 56
+      },
+      "rust": {
+        "operation_id": "rust-00000023",
+        "changes": 56
+      }
+    },
+    {
+      "index": 10,
+      "time_epoch_ms": 1792263541503,
+      "transactions": 1,
+      "cdc_equal": true,
+      "java": {
+        "operation_id": "java-00000018",
+        "changes": 112
+      },
+      "rust": {
+        "operation_id": "rust-00000024",
+        "changes": 112
+      }
+    },
+    {
+      "index": 11,
+      "time_epoch_ms": 1792263541504,
+      "transactions": 1,
+      "cdc_equal": true,
+      "java": {
+        "operation_id": "java-00000020",
+        "changes": 14
+      },
+      "rust": {
+        "operation_id": "rust-00000026",
+        "changes": 14
+      }
+    },
+    {
+      "index": 12,
+      "time_epoch_ms": 1792263541505,
+      "transactions": 1,
+      "cdc_equal": true,
+      "java": {
+        "operation_id": "java-00000021",
+        "changes": 36
+      },
+      "rust": {
+        "operation_id": "rust-00000027",
+        "changes": 36
+      }
+    },
+    {
+      "index": 13,
+      "time_epoch_ms": 1792263541506,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000022",
+        "changes": 112
+      },
+      "rust": {
+        "operation_id": "rust-00000028",
+        "changes": 112
+      }
+    },
+    {
+      "index": 14,
+      "time_epoch_ms": 1792263541507,
+      "transactions": 1,
+      "cdc_equal": true,
+      "java": {
+        "operation_id": "java-00000023",
+        "changes": 340
+      },
+      "rust": {
+        "operation_id": "rust-00000029",
+        "changes": 340
+      }
+    },
+    {
+      "index": 15,
+      "time_epoch_ms": 1792263541508,
+      "transactions": 1,
+      "cdc_equal": true,
+      "java": {
+        "operation_id": "java-00000024",
+        "changes": 30
+      },
+      "rust": {
+        "operation_id": "rust-00000030",
+        "changes": 30
+      }
+    },
+    {
+      "index": 16,
+      "time_epoch_ms": 1792263541509,
+      "transactions": 1,
+      "cdc_equal": true,
+      "java": {
+        "operation_id": "java-00000025",
+        "changes": 484
+      },
+      "rust": {
+        "operation_id": "rust-00000031",
+        "changes": 484
+      }
+    },
+    {
+      "index": 17,
+      "time_epoch_ms": 1792263541510,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000026",
+        "changes": 48
+      },
+      "rust": {
+        "operation_id": "rust-00000032",
+        "changes": 56
+      }
+    },
+    {
+      "index": 18,
+      "time_epoch_ms": 1792263541511,
+      "transactions": 1,
+      "cdc_equal": true,
+      "java": {
+        "operation_id": "java-00000027",
+        "changes": 62
+      },
+      "rust": {
+        "operation_id": "rust-00000033",
+        "changes": 62
+      }
+    },
+    {
+      "index": 19,
+      "time_epoch_ms": 1792263541512,
+      "transactions": 1,
+      "cdc_equal": true,
+      "java": {
+        "operation_id": "java-00000028",
+        "changes": 784
+      },
+      "rust": {
+        "operation_id": "rust-00000034",
+        "changes": 784
+      }
+    },
+    {
+      "index": 20,
+      "time_epoch_ms": 1792263541513,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000029",
+        "changes": 86
+      },
+      "rust": {
+        "operation_id": "rust-00000035",
+        "changes": 88
+      }
+    },
+    {
+      "index": 21,
+      "time_epoch_ms": 1792263541514,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000030",
+        "changes": 18
+      },
+      "rust": {
+        "operation_id": "rust-00000037",
+        "changes": 18
+      }
+    },
+    {
+      "index": 22,
+      "time_epoch_ms": 1792263541515,
+      "transactions": 1,
+      "cdc_equal": true,
+      "java": {
+        "operation_id": "java-00000031",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000038",
+        "changes": 2
+      }
+    },
+    {
+      "index": 23,
+      "time_epoch_ms": 1792263541516,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000032",
+        "changes": 24
+      },
+      "rust": {
+        "operation_id": "rust-00000039",
+        "changes": 22
+      }
+    },
+    {
+      "index": 24,
+      "time_epoch_ms": 1792263541517,
+      "transactions": 1,
+      "cdc_equal": true,
+      "java": {
+        "operation_id": "java-00000033",
+        "changes": 14
+      },
+      "rust": {
+        "operation_id": "rust-00000040",
+        "changes": 14
+      }
+    },
+    {
+      "index": 25,
+      "time_epoch_ms": 1792263541518,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000034",
+        "changes": 20
+      },
+      "rust": {
+        "operation_id": "rust-00000041",
+        "changes": 20
+      }
+    },
+    {
+      "index": 26,
+      "time_epoch_ms": 1792263541519,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000035",
+        "changes": 32
+      },
+      "rust": {
+        "operation_id": "rust-00000042",
+        "changes": 16
+      }
+    },
+    {
+      "index": 27,
+      "time_epoch_ms": 1792263541520,
+      "transactions": 1,
+      "cdc_equal": true,
+      "java": {
+        "operation_id": "java-00000037",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000045",
+        "changes": 2
+      }
+    },
+    {
+      "index": 28,
+      "time_epoch_ms": 1792263541521,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000038",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000046",
+        "changes": 2
+      }
+    },
+    {
+      "index": 29,
+      "time_epoch_ms": 1792263541522,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000039",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000047",
+        "changes": 2
+      }
+    },
+    {
+      "index": 30,
+      "time_epoch_ms": 1792263541523,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000040",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000048",
+        "changes": 2
+      }
+    },
+    {
+      "index": 31,
+      "time_epoch_ms": 1792263541524,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000041",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000049",
+        "changes": 2
+      }
+    },
+    {
+      "index": 32,
+      "time_epoch_ms": 1792263541525,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000042",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000051",
+        "changes": 2
+      }
+    },
+    {
+      "index": 33,
+      "time_epoch_ms": 1792263541526,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000043",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000052",
+        "changes": 2
+      }
+    },
+    {
+      "index": 34,
+      "time_epoch_ms": 1792263541527,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000044",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000053",
+        "changes": 2
+      }
+    },
+    {
+      "index": 35,
+      "time_epoch_ms": 1792263541528,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000045",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000054",
+        "changes": 2
+      }
+    },
+    {
+      "index": 36,
+      "time_epoch_ms": 1792263541529,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000046",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000055",
+        "changes": 2
+      }
+    },
+    {
+      "index": 37,
+      "time_epoch_ms": 1792263541530,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000047",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000056",
+        "changes": 2
+      }
+    },
+    {
+      "index": 38,
+      "time_epoch_ms": 1792263541531,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000048",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000057",
+        "changes": 2
+      }
+    },
+    {
+      "index": 39,
+      "time_epoch_ms": 1792263541532,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000049",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000058",
+        "changes": 2
+      }
+    },
+    {
+      "index": 40,
+      "time_epoch_ms": 1792263541533,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000050",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000059",
+        "changes": 2
+      }
+    },
+    {
+      "index": 41,
+      "time_epoch_ms": 1792263541534,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000051",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000060",
+        "changes": 2
+      }
+    },
+    {
+      "index": 42,
+      "time_epoch_ms": 1792263541535,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000052",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000061",
+        "changes": 2
+      }
+    },
+    {
+      "index": 43,
+      "time_epoch_ms": 1792263541536,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000053",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000062",
+        "changes": 2
+      }
+    },
+    {
+      "index": 44,
+      "time_epoch_ms": 1792263541537,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000054",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000063",
+        "changes": 2
+      }
+    },
+    {
+      "index": 45,
+      "time_epoch_ms": 1792263541538,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000055",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000064",
+        "changes": 2
+      }
+    },
+    {
+      "index": 46,
+      "time_epoch_ms": 1792263541539,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000056",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000065",
+        "changes": 2
+      }
+    },
+    {
+      "index": 47,
+      "time_epoch_ms": 1792263541540,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000057",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000066",
+        "changes": 2
+      }
+    },
+    {
+      "index": 48,
+      "time_epoch_ms": 1792263541541,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000058",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000067",
+        "changes": 2
+      }
+    },
+    {
+      "index": 49,
+      "time_epoch_ms": 1792263541542,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000059",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000068",
+        "changes": 2
+      }
+    },
+    {
+      "index": 50,
+      "time_epoch_ms": 1792263541543,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000060",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000069",
+        "changes": 2
+      }
+    },
+    {
+      "index": 51,
+      "time_epoch_ms": 1792263541544,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000061",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000070",
+        "changes": 2
+      }
+    },
+    {
+      "index": 52,
+      "time_epoch_ms": 1792263541545,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000062",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000071",
+        "changes": 2
+      }
+    },
+    {
+      "index": 53,
+      "time_epoch_ms": 1792263541546,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000063",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000072",
+        "changes": 2
+      }
+    },
+    {
+      "index": 54,
+      "time_epoch_ms": 1792263541547,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000064",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000073",
+        "changes": 2
+      }
+    },
+    {
+      "index": 55,
+      "time_epoch_ms": 1792263541548,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000065",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000074",
+        "changes": 2
+      }
+    },
+    {
+      "index": 56,
+      "time_epoch_ms": 1792263541549,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000066",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000075",
+        "changes": 2
+      }
+    },
+    {
+      "index": 57,
+      "time_epoch_ms": 1792263541550,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000067",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000076",
+        "changes": 2
+      }
+    },
+    {
+      "index": 58,
+      "time_epoch_ms": 1792263541551,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000068",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000077",
+        "changes": 2
+      }
+    },
+    {
+      "index": 59,
+      "time_epoch_ms": 1792263541552,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000069",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000078",
+        "changes": 2
+      }
+    },
+    {
+      "index": 60,
+      "time_epoch_ms": 1792263541553,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000070",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000079",
+        "changes": 2
+      }
+    },
+    {
+      "index": 61,
+      "time_epoch_ms": 1792263541554,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000071",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000080",
+        "changes": 2
+      }
+    },
+    {
+      "index": 62,
+      "time_epoch_ms": 1792263541555,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000072",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000081",
+        "changes": 2
+      }
+    },
+    {
+      "index": 63,
+      "time_epoch_ms": 1792263541556,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000073",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000082",
+        "changes": 2
+      }
+    },
+    {
+      "index": 64,
+      "time_epoch_ms": 1792263541557,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000074",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000083",
+        "changes": 2
+      }
+    },
+    {
+      "index": 65,
+      "time_epoch_ms": 1792263541558,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000075",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000084",
+        "changes": 2
+      }
+    },
+    {
+      "index": 66,
+      "time_epoch_ms": 1792263541559,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000076",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000085",
+        "changes": 2
+      }
+    },
+    {
+      "index": 67,
+      "time_epoch_ms": 1792263541560,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000077",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000086",
+        "changes": 2
+      }
+    },
+    {
+      "index": 68,
+      "time_epoch_ms": 1792263541561,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000078",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000087",
+        "changes": 2
+      }
+    },
+    {
+      "index": 69,
+      "time_epoch_ms": 1792263541562,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000079",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000088",
+        "changes": 2
+      }
+    },
+    {
+      "index": 70,
+      "time_epoch_ms": 1792263541563,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000080",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000089",
+        "changes": 2
+      }
+    },
+    {
+      "index": 71,
+      "time_epoch_ms": 1792263541564,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000081",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000090",
+        "changes": 2
+      }
+    },
+    {
+      "index": 72,
+      "time_epoch_ms": 1792263541565,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000082",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000091",
+        "changes": 2
+      }
+    },
+    {
+      "index": 73,
+      "time_epoch_ms": 1792263541566,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000083",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000092",
+        "changes": 2
+      }
+    },
+    {
+      "index": 74,
+      "time_epoch_ms": 1792263541567,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000084",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000093",
+        "changes": 2
+      }
+    },
+    {
+      "index": 75,
+      "time_epoch_ms": 1792263541568,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000085",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000094",
+        "changes": 2
+      }
+    },
+    {
+      "index": 76,
+      "time_epoch_ms": 1792263541569,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000086",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000095",
+        "changes": 2
+      }
+    },
+    {
+      "index": 77,
+      "time_epoch_ms": 1792263541570,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000087",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000096",
+        "changes": 2
+      }
+    },
+    {
+      "index": 78,
+      "time_epoch_ms": 1792263541571,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000088",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000097",
+        "changes": 2
+      }
+    },
+    {
+      "index": 79,
+      "time_epoch_ms": 1792263541572,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000089",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000098",
+        "changes": 2
+      }
+    },
+    {
+      "index": 80,
+      "time_epoch_ms": 1792263541573,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000090",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000099",
+        "changes": 2
+      }
+    },
+    {
+      "index": 81,
+      "time_epoch_ms": 1792263541574,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000091",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000100",
+        "changes": 2
+      }
+    },
+    {
+      "index": 82,
+      "time_epoch_ms": 1792263541575,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000092",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000101",
+        "changes": 2
+      }
+    },
+    {
+      "index": 83,
+      "time_epoch_ms": 1792263541576,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000093",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000102",
+        "changes": 2
+      }
+    },
+    {
+      "index": 84,
+      "time_epoch_ms": 1792263541577,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000094",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000103",
+        "changes": 2
+      }
+    },
+    {
+      "index": 85,
+      "time_epoch_ms": 1792263541578,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000095",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000105",
+        "changes": 2
+      }
+    },
+    {
+      "index": 86,
+      "time_epoch_ms": 1792263541579,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000096",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000106",
+        "changes": 2
+      }
+    },
+    {
+      "index": 87,
+      "time_epoch_ms": 1792263541580,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000097",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000107",
+        "changes": 2
+      }
+    },
+    {
+      "index": 88,
+      "time_epoch_ms": 1792263541581,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000098",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000108",
+        "changes": 2
+      }
+    },
+    {
+      "index": 89,
+      "time_epoch_ms": 1792263541582,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000099",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000109",
+        "changes": 2
+      }
+    },
+    {
+      "index": 90,
+      "time_epoch_ms": 1792263541583,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000100",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000110",
+        "changes": 2
+      }
+    },
+    {
+      "index": 91,
+      "time_epoch_ms": 1792263541584,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000101",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000112",
+        "changes": 2
+      }
+    },
+    {
+      "index": 92,
+      "time_epoch_ms": 1792263541585,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000102",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000113",
+        "changes": 2
+      }
+    },
+    {
+      "index": 93,
+      "time_epoch_ms": 1792263541586,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000103",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000114",
+        "changes": 2
+      }
+    },
+    {
+      "index": 94,
+      "time_epoch_ms": 1792263541587,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000104",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000115",
+        "changes": 2
+      }
+    },
+    {
+      "index": 95,
+      "time_epoch_ms": 1792263541588,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000105",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000116",
+        "changes": 2
+      }
+    },
+    {
+      "index": 96,
+      "time_epoch_ms": 1792263541589,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000106",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000117",
+        "changes": 2
+      }
+    },
+    {
+      "index": 97,
+      "time_epoch_ms": 1792263541590,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000107",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000118",
+        "changes": 2
+      }
+    },
+    {
+      "index": 98,
+      "time_epoch_ms": 1792263541591,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000108",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000119",
+        "changes": 2
+      }
+    },
+    {
+      "index": 99,
+      "time_epoch_ms": 1792263541592,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000109",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000120",
+        "changes": 2
+      }
+    },
+    {
+      "index": 100,
+      "time_epoch_ms": 1792263541593,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000110",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000121",
+        "changes": 2
+      }
+    },
+    {
+      "index": 101,
+      "time_epoch_ms": 1792263541594,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000111",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000122",
+        "changes": 2
+      }
+    },
+    {
+      "index": 102,
+      "time_epoch_ms": 1792263541595,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000112",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000123",
+        "changes": 2
+      }
+    },
+    {
+      "index": 103,
+      "time_epoch_ms": 1792263541596,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000113",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000124",
+        "changes": 2
+      }
+    },
+    {
+      "index": 104,
+      "time_epoch_ms": 1792263541597,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000114",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000125",
+        "changes": 2
+      }
+    },
+    {
+      "index": 105,
+      "time_epoch_ms": 1792263541598,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000115",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000126",
+        "changes": 2
+      }
+    },
+    {
+      "index": 106,
+      "time_epoch_ms": 1792263541599,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000116",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000127",
+        "changes": 2
+      }
+    },
+    {
+      "index": 107,
+      "time_epoch_ms": 1792263541600,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000117",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000128",
+        "changes": 2
+      }
+    },
+    {
+      "index": 108,
+      "time_epoch_ms": 1792263541601,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000118",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000129",
+        "changes": 2
+      }
+    },
+    {
+      "index": 109,
+      "time_epoch_ms": 1792263541602,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000119",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000130",
+        "changes": 2
+      }
+    },
+    {
+      "index": 110,
+      "time_epoch_ms": 1792263541603,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000120",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000132",
+        "changes": 2
+      }
+    },
+    {
+      "index": 111,
+      "time_epoch_ms": 1792263541604,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000121",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000133",
+        "changes": 2
+      }
+    },
+    {
+      "index": 112,
+      "time_epoch_ms": 1792263541605,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000122",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000134",
+        "changes": 2
+      }
+    },
+    {
+      "index": 113,
+      "time_epoch_ms": 1792263541606,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000123",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000135",
+        "changes": 2
+      }
+    },
+    {
+      "index": 114,
+      "time_epoch_ms": 1792263541607,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000126",
+        "changes": 8
+      },
+      "rust": {
+        "operation_id": "rust-00000142",
+        "changes": 3
+      }
+    },
+    {
+      "index": 115,
+      "time_epoch_ms": 1792263541608,
+      "transactions": 1,
+      "cdc_equal": true,
+      "java": {
+        "operation_id": "java-00000129",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000149",
+        "changes": 2
+      }
+    },
+    {
+      "index": 116,
+      "time_epoch_ms": 1792263541609,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000130",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00000150",
+        "changes": 2
+      }
+    }
+  ]
+}

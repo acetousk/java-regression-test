@@ -1,0 +1,13 @@
+{
+  "operation_id": "java-00000016",
+  "transactions": [
+    {
+      "operation_id": "java-00000016",
+      "outcome": "committed",
+      "changes": [
+        "table public.sequence_value_item: INSERT: seq_name[text]:'moqui.entity.EntityAuditLog' seq_num[numeric]:100050 last_updated_stamp[timestamp without time zone]:'2026-10-17 18:59:01.5'",
+        "table moqui_regression.events: INSERT: payload[text]:'{\"kind\" : \"insert\", \"table\" : \"public.sequence_value_item\", \"old\" : null, \"new\" : \"{\\\"seq_name\\\":\\\"moqui.entity.EntityAuditLog\\\",\\\"seq_num\\\":100050,\\\"last_updated_stamp\\\":\\\"2026-10-17T18:59:01.5\\\"}\"}'"
+      ]
+    }
+  ]
+}

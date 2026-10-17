@@ -1,0 +1,13 @@
+{
+  "operation_id": "rust-00000149",
+  "transactions": [
+    {
+      "operation_id": "rust-00000149",
+      "outcome": "committed",
+      "changes": [
+        "table public.sequence_value_item: UPDATE: seq_name[text]:'moqui.server.ArtifactHitBin' seq_num[numeric]:100201 last_updated_stamp[timestamp without time zone]:'2026-10-17 18:59:01.608'",
+        "table moqui_regression.events: INSERT: payload[text]:'{\"kind\" : \"update\", \"table\" : \"public.sequence_value_item\", \"old\" : \"{\\\"seq_name\\\":\\\"moqui.server.ArtifactHitBin\\\",\\\"seq_num\\\":100100,\\\"last_updated_stamp\\\":\\\"2026-10-17T18:59:01.52\\\"}\", \"new\" : \"{\\\"seq_name\\\":\\\"moqui.server.ArtifactHitBin\\\",\\\"seq_num\\\":100201,\\\"last_updated_stamp\\\":\\\"2026-10-17T18:59:01.608\\\"}\"}'"
+      ]
+    }
+  ]
+}

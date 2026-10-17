@@ -1,0 +1,1669 @@
+{
+  "artifact_bin_operations": {
+    "diagnostic_only": true,
+    "operation_bin_multisets_equal": false,
+    "java_bins": 87,
+    "rust_bins": 93,
+    "differing_operations": [
+      {
+        "artifact_type": "AT_ENTITY",
+        "artifact_sub_type": "create",
+        "artifact_name": "moqui.basic.Enumeration",
+        "java_hit_counts": [
+          "186"
+        ],
+        "rust_hit_counts": [
+          "219"
+        ]
+      },
+      {
+        "artifact_type": "AT_ENTITY",
+        "artifact_sub_type": "create",
+        "artifact_name": "moqui.basic.EnumerationType",
+        "java_hit_counts": [
+          "37"
+        ],
+        "rust_hit_counts": [
+          "41"
+        ]
+      },
+      {
+        "artifact_type": "AT_ENTITY",
+        "artifact_sub_type": "create",
+        "artifact_name": "moqui.screen.ScreenThemeResource",
+        "java_hit_counts": [
+          "26"
+        ],
+        "rust_hit_counts": [
+          "17"
+        ]
+      },
+      {
+        "artifact_type": "AT_ENTITY",
+        "artifact_sub_type": "create",
+        "artifact_name": "moqui.security.UserGroupPermission",
+        "java_hit_counts": [
+          "10"
+        ],
+        "rust_hit_counts": [
+          "12"
+        ]
+      },
+      {
+        "artifact_type": "AT_ENTITY",
+        "artifact_sub_type": "create",
+        "artifact_name": "moqui.security.UserPermission",
+        "java_hit_counts": [
+          "10"
+        ],
+        "rust_hit_counts": [
+          "12"
+        ]
+      },
+      {
+        "artifact_type": "AT_ENTITY",
+        "artifact_sub_type": "create",
+        "artifact_name": "moqui.service.job.ServiceJob",
+        "java_hit_counts": [
+          "14"
+        ],
+        "rust_hit_counts": [
+          "16"
+        ]
+      },
+      {
+        "artifact_type": "AT_ENTITY",
+        "artifact_sub_type": "create",
+        "artifact_name": "moqui.service.job.ServiceJobParameter",
+        "java_hit_counts": [
+          "12"
+        ],
+        "rust_hit_counts": [
+          "14"
+        ]
+      },
+      {
+        "artifact_type": "AT_ENTITY",
+        "artifact_sub_type": "create",
+        "artifact_name": "moqui.service.message.SystemMessageRemote",
+        "java_hit_counts": [],
+        "rust_hit_counts": [
+          "1"
+        ]
+      },
+      {
+        "artifact_type": "AT_ENTITY",
+        "artifact_sub_type": "create",
+        "artifact_name": "moqui.service.message.SystemMessageType",
+        "java_hit_counts": [],
+        "rust_hit_counts": [
+          "1"
+        ]
+      },
+      {
+        "artifact_type": "AT_ENTITY",
+        "artifact_sub_type": "load-report",
+        "artifact_name": "moqui.basic.Enumeration",
+        "java_hit_counts": [],
+        "rust_hit_counts": [
+          "1"
+        ]
+      },
+      {
+        "artifact_type": "AT_ENTITY",
+        "artifact_sub_type": "load-report",
+        "artifact_name": "moqui.security.UserGroupPermission",
+        "java_hit_counts": [],
+        "rust_hit_counts": [
+          "1"
+        ]
+      },
+      {
+        "artifact_type": "AT_ENTITY",
+        "artifact_sub_type": "refresh",
+        "artifact_name": "moqui.basic.Enumeration",
+        "java_hit_counts": [
+          "186"
+        ],
+        "rust_hit_counts": [
+          "219"
+        ]
+      },
+      {
+        "artifact_type": "AT_ENTITY",
+        "artifact_sub_type": "refresh",
+        "artifact_name": "moqui.basic.EnumerationType",
+        "java_hit_counts": [
+          "37"
+        ],
+        "rust_hit_counts": [
+          "41"
+        ]
+      },
+      {
+        "artifact_type": "AT_ENTITY",
+        "artifact_sub_type": "refresh",
+        "artifact_name": "moqui.screen.ScreenThemeResource",
+        "java_hit_counts": [
+          "26"
+        ],
+        "rust_hit_counts": [
+          "17"
+        ]
+      },
+      {
+        "artifact_type": "AT_ENTITY",
+        "artifact_sub_type": "refresh",
+        "artifact_name": "moqui.security.UserGroupPermission",
+        "java_hit_counts": [
+          "10"
+        ],
+        "rust_hit_counts": [
+          "12"
+        ]
+      },
+      {
+        "artifact_type": "AT_ENTITY",
+        "artifact_sub_type": "refresh",
+        "artifact_name": "moqui.security.UserPermission",
+        "java_hit_counts": [
+          "10"
+        ],
+        "rust_hit_counts": [
+          "12"
+        ]
+      },
+      {
+        "artifact_type": "AT_ENTITY",
+        "artifact_sub_type": "refresh",
+        "artifact_name": "moqui.service.job.ServiceJob",
+        "java_hit_counts": [
+          "14"
+        ],
+        "rust_hit_counts": [
+          "16"
+        ]
+      },
+      {
+        "artifact_type": "AT_ENTITY",
+        "artifact_sub_type": "refresh",
+        "artifact_name": "moqui.service.job.ServiceJobParameter",
+        "java_hit_counts": [
+          "12"
+        ],
+        "rust_hit_counts": [
+          "14"
+        ]
+      },
+      {
+        "artifact_type": "AT_ENTITY",
+        "artifact_sub_type": "refresh",
+        "artifact_name": "moqui.service.message.SystemMessageRemote",
+        "java_hit_counts": [],
+        "rust_hit_counts": [
+          "1"
+        ]
+      },
+      {
+        "artifact_type": "AT_ENTITY",
+        "artifact_sub_type": "refresh",
+        "artifact_name": "moqui.service.message.SystemMessageType",
+        "java_hit_counts": [],
+        "rust_hit_counts": [
+          "1"
+        ]
+      }
+    ]
+  },
+  "relation_inventory_available": true,
+  "java_only_relations": [],
+  "rust_only_relations": [
+    "public.auth_flow",
+    "public.auth_flow_field_map",
+    "public.auth_flow_role_map",
+    "public.cluster_member",
+    "public.cluster_message",
+    "public.data_feed_pending",
+    "public.http_session",
+    "public.oauth_flow",
+    "public.oidc_flow",
+    "public.saml_flow",
+    "public.user_ssh_key",
+    "search.document_index",
+    "search.moqui_http_log",
+    "search.moqui_logs"
+  ],
+  "shared_relation_differences": {
+    "public.data_document_field": {
+      "java": {
+        "relation": "public.data_document_field",
+        "kind": "r",
+        "columns": [
+          {
+            "name": "data_document_id",
+            "type": "character varying(40)",
+            "not_null": true,
+            "default": null
+          },
+          {
+            "name": "field_seq_id",
+            "type": "character varying(40)",
+            "not_null": true,
+            "default": null
+          },
+          {
+            "name": "field_path",
+            "type": "text",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "field_name_alias",
+            "type": "text",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "field_type",
+            "type": "character varying(63)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "sortable",
+            "type": "character(1)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "default_display",
+            "type": "character(1)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "function_name",
+            "type": "character varying(63)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "sequence_num",
+            "type": "numeric(20,0)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "last_updated_stamp",
+            "type": "timestamp without time zone",
+            "not_null": false,
+            "default": null
+          }
+        ]
+      },
+      "rust": {
+        "relation": "public.data_document_field",
+        "kind": "r",
+        "columns": [
+          {
+            "name": "data_document_id",
+            "type": "character varying(40)",
+            "not_null": true,
+            "default": null
+          },
+          {
+            "name": "field_seq_id",
+            "type": "character varying(40)",
+            "not_null": true,
+            "default": null
+          },
+          {
+            "name": "field_path",
+            "type": "text",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "field_name_alias",
+            "type": "text",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "field_type",
+            "type": "character varying(63)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "sortable",
+            "type": "character(1)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "default_display",
+            "type": "character(1)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "function_name",
+            "type": "character varying(63)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "search_role",
+            "type": "character varying(63)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "search_weight",
+            "type": "character(1)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "sequence_num",
+            "type": "numeric(20,0)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "last_updated_stamp",
+            "type": "timestamp without time zone",
+            "not_null": false,
+            "default": null
+          }
+        ]
+      }
+    },
+    "public.llm_conversation": {
+      "java": {
+        "relation": "public.llm_conversation",
+        "kind": "r",
+        "columns": [
+          {
+            "name": "conversation_id",
+            "type": "character varying(40)",
+            "not_null": true,
+            "default": null
+          },
+          {
+            "name": "context_id",
+            "type": "character varying(40)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "profile_name",
+            "type": "text",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "user_id",
+            "type": "character varying(40)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "visit_id",
+            "type": "character varying(40)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "status_id",
+            "type": "character varying(40)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "title",
+            "type": "text",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "created_date",
+            "type": "timestamp without time zone",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "purpose",
+            "type": "character varying(63)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "summary",
+            "type": "text",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "search_text",
+            "type": "text",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "has_canvas",
+            "type": "character(1)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "summary_from_llm",
+            "type": "character(1)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "canvas_json",
+            "type": "text",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "system_text",
+            "type": "text",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "window_policy_json",
+            "type": "text",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "pending_tool_calls_json",
+            "type": "text",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "attributes_json",
+            "type": "text",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "last_message_date",
+            "type": "timestamp without time zone",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "message_count",
+            "type": "numeric(20,0)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "turn_owner",
+            "type": "character varying(63)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "turn_lease_thru",
+            "type": "timestamp without time zone",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "last_updated_stamp",
+            "type": "timestamp without time zone",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "search_text_tsv",
+            "type": "tsvector",
+            "not_null": false,
+            "default": "to_tsvector('english'::regconfig, COALESCE(search_text, ''::text))"
+          }
+        ]
+      },
+      "rust": {
+        "relation": "public.llm_conversation",
+        "kind": "r",
+        "columns": [
+          {
+            "name": "conversation_id",
+            "type": "character varying(40)",
+            "not_null": true,
+            "default": null
+          },
+          {
+            "name": "context_id",
+            "type": "character varying(40)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "profile_name",
+            "type": "text",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "user_id",
+            "type": "character varying(40)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "visit_id",
+            "type": "character varying(40)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "status_id",
+            "type": "character varying(40)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "title",
+            "type": "text",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "created_date",
+            "type": "timestamp without time zone",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "purpose",
+            "type": "character varying(63)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "summary",
+            "type": "text",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "search_text",
+            "type": "text",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "has_canvas",
+            "type": "character(1)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "summary_from_llm",
+            "type": "character(1)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "canvas_json",
+            "type": "text",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "system_text",
+            "type": "text",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "window_policy_json",
+            "type": "text",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "pending_tool_calls_json",
+            "type": "text",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "attributes_json",
+            "type": "text",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "last_message_date",
+            "type": "timestamp without time zone",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "message_count",
+            "type": "numeric(20,0)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "turn_owner",
+            "type": "character varying(63)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "turn_lease_thru",
+            "type": "timestamp without time zone",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "last_updated_stamp",
+            "type": "timestamp without time zone",
+            "not_null": false,
+            "default": null
+          }
+        ]
+      }
+    },
+    "public.llm_skill": {
+      "java": {
+        "relation": "public.llm_skill",
+        "kind": "r",
+        "columns": [
+          {
+            "name": "skill_id",
+            "type": "character varying(40)",
+            "not_null": true,
+            "default": null
+          },
+          {
+            "name": "name",
+            "type": "text",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "title",
+            "type": "text",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "description",
+            "type": "text",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "summary",
+            "type": "text",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "body",
+            "type": "text",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "risk_id",
+            "type": "character varying(40)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "status_id",
+            "type": "character varying(40)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "provenance_id",
+            "type": "character varying(40)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "speaker",
+            "type": "character varying(63)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "warrant",
+            "type": "text",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "source_location",
+            "type": "text",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "kind",
+            "type": "character varying(63)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "version",
+            "type": "numeric(20,0)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "superseded_skill_id",
+            "type": "character varying(40)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "world_success_count",
+            "type": "numeric(20,0)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "sim_success_count",
+            "type": "numeric(20,0)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "last_used_date",
+            "type": "timestamp without time zone",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "last_updated_stamp",
+            "type": "timestamp without time zone",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "description_tsv",
+            "type": "tsvector",
+            "not_null": false,
+            "default": "to_tsvector('english'::regconfig, COALESCE(description, ''::text))"
+          },
+          {
+            "name": "body_tsv",
+            "type": "tsvector",
+            "not_null": false,
+            "default": "to_tsvector('english'::regconfig, COALESCE(body, ''::text))"
+          }
+        ]
+      },
+      "rust": {
+        "relation": "public.llm_skill",
+        "kind": "r",
+        "columns": [
+          {
+            "name": "skill_id",
+            "type": "character varying(40)",
+            "not_null": true,
+            "default": null
+          },
+          {
+            "name": "name",
+            "type": "text",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "title",
+            "type": "text",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "description",
+            "type": "text",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "summary",
+            "type": "text",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "body",
+            "type": "text",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "risk_id",
+            "type": "character varying(40)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "status_id",
+            "type": "character varying(40)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "provenance_id",
+            "type": "character varying(40)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "speaker",
+            "type": "character varying(63)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "warrant",
+            "type": "text",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "source_location",
+            "type": "text",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "kind",
+            "type": "character varying(63)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "version",
+            "type": "numeric(20,0)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "superseded_skill_id",
+            "type": "character varying(40)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "world_success_count",
+            "type": "numeric(20,0)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "sim_success_count",
+            "type": "numeric(20,0)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "last_used_date",
+            "type": "timestamp without time zone",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "last_updated_stamp",
+            "type": "timestamp without time zone",
+            "not_null": false,
+            "default": null
+          }
+        ]
+      }
+    },
+    "public.system_message_remote": {
+      "java": {
+        "relation": "public.system_message_remote",
+        "kind": "r",
+        "columns": [
+          {
+            "name": "system_message_remote_id",
+            "type": "character varying(40)",
+            "not_null": true,
+            "default": null
+          },
+          {
+            "name": "description",
+            "type": "text",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "send_url",
+            "type": "text",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "receive_url",
+            "type": "text",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "remote_charset",
+            "type": "character varying(63)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "remote_attributes",
+            "type": "character(1)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "send_service_name",
+            "type": "text",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "username",
+            "type": "text",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "password",
+            "type": "text",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "public_key",
+            "type": "text",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "private_key",
+            "type": "text",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "remote_public_key",
+            "type": "text",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "shared_secret",
+            "type": "text",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "send_shared_secret",
+            "type": "text",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "auth_header_name",
+            "type": "text",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "message_auth_enum_id",
+            "type": "character varying(40)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "send_auth_enum_id",
+            "type": "character varying(40)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "system_message_type_id",
+            "type": "character varying(40)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "internal_id",
+            "type": "character varying(63)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "internal_id_type",
+            "type": "character varying(63)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "internal_app_code",
+            "type": "text",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "remote_id",
+            "type": "character varying(63)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "remote_id_type",
+            "type": "character varying(63)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "remote_app_code",
+            "type": "text",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "ack_requested",
+            "type": "character varying(63)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "usage_code",
+            "type": "character varying(63)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "segment_terminator",
+            "type": "character(1)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "element_separator",
+            "type": "character(1)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "component_delimiter",
+            "type": "character(1)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "escape_character",
+            "type": "character(1)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "pre_auth_message_remote_id",
+            "type": "character varying(40)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "last_updated_stamp",
+            "type": "timestamp without time zone",
+            "not_null": false,
+            "default": null
+          }
+        ]
+      },
+      "rust": {
+        "relation": "public.system_message_remote",
+        "kind": "r",
+        "columns": [
+          {
+            "name": "system_message_remote_id",
+            "type": "character varying(40)",
+            "not_null": true,
+            "default": null
+          },
+          {
+            "name": "description",
+            "type": "text",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "send_url",
+            "type": "text",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "receive_url",
+            "type": "text",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "remote_charset",
+            "type": "character varying(63)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "remote_attributes",
+            "type": "character(1)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "send_service_name",
+            "type": "text",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "username",
+            "type": "text",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "password",
+            "type": "text",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "public_key",
+            "type": "text",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "private_key",
+            "type": "text",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "ssh_host_key_fingerprint",
+            "type": "text",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "remote_public_key",
+            "type": "text",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "shared_secret",
+            "type": "text",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "send_shared_secret",
+            "type": "text",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "auth_header_name",
+            "type": "text",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "message_auth_enum_id",
+            "type": "character varying(40)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "send_auth_enum_id",
+            "type": "character varying(40)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "system_message_type_id",
+            "type": "character varying(40)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "internal_id",
+            "type": "character varying(63)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "internal_id_type",
+            "type": "character varying(63)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "internal_app_code",
+            "type": "text",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "remote_id",
+            "type": "character varying(63)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "remote_id_type",
+            "type": "character varying(63)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "remote_app_code",
+            "type": "text",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "ack_requested",
+            "type": "character varying(63)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "usage_code",
+            "type": "character varying(63)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "segment_terminator",
+            "type": "character(1)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "element_separator",
+            "type": "character(1)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "component_delimiter",
+            "type": "character(1)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "escape_character",
+            "type": "character(1)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "pre_auth_message_remote_id",
+            "type": "character varying(40)",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "last_updated_stamp",
+            "type": "timestamp without time zone",
+            "not_null": false,
+            "default": null
+          }
+        ]
+      }
+    },
+    "public.test_fts": {
+      "java": {
+        "relation": "public.test_fts",
+        "kind": "r",
+        "columns": [
+          {
+            "name": "test_fts_id",
+            "type": "character varying(40)",
+            "not_null": true,
+            "default": null
+          },
+          {
+            "name": "note",
+            "type": "text",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "body",
+            "type": "text",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "last_updated_stamp",
+            "type": "timestamp without time zone",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "body_tsv",
+            "type": "tsvector",
+            "not_null": false,
+            "default": "to_tsvector('english'::regconfig, COALESCE(body, ''::text))"
+          }
+        ]
+      },
+      "rust": {
+        "relation": "public.test_fts",
+        "kind": "r",
+        "columns": [
+          {
+            "name": "test_fts_id",
+            "type": "character varying(40)",
+            "not_null": true,
+            "default": null
+          },
+          {
+            "name": "note",
+            "type": "text",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "body",
+            "type": "text",
+            "not_null": false,
+            "default": null
+          },
+          {
+            "name": "last_updated_stamp",
+            "type": "timestamp without time zone",
+            "not_null": false,
+            "default": null
+          }
+        ]
+      }
+    }
+  },
+  "differing_tables": {
+    "public.artifact_hit_bin": {
+      "java_rows": 87,
+      "rust_rows": 93,
+      "java_unmatched_rows": 87,
+      "rust_unmatched_rows": 93,
+      "differing_column_multisets": [
+        "artifact_name",
+        "artifact_sub_type",
+        "artifact_type",
+        "bin_end_date_time",
+        "bin_start_date_time",
+        "hit_bin_id",
+        "hit_count",
+        "last_updated_stamp",
+        "max_time_millis",
+        "min_time_millis",
+        "server_host_name",
+        "server_ip_address",
+        "slow_hit_count",
+        "total_squared_time",
+        "total_time_millis"
+      ]
+    },
+    "public.cluster_member": {
+      "java_rows": 0,
+      "rust_rows": 1,
+      "java_unmatched_rows": 0,
+      "rust_unmatched_rows": 1,
+      "differing_column_multisets": [
+        "cert_fingerprint",
+        "cluster_base_url",
+        "heartbeat",
+        "instance_id",
+        "last_updated_stamp",
+        "session_key_fingerprint",
+        "ssh_host_key_fingerprint"
+      ]
+    },
+    "public.enumeration": {
+      "java_rows": 186,
+      "rust_rows": 219,
+      "java_unmatched_rows": 0,
+      "rust_unmatched_rows": 33,
+      "differing_column_multisets": [
+        "description",
+        "enum_code",
+        "enum_id",
+        "enum_type_id",
+        "last_updated_stamp",
+        "option_indicator",
+        "option_value",
+        "parent_enum_id",
+        "related_enum_id",
+        "related_enum_type_id",
+        "sequence_num",
+        "status_flow_id"
+      ]
+    },
+    "public.enumeration_type": {
+      "java_rows": 37,
+      "rust_rows": 41,
+      "java_unmatched_rows": 0,
+      "rust_unmatched_rows": 4,
+      "differing_column_multisets": [
+        "description",
+        "enum_type_id",
+        "last_updated_stamp"
+      ]
+    },
+    "public.localized_message": {
+      "java_rows": 45,
+      "rust_rows": 45,
+      "java_unmatched_rows": 3,
+      "rust_unmatched_rows": 3,
+      "differing_column_multisets": [
+        "localized"
+      ]
+    },
+    "public.notification_topic": {
+      "java_rows": 5,
+      "rust_rows": 5,
+      "java_unmatched_rows": 2,
+      "rust_unmatched_rows": 2,
+      "differing_column_multisets": [
+        "link_template",
+        "title_template"
+      ]
+    },
+    "public.screen_theme_resource": {
+      "java_rows": 26,
+      "rust_rows": 17,
+      "java_unmatched_rows": 16,
+      "rust_unmatched_rows": 7,
+      "differing_column_multisets": [
+        "last_updated_stamp",
+        "resource_type_enum_id",
+        "resource_value",
+        "screen_theme_id",
+        "sequence_num"
+      ]
+    },
+    "public.service_job": {
+      "java_rows": 14,
+      "rust_rows": 16,
+      "java_unmatched_rows": 0,
+      "rust_unmatched_rows": 2,
+      "differing_column_multisets": [
+        "cron_expression",
+        "description",
+        "expire_lock_time",
+        "from_date",
+        "job_name",
+        "last_updated_stamp",
+        "local_only",
+        "min_retry_time",
+        "paused",
+        "priority",
+        "repeat_count",
+        "service_name",
+        "thru_date",
+        "topic",
+        "transaction_timeout"
+      ]
+    },
+    "public.service_job_parameter": {
+      "java_rows": 12,
+      "rust_rows": 14,
+      "java_unmatched_rows": 0,
+      "rust_unmatched_rows": 2,
+      "differing_column_multisets": [
+        "job_name",
+        "last_updated_stamp",
+        "parameter_name",
+        "parameter_value"
+      ]
+    },
+    "public.system_message_remote": {
+      "java_rows": 0,
+      "rust_rows": 1,
+      "java_unmatched_rows": 0,
+      "rust_unmatched_rows": 1,
+      "differing_column_multisets": [
+        "ack_requested",
+        "auth_header_name",
+        "component_delimiter",
+        "description",
+        "element_separator",
+        "escape_character",
+        "internal_app_code",
+        "internal_id",
+        "internal_id_type",
+        "last_updated_stamp",
+        "message_auth_enum_id",
+        "password",
+        "pre_auth_message_remote_id",
+        "private_key",
+        "public_key",
+        "receive_url",
+        "remote_app_code",
+        "remote_attributes",
+        "remote_charset",
+        "remote_id",
+        "remote_id_type",
+        "remote_public_key",
+        "segment_terminator",
+        "send_auth_enum_id",
+        "send_service_name",
+        "send_shared_secret",
+        "send_url",
+        "shared_secret",
+        "ssh_host_key_fingerprint",
+        "system_message_remote_id",
+        "system_message_type_id",
+        "usage_code",
+        "username"
+      ]
+    },
+    "public.system_message_type": {
+      "java_rows": 0,
+      "rust_rows": 1,
+      "java_unmatched_rows": 0,
+      "rust_unmatched_rows": 1,
+      "differing_column_multisets": [
+        "consume_service_name",
+        "content_type",
+        "description",
+        "last_updated_stamp",
+        "produce_ack_on_consumed",
+        "produce_ack_service_name",
+        "produce_service_name",
+        "receive_file_pattern",
+        "receive_move_path",
+        "receive_path",
+        "receive_response_enum_id",
+        "receive_service_name",
+        "send_path",
+        "send_service_name",
+        "system_message_type_id"
+      ]
+    },
+    "public.user_group_permission": {
+      "java_rows": 10,
+      "rust_rows": 12,
+      "java_unmatched_rows": 0,
+      "rust_unmatched_rows": 2,
+      "differing_column_multisets": [
+        "from_date",
+        "last_updated_stamp",
+        "thru_date",
+        "user_group_id",
+        "user_permission_id"
+      ]
+    },
+    "public.user_permission": {
+      "java_rows": 10,
+      "rust_rows": 12,
+      "java_unmatched_rows": 0,
+      "rust_unmatched_rows": 2,
+      "differing_column_multisets": [
+        "description",
+        "last_updated_stamp",
+        "user_permission_id"
+      ]
+    },
+    "search.document_index": {
+      "java_rows": 0,
+      "rust_rows": 2,
+      "java_unmatched_rows": 0,
+      "rust_unmatched_rows": 2,
+      "differing_column_multisets": [
+        "created_at",
+        "document_id",
+        "index_name",
+        "physical_name",
+        "signature"
+      ]
+    },
+    "search.moqui_logs": {
+      "java_rows": 0,
+      "rust_rows": 885,
+      "java_unmatched_rows": 0,
+      "rust_unmatched_rows": 885,
+      "differing_column_multisets": [
+        "all_text",
+        "body",
+        "doc_id",
+        "f_@timestamp",
+        "f_level",
+        "f_logger_name",
+        "f_message",
+        "f_name",
+        "f_source_host",
+        "f_thread_id",
+        "f_thread_name",
+        "f_thread_priority",
+        "f_user_id",
+        "f_visitor_id",
+        "indexed_at"
+      ]
+    }
+  },
+  "differences_excluded": false
+}

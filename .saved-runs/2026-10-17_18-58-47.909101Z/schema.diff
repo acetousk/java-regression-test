@@ -1,0 +1,1226 @@
+--- java-schema
++++ rust-schema
+@@ -18,6 +18,29 @@
+ SET xmloption = content;
+ SET client_min_messages = warning;
+ SET row_security = off;
++
++--
++-- Name: search; Type: SCHEMA; Schema: -; Owner: moqui
++--
++
++CREATE SCHEMA search;
++
++
++ALTER SCHEMA search OWNER TO moqui;
++
++--
++-- Name: pg_trgm; Type: EXTENSION; Schema: -; Owner: -
++--
++
++CREATE EXTENSION IF NOT EXISTS pg_trgm WITH SCHEMA public;
++
++
++--
++-- Name: EXTENSION pg_trgm; Type: COMMENT; Schema: -; Owner: 
++--
++
++COMMENT ON EXTENSION pg_trgm IS 'text similarity measurement and index searching based on trigrams';
++
+ 
+ SET default_tablespace = '';
+ 
+@@ -453,6 +476,57 @@
+ ALTER TABLE public.artifact_tarpit_lock OWNER TO moqui;
+ 
+ --
++-- Name: auth_flow; Type: TABLE; Schema: public; Owner: moqui
++--
++
++CREATE TABLE public.auth_flow (
++    auth_flow_id character varying(40) NOT NULL,
++    auth_flow_type_enum_id character varying(40),
++    system_message_remote_id character varying(40),
++    description text,
++    icon_name character varying(63),
++    default_user_group_id character varying(40),
++    sequence_num numeric(20,0),
++    inbound character(1),
++    disabled character(1),
++    last_updated_stamp timestamp without time zone
++);
++
++
++ALTER TABLE public.auth_flow OWNER TO moqui;
++
++--
++-- Name: auth_flow_field_map; Type: TABLE; Schema: public; Owner: moqui
++--
++
++CREATE TABLE public.auth_flow_field_map (
++    auth_flow_id character varying(40) NOT NULL,
++    rule_seq_id character varying(40) NOT NULL,
++    src_field_name text,
++    dst_field_name text,
++    dst_field_expression text,
++    mapping_service_register_id character varying(40),
++    last_updated_stamp timestamp without time zone
++);
++
++
++ALTER TABLE public.auth_flow_field_map OWNER TO moqui;
++
++--
++-- Name: auth_flow_role_map; Type: TABLE; Schema: public; Owner: moqui
++--
++
++CREATE TABLE public.auth_flow_role_map (
++    auth_flow_id character varying(40) NOT NULL,
++    role_name text NOT NULL,
++    user_group_id character varying(40),
++    last_updated_stamp timestamp without time zone
++);
++
++
++ALTER TABLE public.auth_flow_role_map OWNER TO moqui;
++
++--
+ -- Name: bar; Type: TABLE; Schema: public; Owner: moqui
+ --
+ 
+@@ -466,6 +540,38 @@
+ 
+ 
+ ALTER TABLE public.bar OWNER TO moqui;
++
++--
++-- Name: cluster_member; Type: TABLE; Schema: public; Owner: moqui
++--
++
++CREATE TABLE public.cluster_member (
++    instance_id character varying(40) NOT NULL,
++    cluster_base_url text,
++    heartbeat timestamp without time zone,
++    session_key_fingerprint text,
++    cert_fingerprint text,
++    ssh_host_key_fingerprint text,
++    last_updated_stamp timestamp without time zone
++);
++
++
++ALTER TABLE public.cluster_member OWNER TO moqui;
++
++--
++-- Name: cluster_message; Type: TABLE; Schema: public; Owner: moqui
++--
++
++CREATE TABLE public.cluster_message (
++    message_id character varying(40) NOT NULL,
++    topic character varying(63),
++    payload text,
++    created_date timestamp without time zone,
++    last_updated_stamp timestamp without time zone
++);
++
++
++ALTER TABLE public.cluster_message OWNER TO moqui;
+ 
+ --
+ -- Name: currency_dimension; Type: TABLE; Schema: public; Owner: moqui
+@@ -530,6 +636,8 @@
+     sortable character(1),
+     default_display character(1),
+     function_name character varying(63),
++    search_role character varying(63),
++    search_weight character(1),
+     sequence_num numeric(20,0),
+     last_updated_stamp timestamp without time zone
+ );
+@@ -612,6 +720,22 @@
+ 
+ 
+ ALTER TABLE public.data_feed_document OWNER TO moqui;
++
++--
++-- Name: data_feed_pending; Type: TABLE; Schema: public; Owner: moqui
++--
++
++CREATE TABLE public.data_feed_pending (
++    data_feed_pending_id character varying(40) NOT NULL,
++    data_document_id character varying(40),
++    entity_name text,
++    primary_key text,
++    operation character varying(63),
++    last_updated_stamp timestamp without time zone
++);
++
++
++ALTER TABLE public.data_feed_pending OWNER TO moqui;
+ 
+ --
+ -- Name: data_source; Type: TABLE; Schema: public; Owner: moqui
+@@ -1480,6 +1604,26 @@
+ ALTER TABLE public.geo_point OWNER TO moqui;
+ 
+ --
++-- Name: http_session; Type: TABLE; Schema: public; Owner: moqui
++--
++
++CREATE TABLE public.http_session (
++    session_id character varying(40) NOT NULL,
++    user_id character varying(40),
++    visit_id character varying(40),
++    visitor_id character varying(40),
++    locale character varying(63),
++    time_zone character varying(63),
++    session_token character varying(63),
++    attributes text,
++    session_revision numeric(20,0),
++    last_updated_stamp timestamp without time zone
++);
++
++
++ALTER TABLE public.http_session OWNER TO moqui;
++
++--
+ -- Name: instance_host; Type: TABLE; Schema: public; Owner: moqui
+ --
+ 
+@@ -1665,8 +1809,7 @@
+     message_count numeric(20,0),
+     turn_owner character varying(63),
+     turn_lease_thru timestamp without time zone,
+-    last_updated_stamp timestamp without time zone,
+-    search_text_tsv tsvector GENERATED ALWAYS AS (to_tsvector('english'::regconfig, COALESCE(search_text, ''::text))) STORED
++    last_updated_stamp timestamp without time zone
+ );
+ 
+ 
+@@ -1736,9 +1879,7 @@
+     world_success_count numeric(20,0),
+     sim_success_count numeric(20,0),
+     last_used_date timestamp without time zone,
+-    last_updated_stamp timestamp without time zone,
+-    description_tsv tsvector GENERATED ALWAYS AS (to_tsvector('english'::regconfig, COALESCE(description, ''::text))) STORED,
+-    body_tsv tsvector GENERATED ALWAYS AS (to_tsvector('english'::regconfig, COALESCE(body, ''::text))) STORED
++    last_updated_stamp timestamp without time zone
+ );
+ 
+ 
+@@ -1888,6 +2029,47 @@
+ ALTER TABLE public.notification_topic_user OWNER TO moqui;
+ 
+ --
++-- Name: oauth_flow; Type: TABLE; Schema: public; Owner: moqui
++--
++
++CREATE TABLE public.oauth_flow (
++    auth_flow_id character varying(40) NOT NULL,
++    client_type_enum_id character varying(40),
++    client_id text,
++    secret text,
++    authorize_url text,
++    token_url text,
++    user_info_url text,
++    scope text,
++    last_updated_stamp timestamp without time zone
++);
++
++
++ALTER TABLE public.oauth_flow OWNER TO moqui;
++
++--
++-- Name: oidc_flow; Type: TABLE; Schema: public; Owner: moqui
++--
++
++CREATE TABLE public.oidc_flow (
++    auth_flow_id character varying(40) NOT NULL,
++    client_type_enum_id character varying(40),
++    client_id text,
++    secret text,
++    realm text,
++    base_uri text,
++    discovery_uri text,
++    preferred_jws_algorithm_enum_id character varying(40),
++    use_nonce character(1),
++    apple_team_id character varying(63),
++    apple_key_id character varying(63),
++    last_updated_stamp timestamp without time zone
++);
++
++
++ALTER TABLE public.oidc_flow OWNER TO moqui;
++
++--
+ -- Name: print_job; Type: TABLE; Schema: public; Owner: moqui
+ --
+ 
+@@ -1910,6 +2092,25 @@
+ 
+ 
+ ALTER TABLE public.print_job OWNER TO moqui;
++
++--
++-- Name: saml_flow; Type: TABLE; Schema: public; Owner: moqui
++--
++
++CREATE TABLE public.saml_flow (
++    auth_flow_id character varying(40) NOT NULL,
++    keystore_location text,
++    keystore_password text,
++    private_key_password text,
++    service_provider_entity_id text,
++    identity_provider_metadata_location text,
++    force_auth character(1),
++    passive character(1),
++    last_updated_stamp timestamp without time zone
++);
++
++
++ALTER TABLE public.saml_flow OWNER TO moqui;
+ 
+ --
+ -- Name: screen_document; Type: TABLE; Schema: public; Owner: moqui
+@@ -2347,6 +2548,7 @@
+     password text,
+     public_key text,
+     private_key text,
++    ssh_host_key_fingerprint text,
+     remote_public_key text,
+     shared_secret text,
+     send_shared_secret text,
+@@ -2430,8 +2632,7 @@
+     test_fts_id character varying(40) NOT NULL,
+     note text,
+     body text,
+-    last_updated_stamp timestamp without time zone,
+-    body_tsv tsvector GENERATED ALWAYS AS (to_tsvector('english'::regconfig, COALESCE(body, ''::text))) STORED
++    last_updated_stamp timestamp without time zone
+ );
+ 
+ 
+@@ -2747,6 +2948,24 @@
+ 
+ 
+ ALTER TABLE public.user_screen_theme OWNER TO moqui;
++
++--
++-- Name: user_ssh_key; Type: TABLE; Schema: public; Owner: moqui
++--
++
++CREATE TABLE public.user_ssh_key (
++    ssh_key_id character varying(40) NOT NULL,
++    user_id character varying(40) NOT NULL,
++    public_key text,
++    fingerprint text,
++    from_date timestamp without time zone,
++    thru_date timestamp without time zone,
++    description text,
++    last_updated_stamp timestamp without time zone
++);
++
++
++ALTER TABLE public.user_ssh_key OWNER TO moqui;
+ 
+ --
+ -- Name: visit; Type: TABLE; Schema: public; Owner: moqui
+@@ -2969,6 +3188,79 @@
+ ALTER TABLE public.wiki_space_user OWNER TO moqui;
+ 
+ --
++-- Name: document_index; Type: TABLE; Schema: search; Owner: moqui
++--
++
++CREATE TABLE search.document_index (
++    document_id text NOT NULL,
++    index_name text,
++    physical_name text NOT NULL,
++    signature text NOT NULL,
++    created_at timestamp with time zone NOT NULL
++);
++
++
++ALTER TABLE search.document_index OWNER TO moqui;
++
++--
++-- Name: moqui_http_log; Type: TABLE; Schema: search; Owner: moqui
++--
++
++CREATE TABLE search.moqui_http_log (
++    doc_id text NOT NULL,
++    indexed_at timestamp with time zone NOT NULL,
++    body jsonb NOT NULL,
++    all_text tsvector GENERATED ALWAYS AS (jsonb_to_tsvector('simple'::regconfig, body, '["string", "numeric"]'::jsonb)) STORED,
++    "f_@timestamp" timestamp with time zone,
++    f_remote_ip text,
++    f_remote_user text,
++    f_server_ip text,
++    f_content_type text,
++    f_request_method text,
++    f_request_scheme text,
++    f_request_host text,
++    f_request_path text,
++    f_request_query text,
++    f_http_version numeric,
++    f_response bigint,
++    f_time_initial_ms bigint,
++    f_time_final_ms bigint,
++    f_bytes bigint,
++    f_referrer text,
++    f_agent text,
++    f_session text,
++    f_visitor_id text
++);
++
++
++ALTER TABLE search.moqui_http_log OWNER TO moqui;
++
++--
++-- Name: moqui_logs; Type: TABLE; Schema: search; Owner: moqui
++--
++
++CREATE TABLE search.moqui_logs (
++    doc_id text NOT NULL,
++    indexed_at timestamp with time zone NOT NULL,
++    body jsonb NOT NULL,
++    all_text tsvector GENERATED ALWAYS AS (jsonb_to_tsvector('simple'::regconfig, body, '["string", "numeric"]'::jsonb)) STORED,
++    "f_@timestamp" timestamp with time zone,
++    f_level text,
++    f_thread_name text,
++    f_thread_id bigint,
++    f_thread_priority bigint,
++    f_user_id text,
++    f_visitor_id text,
++    f_logger_name text,
++    f_name text,
++    f_message text,
++    f_source_host text
++);
++
++
++ALTER TABLE search.moqui_logs OWNER TO moqui;
++
++--
+ -- Name: a2_a_artifact pk_a2_a_artifact; Type: CONSTRAINT; Schema: public; Owner: moqui
+ --
+ 
+@@ -3153,6 +3445,30 @@
+ 
+ 
+ --
++-- Name: auth_flow pk_auth_flow; Type: CONSTRAINT; Schema: public; Owner: moqui
++--
++
++ALTER TABLE ONLY public.auth_flow
++    ADD CONSTRAINT pk_auth_flow PRIMARY KEY (auth_flow_id);
++
++
++--
++-- Name: auth_flow_field_map pk_auth_flow_field_map; Type: CONSTRAINT; Schema: public; Owner: moqui
++--
++
++ALTER TABLE ONLY public.auth_flow_field_map
++    ADD CONSTRAINT pk_auth_flow_field_map PRIMARY KEY (auth_flow_id, rule_seq_id);
++
++
++--
++-- Name: auth_flow_role_map pk_auth_flow_role_map; Type: CONSTRAINT; Schema: public; Owner: moqui
++--
++
++ALTER TABLE ONLY public.auth_flow_role_map
++    ADD CONSTRAINT pk_auth_flow_role_map PRIMARY KEY (auth_flow_id, role_name);
++
++
++--
+ -- Name: bar pk_bar; Type: CONSTRAINT; Schema: public; Owner: moqui
+ --
+ 
+@@ -3161,6 +3477,22 @@
+ 
+ 
+ --
++-- Name: cluster_member pk_cluster_member; Type: CONSTRAINT; Schema: public; Owner: moqui
++--
++
++ALTER TABLE ONLY public.cluster_member
++    ADD CONSTRAINT pk_cluster_member PRIMARY KEY (instance_id);
++
++
++--
++-- Name: cluster_message pk_cluster_message; Type: CONSTRAINT; Schema: public; Owner: moqui
++--
++
++ALTER TABLE ONLY public.cluster_message
++    ADD CONSTRAINT pk_cluster_message PRIMARY KEY (message_id);
++
++
++--
+ -- Name: currency_dimension pk_currency_dimension; Type: CONSTRAINT; Schema: public; Owner: moqui
+ --
+ 
+@@ -3233,6 +3565,14 @@
+ 
+ 
+ --
++-- Name: data_feed_pending pk_data_feed_pending; Type: CONSTRAINT; Schema: public; Owner: moqui
++--
++
++ALTER TABLE ONLY public.data_feed_pending
++    ADD CONSTRAINT pk_data_feed_pending PRIMARY KEY (data_feed_pending_id);
++
++
++--
+ -- Name: data_source pk_data_source; Type: CONSTRAINT; Schema: public; Owner: moqui
+ --
+ 
+@@ -3625,6 +3965,14 @@
+ 
+ 
+ --
++-- Name: http_session pk_http_session; Type: CONSTRAINT; Schema: public; Owner: moqui
++--
++
++ALTER TABLE ONLY public.http_session
++    ADD CONSTRAINT pk_http_session PRIMARY KEY (session_id);
++
++
++--
+ -- Name: instance_host pk_instance_host; Type: CONSTRAINT; Schema: public; Owner: moqui
+ --
+ 
+@@ -3793,6 +4141,22 @@
+ 
+ 
+ --
++-- Name: oauth_flow pk_oauth_flow; Type: CONSTRAINT; Schema: public; Owner: moqui
++--
++
++ALTER TABLE ONLY public.oauth_flow
++    ADD CONSTRAINT pk_oauth_flow PRIMARY KEY (auth_flow_id);
++
++
++--
++-- Name: oidc_flow pk_oidc_flow; Type: CONSTRAINT; Schema: public; Owner: moqui
++--
++
++ALTER TABLE ONLY public.oidc_flow
++    ADD CONSTRAINT pk_oidc_flow PRIMARY KEY (auth_flow_id);
++
++
++--
+ -- Name: print_job pk_print_job; Type: CONSTRAINT; Schema: public; Owner: moqui
+ --
+ 
+@@ -3801,6 +4165,14 @@
+ 
+ 
+ --
++-- Name: saml_flow pk_saml_flow; Type: CONSTRAINT; Schema: public; Owner: moqui
++--
++
++ALTER TABLE ONLY public.saml_flow
++    ADD CONSTRAINT pk_saml_flow PRIMARY KEY (auth_flow_id);
++
++
++--
+ -- Name: screen_document pk_screen_document; Type: CONSTRAINT; Schema: public; Owner: moqui
+ --
+ 
+@@ -4185,6 +4557,14 @@
+ 
+ 
+ --
++-- Name: user_ssh_key pk_user_ssh_key; Type: CONSTRAINT; Schema: public; Owner: moqui
++--
++
++ALTER TABLE ONLY public.user_ssh_key
++    ADD CONSTRAINT pk_user_ssh_key PRIMARY KEY (ssh_key_id);
++
++
++--
+ -- Name: visit pk_visit; Type: CONSTRAINT; Schema: public; Owner: moqui
+ --
+ 
+@@ -4281,6 +4661,30 @@
+ 
+ 
+ --
++-- Name: document_index document_index_pkey; Type: CONSTRAINT; Schema: search; Owner: moqui
++--
++
++ALTER TABLE ONLY search.document_index
++    ADD CONSTRAINT document_index_pkey PRIMARY KEY (document_id);
++
++
++--
++-- Name: moqui_http_log moqui_http_log_pkey; Type: CONSTRAINT; Schema: search; Owner: moqui
++--
++
++ALTER TABLE ONLY search.moqui_http_log
++    ADD CONSTRAINT moqui_http_log_pkey PRIMARY KEY (doc_id);
++
++
++--
++-- Name: moqui_logs moqui_logs_pkey; Type: CONSTRAINT; Schema: search; Owner: moqui
++--
++
++ALTER TABLE ONLY search.moqui_logs
++    ADD CONSTRAINT moqui_logs_pkey PRIMARY KEY (doc_id);
++
++
++--
+ -- Name: a2aartpart_seq; Type: INDEX; Schema: public; Owner: moqui
+ --
+ 
+@@ -4421,31 +4825,10 @@
+ 
+ 
+ --
+--- Name: fts_llm_conversation_search_text; Type: INDEX; Schema: public; Owner: moqui
+---
+-
+-CREATE INDEX fts_llm_conversation_search_text ON public.llm_conversation USING gin (search_text_tsv);
+-
+-
+---
+--- Name: fts_llm_skill_body; Type: INDEX; Schema: public; Owner: moqui
+---
+-
+-CREATE INDEX fts_llm_skill_body ON public.llm_skill USING gin (body_tsv);
+-
+-
+---
+--- Name: fts_llm_skill_description; Type: INDEX; Schema: public; Owner: moqui
+---
+-
+-CREATE INDEX fts_llm_skill_description ON public.llm_skill USING gin (description_tsv);
+-
+-
+---
+--- Name: fts_test_fts_body; Type: INDEX; Schema: public; Owner: moqui
+---
+-
+-CREATE INDEX fts_test_fts_body ON public.test_fts USING gin (body_tsv);
++-- Name: http_session_user; Type: INDEX; Schema: public; Owner: moqui
++--
++
++CREATE INDEX http_session_user ON public.http_session USING btree (user_id);
+ 
+ 
+ --
+@@ -4715,6 +5098,55 @@
+ 
+ 
+ --
++-- Name: idxauthflowaftypeenumeration; Type: INDEX; Schema: public; Owner: moqui
++--
++
++CREATE INDEX idxauthflowaftypeenumeration ON public.auth_flow USING btree (auth_flow_type_enum_id);
++
++
++--
++-- Name: idxauthflowfieldmapauthflow; Type: INDEX; Schema: public; Owner: moqui
++--
++
++CREATE INDEX idxauthflowfieldmapauthflow ON public.auth_flow_field_map USING btree (auth_flow_id);
++
++
++--
++-- Name: idxauthflowfieldmapserviceregister; Type: INDEX; Schema: public; Owner: moqui
++--
++
++CREATE INDEX idxauthflowfieldmapserviceregister ON public.auth_flow_field_map USING btree (mapping_service_register_id);
++
++
++--
++-- Name: idxauthflowrolemapauthflow; Type: INDEX; Schema: public; Owner: moqui
++--
++
++CREATE INDEX idxauthflowrolemapauthflow ON public.auth_flow_role_map USING btree (auth_flow_id);
++
++
++--
++-- Name: idxauthflowrolemapusergrou; Type: INDEX; Schema: public; Owner: moqui
++--
++
++CREATE INDEX idxauthflowrolemapusergrou ON public.auth_flow_role_map USING btree (user_group_id);
++
++
++--
++-- Name: idxauthflowsystemmessageremote; Type: INDEX; Schema: public; Owner: moqui
++--
++
++CREATE INDEX idxauthflowsystemmessageremote ON public.auth_flow USING btree (system_message_remote_id);
++
++
++--
++-- Name: idxauthflowusergroup; Type: INDEX; Schema: public; Owner: moqui
++--
++
++CREATE INDEX idxauthflowusergroup ON public.auth_flow USING btree (default_user_group_id);
++
++
++--
+ -- Name: idxdatabasehostdatabasetype; Type: INDEX; Schema: public; Owner: moqui
+ --
+ 
+@@ -5387,6 +5819,41 @@
+ 
+ 
+ --
++-- Name: idxoauthflowaf; Type: INDEX; Schema: public; Owner: moqui
++--
++
++CREATE INDEX idxoauthflowaf ON public.oauth_flow USING btree (auth_flow_id);
++
++
++--
++-- Name: idxoauthflowoclienttypeenumeration; Type: INDEX; Schema: public; Owner: moqui
++--
++
++CREATE INDEX idxoauthflowoclienttypeenumeration ON public.oauth_flow USING btree (client_type_enum_id);
++
++
++--
++-- Name: idxoidc_client_type_fk; Type: INDEX; Schema: public; Owner: moqui
++--
++
++CREATE INDEX idxoidc_client_type_fk ON public.oidc_flow USING btree (client_type_enum_id);
++
++
++--
++-- Name: idxoidc_jws_alg_fk; Type: INDEX; Schema: public; Owner: moqui
++--
++
++CREATE INDEX idxoidc_jws_alg_fk ON public.oidc_flow USING btree (preferred_jws_algorithm_enum_id);
++
++
++--
++-- Name: idxoidcflowauthf; Type: INDEX; Schema: public; Owner: moqui
++--
++
++CREATE INDEX idxoidcflowauthf ON public.oidc_flow USING btree (auth_flow_id);
++
++
++--
+ -- Name: idxprintjobnetworkprinter; Type: INDEX; Schema: public; Owner: moqui
+ --
+ 
+@@ -5401,6 +5868,13 @@
+ 
+ 
+ --
++-- Name: idxsamlflowauthf; Type: INDEX; Schema: public; Owner: moqui
++--
++
++CREATE INDEX idxsamlflowauthf ON public.saml_flow USING btree (auth_flow_id);
++
++
++--
+ -- Name: idxscreenscheduledemailtemplate; Type: INDEX; Schema: public; Owner: moqui
+ --
+ 
+@@ -5814,6 +6288,13 @@
+ 
+ 
+ --
++-- Name: idxusersshkeyuseraccount; Type: INDEX; Schema: public; Owner: moqui
++--
++
++CREATE INDEX idxusersshkeyuseraccount ON public.user_ssh_key USING btree (user_id);
++
++
++--
+ -- Name: idxwikiblogcategorywikiblog; Type: INDEX; Schema: public; Owner: moqui
+ --
+ 
+@@ -5898,6 +6379,27 @@
+ 
+ 
+ --
++-- Name: llm_conversation_searchtext_fts; Type: INDEX; Schema: public; Owner: moqui
++--
++
++CREATE INDEX llm_conversation_searchtext_fts ON public.llm_conversation USING gin (to_tsvector('english'::regconfig, search_text));
++
++
++--
++-- Name: llm_skill_body_fts; Type: INDEX; Schema: public; Owner: moqui
++--
++
++CREATE INDEX llm_skill_body_fts ON public.llm_skill USING gin (to_tsvector('english'::regconfig, body));
++
++
++--
++-- Name: llm_skill_description_fts; Type: INDEX; Schema: public; Owner: moqui
++--
++
++CREATE INDEX llm_skill_description_fts ON public.llm_skill USING gin (to_tsvector('english'::regconfig, description));
++
++
++--
+ -- Name: llmcall_conv; Type: INDEX; Schema: public; Owner: moqui
+ --
+ 
+@@ -6024,6 +6526,20 @@
+ 
+ 
+ --
++-- Name: test_fts_body_fts; Type: INDEX; Schema: public; Owner: moqui
++--
++
++CREATE INDEX test_fts_body_fts ON public.test_fts USING gin (to_tsvector('english'::regconfig, body));
++
++
++--
++-- Name: user_ssh_key_fp; Type: INDEX; Schema: public; Owner: moqui
++--
++
++CREATE INDEX user_ssh_key_fp ON public.user_ssh_key USING btree (fingerprint);
++
++
++--
+ -- Name: useracct_emailaddr; Type: INDEX; Schema: public; Owner: moqui
+ --
+ 
+@@ -6056,6 +6572,300 @@
+ --
+ 
+ CREATE UNIQUE INDEX wikipage_spcpth ON public.wiki_page USING btree (wiki_space_id, page_path);
++
++
++--
++-- Name: moqui_http_log_all_text_idx; Type: INDEX; Schema: search; Owner: moqui
++--
++
++CREATE INDEX moqui_http_log_all_text_idx ON search.moqui_http_log USING gin (all_text);
++
++
++--
++-- Name: moqui_http_log_f_@timestamp_idx; Type: INDEX; Schema: search; Owner: moqui
++--
++
++CREATE INDEX "moqui_http_log_f_@timestamp_idx" ON search.moqui_http_log USING btree ("f_@timestamp");
++
++
++--
++-- Name: moqui_http_log_f_agent_idx; Type: INDEX; Schema: search; Owner: moqui
++--
++
++CREATE INDEX moqui_http_log_f_agent_idx ON search.moqui_http_log USING gin (f_agent public.gin_trgm_ops);
++
++
++--
++-- Name: moqui_http_log_f_bytes_idx; Type: INDEX; Schema: search; Owner: moqui
++--
++
++CREATE INDEX moqui_http_log_f_bytes_idx ON search.moqui_http_log USING btree (f_bytes);
++
++
++--
++-- Name: moqui_http_log_f_content_type_idx; Type: INDEX; Schema: search; Owner: moqui
++--
++
++CREATE INDEX moqui_http_log_f_content_type_idx ON search.moqui_http_log USING gin (f_content_type public.gin_trgm_ops);
++
++
++--
++-- Name: moqui_http_log_f_http_version_idx; Type: INDEX; Schema: search; Owner: moqui
++--
++
++CREATE INDEX moqui_http_log_f_http_version_idx ON search.moqui_http_log USING btree (f_http_version);
++
++
++--
++-- Name: moqui_http_log_f_referrer_idx; Type: INDEX; Schema: search; Owner: moqui
++--
++
++CREATE INDEX moqui_http_log_f_referrer_idx ON search.moqui_http_log USING gin (f_referrer public.gin_trgm_ops);
++
++
++--
++-- Name: moqui_http_log_f_remote_ip_idx; Type: INDEX; Schema: search; Owner: moqui
++--
++
++CREATE INDEX moqui_http_log_f_remote_ip_idx ON search.moqui_http_log USING btree (f_remote_ip);
++
++
++--
++-- Name: moqui_http_log_f_remote_user_idx; Type: INDEX; Schema: search; Owner: moqui
++--
++
++CREATE INDEX moqui_http_log_f_remote_user_idx ON search.moqui_http_log USING btree (f_remote_user);
++
++
++--
++-- Name: moqui_http_log_f_request_host_idx; Type: INDEX; Schema: search; Owner: moqui
++--
++
++CREATE INDEX moqui_http_log_f_request_host_idx ON search.moqui_http_log USING btree (f_request_host);
++
++
++--
++-- Name: moqui_http_log_f_request_method_idx; Type: INDEX; Schema: search; Owner: moqui
++--
++
++CREATE INDEX moqui_http_log_f_request_method_idx ON search.moqui_http_log USING btree (f_request_method);
++
++
++--
++-- Name: moqui_http_log_f_request_path_idx; Type: INDEX; Schema: search; Owner: moqui
++--
++
++CREATE INDEX moqui_http_log_f_request_path_idx ON search.moqui_http_log USING gin (f_request_path public.gin_trgm_ops);
++
++
++--
++-- Name: moqui_http_log_f_request_query_idx; Type: INDEX; Schema: search; Owner: moqui
++--
++
++CREATE INDEX moqui_http_log_f_request_query_idx ON search.moqui_http_log USING gin (f_request_query public.gin_trgm_ops);
++
++
++--
++-- Name: moqui_http_log_f_request_scheme_idx; Type: INDEX; Schema: search; Owner: moqui
++--
++
++CREATE INDEX moqui_http_log_f_request_scheme_idx ON search.moqui_http_log USING btree (f_request_scheme);
++
++
++--
++-- Name: moqui_http_log_f_response_idx; Type: INDEX; Schema: search; Owner: moqui
++--
++
++CREATE INDEX moqui_http_log_f_response_idx ON search.moqui_http_log USING btree (f_response);
++
++
++--
++-- Name: moqui_http_log_f_server_ip_idx; Type: INDEX; Schema: search; Owner: moqui
++--
++
++CREATE INDEX moqui_http_log_f_server_ip_idx ON search.moqui_http_log USING btree (f_server_ip);
++
++
++--
++-- Name: moqui_http_log_f_session_idx; Type: INDEX; Schema: search; Owner: moqui
++--
++
++CREATE INDEX moqui_http_log_f_session_idx ON search.moqui_http_log USING btree (f_session);
++
++
++--
++-- Name: moqui_http_log_f_time_final_ms_idx; Type: INDEX; Schema: search; Owner: moqui
++--
++
++CREATE INDEX moqui_http_log_f_time_final_ms_idx ON search.moqui_http_log USING btree (f_time_final_ms);
++
++
++--
++-- Name: moqui_http_log_f_time_initial_ms_idx; Type: INDEX; Schema: search; Owner: moqui
++--
++
++CREATE INDEX moqui_http_log_f_time_initial_ms_idx ON search.moqui_http_log USING btree (f_time_initial_ms);
++
++
++--
++-- Name: moqui_http_log_f_visitor_id_idx; Type: INDEX; Schema: search; Owner: moqui
++--
++
++CREATE INDEX moqui_http_log_f_visitor_id_idx ON search.moqui_http_log USING btree (f_visitor_id);
++
++
++--
++-- Name: moqui_http_log_indexed_at_idx; Type: INDEX; Schema: search; Owner: moqui
++--
++
++CREATE INDEX moqui_http_log_indexed_at_idx ON search.moqui_http_log USING btree (indexed_at);
++
++
++--
++-- Name: moqui_http_log_to_tsvector_idx; Type: INDEX; Schema: search; Owner: moqui
++--
++
++CREATE INDEX moqui_http_log_to_tsvector_idx ON search.moqui_http_log USING gin (to_tsvector('simple'::regconfig, f_content_type));
++
++
++--
++-- Name: moqui_http_log_to_tsvector_idx1; Type: INDEX; Schema: search; Owner: moqui
++--
++
++CREATE INDEX moqui_http_log_to_tsvector_idx1 ON search.moqui_http_log USING gin (to_tsvector('simple'::regconfig, f_request_path));
++
++
++--
++-- Name: moqui_http_log_to_tsvector_idx2; Type: INDEX; Schema: search; Owner: moqui
++--
++
++CREATE INDEX moqui_http_log_to_tsvector_idx2 ON search.moqui_http_log USING gin (to_tsvector('simple'::regconfig, f_request_query));
++
++
++--
++-- Name: moqui_http_log_to_tsvector_idx3; Type: INDEX; Schema: search; Owner: moqui
++--
++
++CREATE INDEX moqui_http_log_to_tsvector_idx3 ON search.moqui_http_log USING gin (to_tsvector('simple'::regconfig, f_referrer));
++
++
++--
++-- Name: moqui_http_log_to_tsvector_idx4; Type: INDEX; Schema: search; Owner: moqui
++--
++
++CREATE INDEX moqui_http_log_to_tsvector_idx4 ON search.moqui_http_log USING gin (to_tsvector('simple'::regconfig, f_agent));
++
++
++--
++-- Name: moqui_logs_all_text_idx; Type: INDEX; Schema: search; Owner: moqui
++--
++
++CREATE INDEX moqui_logs_all_text_idx ON search.moqui_logs USING gin (all_text);
++
++
++--
++-- Name: moqui_logs_f_@timestamp_idx; Type: INDEX; Schema: search; Owner: moqui
++--
++
++CREATE INDEX "moqui_logs_f_@timestamp_idx" ON search.moqui_logs USING btree ("f_@timestamp");
++
++
++--
++-- Name: moqui_logs_f_level_idx; Type: INDEX; Schema: search; Owner: moqui
++--
++
++CREATE INDEX moqui_logs_f_level_idx ON search.moqui_logs USING btree (f_level);
++
++
++--
++-- Name: moqui_logs_f_logger_name_idx; Type: INDEX; Schema: search; Owner: moqui
++--
++
++CREATE INDEX moqui_logs_f_logger_name_idx ON search.moqui_logs USING gin (f_logger_name public.gin_trgm_ops);
++
++
++--
++-- Name: moqui_logs_f_message_idx; Type: INDEX; Schema: search; Owner: moqui
++--
++
++CREATE INDEX moqui_logs_f_message_idx ON search.moqui_logs USING gin (f_message public.gin_trgm_ops);
++
++
++--
++-- Name: moqui_logs_f_name_idx; Type: INDEX; Schema: search; Owner: moqui
++--
++
++CREATE INDEX moqui_logs_f_name_idx ON search.moqui_logs USING gin (f_name public.gin_trgm_ops);
++
++
++--
++-- Name: moqui_logs_f_source_host_idx; Type: INDEX; Schema: search; Owner: moqui
++--
++
++CREATE INDEX moqui_logs_f_source_host_idx ON search.moqui_logs USING btree (f_source_host);
++
++
++--
++-- Name: moqui_logs_f_thread_id_idx; Type: INDEX; Schema: search; Owner: moqui
++--
++
++CREATE INDEX moqui_logs_f_thread_id_idx ON search.moqui_logs USING btree (f_thread_id);
++
++
++--
++-- Name: moqui_logs_f_thread_name_idx; Type: INDEX; Schema: search; Owner: moqui
++--
++
++CREATE INDEX moqui_logs_f_thread_name_idx ON search.moqui_logs USING btree (f_thread_name);
++
++
++--
++-- Name: moqui_logs_f_thread_priority_idx; Type: INDEX; Schema: search; Owner: moqui
++--
++
++CREATE INDEX moqui_logs_f_thread_priority_idx ON search.moqui_logs USING btree (f_thread_priority);
++
++
++--
++-- Name: moqui_logs_f_user_id_idx; Type: INDEX; Schema: search; Owner: moqui
++--
++
++CREATE INDEX moqui_logs_f_user_id_idx ON search.moqui_logs USING btree (f_user_id);
++
++
++--
++-- Name: moqui_logs_f_visitor_id_idx; Type: INDEX; Schema: search; Owner: moqui
++--
++
++CREATE INDEX moqui_logs_f_visitor_id_idx ON search.moqui_logs USING btree (f_visitor_id);
++
++
++--
++-- Name: moqui_logs_indexed_at_idx; Type: INDEX; Schema: search; Owner: moqui
++--
++
++CREATE INDEX moqui_logs_indexed_at_idx ON search.moqui_logs USING btree (indexed_at);
++
++
++--
++-- Name: moqui_logs_to_tsvector_idx; Type: INDEX; Schema: search; Owner: moqui
++--
++
++CREATE INDEX moqui_logs_to_tsvector_idx ON search.moqui_logs USING gin (to_tsvector('simple'::regconfig, f_logger_name));
++
++
++--
++-- Name: moqui_logs_to_tsvector_idx1; Type: INDEX; Schema: search; Owner: moqui
++--
++
++CREATE INDEX moqui_logs_to_tsvector_idx1 ON search.moqui_logs USING gin (to_tsvector('simple'::regconfig, f_name));
++
++
++--
++-- Name: moqui_logs_to_tsvector_idx2; Type: INDEX; Schema: search; Owner: moqui
++--
++
++CREATE INDEX moqui_logs_to_tsvector_idx2 ON search.moqui_logs USING gin (to_tsvector('simple'::regconfig, f_message));
+ 
+ 
+ --
+@@ -6363,6 +7173,62 @@
+ 
+ 
+ --
++-- Name: auth_flow authflowaftypeenumeration; Type: FK CONSTRAINT; Schema: public; Owner: moqui
++--
++
++ALTER TABLE ONLY public.auth_flow
++    ADD CONSTRAINT authflowaftypeenumeration FOREIGN KEY (auth_flow_type_enum_id) REFERENCES public.enumeration(enum_id);
++
++
++--
++-- Name: auth_flow_field_map authflowfieldmapauthflow; Type: FK CONSTRAINT; Schema: public; Owner: moqui
++--
++
++ALTER TABLE ONLY public.auth_flow_field_map
++    ADD CONSTRAINT authflowfieldmapauthflow FOREIGN KEY (auth_flow_id) REFERENCES public.auth_flow(auth_flow_id);
++
++
++--
++-- Name: auth_flow_field_map authflowfieldmapserviceregister; Type: FK CONSTRAINT; Schema: public; Owner: moqui
++--
++
++ALTER TABLE ONLY public.auth_flow_field_map
++    ADD CONSTRAINT authflowfieldmapserviceregister FOREIGN KEY (mapping_service_register_id) REFERENCES public.service_register(service_register_id);
++
++
++--
++-- Name: auth_flow_role_map authflowrolemapauthflow; Type: FK CONSTRAINT; Schema: public; Owner: moqui
++--
++
++ALTER TABLE ONLY public.auth_flow_role_map
++    ADD CONSTRAINT authflowrolemapauthflow FOREIGN KEY (auth_flow_id) REFERENCES public.auth_flow(auth_flow_id);
++
++
++--
++-- Name: auth_flow_role_map authflowrolemapusergroup; Type: FK CONSTRAINT; Schema: public; Owner: moqui
++--
++
++ALTER TABLE ONLY public.auth_flow_role_map
++    ADD CONSTRAINT authflowrolemapusergroup FOREIGN KEY (user_group_id) REFERENCES public.user_group(user_group_id);
++
++
++--
++-- Name: auth_flow authflowsystemmessageremote; Type: FK CONSTRAINT; Schema: public; Owner: moqui
++--
++
++ALTER TABLE ONLY public.auth_flow
++    ADD CONSTRAINT authflowsystemmessageremote FOREIGN KEY (system_message_remote_id) REFERENCES public.system_message_remote(system_message_remote_id);
++
++
++--
++-- Name: auth_flow authflowusergroup; Type: FK CONSTRAINT; Schema: public; Owner: moqui
++--
++
++ALTER TABLE ONLY public.auth_flow
++    ADD CONSTRAINT authflowusergroup FOREIGN KEY (default_user_group_id) REFERENCES public.user_group(user_group_id);
++
++
++--
+ -- Name: database_host databasehostdatabasetype; Type: FK CONSTRAINT; Schema: public; Owner: moqui
+ --
+ 
+@@ -7131,6 +7997,46 @@
+ 
+ 
+ --
++-- Name: oauth_flow oauthflowauthflow; Type: FK CONSTRAINT; Schema: public; Owner: moqui
++--
++
++ALTER TABLE ONLY public.oauth_flow
++    ADD CONSTRAINT oauthflowauthflow FOREIGN KEY (auth_flow_id) REFERENCES public.auth_flow(auth_flow_id);
++
++
++--
++-- Name: oauth_flow oauthflowoclienttypeenumeration; Type: FK CONSTRAINT; Schema: public; Owner: moqui
++--
++
++ALTER TABLE ONLY public.oauth_flow
++    ADD CONSTRAINT oauthflowoclienttypeenumeration FOREIGN KEY (client_type_enum_id) REFERENCES public.enumeration(enum_id);
++
++
++--
++-- Name: oidc_flow oidc_client_type_fk; Type: FK CONSTRAINT; Schema: public; Owner: moqui
++--
++
++ALTER TABLE ONLY public.oidc_flow
++    ADD CONSTRAINT oidc_client_type_fk FOREIGN KEY (client_type_enum_id) REFERENCES public.enumeration(enum_id);
++
++
++--
++-- Name: oidc_flow oidc_jws_alg_fk; Type: FK CONSTRAINT; Schema: public; Owner: moqui
++--
++
++ALTER TABLE ONLY public.oidc_flow
++    ADD CONSTRAINT oidc_jws_alg_fk FOREIGN KEY (preferred_jws_algorithm_enum_id) REFERENCES public.enumeration(enum_id);
++
++
++--
++-- Name: oidc_flow oidcflowauthflow; Type: FK CONSTRAINT; Schema: public; Owner: moqui
++--
++
++ALTER TABLE ONLY public.oidc_flow
++    ADD CONSTRAINT oidcflowauthflow FOREIGN KEY (auth_flow_id) REFERENCES public.auth_flow(auth_flow_id);
++
++
++--
+ -- Name: print_job printjobnetworkprinter; Type: FK CONSTRAINT; Schema: public; Owner: moqui
+ --
+ 
+@@ -7147,6 +8053,14 @@
+ 
+ 
+ --
++-- Name: saml_flow samlflowauthflow; Type: FK CONSTRAINT; Schema: public; Owner: moqui
++--
++
++ALTER TABLE ONLY public.saml_flow
++    ADD CONSTRAINT samlflowauthflow FOREIGN KEY (auth_flow_id) REFERENCES public.auth_flow(auth_flow_id);
++
++
++--
+ -- Name: screen_scheduled screenscheduledemailtemplate; Type: FK CONSTRAINT; Schema: public; Owner: moqui
+ --
+ 
+@@ -7619,6 +8533,14 @@
+ 
+ 
+ --
++-- Name: user_ssh_key usersshkeyuseraccount; Type: FK CONSTRAINT; Schema: public; Owner: moqui
++--
++
++ALTER TABLE ONLY public.user_ssh_key
++    ADD CONSTRAINT usersshkeyuseraccount FOREIGN KEY (user_id) REFERENCES public.user_account(user_id);
++
++
++--
+ -- Name: wiki_blog_category wikiblogcategorywikiblog; Type: FK CONSTRAINT; Schema: public; Owner: moqui
+ --
+ 

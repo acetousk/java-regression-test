@@ -1,0 +1,13 @@
+{
+  "operation_id": "java-00000031",
+  "transactions": [
+    {
+      "operation_id": "java-00000031",
+      "outcome": "committed",
+      "changes": [
+        "table public.localized_message: INSERT: original[text]:'PaginationTemplate' locale[character varying]:'default' localized[text]:'Page ${curPageIndex + 1} of ${curPageMaxIndex + 1} (${context[listName + ''PageRangeLow'']} - ${context[listName + ''PageRangeHigh'']} of ${context[listName + ''Count'']})' last_updated_stamp[timestamp without time zone]:'2026-10-17 18:59:01.515'",
+        "table moqui_regression.events: INSERT: payload[text]:'{\"kind\" : \"insert\", \"table\" : \"public.localized_message\", \"old\" : null, \"new\" : \"{\\\"original\\\":\\\"PaginationTemplate\\\",\\\"locale\\\":\\\"default\\\",\\\"localized\\\":\\\"Page ${curPageIndex + 1} of ${curPageMaxIndex + 1} (${context[listName + ''PageRangeLow'']} - ${context[listName + ''PageRangeHigh'']} of ${context[listName + ''Count'']})\\\",\\\"last_updated_stamp\\\":\\\"2026-10-17T18:59:01.515\\\"}\"}'"
+      ]
+    }
+  ]
+}

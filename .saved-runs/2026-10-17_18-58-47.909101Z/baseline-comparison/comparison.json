@@ -1,0 +1,31 @@
+{
+  "mode": "postgresql-incremental",
+  "comparison_passed": true,
+  "compared_relations": [
+    "public.artifact_hit",
+    "public.artifact_hit_bin",
+    "public.data_document_field",
+    "public.enumeration",
+    "public.enumeration_type",
+    "public.llm_conversation",
+    "public.llm_skill",
+    "public.localized_message",
+    "public.notification_topic",
+    "public.sequence_value_item",
+    "public.service_job",
+    "public.service_job_parameter",
+    "public.system_message_remote",
+    "public.system_message_type",
+    "public.test_fts",
+    "public.user_group_permission",
+    "public.user_permission"
+  ],
+  "schema_equal_after_approved_differences": true,
+  "unapproved_record_byte_differences": [],
+  "approved_differences_applied": [],
+  "transactions_replayed": {
+    "java": 0,
+    "rust": 0
+  },
+  "uncommitted_state_verified": false
+}

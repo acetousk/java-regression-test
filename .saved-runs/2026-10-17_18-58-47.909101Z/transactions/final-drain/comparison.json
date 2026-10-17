@@ -1,0 +1,661 @@
+{
+  "mode": "postgresql-incremental",
+  "comparison_passed": true,
+  "compared_relations": [
+    "public.artifact_hit",
+    "public.artifact_hit_bin",
+    "public.data_document_field",
+    "public.enumeration",
+    "public.enumeration_type",
+    "public.llm_conversation",
+    "public.llm_skill",
+    "public.localized_message",
+    "public.notification_topic",
+    "public.sequence_value_item",
+    "public.service_job",
+    "public.service_job_parameter",
+    "public.system_message_remote",
+    "public.system_message_type",
+    "public.test_fts",
+    "public.user_group_permission",
+    "public.user_permission",
+    "search.moqui_logs"
+  ],
+  "schema_equal_after_approved_differences": true,
+  "unapproved_record_byte_differences": [],
+  "approved_differences_applied": [
+    {
+      "kind": "rust_only_table",
+      "table": "public.auth_flow",
+      "rows": 0
+    },
+    {
+      "kind": "rust_only_table",
+      "table": "public.auth_flow_field_map",
+      "rows": 0
+    },
+    {
+      "kind": "rust_only_table",
+      "table": "public.auth_flow_role_map",
+      "rows": 0
+    },
+    {
+      "kind": "rust_only_table",
+      "table": "public.cluster_member",
+      "rows": 1
+    },
+    {
+      "kind": "rust_only_table",
+      "table": "public.cluster_message",
+      "rows": 0
+    },
+    {
+      "kind": "rust_only_table",
+      "table": "public.data_feed_pending",
+      "rows": 0
+    },
+    {
+      "kind": "rust_only_table",
+      "table": "public.http_session",
+      "rows": 0
+    },
+    {
+      "kind": "rust_only_table",
+      "table": "public.oauth_flow",
+      "rows": 0
+    },
+    {
+      "kind": "rust_only_table",
+      "table": "public.oidc_flow",
+      "rows": 0
+    },
+    {
+      "kind": "rust_only_table",
+      "table": "public.saml_flow",
+      "rows": 0
+    },
+    {
+      "kind": "rust_only_table",
+      "table": "public.user_ssh_key",
+      "rows": 0
+    },
+    {
+      "kind": "rust_only_table",
+      "table": "search.document_index",
+      "rows": 2
+    },
+    {
+      "kind": "rust_only_table",
+      "table": "search.moqui_http_log",
+      "rows": 0
+    },
+    {
+      "kind": "rust_only_table",
+      "table": "search.moqui_logs",
+      "rows": 885
+    },
+    {
+      "kind": "template_difference",
+      "table": "public.localized_message",
+      "key": {
+        "original": "StatusFlowTransitionNotFoundTemplate",
+        "locale": "default"
+      },
+      "field": "localized",
+      "validator": "elvis_or",
+      "java": "Status change not allowed from ${lookedUpStatusName?:lookedUpStatusId} to ${parameterStatusName?:parameterStatusId}"
+    },
+    {
+      "kind": "template_difference",
+      "table": "public.localized_message",
+      "key": {
+        "original": "UomNameTemplate",
+        "locale": "default"
+      },
+      "field": "localized",
+      "validator": "elvis_or",
+      "java": "${description?:''} (${abbreviation?:uomId})"
+    },
+    {
+      "kind": "template_difference",
+      "table": "public.localized_message",
+      "key": {
+        "original": "UsernameTemplate",
+        "locale": "default"
+      },
+      "field": "localized",
+      "validator": "elvis_or",
+      "java": "${userFullName ?: (lastName ? (firstName ? firstName + ' ' : '') + lastName : '')} [${username?:userId?:''}]"
+    },
+    {
+      "kind": "template_difference",
+      "table": "public.notification_topic",
+      "key": {
+        "topic": "ServiceJobError"
+      },
+      "field": "title_template",
+      "validator": "elvis_or",
+      "java": "Job Error ${serviceCallRun.jobName?:''} [${serviceCallRun.jobRunId?:''}] ${serviceCallRun.errors?:'N/A'}"
+    },
+    {
+      "kind": "template_difference",
+      "table": "public.notification_topic",
+      "key": {
+        "topic": "WebServletError"
+      },
+      "field": "title_template",
+      "validator": "elvis_or",
+      "java": "Web Error ${errorCode?:''} (${username?:'no user'}) ${path?:''} ${message?:'N/A'}"
+    },
+    {
+      "kind": "template_difference",
+      "table": "public.notification_topic",
+      "key": {
+        "topic": "ServiceJobError"
+      },
+      "field": "link_template",
+      "java": "/vapps/system/ServiceJob/JobRuns/JobRunDetail?jobRunId=${serviceCallRun.jobRunId}",
+      "rust": "/qapps/System/ServiceJob/JobRuns/JobRunDetail?jobRunId=${serviceCallRun.jobRunId}"
+    },
+    {
+      "kind": "rust_only_column",
+      "table": "public.data_document_field",
+      "name": "search_role",
+      "type": "character varying(63)"
+    },
+    {
+      "kind": "rust_only_column",
+      "table": "public.data_document_field",
+      "name": "search_weight",
+      "type": "character(1)"
+    },
+    {
+      "kind": "rust_only_column",
+      "table": "public.system_message_remote",
+      "name": "ssh_host_key_fingerprint",
+      "type": "text"
+    },
+    {
+      "kind": "rust_only_ddl",
+      "object_type": "SCHEMA",
+      "name": "search"
+    },
+    {
+      "kind": "rust_only_ddl",
+      "object_type": "EXTENSION",
+      "name": "pg_trgm"
+    },
+    {
+      "kind": "theme_resource",
+      "theme": "DEFAULT",
+      "sequence": 1,
+      "java": [
+        "STRT_STYLESHEET",
+        null
+      ],
+      "rust": [
+        "STRT_STYLESHEET",
+        "/libs/fontawesome/css/font-awesome.min.css"
+      ]
+    },
+    {
+      "kind": "theme_resource",
+      "theme": "DEFAULT",
+      "sequence": 2,
+      "java": [
+        "STRT_STYLESHEET",
+        "/libs/font-awesome/css/font-awesome.min.css"
+      ],
+      "rust": null
+    },
+    {
+      "kind": "theme_resource",
+      "theme": "DEFAULT",
+      "sequence": 3,
+      "java": [
+        "STRT_STYLESHEET",
+        "/libs/twitter-bootstrap/css/bootstrap.min.css"
+      ],
+      "rust": null
+    },
+    {
+      "kind": "theme_resource",
+      "theme": "DEFAULT",
+      "sequence": 4,
+      "java": [
+        "STRT_STYLESHEET",
+        "/libs/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css"
+      ],
+      "rust": null
+    },
+    {
+      "kind": "theme_resource",
+      "theme": "DEFAULT",
+      "sequence": 5,
+      "java": [
+        "STRT_STYLESHEET",
+        "/libs/select2/select2.min.css"
+      ],
+      "rust": null
+    },
+    {
+      "kind": "theme_resource",
+      "theme": "DEFAULT",
+      "sequence": 6,
+      "java": [
+        "STRT_STYLESHEET",
+        "/libs/select2-bootstrap-theme/select2-bootstrap.min.css"
+      ],
+      "rust": null
+    },
+    {
+      "kind": "theme_resource",
+      "theme": "DEFAULT",
+      "sequence": 7,
+      "java": [
+        "STRT_STYLESHEET",
+        "/libs/Selectivity.js/selectivity-full.min.css"
+      ],
+      "rust": null
+    },
+    {
+      "kind": "theme_resource",
+      "theme": "DEFAULT",
+      "sequence": 8,
+      "java": [
+        "STRT_STYLESHEET",
+        "/libs/jstree/themes/default/style.min.css"
+      ],
+      "rust": null
+    },
+    {
+      "kind": "theme_resource",
+      "theme": "DEFAULT",
+      "sequence": 20,
+      "java": [
+        "STRT_STYLESHEET",
+        "/css/webroot-layout.css"
+      ],
+      "rust": [
+        "STRT_STYLESHEET",
+        "/css/moqui-html.css"
+      ]
+    },
+    {
+      "kind": "theme_resource",
+      "theme": "DEFAULT",
+      "sequence": 21,
+      "java": [
+        "STRT_STYLESHEET",
+        "/css/webroot-theme.css"
+      ],
+      "rust": null
+    },
+    {
+      "kind": "theme_resource",
+      "theme": "DEFAULT",
+      "sequence": 30,
+      "java": null,
+      "rust": [
+        "STRT_SCRIPT",
+        "/js/moqui-html.js"
+      ]
+    },
+    {
+      "kind": "theme_resource",
+      "theme": "DEFAULT",
+      "sequence": 102,
+      "java": [
+        "STRT_BODY_CLASS",
+        "bg-light"
+      ],
+      "rust": null
+    },
+    {
+      "kind": "theme_resource",
+      "theme": "DEFAULT",
+      "sequence": 201,
+      "java": [
+        "STRT_FOOTER_ITEM",
+        "<p><a href=\"/vapps/ScreenTree\">${ec.l10n.localize('Site Map')}</a></p>"
+      ],
+      "rust": [
+        "STRT_FOOTER_ITEM",
+        "<p><a href=\"/apps/ScreenTree\">${ec.l10n.localize('Site Map')}</a></p>"
+      ]
+    },
+    {
+      "kind": "theme_resource",
+      "theme": "DEFAULT_QUASAR",
+      "sequence": 1,
+      "java": [
+        "STRT_STYLESHEET",
+        null
+      ],
+      "rust": [
+        "STRT_STYLESHEET",
+        "/libs/fontawesome/css/font-awesome.min.css"
+      ]
+    },
+    {
+      "kind": "theme_resource",
+      "theme": "DEFAULT_QUASAR",
+      "sequence": 2,
+      "java": [
+        "STRT_STYLESHEET",
+        "/libs/font-awesome/css/font-awesome.min.css"
+      ],
+      "rust": null
+    },
+    {
+      "kind": "theme_resource",
+      "theme": "DEFAULT_QUASAR",
+      "sequence": 3,
+      "java": [
+        "STRT_STYLESHEET",
+        "https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons"
+      ],
+      "rust": [
+        "STRT_STYLESHEET",
+        "/libs/material-icons/material-icons.css"
+      ]
+    },
+    {
+      "kind": "theme_resource",
+      "theme": "DEFAULT_QUASAR",
+      "sequence": 4,
+      "java": [
+        "STRT_STYLESHEET",
+        "/libs/quasar/quasar.min.css"
+      ],
+      "rust": [
+        "STRT_STYLESHEET",
+        "/libs/quasar/quasar.prod.css"
+      ]
+    },
+    {
+      "kind": "rust_seed_addition",
+      "table": "public.enumeration",
+      "rows": 33
+    },
+    {
+      "kind": "rust_seed_addition",
+      "table": "public.enumeration_type",
+      "rows": 4
+    },
+    {
+      "kind": "rust_seed_addition",
+      "table": "public.user_permission",
+      "rows": 2
+    },
+    {
+      "kind": "rust_seed_addition",
+      "table": "public.user_group_permission",
+      "rows": 2
+    },
+    {
+      "kind": "rust_seed_addition",
+      "table": "public.service_job",
+      "rows": 1
+    },
+    {
+      "kind": "rust_seed_addition",
+      "table": "public.service_job",
+      "rows": 1
+    },
+    {
+      "kind": "rust_seed_addition",
+      "table": "public.service_job_parameter",
+      "rows": 2
+    },
+    {
+      "kind": "rust_seed_addition",
+      "table": "public.system_message_type",
+      "rows": 1
+    },
+    {
+      "kind": "rust_seed_addition",
+      "table": "public.system_message_remote",
+      "rows": 1
+    },
+    {
+      "kind": "rust_only_statistics",
+      "rows": [
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "load-report",
+          "artifact_name": "moqui.basic.Enumeration",
+          "hit_count": 1
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "load-report",
+          "artifact_name": "moqui.security.UserGroupPermission",
+          "hit_count": 1
+        }
+      ],
+      "hit_count": 2
+    },
+    {
+      "kind": "seed_statistics",
+      "artifact_name": "moqui.basic.Enumeration",
+      "artifact_sub_type": "create",
+      "java_hit_count": 186,
+      "rust_hit_count": 219
+    },
+    {
+      "kind": "seed_statistics",
+      "artifact_name": "moqui.basic.Enumeration",
+      "artifact_sub_type": "refresh",
+      "java_hit_count": 186,
+      "rust_hit_count": 219
+    },
+    {
+      "kind": "seed_statistics",
+      "artifact_name": "moqui.basic.EnumerationType",
+      "artifact_sub_type": "create",
+      "java_hit_count": 37,
+      "rust_hit_count": 41
+    },
+    {
+      "kind": "seed_statistics",
+      "artifact_name": "moqui.basic.EnumerationType",
+      "artifact_sub_type": "refresh",
+      "java_hit_count": 37,
+      "rust_hit_count": 41
+    },
+    {
+      "kind": "seed_statistics",
+      "artifact_name": "moqui.screen.ScreenThemeResource",
+      "artifact_sub_type": "create",
+      "java_hit_count": 26,
+      "rust_hit_count": 17
+    },
+    {
+      "kind": "seed_statistics",
+      "artifact_name": "moqui.screen.ScreenThemeResource",
+      "artifact_sub_type": "refresh",
+      "java_hit_count": 26,
+      "rust_hit_count": 17
+    },
+    {
+      "kind": "seed_statistics",
+      "artifact_name": "moqui.security.UserGroupPermission",
+      "artifact_sub_type": "create",
+      "java_hit_count": 10,
+      "rust_hit_count": 12
+    },
+    {
+      "kind": "seed_statistics",
+      "artifact_name": "moqui.security.UserGroupPermission",
+      "artifact_sub_type": "refresh",
+      "java_hit_count": 10,
+      "rust_hit_count": 12
+    },
+    {
+      "kind": "seed_statistics",
+      "artifact_name": "moqui.security.UserPermission",
+      "artifact_sub_type": "create",
+      "java_hit_count": 10,
+      "rust_hit_count": 12
+    },
+    {
+      "kind": "seed_statistics",
+      "artifact_name": "moqui.security.UserPermission",
+      "artifact_sub_type": "refresh",
+      "java_hit_count": 10,
+      "rust_hit_count": 12
+    },
+    {
+      "kind": "seed_statistics",
+      "artifact_name": "moqui.service.job.ServiceJob",
+      "artifact_sub_type": "create",
+      "java_hit_count": 14,
+      "rust_hit_count": 16
+    },
+    {
+      "kind": "seed_statistics",
+      "artifact_name": "moqui.service.job.ServiceJob",
+      "artifact_sub_type": "refresh",
+      "java_hit_count": 14,
+      "rust_hit_count": 16
+    },
+    {
+      "kind": "seed_statistics",
+      "artifact_name": "moqui.service.job.ServiceJobParameter",
+      "artifact_sub_type": "create",
+      "java_hit_count": 12,
+      "rust_hit_count": 14
+    },
+    {
+      "kind": "seed_statistics",
+      "artifact_name": "moqui.service.job.ServiceJobParameter",
+      "artifact_sub_type": "refresh",
+      "java_hit_count": 12,
+      "rust_hit_count": 14
+    },
+    {
+      "kind": "seed_statistics",
+      "artifact_name": "moqui.service.message.SystemMessageRemote",
+      "artifact_sub_type": "create",
+      "java_hit_count": 0,
+      "rust_hit_count": 1
+    },
+    {
+      "kind": "seed_statistics",
+      "artifact_name": "moqui.service.message.SystemMessageRemote",
+      "artifact_sub_type": "refresh",
+      "java_hit_count": 0,
+      "rust_hit_count": 1
+    },
+    {
+      "kind": "seed_statistics",
+      "artifact_name": "moqui.service.message.SystemMessageType",
+      "artifact_sub_type": "create",
+      "java_hit_count": 0,
+      "rust_hit_count": 1
+    },
+    {
+      "kind": "seed_statistics",
+      "artifact_name": "moqui.service.message.SystemMessageType",
+      "artifact_sub_type": "refresh",
+      "java_hit_count": 0,
+      "rust_hit_count": 1
+    },
+    {
+      "kind": "statistics_timing",
+      "table": "public.artifact_hit_bin",
+      "fields": [
+        "bin_start_date_time",
+        "bin_end_date_time",
+        "total_time_millis",
+        "total_squared_time",
+        "min_time_millis",
+        "max_time_millis",
+        "slow_hit_count",
+        "last_updated_stamp"
+      ],
+      "java_rows": 87,
+      "rust_rows": 87
+    },
+    {
+      "kind": "statistics_bin_boundaries",
+      "identity": [
+        "object",
+        [
+          [
+            "artifact_name",
+            [
+              "str",
+              "moqui.entity.feed.DataFeed"
+            ]
+          ],
+          [
+            "artifact_sub_type",
+            [
+              "str",
+              "list"
+            ]
+          ],
+          [
+            "artifact_type",
+            [
+              "str",
+              "AT_ENTITY"
+            ]
+          ],
+          [
+            "server_host_name",
+            [
+              "str",
+              "zenbook"
+            ]
+          ],
+          [
+            "server_ip_address",
+            [
+              "str",
+              "192.168.8.171"
+            ]
+          ]
+        ]
+      ],
+      "java_bins": 2,
+      "rust_bins": 2,
+      "hit_count": 2
+    },
+    {
+      "kind": "full_text_storage",
+      "table": "public.llm_conversation",
+      "field": "search_text",
+      "java_index": "fts_llm_conversation_search_text",
+      "rust_index": "llm_conversation_searchtext_fts"
+    },
+    {
+      "kind": "full_text_storage",
+      "table": "public.llm_skill",
+      "field": "description",
+      "java_index": "fts_llm_skill_description",
+      "rust_index": "llm_skill_description_fts"
+    },
+    {
+      "kind": "full_text_storage",
+      "table": "public.llm_skill",
+      "field": "body",
+      "java_index": "fts_llm_skill_body",
+      "rust_index": "llm_skill_body_fts"
+    },
+    {
+      "kind": "full_text_storage",
+      "table": "public.test_fts",
+      "field": "body",
+      "java_index": "fts_test_fts_body",
+      "rust_index": "test_fts_body_fts"
+    }
+  ],
+  "transactions_replayed": {
+    "java": 116,
+    "rust": 128
+  },
+  "uncommitted_state_verified": false
+}
