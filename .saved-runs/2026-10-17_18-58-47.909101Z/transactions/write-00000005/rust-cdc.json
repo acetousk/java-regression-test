@@ -1,0 +1,13 @@
+{
+  "operation_id": "rust-00000018",
+  "transactions": [
+    {
+      "operation_id": "rust-00000018",
+      "outcome": "committed",
+      "changes": [
+        "table public.db_resource: INSERT: resource_id[character varying]:'WIKI_SPACE_ROOT' parent_resource_id[character varying]:null filename[text]:'WikiSpace' is_file[character]:'N' last_updated_stamp[timestamp without time zone]:'2026-10-17 18:59:01.498'",
+        "table moqui_regression.events: INSERT: payload[text]:'{\"kind\" : \"insert\", \"table\" : \"public.db_resource\", \"old\" : null, \"new\" : \"{\\\"resource_id\\\":\\\"WIKI_SPACE_ROOT\\\",\\\"parent_resource_id\\\":null,\\\"filename\\\":\\\"WikiSpace\\\",\\\"is_file\\\":\\\"N\\\",\\\"last_updated_stamp\\\":\\\"2026-10-17T18:59:01.498\\\"}\"}'"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "deterministic_requested": true,
+  "servers_started": true,
+  "shutdown_verified": true,
+  "final_databases_equal": true,
+  "passed": true,
+  "approved_differences_sha256": "eae7e91a595e85f17ce618714ac216b915323469353c35caebbbdf5edd380d1e",
+  "deterministic": {
+    "protocol_version": 2,
+    "run_id": "2026-10-17_18-58-47.909101Z",
+    "start_epoch_ms": 1792263541494,
+    "write_transactions": 116,
+    "database_comparisons": 116,
+    "error": null,
+    "transaction_counts": {
+      "java": {
+        "begin": 130,
+        "committed": 130,
+        "rolled_back": 0,
+        "begin_failed": 0
+      },
+      "rust": {
+        "begin": 156,
+        "committed": 156,
+        "rolled_back": 0,
+        "begin_failed": 0
+      }
+    },
+    "rust_only_writes": 12,
+    "exempt_writes": {
+      "java": 0,
+      "rust": 12
+    },
+    "unpaired_writes": {
+      "java": 0,
+      "rust": 0
+    },
+    "operation_trace_counts": {
+      "java": {
+        "phase": 2,
+        "coordinator": 130,
+        "metadata": 428,
+        "AT_ENTITY": 5798,
+        "cache": 111,
+        "jdbc": 7584,
+        "AT_OTHER": 1,
+        "data": 2688,
+        "AT_SERVICE": 4
+      },
+      "rust": {
+        "coordinator": 156,
+        "phase": 8,
+        "metadata": 450,
+        "AT_ENTITY": 5590,
+        "jdbc": 16182,
+        "cache": 1400,
+        "AT_OTHER": 2,
+        "data": 2836,
+        "AT_SERVICE": 4
+      }
+    },
+    "operation_checks_enabled": false,
+    "operation_order_equal": null,
+    "operation_database_comparisons": 0,
+    "uncommitted_state_verified": false,
+    "final_incremental_equal": true,
+    "operations": [],
+    "per_transaction_databases_equal": true
+  }
+}

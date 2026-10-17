@@ -1,0 +1,19 @@
+{
+  "operation_id": "java-00000126",
+  "transactions": [
+    {
+      "operation_id": "java-00000126",
+      "outcome": "committed",
+      "changes": [
+        "table moqui_regression.events: INSERT: payload[text]:'{\"kind\" : \"schema\", \"tag\" : \"ALTER TABLE\", \"tables\" : [\"public.llm_conversation\"], \"table_only\" : true, \"readback\" : [\"public.llm_conversation\"]}'",
+        "table moqui_regression.events: INSERT: payload[text]:'{\"kind\" : \"schema\", \"tag\" : \"CREATE INDEX\", \"tables\" : null, \"table_only\" : true, \"readback\" : null}'",
+        "table moqui_regression.events: INSERT: payload[text]:'{\"kind\" : \"schema\", \"tag\" : \"ALTER TABLE\", \"tables\" : [\"public.llm_skill\"], \"table_only\" : true, \"readback\" : [\"public.llm_skill\"]}'",
+        "table moqui_regression.events: INSERT: payload[text]:'{\"kind\" : \"schema\", \"tag\" : \"CREATE INDEX\", \"tables\" : null, \"table_only\" : true, \"readback\" : null}'",
+        "table moqui_regression.events: INSERT: payload[text]:'{\"kind\" : \"schema\", \"tag\" : \"ALTER TABLE\", \"tables\" : [\"public.llm_skill\"], \"table_only\" : true, \"readback\" : [\"public.llm_skill\"]}'",
+        "table moqui_regression.events: INSERT: payload[text]:'{\"kind\" : \"schema\", \"tag\" : \"CREATE INDEX\", \"tables\" : null, \"table_only\" : true, \"readback\" : null}'",
+        "table moqui_regression.events: INSERT: payload[text]:'{\"kind\" : \"schema\", \"tag\" : \"ALTER TABLE\", \"tables\" : [\"public.test_fts\"], \"table_only\" : true, \"readback\" : [\"public.test_fts\"]}'",
+        "table moqui_regression.events: INSERT: payload[text]:'{\"kind\" : \"schema\", \"tag\" : \"CREATE INDEX\", \"tables\" : null, \"table_only\" : true, \"readback\" : null}'"
+      ]
+    }
+  ]
+}

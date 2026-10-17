@@ -1,0 +1,13 @@
+{
+  "operation_id": "rust-00000133",
+  "transactions": [
+    {
+      "operation_id": "rust-00000133",
+      "outcome": "committed",
+      "changes": [
+        "table public.artifact_hit_bin: INSERT: hit_bin_id[character varying]:'100087' artifact_type[text]:'AT_ENTITY' artifact_sub_type[text]:'refresh' artifact_name[text]:'moqui.security.UserAuthcFactor' server_ip_address[character varying]:'192.168.8.171' server_host_name[text]:'zenbook' bin_start_date_time[timestamp without time zone]:'2026-10-17 18:59:01.5' bin_end_date_time[timestamp without time zone]:'2026-10-17 18:59:01.496' hit_count[numeric]:1 total_time_millis[numeric]:0.495800 total_squared_time[numeric]:0.245818 min_time_millis[numeric]:0.495800 max_time_millis[numeric]:0.495800 slow_hit_count[numeric]:0 last_updated_stamp[timestamp without time zone]:'2026-10-17 18:59:01.604'",
+        "table moqui_regression.events: INSERT: payload[text]:'{\"kind\" : \"insert\", \"table\" : \"public.artifact_hit_bin\", \"old\" : null, \"new\" : \"{\\\"hit_bin_id\\\":\\\"100087\\\",\\\"artifact_type\\\":\\\"AT_ENTITY\\\",\\\"artifact_sub_type\\\":\\\"refresh\\\",\\\"artifact_name\\\":\\\"moqui.security.UserAuthcFactor\\\",\\\"server_ip_address\\\":\\\"192.168.8.171\\\",\\\"server_host_name\\\":\\\"zenbook\\\",\\\"bin_start_date_time\\\":\\\"2026-10-17T18:59:01.5\\\",\\\"bin_end_date_time\\\":\\\"2026-10-17T18:59:01.496\\\",\\\"hit_count\\\":1,\\\"total_time_millis\\\":0.495800,\\\"total_squared_time\\\":0.245818,\\\"min_time_millis\\\":0.495800,\\\"max_time_millis\\\":0.495800,\\\"slow_hit_count\\\":0,\\\"last_updated_stamp\\\":\\\"2026-10-17T18:59:01.604\\\"}\"}'"
+      ]
+    }
+  ]
+}

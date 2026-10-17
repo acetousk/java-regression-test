@@ -1,0 +1,14 @@
+{
+  "operation_id": "rust-00000142",
+  "transactions": [
+    {
+      "operation_id": "rust-00000142",
+      "outcome": "committed",
+      "changes": [
+        "table moqui_regression.events: INSERT: payload[text]:'{\"kind\" : \"schema\", \"tag\" : \"CREATE SCHEMA\", \"tables\" : null, \"table_only\" : true, \"readback\" : null}'",
+        "table moqui_regression.events: INSERT: payload[text]:'{\"kind\" : \"schema\", \"tag\" : \"CREATE EXTENSION\", \"tables\" : null, \"table_only\" : true, \"readback\" : null}'",
+        "table moqui_regression.events: INSERT: payload[text]:'{\"kind\" : \"schema\", \"tag\" : \"CREATE TABLE\", \"tables\" : null, \"table_only\" : true, \"readback\" : null}'"
+      ]
+    }
+  ]
+}
