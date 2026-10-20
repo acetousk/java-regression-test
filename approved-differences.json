@@ -79,6 +79,12 @@
     "approved_by": "user",
     "description": "Different time-based bin splits are okay when operation identities, host values, all other non-timing fields, and aggregate hit counts match. Collapse split bins in the comparison copy and close only the id gaps caused by those bins. Sequence states remain strict."
   },
+  "url_port_differences": [
+    {"approved_by": "user", "description": "Java and Rust test servers use different ports. Ignore only URL ports; scheme, host, path, query and fragment remain strict.", "table": "public.visit", "fields": ["initial_request", "initial_referrer"]}
+  ],
+  "java_servlet_session_fields": [
+    {"approved_by": "user", "description": "Java-only servlet/Jetty session metadata and Visit date differences; other Visit fields remain strict.", "table": "public.visit", "fields": ["webapp_name", "from_date", "last_updated_stamp"]}
+  ],
   "statistics_timing": [
     {"table": "public.artifact_hit_bin", "fields": ["bin_start_date_time", "bin_end_date_time", "total_time_millis", "total_squared_time", "min_time_millis", "max_time_millis", "slow_hit_count", "last_updated_stamp"]},
     {"table": "public.artifact_hit", "fields": ["start_date_time", "running_time_millis", "is_slow_hit", "last_updated_stamp"]}

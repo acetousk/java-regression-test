@@ -22,6 +22,7 @@ import signal
 import socket
 import subprocess
 import time
+import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
 
@@ -253,6 +254,48 @@ def apply_approved_differences(java, rust, approved):
 
     applied.extend(apply_rust_only_statistics(snapshots, approved.get("rust_only_statistics")))
     applied.extend(apply_seed_statistics(snapshots, seed_row_deltas))
+
+    for rule in approved.get("java_servlet_session_fields", []):
+        normalized_rows = []
+        for snapshot in snapshots:
+            count = 0
+            for item in snapshot["records"]:
+                if item.get("table") != rule["table"]:
+                    continue
+                for field in rule["fields"]:
+                    if field in item["row"]:
+                        item["row"][field] = None
+                count += 1
+            normalized_rows.append(count)
+        if any(normalized_rows):
+            applied.append({"kind": "java_servlet_session_fields", **deepcopy(rule),
+                            "java_rows": normalized_rows[0], "rust_rows": normalized_rows[1]})
+
+    for rule in approved.get("url_port_differences", []):
+        normalized_rows = []
+        for snapshot in snapshots:
+            count = 0
+            for item in snapshot["records"]:
+                if item.get("table") != rule["table"]:
+                    continue
+                for field in rule["fields"]:
+                    value = item["row"].get(field)
+                    if not isinstance(value, str):
+                        continue
+                    try:
+                        url = urllib.parse.urlsplit(value)
+                        if url.scheme not in ("http", "https") or not url.hostname or url.port is None:
+                            continue
+                    except ValueError:
+                        continue
+                    # Remove only the authority's port, leaving every other URL byte intact.
+                    authority = url.netloc.rsplit(":", 1)[0]
+                    item["row"][field] = value.replace("//" + url.netloc, "//" + authority, 1)
+                    count += 1
+            normalized_rows.append(count)
+        if any(normalized_rows):
+            applied.append({"kind": "url_port_differences", **deepcopy(rule),
+                            "java_fields": normalized_rows[0], "rust_fields": normalized_rows[1]})
 
     for rule in approved.get("statistics_timing", []):
         normalized_rows = []
@@ -961,7 +1004,7 @@ def snapshot_compare(left, right, report_dir, *, rust_only_manifest=None, source
     return equal
 
 
-def diff_compare(left, right, report_dir, *, approved_differences=None):
+def diff_compare(left, right, report_dir, *, approved_differences=None, activity_baselines=None):
     """Compare PostgreSQL-replayed state without recapturing user rows.
 
     Rebuild canonical counters only for affected relations and approval dependencies.
@@ -995,17 +1038,30 @@ def diff_compare(left, right, report_dir, *, approved_differences=None):
                 cache[name][json.dumps(canonical(record), ensure_ascii=True, separators=(",", ":"))] += 1
         state.comparison_cache = cache
         state.compared_schema = state.schema
+    baseline_counters = []
+    for snapshot in activity_baselines or ():
+        grouped = {}
+        for record in snapshot['records']:
+            value = json.dumps(canonical(record), ensure_ascii=True, separators=(",", ":"))
+            grouped.setdefault(group(record), Counter())[value] += 1
+        baseline_counters.append(grouped)
     differences = []
     for name in sorted(set(left.comparison_cache) | set(right.comparison_cache)):
         java, rust = (state.comparison_cache.get(name, Counter()) for state in (left, right))
+        if activity_baselines:
+            java, rust = java.copy(), rust.copy()
+            java.subtract(baseline_counters[0].get(name, Counter()))
+            rust.subtract(baseline_counters[1].get(name, Counter()))
         for side, items in (("java", java - rust), ("rust", rust - java)):
             differences.extend({"relation": name, "side": side, "count": count,
                                 "hex": record.encode("utf-8").hex()} for record, count in sorted(items.items()))
-    schema_equal = normalized[0]["schema"] == normalized[1]["schema"]
+    schema_equal = (all(current['schema'] == baseline['schema']
+                        for current, baseline in zip(normalized, activity_baselines))
+                    if activity_baselines else normalized[0]["schema"] == normalized[1]["schema"])
     equal = schema_equal and not differences
     report_dir = Path(report_dir)
     report_dir.mkdir(parents=True, exist_ok=True, mode=0o700)
-    report = {"mode": "postgresql-incremental", "comparison_passed": equal,
+    report = {"mode": "activity-delta" if activity_baselines else "postgresql-incremental", "comparison_passed": equal,
               "compared_relations": sorted(touched), "schema_equal_after_approved_differences": schema_equal,
               "unapproved_record_byte_differences": differences, "approved_differences_applied": applied,
               "transactions_replayed": {side: state.transactions for side, state in (("java", left), ("rust", right))},
@@ -1237,6 +1293,53 @@ COMMIT;
         state.catalog = [record for record in state.catalog if 'sequence' not in json.loads(record)] + sequences
 
 
+def preflight_activity_tests(args):
+    """Fail in seconds, before builds and boot, if Step 5 could not launch its browser or load its specs."""
+    environment = {**os.environ, "MOQUI_HARNESS_STATUS_URL": "http://127.0.0.1:9/status"}
+    browser = subprocess.run(
+        ["node", "-e", "const p = require('@playwright/test').chromium.executablePath();"
+         "if (!require('node:fs').existsSync(p)) { console.error(p); process.exit(1); }"],
+        cwd=ROOT / "ui-test", env=environment, capture_output=True, text=True)
+    if browser.returncode:
+        raise SystemExit(f"Step 5 browser missing ({browser.stderr.strip()}); run: cd ui-test && npx playwright install chromium")
+    listing = subprocess.run(["npx", "playwright", "test", "--list", args.activity_spec], cwd=ROOT / "ui-test",
+                             env=environment, capture_output=True, text=True)
+    found = re.search(r"Total: (\d+) tests?", listing.stdout)
+    if listing.returncode or not found or found.group(1) == "0":
+        raise SystemExit(f"Step 5 specs do not load for {args.activity_spec!r}:\n{listing.stdout}{listing.stderr}")
+
+
+def hold_for_activities(args, evidence, coordinator, status_url):
+    """Keep both engines and the transaction harness up so activity specs can be rerun in seconds."""
+    (evidence / "activity-session.json").write_text(json.dumps({
+        "MOQUI_RUN_DIR": str(evidence), "MOQUI_HARNESS_STATUS_URL": status_url,
+        "JAVA_BASE_URL": f"http://127.0.0.1:{args.java_port}",
+        "RUST_BASE_URL": f"http://127.0.0.1:{args.rust_port}",
+    }, indent=2) + "\n")
+    print("Holding both engines under the transaction harness. Iterate from ui-test/ with:\n"
+          f"  MOQUI_RUN_DIR={evidence} MOQUI_HARNESS_STATUS_URL={status_url} "
+          f"JAVA_BASE_URL=http://127.0.0.1:{args.java_port} RUST_BASE_URL=http://127.0.0.1:{args.rust_port} "
+          f"npx playwright test {args.activity_spec or '.activity.spec.js'}\n"
+          "A harness failure is permanent for this boot. Ctrl-C (or SIGTERM) shuts down.", flush=True)
+    previous = signal.signal(signal.SIGTERM, signal.default_int_handler)
+    try:
+        while True:
+            signal.pause()
+    except KeyboardInterrupt:
+        print("Hold released; shutting down.", flush=True)
+    finally:
+        signal.signal(signal.SIGTERM, previous)
+
+
+def run_activity_tests(args, evidence, status_url):
+    """Step 5: drive business-process activities on both engines under the transaction harness."""
+    subprocess.run(
+        ["npm", "run", "test:activities", "--", args.activity_spec], cwd=ROOT / "ui-test",
+        env={**os.environ, "MOQUI_RUN_DIR": str(evidence), "MOQUI_HARNESS_STATUS_URL": status_url,
+             "JAVA_BASE_URL": f"http://127.0.0.1:{args.java_port}",
+             "RUST_BASE_URL": f"http://127.0.0.1:{args.rust_port}"}, check=True)
+
+
 def catalog_row_readback(container, state, catalog):
     """Read DDL-affected rows in one PostgreSQL snapshot, not one process per table."""
     old_columns = {item['relation']: item.get('columns') for item in map(json.loads, state.catalog)
@@ -1275,19 +1378,26 @@ def boot_and_stop(args):
     print(f"Startup evidence: {evidence}", flush=True)
     approved = getattr(args, "approved_differences", APPROVED_STARTUP_DIFFERENCES)
     (evidence / "approved-differences.json").write_text(json.dumps(approved, indent=2) + "\n")
-    manifest = ROOT / ".runs/build.json"
-    if manifest.exists():
-        (evidence / "build.json").write_bytes(manifest.read_bytes())
     containers, processes, logs = {}, {}, []
     directories = engine_directories(args)
+    artifacts = {}
+    for side, directory in directories.items():
+        executable = directory / "moqui.war" if side == "java" else rust_artifact(directory)
+        with executable.open("rb") as stream:
+            checksum = hashlib.file_digest(stream, "sha256").hexdigest()
+        artifacts[side] = {"artifact": str(executable), "sha256": checksum,
+                           "checkout": str(directory), "runtime": str(directory / "runtime")}
+    (evidence / "build.json").write_text(json.dumps(artifacts, indent=2) + "\n")
     coordinator = None
     hook_url = None
     verification = {"deterministic_requested": bool(getattr(args, "deterministic", False)),
                     "servers_started": False, "shutdown_verified": False,
-                    "final_databases_equal": None, "passed": False,
+                    "activity_tests_passed": None, "final_databases_equal": None, "passed": False,
                     "approved_differences_sha256": hashlib.sha256(
                         (evidence / "approved-differences.json").read_bytes()).hexdigest()}
     started = False
+    activity_only = bool(getattr(args, 'skip_step_4', False) and getattr(args, 'deterministic', False))
+    activity_baselines = None
     password = secrets.token_hex(24)
     crypt_pass = secrets.token_hex(32)
     environment = os.environ.copy()
@@ -1391,7 +1501,8 @@ def boot_and_stop(args):
                 step = evidence / "transactions" / write_id
                 for side, state in states.items():
                     refresh_incremental_catalog(containers[side], state, evidence / f"{side}-catalog.json")
-                return diff_compare(states['java'], states['rust'], step, approved_differences=approved)
+                return diff_compare(states['java'], states['rust'], step, approved_differences=approved,
+                                    activity_baselines=activity_baselines)
 
             def approved_difference(event, kind):
                 return approved_statistics_change(event, kind,
@@ -1400,7 +1511,8 @@ def boot_and_stop(args):
             coordinator = DeterministicCoordinator(run_id, evidence, compare=compare_transaction,
                                                    cdc=changes,
                                                    exempt=ApprovalEngine(approved, approved_difference).exempt_transaction,
-                                                   operation_checks=False, timeout=args.boot_timeout)
+                                                   operation_checks=False, timeout=args.boot_timeout,
+                                                   bootstrap=activity_only, random_seed=getattr(args, 'random_seed', None))
             hook_url = coordinator.start()
 
         for name, checkout in zip(("java", "rust"), REPOSITORIES):
@@ -1412,8 +1524,10 @@ def boot_and_stop(args):
                            "-jar", str(directory / "moqui.war"), f"port={ports[name]}", "no-run-es"]
             else:
                 command = [str(rust_artifact(directory)), "--conf", str(conf),
-                           "--port", str(ports[name]), "--https-port", "off", "--no-run-es",
-                           "-D", "create-or-update=true"]
+                           "--port", str(ports[name]), "--https-port", "off", "--no-run-es"]
+                # The instrumented activity branch already loads with create_or_update and predates this flag.
+                if not activity_only:
+                    command.extend(["-D", "create-or-update=true"])
             log = (evidence / f"{name}-boot.log").open("wb")
             logs.append(log)
             overrides = {node.get("name"): node.get("value")
@@ -1421,6 +1535,7 @@ def boot_and_stop(args):
             deterministic_env = ({
                 "MOQUI_DETERMINISTIC": "true", "MOQUI_DETERMINISTIC_HOOK": hook_url,
                 "MOQUI_DETERMINISTIC_OPERATIONS": "false",
+                "MOQUI_DETERMINISTIC_TIMEOUT_SECONDS": str(min(3600, max(120, int(args.boot_timeout)))),
                 "MOQUI_DETERMINISTIC_ENGINE": name, "MOQUI_DETERMINISTIC_RUN": run_id,
                 "MOQUI_DETERMINISTIC_LOG": str(evidence / f"{name}-deterministic.log"),
             } if coordinator else {})
@@ -1434,6 +1549,33 @@ def boot_and_stop(args):
                        failure_check=coordinator.check_health if coordinator else None)
         started = True
         verification["servers_started"] = True
+        if activity_only:
+            def establish_activity_baselines():
+                nonlocal activity_baselines
+                for side, container in containers.items():
+                    baseline = evidence / f'{side}-activity-baseline.json'
+                    capture_snapshot(container, baseline)
+                    # Loading is outside Step 5. Retain its CDC separately, without pairing it.
+                    transactions, cursor = read_cdc(container, with_cursor=True)
+                    (evidence / f'{side}-loading-cdc.json').write_text(json.dumps({
+                        'transactions': transactions, 'cursor': cursor}) + '\n')
+                    states[side] = DatabaseState(json.loads(baseline.read_text()))
+                    states[side].capture_cursor = cursor['after']
+                activity_baselines, _ = apply_approved_differences(
+                    states['java'].snapshot(), states['rust'].snapshot(), approved)
+            coordinator.activate(establish_activity_baselines)
+            verification['loading_equality_checked'] = False
+            print('Step 5 baselines captured after loading; pairing and comparing activity writes only.', flush=True)
+        # The read-only visual sweep drives engines one at a time, so it cannot run under transaction barriers.
+        if coordinator and getattr(args, "hold", False):
+            hold_for_activities(args, evidence, coordinator, hook_url.rsplit("/", 1)[0] + "/status")
+        elif coordinator and getattr(args, "activity_spec", None):
+            # Step 5: user-driven activities while both engines are paired at every write.
+            print("Step 5: performing business-process activities under the transaction harness.", flush=True)
+            verification["activity_tests_passed"] = False
+            run_activity_tests(args, evidence, hook_url.rsplit("/", 1)[0] + "/status")
+            coordinator.check_health()
+            verification["activity_tests_passed"] = True
         print("Both engines started; stopping both processes.", flush=True)
     finally:
         shutdown = stop_engines(processes, {name: evidence / f"{name}-boot.log" for name in processes},
@@ -1454,23 +1596,31 @@ def boot_and_stop(args):
                         capture_snapshot(container, evidence / f"{name}-snapshot.json")
                     except (subprocess.CalledProcessError, subprocess.TimeoutExpired):
                         print(f"Could not capture failed-startup database for {name}", flush=True)
-            if started:
+            if started and verification["activity_tests_passed"] is False:
+                # A failed activity step fails every later step, including the Step 4 comparison.
+                print(f"Step 5 failed; Step 4 skipped. Inspect {evidence / 'ui-test/activities'}", flush=True)
+            elif started:
                 if coordinator and not coordinator.report()["per_transaction_databases_equal"]:
                     raise RuntimeError(f"Deterministic verification failed; inspect {evidence / 'deterministic-report.json'}")
                 if any(result["errors"] for result in shutdown.values()):
                     raise RuntimeError(f"Graceful shutdown verification failed; inspect {evidence / 'shutdown.json'}")
                 print("Both engines shut down gracefully and flushed artifact bins.", flush=True)
-                # Step 4: Snapshot and compare only after verified graceful shutdown.
-                for name, container in containers.items():
-                    capture_snapshot(container, evidence / f"{name}-snapshot.json")
-                verification["final_databases_equal"] = snapshot_compare(
-                    evidence / "java-snapshot.json", evidence / "rust-snapshot.json", evidence,
-                    rust_only_manifest=(RUST_ONLY_SOURCES if args.exclude_rust_only else None),
-                    source_root=args.source_root, approved_differences=approved)
-                if not verification["final_databases_equal"]:
-                    raise SystemExit(f"Startup snapshots differ; inspect {evidence / 'comparison.json'}")
-                verification["passed"] = True
-                print("Startup snapshots match after approved differences (not a complete logical-equivalence proof).", flush=True)
+                if getattr(args, "skip_step_4", False):
+                    verification["step_4_skipped"] = True
+                    verification["passed"] = bool(verification.get(
+                        "activity_tests_passed" if coordinator else "visual_tests_passed", False))
+                else:
+                    # Step 4: Snapshot and compare only after verified graceful shutdown.
+                    for name, container in containers.items():
+                        capture_snapshot(container, evidence / f"{name}-snapshot.json")
+                    verification["final_databases_equal"] = snapshot_compare(
+                        evidence / "java-snapshot.json", evidence / "rust-snapshot.json", evidence,
+                        rust_only_manifest=(RUST_ONLY_SOURCES if args.exclude_rust_only else None),
+                        source_root=args.source_root, approved_differences=approved)
+                    if not verification["final_databases_equal"]:
+                        raise SystemExit(f"Startup snapshots differ; inspect {evidence / 'comparison.json'}")
+                    verification["passed"] = True
+                    print("Startup snapshots match after approved differences (not a complete logical-equivalence proof).", flush=True)
         finally:
             (evidence / "verification.json").write_text(json.dumps(verification, indent=2) + "\n")
             for name, container in containers.items():
@@ -1490,6 +1640,17 @@ def main():
     parser.add_argument("--rust-checkout", type=Path, help="Use an existing private Rust worktree (not reset)")
     parser.add_argument("--deterministic", action="store_true",
                         help="Pair transaction hooks and compare committed databases after every transaction")
+    parser.add_argument("--random-seed", help="Deterministic entropy seed: 64 lowercase hex characters; default: fresh per run")
+    parser.add_argument("--skip-step-4", action="store_true",
+                        help="With --deterministic: compare activity writes only, skipping Step 4")
+    parser.add_argument("--activity-spec", default=".activity.spec.js",
+                        help="Step 5 activity spec filter, run under the transaction harness "
+                             "(default: all activity specs; empty string skips Step 5)")
+    parser.add_argument("--hold", action="store_true",
+                        help="With --deterministic: after boot, keep engines and harness up for rerunning "
+                             "activity specs (Step 5 is not run automatically); Ctrl-C shuts down")
+    parser.add_argument("--skip-build", action="store_true",
+                        help="Reuse existing engine builds instead of rebuilding both engines")
     parser.add_argument("--differences", type=Path, default=ROOT / "approved-differences.json",
                         help="Reviewed differences JSON; copied into the run evidence")
     parser.add_argument("--java-port", type=int, default=8080)
@@ -1513,6 +1674,16 @@ def main():
     if args.boot_timeout <= 0 or args.shutdown_timeout <= 0:
         parser.error("--boot-timeout and --shutdown-timeout must be positive")
 
+    if args.random_seed is not None and (not args.deterministic or len(args.random_seed) != 64
+            or any(char not in '0123456789abcdef' for char in args.random_seed)):
+        parser.error('--random-seed requires --deterministic and 64 lowercase hex characters')
+    if args.skip_step_4 and not args.deterministic:
+        parser.error("--skip-step-4 requires --deterministic")
+    if args.hold and not args.deterministic:
+        parser.error("--hold requires --deterministic")
+    if args.deterministic and args.activity_spec:
+        preflight_activity_tests(args)
+
     # Step 1: Initialize the pinned framework submodules and Java's private runtime.
     defaults = [checkout for name, checkout in zip(("java", "rust"), REPOSITORIES)
                 if getattr(args, f"{name}_checkout") is None]
@@ -1526,7 +1697,14 @@ def main():
         ).strip()
         print(f"{directory}: {revision}", flush=True)
     # Step 2: Build Java's moqui.war and Rust's executable with separate runtimes.
-    build_engines(args.java_home, directories)
+    if args.skip_build:
+        missing = [path for path in (directories["java"] / "moqui.war", rust_artifact(directories["rust"]))
+                   if not path.is_file()]
+        if missing:
+            parser.error(f"--skip-build needs existing engine builds: {', '.join(map(str, missing))}")
+        print("Skipping engine builds (--skip-build).", flush=True)
+    else:
+        build_engines(args.java_home, directories)
 
     # Step 3: Start both engines, wait for HTTP ports, then stop both processes.
     boot_and_stop(args)

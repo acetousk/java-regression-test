@@ -72,6 +72,74 @@ class ApprovedDifferencesTests(unittest.TestCase):
         self.assertFalse(equal)
         self.assertEqual(report["approved_differences_applied"], [])
 
+    def visit(self, java=True):
+        return {"table": "public.visit", "row": {
+            "visit_id": "100000", "session_id": "same", "initial_request": "/Login",
+            "webapp_name": "ROOT" if java else None,
+            "from_date": "2026-01-01T00:00:00" if java else "2026-01-01T00:00:01",
+            "last_updated_stamp": "2026-01-01T00:00:02" if java else "2026-01-01T00:00:03",
+        }}
+
+    def test_java_servlet_session_fields_keep_raw_evidence(self):
+        left, right = self.visit(), self.visit(False)
+        original = deepcopy((left, right))
+        equal, report, _ = self.compare([left], [right])
+        self.assertTrue(equal)
+        self.assertFalse(report["row_and_sequence_values_equal"])
+        self.assertEqual(report["approved_differences_applied"][0]["kind"], "java_servlet_session_fields")
+        self.assertEqual((left, right), original)
+
+    def test_visit_other_fields_missing_rows_and_duplicates_stay_strict(self):
+        for field in ("visit_id", "session_id", "initial_request", "thru_date", "unexpected_column"):
+            with self.subTest(field=field):
+                right = self.visit(False)
+                right["row"][field] = "different"
+                self.assertFalse(self.compare([self.visit()], [right])[0])
+        self.assertFalse(self.compare([self.visit()], [])[0])
+        self.assertFalse(self.compare([self.visit()], [self.visit(False)] * 2)[0])
+        self.assertFalse(self.compare([self.visit()], [self.visit(False)], "schema", "other")[0])
+        self.assertFalse(test_database_compare.SnapshotTests().compare(
+            [json.dumps(self.visit())], [json.dumps(self.visit(False))],
+            approved_differences={"theme_resources": [], "full_text_indexes": []})[0])
+
+    def test_visit_url_ports_pass_without_changing_raw_values(self):
+        for host in ("127.0.0.1", "[::1]"):
+            with self.subTest(host=host):
+                left, right = self.visit(), self.visit()
+                for field in ("initial_request", "initial_referrer"):
+                    left["row"][field] = f"http://{host}:28080/Login?next=%2Fapps#login"
+                    right["row"][field] = f"http://{host}:28081/Login?next=%2Fapps#login"
+                original = deepcopy((left, right))
+                equal, report, _ = self.compare([left], [right])
+                self.assertTrue(equal)
+                self.assertFalse(report["row_and_sequence_values_equal"])
+                self.assertTrue(any(rule["kind"] == "url_port_differences"
+                                    for rule in report["approved_differences_applied"]))
+                self.assertEqual((left, right), original)
+
+    def test_visit_url_non_port_differences_remain_strict(self):
+        left = self.visit()
+        left["row"]["initial_request"] = "http://127.0.0.1:28080/Login?next=%2Fapps#login"
+        for url in ("https://127.0.0.1:28081/Login?next=%2Fapps#login",
+                    "http://localhost:28081/Login?next=%2Fapps#login",
+                    "http://127.0.0.1:28081/Other?next=%2Fapps#login",
+                    "http://127.0.0.1:28081/Login?next=%2Fother#login",
+                    "http://127.0.0.1:28081/Login?next=/apps#login",
+                    "http://127.0.0.1:28081/Login?next=%2Fapps#other",
+                    "http://127.0.0.1:invalid/Login?next=%2Fapps#login",
+                    None):
+            with self.subTest(url=url):
+                right = self.visit()
+                right["row"]["initial_request"] = url
+                self.assertFalse(self.compare([left], [right])[0])
+        right = deepcopy(left)
+        right["row"]["initial_request"] = "http://127.0.0.1:28081/Login?next=%2Fapps#login"
+        self.assertFalse(test_database_compare.SnapshotTests().compare(
+            [json.dumps(left)], [json.dumps(right)],
+            approved_differences={"theme_resources": [], "full_text_indexes": []})[0])
+        left["table"] = right["table"] = "public.other"
+        self.assertFalse(self.compare([left], [right])[0])
+
     def test_statistics_timing_passes_but_raw_evidence_remains(self):
         equal, report, _ = self.compare([self.statistic()], [self.statistic(offset=1)])
         self.assertTrue(equal)

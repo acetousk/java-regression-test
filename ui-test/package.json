@@ -1,0 +1,13 @@
+{
+  "name": "moqui-activity-tests",
+  "private": true,
+  "scripts": {
+    "test": "playwright test",
+    "test:activities": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.61.1",
+    "pixelmatch": "7.1.0",
+    "pngjs": "7.0.0"
+  }
+}
