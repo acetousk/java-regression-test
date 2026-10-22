@@ -1169,14 +1169,30 @@ def approved_statistics_change(event, kind, snapshots, approved):
                and rule["rust_hit_count"] == row.get("hit_count") for rule in applied)
 
 
-def create_cdc_slot(container):
+def create_cdc_slot(container, *, bootstrap=False):
     """Start logical decoding before either engine connects, so every committed change is captured."""
     subprocess.run(["docker", "exec", "-i", container, "psql", "-X", "-qAt", "-v", "ON_ERROR_STOP=1",
                     "-U", "moqui", "-d", "moqui"], input=INSTALL_SQL, text=True,
                    check=True, stdout=subprocess.DEVNULL, timeout=60)
+    if bootstrap:
+        subprocess.run(["docker", "exec", container, "psql", "-X", "-qAt", "-v", "ON_ERROR_STOP=1",
+                        "-U", "moqui", "-d", "moqui", "-c",
+                        "ALTER EVENT TRIGGER moqui_regression_ddl DISABLE; "
+                        "ALTER EVENT TRIGGER moqui_regression_drop DISABLE"],
+                       check=True, stdout=subprocess.DEVNULL, timeout=60)
     subprocess.run(["docker", "exec", container, "psql", "-X", "-qAt", "-v", "ON_ERROR_STOP=1",
                     "-U", "moqui", "-d", "moqui", "-c",
                     f"SELECT pg_create_logical_replication_slot('{CDC_SLOT}', 'test_decoding')"],
+                   check=True, stdout=subprocess.DEVNULL, timeout=60)
+
+
+def enable_cdc_tracking(container):
+    """Enable DDL capture and attach row observers after activity-only loading is idle."""
+    subprocess.run(["docker", "exec", container, "psql", "-X", "-qAt", "-v", "ON_ERROR_STOP=1",
+                    "-U", "moqui", "-d", "moqui", "-c",
+                    "ALTER EVENT TRIGGER moqui_regression_ddl ENABLE; "
+                    "ALTER EVENT TRIGGER moqui_regression_drop ENABLE; "
+                    "SELECT moqui_regression.attach_triggers()"],
                    check=True, stdout=subprocess.DEVNULL, timeout=60)
 
 
@@ -1447,7 +1463,7 @@ def boot_and_stop(args):
             if table_count != "0":
                 raise RuntimeError(f"{name} database is not empty")
             if getattr(args, "deterministic", False):
-                create_cdc_slot(container)
+                create_cdc_slot(container, bootstrap=activity_only)
             runtime = directories[name] / "runtime"
             conf = evidence / f"{name}-demo.xml"
             demo_conf(runtime / "conf/MoquiDevConf.xml", conf, db_port, password, ports[name], crypt_pass)
@@ -1553,6 +1569,7 @@ def boot_and_stop(args):
             def establish_activity_baselines():
                 nonlocal activity_baselines
                 for side, container in containers.items():
+                    enable_cdc_tracking(container)
                     baseline = evidence / f'{side}-activity-baseline.json'
                     capture_snapshot(container, baseline)
                     # Loading is outside Step 5. Retain its CDC separately, without pairing it.
