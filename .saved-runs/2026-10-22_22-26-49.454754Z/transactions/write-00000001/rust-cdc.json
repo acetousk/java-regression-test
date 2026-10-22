@@ -1,0 +1,13 @@
+{
+  "operation_id": "rust-00003173",
+  "transactions": [
+    {
+      "operation_id": "rust-00003173",
+      "outcome": "committed",
+      "changes": [
+        "table public.visitor: INSERT: visitor_id[character varying]:'34dea131-825e-4c50-8ddf-850de91c2d45' created_date[timestamp without time zone]:'2026-10-22 22:26:54.719' last_updated_stamp[timestamp without time zone]:'2026-10-22 22:26:54.719'",
+        "table moqui_regression.events: INSERT: payload[text]:'{\"kind\" : \"insert\", \"table\" : \"public.visitor\", \"old\" : null, \"new\" : \"{\\\"visitor_id\\\":\\\"34dea131-825e-4c50-8ddf-850de91c2d45\\\",\\\"created_date\\\":\\\"2026-10-22T22:26:54.719\\\",\\\"last_updated_stamp\\\":\\\"2026-10-22T22:26:54.719\\\"}\"}'"
+      ]
+    }
+  ]
+}
