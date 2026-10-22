@@ -1,0 +1,1921 @@
+diff --git i/crates/moqui-core/src/context/artifact.rs w/crates/moqui-core/src/context/artifact.rs
+index b5326c8..28846bb 100644
+--- i/crates/moqui-core/src/context/artifact.rs
++++ w/crates/moqui-core/src/context/artifact.rs
+@@ -81,6 +81,8 @@ impl ArtifactStack {
+         let artifact_type = artifact_type.to_string();
+         let name = name.to_string();
+         let action = action.to_string();
++        crate::deterministic::trace(&artifact_type, &action, &name, "enter")
++            .expect("deterministic artifact trace failed");
+         let entered = tracing::info_span!(
+             "artifact",
+             artifact_type = %artifact_type,
+@@ -160,6 +162,12 @@ impl ArtifactStack {
+     /// Pop the top frame and close its span. What the span recorded is returned for the hit counter.
+     pub(super) fn pop(&mut self) -> Result<Popped, Error> {
+         let frame = self.frames.pop().ok_or_else(|| Error::new("artifact stack is empty"))?;
++        crate::deterministic::trace(
++            &frame.artifact_type,
++            frame.hit.sub_type.as_deref().unwrap_or(&frame.action),
++            &frame.name,
++            "exit",
++        )?;
+         let elapsed = frame.started.elapsed();
+         let duration_ms = u64::try_from(elapsed.as_millis()).unwrap_or(u64::MAX);
+         frame.entered.record("duration_ms", duration_ms);
+diff --git i/crates/moqui-core/src/context/factory.rs w/crates/moqui-core/src/context/factory.rs
+index c87bf83..bcc35e8 100644
+--- i/crates/moqui-core/src/context/factory.rs
++++ w/crates/moqui-core/src/context/factory.rs
+@@ -168,6 +168,7 @@ impl ExecutionContextFactory {
+         mut options: BootOptions,
+     ) -> Result<Arc<Self>, Error> {
+         crate::deterministic::validate_startup().map_err(Error::from)?;
++        crate::deterministic::trace("phase", "initialize", "factory", "requested").map_err(Error::from)?;
+         let _bootstrap = crate::deterministic::bootstrap().map_err(Error::from)?;
+         if crate::deterministic::enabled() {
+             options.executor = Executor::Inline;
+@@ -254,6 +255,7 @@ impl ExecutionContextFactory {
+         // The host calls cluster::start after the entity facade is installed.
+         install_session_flush(&factory);
+         install_hit_flush(&factory);
++        crate::deterministic::trace("phase", "initialize", "factory", "succeeded").map_err(Error::from)?;
+         Ok(factory)
+     }
+ 
+diff --git i/crates/moqui-core/src/context/hits.rs w/crates/moqui-core/src/context/hits.rs
+index 9d5417a..4709f56 100644
+--- i/crates/moqui-core/src/context/hits.rs
++++ w/crates/moqui-core/src/context/hits.rs
+@@ -517,7 +517,7 @@ fn truncate(text: &str, max_chars: usize) -> String {
+ }
+ 
+ /// The host address and name, as Java's `InetAddress.getLocalHost()`, found once.
+-fn server_address() -> &'static (String, String) {
++pub(crate) fn server_address() -> &'static (String, String) {
+     static ADDRESS: OnceLock<(String, String)> = OnceLock::new();
+     ADDRESS.get_or_init(|| {
+         let name = std::fs::read_to_string("/proc/sys/kernel/hostname")
+@@ -564,6 +564,19 @@ pub(crate) fn flush(factory: &ExecutionContextFactory, all: bool) -> Result<(),
+     for hit in hits {
+         rows.push((HIT, hit_fields(hit, ip, host)));
+     }
++    if crate::deterministic::enabled() {
++        // Java persists each queued hit/bin through its own facade transaction.
++        // Do not batch them into one commit or retry after a failed comparison.
++        for (entity, fields) in rows {
++            let mut value = facade.make_value(entity)?;
++            for (name, field) in fields {
++                value.set(name, field);
++            }
++            value.set_sequenced_id_primary(&facade)?;
++            value.create(&facade)?;
++        }
++        return Ok(());
++    }
+     let mut failed = None;
+     for chunk in rows.chunks(MAX_CREATES) {
+         let mut last = None;
+@@ -1185,6 +1198,69 @@ mod tests {
+         );
+     }
+ 
++    #[test]
++    fn audit_writes_count_the_implicit_create_service_as_java_does() {
++        let world = world();
++        let _entered = world.context.enter();
++        let _authz = world.context.disable_authz();
++        world.facade.set_disable_audit_log(false);
++        let mut user = world.facade.make_value("moqui.security.UserAccount").unwrap();
++        user.set("userId", Value::string("AUDIT_HITS"));
++        user.set("username", Value::string("alice"));
++        user.create(&world.facade).unwrap();
++        user.set("username", Value::string("alice2"));
++        user.update(&world.facade).unwrap();
++        world.context.factory().flush_artifact_hits().unwrap();
++        let bins = rows(&world, "moqui.server.ArtifactHitBin", "AT_SERVICE");
++        let bins: Vec<_> = bins.iter().filter(|bin|
++            text(bin, "artifactName") == "create#moqui.entity.EntityAuditLog"
++        ).collect();
++        assert_eq!(bins.len(), 1);
++        assert_eq!(text(bins[0], "artifactSubType"), "entity-implicit");
++        assert_eq!(text(bins[0], "hitCount"), "2");
++    }
++
++    #[test]
++    fn audit_services_reuse_the_users_authorization_list_across_seed_writes() {
++        let world = world_with_conf(r#"<moqui-conf>
++            <artifact-execution-facade>
++                <artifact-execution type="AT_SERVICE" authz-enabled="true"/>
++            </artifact-execution-facade>
++            <server-stats bin-length-seconds="600">
++                <artifact-stats type="AT_SERVICE" persist-bin="true"/>
++                <artifact-stats type="AT_ENTITY" persist-bin="true"/>
++            </server-stats>
++        </moqui-conf>"#);
++        let _entered = world.context.enter();
++        let _authz = world.context.disable_authz();
++        world.facade.set_disable_audit_log(false);
++        let mut user = world.facade.make_value("moqui.security.UserAccount").unwrap();
++        user.set("userId", Value::string("AUDIT_CACHE"));
++        user.set("username", Value::string("first"));
++        user.create(&world.facade).unwrap();
++        let mut authz = world.facade.make_value("moqui.security.ArtifactAuthz").unwrap();
++        authz.set("artifactAuthzId", Value::string("SEED_CACHE"));
++        authz.set("userGroupId", Value::string("ALL_USERS"));
++        authz.create(&world.facade).unwrap();
++        user.set("username", Value::string("second"));
++        user.update(&world.facade).unwrap();
++        world.context.factory().flush_artifact_hits().unwrap();
++        let bins = rows(&world, "moqui.server.ArtifactHitBin", "AT_ENTITY");
++        let checks: Vec<_> = bins.iter().filter(|bin|
++            text(bin, "artifactName") == "moqui.security.ArtifactAuthzCheckView"
++                && text(bin, "artifactSubType") == "list"
++        ).collect();
++        assert_eq!(checks.len(), 1);
++        assert_eq!(text(checks[0], "hitCount"), "1");
++        let bins = rows(&world, "moqui.server.ArtifactHitBin", "AT_SERVICE");
++        let audit: Vec<_> = bins.iter().filter(|bin|
++            text(bin, "artifactName") == "create#moqui.entity.EntityAuditLog"
++        ).collect();
++        assert_eq!(audit.len(), 1);
++        assert_eq!(text(audit[0], "artifactSubType"), "entity-implicit");
++        assert_eq!(text(audit[0], "hitCount"), "2");
++    }
++
+     #[test]
+     fn fk_reads_are_counted_apart_and_still_refuse_a_missing_parent() {
+         let world = world();
+diff --git i/crates/moqui-core/src/context/mod.rs w/crates/moqui-core/src/context/mod.rs
+index a3b8250..b6a4a25 100644
+--- i/crates/moqui-core/src/context/mod.rs
++++ w/crates/moqui-core/src/context/mod.rs
+@@ -35,7 +35,7 @@ pub use error::{DeniedArtifact, Error, ErrorKind};
+ pub use factory::{
+     default_framework_dir, BootOptions, ContextGuard, ExecutionContext, ExecutionContextFactory, Executor,
+ };
+-pub(crate) use hits::{secret_parameter, Hit};
++pub(crate) use hits::{secret_parameter, server_address, Hit};
+ pub use locate::{framework_dir, locate};
+ pub use message::{ErrorMark, MessageFacade, ValidationError};
+ pub use resource::{ResourceEntry, ResourceFacade, ResourceRef, ResourceStat};
+diff --git i/crates/moqui-core/src/deterministic.rs w/crates/moqui-core/src/deterministic.rs
+index 6f32e51..888bd58 100644
+--- i/crates/moqui-core/src/deterministic.rs
++++ w/crates/moqui-core/src/deterministic.rs
+@@ -6,7 +6,7 @@ use std::sync::{Arc, Condvar, Mutex, OnceLock};
+ use std::thread::ThreadId;
+ 
+ use moqui_lib::error::Error;
+-use serde_json::{json, Value};
++use serde_json::{Value, json};
+ 
+ pub trait Provider: Send + Sync {
+     /// Returns an object containing a nonempty operation_id and an integer time_epoch_ms.
+@@ -15,6 +15,9 @@ pub trait Provider: Send + Sync {
+     fn random(&self, _domain: &str, _length: usize) -> Result<Vec<u8>, Error> {
+         Err(Error::new("deterministic provider does not support random bytes"))
+     }
++    fn trace(&self, _request: Value) -> Result<(), Error> {
++        Err(Error::new("deterministic provider does not support operation tracing"))
++    }
+ }
+ 
+ static PROVIDER: OnceLock<Arc<dyn Provider>> = OnceLock::new();
+@@ -162,6 +165,32 @@ pub fn bootstrap() -> Result<Option<Operation>, Error> {
+     Ok(op)
+ }
+ 
++/// Local evidence only: observations never acknowledge or skip a paired barrier.
++pub fn trace(kind: &str, action: &str, name: &str, outcome: &str) -> Result<(), Error> {
++    if !enabled() {
++        return Ok(());
++    }
++    let (parent, time) = OPERATIONS.with(|ops| {
++        let ops = ops.borrow();
++        (
++            ops.last().map(|op| op.0),
++            ops.iter().rev().find(|op| !op.2).map(|op| op.1),
++        )
++    });
++    provider()
++        .trace(json!({"event":"trace", "kind":kind, "action":action, "name":name,
++        "outcome":outcome, "parent_sequence":parent, "time_epoch_ms":time}))
++        .inspect_err(|_| fail())
++}
++
++/// Record both attempts and actual outcomes, including early errors in the closure.
++pub fn traced<T>(kind: &str, action: &str, name: &str, body: impl FnOnce() -> Result<T, Error>) -> Result<T, Error> {
++    trace(kind, action, name, "requested")?;
++    let result = body();
++    trace(kind, action, name, if result.is_ok() { "succeeded" } else { "failed" })?;
++    result
++}
++
+ fn provider() -> &'static dyn Provider {
+     PROVIDER.get().expect("installed deterministic provider").as_ref()
+ }
+diff --git i/crates/moqui-core/src/entity/facade.rs w/crates/moqui-core/src/entity/facade.rs
+index c090572..4cc3cbe 100644
+--- i/crates/moqui-core/src/entity/facade.rs
++++ w/crates/moqui-core/src/entity/facade.rs
+@@ -205,7 +205,12 @@ impl EntityFacade {
+                 .collect::<Vec<_>>()
+                 .join(", ")
+         );
+-        let model = EntityModel::load_directories(conf, &directories)?;
++        let model = crate::deterministic::traced("phase", "initialize", "entity-metadata", || {
++            EntityModel::load_directories(conf, &directories)
++        })?;
++        for entity in model.entities() {
++            crate::deterministic::trace("metadata", "load-definition", &entity.full_name, "succeeded")?;
++        }
+         let dialects = Dialects::load(conf)?;
+         let all = model.entities();
+         let views = all.iter().filter(|entity| entity.is_view).count();
+@@ -396,6 +401,16 @@ impl EntityFacade {
+         self.edit_flags(|flags| flags.dummy_fks = value);
+     }
+ 
++    /// Transaction manager for the default entity group.
++    pub fn default_transactions(&self) -> Result<TransactionManager, Error> {
++        let group_name = self.inner.default_group.as_str();
++        self.inner
++            .groups
++            .get(group_name)
++            .map(|runtime| runtime.transactions.clone())
++            .ok_or_else(|| Error::new(format!("no transaction manager for entity group {group_name}")))
++    }
++
+     /// Transaction manager for the entity's group. The group attribute falls back to the default group.
+     pub fn transactions_for(&self, entity_name: &str) -> Result<TransactionManager, Error> {
+         self.with_group(entity_name, |_, _, _, tx| Ok(tx.clone()))
+diff --git i/crates/moqui-core/src/entity/field_rw.rs w/crates/moqui-core/src/entity/field_rw.rs
+index 96a6925..52c09af 100644
+--- i/crates/moqui-core/src/entity/field_rw.rs
++++ w/crates/moqui-core/src/entity/field_rw.rs
+@@ -375,7 +375,6 @@ fn insert_audit(
+     old_text: Option<String>,
+ ) -> Result<(), Error> {
+     let mut row = facade.make_value(AUDIT_ENTITY)?;
+-    row.set_sequenced_id_primary(facade)?;
+     row.set("changedEntityName", Value::string(entity.full_name.as_str()));
+     row.set("changedFieldName", Value::string(field_name));
+     row.set("changedDate", changed_now());
+@@ -390,6 +389,10 @@ fn insert_audit(
+     if let Some(visit_id) = crate::user::visit_id().ok().flatten().filter(|id| !id.is_empty()) {
+         row.set("changedInVisitId", Value::string(visit_id));
+     }
++    // Java's getStackNameString, cut at 4000 characters.
++    if let Some(stack) = crate::context::ExecutionContext::with_current(|ctx| ctx.artifact_stack_names()) {
++        row.set("artifactStack", Value::string(stack.chars().take(4000).collect::<String>()));
++    }
+     if let Some(text) = new_text {
+         row.set("newValueText", Value::string(text));
+     }
+@@ -397,6 +400,19 @@ fn insert_audit(
+         row.set("oldValueText", Value::string(text));
+     }
+     put_pk(&mut row, entity, values);
++    // Java creates audit rows through the implicit service, with authorization disabled.
++    let same_facade = crate::context::ExecutionContext::with_current(|ctx| ctx.factory().entity())
++        .flatten()
++        .is_some_and(|current| std::sync::Arc::ptr_eq(&current.inner, &facade.inner));
++    if same_facade {
++        let options = crate::service::call::CallOptions {
++            disable_authz: true,
++            ..Default::default()
++        };
++        crate::service::call::sync_with(&format!("create#{AUDIT_ENTITY}"), row.fields(), &options)?;
++        return Ok(());
++    }
++    row.set_sequenced_id_primary(facade)?;
+     row.create(facade)
+ }
+ 
+diff --git i/crates/moqui-core/src/entity/find.rs w/crates/moqui-core/src/entity/find.rs
+index b773d26..c29ace5 100644
+--- i/crates/moqui-core/src/entity/find.rs
++++ w/crates/moqui-core/src/entity/find.rs
+@@ -243,14 +243,39 @@ impl EntityFind {
+         // The view frame is what authorizes the read, and the filters come from its record.
+         let _authz = self.authz_guard();
+         let _artifact = EntityArtifact::push(&self.facade, &self.entity_name, "view", operation)?;
++        if crate::deterministic::enabled() {
++            let tx = self.facade.transactions_for(&self.entity_name)?;
++            return tx.run(crate::transaction::TransactionAttribute::UseOrBegin, None, || {
++                self.list_in_transaction()
++            });
++        }
++        self.list_in_transaction()
++    }
++
++    fn list_in_transaction(self) -> Result<EntityList, Error> {
++        // Java's listExtended returns an empty list when the physical table is absent.
++        // Keep the existence probe and the read in the same facade transaction.
++        if crate::deterministic::enabled()
++            && !self.facade.with_entity(&self.entity_name, |entity, _, _| Ok(entity.is_view))?
++            && !self.facade.table_exists(&self.entity_name)?
++        {
++            return Ok(EntityList::new(Vec::new()));
++        }
+         let condition = self.combined();
+         let lookup = self.lookup(&condition);
+         let bypass = self.bypasses_cache();
+         if !bypass {
+             if let Some(cached) = cache::before_find(&self.facade, &lookup) {
++                crate::deterministic::trace("cache", "hit", &self.entity_name, "succeeded")?;
+                 return self.localize_list(cached);
+             }
+         }
++        crate::deterministic::trace(
++            "cache",
++            if bypass { "bypass" } else { "miss" },
++            &self.entity_name,
++            "succeeded",
++        )?;
+         self.require_transaction_for_lock()?;
+         let plan = self.plan(false)?;
+         let rows = query_tx(&plan.tx, &plan.sql, &plan.params)?;
+@@ -338,8 +363,10 @@ impl EntityFind {
+         let _artifact = EntityArtifact::push(&self.facade, &self.entity_name, "view", "count")?;
+         let condition = self.combined();
+         if let Some(count) = cache::before_count(&self.facade, &self.entity_name, condition.as_ref()) {
++            crate::deterministic::trace("cache", "hit", &self.entity_name, "succeeded")?;
+             return Ok(count);
+         }
++        crate::deterministic::trace("cache", "miss", &self.entity_name, "succeeded")?;
+         let plan = self.plan(true)?;
+         let rows = query_tx(&plan.tx, &plan.sql, &plan.params)?;
+         after_statement(&self.facade, &plan.tx, false);
+@@ -373,9 +400,16 @@ impl EntityFind {
+         let lookup = self.lookup(&condition);
+         if !self.bypasses_cache() {
+             if let Some(cached) = cache::before_find(&self.facade, &lookup) {
++                crate::deterministic::trace("cache", "hit", &self.entity_name, "succeeded")?;
+                 return Ok(EntityListIterator::memory(self.facade, self.entity_name, cached));
+             }
+         }
++        crate::deterministic::trace(
++            "cache",
++            if self.bypasses_cache() { "bypass" } else { "miss" },
++            &self.entity_name,
++            "succeeded",
++        )?;
+         self.require_transaction_for_lock()?;
+         let plan = self.plan(false)?;
+         plan.tx
+diff --git i/crates/moqui-core/src/entity/load_feed/loader.rs w/crates/moqui-core/src/entity/load_feed/loader.rs
+index 1daaf21..e80a367 100644
+--- i/crates/moqui-core/src/entity/load_feed/loader.rs
++++ w/crates/moqui-core/src/entity/load_feed/loader.rs
+@@ -61,7 +61,16 @@ pub fn load_entity_data(facade: &EntityFacade, location: &str, options: &LoadOpt
+     }
+     let _scope = FkScope::enter(options.dummy_fks, options.disable_fk_create);
+     let path = resolve_location(facade, location)?;
+-    let records = load_path(facade, location, &path, options)?;
++    let records = crate::deterministic::traced("data", "load", location, || {
++        // Java's loadSingleFile commits each file in one transaction; deterministic runs match its commits.
++        if crate::deterministic::enabled() && !path.is_dir() {
++            facade
++                .default_transactions()?
++                .run(TransactionAttribute::UseOrBegin, options.timeout, || load_path(facade, location, &path, options))
++        } else {
++            load_path(facade, location, &path, options)
++        }
++    })?;
+     Ok(LoadResult { records })
+ }
+ 
+@@ -73,7 +82,9 @@ pub fn load_entity_xml_text(
+     options: &LoadOptions,
+ ) -> Result<LoadResult, Error> {
+     let _scope = FkScope::enter(options.dummy_fks, options.disable_fk_create);
+-    let records = load_xml_text(facade, location, text, options)?;
++    let records = crate::deterministic::traced("data", "load", location, || {
++        load_xml_text(facade, location, text, options)
++    })?;
+     Ok(LoadResult { records })
+ }
+ 
+@@ -117,7 +128,14 @@ fn load_directory(facade: &EntityFacade, path: &Path, options: &LoadOptions) ->
+     let mut total = 0_u64;
+     for child in names {
+         let location = child.display().to_string();
+-        total = total.saturating_add(load_path(facade, &location, &child, options)?);
++        let records = if crate::deterministic::enabled() {
++            facade.default_transactions()?.run(TransactionAttribute::UseOrBegin, options.timeout, || {
++                load_path(facade, &location, &child, options)
++            })?
++        } else {
++            load_path(facade, &location, &child, options)?
++        };
++        total = total.saturating_add(records);
+     }
+     Ok(total)
+ }
+@@ -359,6 +377,7 @@ fn write_tree(
+     record: &Record,
+     ancestor: &BTreeMap<String, Value>,
+ ) -> Result<u64, Error> {
++    crate::deterministic::trace("data", "record", &record.entity, "requested")?;
+     let mut fields = record.fields.clone();
+     inherit_pk_fields(facade, &record.entity, ancestor, &mut fields)?;
+     prepare_fields(facade, &record.entity, &mut fields, options.only_create)?;
+@@ -384,6 +403,12 @@ fn write_tree(
+         }
+         total = 1;
+     }
++    crate::deterministic::trace(
++        "data",
++        "record",
++        &record.entity,
++        if total == 0 { "skipped" } else { "succeeded" },
++    )?;
+     for child in &record.children {
+         total = total.saturating_add(write_tree(facade, options, child, &shared)?);
+     }
+diff --git i/crates/moqui-core/src/entity/meta.rs w/crates/moqui-core/src/entity/meta.rs
+index 2e14dfd..a1a8f4c 100644
+--- i/crates/moqui-core/src/entity/meta.rs
++++ w/crates/moqui-core/src/entity/meta.rs
+@@ -48,6 +48,16 @@ impl EntityFacade {
+         self.meta().check_all()
+     }
+ 
++    /// Java's `checkAndAddAllTables` first pass; true when any table was created.
++    pub fn check_tables_startup(&self, names: &[&str]) -> Result<bool, Error> {
++        self.meta().check_startup(names)
++    }
++
++    /// Java's `checkAndAddAllTables` second pass: every missing foreign key, each group in its own transaction.
++    pub fn check_fks_startup(&self, names: &[&str]) -> Result<(), Error> {
++        self.meta().check_fks_startup(names)
++    }
++
+     pub fn table_exists(&self, entity_name: &str) -> Result<bool, Error> {
+         let (probe, tx) = self.with_group(entity_name, |entity, dialect, _, tx| {
+             Ok((table_probe(dialect, &entity.table_name), tx.clone()))
+@@ -79,7 +89,7 @@ impl EntityDbMeta<'_> {
+         self.run(&refs, true)
+     }
+ 
+-    fn run(&self, names: &[&str], lenient_fk: bool) -> Result<(), Error> {
++    fn batches(&self, names: &[&str]) -> Result<HashMap<String, Batch>, Error> {
+         let concrete = expand(self.facade, names)?;
+         let default_group = self.facade.inner.default_group.clone();
+         let mut batches: HashMap<String, Batch> = HashMap::new();
+@@ -97,6 +107,63 @@ impl EntityDbMeta<'_> {
+                 }
+             }
+         }
++        Ok(batches)
++    }
++
++    /// Groups in name order and, within each group, entities in full-name order (Java's TreeSets).
++    fn sorted_batches(&self, names: &[&str]) -> Result<Vec<(String, Batch)>, Error> {
++        let mut batches: Vec<_> = self.batches(names)?.into_iter().collect();
++        batches.sort_by(|a, b| a.0.cmp(&b.0));
++        for (_, batch) in &mut batches {
++            batch.names.sort();
++        }
++        Ok(batches)
++    }
++
++    fn check_startup(&self, names: &[&str]) -> Result<bool, Error> {
++        let skip_fk = super::fk::fk_create_disabled(self.facade);
++        let mut created = false;
++        for (group, batch) in self.sorted_batches(names)? {
++            let facade = self.facade;
++            let body = |conn: &mut dyn DbConnection| apply_startup(facade, conn, &batch.names, skip_fk);
++            let counts = if batch.tx.in_transaction() {
++                batch.tx.with_connection(body)?
++            } else {
++                batch.tx.with_reserve(body)?
++            };
++            tracing::info!(
++                "Checked {} entities in group {group}: {} tables created, {} columns added, {} indexes, {} full-text indexes, {} foreign keys",
++                batch.names.len(),
++                counts.tables_created,
++                counts.columns,
++                counts.indexes,
++                counts.fts,
++                counts.fks
++            );
++            created |= counts.tables_created > 0;
++        }
++        Ok(created)
++    }
++
++    fn check_fks_startup(&self, names: &[&str]) -> Result<(), Error> {
++        if super::fk::fk_create_disabled(self.facade) {
++            return Ok(());
++        }
++        for (group, batch) in self.sorted_batches(names)? {
++            tracing::info!("Tables were created, checking FKs for all entities in group {group}");
++            let facade = self.facade;
++            batch.tx.with_reserve(|conn| {
++                for name in &batch.names {
++                    ensure_fks(facade, conn, name, false)?;
++                }
++                Ok(())
++            })?;
++        }
++        Ok(())
++    }
++
++    fn run(&self, names: &[&str], lenient_fk: bool) -> Result<(), Error> {
++        let batches = self.batches(names)?;
+         let skip_fk = super::fk::fk_create_disabled(self.facade);
+         let started = std::time::Instant::now();
+         let mut totals = Counts::default();
+@@ -111,9 +178,11 @@ impl EntityDbMeta<'_> {
+             let facade = self.facade;
+             let names = batch.names;
+             let group_started = std::time::Instant::now();
+-            let counts = batch
+-                .tx
+-                .with_reserve(|conn| apply(facade, conn, &group, &names, skip_fk, lenient_fk))?;
++            let counts = if crate::deterministic::enabled() && batch.tx.in_transaction() {
++                batch.tx.with_connection(|conn| apply(facade, conn, &group, &names, skip_fk, lenient_fk))?
++            } else {
++                batch.tx.with_reserve(|conn| apply(facade, conn, &group, &names, skip_fk, lenient_fk))?
++            };
+             tracing::info!(
+                 "Checked {} entities in group {group} in {:.3} seconds: {} tables created, {} already existed, {} columns added, {} indexes, {} full-text indexes, {} foreign keys",
+                 names.len(),
+@@ -284,6 +353,35 @@ fn apply(
+     Ok(counts)
+ }
+ 
++// Mirrors Java's checkAndAddAllTables: an existing table only gets missing columns; a new table
++// gets its indexes and the foreign keys to tables that already exist, in entity-name order.
++fn apply_startup(facade: &EntityFacade, conn: &mut dyn DbConnection, names: &[String], skip_fk: bool) -> Result<Counts, Error> {
++    let mut counts = Counts::default();
++    for name in names {
++        let sql = facade.with_entity(name, |entity, dialect, model| {
++            if table_exists_conn(conn, dialect, &entity.table_name)? {
++                Ok(None)
++            } else {
++                Ok(Some(create_table(entity, model, dialect)?))
++            }
++        })?;
++        match sql {
++            None => counts.columns += ensure_columns(facade, conn, name)?,
++            Some(sql) => {
++                execute_script(conn, &sql)?;
++                counts.tables_created += 1;
++                tracing::info!("Created table for entity {name}");
++                counts.indexes += ensure_indexes(facade, conn, name)?;
++                if !skip_fk {
++                    counts.fks += ensure_fks(facade, conn, name, false)?;
++                }
++            }
++        }
++        counts.fts += ensure_fts(facade, conn, name)?;
++    }
++    Ok(counts)
++}
++
+ fn ensure_columns(facade: &EntityFacade, conn: &mut dyn DbConnection, name: &str) -> Result<usize, Error> {
+     let statements = facade.with_entity(name, |entity, dialect, model| {
+         let present = column_names(conn, dialect, &entity.table_name)?;
+diff --git i/crates/moqui-core/src/screen/mod.rs w/crates/moqui-core/src/screen/mod.rs
+index 101d7ff..3f5cef1 100644
+--- i/crates/moqui-core/src/screen/mod.rs
++++ w/crates/moqui-core/src/screen/mod.rs
+@@ -137,12 +137,21 @@ fn handle(
+         .map(user::verify_session_cookie)
+         .transpose()?
+         .flatten();
+-    let guard = user::bind(
++    // Capture the initial request before starting its Visit.
++    let _initial_web = web::install(parameters.clone());
++    web::set_host(request.header("host").unwrap_or(""));
++    web::set_request_info(request);
++    web::set_request_locale(request.header("accept-language"));
++    let guard = user::session::bind_for_screen(
+         factory,
+         session_cookie.as_deref(),
+         visitor_cookie.as_deref(),
+         request.https,
+     )?;
++    let url_info = ScreenUrlInfo::parse(factory, root, &request.path, 0)?;
++    if url_info.file_resource.is_none() {
++        user::session::ensure_visit(factory, visitor_cookie.as_deref())?;
++    }
+     let token_before = peek_token();
+     if let Err(err) = user::session::remember_client_ip(&web::client_ip(request)) {
+         return Ok(web::json_error(500, &web::error_text(500, &err)));
+diff --git i/crates/moqui-core/src/search/postgres/mod.rs w/crates/moqui-core/src/search/postgres/mod.rs
+index 4e3cf99..58a1598 100644
+--- i/crates/moqui-core/src/search/postgres/mod.rs
++++ w/crates/moqui-core/src/search/postgres/mod.rs
+@@ -177,7 +177,9 @@ impl PostgresBackend {
+     pub fn open(tx: TransactionManager, schema: Option<&str>) -> Result<Self, Error> {
+         let schema = schema.unwrap_or(DEFAULT_SCHEMA).to_string();
+         let quoted = ident(&schema);
+-        let trigram = tx.with_reserve(|conn| {
++        // Deterministic startup joins the open schema transaction: the search tables have no
++        // Java counterpart, so they must not add a coordinated transaction of their own.
++        let setup = |conn: &mut dyn DbConnection| -> Result<bool, Error> {
+             conn.execute(&format!("CREATE SCHEMA IF NOT EXISTS {quoted}"), &[])?;
+             if crate::deterministic::enabled() {
+                 conn.savepoint("moqui_search_extension")?;
+@@ -210,7 +212,12 @@ impl PostgresBackend {
+                 &[],
+             )?;
+             Ok(trigram)
+-        })?;
++        };
++        let trigram = if crate::deterministic::enabled() && tx.in_transaction() {
++            tx.with_connection(setup)?
++        } else {
++            tx.with_reserve(setup)?
++        };
+         Ok(Self {
+             tx,
+             read: None,
+@@ -269,7 +276,7 @@ impl PostgresBackend {
+         let base = config.unwrap_or(compile::TS_CONFIG).to_string();
+         let quoted = ident(&self.schema);
+         let schema = self.schema.clone();
+-        let setup = self.tx.with_reserve(|conn| {
++        let setup = startup_connection(&self.tx, |conn| {
+             let found = conn.query("SELECT 1 FROM pg_ts_config WHERE cfgname = ?", &[Value::string(&base)])?;
+             if found.is_empty() {
+                 return Err(Error::new(format!("text search configuration {base} does not exist")));
+@@ -871,7 +878,7 @@ impl SearchBackend for PostgresBackend {
+         let statements = self.create_statements(mapping);
+         let advisory = format!("{}.{}", self.schema, mapping.physical_name);
+         // True when this call made the table; false when another made it first.
+-        self.tx.with_reserve(|conn| {
++        startup_connection(&self.tx, |conn| {
+             ddl_transaction(conn, &table, |conn| {
+                 // Another process may be making it: wait for it, then look again.
+                 conn.query("SELECT pg_advisory_xact_lock(hashtext(?))", &[Value::string(&advisory)])?;
+@@ -1110,6 +1117,14 @@ const DDL_LOCK_TIMEOUT: &str = "5s";
+ 
+ /// Run `work` in a transaction on a reserve connection, with [`DDL_LOCK_TIMEOUT`]. A lock wait that
+ /// runs out is an error that names the table.
++fn startup_connection<T>(tx: &TransactionManager, work: impl FnOnce(&mut dyn DbConnection) -> Result<T, Error>) -> Result<T, Error> {
++    if crate::deterministic::enabled() && tx.in_transaction() {
++        tx.with_connection(work)
++    } else {
++        tx.with_reserve(work)
++    }
++}
++
+ fn ddl_transaction<T>(
+     conn: &mut dyn DbConnection,
+     table: &str,
+diff --git i/crates/moqui-core/src/transaction/pool.rs w/crates/moqui-core/src/transaction/pool.rs
+index 20c6d4e..f90db8d 100644
+--- i/crates/moqui-core/src/transaction/pool.rs
++++ w/crates/moqui-core/src/transaction/pool.rs
+@@ -27,7 +27,7 @@ use moqui_lib::object::Value;
+ 
+ use crate::driver::{DbCancel, DbConnection, DbDriver, DbRow};
+ 
+-/// The checkout test when the conf names none.
++/// The idle-connection checkout test when the conf names none.
+ pub const DEFAULT_TEST_QUERY: &str = "SELECT 1";
+ 
+ /// Datasource pool settings. `reserve` sits inside `max`.
+@@ -41,7 +41,8 @@ pub struct PoolConfig {
+     /// `pool-time-idle`: an idle connection past this is closed at the next checkout or return,
+     /// while more than `min` are open. `None` keeps idle connections.
+     pub idle_timeout: Option<Duration>,
+-    /// `pool-test-query`, else the database's `default-test-query`. `None` is [`DEFAULT_TEST_QUERY`].
++    /// Idle-connection test: `pool-test-query`, else the database's `default-test-query`.
++    /// `None` is [`DEFAULT_TEST_QUERY`]. Newly connected clients need no test.
+     pub test_query: Option<String>,
+ }
+ 
+@@ -353,7 +354,7 @@ impl Pool {
+                 },
+                 Step::Connect => {
+                     let connected = self.inner.driver.connect();
+-                    let mut tracked = match connected {
++                    let tracked = match connected {
+                         Ok(conn) => Tracked::new(conn),
+                         Err(err) => {
+                             self.mark_creating(class, false);
+@@ -361,18 +362,10 @@ impl Pool {
+                             return Err(err);
+                         }
+                     };
+-                    match tracked.query_once(self.inner.config.test_sql(), &[]) {
+-                        Ok(_) => {
+-                            self.finish_create(class);
+-                            return Ok(self.wrap(tracked, class));
+-                        }
+-                        Err(err) => {
+-                            self.mark_creating(class, false);
+-                            self.inner.available.notify_all();
+-                            drop(tracked);
+-                            return Err(Error::new("connection test failed").with_source(err));
+-                        }
+-                    }
++                    // A successful connect already established a live session. Let the caller's
++                    // metadata query or application work be its first SQL, as on Java startup.
++                    self.finish_create(class);
++                    return Ok(self.wrap(tracked, class));
+                 }
+                 Step::Wait => {
+                     if !self.wait_for_return(started)? {
+diff --git i/crates/moqui-core/src/transaction/tests.rs w/crates/moqui-core/src/transaction/tests.rs
+index 6551f26..5c5d92c 100644
+--- i/crates/moqui-core/src/transaction/tests.rs
++++ w/crates/moqui-core/src/transaction/tests.rs
+@@ -442,7 +442,7 @@ fn check_caps_allows_40_and_rejects_80() {
+ fn statement_error_marks_rollback_only_and_commit_rolls_back() {
+     let (mgr, driver) = harness(small());
+     let _clean = Clean(&mgr);
+-    driver.shared.fail_at.store(2, Ordering::SeqCst);
++    driver.shared.fail_at.store(1, Ordering::SeqCst);
+     assert!(mgr.begin(None).expect("begin"));
+     let err = mgr.with_connection(|conn| conn.execute("boom", &[])).expect_err("boom");
+     assert!(err.to_string().contains("boom"), "{err}");
+@@ -559,6 +559,28 @@ fn reserve_work_does_not_take_the_enlisted_connection() {
+     assert_eq!(mgr.with_connection(conn_id).expect("still enlisted"), enlisted);
+ }
+ 
++#[test]
++fn fresh_connections_run_application_sql_before_any_checkout_test() {
++    let (mgr, driver) = harness(small());
++    let _clean = Clean(&mgr);
++    mgr.with_connection(|conn| conn.query_once("metadata-probe", &[]))
++        .expect("ordinary connect");
++    mgr.with_reserve(|conn| conn.query_once("reserve-metadata-probe", &[]))
++        .expect("reserve connect");
++    assert_eq!(driver.connects(), 2);
++    assert_eq!(driver.event_count("sql:SELECT 1"), 0);
++    assert_eq!(driver.event_count("sql:metadata-probe"), 1);
++    assert_eq!(driver.event_count("sql:reserve-metadata-probe"), 1);
++    assert_eq!(mgr.stats().ordinary_idle, 1);
++    assert_eq!(mgr.stats().reserve_idle, 1);
++    assert_eq!(mgr.stats().checked_out, 0);
++
++    mgr.with_connection(|_| Ok(())).expect("ordinary reuse");
++    mgr.with_reserve(|_| Ok(())).expect("reserve reuse");
++    assert_eq!(driver.connects(), 2);
++    assert_eq!(driver.event_count("sql:SELECT 1"), 2);
++}
++
+ #[test]
+ fn failed_checkout_test_discards_the_idle_connection() {
+     let (mgr, driver) = harness(small());
+@@ -601,7 +623,7 @@ fn idle_connections_past_the_idle_time_close_down_to_min() {
+ }
+ 
+ #[test]
+-fn checkout_runs_the_configured_test_query() {
++fn idle_checkout_runs_the_configured_test_query() {
+     let config = PoolConfig {
+         test_query: Some("SELECT 42".to_string()),
+         ..small()
+@@ -609,8 +631,9 @@ fn checkout_runs_the_configured_test_query() {
+     let (mgr, driver) = harness(config);
+     let _clean = Clean(&mgr);
+     mgr.with_connection(|_| Ok(())).expect("connect");
++    assert_eq!(driver.event_count("sql:SELECT 42"), 0);
+     mgr.with_connection(|_| Ok(())).expect("reuse");
+-    assert_eq!(driver.event_count("sql:SELECT 42"), 2);
++    assert_eq!(driver.event_count("sql:SELECT 42"), 1);
+     assert_eq!(driver.event_count("sql:SELECT 1"), 0);
+ }
+ 
+diff --git i/crates/moqui-core/src/user/authz.rs w/crates/moqui-core/src/user/authz.rs
+index 5f65dd4..f260597 100644
+--- i/crates/moqui-core/src/user/authz.rs
++++ w/crates/moqui-core/src/user/authz.rs
+@@ -17,7 +17,7 @@
+ //! The artifact stack carries each frame's [`AuthInfo`]. A new frame is decided against its
+ //! parent frame: an inheritable allow on the parent covers it, an always-allow skips every
+ //! check, and a deny anywhere on the stack stops a plain allow. The checks for a user's groups
+-//! are read once and kept on the session until an authorization table changes.
++//! are read once and kept for the current user, as Java's UserInfo caches them.
+ 
+ use std::collections::{BTreeMap, HashSet};
+ use std::sync::atomic::{AtomicU64, Ordering};
+@@ -36,7 +36,8 @@ const AUTHZT_ALLOW: &str = "AUTHZT_ALLOW";
+ const AUTHZA_ALL: &str = "AUTHZA_ALL";
+ const AT_ENTITY: &str = "AT_ENTITY";
+ 
+-/// Bumped when a table the cached checks come from changes, so sessions reload them.
++/// Bumped when authorization tables change, to refresh membership, tarpit and filter caches.
++/// The authorization-check list itself follows Java's current-user lifetime.
+ static AUTHZ_GENERATION: AtomicU64 = AtomicU64::new(0);
+ 
+ /// Entity writes call this. Only the authorization tables, the entity filter tables among them, change the generation.
+@@ -552,13 +553,16 @@ pub(super) fn generation() -> u64 {
+     AUTHZ_GENERATION.load(Ordering::Relaxed)
+ }
+ 
+-/// Run `body` on the session's cache, which is reset when the generation moved.
++/// Refresh generation-bound caches, retaining Java's current-user authorization-check list.
+ fn with_cache<T>(body: impl FnOnce(&mut AuthzCache) -> T) -> T {
+     let now = generation();
+     with_session(|session| {
+         if session.authz.generation != now {
+             session.authz = AuthzCache {
+                 generation: now,
++                // Java retains the current UserInfo's authorization list across entity writes.
++                // Login/logout reset it with the rest of the user's state.
++                checks: session.authz.checks.take(),
+                 ..AuthzCache::default()
+             };
+         }
+@@ -632,11 +636,12 @@ fn load_user_groups(facade: &EntityFacade) -> Result<Arc<HashSet<String>>, Error
+ }
+ 
+ fn user_checks(facade: &EntityFacade) -> Result<Arc<Vec<Arc<AuthzCheck>>>, Error> {
+-    cached(
+-        |cache| cache.checks.clone(),
+-        || load_user_checks(facade),
+-        |cache, checks| cache.checks = Some(checks),
+-    )
++    if let Some(checks) = with_session(|session| session.authz.checks.clone()) {
++        return Ok(checks);
++    }
++    let checks = load_user_checks(facade)?;
++    with_session(|session| session.authz.checks = Some(checks.clone()));
++    Ok(checks)
+ }
+ 
+ /// One `ArtifactAuthzCheckView` read per group, as Java's `getArtifactAuthzCheckList`.
+@@ -872,23 +877,23 @@ mod tests {
+     }
+ 
+     #[test]
+-    fn checks_loaded_while_the_generation_moves_are_not_kept() {
++    fn groups_loaded_while_the_generation_moves_are_not_kept() {
+         let context = ExecutionContextFactory::test_context();
+         let _entered = context.enter();
+         let loaded = super::cached(
+-            |cache| cache.checks.clone(),
++            |cache| cache.groups.clone(),
+             || {
+-                // An authorization write lands while the checks are read.
++                // An authorization write lands while the groups are read.
+                 super::note_entity_write("moqui.security.ArtifactAuthz");
+-                Ok(std::sync::Arc::new(Vec::new()))
++                Ok(std::sync::Arc::new(std::collections::HashSet::new()))
+             },
+-            |cache, checks| cache.checks = Some(checks),
++            |cache, groups| cache.groups = Some(groups),
+         )
+         .unwrap();
+         assert!(loaded.is_empty());
+         assert!(
+-            super::with_cache(|cache| cache.checks.is_none()),
+-            "checks read under the old generation are not stored as current"
++            super::with_cache(|cache| cache.groups.is_none()),
++            "groups read under the old generation are not stored as current"
+         );
+     }
+ 
+@@ -899,13 +904,13 @@ mod tests {
+         let tx = world.facade.transactions_for("moqui.security.ArtifactAuthz").unwrap();
+         assert!(tx.begin(None).unwrap());
+         grant(&world, "GEN_COMMIT", "AT_ENTITY", ENTITY, "AUTHZT_ALLOW", "N");
+-        // A session that reloads before the commit reads the old rows under the moved generation.
+-        super::with_cache(|cache| cache.checks = Some(std::sync::Arc::new(Vec::new())));
++        // Membership caches still invalidate on commit, unlike Java's user authorization list.
++        super::with_cache(|cache| cache.groups = Some(std::sync::Arc::new(std::collections::HashSet::new())));
+         let written = super::generation();
+         tx.commit().unwrap();
+         assert!(super::generation() > written);
+         assert!(
+-            super::with_cache(|cache| cache.checks.is_none()),
++            super::with_cache(|cache| cache.groups.is_none()),
+             "the commit drops what was read before it"
+         );
+     }
+@@ -918,12 +923,12 @@ mod tests {
+         assert!(tx.begin(None).unwrap());
+         grant(&world, "GEN_ROLLBACK", "AT_ENTITY", ENTITY, "AUTHZT_ALLOW", "N");
+         // The writer reloads and reads its own row, which the rollback then undoes.
+-        super::with_cache(|cache| cache.checks = Some(std::sync::Arc::new(Vec::new())));
++        super::with_cache(|cache| cache.groups = Some(std::sync::Arc::new(std::collections::HashSet::new())));
+         let written = super::generation();
+         tx.rollback().unwrap();
+         assert!(super::generation() > written);
+         assert!(
+-            super::with_cache(|cache| cache.checks.is_none()),
++            super::with_cache(|cache| cache.groups.is_none()),
+             "the rollback drops what was read before it"
+         );
+     }
+@@ -950,6 +955,7 @@ mod tests {
+         assert!(world.facade.find(ENTITY).unwrap().count().is_err());
+ 
+         grant(&world, "READ_TEST", "AT_ENTITY", ENTITY, "AUTHZT_ALLOW", "N");
++        session::set_user("nobody", "nobody");
+         world.facade.find(ENTITY).unwrap().list().expect("read after the allow");
+         row.create(&world.facade).expect("the allow is for all actions");
+ 
+@@ -1020,9 +1026,11 @@ mod tests {
+         let err = view().expect_err("no member is allowed");
+         assert!(err.to_string().contains("not authorized"), "{err}");
+         grant(&world, "DV_FOO", "AT_ENTITY", "moqui.test.Foo", "AUTHZT_ALLOW", "N");
++        session::set_user("nobody", "nobody");
+         let err = view().expect_err("the joined member is not allowed");
+         assert!(err.to_string().contains("moqui.test.Bar"), "{err}");
+         grant(&world, "DV_BAR", "AT_ENTITY", "moqui.test.Bar", "AUTHZT_ALLOW", "N");
++        session::set_user("nobody", "nobody");
+         assert!(view().expect("both members are allowed").is_empty());
+     }
+ 
+@@ -1036,6 +1044,7 @@ mod tests {
+         let err = world.facade.find(ENTITY).unwrap().list().expect_err("deny wins");
+         assert!(err.to_string().contains("deny record"), "{err}");
+         grant(&world, "ALWAYS_TEST", "AT_ENTITY", ENTITY, "AUTHZT_ALWAYS", "N");
++        session::set_user("nobody", "nobody");
+         world.facade.find(ENTITY).unwrap().list().expect("always wins");
+     }
+ 
+@@ -1067,6 +1076,7 @@ mod tests {
+             "AUTHZT_DENY",
+             &[("filterMap", BAD_FILTER)],
+         );
++        session::set_user("nobody", "nobody");
+         let err = world
+             .context
+             .push_checked("AT_SERVICE", service, "all", true, false, Some(&parameters))
+@@ -1124,6 +1134,7 @@ mod tests {
+             "AUTHZT_ALLOW",
+             &[("filterMap", "{orderId: 'O1'}")],
+         );
++        session::set_user("nobody", "nobody");
+         world
+             .context
+             .push_checked("AT_SERVICE", service, "all", true, false, Some(&parameters))
+@@ -1159,6 +1170,7 @@ mod tests {
+             "AUTHZT_ALLOW",
+             "N",
+         );
++        session::set_user("nobody", "nobody");
+         world
+             .context
+             .push_checked("AT_SERVICE", "test.Other#Row", "all", true, false, None)
+@@ -1186,6 +1198,7 @@ mod tests {
+             .push_checked("AT_SERVICE", "test.Denied#Row", "all", false, false, None)
+             .expect("pushed without needing authz");
+         grant(&world, "ENT_ALLOW", "AT_ENTITY", ENTITY, "AUTHZT_ALLOW", "N");
++        session::set_user("nobody", "nobody");
+         assert!(
+             world.facade.find(ENTITY).unwrap().list().is_err(),
+             "the allow does not apply under a deny frame"
+@@ -1200,12 +1213,37 @@ mod tests {
+     }
+ 
+     #[test]
+-    fn a_new_allow_is_seen_without_a_new_session() {
++    fn authorization_checks_stay_cached_until_the_user_changes_as_in_java() {
++        let world = world();
++        let _entered = world.context.enter();
++        session::set_user("nobody", "nobody");
++        let original = {
++            let _guard = world.context.disable_authz();
++            super::user_checks(&world.facade).unwrap()
++        };
++        assert!(original.is_empty());
++        grant(&world, "LATE_DENY", "AT_SERVICE", "test.Cached#Row", "AUTHZT_DENY", "N");
++        let retained = {
++            let _guard = world.context.disable_authz();
++            super::user_checks(&world.facade).unwrap()
++        };
++        assert!(std::sync::Arc::ptr_eq(&original, &retained), "seed writes must not reload the user's checks");
++        session::set_user("other", "other");
++        let err = world.context
++            .push_checked("AT_SERVICE", "test.Cached#Row", "all", true, false, None)
++            .expect_err("a new user loads and enforces the deny");
++        assert!(err.to_string().contains("deny record"), "{err}");
++    }
++
++    #[test]
++    fn a_new_allow_is_seen_after_refreshing_the_user() {
+         let world = world();
+         let _entered = world.context.enter();
+         session::set_user("nobody", "nobody");
+         assert!(world.facade.find(ENTITY).unwrap().list().is_err());
+         grant(&world, "LATE_TEST", "AT_ENTITY", ENTITY, "AUTHZT_ALLOW", "N");
++        assert!(world.facade.find(ENTITY).unwrap().list().is_err(), "the current user's checks stay cached");
++        session::set_user("nobody", "nobody");
+         world
+             .facade
+             .find(ENTITY)
+diff --git i/crates/moqui-core/src/user/session.rs w/crates/moqui-core/src/user/session.rs
+index 9e6998f..3dfcb46 100644
+--- i/crates/moqui-core/src/user/session.rs
++++ w/crates/moqui-core/src/user/session.rs
+@@ -303,6 +303,26 @@ pub fn bind(
+     session_cookie: Option<&str>,
+     visitor_cookie: Option<&str>,
+     https: bool,
++) -> Result<SessionGuard, Error> {
++    bind_impl(factory, session_cookie, visitor_cookie, https, true)
++}
++
++/// Bind a screen request without starting its visit until its resolved path is known.
++pub(crate) fn bind_for_screen(
++    factory: &Arc<ExecutionContextFactory>,
++    session_cookie: Option<&str>,
++    visitor_cookie: Option<&str>,
++    https: bool,
++) -> Result<SessionGuard, Error> {
++    bind_impl(factory, session_cookie, visitor_cookie, https, false)
++}
++
++fn bind_impl(
++    factory: &Arc<ExecutionContextFactory>,
++    session_cookie: Option<&str>,
++    visitor_cookie: Option<&str>,
++    https: bool,
++    track_visit: bool,
+ ) -> Result<SessionGuard, Error> {
+     if !ExecutionContext::is_entered() {
+         return Err(Error::new("no execution context"));
+@@ -314,13 +334,11 @@ pub fn bind(
+     let (id, created) = resolve_id(factory, presented.as_deref())?;
+     touch_session(factory, &id);
+     install_thread(factory, &id)?;
+-    // A request with no moqui cookie may come from a client that keeps none, such as a crawler, which
+-    // would leave a Visitor and a Visit behind on every request. Its visit starts when the session
+-    // cookie comes back or a user logs in.
++    // Screen requests resolve their path after binding before deciding whether to track.
+     let keeps_cookies = [session_cookie, visitor_cookie]
+         .iter()
+         .any(|cookie| cookie.is_some_and(|value| !value.trim().is_empty()));
+-    let visit = if keeps_cookies {
++    let visit = if track_visit && keeps_cookies {
+         ensure_visit(factory, visitor_cookie)
+     } else {
+         Ok(())
+@@ -522,6 +540,9 @@ pub fn remember_client_ip(address: &str) -> Result<(), Error> {
+     else {
+         return Ok(());
+     };
++    if visit.get("clientIpAddress").and_then(Value::as_str) == Some(address) {
++        return Ok(());
++    }
+     visit.set("clientIpAddress", Value::string(address));
+     visit.update(&facade).map_err(Error::from)
+ }
+@@ -1278,7 +1299,7 @@ fn forget_user_logged_out_elsewhere() -> Result<(), Error> {
+     Ok(())
+ }
+ 
+-fn ensure_visit(factory: &Arc<ExecutionContextFactory>, visitor_cookie: Option<&str>) -> Result<(), Error> {
++pub(crate) fn ensure_visit(factory: &Arc<ExecutionContextFactory>, visitor_cookie: Option<&str>) -> Result<(), Error> {
+     if visit_id()?.is_some() {
+         return Ok(());
+     }
+@@ -1320,6 +1341,21 @@ pub(crate) fn create_visit(facade: &EntityFacade, visitor_id: &str) -> Result<St
+     let mut visit = facade.make_value(VISIT).map_err(Error::from)?;
+     visit.set("visitorId", Value::string(visitor_id));
+     visit.set("fromDate", super::login::now_value());
++    if crate::web::request_url().is_some() {
++        for (name, value) in crate::web::visit_fields() {
++            visit.set(&name, value);
++        }
++        if let Some(id) = with_session(|session| session.bound_id.clone()) {
++            visit.set("sessionId", Value::string(id));
++        }
++        let locale = locale()?
++            .or_else(crate::web::request_locale)
++            .unwrap_or_else(|| "en_US".to_string());
++        visit.set("initialLocale", Value::string(locale));
++        let (ip, host) = crate::context::server_address();
++        visit.set("serverIpAddress", Value::string(ip));
++        visit.set("serverHostName", Value::string(host));
++    }
+     if let Some(user_id) = current_user_id()? {
+         visit.set("userId", Value::string(user_id));
+     }
+diff --git i/crates/moqui-core/src/web/mod.rs w/crates/moqui-core/src/web/mod.rs
+index 9e7263d..490bd7e 100644
+--- i/crates/moqui-core/src/web/mod.rs
++++ w/crates/moqui-core/src/web/mod.rs
+@@ -128,6 +128,8 @@ struct WebSlot {
+     query_names: Vec<String>,
+     /// [`client_ip`] of the request, for the login `ipAllowed` check.
+     client_ip: String,
++    peer_ip: String,
++    user_agent: String,
+     /// The first locale of the request's `Accept-Language`, as Java's `request.getLocale()`.
+     locale: Option<String>,
+     /// Scheme, host, and context path that links start with. Empty for a path-only link.
+@@ -172,6 +174,8 @@ pub(crate) fn install_with(parameters: BTreeMap<String, Value>, base_url: String
+             request_details: String::new(),
+             query_names: Vec::new(),
+             client_ip: String::new(),
++            peer_ip: String::new(),
++            user_agent: String::new(),
+             locale: None,
+             base_url,
+             sent: false,
+@@ -276,10 +280,33 @@ pub(crate) fn set_request_info(request: &WebRequest) {
+             web.request_details = details;
+             web.query_names = request.query.iter().map(|(name, _)| name.clone()).collect();
+             web.client_ip = client_ip(request);
++            web.peer_ip = request.peer_ip.clone();
++            web.user_agent = request.header("user-agent").unwrap_or("").to_string();
+         }
+     });
+ }
+ 
++/// Request metadata for Java's `moqui.server.Visit`; absent for renders without a socket.
++pub(crate) fn visit_fields() -> BTreeMap<String, Value> {
++    WEB.with(|slot| {
++        let slot = slot.borrow();
++        let Some(web) = slot.as_ref().filter(|web| !web.request_url.is_empty()) else {
++            return BTreeMap::new();
++        };
++        [
++            ("initialRequest", web.request_url.chars().take(255).collect()),
++            ("initialReferrer", web.referrer.clone()),
++            ("initialUserAgent", web.user_agent.chars().take(255).collect()),
++            ("clientIpAddress", web.client_ip.clone()),
++            ("clientHostName", web.peer_ip.clone()),
++        ]
++        .into_iter()
++        .filter(|(_, value): &(&str, String)| !value.is_empty())
++        .map(|(name, value)| (name.to_string(), Value::string(value)))
++        .collect()
++    })
++}
++
+ /// Java `getClientIp`: the [`client_ip`] of the current request. Empty with no request.
+ pub(crate) fn current_client_ip() -> String {
+     WEB.with(|slot| {
+@@ -1333,6 +1360,28 @@ mod tests {
+     };
+     use moqui_lib::object::Value;
+ 
++    #[test]
++    fn visit_metadata_comes_from_the_initial_request() {
++        let _web = super::install(Default::default());
++        assert!(super::visit_fields().is_empty());
++        let mut request = super::WebRequest::new("GET", "/Login");
++        request.peer_ip = "127.0.0.1".to_string();
++        request.set_header("host", "localhost:8081");
++        request.set_header("user-agent", "x".repeat(300));
++        request.set_header("referer", "http://localhost:8081/");
++        super::set_request_info(&request);
++        let fields = super::visit_fields();
++        for (name, expected) in [
++            ("initialRequest", "http://localhost:8081/Login"),
++            ("initialReferrer", "http://localhost:8081/"),
++            ("clientIpAddress", "127.0.0.1"),
++            ("clientHostName", "127.0.0.1"),
++        ] {
++            assert_eq!(fields.get(name).and_then(Value::as_str), Some(expected));
++        }
++        assert_eq!(fields["initialUserAgent"].as_str().unwrap().len(), 255);
++    }
++
+     #[test]
+     fn request_details_leave_out_credential_parameters() {
+         let parameters = [("orderId", "O1"), ("password", "hunter2"), ("api_key", "k-1")]
+diff --git i/crates/moqui-host/src/db/entity_facade.rs w/crates/moqui-host/src/db/entity_facade.rs
+index 74e8abc..e068ba2 100644
+--- i/crates/moqui-host/src/db/entity_facade.rs
++++ w/crates/moqui-host/src/db/entity_facade.rs
+@@ -93,6 +93,23 @@ pub fn open_entity_facade_for_factory(
+     Ok(facade)
+ }
+ 
++/// Java discovers database-backed views before checking/creating the entity schema.
++/// Keep the real read in an execution context so its transaction has entity identity.
++pub fn discover_db_views(factory: &Arc<ExecutionContextFactory>, facade: &EntityFacade) -> Result<(), Error> {
++    if !moqui_core::deterministic::enabled() {
++        return Ok(());
++    }
++    let context = factory.new_context();
++    let _entered = context.enter();
++    let _authz = context.disable_authz();
++    let views = facade.find("moqui.entity.view.DbViewEntity")?.list()?;
++    tracing::info!("Found {} view-entity definitions in database (DbViewEntity records)", views.len());
++    if !views.is_empty() {
++        return Err(Error::new("Database-backed view definitions require model registration before startup can continue"));
++    }
++    Ok(())
++}
++
+ /// The `entity` directory of each component the factory found, in its load order, the framework
+ /// left out (its directory is always read).
+ pub fn component_entity_dirs(factory: &ExecutionContextFactory) -> Vec<std::path::PathBuf> {
+diff --git i/crates/moqui-host/src/db/postgres.rs w/crates/moqui-host/src/db/postgres.rs
+index 7da3d32..2fceb83 100644
+--- i/crates/moqui-host/src/db/postgres.rs
++++ w/crates/moqui-host/src/db/postgres.rs
+@@ -313,14 +313,18 @@ mod driver {
+             let closed = if close { self.close_stream() } else { Ok(()) };
+             self.clear_stream();
+             closed?;
+-            self.client.batch_execute(sql).map_err(|err| pg(sql, err))?;
++            moqui_core::deterministic::traced("jdbc", "transaction", sql, || {
++                self.client.batch_execute(sql).map_err(|err| pg(sql, err))
++            })?;
+             self.in_transaction = false;
+             Ok(())
+         }
+ 
+         fn fetch_stream(&mut self) -> Result<(), Error> {
+             let sql = format!("FETCH {FETCH_BATCH} FROM {STREAM_CURSOR}");
+-            let rows = self.client.query(&sql, &[]).map_err(|err| pg("fetch cursor", err))?;
++            let rows = moqui_core::deterministic::traced("jdbc", "fetch", &sql, || {
++                self.client.query(&sql, &[]).map_err(|err| pg("fetch cursor", err))
++            })?;
+             if rows.len() < FETCH_BATCH {
+                 self.stream_exhausted = true;
+             }
+@@ -339,26 +343,32 @@ mod driver {
+ 
+     impl DbConnection for PostgresConn {
+         fn execute(&mut self, sql: &str, params: &[Value]) -> Result<u64, Error> {
+-            let bound = bind(params)?;
+-            let refs = param_refs(&bound);
+-            let statement = self.prepared(sql)?;
+-            self.client.execute(&statement, &refs).map_err(|err| pg("execute", err))
++            moqui_core::deterministic::traced("jdbc", "executeUpdate", sql, || {
++                let bound = bind(params)?;
++                let refs = param_refs(&bound);
++                let statement = self.prepared(sql)?;
++                self.client.execute(&statement, &refs).map_err(|err| pg("execute", err))
++            })
+         }
+ 
+         fn query(&mut self, sql: &str, params: &[Value]) -> Result<Vec<DbRow>, Error> {
+-            let bound = bind(params)?;
+-            let refs = param_refs(&bound);
+-            let statement = self.prepared(sql)?;
+-            let rows = self.client.query(&statement, &refs).map_err(|err| pg("query", err))?;
+-            rows.iter().map(map_row).collect()
++            moqui_core::deterministic::traced("jdbc", "executeQuery", sql, || {
++                let bound = bind(params)?;
++                let refs = param_refs(&bound);
++                let statement = self.prepared(sql)?;
++                let rows = self.client.query(&statement, &refs).map_err(|err| pg("query", err))?;
++                rows.iter().map(map_row).collect()
++            })
+         }
+ 
+         fn query_once(&mut self, sql: &str, params: &[Value]) -> Result<Vec<DbRow>, Error> {
+-            let bound = bind(params)?;
+-            let refs = param_refs(&bound);
+-            let rewritten = rewrite_placeholders(sql);
+-            let rows = self.client.query(&rewritten, &refs).map_err(|err| pg("query", err))?;
+-            rows.iter().map(map_row).collect()
++            moqui_core::deterministic::traced("jdbc", "executeQuery", sql, || {
++                let bound = bind(params)?;
++                let refs = param_refs(&bound);
++                let rewritten = rewrite_placeholders(sql);
++                let rows = self.client.query(&rewritten, &refs).map_err(|err| pg("query", err))?;
++                rows.iter().map(map_row).collect()
++            })
+         }
+ 
+         fn open_stream(&mut self, sql: &str, params: &[Value]) -> Result<(), Error> {
+@@ -372,9 +382,11 @@ mod driver {
+             let refs = param_refs(&bound);
+             let rewritten = rewrite_placeholders(sql);
+             let declare = format!("DECLARE {STREAM_CURSOR} NO SCROLL CURSOR FOR {rewritten}");
+-            self.client
+-                .execute(&declare, &refs)
+-                .map_err(|err| pg("declare cursor", err))?;
++            moqui_core::deterministic::traced("jdbc", "openStream", sql, || {
++                self.client
++                    .execute(&declare, &refs)
++                    .map_err(|err| pg("declare cursor", err))
++            })?;
+             self.streaming = true;
+             self.stream_exhausted = false;
+             self.stream_buf.clear();
+@@ -410,7 +422,9 @@ mod driver {
+         }
+ 
+         fn begin(&mut self) -> Result<(), Error> {
+-            self.client.batch_execute("BEGIN").map_err(|err| pg("begin", err))?;
++            moqui_core::deterministic::traced("jdbc", "transaction", "BEGIN", || {
++                self.client.batch_execute("BEGIN").map_err(|err| pg("begin", err))
++            })?;
+             self.in_transaction = true;
+             Ok(())
+         }
+@@ -425,21 +439,27 @@ mod driver {
+ 
+         fn savepoint(&mut self, name: &str) -> Result<(), Error> {
+             let sql = format!("SAVEPOINT {}", quote_ident(name));
+-            self.client.batch_execute(&sql).map_err(|err| pg("savepoint", err))
++            moqui_core::deterministic::traced("jdbc", "savepoint", &sql, || {
++                self.client.batch_execute(&sql).map_err(|err| pg("savepoint", err))
++            })
+         }
+ 
+         fn rollback_to_savepoint(&mut self, name: &str) -> Result<(), Error> {
+             let sql = format!("ROLLBACK TO SAVEPOINT {}", quote_ident(name));
+-            self.client
+-                .batch_execute(&sql)
+-                .map_err(|err| pg("rollback to savepoint", err))
++            moqui_core::deterministic::traced("jdbc", "savepoint", &sql, || {
++                self.client
++                    .batch_execute(&sql)
++                    .map_err(|err| pg("rollback to savepoint", err))
++            })
+         }
+ 
+         fn release_savepoint(&mut self, name: &str) -> Result<(), Error> {
+             let sql = format!("RELEASE SAVEPOINT {}", quote_ident(name));
+-            self.client
+-                .batch_execute(&sql)
+-                .map_err(|err| pg("release savepoint", err))
++            moqui_core::deterministic::traced("jdbc", "savepoint", &sql, || {
++                self.client
++                    .batch_execute(&sql)
++                    .map_err(|err| pg("release savepoint", err))
++            })
+         }
+ 
+         /// `SET LOCAL` lasts until the transaction ends, so clearing is a no-op.
+diff --git i/crates/moqui-host/src/deterministic.rs w/crates/moqui-host/src/deterministic.rs
+index 496f137..df99bba 100644
+--- i/crates/moqui-host/src/deterministic.rs
++++ w/crates/moqui-host/src/deterministic.rs
+@@ -7,7 +7,7 @@ use std::time::Duration;
+ 
+ use moqui_core::deterministic::{self, Provider};
+ use moqui_lib::error::Error;
+-use serde_json::{json, Value};
++use serde_json::{Value, json};
+ 
+ struct Hook {
+     client: reqwest::blocking::Client,
+@@ -172,6 +172,12 @@ impl Provider for Hook {
+ 
+     fn begin(&self, request: Value) -> Result<Value, Error> {
+         let mut request = self.envelope(request);
++        moqui_core::deterministic::trace(
++            "coordinator",
++            "begin",
++            request["artifact"]["name"].as_str().unwrap_or(""),
++            "requested",
++        )?;
+         let response = self.post(&request)?;
+         let id = response
+             .get("operation_id")
+@@ -190,12 +196,39 @@ impl Provider for Hook {
+         Ok(response)
+     }
+ 
++    fn trace(&self, request: Value) -> Result<(), Error> {
++        static SEQUENCE: std::sync::atomic::AtomicU64 = std::sync::atomic::AtomicU64::new(1);
++        // Sequence allocation and append must be serialized together.
++        static SERIAL: Mutex<()> = Mutex::new(());
++        let _guard = SERIAL.lock().unwrap();
++        let mut request = self.envelope(request);
++        request["trace_sequence"] = json!(SEQUENCE.fetch_add(1, std::sync::atomic::Ordering::SeqCst));
++        self.append(&request)?;
++        let kind = request["kind"].as_str().unwrap_or("");
++        let action = request["action"].as_str().unwrap_or("");
++        let outcome = request["outcome"].as_str().unwrap_or("");
++        if std::env::var("MOQUI_DETERMINISTIC_OPERATIONS").as_deref() == Ok("true")
++            && ((kind.starts_with("AT_") && outcome == "exit")
++                || (kind == "jdbc" && matches!(outcome, "succeeded" | "failed"))
++                || (kind == "data" && outcome != "requested"))
++        {
++            let operation = self.envelope(json!({"event":"operation", "sequence":request["trace_sequence"],
++                "kind":kind, "action":action, "name":request["name"], "outcome":outcome,
++                "transaction_sequence":request["parent_sequence"]}));
++            if self.post(&operation)?.get("ok") != Some(&Value::Bool(true)) {
++                return Err(Error::new("operation database comparison rejected"));
++            }
++        }
++        Ok(())
++    }
++
+     fn complete(&self, request: Value) -> Result<(), Error> {
+         let request = self.envelope(request);
++        self.append(&request)?;
+         let response = self.post(&request)?;
+         if response.get("ok") != Some(&Value::Bool(true)) {
+             return Err(Error::new("invalid deterministic completion response"));
+         }
+-        self.append(&request)
++        Ok(())
+     }
+ }
+diff --git i/crates/moqui-host/src/lib.rs w/crates/moqui-host/src/lib.rs
+index 407488b..b87d61f 100644
+--- i/crates/moqui-host/src/lib.rs
++++ w/crates/moqui-host/src/lib.rs
+@@ -700,12 +700,13 @@ fn load_with_factory(
+         &db.conf.dialect,
+     )?;
+     crate::db::entity_facade::attach(factory, facade.clone());
++    crate::db::entity_facade::discover_db_views(factory, &facade)?;
+     tracing::info!(
+         "Entity Facade initialized in {:.3} seconds",
+         entity_started.elapsed().as_secs_f64()
+     );
+     // Feeds index through search when it is up; a load still runs when it is not.
+-    let _search = match crate::search::attach_search(factory, &facade, db.is_postgres()) {
++    let _search = match prepare_search(factory, &facade, db.is_postgres()) {
+         Ok(store) => {
+             tracing::info!("Search attached for this load, data feeds will index documents");
+             logging::ship_to_search(factory);
+@@ -961,6 +962,7 @@ fn boot_server(
+         &db.conf.dialect,
+     )?;
+     crate::db::entity_facade::attach(&factory, facade.clone());
++    crate::db::entity_facade::discover_db_views(&factory, &facade)?;
+     tracing::info!(
+         "Entity Facade initialized in {:.3} seconds",
+         entity_started.elapsed().as_secs_f64()
+@@ -968,7 +970,7 @@ fn boot_server(
+     // The overlay starts on the first enter_sim, inside the cluster directory, on the shared install.
+     let sim = crate::db::sim::SimOverlay::install(&facade, &cluster_dir, Some(install));
+     // Same policy as `load`: indexing runs when search is up, and the server still starts when it is not.
+-    let search = match crate::search::attach_search(&factory, &facade, db.is_postgres()) {
++    let search = match prepare_search(&factory, &facade, db.is_postgres()) {
+         Ok(store) => {
+             tracing::info!("Search attached, data feeds and logs can index documents");
+             logging::ship_to_search(&factory);
+@@ -980,9 +982,14 @@ fn boot_server(
+             None
+         }
+     };
++    // Java completes factory/schema initialization before checkEmptyDb enters its own scope.
++    if let Some(bootstrap) = _bootstrap {
++        bootstrap.finish("committed")?;
++    }
++    let _bootstrap = deterministic::bootstrap()?;
+     // Log events and HTTP requests go to moqui_logs and moqui_http_log through the search backend (shipped above).
+     factory.init_tools().map_err(moqui_lib::error::Error::from)?;
+-    if search.is_some() {
++    if search.is_some() && !moqui_core::deterministic::enabled() {
+         index_feeds_on_start_empty(&factory);
+     }
+     let load_started = std::time::Instant::now();
+@@ -1003,6 +1010,11 @@ fn boot_server(
+         drop(context);
+         loaded?;
+     }
++    if moqui_core::deterministic::enabled() {
++        // Java restarts the factory after the empty-db load, persisting bootstrap
++        // statistics before serving requests. Flush here, not only at final shutdown.
++        factory.flush_artifact_hits().map_err(moqui_lib::error::Error::from)?;
++    }
+     tracing::info!(
+         "Table check and empty-db load finished in {:.3} seconds",
+         load_started.elapsed().as_secs_f64()
+@@ -1195,6 +1207,44 @@ fn should_load_data(existing: i64, flags: &LoadFlags, startup: bool) -> bool {
+     }
+ }
+ 
++#[cfg(all(feature = "embedded-postgres", feature = "postgres"))]
++#[derive(Default)]
++struct JavaStartupSchemaChecked(bool);
++
++// Java's postFacadeInit checks tables in one transaction, then (when tables were created)
++// checks all foreign keys in a second, before checkEmptyDb. Rust's search DDL is auxiliary
++// schema work and joins the first.
++#[cfg(all(feature = "embedded-postgres", feature = "postgres"))]
++fn prepare_search(
++    factory: &std::sync::Arc<moqui_core::context::ExecutionContextFactory>,
++    facade: &moqui_core::entity::EntityFacade,
++    postgres: bool,
++) -> Result<crate::search::SearchStore, moqui_lib::error::Error> {
++    if !moqui_core::deterministic::enabled() {
++        return crate::search::attach_search(factory, facade, postgres);
++    }
++    let entities = entity_names(factory.framework_dir(), &facade.entity_dirs())?;
++    let refs: Vec<&str> = entities.iter().map(String::as_str).collect();
++    let tx = facade.transactions_for("moqui.basic.Enumeration")?;
++    let mut created = false;
++    let search = tx.run(moqui_core::transaction::TransactionAttribute::UseOrBegin, Some(std::time::Duration::from_secs(300)), || {
++        created = facade.check_tables_startup(&refs)?;
++        if !facade.table_exists("moqui.test.TestFts")? {
++            return Err(moqui_lib::error::Error::new("TestFts was not created before seed loading"));
++        }
++        let search = crate::search::attach_search(factory, facade, postgres);
++        if search.is_ok() {
++            index_feeds_on_start_empty(factory);
++        }
++        Ok(search)
++    })?;
++    if created {
++        facade.check_fks_startup(&refs)?;
++    }
++    facade.with_slot(JavaStartupSchemaChecked::default, |ready| ready.0 = true);
++    search
++}
++
+ #[cfg(all(feature = "embedded-postgres", feature = "postgres"))]
+ fn load_in_context(
+     framework_dir: &std::path::Path,
+@@ -1229,8 +1279,12 @@ fn load_in_context(
+         "Checking tables for {} framework entities in group transactional",
+         refs.len()
+     );
+-    facade.check_tables(&refs)?;
+-    let test_fts_before_load = facade.table_exists("moqui.test.TestFts")?;
++    let test_fts_before_load = if moqui_core::deterministic::enabled() {
++        facade.with_slot(JavaStartupSchemaChecked::default, |ready| ready.0)
++    } else {
++        facade.check_tables(&refs)?;
++        facade.table_exists("moqui.test.TestFts")?
++    };
+     if !test_fts_before_load {
+         return Err(moqui_lib::error::Error::new(
+             "moqui.test.TestFts was not created before the seed load",
+diff --git i/crates/moqui-host/tests/deterministic.rs w/crates/moqui-host/tests/deterministic.rs
+index 82620cc..4806dda 100644
+--- i/crates/moqui-host/tests/deterministic.rs
++++ w/crates/moqui-host/tests/deterministic.rs
+@@ -20,6 +20,8 @@ const BASE: i64 = 1760000000000;
+ fn protocol_and_failure_cases() {
+     for scenario in [
+         "lifecycle",
++        "operations",
++        "postgres",
+         "status",
+         "json",
+         "assignment",
+@@ -32,6 +34,9 @@ fn protocol_and_failure_cases() {
+         "random-invalid",
+         "random-uninstalled",
+     ] {
++        if scenario == "postgres" && !cfg!(all(feature = "postgres", feature = "embedded-postgres")) {
++            continue;
++        }
+         let dir = std::env::temp_dir().join(format!("moqui-deterministic-{}-{scenario}", std::process::id()));
+         std::fs::create_dir_all(&dir).unwrap();
+         let log = dir.join("deterministic.log");
+@@ -89,7 +94,7 @@ fn protocol_and_failure_cases() {
+                     "not json".to_string()
+                 } else if scenario == "assignment" {
+                     json!({"operation_id":"x", "time_epoch_ms":"wrong"}).to_string()
+-                } else if request["event"] == "complete" {
++                } else if request["event"] == "complete" || request["event"] == "operation" {
+                     json!({"ok": scenario != "complete"}).to_string()
+                 } else {
+                     json!({"operation_id":format!("op-{sequence:06}"), "time_epoch_ms":BASE + sequence as i64})
+@@ -119,6 +124,10 @@ fn protocol_and_failure_cases() {
+                 "MOQUI_DETERMINISTIC",
+                 if scenario == "normal" { "false" } else { "true" },
+             )
++            .env(
++                "MOQUI_DETERMINISTIC_OPERATIONS",
++                if scenario == "operations" { "true" } else { "false" },
++            )
+             .env("MOQUI_DETERMINISTIC_OFFLINE", "true")
+             .env("MOQUI_DETERMINISTIC_HOOK", format!("http://{address}/transaction"))
+             .env("MOQUI_DETERMINISTIC_ENGINE", "rust")
+@@ -144,6 +153,61 @@ fn protocol_and_failure_cases() {
+             .lines()
+             .map(|line| serde_json::from_str(line).unwrap())
+             .collect();
++        let traces: Vec<_> = records.iter().filter(|record| record["event"] == "trace").collect();
++        for (index, trace) in traces.iter().enumerate() {
++            assert_eq!(trace["trace_sequence"], index + 1);
++            assert!(!trace.to_string().contains("secret-parameter"));
++        }
++        if scenario == "lifecycle" {
++            assert!(
++                traces
++                    .iter()
++                    .any(|trace| trace["kind"] == "AT_SERVICE" && trace["outcome"] == "enter")
++            );
++            assert!(
++                traces
++                    .iter()
++                    .any(|trace| trace["kind"] == "AT_SERVICE" && trace["outcome"] == "exit")
++            );
++        }
++        if scenario == "operations" {
++            let requests = requests.lock().unwrap();
++            let operations: Vec<_> = requests
++                .iter()
++                .filter(|request| request["event"] == "operation")
++                .collect();
++            assert_eq!(operations.len(), 2);
++            assert_eq!(operations[0]["name"], "moqui.example.Thing");
++            assert_eq!(operations[0]["outcome"], "exit");
++            assert_eq!(operations[0]["transaction_sequence"], 1);
++        }
++        if scenario == "postgres" {
++            for sql in [
++                "CREATE TABLE deterministic_trace (id text)",
++                "INSERT INTO deterministic_trace VALUES (?)",
++            ] {
++                assert!(
++                    traces.iter().any(|trace| trace["kind"] == "jdbc"
++                        && trace["name"] == sql
++                        && trace["outcome"] == "succeeded")
++                );
++            }
++            assert!(
++                traces
++                    .iter()
++                    .any(|trace| trace["kind"] == "jdbc" && trace["outcome"] == "failed")
++            );
++            assert!(
++                traces
++                    .iter()
++                    .filter(|trace| trace["kind"] == "jdbc")
++                    .all(|trace| trace["time_epoch_ms"].is_i64())
++            );
++        }
++        let records: Vec<_> = records
++            .into_iter()
++            .filter(|record| record["event"] != "trace")
++            .collect();
+         assert_eq!(
+             records[0],
+             json!({"existing":true}),
+@@ -266,15 +330,47 @@ fn deterministic_child() {
+         return;
+     }
+     if scenario == "complete" {
+-        assert!(moqui_core::deterministic::begin()
+-            .unwrap()
+-            .unwrap()
+-            .finish("committed")
+-            .is_err());
++        assert!(
++            moqui_core::deterministic::begin()
++                .unwrap()
++                .unwrap()
++                .finish("committed")
++                .is_err()
++        );
+         assert!(moqui_core::deterministic::begin().is_err());
+         return;
+     }
+     assert!(std::panic::catch_unwind(moqui_lib::clock::now_millis).is_err());
++    #[cfg(all(feature = "postgres", feature = "embedded-postgres"))]
++    if scenario == "postgres" {
++        let bootstrap = moqui_host::deterministic::bootstrap().unwrap().unwrap();
++        let dir = std::path::PathBuf::from(std::env::var("DETERMINISTIC_TEST_DIR").unwrap());
++        let (mut cluster, driver) = moqui_host::db::embedded::EmbeddedCluster::start(dir.join("pg"), 8).unwrap();
++        let mut connection = driver.connect().unwrap();
++        connection.begin().unwrap();
++        connection
++            .execute("CREATE TABLE deterministic_trace (id text)", &[])
++            .unwrap();
++        connection
++            .execute(
++                "INSERT INTO deterministic_trace VALUES (?)",
++                &[Value::string("secret-parameter")],
++            )
++            .unwrap();
++        connection.commit().unwrap();
++        assert_eq!(
++            connection
++                .query("SELECT id FROM deterministic_trace", &[])
++                .unwrap()
++                .len(),
++            1
++        );
++        assert!(connection.query_once("SELECT * FROM missing_trace_table", &[]).is_err());
++        drop(connection);
++        cluster.stop().unwrap();
++        bootstrap.finish("committed").unwrap();
++        return;
++    }
+     let fail = Arc::new(AtomicBool::new(false));
+     let tx = TransactionManager::new(Arc::new(Driver(Arc::clone(&fail))), PoolConfig::default()).unwrap();
+     if scenario == "uncertain" {
+@@ -286,6 +382,12 @@ fn deterministic_child() {
+         return;
+     }
+     let bootstrap = moqui_host::deterministic::bootstrap().unwrap().unwrap();
++    if scenario == "operations" {
++        moqui_core::deterministic::trace("AT_ENTITY", "list", "moqui.example.Thing", "exit").unwrap();
++        moqui_core::deterministic::traced("jdbc", "executeQuery", "SELECT 1", || Ok(())).unwrap();
++        bootstrap.finish("committed").unwrap();
++        return;
++    }
+     let boot_time = moqui_lib::clock::now_millis();
+     let outer = tx.scope(None).unwrap();
+     let parent = moqui_lib::clock::now_millis();
+diff --git i/crates/moqui-host/tests/it/tools_services.rs w/crates/moqui-host/tests/it/tools_services.rs
+index b61ebd4..7b571c9 100644
+--- i/crates/moqui-host/tests/it/tools_services.rs
++++ w/crates/moqui-host/tests/it/tools_services.rs
+@@ -181,6 +181,18 @@ fn tools_services_run_on_postgres() {
+     );
+     assert_eq!(status, 200, "{cleaned}");
+     assert!(cleaned.contains("artifactHitsRemoved"), "{cleaned}");
++    // Every query of the LLM clean runs: the OR/AND conversation find, the chunked IN deletes and the strip.
++    let (status, cleaned) = run(
++        address,
++        &john,
++        "org.moqui.impl.LlmServices.clean#LlmData",
++        &[("daysToKeep", "90"), ("contentDaysToKeep", "14")],
++    );
++    assert_eq!(status, 200, "{cleaned}");
++    assert!(
++        cleaned.contains("\"conversationsRemoved\"") && cleaned.contains("\"contentStripped\""),
++        "{cleaned}"
++    );
+ 
+     // Decimal arithmetic, both directions.
+     let (_, converted) = run(
+diff --git i/runtime/base-component/framework/entity/EntityEntities.xml w/runtime/base-component/framework/entity/EntityEntities.xml
+index 25e9dce..5a97f1e 100644
+--- i/runtime/base-component/framework/entity/EntityEntities.xml
++++ w/runtime/base-component/framework/entity/EntityEntities.xml
+@@ -153,7 +153,7 @@ along with this software (see the LICENSE.md file). If not, see
+             code, category, or quality. A root field only. The title is what fuzzy and autocomplete search match.</description></field>
+         <field name="searchWeight" type="text-indicator"><description>A, B, C, or D: the weight of this root text field when
+             a search asks for weighted (cover-density) ranking. Fields with none count as D.</description></field>
+-        <field name="sequenceNum" type="number-integer" default="fieldSeqId as int"/>
++        <field name="sequenceNum" type="number-integer" default="(fieldSeqId == null ? null : Math.trunc(toDecimal(fieldSeqId).toNumber()))"/>
+         <relationship type="one" related="moqui.entity.document.DataDocument"/>
+     </entity>
+     <entity entity-name="DataDocumentRelAlias" package="moqui.entity.document" use="configuration">
+diff --git i/runtime/base-component/framework/service/org/moqui/impl/EmailServices.xml w/runtime/base-component/framework/service/org/moqui/impl/EmailServices.xml
+index f99cb4c..2c67c60 100644
+--- i/runtime/base-component/framework/service/org/moqui/impl/EmailServices.xml
++++ w/runtime/base-component/framework/service/org/moqui/impl/EmailServices.xml
+@@ -76,6 +76,8 @@ along with this software (see the LICENSE.md file). If not, see
+             </if>
+ 
+             <set field="body" from="bodyPartList?.length ? bodyPartList[0].contentText : null"/>
++            <!-- The address lists are stored comma separated, as send#EmailTemplate stores them and send#EmailMessage
++                splits them; Java's List.toString() stores "[a, b]", which sends to "[a" and "b]". -->
+             <service-call name="create#moqui.basic.email.EmailMessage" out-map="context"
+                 in-map="{sentDate:fields.sentDate, receivedDate:fields.receivedDate, statusId:statusId,
+                     subject:fields.subject, body:body,
+diff --git i/runtime/base-component/framework/service/org/moqui/impl/EntityServices.xml w/runtime/base-component/framework/service/org/moqui/impl/EntityServices.xml
+index 9c974bf..f4011c1 100644
+--- i/runtime/base-component/framework/service/org/moqui/impl/EntityServices.xml
++++ w/runtime/base-component/framework/service/org/moqui/impl/EntityServices.xml
+@@ -350,7 +350,7 @@ along with this software (see the LICENSE.md file). If not, see
+     <service verb="rewrite" noun="EntityEncryptedFields" type="rust"
+             location="moqui_core::service::tools::rewrite_encrypted_fields" authenticate="anonymous-all"
+             transaction-timeout="900">
+-        <description>The body is Rust (crates/moqui-core/src/service/tools.rs). A value that does not decrypt fails the read instead of skipping the record.</description>
++        <description>The body is Rust (crates/moqui-core/src/service/tools.rs). A record with a value that does not decrypt is logged and skipped, as in Java.</description>
+         <in-parameters>
+             <parameter name="entityName" required="true"/>
+         </in-parameters>
+diff --git i/runtime/base-component/framework/service/org/moqui/impl/ServerServices.xml w/runtime/base-component/framework/service/org/moqui/impl/ServerServices.xml
+index e22fdc8..8a19915 100644
+--- i/runtime/base-component/framework/service/org/moqui/impl/ServerServices.xml
++++ w/runtime/base-component/framework/service/org/moqui/impl/ServerServices.xml
+@@ -109,4 +109,34 @@ along with this software (see the LICENSE.md file). If not, see
+             ec.logger.log("info", `Removed ${printJobsRemoved} PrintJob records more than ${daysToKeep} days old`)
+         </script></actions>
+     </service>
++
++    <service verb="backup" noun="EmbeddedDatabase" type="rust"
++            location="moqui_core::service::backup::backup_embedded_database"
++            authenticate="false" transaction="ignore">
++        <description>
++            Live backup of each embedded Postgres cluster this process runs, then the retention ladder, then an
++            optional SFTP mirror of the archives that remain. The schedule is the ServiceJob cron.
++            See plans/PostgresBackup.md.
++        </description>
++        <in-parameters>
++            <parameter name="dailyCount" type="Integer" default="7"/>
++            <parameter name="weeklyCount" type="Integer" default="5"/>
++            <parameter name="monthlyCount" type="Integer" default="12"/>
++            <parameter name="yearlyCount" type="Integer"/>
++            <parameter name="backupMode" type="String" default="dump"/>
++            <parameter name="backupDir" type="String"/>
++            <parameter name="fullEvery" type="Integer" default="7"/>
++            <parameter name="timeoutMinutes" type="Integer" default="120"/>
++            <parameter name="systemMessageRemoteId" type="String"/>
++        </in-parameters>
++        <out-parameters>
++            <parameter name="archivePath" type="String"/>
++            <parameter name="backupKind" type="String"/>
++            <parameter name="bytesWritten" type="Long"/>
++            <parameter name="promoted" type="String"/>
++            <parameter name="archivesRemoved" type="String"/>
++            <parameter name="mirrored" type="String"/>
++            <parameter name="skipped" type="String"/>
++        </out-parameters>
++    </service>
+ </services>
+diff --git i/runtime/base-component/framework/template/screen/ScreenQvtStatic.js w/runtime/base-component/framework/template/screen/ScreenQvtStatic.js
+index 0c2f999..31c0866 100644
+--- i/runtime/base-component/framework/template/screen/ScreenQvtStatic.js
++++ w/runtime/base-component/framework/template/screen/ScreenQvtStatic.js
+@@ -783,11 +783,15 @@
+             const confirmAttr = {};
+             if (confirmation) textAttr(confirmAttr, "data-confirm", confirmation, n, true);
+             const noParam = at(n, "url-noparam") === "true";
++            // An alias transition's screenPath is the screen it names. A form still posts found.path.
++            const navPath = found && at(n, "expand-transition-url") !== "false" && found.screenPath ? found.screenPath : (found ? found.path : "");
+             let out = "";
+             if (anchor) {
+-                const plain = !found;
+-                const href = plain ? exp(at(n, "url"), n, "url", false) : noParam ? sq(found.path) : urlOf(n, found.path);
+-                const tag = plain ? "a" : "m-link";
++                // A type=none or plain-response transition is not a screen URL, so the anchor is <a> and the client
++                // does not setUrl it. An unresolved ${} target stays an m-link.
++                const toScreen = !!(found && found.screenUrl);
++                const href = found ? (noParam ? sq(navPath) : urlOf(n, navPath)) : exp(at(n, "url"), n, "url", false);
++                const tag = toScreen ? "m-link" : "a";
+                 const asButton = linkType !== "anchor";
+                 const attrs = Object.assign({ ":href": href, target: at(n, "target-window") || null, "load-id": at(n, "dynamic-load-id") || null, class: asButton ? null : style }, confirmAttr);
+                 plainAttr(attrs, "id", at(n, "id"), n);
+@@ -842,7 +846,7 @@
+ 
+         const dynamicDialog = (n) => {
+             const found = sri.staticUrl(at(n, "transition"), "transition");
+-            const out = { ":url": urlOf(n, found.path), color: quasarColor(at(n, "type") || "primary") || null, width: at(n, "width") || null, "button-class": at(n, "button-style") || null };
++            const out = { ":url": urlOf(n, found.screenPath || found.path), color: quasarColor(at(n, "type") || "primary") || null, width: at(n, "width") || null, "button-class": at(n, "button-style") || null };
+             plainAttr(out, "id", at(n, "id"), n);
+             textAttr(out, "button-text", at(n, "button-text"), n, true);
+             if (at(n, "title")) textAttr(out, "title", at(n, "title"), n, true);
+@@ -853,7 +857,7 @@
+         const dynamicContainer = (n) => {
+             const found = sri.staticUrl(at(n, "transition"), "transition");
+             const id = at(n, "id");
+-            const out = { ":url": urlOf(n, found.path, { _dynamic_container_id: sq(id) }) };
++            const out = { ":url": urlOf(n, found.screenPath || found.path, { _dynamic_container_id: sq(id) }) };
+             plainAttr(out, "id", id, n);
+             w("<m-dynamic-container" + A(out) + "></m-dynamic-container>\n");
+         };
+diff --git i/runtime/base-component/framework/xsd/moqui-conf-3.xsd w/runtime/base-component/framework/xsd/moqui-conf-3.xsd
+index e5f6ba4..bc8a7c7 100644
+--- i/runtime/base-component/framework/xsd/moqui-conf-3.xsd
++++ w/runtime/base-component/framework/xsd/moqui-conf-3.xsd
+@@ -994,6 +994,12 @@ along with this software (see the LICENSE.md file). If not, see
+                     <xs:enumeration value="oracle-text"/>
+                 </xs:restriction></xs:simpleType>
+             </xs:attribute>
++            <xs:attribute name="fts-ddl" default="true" type="xs:boolean">
++                <xs:annotation><xs:documentation>
++                    When false Moqui does not create the generated tsvector column, GIN or FULLTEXT index for text-fts fields.
++                    Use it when a DBA manages them, because on PostgreSQL adding the stored column rewrites the table.
++                </xs:documentation></xs:annotation>
++            </xs:attribute>
+             <xs:attribute name="fts-config" default="english" type="xs:token">
+                 <xs:annotation><xs:documentation>
+                     Postgres text search configuration passed to to_tsvector / plainto_tsquery. Other fts-style values ignore it.
+diff --git i/runtime/base-component/webroot/screen/webroot/js/WebrootVue.qvt.js w/runtime/base-component/webroot/screen/webroot/js/WebrootVue.qvt.js
+index 984afab..e61c3b1 100644
+--- i/runtime/base-component/webroot/screen/webroot/js/WebrootVue.qvt.js
++++ w/runtime/base-component/webroot/screen/webroot/js/WebrootVue.qvt.js
+@@ -251,6 +251,11 @@
+         moqui.handleAjaxError(err);
+     };
+ 
++    // A validation error's line in errors, as the server writes it (Java's ValidationError.toStringPretty): the message, then "(" and the
++    // pretty field, form and service names that are there, with no closing parenthesis.
++    moqui.validationErrorText = (ve) => (ve.message || "") + "(" + (ve.fieldPretty ? "for field " + ve.fieldPretty : "") +
++        (ve.formPretty ? " on form " + ve.formPretty : "") + (ve.serviceNamePretty ? " of service " + ve.serviceNamePretty : "");
++
+     // The validation errors of a form's own fields go to the form (m-form fieldErrors), shown by the field. A copy of the response without
+     // them, and without their text in errors, is what is left to notify. An error for another form or for no field stays in the copy.
+     moqui.placeFieldErrors = (form, resp) => {
+@@ -265,7 +270,7 @@
+         });
+         if (!placed.length) return resp;
+         form.setFieldErrors(placed);
+-        const placedText = placed.map((ve) => ve.message);
++        const placedText = placed.map((ve) => ve.message).concat(placed.map(moqui.validationErrorText));
+         const copy = Object.assign({}, resp, { validationErrors: rest, fieldErrorsPlaced: placed.length });
+         if (moqui.isString(resp.errors)) {
+             const lines = resp.errors.split("\n").filter((line) => placedText.indexOf(line) === -1);
+diff --git i/runtime/base-component/webroot/screen/webroot/js/WebrootVue.qvt.test.js w/runtime/base-component/webroot/screen/webroot/js/WebrootVue.qvt.test.js
+index 570beb1..b0777ee 100644
+--- i/runtime/base-component/webroot/screen/webroot/js/WebrootVue.qvt.test.js
++++ w/runtime/base-component/webroot/screen/webroot/js/WebrootVue.qvt.test.js
+@@ -161,6 +161,11 @@ test("an m-form keeps its own field errors and leaves the rest to notify", () =>
+     assert.deepEqual(form.fieldErrors, {});
+     // nothing placed is the same response
+     assert.equal(moqui.placeFieldErrors(form, { errors: "e" }).errors, "e");
++    // the server writes a validation error's line as Java's toStringPretty; a placed one's line goes too
++    const pretty = { field: "title", message: "Field cannot be empty", fieldPretty: "Title", serviceName: "save#Thing", serviceNamePretty: "Save#Thing" };
++    assert.equal(moqui.validationErrorText(pretty), "Field cannot be empty(for field Title of service Save#Thing");
++    const placedPretty = moqui.placeFieldErrors(form, { errors: "Field cannot be empty(for field Title of service Save#Thing\nOther", validationErrors: [pretty] });
++    assert.equal(placedPretty.errors, "Other");
+ });
+ 
+ test("a field widget puts its form's error on the Quasar field", () => {
+diff --git i/runtime/base-component/webroot/screen/webroot/js/moqui-html.js w/runtime/base-component/webroot/screen/webroot/js/moqui-html.js
+index 5a71529..f19262f 100644
+--- i/runtime/base-component/webroot/screen/webroot/js/moqui-html.js
++++ w/runtime/base-component/webroot/screen/webroot/js/moqui-html.js
+@@ -192,7 +192,9 @@
+             box.setAttribute("data-bg-error", "");
+             const widget = box.querySelector(".widget") || box;
+             widget.appendChild(el("div", { class: "field-error", role: "alert", "data-bg-error": "" }, ve.message));
+-            placed.push(ve.message);
++            // its line in errors is the message, or the message with its names as the server writes it (toStringPretty)
++            placed.push(ve.message, ve.message + "(" + (ve.fieldPretty ? "for field " + ve.fieldPretty : "") +
++                (ve.formPretty ? " on form " + ve.formPretty : "") + (ve.serviceNamePretty ? " of service " + ve.serviceNamePretty : ""));
+         });
+         return placed;
+     };

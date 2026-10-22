@@ -1,0 +1,14 @@
+{
+  "java": {
+    "head": "13bd63af7a602af9c96e3ec42bbc2cd91f85ec3a",
+    "working_tree_dirty": true,
+    "patch_file": "java-source.patch",
+    "patch_sha256": "013f3d6794c22f3ed0afbd3282c6f0a943f296e23ac284aad904ba91b496e30d"
+  },
+  "rust": {
+    "head": "9881626797139fce0c70e9338df8ce5449e48c73",
+    "working_tree_dirty": true,
+    "patch_file": "rust-source.patch",
+    "patch_sha256": "e0c24efd1286d5efd08b6ba82b766ae73c7f4c8581590ff8d35c298bb60b1236"
+  }
+}

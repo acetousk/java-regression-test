@@ -1,0 +1,4 @@
+Emulate Docker CLI using podman. Create /etc/containers/nodocker to quiet msg.
+pause.pid file refers to PID 41879 which is not a pause process, the process may have exited and the PID been recycled. Removing /run/user/1000/libpod/tmp/pause.pid
+Error: no container with name or ID "moqui-regression-2026-10-20_00-04-53.084062Z-java" found: no such container
+time="2026-10-19T23:24:12-06:00" level=warning msg="Failed to add pause process to systemd sandbox cgroup: Transaction for podman-pause-e075cb68.scope/start is destructive (exit.target has 'start' job queued, but 'stop' is included in transaction)."

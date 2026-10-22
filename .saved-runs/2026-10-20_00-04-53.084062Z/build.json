@@ -1,0 +1,14 @@
+{
+  "java": {
+    "artifact": "/home/user/.herdr/worktrees/java-regression-test/match-screen-logic/.runs/activity-engines/java/moqui.war",
+    "sha256": "9b2e6dbf6b0a64103a9b3cde1839ea70b0de87f1b63059bc1695689b972b92c5",
+    "checkout": "/home/user/.herdr/worktrees/java-regression-test/match-screen-logic/.runs/activity-engines/java",
+    "runtime": "/home/user/.herdr/worktrees/java-regression-test/match-screen-logic/.runs/activity-engines/java/runtime"
+  },
+  "rust": {
+    "artifact": "/home/user/.herdr/worktrees/java-regression-test/match-screen-logic/.runs/activity-target/debug/moqui",
+    "sha256": "81c4a8e8490024b16332963c64057f02dfae3449ec1f65db35d96b3d99d1d364",
+    "checkout": "/home/user/.herdr/worktrees/java-regression-test/match-screen-logic/.runs/activity-engines/rust",
+    "runtime": "/home/user/.herdr/worktrees/java-regression-test/match-screen-logic/.runs/activity-engines/rust/runtime"
+  }
+}
