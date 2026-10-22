@@ -1,0 +1,612 @@
+# Initial Setup and Basics
+
+Source: [Marble ERP User Guide/Initial Setup and Basics](https://moqui.org/docs/apps/Marble%20ERP%20User%20Guide/Initial%20Setup%20and%20Basics)
+
+Type: UI walkthrough.
+
+## Initial Setup
+
+### Start with base install data (no demo, etc)
+- easiest: start Moqui with an empty database (ie don't do a `./gradlew load` or `java -jar moqui.war load`)
+  - visual test:
+  - transition test:
+- default empty DB data types: **seed,seed-initial,install**
+  - visual test:
+  - transition test:
+- env var `entity_empty_db_load` OR Moqui Conf XML `moqui-conf.tools.@empty-db-load` attribute
+  - visual test:
+  - transition test:
+- warning: **MoquiDevConf.xml** (default when starting with `java -jar moqui.war`) loads all data files found; don't do this!
+  - visual test:
+  - transition test:
+- example: `java -jar moqui.war conf=conf/MoquiProductionConf.xml`
+  - visual test:
+  - transition test:
+### Create Initial Admin user (a one time action)
+- go to any screen that requires authentication and default Login screen will show a form to create initial admin user
+  - visual test:
+  - transition test:
+- fill out all fields, including User Full Name and Email Address
+  - visual test:
+  - transition test:
+
+### Create first Company (Internal Organization)
+#### Create Organization
+- **Marble ERP Dashboard** ==> **Internal** (*marble/Party/FindParty* with role *Internal Organization*)
+  - visual test:
+  - transition test:
+- use **New Organization** dialog, enter name and submit
+  - visual test:
+  - transition test:
+#### Add Internal role (direct role)
+- on the **Marble ERP > Parties > Party** screen (*marble/Party/EditParty*)
+  - visual test:
+  - transition test:
+- verify role *Internal Organization* (added automatically if New Organization used after Internal link from Dashboard)
+  - visual test:
+  - transition test:
+- if needed use **Add Direct Role** on **Edit Party** screen
+  - visual test:
+  - transition test:
+#### Add Contact Information
+- on the **Marble ERP > Parties > Party** screen (*marble/Party/EditParty*)
+  - visual test:
+  - transition test:
+- under *Phone, Email, and Other* use **Add New** drop-down menu for the **Phone**, **Email**, **URL**, and **Other** dialogs
+  - visual test:
+  - transition test:
+- under *Postal Addresses* use **Add Address** dialog
+  - visual test:
+  - transition test:
+#### Configure Accounting Settings
+- **Marble ERP Dashboard** ==> **Accounting** (*marble/Accounting/dashboard*)
+  - visual test:
+  - transition test:
+- choose an Internal Organization, and click on the **Settings** link (on the right)
+  - visual test:
+  - transition test:
+- clone accounting settings
+  - visual test:
+  - transition test:
+  - select Base Currency, and if a different Local Currency is used (for tax reporting, etc) also choose that
+    - visual test:
+    - transition test:
+  - choose a Source Party to clone accounting settings from, generally the OOTB *DefaultSettings* party
+    - visual test:
+    - transition test:
+- still on the **Accounting Preferences** screen, adjust fields as needed
+  - visual test:
+  - transition test:
+  - recommend setting *Per-Transaction GL Summary* to Y (so GL summary records are immediately updated for each GL transaction, not recommended for high volume)
+    - visual test:
+    - transition test:
+  - recommend choosing a *Default Receivables Term* (default time period for receivable invoices)
+    - visual test:
+    - transition test:
+  - other fields optional, many such as tax and employer classifications have little impact with current app functionality, but are used in various services where entities and services exist but no screens yet in Marble ERP)
+    - visual test:
+    - transition test:
+
+## Sales - Service & Product
+
+### Create first Customer
+- Person vs Organization
+  - visual test:
+  - transition test:
+- Sales Account & Sales Contact (organization customer & contacts in the org)
+  - visual test:
+  - transition test:
+#### Create a Sales Account
+- **Marble ERP Dashboard** ==> **Customers** (*marble/Customer/FindCustomer*)
+  - visual test:
+  - transition test:
+- use **New Sales Account (Organization Customer)** dialog
+  - visual test:
+  - transition test:
+#### Add Contact Information
+- on the **Marble ERP > Customers > Customer** screen (*marble/Customer/EditCustomer*)
+  - visual test:
+  - transition test:
+- same as for the Internal Org on **Parties > Party** screen
+  - visual test:
+  - transition test:
+#### Add Payment Information (optional)
+- under *Payment Methods* use **Create Credit Card** or **Create Bank Account**
+  - visual test:
+  - transition test:
+- warning about credit cards: storing credit card information in the local database is risky (and tough PCI compliance), better to avoid unless a third party vault like Authorize.NET PIM is in use
+  - visual test:
+  - transition test:
+#### Add a Sales Contact
+- on the **Marble ERP > Customers > Customer** screen (*marble/Customer/EditCustomer*)
+  - visual test:
+  - transition test:
+- under *Sales Account Contacts* use the **Add Contact** dialog to add an existing Person party as a contact, or **New Contact** to create a new Person party and add them as a contact to this Sales Account
+  - visual test:
+  - transition test:
+- select a *Role* as applicable
+  - visual test:
+  - transition test:
+  - some roles have related functionality
+    - visual test:
+    - transition test:
+  - use the *Client Billing Rep* role to show the contact on receivable invoices
+    - visual test:
+    - transition test:
+
+### Create first Invoice - Service
+#### Create an Employee
+- employee in the general sense, may be an owner or contractor; employment classification is separate from the Employee role
+  - visual test:
+  - transition test:
+- **Marble ERP Dashboard** ==> **Employees** (*marble/Party/FindParty* with role *Employee*)
+  - visual test:
+  - transition test:
+- use the **New Employee** dialog
+  - visual test:
+  - transition test:
+  - ID is optional, generated numeric ID will be used if none specified
+    - visual test:
+    - transition test:
+  - select the created Internal Organization as *Employer/Branch*, this will add a Party Relationship of type Employee (see under *Internal Organization Relationships* section of the **Parties > Party** screen)
+    - visual test:
+    - transition test:
+  - if a *User Group* is selected the employee will have authorization and permissions for that User Group
+    - visual test:
+    - transition test:
+  - once created set a password for the employee's User Account with the **Reset Password** button (send email with reset password), or use the **Account Detail** button to go to the System App (if current user has authorization) where a password can be set directly
+    - visual test:
+    - transition test:
+- to use the Person party from the Initial Admin account, find it on Find Party and add the *Employee* role
+  - visual test:
+  - transition test:
+#### Create a Project
+- **Marble ERP Dashboard** ==> **Projects** (*marble/Project/FindProject*)
+  - visual test:
+  - transition test:
+- use the **New Project** dialog
+  - visual test:
+  - transition test:
+  - ID is optional, defaults to generated numeric ID, use something SHORT - it will be the prefix for all Task IDs in the project
+    - visual test:
+    - transition test:
+  - for *Client* select the Sales Account party created above
+    - visual test:
+    - transition test:
+  - for *Vendor* select the Company (Internal Organization) created above
+    - visual test:
+    - transition test:
+#### Create a Work Task
+- **Marble ERP Dashboard** ==> **Tasks** (*marble/Task/FindTask*)
+  - visual test:
+  - transition test:
+- use **New Task** dialog (right side of screen)
+  - visual test:
+  - transition test:
+  - select the Project created above
+    - visual test:
+    - transition test:
+  - for convenience, *Assign To* the current user (initial admin user)
+    - visual test:
+    - transition test:
+  - specify a *Task Name*
+    - visual test:
+    - transition test:
+  - other fields can be left as-is, consider different *Priority* (ascending: 1 high priority, 9 low priority), *Purpose*, initial *Status*, *Due Date*, etc
+    - visual test:
+    - transition test:
+  - use *Description* for details about the task, can also link to Wiki Pages, etc for more detail
+    - visual test:
+    - transition test:
+#### Setup Billing/Pay Rates
+- **Marble ERP Dashboard** ==> **HR** ==> **Labor Rates** (*marble/HumanRes/EditRateAmounts*)
+  - visual test:
+  - transition test:
+- use **Add Rate Amount** dialog
+  - visual test:
+  - transition test:
+  - leave *Type*: Standard, *Purpose*: Client Billing
+    - visual test:
+    - transition test:
+  - optionally select a *Project*, *Person*, etc
+    - visual test:
+    - transition test:
+  - specify a *Rate Amount*, different *Currency* if needed
+    - visual test:
+    - transition test:
+#### Record a Time Entry
+- can be done on Task > Time, Party > Time, or My Account > Time screens
+  - visual test:
+  - transition test:
+- in upper right open user dialog, click on any of the 4 my account icons to get to the My Account app OR under the **Applications** menu in the top left select the **My Account** app
+  - visual test:
+  - transition test:
+- click on the **Time** tab
+  - visual test:
+  - transition test:
+- can use **Clock In** and **Clock Out** dialogs for recording time on the fly
+  - visual test:
+  - transition test:
+- use the **Record Time** dialog
+  - visual test:
+  - transition test:
+  - for *Employer* use the Company (Internal Org) created above
+    - visual test:
+    - transition test:
+  - for *Task* select the task created above, and assigned to the current user (initial admin user)
+    - visual test:
+    - transition test:
+  - while different combinations are available, select a *From Date* and enter a number of *Hours* (can be decimal)
+    - visual test:
+    - transition test:
+  - add *Comments* to describe work done (will show on the receivable invoice if item per time entry is selected)
+    - visual test:
+    - transition test:
+- after adding a time entry click on the open dialog button to the left of the time entry to open the edit dialog, verify *Client Hour Calc* shows the desired rate (the rate added above)
+  - visual test:
+  - transition test:
+#### Create Project Client Invoice (receivable)
+- **Marble ERP Dashboard** ==> **Projects** (*marble/Project/FindProject*)
+  - visual test:
+  - transition test:
+- select the project created above
+  - visual test:
+  - transition test:
+- go to the **Time Entries** tab, verify desired time entries are shown
+  - visual test:
+  - transition test:
+- use the **Project Client Invoice** dialog
+  - visual test:
+  - transition test:
+  - optionally specify *Thru Date*, or defaults to now (includes all time entries up to that date/time)
+    - visual test:
+    - transition test:
+  - select a *Grouping* option, try *Item Per Time Entry* for detailed invoice
+    - visual test:
+    - transition test:
+#### Review Invoice
+- **Marble ERP Dashboard** ==> **Receivable Invoices** (*marble/Accounting/Invoice/FindInvoice* with type *Receivable*)
+  - visual test:
+  - transition test:
+- select the invoice just created
+  - visual test:
+  - transition test:
+- review parties, total, due date & terms, items, etc
+  - visual test:
+  - transition test:
+#### Finalize Invoice
+- still on the Marble ERP > Accounting > Invoices > Invoice screen
+  - visual test:
+  - transition test:
+- if all looks well, click on the **Finalize** button
+  - visual test:
+  - transition test:
+- note the *GL Transactions* created
+  - visual test:
+  - transition test:
+
+### Create first Invoice - Physical Good
+#### Create first Product
+##### New Product, Content
+- **Marble ERP Dashboard** ==> **Products** (*marble/Catalog/Product/FindProduct*)
+  - visual test:
+  - transition test:
+- use **New Product** dialog
+  - visual test:
+  - transition test:
+  - specify a *Product Name* and leave *Product Type* as *Asset (Good)*
+    - visual test:
+    - transition test:
+  - *Owned By Org* is for multi-organization systems to isolate Product and other data across organizations, leave as *N/A*
+    - visual test:
+    - transition test:
+- on the **Marble ERP > Catalog > Products > Product** screen
+  - visual test:
+  - transition test:
+  - update *ID* (Pseudo ID) if needed
+    - visual test:
+    - transition test:
+  - change *Asset Type* to *Inventory*
+    - visual test:
+    - transition test:
+  - change *Asset Class* to *Inventory - Finished Good*
+    - visual test:
+    - transition test:
+  - add *Description* and other fields as needed
+    - visual test:
+    - transition test:
+- go to **Content** tab and add text, image, and other content as needed (mainly for ecommerce, can be useful for internal use as well)
+  - visual test:
+  - transition test:
+##### Pricing
+- go to the **Prices** tab: **Marble ERP > Catalog > Products > Prices**
+  - visual test:
+  - transition test:
+- use the **New Price** dialog
+  - visual test:
+  - transition test:
+  - for *Type* use *Current Price* (default)
+    - visual test:
+    - transition test:
+  - for *Purpose* use *Purchase/Initial* (default)
+    - visual test:
+    - transition test:
+  - optionally select a *Vendor* and/or *Customer* for Vendor/Customer specific pricing, or leave empty for all Vendors and Customers
+    - visual test:
+    - transition test:
+  - specify other fields as needed to constrain applicability of price
+    - visual test:
+    - transition test:
+  - for quantity breaks use the *Min Quantity* field
+    - visual test:
+    - transition test:
+  - specify a *Price*, and a different *Currency* from the default if needed
+    - visual test:
+    - transition test:
+#### Create first Facility
+- **Marble ERP Dashboard** ==> **Facilities** (*marble/Facility/FindFacility*)
+  - visual test:
+  - transition test:
+- use the **New Facility** dialog
+  - visual test:
+  - transition test:
+  - optionally specify *ID*, defaults to generated numeric ID
+    - visual test:
+    - transition test:
+  - specify a *Facility Name*
+    - visual test:
+    - transition test:
+  - leave *Facility Type* as Warehouse for use with Inventory for sale
+    - visual test:
+    - transition test:
+  - optionally specify an *Owner*
+    - visual test:
+    - transition test:
+#### Create first Product Store
+- **Marble ERP Dashboard** ==> **Stores** (*marble/ProductStore/FindProductStore*)
+  - visual test:
+  - transition test:
+- use **New Store** dialog
+  - visual test:
+  - transition test:
+  - optionally specify *ID*, defaults to generated numeric ID
+    - visual test:
+    - transition test:
+  - specify a *Name*
+    - visual test:
+    - transition test:
+  - for *Organization Party* use the Company (Internal Org) created above
+    - visual test:
+    - transition test:
+- on **Marble ERP > Stores > Product Store** screen
+  - visual test:
+  - transition test:
+  - select the *Facility* created above
+    - visual test:
+    - transition test:
+  - for *Auto Reservation* (of inventory) select *On Order Placed*
+    - visual test:
+    - transition test:
+  - set *Default Currency* to USD (general default for demo, needs other config to consistently use different currency)
+    - visual test:
+    - transition test:
+  - set other fields as needed
+    - visual test:
+    - transition test:
+#### Receive or Record Inventory
+- **Marble ERP Dashboard** ==> **Inventory** (next to **Assets**, *marble/Asset/Asset/FindSummary* with type *Inventory*)
+  - visual test:
+  - transition test:
+- use **Receive Direct** dialog
+  - visual test:
+  - transition test:
+  - note that this is a shortcut and for better bookkeeping a purchase order, incoming shipment, and payable invoice should be used
+    - visual test:
+    - transition test:
+  - select the *Product* created above
+    - visual test:
+    - transition test:
+  - leave *Status* as *Available*
+    - visual test:
+    - transition test:
+  - specify a *Quantity*
+    - visual test:
+    - transition test:
+  - select the *Facility* created above
+    - visual test:
+    - transition test:
+  - for *Owner* select the Company (Internal Org) created above
+    - visual test:
+    - transition test:
+  - for accounting purposes, and because a purchase order is not being used, specify an *Acquire Cost*
+    - visual test:
+    - transition test:
+  - use other fields as needed
+    - visual test:
+    - transition test:
+#### Create first Sales Order
+- **Marble ERP Dashboard** ==> **Sales Orders & Quotes** (*marble/Order/FindOrder* with type *Sales*)
+  - visual test:
+  - transition test:
+- use **Create Sales Order** dialog
+  - visual test:
+  - transition test:
+  - select the *Store* created above
+    - visual test:
+    - transition test:
+  - note that *Vendor Org* and *Facility* are selected automatically based on the *Store*
+    - visual test:
+    - transition test:
+  - select the *Customer* created above (the Sales Account)
+    - visual test:
+    - transition test:
+  - use other fields as needed
+    - visual test:
+    - transition test:
+- on the **Marble ERP > Orders > Order Detail** screen
+  - visual test:
+  - transition test:
+  - use the **Add Product Item** dialog
+    - visual test:
+    - transition test:
+    - select the *Product* created above
+      - visual test:
+      - transition test:
+    - leave *Price* empty to use configured price (shown under *Calc Price*)
+      - visual test:
+      - transition test:
+    - leave other fields as-is unless there is a special circumstance
+      - visual test:
+      - transition test:
+  - use the **Place Warnings** dialog to place the order
+    - visual test:
+    - transition test:
+    - there are warnings for a few things important to consider for normal business circumstances, ignoring for now...
+      - visual test:
+      - transition test:
+    - use the **Place Order Anyway** button
+      - visual test:
+      - transition test:
+  - use the **Approve Warnings** dialog
+    - visual test:
+    - transition test:
+    - similar to place warnings, important considerations for normal use
+      - visual test:
+      - transition test:
+    - use the **Approve Order Anyway** button
+      - visual test:
+      - transition test:
+  - use the **Create Shipment** button, see it disappear replaced by a **Shipment {ID}** button
+    - visual test:
+    - transition test:
+  - use the **Shipment {ID}** button
+    - visual test:
+    - transition test:
+#### Ship the Order
+- on the **Marble ERP > Shipments > Shipment** screen (from the button on the **Order Detail** screen)
+  - visual test:
+  - transition test:
+- in the **Shipment Items** section use the **Issue & Pack** button to submit that inline form with defaults
+  - visual test:
+  - transition test:
+- verify the *Issuance* under **Shipment Items**
+  - visual test:
+  - transition test:
+- verify the **Packages**, use **Update Package** as needed to specify box type, weight, etc
+  - visual test:
+  - transition test:
+- use the **Set Packed** dialog
+  - visual test:
+  - transition test:
+  - at this point an Invoice for the Shipment is created
+    - visual test:
+    - transition test:
+- use the **Set Shipped** dialog to finalize the Shipment, send notice emails, etc
+  - visual test:
+  - transition test:
+  - note the warnings there for real world use
+    - visual test:
+    - transition test:
+  - if Shippo or other shipping integrations are in place there will be options here to generate and print labels, and that is done before using the **Set Shipped** dialog
+    - visual test:
+    - transition test:
+- note the **Pack Screen** button which goes to a screen optimized for in warehouse use, in the **Shipping** area of Marble ERP
+  - visual test:
+  - transition test:
+#### Review Invoice
+- from the **Shipments > Shipment** screen use the **Invoice {ID}** button
+  - visual test:
+  - transition test:
+- note that the Status defaults to *Finalized* when created from a Shipment with a Sales Order
+  - visual test:
+  - transition test:
+- note and verify parties, total, due date & terms, items, etc
+  - visual test:
+  - transition test:
+
+### Receive first Payment
+- payments can be viewed or created directly on **Marble ERP Dashboard** ==> **Customer Payments**
+  - visual test:
+  - transition test:
+- easier to create a Payment from an existing Invoice
+  - visual test:
+  - transition test:
+  - **Marble ERP Dashboard** ==> **Receivable Invoices** (*marble/Accounting/Invoice/FindInvoice* with type *Receivable*)
+    - visual test:
+    - transition test:
+  - select an unpaid (*Finalized*) Invoice
+    - visual test:
+    - transition test:
+  - use **New Payment for Invoice** dialog
+    - visual test:
+    - transition test:
+    - *Payment Status* defaults to *Promised*, if already received change to *Delivered*
+      - visual test:
+      - transition test:
+    - verify or modify *Amount*
+      - visual test:
+      - transition test:
+    - make sure to specify the *Effective Date* (will be used for GL posting, reconciliation, etc)
+      - visual test:
+      - transition test:
+    - select a *Payment Instrument* and/or *From Payment Method* (must already exist on Customer's account through **Customers > Customer** screen)
+      - visual test:
+      - transition test:
+    - add data for other fields as needed
+      - visual test:
+      - transition test:
+  - after submit verify payment applied to Invoice in the **Payment Applications** section, and *Unpaid* amount as $0.00
+    - visual test:
+    - transition test:
+  - note the new transaction under **GL Transactions**
+    - visual test:
+    - transition test:
+  - note the Invoice status changed to *Payment Received*
+    - visual test:
+    - transition test:
+
+## Accounting
+
+### Review Accounting Reports
+- **Marble ERP Dashboard** ==> **Reports** (right of **Accounting**, *marble/Accounting/Reports/ReportList*)
+  - visual test:
+  - transition test:
+- if data is missing because *Per-Transaction GL Summary* was not set to **Y**
+  - visual test:
+  - transition test:
+  - under the **Accounting** menu select **Time Period**
+    - visual test:
+    - transition test:
+  - select any current time period, easiest is current year
+    - visual test:
+    - transition test:
+  - go to the **Accounts** tab
+    - visual test:
+    - transition test:
+  - click on **Recalc All**
+    - visual test:
+    - transition test:
+  - go back to the Accounting Reports screen (Accounting menu ==> Reports)
+    - visual test:
+    - transition test:
+- try the **Income Statement** dialog
+  - visual test:
+  - transition test:
+  - make sure the *Organization* selected is the Company (internal org) created above
+    - visual test:
+    - transition test:
+  - for *Time Periods* select the current year (and/or other relevant time periods)
+    - visual test:
+    - transition test:
+  - for more report features select the *Detail* and *Percent of Revenue* options
+    - visual test:
+    - transition test:
+  - these use print-specific CSS so try printing from your browser (ctrl-p or Print from menu)
+    - visual test:
+    - transition test:
+- try the **Balance Sheet** dialog
+  - visual test:
+  - transition test:
+  - same notes as Income Statement
+    - visual test:
+    - transition test:

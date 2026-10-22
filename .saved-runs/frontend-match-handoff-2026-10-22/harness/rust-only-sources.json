@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "classification": "Rust only",
+  "reason": "Rust-specific demo and authentication seeds; exact source records only, not whole entity tables.",
+  "operational": [
+    {
+      "table": "search.moqui_logs",
+      "reason": "Rust PostgreSQL application search logs; Java has no PostgreSQL search log backend by default.",
+      "implementation": "mr-moqui/crates/moqui-core/src/search/logs.rs: APP_LOG; postgres/mod.rs: DEFAULT_SCHEMA and table()"
+    },
+    {
+      "table": "search.moqui_http_log",
+      "reason": "Rust PostgreSQL HTTP search logs; not business search documents.",
+      "implementation": "mr-moqui/crates/moqui-core/src/search/logs.rs: HTTP_LOG; postgres/mod.rs: DEFAULT_SCHEMA and table()"
+    },
+    {
+      "table": "search.document_index",
+      "reason": "Rust PostgreSQL search-index registry metadata, including metadata for business indexes; not the business documents themselves.",
+      "implementation": "mr-moqui/crates/moqui-core/src/search/postgres/mod.rs: PostgresBackend::open, ensure_mapping"
+    }
+  ],
+  "java_pk_guards": {
+    "moqui.basic.Enumeration": {"table": "public.enumeration", "columns": {"enumId": "enum_id"}},
+    "moqui.basic.EnumerationType": {"table": "public.enumeration_type", "columns": {"enumTypeId": "enum_type_id"}},
+    "moqui.service.job.ServiceJob": {"table": "public.service_job", "columns": {"jobName": "job_name"}},
+    "moqui.service.job.ServiceJobParameter": {"table": "public.service_job_parameter", "columns": {"jobName": "job_name", "parameterName": "parameter_name"}},
+    "moqui.service.message.SystemMessageType": {"table": "public.system_message_type", "columns": {"systemMessageTypeId": "system_message_type_id"}},
+    "moqui.service.message.SystemMessageRemote": {"table": "public.system_message_remote", "columns": {"systemMessageRemoteId": "system_message_remote_id"}}
+  },
+  "metadata": [
+    "mr-moqui/runtime/base-component/framework/entity/BasicEntities.xml",
+    "mr-moqui/runtime/base-component/framework/entity/ServiceEntities.xml"
+  ],
+  "sources": [
+    {
+      "path": "mr-moqui/runtime/base-component/framework/data/SftpDemoData.xml",
+      "mode": "data",
+      "expected_records": 5
+    },
+    {
+      "path": "mr-moqui/runtime/base-component/framework/entity/SecurityEntities.xml",
+      "mode": "enum-seeds",
+      "expected_records": 37,
+      "note": "Four types and 33 enum PKs. A PK occurring in more than one source group is a collision: retain it rather than hiding the winning value.",
+      "groups": ["AuthFlowType", "OauthClientType", "OidcClientType", "OidcJwsAlgorithm"]
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "limitation": "Existing artifacts, not rebuilt by this command. Rust uses worktree runtime macro overrides. No engine-source parity claim.",
+  "java": {
+    "checkout": "/home/user/.herdr/worktrees/java-regression-test/frontend-match/moqui-framework",
+    "revision": "23eb356556d3bc025f49bacfb8e2201851c236a0",
+    "status": "",
+    "artifact": "/home/user/.herdr/worktrees/java-regression-test/frontend-match/moqui-framework/moqui.war",
+    "sha256": "ce3c8094a97d63f0b8c1070fdb21fd0f5d6f8921c2f9dc1feff79b34b54f0d56"
+  },
+  "rust": {
+    "checkout": "/home/user/.herdr/worktrees/java-regression-test/frontend-match/.runs/pr-invoice-screen",
+    "revision": "03f546018b0104d95c7fa13e3c9744c8876751ce",
+    "status": " M crates/moqui-core/src/script/runtime/ec_extra.rs\n",
+    "artifact": "/home/user/.cache/mr-moqui-invoice-screen-target/debug/moqui",
+    "sha256": "c971ff5510d4c38fa1d0413e705040a2fd9e5389aa0929ca7dfcf98f2e17af09"
+  }
+}

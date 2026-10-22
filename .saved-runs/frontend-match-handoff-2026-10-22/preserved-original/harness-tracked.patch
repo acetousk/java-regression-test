@@ -1,0 +1,246 @@
+diff --git c/mr-moqui w/mr-moqui
+--- c/mr-moqui
++++ w/mr-moqui
+@@ -1 +1 @@
+-Subproject commit 38196ec6071b1a0c77e2de2be4c60a6c2e129fb2
++Subproject commit 38196ec6071b1a0c77e2de2be4c60a6c2e129fb2-dirty
+diff --git c/ui-test/README.md w/ui-test/README.md
+index 54b722f..8a2c586 100644
+--- c/ui-test/README.md
++++ w/ui-test/README.md
+@@ -43,6 +43,41 @@ Authentication uses the seeded `john.doe` / `moqui` login form. Override with
+ normal login, statistics and scheduler writes may still happen. Optionally set
+ `CHROMIUM_PATH=/usr/bin/chromium` to use system Chromium.
+ 
++## Compare one screen (no script edits)
++
++Fresh disposable databases and automatic available HTTP ports, using existing
++build artifacts and this checkout's Rust runtime HTML/QVT macros:
++
++```sh
++CHROMIUM_PATH=/usr/bin/chromium mise exec -- python ui-test/compare-screen.py \
++  --route 'marble/Shipment/FindShipment?shipmentTypeEnumId=ShpTpTransfer'
++```
++
++If the Rust executable is elsewhere, supply `--rust-binary /absolute/path/to/moqui`.
++Use `--random` instead of `--route` to select from unique mapped walkthrough
++routes; the selection pool is recorded. Defaults to `apps,qapps` (no `vapps`).
++Optional `--modes qapps`, `--dialog-id ShipmentList_hdialog --dialog-label 'Find Options'`,
++`--java-port`, `--rust-port`, `--java-checkout` and `--rust-checkout` select the
++probe without changing files. Use explicit routes with dialog options. To
++compare another state, invoke again; every invocation gets a fresh run directory.
++
++For already-running **isolated test servers**, with the same environment variables
++as above and a new absolute evidence directory:
++
++```sh
++CHROMIUM_PATH=/usr/bin/chromium node ui-test/compare-screen.js \
++  --route 'marble/Accounting/Payment/FindPayment' --modes qapps \
++  --run-dir /absolute/path/to/new-run
++```
++
++Evidence goes to `.runs/<run-id>/ui-test/screen-probe/` under the startup wrapper
++(or the supplied directory). Differences/blocked captures exit nonzero after
++collecting both engines/modes; startup cleanup still runs. This is a read-only
++screen comparison, not workflow completion. Artifacts are not rebuilt: provenance
++records executable hashes, checkout revisions and dirty-file inventories, without
++claiming current-engine-source parity. Keep private configs, cookies, HTML and
++logs private. The wrapper overrides configuration only in its private run config.
++
+ ## Evidence layout
+ 
+ ```text
+@@ -66,6 +101,7 @@ normal login, statistics and scheduler writes may still happen. Optionally set
+             comparison.json
+           vapps/                 # same artifacts when obtainable
+           qapps/
++    _steps/                      # deduplicated screenshots of each navigation step
+     _captures/                   # shared immutable captures and diagnostics
+     _sessions/                   # private authentication cookies; never commit
+     test-results/                # Playwright diagnostics
+@@ -77,6 +113,11 @@ login status and dialog-open result. Both engines are attempted independently.
+ Error-page screenshots are retained but labeled `diagnostic-only`; missing routes
+ and prerequisites are failures, not equivalent screens. Identical route/dialog
+ probes reuse the same capture **within one run**, explicitly marked `reused`.
++Each capture's `steps` list references screenshots for login, the authenticated
++landing page, dashboard, destination screen, and the open dialog when applicable.
++Step screenshots are deduplicated within the run by server, engine/mode (for
++application screens), route, dialog and actual URL; references mark `reused`.
++Reusing a step screenshot does not skip navigation needed to reach later steps.
+ Hard links avoid duplicating image/HTML storage for repeated activities. Reused
+ entry screens are not independent executions of a story.
+ 
+diff --git c/ui-test/package.json w/ui-test/package.json
+index 22735cd..2a0ed92 100644
+--- c/ui-test/package.json
++++ w/ui-test/package.json
+@@ -6,7 +6,7 @@
+     "test:visual": "playwright test",
+     "generate:processes": "node generate-process-specs.js",
+     "test:processes": "npm run generate:processes && playwright test --grep 'all documented activities'",
+-    "test:unit": "node --test process-plan.test.js"
++    "test:unit": "node --test process-plan.test.js capture-step.test.js compare-screen.test.js"
+   },
+   "devDependencies": {
+     "@playwright/test": "1.61.1",
+diff --git c/ui-test/process-runner.js w/ui-test/process-runner.js
+index 882dafb..fc38816 100644
+--- c/ui-test/process-runner.js
++++ w/ui-test/process-runner.js
+@@ -4,6 +4,9 @@ const path = require('node:path');
+ const crypto = require('node:crypto');
+ const { PNG } = require('pngjs');
+ const { modes, loadProcess } = require('./process-plan');
++const { captureStep } = require('./capture-step');
++const contextOptions = { viewport: { width: 1440, height: 1000 }, deviceScaleFactor: 1,
++  locale: 'en-US', timezoneId: 'UTC', colorScheme: 'light', reducedMotion: 'reduce' };
+ 
+ function writeJSON(file, value) {
+   fs.mkdirSync(path.dirname(file), { recursive: true });
+@@ -20,13 +23,17 @@ async function authenticate(browser, baseURL, directory) {
+   const key = crypto.createHash('sha256').update(baseURL).digest('hex').slice(0, 16);
+   const state = path.join(directory, '_sessions', `${key}.json`);
+   const evidence = path.join(directory, '_sessions', `${key}.login.json`);
+-  if (fs.existsSync(evidence)) return { state: fs.existsSync(state) ? state : undefined,
+-    ...JSON.parse(fs.readFileSync(evidence)) };
+-  const context = await browser.newContext();
+-  const result = { baseURL, authenticated: false };
++  if (fs.existsSync(evidence)) {
++    const login = JSON.parse(fs.readFileSync(evidence));
++    return { ...login, state: fs.existsSync(state) ? state : undefined,
++      steps: (login.steps || []).map(step => ({ ...step, reused: !step.error })) };
++  }
++  const context = await browser.newContext(contextOptions);
++  const result = { baseURL, authenticated: false, steps: [] };
+   try {
+     const page = await context.newPage();
+     await page.goto(`${baseURL}/Login`, { waitUntil: 'domcontentloaded', timeout: 15000 });
++    result.steps.push(await captureStep(page, directory, { baseURL, step: 'login', url: page.url() }));
+     const form = page.locator('#login_form');
+     await form.locator('[name="username"]').fill(process.env.VISUAL_USERNAME || 'john.doe', { timeout: 4000 });
+     await form.locator('[name="password"]').fill(process.env.VISUAL_PASSWORD || 'moqui', { timeout: 4000 });
+@@ -36,6 +43,7 @@ async function authenticate(browser, baseURL, directory) {
+     ]);
+     result.authenticated = !/\/Login(?:[/?#]|$)/.test(new URL(page.url()).pathname);
+     result.finalURL = page.url();
++    result.steps.push(await captureStep(page, directory, { baseURL, step: 'authenticated', url: page.url() }));
+     fs.mkdirSync(path.dirname(state), { recursive: true, mode: 0o700 });
+     await context.storageState({ path: state });
+     fs.chmodSync(state, 0o600);
+@@ -45,6 +53,9 @@ async function authenticate(browser, baseURL, directory) {
+   writeJSON(evidence, result);
+   return { state: fs.existsSync(state) ? state : undefined, ...result };
+ }
++function shellTemplateUnrendered(text) {
++  return /<#assign\s+(?:headerLogoList|headerTitleList|footerItemList|screenHistoryList)\b/.test(text);
++}
+ async function capture(browser, engine, mode, activity, runDir) {
+   const baseURL = process.env[`${engine.toUpperCase()}_BASE_URL`] ||
+     `http://127.0.0.1:${engine === 'java' ? 8080 : 8081}`;
+@@ -53,13 +64,18 @@ async function capture(browser, engine, mode, activity, runDir) {
+   })).digest('hex').slice(0, 24);
+   const directory = path.join(runDir, 'ui-test/_captures', key);
+   const reportFile = path.join(directory, 'capture.json');
+-  if (fs.existsSync(reportFile)) return { ...JSON.parse(fs.readFileSync(reportFile)), directory, reused: true };
++  if (fs.existsSync(reportFile)) {
++    const cached = JSON.parse(fs.readFileSync(reportFile));
++    return { ...cached, directory, reused: true,
++      steps: (cached.steps || []).map(step => ({ ...step, reused: !step.error })) };
++  }
+   fs.mkdirSync(directory, { recursive: true });
+   const login = await authenticate(browser, baseURL, path.join(runDir, 'ui-test'));
+-  const context = await browser.newContext({ storageState: login.state });
++  const context = await browser.newContext({ ...contextOptions, storageState: login.state });
+   const result = { engine, mode, route: activity.route, dialog: activity.dialog,
+     authenticated: login.authenticated, loginError: login.error, errors: [],
+-    failedRequests: [], httpErrors: [], consoleErrors: [], status: 'blocked', reused: false };
++    failedRequests: [], httpErrors: [], consoleErrors: [], status: 'blocked', reused: false,
++    steps: [...(login.steps || [])] };
+   try {
+     const page = await context.newPage();
+     page.on('pageerror', error => result.errors.push(error.message));
+@@ -80,7 +96,11 @@ async function capture(browser, engine, mode, activity, runDir) {
+       await page.goto(`${baseURL}/${mode}/marble/dashboard`, {
+         waitUntil: 'domcontentloaded', timeout: 12000,
+       });
+-      await page.waitForLoadState('networkidle', { timeout: 2500 }).catch(() => {});
++      await page.waitForLoadState('networkidle', { timeout: 15000 });
++      if (mode === 'qapps') await require('./wait-qapps').waitQapps(page, 'marble/dashboard');
++      result.steps.push(await captureStep(page, path.join(runDir, 'ui-test'), {
++        baseURL, engine, mode, step: 'screen', route: 'marble/dashboard', url: page.url(),
++      }));
+       const link = page.locator('a[href]').filter({ visible: true });
+       const hrefs = await link.evaluateAll(nodes => nodes.map(node => node.href));
+       const target = new URL(destination);
+@@ -97,18 +117,41 @@ async function capture(browser, engine, mode, activity, runDir) {
+         const response = await page.goto(destination, { waitUntil: 'domcontentloaded', timeout: 12000 });
+         result.httpStatus = response?.status();
+       }
+-      await page.waitForLoadState('networkidle', { timeout: 2500 }).catch(() => {});
++      await page.waitForLoadState('networkidle', { timeout: 15000 });
++      if (mode === 'qapps') await require('./wait-qapps').waitQapps(page, activity.route);
+       result.finalURL = page.url();
++      result.steps.push(await captureStep(page, path.join(runDir, 'ui-test'), {
++        baseURL, engine, mode, step: 'screen', route: activity.route, url: page.url(),
++      }));
+       if (page.url().includes('/Login') || !login.authenticated) {
+         result.errors.push('Authenticated activity not reached; login prerequisite failed');
+       } else if (activity.dialog && !(result.httpStatus >= 400)) {
+         const button = page.getByRole('button', { name: activity.dialog.label, exact: true });
+         const anchor = page.getByRole('link', { name: activity.dialog.label, exact: true });
+-        const trigger = button.or(anchor).filter({ visible: true }).first();
++        result.dialogNamedTrigger = await button.or(anchor).filter({ visible: true }).count() > 0;
++        const trigger = page.locator(`[id="${activity.dialog.id}-button"]`)
++          .or(button).or(anchor).filter({ visible: true }).first();
+         await trigger.click({ timeout: 3500 });
+-        const dialog = page.locator(`[id="${activity.dialog.id}"]`).or(page.getByRole('dialog')).filter({ visible: true }).first();
++        // Component IDs may belong to the always-visible trigger wrapper, not the dialog.
++        const dialog = page.getByRole('dialog').filter({ visible: true }).first();
+         await dialog.waitFor({ state: 'visible', timeout: 3500 });
++        await dialog.evaluate(async node => {
++          // Vue starts the enter transition on the next frame; visibility alone can precede opacity.
++          await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
++          await Promise.all(node.getAnimations({ subtree: true }).map(animation => animation.finished.catch(() => {})));
++        });
+         result.dialogOpened = true;
++        result.steps.push(await captureStep(page, path.join(runDir, 'ui-test'), {
++          baseURL, engine, mode, step: 'dialog', route: activity.route,
++          dialog: activity.dialog.id, url: page.url(),
++        }));
++      }
++      const bodyText = await page.locator('body').innerText();
++      if (bodyText.includes('Error rendering section [')) {
++        result.errors.push('Server-side section rendering failed (see page text)');
++      }
++      if (shellTemplateUnrendered(bodyText)) {
++        result.errors.push('Unrendered shell template directives (see page text)');
+       }
+       if (result.httpStatus >= 400) result.errors.push(`HTTP ${result.httpStatus}`);
+       if (result.httpErrors.length) result.errors.push('One or more HTTP resources failed (see httpErrors)');
+@@ -119,10 +162,18 @@ async function capture(browser, engine, mode, activity, runDir) {
+       await document.fonts.ready;
+       await Promise.all(Array.from(document.images, image => image.decode().catch(() => {})));
+     }).catch(error => result.errors.push(error.message));
+-    await page.screenshot({ path: path.join(directory, 'screen.visual.png'), fullPage: true,
+-      animations: 'disabled', caret: 'hide', timeout: 8000 }).catch(error => result.errors.push(error.message));
++    const finalStep = result.steps.at(-1);
++    if (!result.errors.length && finalStep && !finalStep.error) {
++      copyEvidence(finalStep.screenshot, path.join(directory, 'screen.visual.png'));
++    } else {
++      await page.screenshot({ path: path.join(directory, 'screen.visual.png'), fullPage: true,
++        animations: 'disabled', caret: 'hide', timeout: 8000 }).catch(error => result.errors.push(error.message));
++    }
+     fs.writeFileSync(path.join(directory, 'page.html'), await page.content().catch(() => ''));
+     fs.writeFileSync(path.join(directory, 'page.txt'), await page.locator('body').innerText().catch(() => ''));
++    for (const step of result.steps) {
++      if (step.error) result.errors.push(`Screenshot step ${step.step}: ${step.error}`);
++    }
+     if (result.errors.length) result.status = 'blocked';
+   } finally {
+     await context.close();
+@@ -198,4 +249,4 @@ function registerProcess(relative) {
+     });
+   });
+ }
+-module.exports = { registerProcess };
++module.exports = { registerProcess, capture, compare, shellTemplateUnrendered };

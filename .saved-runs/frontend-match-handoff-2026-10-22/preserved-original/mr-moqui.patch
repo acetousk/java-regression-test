@@ -1,0 +1,358 @@
+diff --git c/crates/moqui-core/src/entity/find.rs w/crates/moqui-core/src/entity/find.rs
+index 22839c6..d87e8b1 100644
+--- c/crates/moqui-core/src/entity/find.rs
++++ w/crates/moqui-core/src/entity/find.rs
+@@ -269,6 +269,10 @@ impl EntityFind {
+ 
+     fn list_internal(self, operation: &str) -> Result<EntityList, Error> {
+         if self.require_search_parameters && !self.has_search_parameters {
++            crate::context::ExecutionContext::with_current(|ec| {
++                ec.shared_map()
++                    .insert("_entityListNoSearchParms".to_string(), Value::Bool(true));
++            });
+             return Ok(EntityList::new(Vec::new()));
+         }
+         // The view frame is what authorizes the read, and the filters come from its record.
+diff --git c/runtime/base-component/framework/template/screen/ScreenHtml.js w/runtime/base-component/framework/template/screen/ScreenHtml.js
+index 724a773..bdf7f43 100644
+--- c/runtime/base-component/framework/template/screen/ScreenHtml.js
++++ w/runtime/base-component/framework/template/screen/ScreenHtml.js
+@@ -80,11 +80,11 @@
+         if (sub.name === "header-field" && sub.parent) {
+             const header = child(sub.parent, "header-field");
+             const dflt = child(sub.parent, "default-field");
+-            if (header && attr(header, "title")) holder = header;
+-            else if (dflt && attr(dflt, "title")) holder = dflt;
++            if (header?.attrs?.title !== undefined) holder = header;
++            else if (dflt?.attrs?.title !== undefined) holder = dflt;
+         }
+         const title = attr(holder, "title");
+-        if (title) return `ec.l10n.localize(${expandCode(title)})`;
++        if (holder.attrs?.title !== undefined) return `ec.l10n.localize(${expandCode(title)})`;
+         return `ec.l10n.localize(${lit(titleText(holder))})`;
+     };
+ 
+@@ -634,7 +634,7 @@
+         const dialogOpen = (n, id, text, extra) => {
+             const iconClass = at(n, "icon") || "fa fa-share";
+             return "<button" + A({
+-                type: "button", id: id + "-button", "data-dialog": id, "data-btn": xn(at(n, "type")) || "primary", class: xn(at(n, "button-style")) || null, title: text
++                type: "button", id: id + "-button", "data-dialog": id, "data-btn": xn(at(n, "type")) || "primary", class: xn(at(n, "button-style")) || null, title: text, "aria-label": text
+             }) + ">" + icon(iconClass) + e(text) + "</button>";
+         };
+         const dialogShell = (n, id, text, bodyAttrs, body, extra) =>
+@@ -1143,8 +1143,8 @@
+                     if (cfg.headerDialog) {
+                         // The active find parameters are shown as text with a button that clears them.
+                         let summary = "";
+-                        visible.flat().forEach((f) => {
+-                            if (!f.summary) return;
++                        cfg.summaryFields.forEach((f) => {
++                            if (!f.summary || (f.hide && f.hide())) return;
+                             const text = f.summary();
+                             if (text) summary += '<span class="filter"><strong>' + e(f.title()) + ":</strong> " + e(text) + "</span> ";
+                         });
+@@ -1265,7 +1265,19 @@
+             }
+             if (type === "date-period") {
+                 const period = String(ec.context.get(name + "_period") || "").toLowerCase();
+-                if (period) return period + " " + (ec.context.get(name + "_poffset") || "0") + " " + (ec.context.get(name + "_pdate") || "");
++                if (period) {
++                    const offset = String(ec.context.get(name + "_poffset") ?? "0");
++                    const date = ec.context.get(name + "_pdate") || "";
++                    const range = ec.user.getPeriodRange(period, offset, date);
++                    const periods = { day: L("Day"), "7d": "7 " + L("Days"), "30d": "30 " + L("Days"),
++                        week: L("Week"), weeks: L("Weeks"), month: L("Month"), months: L("Months"),
++                        quarter: L("Quarter"), year: L("Year"), "7r": "+/-7d", "30r": "+/-30d" };
++                    const offsets = { "0": L("This"), "-1": L("Last"), "1": L("Next") };
++                    return (offsets[offset] || offset) + " " + (periods[period] || "") +
++                        (date ? " " + L("from##period") + " " + date : "") + " (" +
++                        formatted(range[0], "yyyy-MM-dd") + " " + L("to##period") + " " +
++                        formatted(range[1] - 1, "yyyy-MM-dd") + ")";
++                }
+             }
+             if (type === "date-find" || type === "date-period" || type === "range-find") {
+                 const format = type === "date-find" ? dateDefault(n) : "yyyy-MM-dd";
+@@ -1576,6 +1588,9 @@
+                 ],
+                 "allFields": [
+                     ${fields.filter((field) => !S.listFieldHiddenWidget(field)).map((field) => `{"name": ${lit(attr(field, "name"))}, "title": () => ${titleCode(S.headerSub(field))}}`).join(",\n")}
++                ],
++                "summaryFields": [
++                    ${fields.map(columnField).join(",\n")}
+                 ]
+             }
+         `.replace(/\n$/, "");
+diff --git c/runtime/base-component/framework/template/screen/ScreenQvt.js w/runtime/base-component/framework/template/screen/ScreenQvt.js
+index 0190b28..21b3b58 100644
+--- c/runtime/base-component/framework/template/screen/ScreenQvt.js
++++ w/runtime/base-component/framework/template/screen/ScreenQvt.js
+@@ -32,8 +32,7 @@
+ //  - The background-message of a form is text. The Java client evaluated it as a JavaScript string.
+ //  - An editor-type html or md text-area is an m-text-area (QEditor, or a textarea with a Marked preview).
+ //  - lookup is a text line. The Java macros had it commented out.
+-//  - The navigation bar sits above the table of a form-list and not in a table row. The saved finds are listed in the find dialog; the menu
+-//    data has them and the screen documents.
++//  - The navigation bar sits above the table of a form-list and not in a table row.
+ //  - The mask of a text-line is converted from the Inputmask patterns (9, a, *) to Quasar mask tokens.
+ //  - In fields-initial a link does not replace the _display text of a display or display-entity before it in the same field.
+ (function (T, S) {
+@@ -85,11 +84,11 @@
+         if (sub.name === "header-field" && sub.parent) {
+             const header = child(sub.parent, "header-field");
+             const dflt = child(sub.parent, "default-field");
+-            if (header && attr(header, "title")) holder = header;
+-            else if (dflt && attr(dflt, "title")) holder = dflt;
++            if (header?.attrs?.title !== undefined) holder = header;
++            else if (dflt?.attrs?.title !== undefined) holder = dflt;
+         }
+         const title = attr(holder, "title");
+-        if (title) return `ec.l10n.localize(${expandCode(title)})`;
++        if (holder.attrs?.title !== undefined) return `ec.l10n.localize(${expandCode(title)})`;
+         return `ec.l10n.localize(${lit(titleText(holder))})`;
+     };
+ 
+@@ -193,10 +192,10 @@
+             if (sub.name === "header-field" && sub.parent) {
+                 const header = first(sub.parent, "header-field");
+                 const dflt = first(sub.parent, "default-field");
+-                if (header && at(header, "title")) holder = header;
+-                else if (dflt && at(dflt, "title")) holder = dflt;
++                if (header?.attrs?.title !== undefined) holder = header;
++                else if (dflt?.attrs?.title !== undefined) holder = dflt;
+             }
+-            if (at(holder, "title")) return L(x(at(holder, "title")));
++            if (holder.attrs?.title !== undefined) return L(x(at(holder, "title")));
+             const name = holder.parent ? at(holder.parent, "name") : "";
+             return L(name.split(/(?=[A-Z])/).map((word) => (word.charAt(0).toUpperCase() + word.slice(1)).replace("Id", "ID")).join(" "));
+         };
+@@ -1058,7 +1057,7 @@
+             if (!(cfg.headerDialog || cfg.savedFinds || cfg.selectColumns || paginated) || ctx("hideNav") === "true") return;
+             let out = '<div class="form-list-nav-row row items-center"><div class="col-xs-12 col-sm-6"><div class="row items-center">';
+             const flush = () => { if (out) { w(out); out = ""; } };
+-            if (cfg.headerDialog || cfg.savedFinds) {
++            if (cfg.headerDialog) {
+                 out += '<m-container-dialog id="' + e(formId) + '_hdialog" title="' + e(L("Find Options")) + '"><template v-slot:button><q-btn dense outline no-caps icon="search" label="' + e(L("Find Options")) + '"></q-btn></template>';
+                 flush();
+                 findDialogBody(n, cols, cfg);
+@@ -1070,6 +1069,12 @@
+                 columnsDialogBody(n, cols, cfg);
+                 w("</m-container-dialog>");
+             }
++            if (cfg.savedFinds) {
++                out += '<m-container-dialog id="' + e(formId) + '_sfdialog" title="' + e(L("Saved Finds")) + '"><template v-slot:button><q-btn dense outline no-caps icon="find_in_page" label="' + e(L("Saved Finds")) + '"></q-btn></template>';
++                flush();
++                savedFindsDialogBody(n, cfg);
++                w("</m-container-dialog>");
++            }
+             if (at(n, "show-csv-button") === "true") {
+                 const csv = sri.getScreenUrlInstance().cloneUrlInstance().addParameter("renderMode", "csv").addParameter("pageNoLimit", "true").addParameter("lastStandalone", "true").addParameter("saveFilename", at(n, "name") + ".csv");
+                 out += '<q-btn dense outline type="a" href="' + e(csv.getUrlWithParams()) + '" label="' + e(L("CSV")) + '"></q-btn>';
+@@ -1088,7 +1093,7 @@
+             }
+             const count = ctx(listName + "Count");
+             if ((count === "" ? 0 : count) === 0) {
+-                out += '<strong class="text-warning on-right q-my-auto">' + t(L(ec.context.get("_entityListNoSearchParms") ? "Find Options required to view results" : "No results found")) + "</strong>";
++                out += '<strong class="text-warning on-right q-my-auto">' + t(L(ec.context.sharedMap._entityListNoSearchParms ? "Find Options required to view results" : "No results found")) + "</strong>";
+             }
+             out += "</div></div>";
+             if (paginated) {
+@@ -1099,12 +1104,23 @@
+                 out += '<m-form-paginate :paginate="' + e(paginateProps(listName)) + '"></m-form-paginate></div></div>';
+             }
+             w(out + "</div>\n");
++            if (cfg.headerDialog) {
++                const summaries = (cfg.allFields || []).map((field) => {
++                    const value = field.summary ? field.summary() : "";
++                    return value ? '<span style="white-space:nowrap;"><strong>' + t(field.title()) + ':</strong> <span class="text-positive">' + t(value) + '</span></span>' : "";
++                }).filter(Boolean);
++                w('<div class="form-list-filter-summary text-center q-pa-sm" style="font-weight:normal;">' + summaries.join(" "));
++                if (summaries.length) {
++                    w("<m-form-link" + A({ name: cfg.headerFormId + "_clr", id: cfg.headerFormId + "_clr", action: sri.getCurrentScreenUrl().path, ":fields-initial": initial(hiddenParams(n)) }) +
++                        '><q-btn dense flat type="submit" icon="clear" color="negative"><q-tooltip>' + t(L("Reset to Default")) + '</q-tooltip></q-btn></m-form-link>');
++                }
++                w("</div>");
++            }
+         };
+ 
+-        // The dialog of find options: the header fields as an m-form-link, an order-by list, and the summary of the saved find form.
+-        const findDialogBody = (n, cols, cfg) => {
++        // Saved finds have their own dialog, as in Java, separate from the search parameters.
++        const savedFindsDialogBody = (n, cfg) => {
+             const formId = cfg.formId;
+-            const headerId = cfg.headerFormId;
+             if (cfg.savedFinds) {
+                 const current = sri.getScreenUrlInstance().cloneUrlInstance().removeParameter("pageIndex").removeParameter("moquiFormName").removeParameter("moquiSessionToken").removeParameter("lastStandalone").removeParameter("formListFindId");
+                 const params = current.getParameterMap();
+@@ -1140,6 +1156,10 @@
+                     }) + '></m-text-line></div><div class="on-right q-my-auto big-row-item"><q-btn dense outline no-caps type="submit" label="' + e(L("Save New Find")) + '"></q-btn></div></div></m-form>');
+                 } else w("<div style=\"margin:12px 0;\"><strong>" + t(L("No find parameters (or default), choose some in Find Options to save a new find or update existing")) + "</strong></div>");
+             }
++        };
++
++        const findDialogBody = (n, cols, cfg) => {
++            const headerId = cfg.headerFormId;
+             if (!cfg.headerDialog) return;
+             const orderable = cols.flat().filter((f) => f.orderBy);
+             const orderOptions = [];
+@@ -1499,8 +1519,20 @@
+                 return text + (param(name + "_not") === "Y" ? " (" + L("Not") + ")" : "");
+             }
+             if (type === "date-period") {
+-                const period = String(ctx(name + "_period")).toLowerCase();
+-                if (period) return period + " " + (ctx(name + "_poffset") || "0") + " " + ctx(name + "_pdate");
++                const period = String(ctx(name + "_period") || "").toLowerCase();
++                if (period) {
++                    const offset = String(ec.context.get(name + "_poffset") ?? "0");
++                    const date = ctx(name + "_pdate") || "";
++                    const range = ec.user.getPeriodRange(period, offset, date);
++                    const periods = { day: L("Day"), "7d": "7 " + L("Days"), "30d": "30 " + L("Days"),
++                        week: L("Week"), weeks: L("Weeks"), month: L("Month"), months: L("Months"),
++                        quarter: L("Quarter"), year: L("Year"), "7r": "+/-7d", "30r": "+/-30d" };
++                    const offsets = { "0": L("This"), "-1": L("Last"), "1": L("Next") };
++                    return (offsets[offset] || offset) + " " + (periods[period] || "") +
++                        (date ? " " + L("from##period") + " " + date : "") + " (" +
++                        formatted(range[0], "yyyy-MM-dd") + " " + L("to##period") + " " +
++                        formatted(range[1] - 1, "yyyy-MM-dd") + ")";
++                }
+             }
+             if (type === "date-find" || type === "date-period" || type === "range-find") {
+                 const format = type === "date-find" ? dateDefault(n) : "yyyy-MM-dd";
+@@ -1754,6 +1786,13 @@
+         return `() => {\n${body}}`;
+     };
+ 
++    const summaryCode = (field) => {
++        const header = child(field, "header-field");
++        if (!header || !header.children.length || child(header, "hidden") || child(header, "ignored")) return "null";
++        const hide = attr(field, "hide");
++        return `() => { ${hide ? `if (${hide}) return "";` : ""} let $t = ""; sri.pushContext(); try { ${setCode(header)} ${header.children.filter((w) => w.name !== "set" && w.name !== "link").map((w) => `$t += $v.valueText(${wlit(w, true)});`).join(" ")} } finally { sri.popContext(); } return $t.trim(); }`;
++    };
++
+     const columnField = (field) => {
+         const header = S.headerSub(field);
+         const headerField = child(field, "header-field");
+@@ -1763,8 +1802,7 @@
+         const first = sideCode(field, "first-row-field");
+         const second = sideCode(field, "second-row-field");
+         const last = sideCode(field, "last-row-field");
+-        const summary = headerField && headerField.children.length && !child(headerField, "hidden") && !child(headerField, "ignored") ?
+-            `() => { let $t = ""; sri.pushContext(); try { ${setCode(headerField)} ${headerField.children.filter((w) => w.name !== "set" && w.name !== "link").map((w) => `$t += $v.valueText(${wlit(w, true)});`).join(" ")} } finally { sri.popContext(); } return $t.trim(); }` : "null";
++        const summary = summaryCode(field);
+         return js`
+             {
+                 "name": ${lit(attr(field, "name"))},
+@@ -1817,7 +1855,7 @@
+                     "last": ${valueDescs(fields, "last")}
+                 },
+                 "allFields": [
+-                    ${fields.filter((field) => !S.listFieldHiddenWidget(field)).map((field) => `{"name": ${lit(attr(field, "name"))}, "title": () => ${titleCode(S.headerSub(field))}}`).join(",\n")}
++                    ${fields.filter((field) => !S.listFieldHiddenWidget(field)).map((field) => `{"name": ${lit(attr(field, "name"))}, "title": () => ${titleCode(S.headerSub(field))}, "summary": ${summaryCode(field)}}`).join(",\n")}
+                 ]
+             }
+         `.replace(/\n$/, "");
+diff --git c/runtime/base-component/framework/template/screen/ScreenQvtStatic.js w/runtime/base-component/framework/template/screen/ScreenQvtStatic.js
+index 31c0866..3ec957f 100644
+--- c/runtime/base-component/framework/template/screen/ScreenQvtStatic.js
++++ w/runtime/base-component/framework/template/screen/ScreenQvtStatic.js
+@@ -1320,17 +1320,16 @@
+             pop();
+         };
+ 
+-        // The tools above a form-list, as the server-merged nav row has them: the find dialog with the saved finds and the header fields,
++        // The tools above a form-list, as the server-merged nav row has them: separate find options and saved finds dialogs,
+         // and the csv, xlsx, text and print exports. The component gives nv: the finds, the current parameters, and the URLs.
+         const loc = (text) => "ec.l10n.localize(" + sq(text) + ")";
+         const navSlot = (n, cols, headerFields, flags) => {
+             if (!(flags.headerDialog || flags.savedFinds || flags.csv || flags.xlsx || flags.text || flags.pdf || flags.columns)) return;
+             const name = at(n, "name");
+             w('<template v-slot:nav="nv">');
+-            if (flags.headerDialog || flags.savedFinds) {
++            if (flags.headerDialog) {
+                 w("<m-container-dialog" + A({ id: name + "_hdialog", ":title": loc("Find Options") }) + '><template v-slot:button><q-btn dense outline no-caps icon="search"' + A({ ":label": loc("Find Options") }) + "></q-btn></template>");
+-                if (flags.savedFinds) savedFindsBody(name);
+-                if (flags.headerDialog) findDialogForm(n, cols, headerFields);
++                findDialogForm(n, cols, headerFields);
+                 w("</m-container-dialog>");
+             }
+             if (flags.columns) {
+@@ -1338,6 +1337,11 @@
+                 w("<m-form-column-config" + A({ id: name + "_SelColsForm", ":action": "nv.columnsAction", ":find-parameters": "nv.params", ":columns-initial": "nv.columnsTree", "form-location": name }) + "></m-form-column-config>");
+                 w("</m-container-dialog>");
+             }
++            if (flags.savedFinds) {
++                w("<m-container-dialog" + A({ id: name + "_sfdialog", ":title": loc("Saved Finds") }) + '><template v-slot:button><q-btn dense outline no-caps icon="find_in_page"' + A({ ":label": loc("Saved Finds") }) + "></q-btn></template>");
++                savedFindsBody(name);
++                w("</m-container-dialog>");
++            }
+             if (flags.csv) w('<q-btn dense outline type="a"' + A({ ":href": "nv.exportUrl('csv')", ":label": loc("CSV") }) + "></q-btn>");
+             if (flags.xlsx) w('<q-btn dense outline type="a"' + A({ ":href": "nv.exportUrl('xlsx')", ":label": loc("XLS") }) + "></q-btn>");
+             if (flags.text) textExportDialog(name);
+diff --git c/runtime/base-component/webroot/screen/includes/navbar.html.fancy w/runtime/base-component/webroot/screen/includes/navbar.html.fancy
+index be47a73..4b3efc3 100644
+--- c/runtime/base-component/webroot/screen/includes/navbar.html.fancy
++++ w/runtime/base-component/webroot/screen/includes/navbar.html.fancy
+@@ -13,7 +13,7 @@
+ <a class="current" href="${sri.getScreenUrlInstance().getUrlWithParams()}">${html_title || ec.resource.expand(sri.getScreenUrlInfo().targetScreen.getDefaultMenuName() || "Page", "")}</a>
+ <span class="spacer"></span>
+ <#list sri.getThemeValues("STRT_HEADER_NAVBAR_ITEM") as navbarItem>
+-${raw(ec.resource.expand(navbarItem, ""))}
++${raw(sri.renderInlineText(navbarItem))}
+ </#list>
+ <details id="history-menu" class="menu"><summary title="${ec.l10n.localize("History")}"><i class="fa fa-list"></i></summary><ul>
+ <#list screenHistoryList.slice(0, 25) as screenHistory>
+diff --git c/runtime/base-component/webroot/screen/webroot/css/WebrootVue.qvt.css w/runtime/base-component/webroot/screen/webroot/css/WebrootVue.qvt.css
+index a884193..37a0ae4 100644
+--- c/runtime/base-component/webroot/screen/webroot/css/WebrootVue.qvt.css
++++ w/runtime/base-component/webroot/screen/webroot/css/WebrootVue.qvt.css
+@@ -1,10 +1,10 @@
+ /* This software is in the public domain under CC0 1.0 Universal plus a Grant of Patent License. */
+ 
+-a { color:var(--q-color-primary); text-decoration:none; }
++a { color:var(--q-primary); text-decoration:none; }
+ .q-menu a, .q-toolbar a { color:inherit; }
+ 
+-.text-success { color:var(--q-color-positive); }
+-.text-danger { color:var(--q-color-negative); }
++.text-success { color:var(--q-positive); }
++.text-danger { color:var(--q-negative); }
+ .text-mono { font-family: monospace,monospace; }
+ strong, .text-strong { font-weight:bold; }
+ 
+@@ -88,7 +88,7 @@ form.q-form { width:100%; }
+ .q-field--disabled .q-field__control > div { opacity:1 !important; }
+ /* END q-field label move */
+ 
+-.q-field--focused .q-field__input { border-bottom: var(--q-color-primary) solid 1px; margin-left:8px; }
++.q-field--focused .q-field__input { border-bottom: var(--q-primary) solid 1px; margin-left:8px; }
+ 
+ .q-field--dense .q-field__marginal { height:auto; min-height:40px; }
+ .q-field__prepend { max-width:75%; }
+@@ -232,7 +232,7 @@ div.container-panel-header, div.container-panel-footer { width: 100%; }
+ .form-title { white-space: nowrap; font-weight: bold; }
+ .form-order-by { margin: 0; white-space: nowrap; height: 18px; display: inline-block; vertical-align: top; }
+ .form-order-by a { display: block; height: 10px; font-size: 14px; margin: -2px 0; }
+-.form-order-by a.active { color: var(--q-color-primary); }
++.form-order-by a.active { color: var(--q-primary); }
+ .form-single-field-group { margin: 4px 0; }
+ .panel { margin-bottom: 12px; }
+ .panel .panel-heading>h5 { margin: 4px 8px; font-size: 16px; }
+diff --git c/runtime/base-component/webroot/screen/webroot/css/moqui-html.css w/runtime/base-component/webroot/screen/webroot/css/moqui-html.css
+index 905d9a4..4a1188c 100644
+--- c/runtime/base-component/webroot/screen/webroot/css/moqui-html.css
++++ w/runtime/base-component/webroot/screen/webroot/css/moqui-html.css
+@@ -196,6 +196,7 @@ label.inline { white-space: nowrap; margin: 0 6px; font-weight: normal; }
+ .field-row > div > .field { grid-template-columns: minmax(6em, 33%) minmax(0, 1fr); }
+ .field.big-row { margin-bottom: 8px; }
+ .big-row > .widget { display: flex; flex-wrap: wrap; gap: 0 20px; }
++.field.big-row > .widget:first-child { grid-column: 1 / -1; }
+ .big-item .field { grid-template-columns: 1fr; }
+ .big-item .field > label { text-align: left; padding-top: 0; }
+ .field-group > h5 { border-bottom: 1px solid var(--line); padding-bottom: 2px; }
+diff --git c/runtime/component/MrSimpleScreens w/runtime/component/MrSimpleScreens
+index 5f5d69e..2a36dc1 160000
+--- c/runtime/component/MrSimpleScreens
++++ w/runtime/component/MrSimpleScreens
+@@ -1 +1 @@
+-Subproject commit 5f5d69e4ee077066c15129e3eff966ba0d36dc0e
++Subproject commit 2a36dc166ea3fe848770617c19f10819ef223301

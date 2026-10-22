@@ -1,0 +1,14 @@
+{
+  "java": {
+    "forced_kill": false,
+    "errors": [],
+    "returncode": 143,
+    "missing_shutdown_markers": []
+  },
+  "rust": {
+    "forced_kill": false,
+    "errors": [],
+    "returncode": 0,
+    "missing_shutdown_markers": []
+  }
+}

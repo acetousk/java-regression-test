@@ -1,0 +1,280 @@
+[
+  {
+    "mode": "apps",
+    "route": "marble/Accounting/Invoice/EditInvoice?invoiceId=UI_PARITY_INVOICE",
+    "captures": [
+      {
+        "engine": "java",
+        "mode": "apps",
+        "route": "marble/Accounting/Invoice/EditInvoice?invoiceId=UI_PARITY_INVOICE",
+        "authenticated": true,
+        "errors": [],
+        "failedRequests": [],
+        "httpErrors": [],
+        "consoleErrors": [],
+        "status": "captured",
+        "reused": false,
+        "steps": [
+          {
+            "baseURL": "http://127.0.0.1:59871",
+            "step": "login",
+            "url": "http://127.0.0.1:59871/Login",
+            "finalURL": "http://127.0.0.1:59871/Login",
+            "screenshot": "/home/user/.herdr/worktrees/java-regression-test/frontend-match/.runs/2026-10-20_00-07-00.585196Z/ui-test/_steps/81eebd858a2fa2d0d5d401f3.visual.png",
+            "reused": false
+          },
+          {
+            "baseURL": "http://127.0.0.1:59871",
+            "step": "authenticated",
+            "url": "http://127.0.0.1:59871/qapps",
+            "finalURL": "http://127.0.0.1:59871/qapps",
+            "screenshot": "/home/user/.herdr/worktrees/java-regression-test/frontend-match/.runs/2026-10-20_00-07-00.585196Z/ui-test/_steps/227d6133f469f7df9716e5d5.visual.png",
+            "reused": false
+          },
+          {
+            "baseURL": "http://127.0.0.1:59871",
+            "engine": "java",
+            "mode": "apps",
+            "step": "screen",
+            "route": "marble/dashboard",
+            "url": "http://127.0.0.1:59871/apps/marble/dashboard",
+            "finalURL": "http://127.0.0.1:59871/apps/marble/dashboard",
+            "screenshot": "/home/user/.herdr/worktrees/java-regression-test/frontend-match/.runs/2026-10-20_00-07-00.585196Z/ui-test/_steps/9222f750140878d8358fb802.visual.png",
+            "reused": false
+          },
+          {
+            "baseURL": "http://127.0.0.1:59871",
+            "engine": "java",
+            "mode": "apps",
+            "step": "screen",
+            "route": "marble/Accounting/Invoice/EditInvoice?invoiceId=UI_PARITY_INVOICE",
+            "url": "http://127.0.0.1:59871/apps/marble/Accounting/Invoice/EditInvoice?invoiceId=UI_PARITY_INVOICE",
+            "finalURL": "http://127.0.0.1:59871/apps/marble/Accounting/Invoice/EditInvoice?invoiceId=UI_PARITY_INVOICE",
+            "screenshot": "/home/user/.herdr/worktrees/java-regression-test/frontend-match/.runs/2026-10-20_00-07-00.585196Z/ui-test/_steps/01cb7a125f141fb3cb46e852.visual.png",
+            "reused": false
+          }
+        ],
+        "requestedURL": "http://127.0.0.1:59871/apps/marble/Accounting/Invoice/EditInvoice?invoiceId=UI_PARITY_INVOICE",
+        "navigation": "documented-or-candidate-deep-link",
+        "httpStatus": 200,
+        "finalURL": "http://127.0.0.1:59871/apps/marble/Accounting/Invoice/EditInvoice?invoiceId=UI_PARITY_INVOICE",
+        "directory": "/home/user/.herdr/worktrees/java-regression-test/frontend-match/.runs/2026-10-20_00-07-00.585196Z/ui-test/_captures/5e12d6a6038c13fdd1e08637"
+      },
+      {
+        "engine": "rust",
+        "mode": "apps",
+        "route": "marble/Accounting/Invoice/EditInvoice?invoiceId=UI_PARITY_INVOICE",
+        "authenticated": true,
+        "errors": [],
+        "failedRequests": [],
+        "httpErrors": [],
+        "consoleErrors": [],
+        "status": "captured",
+        "reused": false,
+        "steps": [
+          {
+            "baseURL": "http://127.0.0.1:35819",
+            "step": "login",
+            "url": "http://127.0.0.1:35819/Login",
+            "finalURL": "http://127.0.0.1:35819/Login",
+            "screenshot": "/home/user/.herdr/worktrees/java-regression-test/frontend-match/.runs/2026-10-20_00-07-00.585196Z/ui-test/_steps/833b038e1339fb43c1e17a3a.visual.png",
+            "reused": false
+          },
+          {
+            "baseURL": "http://127.0.0.1:35819",
+            "step": "authenticated",
+            "url": "http://127.0.0.1:35819/qapps",
+            "finalURL": "http://127.0.0.1:35819/qapps",
+            "screenshot": "/home/user/.herdr/worktrees/java-regression-test/frontend-match/.runs/2026-10-20_00-07-00.585196Z/ui-test/_steps/9f375ec5efc61c06ab78e5ca.visual.png",
+            "reused": false
+          },
+          {
+            "baseURL": "http://127.0.0.1:35819",
+            "engine": "rust",
+            "mode": "apps",
+            "step": "screen",
+            "route": "marble/dashboard",
+            "url": "http://127.0.0.1:35819/apps/marble/dashboard",
+            "finalURL": "http://127.0.0.1:35819/apps/marble/dashboard",
+            "screenshot": "/home/user/.herdr/worktrees/java-regression-test/frontend-match/.runs/2026-10-20_00-07-00.585196Z/ui-test/_steps/22292867822736d05f349786.visual.png",
+            "reused": false
+          },
+          {
+            "baseURL": "http://127.0.0.1:35819",
+            "engine": "rust",
+            "mode": "apps",
+            "step": "screen",
+            "route": "marble/Accounting/Invoice/EditInvoice?invoiceId=UI_PARITY_INVOICE",
+            "url": "http://127.0.0.1:35819/apps/marble/Accounting/Invoice/EditInvoice?invoiceId=UI_PARITY_INVOICE",
+            "finalURL": "http://127.0.0.1:35819/apps/marble/Accounting/Invoice/EditInvoice?invoiceId=UI_PARITY_INVOICE",
+            "screenshot": "/home/user/.herdr/worktrees/java-regression-test/frontend-match/.runs/2026-10-20_00-07-00.585196Z/ui-test/_steps/6d48e0ce8db5a0d9cad6195d.visual.png",
+            "reused": false
+          }
+        ],
+        "requestedURL": "http://127.0.0.1:35819/apps/marble/Accounting/Invoice/EditInvoice?invoiceId=UI_PARITY_INVOICE",
+        "navigation": "documented-or-candidate-deep-link",
+        "httpStatus": 200,
+        "finalURL": "http://127.0.0.1:35819/apps/marble/Accounting/Invoice/EditInvoice?invoiceId=UI_PARITY_INVOICE",
+        "directory": "/home/user/.herdr/worktrees/java-regression-test/frontend-match/.runs/2026-10-20_00-07-00.585196Z/ui-test/_captures/5e167e05eb92a1e44eaf8200"
+      }
+    ],
+    "comparison": {
+      "status": "compared",
+      "equal": false,
+      "dimensions": [
+        {
+          "width": 1440,
+          "height": 1091
+        },
+        {
+          "width": 1440,
+          "height": 1000
+        }
+      ],
+      "dimensionsEqual": false,
+      "differentPixels": 314807,
+      "comparedPixels": 1571040,
+      "differencePercent": 20.038127609736225,
+      "threshold": 0.1
+    }
+  },
+  {
+    "mode": "qapps",
+    "route": "marble/Accounting/Invoice/EditInvoice?invoiceId=UI_PARITY_INVOICE",
+    "captures": [
+      {
+        "engine": "java",
+        "mode": "qapps",
+        "route": "marble/Accounting/Invoice/EditInvoice?invoiceId=UI_PARITY_INVOICE",
+        "authenticated": true,
+        "errors": [],
+        "failedRequests": [],
+        "httpErrors": [],
+        "consoleErrors": [],
+        "status": "captured",
+        "reused": false,
+        "steps": [
+          {
+            "baseURL": "http://127.0.0.1:59871",
+            "step": "login",
+            "url": "http://127.0.0.1:59871/Login",
+            "finalURL": "http://127.0.0.1:59871/Login",
+            "screenshot": "/home/user/.herdr/worktrees/java-regression-test/frontend-match/.runs/2026-10-20_00-07-00.585196Z/ui-test/_steps/81eebd858a2fa2d0d5d401f3.visual.png",
+            "reused": true
+          },
+          {
+            "baseURL": "http://127.0.0.1:59871",
+            "step": "authenticated",
+            "url": "http://127.0.0.1:59871/qapps",
+            "finalURL": "http://127.0.0.1:59871/qapps",
+            "screenshot": "/home/user/.herdr/worktrees/java-regression-test/frontend-match/.runs/2026-10-20_00-07-00.585196Z/ui-test/_steps/227d6133f469f7df9716e5d5.visual.png",
+            "reused": true
+          },
+          {
+            "baseURL": "http://127.0.0.1:59871",
+            "engine": "java",
+            "mode": "qapps",
+            "step": "screen",
+            "route": "marble/dashboard",
+            "url": "http://127.0.0.1:59871/qapps/marble/dashboard",
+            "finalURL": "http://127.0.0.1:59871/qapps/marble/dashboard",
+            "screenshot": "/home/user/.herdr/worktrees/java-regression-test/frontend-match/.runs/2026-10-20_00-07-00.585196Z/ui-test/_steps/a6ddd198e8f3e582e31bdb01.visual.png",
+            "reused": false
+          },
+          {
+            "baseURL": "http://127.0.0.1:59871",
+            "engine": "java",
+            "mode": "qapps",
+            "step": "screen",
+            "route": "marble/Accounting/Invoice/EditInvoice?invoiceId=UI_PARITY_INVOICE",
+            "url": "http://127.0.0.1:59871/qapps/marble/Accounting/Invoice/EditInvoice?invoiceId=UI_PARITY_INVOICE",
+            "finalURL": "http://127.0.0.1:59871/qapps/marble/Accounting/Invoice/EditInvoice?invoiceId=UI_PARITY_INVOICE",
+            "screenshot": "/home/user/.herdr/worktrees/java-regression-test/frontend-match/.runs/2026-10-20_00-07-00.585196Z/ui-test/_steps/654fbf3e1987883d42755d03.visual.png",
+            "reused": false
+          }
+        ],
+        "requestedURL": "http://127.0.0.1:59871/qapps/marble/Accounting/Invoice/EditInvoice?invoiceId=UI_PARITY_INVOICE",
+        "navigation": "documented-or-candidate-deep-link",
+        "httpStatus": 200,
+        "finalURL": "http://127.0.0.1:59871/qapps/marble/Accounting/Invoice/EditInvoice?invoiceId=UI_PARITY_INVOICE",
+        "directory": "/home/user/.herdr/worktrees/java-regression-test/frontend-match/.runs/2026-10-20_00-07-00.585196Z/ui-test/_captures/281a9d7128fc6d5021928040"
+      },
+      {
+        "engine": "rust",
+        "mode": "qapps",
+        "route": "marble/Accounting/Invoice/EditInvoice?invoiceId=UI_PARITY_INVOICE",
+        "authenticated": true,
+        "errors": [],
+        "failedRequests": [],
+        "httpErrors": [],
+        "consoleErrors": [],
+        "status": "captured",
+        "reused": false,
+        "steps": [
+          {
+            "baseURL": "http://127.0.0.1:35819",
+            "step": "login",
+            "url": "http://127.0.0.1:35819/Login",
+            "finalURL": "http://127.0.0.1:35819/Login",
+            "screenshot": "/home/user/.herdr/worktrees/java-regression-test/frontend-match/.runs/2026-10-20_00-07-00.585196Z/ui-test/_steps/833b038e1339fb43c1e17a3a.visual.png",
+            "reused": true
+          },
+          {
+            "baseURL": "http://127.0.0.1:35819",
+            "step": "authenticated",
+            "url": "http://127.0.0.1:35819/qapps",
+            "finalURL": "http://127.0.0.1:35819/qapps",
+            "screenshot": "/home/user/.herdr/worktrees/java-regression-test/frontend-match/.runs/2026-10-20_00-07-00.585196Z/ui-test/_steps/9f375ec5efc61c06ab78e5ca.visual.png",
+            "reused": true
+          },
+          {
+            "baseURL": "http://127.0.0.1:35819",
+            "engine": "rust",
+            "mode": "qapps",
+            "step": "screen",
+            "route": "marble/dashboard",
+            "url": "http://127.0.0.1:35819/qapps/marble/dashboard",
+            "finalURL": "http://127.0.0.1:35819/qapps/marble/dashboard",
+            "screenshot": "/home/user/.herdr/worktrees/java-regression-test/frontend-match/.runs/2026-10-20_00-07-00.585196Z/ui-test/_steps/3ac3fcd24a75c2d643675559.visual.png",
+            "reused": false
+          },
+          {
+            "baseURL": "http://127.0.0.1:35819",
+            "engine": "rust",
+            "mode": "qapps",
+            "step": "screen",
+            "route": "marble/Accounting/Invoice/EditInvoice?invoiceId=UI_PARITY_INVOICE",
+            "url": "http://127.0.0.1:35819/qapps/marble/Accounting/Invoice/EditInvoice?invoiceId=UI_PARITY_INVOICE",
+            "finalURL": "http://127.0.0.1:35819/qapps/marble/Accounting/Invoice/EditInvoice?invoiceId=UI_PARITY_INVOICE",
+            "screenshot": "/home/user/.herdr/worktrees/java-regression-test/frontend-match/.runs/2026-10-20_00-07-00.585196Z/ui-test/_steps/b3d913b97cf3dfdf90836d85.visual.png",
+            "reused": false
+          }
+        ],
+        "requestedURL": "http://127.0.0.1:35819/qapps/marble/Accounting/Invoice/EditInvoice?invoiceId=UI_PARITY_INVOICE",
+        "navigation": "documented-or-candidate-deep-link",
+        "httpStatus": 200,
+        "finalURL": "http://127.0.0.1:35819/qapps/marble/Accounting/Invoice/EditInvoice?invoiceId=UI_PARITY_INVOICE",
+        "directory": "/home/user/.herdr/worktrees/java-regression-test/frontend-match/.runs/2026-10-20_00-07-00.585196Z/ui-test/_captures/ee3620bc90114bf14d3cb64f"
+      }
+    ],
+    "comparison": {
+      "status": "compared",
+      "equal": false,
+      "dimensions": [
+        {
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "width": 1440,
+          "height": 1002
+        }
+      ],
+      "dimensionsEqual": false,
+      "differentPixels": 180894,
+      "comparedPixels": 1442880,
+      "differencePercent": 12.537009314703926,
+      "threshold": 0.1
+    }
+  }
+]

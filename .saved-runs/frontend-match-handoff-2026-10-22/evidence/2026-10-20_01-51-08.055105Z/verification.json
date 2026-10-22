@@ -1,0 +1,8 @@
+{
+  "deterministic_requested": false,
+  "servers_started": true,
+  "shutdown_verified": true,
+  "final_databases_equal": false,
+  "passed": false,
+  "approved_differences_sha256": "eae7e91a595e85f17ce618714ac216b915323469353c35caebbbdf5edd380d1e"
+}

@@ -1,0 +1,85 @@
+diff --git c/crates/moqui-core/src/script/runtime/ec_extra.rs w/crates/moqui-core/src/script/runtime/ec_extra.rs
+index 764e45e..03f93b4 100644
+--- c/crates/moqui-core/src/script/runtime/ec_extra.rs
++++ w/crates/moqui-core/src/script/runtime/ec_extra.rs
+@@ -802,6 +802,53 @@ pub(super) fn fill_helpers<'js>(
+         "encodeForXmlAttribute",
+         string_encode_for_xml_attribute
+     );
++    // StringUtilities.masker configures Swing's MaskFormatter with non-literal input.
++    // Keep the formatter in JS so its valueToString method survives in the screen context.
++    let masker = caught(
++        ctx,
++        "StringUtilities.masker",
++        ctx.eval::<Function, _>(
++            r#"
++        (function (mask, placeholder) {
++            if (mask == null || mask === '') return null;
++            var parts = [], text = String(mask);
++            for (var i = 0; i < text.length; i++) {
++                var ch = text.charAt(i);
++                if (ch === "'") {
++                    if (++i < text.length) parts.push({literal: text.charAt(i)});
++                } else if ('#ULA?*H'.indexOf(ch) >= 0) parts.push({kind: ch});
++                else parts.push({literal: ch});
++            }
++            var pad = placeholder == null ? '' : String(placeholder);
++            return {valueToString: function (value) {
++                var input = value == null ? '' : String(value), at = 0, out = '';
++                for (var i = 0; i < parts.length; i++) {
++                    var part = parts[i];
++                    if (part.literal != null) { out += part.literal; continue; }
++                    if (at >= input.length) {
++                        out += pad.length === 1 ? pad : (pad.charAt(at) || ' ');
++                        at++;
++                        continue;
++                    }
++                    var ch = input.charAt(at++), kind = part.kind;
++                    var letter = /^\p{L}$/u.test(ch), digit = /^\p{Nd}$/u.test(ch);
++                    if ((kind === '#' && !digit) ||
++                        ('UL?'.indexOf(kind) >= 0 && !letter) ||
++                        (kind === 'A' && !letter && !digit) ||
++                        (kind === 'H' && !/^[0-9a-fA-F]$/.test(ch))) {
++                        throw new Error('Invalid character: ' + ch);
++                    }
++                    var converted = kind === 'U' || kind === 'H' ? ch.toUpperCase() :
++                        (kind === 'L' ? ch.toLowerCase() : ch);
++                    out += converted.length === 1 ? converted : ch;
++                }
++                return out;
++            }};
++        })
++    "#,
++        ),
++    )?;
++    caught(ctx, "StringUtilities.masker", string_utilities.set("masker", masker))?;
+     method!(string_utilities, "base64UrlEncode", string_base64_url_encode);
+     method!(string_utilities, "base64UrlDecode", string_base64_url_decode);
+     method!(string_utilities, "base64Encode", string_base64_encode);
+@@ -872,6 +919,26 @@ mod tests {
+         holds(r#"WebUtilities.fieldValuesEncodeHtmlJsSafe({"k\\": "v\\'\u2029"}) === "{'k\\\\':'v\\\\\\'\\u2029'}""#);
+     }
+ 
++    #[test]
++    fn account_code_masker_matches_java_mask_formatter() {
++        clear_context_stack();
++        holds(r#"StringUtilities.masker(null, '0') === null && StringUtilities.masker('', '0') === null"#);
++        holds(r#"StringUtilities.masker('###-##', '0').valueToString('1234') === '123-40'"#);
++        holds(r#"StringUtilities.masker('###-##', '0').valueToString('123456') === '123-45'"#);
++        holds(r#"StringUtilities.masker('##-##', 'abcdefg').valueToString('1') === '1b-cd'"#);
++        holds(r#"StringUtilities.masker('##-##', 'xy').valueToString('') === 'xy-  '"#);
++        holds(r#"StringUtilities.masker('##-##', null).valueToString(null) === '  -  '"#);
++        holds(r###"StringUtilities.masker("##'###", '0').valueToString('1234') === '12#34'"###);
++        holds(r###"StringUtilities.masker("##'", '0').valueToString('1234') === '12'"###);
++        holds(r#"StringUtilities.masker('UU-LL', '0').valueToString('abCD') === 'AB-cd'"#);
++        holds(r#"StringUtilities.masker('AA/??/**/HH', '0').valueToString('a1bC!?af') === 'a1/bC/!?/AF'"#);
++        holds(r#"StringUtilities.masker('##', '0').valueToString('١٢') === '١٢'"#);
++        holds(
++            r#"(function () { try { StringUtilities.masker('##', '0').valueToString('1x'); return false; }
++            catch (e) { return e.message === 'Invalid character: x'; } })()"#,
++        );
++    }
++
+     #[test]
+     fn web_string_and_collection_helpers() {
+         clear_context_stack();

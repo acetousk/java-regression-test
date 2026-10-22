@@ -1,0 +1,10 @@
+{
+  "route": "marble/Accounting/Invoice/EditInvoice?invoiceId=UI_PARITY_INVOICE",
+  "random": false,
+  "modes": [
+    "apps",
+    "qapps"
+  ],
+  "runDir": "/home/user/.herdr/worktrees/java-regression-test/frontend-match/.runs/2026-10-20_01-55-59.979813Z",
+  "selection": "explicit"
+}

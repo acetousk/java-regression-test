@@ -1,0 +1,19 @@
+{
+  "java": {
+    "forced_kill": false,
+    "errors": [
+      "Missing post-SIGTERM flush/completion evidence"
+    ],
+    "returncode": 143,
+    "missing_shutdown_markers": [
+      "ArtifactHitBins stored",
+      "Moqui ExecutionContextFactory Destroyed"
+    ]
+  },
+  "rust": {
+    "forced_kill": false,
+    "errors": [],
+    "returncode": 0,
+    "missing_shutdown_markers": []
+  }
+}
