@@ -88,3 +88,25 @@ class ApprovalTests(unittest.TestCase):
                           {"path": "table", "in": {"ref": "missing"}}, {"all": []}):
             with self.assertRaises(ValueError):
                 ApprovalEngine({"transaction_exemptions": [{"engine": "rust", "when": condition}]})
+
+    def test_login_password_upgrade_changes_only_password_columns(self):
+        old = {"user_id": "EX_JOHN_DOE", "current_password": "16ac58bb", "password_salt": None,
+               "password_hash_type": "SHA", "password_base64": None, "disabled": "N",
+               "last_updated_stamp": "2026-10-22T22:26:54.719"}
+        new = {**old, "current_password": "$argon2id$v=19$x", "password_salt": "",
+               "password_hash_type": "argon2", "password_base64": "N",
+               "last_updated_stamp": "2026-10-22T22:26:54.722"}
+
+        def update(old, new, table="public.user_account"):
+            return [f"table {table}: UPDATE: user_id[character varying]:'EX_JOHN_DOE'",
+                    marker(kind="update", table=table, old=json.dumps(old), new=json.dumps(new))]
+        self.assertTrue(self.engine.exempt_transaction("rust", update(old, new)))
+        self.assertFalse(self.engine.exempt_transaction("java", update(old, new)))
+        self.assertFalse(self.engine.exempt_transaction("rust", update(old, new, "public.other")))
+        self.assertFalse(self.engine.exempt_transaction("rust", update(old, {**new, "disabled": "Y"})))
+        self.assertFalse(self.engine.exempt_transaction("rust", update(old, {**new, "password_hash_type": "SHA"})))
+        self.assertFalse(self.engine.exempt_transaction("rust", update({**old, "password_hash_type": "argon2"}, new)))
+        extra = {**new, "unexpected_column": "x"}
+        self.assertFalse(self.engine.exempt_transaction("rust", update(old, extra)))
+        with self.assertRaises(ValueError):
+            ApprovalEngine({"transaction_exemptions": [{"engine": "rust", "when": {"changed_fields": []}}]})

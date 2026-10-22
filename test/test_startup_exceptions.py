@@ -102,6 +102,32 @@ class ApprovedDifferencesTests(unittest.TestCase):
             [json.dumps(self.visit())], [json.dumps(self.visit(False))],
             approved_differences={"theme_resources": [], "full_text_indexes": []})[0])
 
+    def account(self, java=True, **fields):
+        row = {"user_id": "EX_JOHN_DOE", "username": "john.doe", "disabled": "N",
+               "current_password": "16ac58bb", "password_salt": None, "password_hash_type": "SHA",
+               "password_base64": None, "last_updated_stamp": "2026-01-01T00:00:00"}
+        if not java:
+            row.update(current_password="$argon2id$v=19$x", password_salt="", password_hash_type="argon2",
+                       password_base64="N", last_updated_stamp="2026-01-01T00:00:01")
+        return {"table": "public.user_account", "row": {**row, **fields}}
+
+    def test_login_password_upgrade_passes_without_changing_raw_values(self):
+        left, right = self.account(), self.account(False)
+        original = deepcopy((left, right))
+        equal, report, _ = self.compare([left], [right])
+        self.assertTrue(equal)
+        self.assertFalse(report["row_and_sequence_values_equal"])
+        self.assertEqual(report["approved_differences_applied"][0]["kind"], "login_password_upgrades")
+        self.assertEqual((left, right), original)
+
+    def test_login_password_upgrade_other_fields_and_hashes_stay_strict(self):
+        self.assertFalse(self.compare([self.account()], [self.account(False, disabled="Y")])[0])
+        self.assertFalse(self.compare([self.account()], [self.account(False, user_id="OTHER")])[0])
+        self.assertFalse(self.compare([self.account(password_hash_type="argon2")], [self.account(False)])[0])
+        self.assertFalse(self.compare([self.account()], [self.account(False, password_hash_type="bcrypt")])[0])
+        self.assertFalse(self.compare([self.account()] * 2, [self.account(False)] * 2)[0])
+        self.assertFalse(self.compare([self.account()], [])[0])
+
     def test_visit_url_ports_pass_without_changing_raw_values(self):
         for host in ("127.0.0.1", "[::1]"):
             with self.subTest(host=host):
