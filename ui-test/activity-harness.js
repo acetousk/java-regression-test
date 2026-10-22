@@ -6,6 +6,13 @@ const path = require('node:path');
 const { PNG } = require('pngjs');
 
 const engines = ['java', 'rust'];
+// Visual differences the user approved, read at run time so approvals recorded during a held session apply
+// to the next attempt. Each entry names an activity step and the largest difference it may show.
+const approvedDifferencesFile = process.env.MOQUI_APPROVED_DIFFERENCES || path.resolve(__dirname, '../approved-differences.json');
+function visualApproval(activity, step) {
+  const approvals = JSON.parse(fs.readFileSync(approvedDifferencesFile, 'utf8')).visual_differences || [];
+  return approvals.find(approval => approval.activity === activity && approval.step === step);
+}
 
 function baseURL(engine) {
   return process.env[`${engine.toUpperCase()}_BASE_URL`] || `http://127.0.0.1:${engine === 'java' ? 8080 : 8081}`;
@@ -125,8 +132,16 @@ function registerActivity({ source, activity, mode = 'apps', steps }) {
             entry.error ||= `Screenshot comparison unavailable: ${entry.visual.reason}`;
           }
           if (entry.visual.status === 'compared' && !entry.visual.equal) {
-            entry.passed = false;
-            entry.error ||= `Java/Rust screenshots differ: ${entry.visual.differentPixels} pixels`;
+            const approval = visualApproval(activity, step.name);
+            if (approval) entry.visual.approval = approval;
+            if (!approval) {
+              entry.passed = false;
+              entry.error ||= `Java/Rust screenshots differ: ${entry.visual.differentPixels} pixels`;
+            } else if (entry.visual.differencePercent > approval.max_difference_percent) {
+              entry.passed = false;
+              entry.error ||= `Java/Rust screenshots differ by ${entry.visual.differencePercent.toFixed(3)}%, ` +
+                `more than the approved ${approval.max_difference_percent}%`;
+            }
           }
           writeJSON(path.join(stepDir, 'step.json'), entry);
           if (!entry.passed) throw new Error(entry.error);

@@ -1,0 +1,6 @@
+{
+  "MOQUI_RUN_DIR": "/home/spongebob/.t3/scratch/2026-10-22-handoff-java-rust-create-individual-aef3dcb7/harness/.runs/2026-10-22_22-26-49.454754Z",
+  "MOQUI_HARNESS_STATUS_URL": "http://127.0.0.1:35143/status",
+  "JAVA_BASE_URL": "http://127.0.0.1:28080",
+  "RUST_BASE_URL": "http://127.0.0.1:28081"
+}
