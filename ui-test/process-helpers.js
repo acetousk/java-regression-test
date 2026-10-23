@@ -18,13 +18,16 @@ const signIn = [
 /** The button labelled exactly `text`; qapps buttons put an icon glyph before the label. */
 function button(page, text) {
   const label = text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  return page.getByRole('button', { name: new RegExp(`^\\W*${label}\\s*$`) }).first();
+  // Java's Bootstrap 3 dialogs keep aria-hidden while open, so a button inside one counts if it is visible.
+  return page.getByRole('button', { name: new RegExp(`^\\W*${label}\\s*$`), includeHidden: true })
+    .filter({ visible: true }).first();
 }
 
 /** Open a container-dialog by its button text; resolves to the dialog's form. */
 async function openDialog(page, buttonText, dialogId) {
   await button(page, buttonText).click();
-  const form = page.locator(`#${dialogId} form`).first();
+  // Inside a section-iterate both engines suffix the id with the section entry index, as in AddProductItemContainer_0.
+  const form = page.locator(`[id="${dialogId}"] form, [id^="${dialogId}_"] form`).filter({ visible: true }).first();
   await expect(form).toBeVisible();
   return form;
 }
@@ -54,6 +57,13 @@ async function choose(page, selectId, optionText, search) {
       }).toPass({ timeout: 10000 });
     }
     options = page.locator(`#${selectId}-ts-dropdown .option`);
+  } else if (!(await select.locator('xpath=following-sibling::span[contains(@class,"select2")][1]').count())) {
+    // Rust leaves a drop-down without dynamic options, multiple, or combo-box a native select; Java wraps every one
+    // in select2.
+    const value = await select.locator('option').filter({ hasText: optionText }).first().getAttribute('value');
+    await select.selectOption(value);
+    await expect(select).not.toHaveValue('');
+    return;
   } else {
     await select.locator('xpath=following-sibling::span[contains(@class,"select2")][1]')
       .locator('.select2-selection').click();
@@ -68,9 +78,16 @@ async function choose(page, selectId, optionText, search) {
   await expect(select).not.toHaveValue('');
 }
 
+/** The id of a form's drop-down by field name; inside a section-iterate the engines suffix it with the entry index. */
+function selectId(form, name) {
+  return form.locator(`select[name="${name}"]`).getAttribute('id');
+}
+
 /** Click a submit or hidden-form link button and wait for the screen it lands on. */
 async function submitTo(page, locator, url) {
-  await Promise.all([page.waitForURL(url), locator.click()]);
+  // The click waits for its navigation, which waits while each write is paired and compared, so it gets
+  // the navigation budget rather than the 15s action timeout.
+  await Promise.all([page.waitForURL(url), locator.click({ timeout: 120000 })]);
   await page.waitForLoadState('networkidle');
 }
 
@@ -87,4 +104,4 @@ function sameId(label) {
   };
 }
 
-module.exports = { button, choose, openDialog, sameId, signIn, submitTo, urlParam };
+module.exports = { button, choose, openDialog, sameId, selectId, signIn, submitTo, urlParam };

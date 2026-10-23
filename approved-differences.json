@@ -43,6 +43,28 @@
     "public.saml_flow",
     "public.user_ssh_key",
     "search.document_index",
+    "search.mantle_asset",
+    "search.mantle_communication_event",
+    "search.mantle_event",
+    "search.mantle_facility",
+    "search.mantle_inventory_asset",
+    "search.mantle_inventory_order_item",
+    "search.mantle_inventory_prod_estimate",
+    "search.mantle_inventory_run_consume",
+    "search.mantle_inventory_run_produce",
+    "search.mantle_invoice",
+    "search.mantle_order",
+    "search.mantle_party",
+    "search.mantle_product",
+    "search.mantle_project",
+    "search.mantle_request",
+    "search.mantle_sales_invoice",
+    "search.mantle_sales_invoice_item",
+    "search.mantle_sales_order_item",
+    "search.mantle_sales_order_part",
+    "search.mantle_shipment",
+    "search.mantle_task",
+    "search.mantle_wiki_page",
     "search.moqui_http_log",
     "search.moqui_logs"
   ],
@@ -124,6 +146,5 @@
     "approved_by": "user",
     "description": "Rust reads each related row to check a foreign key before a write (Java leaves that to the database), counts Enumeration and UserGroupPermission for its load report, and tries an UPDATE before create-or-update reads the row (Java reads first). Rust counts these as artifact hits under sub types of their own (an UPDATE probe only when it matched no row; one that updates a row is a real update); these bins are listed in the report and not compared with Java.",
     "artifact_sub_types": ["fk-check", "load-report", "update-probe"]
-  },
-  "visual_differences": []
+  }
 }

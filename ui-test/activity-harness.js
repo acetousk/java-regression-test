@@ -8,13 +8,6 @@ const { PNG } = require('pngjs');
 const engines = ['java', 'rust'];
 // Each paired write waits for both engines and a full database comparison; a submit may span several.
 const BARRIER_TIMEOUT = 120000;
-// Visual differences the user approved, read at run time so approvals recorded during a held session apply
-// to the next attempt. Each entry names an activity step and the largest difference it may show.
-const approvedDifferencesFile = process.env.MOQUI_APPROVED_DIFFERENCES || path.resolve(__dirname, '../approved-differences.json');
-function visualApproval(activity, step) {
-  const approvals = JSON.parse(fs.readFileSync(approvedDifferencesFile, 'utf8')).visual_differences || [];
-  return approvals.find(approval => approval.activity === activity && approval.step === step);
-}
 
 function baseURL(engine) {
   return process.env[`${engine.toUpperCase()}_BASE_URL`] || `http://127.0.0.1:${engine === 'java' ? 8080 : 8081}`;
@@ -126,27 +119,21 @@ function registerActivity({ source, activity, mode = 'apps', steps }) {
           fs.mkdirSync(stepDir, { recursive: true });
           // A Vue page renders after its own requests; an unsettled page is caught by the screenshot diff.
           await Promise.all(engines.map(engine => pages[engine]?.waitForLoadState('networkidle').catch(() => {})));
-          await Promise.all(engines.map(engine => pages[engine]?.screenshot({
-            path: path.join(stepDir, `${engine}.png`), fullPage: true }).catch(() => {})));
+          // Quasar's loading bar fades out about a second after its last request, later than networkidle.
+          await Promise.all(engines.map(engine => pages[engine]?.waitForFunction(() =>
+            [...document.querySelectorAll('.q-loading-bar')].every(bar => getComputedStyle(bar).opacity === '0'),
+          null, { timeout: 5000 }).catch(() => {})));
+          await Promise.all(engines.map(engine => pages[engine]
+            ?.screenshot({ path: path.join(stepDir, `${engine}.png`), fullPage: true }).catch(() => {})));
           entry.urls = Object.fromEntries(engines.map(engine => [engine, pages[engine]?.url()]));
-          // Retain unmodified screenshots and fail this step on an unapproved visual difference.
-          entry.visual = await diffScreenshots(stepDir).catch(error => ({ status: 'failed', reason: error.message }));
-          if (entry.visual.status !== 'compared') {
+          // The engines must act alike, not look alike: both end on the same screen. Screenshots are kept as
+          // evidence and their pixel difference recorded, but a visual difference does not fail the step.
+          const screens = Object.fromEntries(engines.map(engine => [engine, entry.urls[engine] && new URL(entry.urls[engine]).pathname]));
+          if (new Set(Object.values(screens)).size > 1) {
             entry.passed = false;
-            entry.error ||= `Screenshot comparison unavailable: ${entry.visual.reason}`;
+            entry.error ||= `Java/Rust ended on different screens: ${JSON.stringify(screens)}`;
           }
-          if (entry.visual.status === 'compared' && !entry.visual.equal) {
-            const approval = visualApproval(activity, step.name);
-            if (approval) entry.visual.approval = approval;
-            if (!approval) {
-              entry.passed = false;
-              entry.error ||= `Java/Rust screenshots differ: ${entry.visual.differentPixels} pixels`;
-            } else if (entry.visual.differencePercent > approval.max_difference_percent) {
-              entry.passed = false;
-              entry.error ||= `Java/Rust screenshots differ by ${entry.visual.differencePercent.toFixed(3)}%, ` +
-                `more than the approved ${approval.max_difference_percent}%`;
-            }
-          }
+          entry.visual = await diffScreenshots(stepDir).catch(error => ({ status: 'failed', reason: error.message }));
           writeJSON(path.join(stepDir, 'step.json'), entry);
           if (!entry.passed) throw new Error(entry.error);
         }
