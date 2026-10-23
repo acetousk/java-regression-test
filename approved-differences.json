@@ -21,6 +21,13 @@
       {"path": "table_only", "equals": true},
       {"path": "tag", "equals": "DROP TABLE"},
       {"path": "tables", "empty": true}
+    ]}},
+    {"engine": "rust", "when": {"all": [
+      {"path": "kind", "equals": "update"},
+      {"path": "table", "equals": "public.user_account"},
+      {"path": "old.password_hash_type", "in": ["SHA", "SHA-256", "SHA-512"]},
+      {"path": "new.password_hash_type", "equals": "argon2"},
+      {"changed_fields": ["current_password", "password_salt", "password_hash_type", "password_base64", "last_updated_stamp"]}
     ]}}
   ],
   "rust_only_tables": [
@@ -84,6 +91,9 @@
   ],
   "java_servlet_session_fields": [
     {"approved_by": "user", "description": "Java-only servlet/Jetty session metadata and Visit date differences; other Visit fields remain strict.", "table": "public.visit", "fields": ["webapp_name", "from_date", "last_updated_stamp"]}
+  ],
+  "login_password_upgrades": [
+    {"approved_by": "user", "description": "At a successful password login Rust re-hashes a legacy SHA password to argon2 and Java keeps the stored hash. Ignore only the password columns and stamp of a user whose Java row still has the legacy hash and whose Rust row has argon2; every other column remains strict.", "table": "public.user_account", "key": ["user_id"], "legacy_hash_types": ["SHA", "SHA-256", "SHA-512"], "upgraded_hash_type": "argon2", "fields": ["current_password", "password_salt", "password_hash_type", "password_base64", "last_updated_stamp"]}
   ],
   "statistics_timing": [
     {"table": "public.artifact_hit_bin", "fields": ["bin_start_date_time", "bin_end_date_time", "total_time_millis", "total_squared_time", "min_time_millis", "max_time_millis", "slow_hit_count", "last_updated_stamp"]},

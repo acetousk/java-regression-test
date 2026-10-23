@@ -271,6 +271,28 @@ def apply_approved_differences(java, rust, approved):
             applied.append({"kind": "java_servlet_session_fields", **deepcopy(rule),
                             "java_rows": normalized_rows[0], "rust_rows": normalized_rows[1]})
 
+    for rule in approved.get("login_password_upgrades", []):
+        # Rust replaces a legacy hash with argon2 at login; copy Java's password columns onto that Rust row only.
+        java_rows = {}
+        for item in snapshots[0]["records"]:
+            if item.get("table") == rule["table"]:
+                java_rows.setdefault(tuple(item["row"].get(field) for field in rule["key"]), []).append(item["row"])
+        count = 0
+        for item in snapshots[1]["records"]:
+            if item.get("table") != rule["table"] or item["row"].get("password_hash_type") != rule["upgraded_hash_type"]:
+                continue
+            row = item["row"]
+            matches = java_rows.get(tuple(row.get(field) for field in rule["key"]), [])
+            if len(matches) != 1 or matches[0].get("password_hash_type") not in rule["legacy_hash_types"]:
+                continue
+            if not all(field in row and field in matches[0] for field in rule["fields"]):
+                continue
+            for field in rule["fields"]:
+                row[field] = matches[0][field]
+            count += 1
+        if count:
+            applied.append({"kind": "login_password_upgrades", **deepcopy(rule), "rust_rows": count})
+
     for rule in approved.get("url_port_differences", []):
         normalized_rows = []
         for snapshot in snapshots:

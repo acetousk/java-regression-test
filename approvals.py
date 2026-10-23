@@ -40,6 +40,11 @@ class ApprovalEngine:
             if not isinstance(self._value(condition["keyed_rows"]), list):
                 raise ValueError("keyed_rows requires a list")
             return
+        if set(condition) == {"changed_fields"}:
+            fields = self._value(condition["changed_fields"])
+            if not isinstance(fields, list) or not fields:
+                raise ValueError("changed_fields requires a nonempty list")
+            return
         if ("path" not in condition or not isinstance(condition["path"], str)
                 or len(condition) != 2):
             raise ValueError("Invalid approval condition")
@@ -76,6 +81,13 @@ class ApprovalEngine:
                     field in row and row[field] == value for field, value in zip(rule["key"], values))
                 for values in rule["values"])
                 for rule in self._value(condition["keyed_rows"]))
+        if "changed_fields" in condition:
+            # An update whose old and new rows have the same columns and differ only in the listed ones.
+            old, new = event.get("old"), event.get("new")
+            if not isinstance(old, dict) or not isinstance(new, dict) or set(old) != set(new):
+                return False
+            changed = {field for field in new if old[field] != new[field]}
+            return bool(changed) and changed <= set(self._value(condition["changed_fields"]))
         found = event
         for part in condition["path"].split("."):
             if not isinstance(found, dict) or part not in found:
