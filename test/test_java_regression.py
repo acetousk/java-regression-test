@@ -2,6 +2,7 @@ import importlib.util
 import json
 from pathlib import Path
 import subprocess
+import sys
 import tempfile
 import unittest
 from unittest.mock import patch
@@ -207,14 +208,35 @@ class CdcTests(unittest.TestCase):
     def test_read_cdc_groups_rows_per_committed_transaction(self):
         rows = ["BEGIN", "table public.a: INSERT: id[integer]:1 note[text]:'two\nlines'", "COMMIT",
                 "BEGIN", "COMMIT"]
-        result = subprocess.CompletedProcess([], 0, stdout="\0".join(rows) + "\n")
-        with patch.object(controller.subprocess, "run", return_value=result):
+        with patch.object(controller, "psql_query", return_value="\0".join(rows) + "\0"):
             self.assertEqual(controller.read_cdc("container"),
                              [["table public.a: INSERT: id[integer]:1 note[text]:'two\nlines'"], []])
 
+    def test_psql_session_reads_each_query_up_to_its_sentinel(self):
+        # Stands in for psql: rows end in NUL, and a failing statement ends the process.
+        fake_psql = r'''
+import sys
+for line in sys.stdin:
+    if line.startswith("SELECT 'end-"):
+        sys.stdout.write("row\0" + line.split("'")[1] + "\0"); sys.stdout.flush()
+    elif line.startswith("FAIL"):
+        sys.stderr.write("ERROR: failed\n"); sys.exit(3)
+'''
+        popen = subprocess.Popen
+        with patch.object(controller.subprocess, "Popen",
+                          lambda args, **kwargs: popen([sys.executable, "-c", fake_psql], **kwargs)):
+            session = controller.PsqlSession("container")
+        try:
+            self.assertEqual(session.query("SELECT 1;"), "row\0")
+            self.assertEqual(session.query("SELECT 2;"), "row\0")
+            with self.assertRaises(subprocess.CalledProcessError) as failure:
+                session.query("FAIL")
+            self.assertIn(b"ERROR: failed", failure.exception.stderr)
+        finally:
+            session.close()
+
     def test_read_cdc_rejects_a_partial_transaction(self):
-        result = subprocess.CompletedProcess([], 0, stdout="BEGIN\0table public.a: INSERT: id[integer]:1")
-        with patch.object(controller.subprocess, "run", return_value=result):
+        with patch.object(controller, "psql_query", return_value="BEGIN\0table public.a: INSERT: id[integer]:1\0"):
             with self.assertRaisesRegex(RuntimeError, "inside a transaction"):
                 controller.read_cdc("container")
 

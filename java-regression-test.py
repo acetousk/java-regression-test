@@ -20,7 +20,10 @@ import re
 import secrets
 import signal
 import socket
+import select
 import subprocess
+import tempfile
+import threading
 import time
 import urllib.parse
 import urllib.request
@@ -1159,6 +1162,63 @@ COMMIT;
 CDC_SLOT = "moqui_regression_cdc"
 
 
+class PsqlSession:
+    """One long-lived psql per database. The deterministic coordinator reads CDC after every engine
+    operation, thousands per page render; starting a psql for each read costs about 50 ms."""
+
+    def __init__(self, container):
+        self.lock = threading.Lock()
+        self.stderr = tempfile.TemporaryFile()
+        self.process = subprocess.Popen(
+            ["docker", "exec", "-i", container, "psql", "-X", "-qAt", "-0", "-v", "ON_ERROR_STOP=1",
+             "-U", "moqui", "-d", "moqui"],
+            stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=self.stderr)
+
+    def query(self, sql, timeout=60):
+        """Run `sql` in one transaction, like `psql -c`; returns its rows, each ending in NUL."""
+        sentinel = f"end-{secrets.token_hex(16)}"
+        end = f"{sentinel}\0".encode()
+        with self.lock:
+            self.process.stdin.write(f"BEGIN;\n{sql}\nCOMMIT;\nSELECT '{sentinel}';\n".encode())
+            self.process.stdin.flush()
+            output, deadline = bytearray(), time.monotonic() + timeout
+            descriptor = self.process.stdout.fileno()
+            while not output.endswith(end):
+                remaining = deadline - time.monotonic()
+                if remaining <= 0 or not select.select([descriptor], [], [], remaining)[0]:
+                    self.close()
+                    raise subprocess.TimeoutExpired(self.process.args, timeout)
+                chunk = os.read(descriptor, 1 << 20)
+                if not chunk:
+                    self.stderr.seek(0)
+                    raise subprocess.CalledProcessError(self.process.wait(), self.process.args,
+                                                        bytes(output), self.stderr.read())
+                output += chunk
+            return output[:-len(end)].decode()
+
+    def close(self):
+        if self.process.poll() is None:
+            self.process.kill()
+        self.process.wait()
+        self.stderr.close()
+
+
+_psql_sessions = {}
+
+
+def psql_query(container, sql):
+    session = _psql_sessions.get(container)
+    if session is None or session.process.poll() is not None:
+        session = _psql_sessions[container] = PsqlSession(container)
+    return session.query(sql)
+
+
+def close_psql_session(container):
+    session = _psql_sessions.pop(container, None)
+    if session is not None:
+        session.close()
+
+
 def approval_snapshots(states, containers, evidence):
     """Approval validators need current DDL metadata, just like paired comparisons."""
     for side, state in states.items():
@@ -1224,8 +1284,8 @@ def read_cdc(container, *, with_cursor=False):
     A transaction with an assigned xid is always reported, including DDL-only ones (empty list);
     reads and rollbacks never appear.
     """
-    select = "json_build_object('lsn', lsn, 'data', data)::text" if with_cursor else 'data'
-    query = (f"SELECT {select} FROM pg_logical_slot_get_changes('{CDC_SLOT}', NULL, NULL, "
+    columns = "json_build_object('lsn', lsn, 'data', data)::text" if with_cursor else 'data'
+    query = (f"SELECT {columns} FROM pg_logical_slot_get_changes('{CDC_SLOT}', NULL, NULL, "
              "'include-xids', '0', 'skip-empty-xacts', '0');")
     if with_cursor:
         def marker(phase):
@@ -1233,10 +1293,7 @@ def read_cdc(container, *, with_cursor=False):
                     f"'database',database,'wal_status',wal_status)::text FROM pg_replication_slots "
                     f"WHERE slot_name='{CDC_SLOT}';")
         query = marker('before') + query + marker('after')
-    output = subprocess.run(
-        ["docker", "exec", container, "psql", "-X", "-qAt", "-0", "-v", "ON_ERROR_STOP=1",
-         "-U", "moqui", "-d", "moqui", "-c", query],
-        check=True, capture_output=True, text=True, timeout=60).stdout
+    output = psql_query(container, query)
     transactions, current = [], None
     cursor = {}
     for row in output.removesuffix("\n").split("\0"):
@@ -1663,6 +1720,7 @@ def boot_and_stop(args):
         finally:
             (evidence / "verification.json").write_text(json.dumps(verification, indent=2) + "\n")
             for name, container in containers.items():
+                close_psql_session(container)
                 with (evidence / f"{name}-postgres.log").open("wb") as log:
                     subprocess.run(["docker", "logs", container], stdout=log, stderr=subprocess.STDOUT)
                 if args.keep_databases:
