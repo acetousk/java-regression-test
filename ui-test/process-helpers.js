@@ -73,12 +73,23 @@ async function choose(page, selectId, optionText, search) {
     await expect(select).not.toHaveValue('');
     return;
   } else {
-    await select.locator('xpath=following-sibling::span[contains(@class,"select2")][1]')
-      .locator('.select2-selection').click();
-    if (search !== undefined) {
-      await page.locator('.select2-container--open .select2-search__field').pressSequentially(search, { delay: 20 });
-    }
+    // A drop-down that depends on another field reloads its options when that field changes, which closes select2
+    // and drops a search typed meanwhile: open and type again until the option shows.
+    const container = select.locator('xpath=following-sibling::span[contains(@class,"select2")][1]');
     options = page.locator('.select2-container--open .select2-results__option');
+    await expect(async () => {
+      if (!(await container.evaluate(node => node.classList.contains('select2-container--open')))) {
+        await container.locator('.select2-selection').click();
+      }
+      if (search !== undefined) {
+        const field = page.locator('.select2-container--open .select2-search__field');
+        if (await field.inputValue() !== search) {
+          await field.fill('');
+          await field.pressSequentially(search, { delay: 20 });
+        }
+      }
+      await expect(options.filter({ hasText: optionText }).first()).toBeVisible({ timeout: 3000 });
+    }).toPass({ timeout: 15000 });
   }
   const option = options.filter({ hasText: optionText }).first();
   await expect(option).toBeVisible();
