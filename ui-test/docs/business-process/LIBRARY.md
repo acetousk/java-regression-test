@@ -30,7 +30,7 @@ integration or a carrier event.
 | # | Process | Actor | Screens | Spec | Status |
 |---|---------|-------|---------|------|--------|
 | 1 | Create individual customer | CSR | Customer/FindCustomer → EditCustomer | `walkthroughs/find-and-create-customer` | spec |
-| 2 | Create sales account and sales contact | CSR | Customer/FindCustomer → EditCustomer | `walkthroughs/create-sales-account` | planned |
+| 2 | Create sales account and sales contact | CSR | Customer/FindCustomer → EditCustomer | `walkthroughs/create-sales-account` | spec |
 | 3 | Place and approve sales order | CSR | Order/FindOrder → OrderDetail | `walkthroughs/place-and-approve-sales-order` | spec |
 | 4 | Ship sales order (simple: create shipment, issue and pack, pack, ship) | Shipper | OrderDetail → Shipment/ShipmentDetail | `walkthroughs/ship-sales-order` | planned |
 | 5 | Receive customer payment for the sales invoice | Accountant | Accounting/Invoice/EditInvoice → Payment | `process-library/accountant-sends-invoice-and-receives-payment` | planned |

@@ -25,6 +25,11 @@ function button(page, text) {
 
 /** Open a container-dialog by its button text; resolves to the dialog's form. */
 async function openDialog(page, buttonText, dialogId) {
+  // A form's focus-field (FindCustomer's search box) keeps Java's Bootstrap hover-and-focus tooltip open over the
+  // buttons; move the pointer away and leave the field, as a user clicking an empty part of the page does.
+  await page.mouse.move(0, 0);
+  await page.evaluate(() => document.activeElement && document.activeElement.blur());
+  await expect(page.locator('.tooltip.in')).toHaveCount(0);
   await button(page, buttonText).click();
   // Inside a section-iterate both engines suffix the id with the section entry index, as in AddProductItemContainer_0.
   const form = page.locator(`[id="${dialogId}"] form, [id^="${dialogId}_"] form`).filter({ visible: true }).first();
