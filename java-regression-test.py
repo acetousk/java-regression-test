@@ -1658,6 +1658,11 @@ def boot_and_stop(args):
             runtime = directory / "runtime"
             conf = evidence / f"{name}-demo.xml"
             if name == "java":
+                # Jetty keeps sessions in runtime/sessions across runs. A session from an earlier run expiring here
+                # closes a visit id this run's database has not created yet.
+                for stored in (runtime / "sessions").glob("*"):
+                    if stored.is_file():
+                        stored.unlink()
                 command = ["java", f"-Dmoqui.runtime={runtime}", f"-Dmoqui.conf={conf}",
                            "-jar", str(directory / "moqui.war"), f"port={ports[name]}", "no-run-es"]
             else:
