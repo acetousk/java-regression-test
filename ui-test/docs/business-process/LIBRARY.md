@@ -34,7 +34,7 @@ integration or a carrier event.
 | 3 | Place and approve sales order | CSR | Order/FindOrder → OrderDetail | `walkthroughs/place-and-approve-sales-order` | spec |
 | 4 | Ship sales order (simple: create shipment, issue and pack, pack, ship) | Shipper | OrderDetail → Shipment/ShipmentDetail | `walkthroughs/ship-sales-order` | spec |
 | 5 | Receive customer payment for the sales invoice | Accountant | Accounting/Invoice/EditInvoice → Payment | `process-library/accountant-sends-invoice-and-receives-payment` | spec |
-| 6 | Add supplier | Buyer | Supplier/FindSupplier → EditSupplier | `walkthroughs/procure-to-pay` | planned |
+| 6 | Add supplier | Buyer | Supplier/FindSupplier → EditSupplier | `walkthroughs/procure-to-pay` | spec |
 | 7 | Place purchase order | Buyer | Order/FindOrder → OrderDetail | `process-library/buyer-places-purchase-order` | planned |
 | 8 | Receive purchase shipment into inventory | Receiver | Shipment/ShipmentDetail (Receive) | `process-library/shipment-receiver-receives-shipment` | planned |
 | 9 | Pay supplier invoice | Accountant | Accounting/Invoice → Payment | `process-library/accountant-receives-invoice-and-sends-payment` | planned |

@@ -50,7 +50,7 @@ Earlier, separate: #68 (on fix/login-history), #51, #50, #29, #20.
 | #752 | fix/deterministic-screen-test-lane | Run joined screen-test renders in the holder's lane |
 | #753 | fix/deterministic-startup-index | Index empty DataFeeds inline in deterministic mode |
 
-## java-regression-test (harness): one stack, #24 → #33
+## java-regression-test (harness): one stack, #24 → #35
 
 | PR | Branch | What |
 |----|--------|------|
@@ -64,6 +64,8 @@ Earlier, separate: #68 (on fix/login-history), #51, #50, #29, #20.
 | #31 | test/create-sales-account | Create a sales account and contact; close the focus tooltip before opening a dialog |
 | #32 | test/ship-sales-order | Ship a sales order: create shipment, pack, ship; record open requests and DOM of a failed step |
 | #33 | test/receive-customer-payment | Receive a check for a sales invoice (Send & Apply the promised payment) |
+| #34 | fix/clear-java-sessions | Clear Java's stored Jetty sessions before startup (stale visit close) |
+| #35 | test/add-supplier | Add a supplier and its order email; click a details-summary menu as a button |
 
 ## Business processes passing in lockstep
 
@@ -73,3 +75,4 @@ Earlier, separate: #68 (on fix/login-history), #51, #50, #29, #20.
 | create-sales-account, then find-and-create-customer, then place-and-approve-sales-order | 6/6, 5/5, 10/10 | 10, 15, 29 (cumulative, 0 unpaired) | 2026-10-23_11-43-49.456151Z |
 | ship-sales-order (places and approves its own order first) | 16/16 | 30, 0 unpaired | 2026-10-23_16-03-15.654529Z (with #126); 2026-10-23_16-20-41.915010Z (shared order steps) |
 | accountant-sends-invoice-and-receives-payment (order paid by check, shipped, check applied) | 18/18 | 16 (46 cumulative), 0 unpaired | 2026-10-23_16-20-41.915010Z |
+| add-supplier (organization supplier, then its order email) | 5/5 | 6 (57 cumulative), 0 unpaired | 2026-10-23_16-20-41.915010Z |
