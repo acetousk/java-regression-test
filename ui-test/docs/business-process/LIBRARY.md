@@ -38,7 +38,7 @@ integration or a carrier event.
 | 7 | Place purchase order | Buyer | Order/FindOrder → OrderDetail | `process-library/buyer-places-purchase-order` | spec |
 | 8 | Receive purchase shipment into inventory | Receiver | Shipment/ShipmentDetail (Receive) | `process-library/shipment-receiver-receives-shipment` | spec |
 | 9 | Pay supplier invoice | Accountant | Accounting/Invoice → Payment | `process-library/accountant-receives-invoice-and-sends-payment` | spec |
-| 10 | Receive inventory directly | Inventory mover | Asset/Asset/FindSummary (Receive Direct) | `walkthroughs/initial-setup-and-basics` | planned |
+| 10 | Receive inventory directly | Inventory mover | Asset/Asset/FindSummary (Receive Direct) | `walkthroughs/receive-inventory-direct` | spec |
 | 11 | Move stock between locations | Inventory mover | Asset/AssetDetail (Move) | `process-library/inventory-mover-does-stock-move` | planned |
 | 12 | Record physical inventory count | Inventory mover | Asset/PhysicalInventory | `process-library/inventory-mover-checks-physical-inventory` | planned |
 | 13 | Transfer shipment between facilities | Shipper | Shipment/FindShipment (New Transfer Shipment) | `walkthroughs/transfer-shipments` | planned |

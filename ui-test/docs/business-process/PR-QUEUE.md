@@ -51,7 +51,7 @@ Earlier, separate: #68 (on fix/login-history), #51, #50, #29, #20.
 | #752 | fix/deterministic-screen-test-lane | Run joined screen-test renders in the holder's lane |
 | #753 | fix/deterministic-startup-index | Index empty DataFeeds inline in deterministic mode |
 
-## java-regression-test (harness): one stack, #24 → #37
+## java-regression-test (harness): one stack, #24 → #38
 
 | PR | Branch | What |
 |----|--------|------|
@@ -69,6 +69,7 @@ Earlier, separate: #68 (on fix/login-history), #51, #50, #29, #20.
 | #35 | test/add-supplier | Add a supplier and its order email; click a details-summary menu as a button |
 | #36 | test/purchase-order-receive | Place and approve a purchase order; receive its shipment into the warehouse |
 | #37 | test/pay-supplier-invoice | Approve the supplier invoice and record the payment sent |
+| #38 | test/receive-inventory-direct | Receive inventory directly, without a purchase order |
 
 ## Business processes passing in lockstep
 
@@ -82,3 +83,4 @@ Earlier, separate: #68 (on fix/login-history), #51, #50, #29, #20.
 | buyer-places-purchase-order (10 DEMO_1_1 from Ziddleman for Ziziwork Retail) | 8/8 | 7 (64 cumulative), 0 unpaired | 2026-10-23_16-20-41.915010Z |
 | shipment-receiver-receives-shipment (its own purchase order, then create, schedule, receive the shipment) | 12/12 | 12 (76 cumulative), 0 unpaired | 2026-10-23_16-20-41.915010Z |
 | accountant-receives-invoice-and-sends-payment (its own purchase order and receipt, then approve the invoice and record the payment sent) | 15/15 | 40 cumulative, 0 unpaired | 2026-10-23_17-14-21.830766Z (with #128) |
+| receive-inventory-direct (5 DEMO_2_1 into Ziziwork Retail Warehouse at 7.50, no purchase order) | 5/5 | 44 cumulative, 0 unpaired | 2026-10-23_17-14-21.830766Z |
