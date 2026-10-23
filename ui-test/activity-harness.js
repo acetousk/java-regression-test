@@ -62,7 +62,7 @@ async function both(pages, action) {
 function registerActivity({ source, activity, mode = 'apps', steps }) {
   test.describe(`${source} :: ${activity}`, () => {
     test.describe.configure({ mode: 'serial', retries: 0 });
-    const contexts = {}, pages = {};
+    const contexts = {}, pages = {}, inFlight = {};
     const directory = path.join(process.env.MOQUI_RUN_DIR || path.resolve(__dirname, '../.runs/manual'),
       'ui-test/activities', source.replace(/\.md$/, ''), activity.toLowerCase().replace(/[^a-z0-9]+/g, '-'));
     const record = { source, activity, mode, steps: [], passed: false };
@@ -79,6 +79,14 @@ function registerActivity({ source, activity, mode = 'apps', steps }) {
         contexts[engine].setDefaultTimeout(15000);
         contexts[engine].setDefaultNavigationTimeout(BARRIER_TIMEOUT);
         pages[engine] = await contexts[engine].newPage();
+        // Requests still open when a step fails name what kept the page from settling.
+        const open = inFlight[engine] = new Map();
+        pages[engine].on('request', request => open.set(request, { started: Date.now() }));
+        pages[engine].on('response', response => {
+          const entry = open.get(response.request());
+          if (entry) entry.response = `HTTP ${response.status()} ${JSON.stringify(response.headers())}`;
+        });
+        for (const done of ['requestfinished', 'requestfailed']) pages[engine].on(done, request => open.delete(request));
       }
     });
     test.afterAll(async () => {
@@ -114,6 +122,9 @@ function registerActivity({ source, activity, mode = 'apps', steps }) {
         } catch (error) {
           entry.error = error.message;
           entry.after = await harnessStatus().catch(statusError => ({ statusError: statusError.message }));
+          entry.openRequests = Object.fromEntries(engines.map(engine => [engine, [...(inFlight[engine] || new Map())]
+            .map(([request, { started, response }]) =>
+              `${request.method()} ${request.url()} (${Date.now() - started}ms; ${response || 'no response'})`)]));
           throw error;
         } finally {
           fs.mkdirSync(stepDir, { recursive: true });
@@ -134,6 +145,14 @@ function registerActivity({ source, activity, mode = 'apps', steps }) {
             entry.error ||= `Java/Rust ended on different screens: ${JSON.stringify(screens)}`;
           }
           entry.visual = await diffScreenshots(stepDir).catch(error => ({ status: 'failed', reason: error.message }));
+          // A failed step keeps each engine's DOM, so a form wired differently can be read without asking either
+          // engine again. A page still waiting on its navigation may not answer; give it ten seconds.
+          if (!entry.passed) {
+            await Promise.all(engines.map(engine => Promise.race([
+              pages[engine]?.evaluate(() => document.documentElement.outerHTML),
+              new Promise(resolve => setTimeout(resolve, 10000)),
+            ]).then(html => html && fs.writeFileSync(path.join(stepDir, `${engine}.html`), html)).catch(() => {})));
+          }
           writeJSON(path.join(stepDir, 'step.json'), entry);
           if (!entry.passed) throw new Error(entry.error);
         }
