@@ -50,7 +50,7 @@ Earlier, separate: #68 (on fix/login-history), #51, #50, #29, #20.
 | #752 | fix/deterministic-screen-test-lane | Run joined screen-test renders in the holder's lane |
 | #753 | fix/deterministic-startup-index | Index empty DataFeeds inline in deterministic mode |
 
-## java-regression-test (harness): one stack, #24 → #35
+## java-regression-test (harness): one stack, #24 → #36
 
 | PR | Branch | What |
 |----|--------|------|
@@ -66,6 +66,7 @@ Earlier, separate: #68 (on fix/login-history), #51, #50, #29, #20.
 | #33 | test/receive-customer-payment | Receive a check for a sales invoice (Send & Apply the promised payment) |
 | #34 | fix/clear-java-sessions | Clear Java's stored Jetty sessions before startup (stale visit close) |
 | #35 | test/add-supplier | Add a supplier and its order email; click a details-summary menu as a button |
+| #36 | test/purchase-order-receive | Place and approve a purchase order; receive its shipment into the warehouse |
 
 ## Business processes passing in lockstep
 
@@ -76,3 +77,5 @@ Earlier, separate: #68 (on fix/login-history), #51, #50, #29, #20.
 | ship-sales-order (places and approves its own order first) | 16/16 | 30, 0 unpaired | 2026-10-23_16-03-15.654529Z (with #126); 2026-10-23_16-20-41.915010Z (shared order steps) |
 | accountant-sends-invoice-and-receives-payment (order paid by check, shipped, check applied) | 18/18 | 16 (46 cumulative), 0 unpaired | 2026-10-23_16-20-41.915010Z |
 | add-supplier (organization supplier, then its order email) | 5/5 | 6 (57 cumulative), 0 unpaired | 2026-10-23_16-20-41.915010Z |
+| buyer-places-purchase-order (10 DEMO_1_1 from Ziddleman for Ziziwork Retail) | 8/8 | 7 (64 cumulative), 0 unpaired | 2026-10-23_16-20-41.915010Z |
+| shipment-receiver-receives-shipment (its own purchase order, then create, schedule, receive the shipment) | 12/12 | 12 (76 cumulative), 0 unpaired | 2026-10-23_16-20-41.915010Z |
