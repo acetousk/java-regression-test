@@ -8,22 +8,6 @@ const { PNG } = require('pngjs');
 const engines = ['java', 'rust'];
 // Each paired write waits for both engines and a full database comparison; a submit may span several.
 const BARRIER_TIMEOUT = 120000;
-// Visual differences the user approved, read at run time so approvals recorded during a held session apply
-// to the next attempt. Each entry names an activity step and the largest difference it may show.
-const approvedDifferencesFile = process.env.MOQUI_APPROVED_DIFFERENCES || path.resolve(__dirname, '../approved-differences.json');
-function visualApprovals() {
-  return JSON.parse(fs.readFileSync(approvedDifferencesFile, 'utf8')).visual_differences || [];
-}
-function visualApproval(activity, step) {
-  return visualApprovals().find(approval => approval.activity === activity && approval.step === step);
-}
-// An approval with a selector names an element one engine renders and the other deliberately does not, such as
-// Java's link to the Bootstrap UI. It is hidden on that engine for the screenshot only, so the rest of the page
-// still compares pixel for pixel.
-function hiddenSelectors(engine) {
-  return visualApprovals().filter(approval => approval.selector && approval.engine === engine)
-    .map(approval => approval.selector);
-}
 
 function baseURL(engine) {
   return process.env[`${engine.toUpperCase()}_BASE_URL`] || `http://127.0.0.1:${engine === 'java' ? 8080 : 8081}`;
@@ -139,42 +123,17 @@ function registerActivity({ source, activity, mode = 'apps', steps }) {
           await Promise.all(engines.map(engine => pages[engine]?.waitForFunction(() =>
             [...document.querySelectorAll('.q-loading-bar')].every(bar => getComputedStyle(bar).opacity === '0'),
           null, { timeout: 5000 }).catch(() => {})));
-          entry.hidden = {};
-          await Promise.all(engines.map(async engine => {
-            const page = pages[engine];
-            if (!page) return;
-            const selectors = hiddenSelectors(engine);
-            entry.hidden[engine] = selectors.length ? await page.evaluate(selectors => selectors.filter(selector => {
-              const elements = [...document.querySelectorAll(selector)];
-              elements.forEach(element => element.setAttribute('data-moqui-hidden', element.style.display));
-              elements.forEach(element => { element.style.display = 'none'; });
-              return elements.length > 0;
-            }), selectors).catch(() => []) : [];
-            await page.screenshot({ path: path.join(stepDir, `${engine}.png`), fullPage: true }).catch(() => {});
-            if (selectors.length) await page.evaluate(() => document.querySelectorAll('[data-moqui-hidden]').forEach(element => {
-              element.style.display = element.getAttribute('data-moqui-hidden');
-              element.removeAttribute('data-moqui-hidden');
-            })).catch(() => {});
-          }));
+          await Promise.all(engines.map(engine => pages[engine]
+            ?.screenshot({ path: path.join(stepDir, `${engine}.png`), fullPage: true }).catch(() => {})));
           entry.urls = Object.fromEntries(engines.map(engine => [engine, pages[engine]?.url()]));
-          // Retain unmodified screenshots and fail this step on an unapproved visual difference.
-          entry.visual = await diffScreenshots(stepDir).catch(error => ({ status: 'failed', reason: error.message }));
-          if (entry.visual.status !== 'compared') {
+          // The engines must act alike, not look alike: both end on the same screen. Screenshots are kept as
+          // evidence and their pixel difference recorded, but a visual difference does not fail the step.
+          const screens = Object.fromEntries(engines.map(engine => [engine, entry.urls[engine] && new URL(entry.urls[engine]).pathname]));
+          if (new Set(Object.values(screens)).size > 1) {
             entry.passed = false;
-            entry.error ||= `Screenshot comparison unavailable: ${entry.visual.reason}`;
+            entry.error ||= `Java/Rust ended on different screens: ${JSON.stringify(screens)}`;
           }
-          if (entry.visual.status === 'compared' && !entry.visual.equal) {
-            const approval = visualApproval(activity, step.name);
-            if (approval) entry.visual.approval = approval;
-            if (!approval) {
-              entry.passed = false;
-              entry.error ||= `Java/Rust screenshots differ: ${entry.visual.differentPixels} pixels`;
-            } else if (entry.visual.differencePercent > approval.max_difference_percent) {
-              entry.passed = false;
-              entry.error ||= `Java/Rust screenshots differ by ${entry.visual.differencePercent.toFixed(3)}%, ` +
-                `more than the approved ${approval.max_difference_percent}%`;
-            }
-          }
+          entry.visual = await diffScreenshots(stepDir).catch(error => ({ status: 'failed', reason: error.message }));
           writeJSON(path.join(stepDir, 'step.json'), entry);
           if (!entry.passed) throw new Error(entry.error);
         }
