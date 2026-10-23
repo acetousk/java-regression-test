@@ -35,8 +35,8 @@ integration or a carrier event.
 | 4 | Ship sales order (simple: create shipment, issue and pack, pack, ship) | Shipper | OrderDetail → Shipment/ShipmentDetail | `walkthroughs/ship-sales-order` | spec |
 | 5 | Receive customer payment for the sales invoice | Accountant | Accounting/Invoice/EditInvoice → Payment | `process-library/accountant-sends-invoice-and-receives-payment` | spec |
 | 6 | Add supplier | Buyer | Supplier/FindSupplier → EditSupplier | `walkthroughs/procure-to-pay` | spec |
-| 7 | Place purchase order | Buyer | Order/FindOrder → OrderDetail | `process-library/buyer-places-purchase-order` | planned |
-| 8 | Receive purchase shipment into inventory | Receiver | Shipment/ShipmentDetail (Receive) | `process-library/shipment-receiver-receives-shipment` | planned |
+| 7 | Place purchase order | Buyer | Order/FindOrder → OrderDetail | `process-library/buyer-places-purchase-order` | spec |
+| 8 | Receive purchase shipment into inventory | Receiver | Shipment/ShipmentDetail (Receive) | `process-library/shipment-receiver-receives-shipment` | spec |
 | 9 | Pay supplier invoice | Accountant | Accounting/Invoice → Payment | `process-library/accountant-receives-invoice-and-sends-payment` | planned |
 | 10 | Receive inventory directly | Inventory mover | Asset/Asset/FindSummary (Receive Direct) | `walkthroughs/initial-setup-and-basics` | planned |
 | 11 | Move stock between locations | Inventory mover | Asset/AssetDetail (Move) | `process-library/inventory-mover-does-stock-move` | planned |
