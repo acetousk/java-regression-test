@@ -1,0 +1,161 @@
+{
+  "protocol_version": 2,
+  "run_id": "2026-10-23_01-35-18.127494Z",
+  "start_epoch_ms": 1792719330635,
+  "write_transactions": 5,
+  "database_comparisons": 5,
+  "error": "Database mismatch after write 6",
+  "transaction_counts": {
+    "java": {
+      "begin": 1086,
+      "committed": 1084,
+      "rolled_back": 0,
+      "begin_failed": 0
+    },
+    "rust": {
+      "begin": 3450,
+      "committed": 3449,
+      "rolled_back": 0,
+      "begin_failed": 0
+    }
+  },
+  "rust_only_writes": 0,
+  "exempt_writes": {
+    "java": 0,
+    "rust": 0
+  },
+  "unpaired_writes": {
+    "java": 1,
+    "rust": 1
+  },
+  "operation_trace_counts": {
+    "java": {
+      "phase": 2,
+      "coordinator": 1086,
+      "metadata": 3808,
+      "AT_ENTITY": 45836,
+      "cache": 3310,
+      "jdbc": 51510,
+      "AT_OTHER": 1,
+      "data": 13890,
+      "AT_SERVICE": 4858,
+      "AT_XML_SCREEN": 46,
+      "AT_XML_SCREEN_TRANS": 6,
+      "AT_REST_PATH": 6
+    },
+    "rust": {
+      "coordinator": 3450,
+      "phase": 4,
+      "metadata": 900,
+      "AT_ENTITY": 87038,
+      "jdbc": 270290,
+      "cache": 27680,
+      "AT_OTHER": 2,
+      "data": 16890,
+      "AT_SERVICE": 4938,
+      "AT_XML_SCREEN": 106,
+      "AT_XML_SCREEN_TRANS": 8,
+      "AT_REST_PATH": 6
+    }
+  },
+  "random_algorithm": "hmac-sha256-v1",
+  "random_draw_counts": {
+    "java": {
+      "loading:eeca-location": 54,
+      "loading:seca-location": 120,
+      "loading:llm-node": 2,
+      "activity:session-id": 2,
+      "activity:session-token": 2,
+      "activity:entity:moqui.server.Visitor": 1
+    },
+    "rust": {
+      "loading:notification-origin": 1,
+      "loading:cluster-invalidation": 12001,
+      "loading:data-feed-row": 77,
+      "activity:session-id": 2,
+      "activity:session-token": 3,
+      "activity:entity:moqui.server.Visitor": 1,
+      "activity:cluster-invalidation": 8,
+      "activity:argon2-salt": 2
+    }
+  },
+  "operation_checks_enabled": false,
+  "operation_order_equal": null,
+  "operation_database_comparisons": 0,
+  "uncommitted_state_verified": false,
+  "final_incremental_equal": null,
+  "operations": [],
+  "per_transaction_databases_equal": false,
+  "pairs": [
+    {
+      "index": 1,
+      "time_epoch_ms": 1792719330635,
+      "transactions": 1,
+      "cdc_equal": true,
+      "java": {
+        "operation_id": "java-00000549",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00003173",
+        "changes": 2
+      }
+    },
+    {
+      "index": 2,
+      "time_epoch_ms": 1792719330636,
+      "transactions": 1,
+      "cdc_equal": true,
+      "java": {
+        "operation_id": "java-00000551",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00003175",
+        "changes": 2
+      }
+    },
+    {
+      "index": 3,
+      "time_epoch_ms": 1792719330637,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000550",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00003176",
+        "changes": 2
+      }
+    },
+    {
+      "index": 4,
+      "time_epoch_ms": 1792719330638,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000661",
+        "changes": 6
+      },
+      "rust": {
+        "operation_id": "rust-00003239",
+        "changes": 6
+      }
+    },
+    {
+      "index": 5,
+      "time_epoch_ms": 1792719330639,
+      "transactions": 1,
+      "cdc_equal": true,
+      "java": {
+        "operation_id": "java-00000668",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00003246",
+        "changes": 2
+      }
+    }
+  ]
+}

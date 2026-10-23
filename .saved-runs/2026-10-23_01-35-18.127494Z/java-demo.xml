@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='utf-8'?>
+<moqui-conf xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/moqui-conf-3.xsd">
+
+    <default-property name="instance_purpose" value="dev" />
+    <default-property name="webapp_allow_origins" value="*" />
+    <default-property name="entity_empty_db_load" value="all" />
+    <default-property name="entity_lock_track" value="true" />
+
+    
+    
+
+    <cache-list warm-on-start="false">
+        
+        <cache name="entity.definition" expire-time-idle="30" />
+        
+        <cache name="entity.location" expire-time-live="300" />
+        <cache name="entity.data.feed.info" expire-time-idle="30" />
+
+        <cache name="service.location" expire-time-idle="10" />
+        <cache name="service.rest.api" expire-time-idle="10" />
+        <cache name="kie.component.releaseId" expire-time-idle="10" />
+
+        <cache name="screen.location" expire-time-idle="10" />
+        <cache name="screen.url" expire-time-idle="10" />
+        <cache name="screen.template.mode" expire-time-idle="10" />
+        <cache name="screen.template.location" expire-time-idle="10" />
+        <cache name="screen.find.path" expire-time-idle="30" />
+
+        <cache name="resource.xml-actions.location" expire-time-idle="5" />
+        <cache name="resource.groovy.location" expire-time-idle="5" />
+
+        <cache name="resource.ftl.location" expire-time-idle="5" />
+        <cache name="resource.gstring.location" expire-time-idle="5" />
+        <cache name="resource.wiki.location" expire-time-idle="5" />
+        <cache name="resource.markdown.location" expire-time-idle="5" />
+        <cache name="resource.text.location" expire-time-idle="5" />
+        <cache name="resource.reference.location" expire-time-idle="5" />
+
+        <cache name="l10n.message" expire-time-idle="600" />
+    </cache-list>
+    
+    <server-stats stats-skip-condition="pathInfo?.startsWith('/rpc') || pathInfo?.startsWith('/rest') || pathInfo?.startsWith('/status')">
+        
+        <artifact-stats type="AT_XML_SCREEN" persist-bin="true" persist-hit="true" />
+        <artifact-stats type="AT_XML_SCREEN_CONTENT" persist-bin="true" persist-hit="true" />
+        <artifact-stats type="AT_XML_SCREEN_TRANS" persist-bin="true" persist-hit="true" />
+        
+        <artifact-stats type="AT_SERVICE" persist-bin="true" persist-hit="true" />
+        <artifact-stats type="AT_ENTITY" persist-bin="true" />
+    </server-stats>
+
+    <webapp-list>
+        <webapp name="webroot">
+            <servlet name="H2Console" class="org.h2.server.web.JakartaWebServlet" load-on-startup="1">
+                
+                <url-pattern>/h2/*</url-pattern>
+            </servlet>
+        </webapp>
+    </webapp-list>
+    <artifact-execution-facade>
+        
+        <artifact-execution type="AT_XML_SCREEN" tarpit-enabled="false" />
+        <artifact-execution type="AT_XML_SCREEN_TRANS" tarpit-enabled="false" />
+        <artifact-execution type="AT_SERVICE" tarpit-enabled="false" />
+    </artifact-execution-facade>
+
+    <screen-facade boundary-comments="true">
+        
+        <screen-text-output type="html" mime-type="text/html" macro-template-location="template/screen-macro/ScreenHtmlMacros.ftl" />
+    </screen-facade>
+
+    <entity-facade query-stats="true">
+        
+    </entity-facade>
+
+    <repository-list>
+        
+    </repository-list>
+<default-property name="entity_ds_db_conf" value="postgres" /><default-property name="entity_ds_host" value="127.0.0.1" /><default-property name="entity_ds_port" value="54101" /><default-property name="entity_ds_database" value="moqui" /><default-property name="entity_ds_schema" value="public" /><default-property name="entity_ds_user" value="moqui" /><default-property name="entity_ds_password" value="REDACTED" /><default-property name="entity_ds_crypt_pass" value="REDACTED" /><default-property name="entity_ds_sslmode" value="disable" /><default-property name="webapp_http_port" value="28080" /><default-property name="webapp_https_enabled" value="false" /><default-property name="cluster_https_port" value="0" /><default-property name="opensearch_run" value="false" /></moqui-conf>

@@ -1,0 +1,14 @@
+{
+  "java": {
+    "artifact": "/home/spongebob/.t3/scratch/2026-10-22-handoff-java-rust-create-individual-aef3dcb7/harness/.runs/activity-engines/java/moqui.war",
+    "sha256": "9b2e6dbf6b0a64103a9b3cde1839ea70b0de87f1b63059bc1695689b972b92c5",
+    "checkout": "/home/spongebob/.t3/scratch/2026-10-22-handoff-java-rust-create-individual-aef3dcb7/harness/.runs/activity-engines/java",
+    "runtime": "/home/spongebob/.t3/scratch/2026-10-22-handoff-java-rust-create-individual-aef3dcb7/harness/.runs/activity-engines/java/runtime"
+  },
+  "rust": {
+    "artifact": "/home/spongebob/.t3/scratch/2026-10-22-handoff-java-rust-create-individual-aef3dcb7/harness/.runs/activity-target/debug/moqui",
+    "sha256": "cfd2345634cd560d537cbb77163ba6ebf860385a27490d0b777b6a839f693b18",
+    "checkout": "/home/spongebob/.t3/scratch/2026-10-22-handoff-java-rust-create-individual-aef3dcb7/harness/.runs/activity-engines/rust",
+    "runtime": "/home/spongebob/.t3/scratch/2026-10-22-handoff-java-rust-create-individual-aef3dcb7/harness/.runs/activity-engines/rust/runtime"
+  }
+}

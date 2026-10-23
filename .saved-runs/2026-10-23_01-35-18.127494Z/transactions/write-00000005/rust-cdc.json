@@ -1,0 +1,13 @@
+{
+  "operation_id": "rust-00003246",
+  "transactions": [
+    {
+      "operation_id": "rust-00003246",
+      "outcome": "committed",
+      "changes": [
+        "table public.user_login_history: INSERT: user_id[character varying]:'EX_JOHN_DOE' from_date[timestamp without time zone]:'2026-10-23 01:35:30.638' thru_date[timestamp without time zone]:null visit_id[character varying]:'100000' password_used[text]:null successful_login[character]:'Y' last_updated_stamp[timestamp without time zone]:'2026-10-23 01:35:30.639'",
+        "table moqui_regression.events: INSERT: payload[text]:'{\"kind\" : \"insert\", \"table\" : \"public.user_login_history\", \"old\" : null, \"new\" : \"{\\\"user_id\\\":\\\"EX_JOHN_DOE\\\",\\\"from_date\\\":\\\"2026-10-23T01:35:30.638\\\",\\\"thru_date\\\":null,\\\"visit_id\\\":\\\"100000\\\",\\\"password_used\\\":null,\\\"successful_login\\\":\\\"Y\\\",\\\"last_updated_stamp\\\":\\\"2026-10-23T01:35:30.639\\\"}\"}'"
+      ]
+    }
+  ]
+}

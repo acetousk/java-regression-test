@@ -1,0 +1,13 @@
+{
+  "operation_id": "java-00000549",
+  "transactions": [
+    {
+      "operation_id": "java-00000549",
+      "outcome": "committed",
+      "changes": [
+        "table public.visitor: INSERT: visitor_id[character varying]:'f8f5a64c-6be7-4ea2-85f8-3ad3800699d2' created_date[timestamp without time zone]:'2026-10-23 01:35:30.635' last_updated_stamp[timestamp without time zone]:'2026-10-23 01:35:30.635'",
+        "table moqui_regression.events: INSERT: payload[text]:'{\"kind\" : \"insert\", \"table\" : \"public.visitor\", \"old\" : null, \"new\" : \"{\\\"visitor_id\\\":\\\"f8f5a64c-6be7-4ea2-85f8-3ad3800699d2\\\",\\\"created_date\\\":\\\"2026-10-23T01:35:30.635\\\",\\\"last_updated_stamp\\\":\\\"2026-10-23T01:35:30.635\\\"}\"}'"
+      ]
+    }
+  ]
+}
