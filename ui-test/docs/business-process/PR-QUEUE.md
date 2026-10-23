@@ -2,7 +2,7 @@
 
 These PRs make the business-process activities pass on Java and Rust in lockstep. Merge each stack bottom-up.
 
-## mr-moqui (Rust): one stack, #95 → #120
+## mr-moqui (Rust): one stack, #95 → #126
 
 | PR | Branch | What |
 |----|--------|------|
@@ -21,6 +21,12 @@ These PRs make the business-process activities pass on Java and Rust in lockstep
 | #118 | fix/decimal-scale-as-java | Read decimals without the column scale; keep BigDecimal's scale when an operand is zero |
 | #119 | fix/dynamic-select-as-select2 | Drop-down opens on click and keeps the transition's option order |
 | #120 | fix/seca-order-as-java | Run same-priority SECA rules in Java's HashMap order (sequence ids) |
+| #121 | fix/link-transition-alias | Link to an alias transition's screen; find `//` paths by name; generate actions for a running script on their own thread |
+| #122 | fix/view-entity-form-shape | Give a view entity's form shape its aliases and primary key |
+| #123 | fix/section-in-form-keeps-owner | A section in a form-list cell keeps the row's form (Pack items) |
+| #124 | fix/timestamp-param-user-zone | Read a text timestamp parameter in the user's zone |
+| #125 | fix/date-time-minute-step | Start a date-time field on its minute step |
+| #126 | fix/temporal-format-as-java | Show a timestamp from a `from` path, or formatted with no pattern, as Java does (Shipment Detail) |
 
 Earlier, separate: #68 (on fix/login-history), #51, #50, #29, #20.
 
@@ -30,6 +36,12 @@ Earlier, separate: #68 (on fix/login-history), #51, #50, #29, #20.
 |----|--------|------|
 | #1 | fix/order-item-total-decimal-scale | get#OrderItemTotal keeps the scale of Java's 0.0 and 1.0 literals |
 
+## MrSimpleScreens (Rust's SimpleScreens)
+
+| PR | Branch | What |
+|----|--------|------|
+| #4 | fix/shipment-shipping-options-js | Iterate shipping options with for...of in getShippingOptions |
+
 ## moqui-framework (Java)
 
 | PR | Branch | What |
@@ -38,7 +50,7 @@ Earlier, separate: #68 (on fix/login-history), #51, #50, #29, #20.
 | #752 | fix/deterministic-screen-test-lane | Run joined screen-test renders in the holder's lane |
 | #753 | fix/deterministic-startup-index | Index empty DataFeeds inline in deterministic mode |
 
-## java-regression-test (harness): one stack, #24 → #31
+## java-regression-test (harness): one stack, #24 → #32
 
 | PR | Branch | What |
 |----|--------|------|
@@ -50,6 +62,7 @@ Earlier, separate: #68 (on fix/login-history), #51, #50, #29, #20.
 | #29 | test/sales-order-create-parity | Type Tom Select searches reliably and pick Joe Q Public |
 | #30 | fix/activity-loading-bar-settle | Functional parity; place and approve a sales order end to end |
 | #31 | test/create-sales-account | Create a sales account and contact; close the focus tooltip before opening a dialog |
+| #32 | test/ship-sales-order | Ship a sales order: create shipment, pack, ship; record open requests and DOM of a failed step |
 
 ## Business processes passing in lockstep
 
@@ -57,3 +70,4 @@ Earlier, separate: #68 (on fix/login-history), #51, #50, #29, #20.
 |---------|-------|---------------|-----|
 | place-and-approve-sales-order | 10/10 | 17 | 2026-10-23_11-06-21.976725Z |
 | create-sales-account, then find-and-create-customer, then place-and-approve-sales-order | 6/6, 5/5, 10/10 | 10, 15, 29 (cumulative, 0 unpaired) | 2026-10-23_11-43-49.456151Z |
+| ship-sales-order (places and approves its own order first) | 16/16 | 30, 0 unpaired | 2026-10-23_16-03-15.654529Z (with #126) |
