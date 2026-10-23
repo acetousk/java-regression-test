@@ -738,7 +738,7 @@ def build_engines(java_home=None, directories=None):
     print(f"Both engines built; artifact/runtime paths recorded in {manifest}")
 
 
-def demo_conf(source, destination, db_port, password, http_port, crypt_pass):
+def demo_conf(source, destination, db_port, password, http_port, crypt_pass, extra=None):
     """Preserve dev/demo settings, overriding test connectivity and the shared test key."""
     tree = ET.parse(source)
     root = tree.getroot()
@@ -757,6 +757,7 @@ def demo_conf(source, destination, db_port, password, http_port, crypt_pass):
         "webapp_https_enabled": "false",
         "cluster_https_port": "0",
         "opensearch_run": "false",
+        **(extra or {}),
     }
     for name, value in properties.items():
         node = root.find(f"default-property[@name='{name}']")
@@ -766,6 +767,42 @@ def demo_conf(source, destination, db_port, password, http_port, crypt_pass):
     # The generated configuration contains disposable database credentials.
     destination.touch(mode=0o600)
     tree.write(destination, encoding="utf-8", xml_declaration=True)
+
+
+def start_opensearch(home, evidence, timeout):
+    """Start a single-node OpenSearch with storage in the run evidence; return (process, url).
+
+    Java searches parties and products through OpenSearch; without it those searches return nothing.
+    """
+    with socket.socket() as probe:
+        probe.bind(("127.0.0.1", 0))
+        port = probe.getsockname()[1]
+    data = evidence / "opensearch"
+    for directory in ("data", "logs"):
+        (data / directory).mkdir(parents=True, exist_ok=True)
+    log = (evidence / "opensearch.log").open("wb")
+    process = subprocess.Popen([
+        str(home / "bin/opensearch"), "-E", "discovery.type=single-node", "-E", "network.host=127.0.0.1",
+        "-E", f"http.port={port}", "-E", "transport.port=0", "-E", f"path.data={data / 'data'}",
+        "-E", f"path.logs={data / 'logs'}", "-E", "cluster.routing.allocation.disk.threshold_enabled=false",
+    ], env={**os.environ, "OPENSEARCH_JAVA_OPTS": "-Xms512m -Xmx512m", "OPENSEARCH_JAVA_HOME": str(home / "jdk")},
+        stdout=log, stderr=subprocess.STDOUT, start_new_session=True)
+    log.close()
+    url = f"http://127.0.0.1:{port}"
+    deadline = time.monotonic() + timeout
+    while True:
+        if process.poll() is not None:
+            raise RuntimeError(f"OpenSearch exited before readiness; see {evidence / 'opensearch.log'}")
+        try:
+            with urllib.request.urlopen(f"{url}/_cluster/health?wait_for_status=yellow&timeout=1s", timeout=5):
+                break
+        except OSError:
+            if time.monotonic() >= deadline:
+                process.kill()
+                raise TimeoutError("OpenSearch did not become ready")
+            time.sleep(0.5)
+    print(f"OpenSearch for Java at {url}", flush=True)
+    return process, url
 
 
 def wait_for_ports(processes, ports, timeout, boot_logs=None, failure_check=None):
@@ -1502,7 +1539,12 @@ def boot_and_stop(args):
     # This is infrastructure entropy, not an application deterministic-input source.
     container_environment = {**os.environ, "POSTGRES_PASSWORD": password}
     ports = {"java": args.java_port, "rust": args.rust_port}
+    opensearch = None
     try:
+        search_conf = {}
+        if getattr(args, "java_opensearch", None):
+            opensearch, search_url = start_opensearch(args.java_opensearch.resolve(), evidence, args.boot_timeout)
+            search_conf = {"elasticsearch_url": search_url, "elasticsearch_index_prefix": "java_"}
         # One fresh, storage-isolated container per engine; never reset an existing DB.
         for name, checkout in zip(("java", "rust"), REPOSITORIES):
             container = f"moqui-regression-{run_id}-{name}"
@@ -1545,7 +1587,8 @@ def boot_and_stop(args):
                 create_cdc_slot(container, bootstrap=activity_only)
             runtime = directories[name] / "runtime"
             conf = evidence / f"{name}-demo.xml"
-            demo_conf(runtime / "conf/MoquiDevConf.xml", conf, db_port, password, ports[name], crypt_pass)
+            demo_conf(runtime / "conf/MoquiDevConf.xml", conf, db_port, password, ports[name], crypt_pass,
+                      search_conf if name == "java" else None)
 
         if (evidence / "java-postgres-image.txt").read_bytes() != (evidence / "rust-postgres-image.txt").read_bytes():
             raise RuntimeError("PostgreSQL containers resolved to different image IDs")
@@ -1719,6 +1762,12 @@ def boot_and_stop(args):
                     print("Startup snapshots match after approved differences (not a complete logical-equivalence proof).", flush=True)
         finally:
             (evidence / "verification.json").write_text(json.dumps(verification, indent=2) + "\n")
+            if opensearch:
+                os.killpg(opensearch.pid, signal.SIGTERM)
+                try:
+                    opensearch.wait(timeout=60)
+                except subprocess.TimeoutExpired:
+                    os.killpg(opensearch.pid, signal.SIGKILL)
             for name, container in containers.items():
                 close_psql_session(container)
                 with (evidence / f"{name}-postgres.log").open("wb") as log:
@@ -1750,6 +1799,9 @@ def main():
                         help="Reuse existing engine builds instead of rebuilding both engines")
     parser.add_argument("--differences", type=Path, default=ROOT / "approved-differences.json",
                         help="Reviewed differences JSON; copied into the run evidence")
+    parser.add_argument("--java-opensearch", type=Path,
+                        help="OpenSearch install (e.g. opensearch-3.4.0) to run for Java's searches; "
+                             "Rust searches through PostgreSQL")
     parser.add_argument("--java-port", type=int, default=8080)
     parser.add_argument("--rust-port", type=int, default=8081)
     parser.add_argument("--boot-timeout", type=float, default=600)
