@@ -18,8 +18,11 @@ const signIn = [
 /** The button labelled exactly `text`; qapps buttons put an icon glyph before the label. */
 function button(page, text) {
   const label = text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  // Java's Bootstrap 3 dialogs keep aria-hidden while open, so a button inside one counts if it is visible.
-  return page.getByRole('button', { name: new RegExp(`^\\W*${label}\\s*$`), includeHidden: true })
+  const name = new RegExp(`^\\W*${label}\\s*$`);
+  // Java's Bootstrap 3 dialogs keep aria-hidden while open, so a button inside one counts if it is visible. Rust opens
+  // a button-menu (Add New) from a details summary where Java has a dropdown button.
+  return page.getByRole('button', { name, includeHidden: true })
+    .or(page.locator('summary').filter({ hasText: name }))
     .filter({ visible: true }).first();
 }
 
