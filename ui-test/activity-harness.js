@@ -6,6 +6,8 @@ const path = require('node:path');
 const { PNG } = require('pngjs');
 
 const engines = ['java', 'rust'];
+// Each paired write waits for both engines and a full database comparison; a submit may span several.
+const BARRIER_TIMEOUT = 120000;
 // Visual differences the user approved, read at run time so approvals recorded during a held session apply
 // to the next attempt. Each entry names an activity step and the largest difference it may show.
 const approvedDifferencesFile = process.env.MOQUI_APPROVED_DIFFERENCES || path.resolve(__dirname, '../approved-differences.json');
@@ -82,7 +84,7 @@ function registerActivity({ source, activity, mode = 'apps', steps }) {
       for (const engine of engines) {
         contexts[engine] = await browser.newContext({ baseURL: `${baseURL(engine)}/${mode}/` });
         contexts[engine].setDefaultTimeout(15000);
-        contexts[engine].setDefaultNavigationTimeout(120000);
+        contexts[engine].setDefaultNavigationTimeout(BARRIER_TIMEOUT);
         pages[engine] = await contexts[engine].newPage();
       }
     });
@@ -103,11 +105,11 @@ function registerActivity({ source, activity, mode = 'apps', steps }) {
           expect(entry.before.error, 'transaction harness error before step').toBeNull();
           const results = await both(pages, step.run);
           if (step.verify) await step.verify(results, pages);
-          // Background commits may still be pairing; wait until both engines are settled.
+          // Background commits may still be pairing, one database comparison per write; wait until both engines settle.
           await expect.poll(async () => {
             entry.after = await harnessStatus();
             return entry.after.error || entry.after.unpaired_writes;
-          }, { message: 'transaction harness settled with no unpaired writes', timeout: 15000 })
+          }, { message: 'transaction harness settled with no unpaired writes', timeout: BARRIER_TIMEOUT })
             .toEqual({ java: 0, rust: 0 });
           expect(entry.after.database_comparisons, 'every paired write was database-compared')
             .toBe(entry.after.write_transactions);
@@ -122,6 +124,8 @@ function registerActivity({ source, activity, mode = 'apps', steps }) {
           throw error;
         } finally {
           fs.mkdirSync(stepDir, { recursive: true });
+          // A Vue page renders after its own requests; an unsettled page is caught by the screenshot diff.
+          await Promise.all(engines.map(engine => pages[engine]?.waitForLoadState('networkidle').catch(() => {})));
           await Promise.all(engines.map(engine => pages[engine]?.screenshot({
             path: path.join(stepDir, `${engine}.png`), fullPage: true }).catch(() => {})));
           entry.urls = Object.fromEntries(engines.map(engine => [engine, pages[engine]?.url()]));
@@ -156,8 +160,9 @@ async function login(page) {
   await form.locator('[name="username"]').fill(process.env.VISUAL_USERNAME || 'john.doe');
   await form.locator('[name="password"]').fill(process.env.VISUAL_PASSWORD || 'moqui');
   await Promise.all([
-    page.waitForURL(url => !/\/Login(?:[/?#]|$)/.test(url.pathname), { timeout: 30000 }),
-    form.locator('button[type="submit"]').click(),
+    page.waitForURL(url => !/\/Login(?:[/?#]|$)/.test(url.pathname), { timeout: BARRIER_TIMEOUT }),
+    // The submit's navigation waits while each login write is paired and compared.
+    form.locator('button[type="submit"]').click({ timeout: BARRIER_TIMEOUT }),
   ]);
 }
 
