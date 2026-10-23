@@ -40,7 +40,7 @@ integration or a carrier event.
 | 9 | Pay supplier invoice | Accountant | Accounting/Invoice → Payment | `process-library/accountant-receives-invoice-and-sends-payment` | spec |
 | 10 | Receive inventory directly | Inventory mover | Asset/Asset/FindSummary (Receive Direct) | `walkthroughs/receive-inventory-direct` | spec |
 | 11 | Move stock between locations | Inventory mover | Asset/AssetDetail (Move) | `process-library/inventory-mover-does-stock-move` | spec |
-| 12 | Record physical inventory count | Inventory mover | Asset/PhysicalInventory | `process-library/inventory-mover-checks-physical-inventory` | planned |
+| 12 | Record physical inventory count | Inventory mover | Asset/PhysicalInventory | `process-library/inventory-mover-checks-physical-inventory` | spec |
 | 13 | Transfer shipment between facilities | Shipper | Shipment/FindShipment (New Transfer Shipment) | `walkthroughs/transfer-shipments` | planned |
 | 14 | Picklist pick and pack | Warehouse | Shipping/Picklist, PackShipment | `walkthroughs/shipping-management-with-picklists` | planned |
 | 15 | Cancel sales order | CSR | OrderDetail (Close Order / Cancel) | `process-library/customer-cancels-order` | planned |

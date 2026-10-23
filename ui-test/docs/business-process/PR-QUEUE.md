@@ -51,7 +51,7 @@ Earlier, separate: #68 (on fix/login-history), #51, #50, #29, #20.
 | #752 | fix/deterministic-screen-test-lane | Run joined screen-test renders in the holder's lane |
 | #753 | fix/deterministic-startup-index | Index empty DataFeeds inline in deterministic mode |
 
-## java-regression-test (harness): one stack, #24 → #39
+## java-regression-test (harness): one stack, #24 → #40
 
 | PR | Branch | What |
 |----|--------|------|
@@ -71,6 +71,7 @@ Earlier, separate: #68 (on fix/login-history), #51, #50, #29, #20.
 | #37 | test/pay-supplier-invoice | Approve the supplier invoice and record the payment sent |
 | #38 | test/receive-inventory-direct | Receive inventory directly, without a purchase order |
 | #39 | test/stock-move | Move part of an asset to another location; shared Receive Direct steps |
+| #40 | test/physical-inventory | Record a physical inventory count with a variance reason |
 
 ## Business processes passing in lockstep
 
@@ -86,3 +87,4 @@ Earlier, separate: #68 (on fix/login-history), #51, #50, #29, #20.
 | accountant-receives-invoice-and-sends-payment (its own purchase order and receipt, then approve the invoice and record the payment sent) | 15/15 | 40 cumulative, 0 unpaired | 2026-10-23_17-14-21.830766Z (with #128) |
 | receive-inventory-direct (5 DEMO_2_1 into Ziziwork Retail Warehouse at 7.50, no purchase order) | 5/5 | 44 cumulative, 0 unpaired | 2026-10-23_17-14-21.830766Z |
 | inventory-mover-does-stock-move (receive 10 DEMO_2_1 at bulk 01010102, move 4 to pick 01010101) | 8/8 | 18 cumulative, 0 unpaired | 2026-10-23_17-41-28.777761Z |
+| inventory-mover-checks-physical-inventory (receive 8 DEMO_2_1 at 01010202, count 2 less, Damaged) | 8/8 | 32 cumulative, 0 unpaired; same variance row on both DBs | 2026-10-23_17-41-28.777761Z |
