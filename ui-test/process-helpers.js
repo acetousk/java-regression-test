@@ -30,17 +30,42 @@ async function openDialog(page, buttonText, dialogId) {
 }
 
 /**
- * Choose an option in an m-drop-down (a Quasar q-select with id `<form>_<field>`): open it, type the
- * search term for server-search drop-downs, then click the option whose label contains `optionText`.
+ * Choose an option in a drop-down field (the `<select id="<form>_<field>">`) as a user does: open it, type
+ * `search` for a server-search drop-down, then click the option whose label contains `optionText`. Java's apps
+ * enhance the select with select2 and Rust's with Tom Select; both are driven by what the user sees.
  */
 async function choose(page, selectId, optionText, search) {
-  const input = page.locator(`#${selectId}`);
-  await input.click();
-  if (search !== undefined) await input.fill(search);
-  const option = page.locator('.q-menu .q-item').filter({ hasText: optionText }).first();
+  const select = page.locator(`#${selectId}`);
+  const tomControl = page.locator(`#${selectId}-ts-control`);
+  let options;
+  if (await tomControl.count()) {
+    await page.locator(`#${selectId}`).locator('xpath=following-sibling::div[contains(@class,"ts-wrapper")][1]')
+      .locator('.ts-control').click();
+    if (search !== undefined) {
+      // A keystroke typed while Tom Select is still opening can be lost ("Joe" became "oe"): type once the input
+      // has focus, and type again until the input holds the whole search.
+      await expect(tomControl).toBeFocused();
+      await expect(async () => {
+        if (await tomControl.inputValue() !== search) {
+          await tomControl.fill('');
+          await tomControl.pressSequentially(search, { delay: 20 });
+        }
+        await expect(tomControl).toHaveValue(search, { timeout: 1000 });
+      }).toPass({ timeout: 10000 });
+    }
+    options = page.locator(`#${selectId}-ts-dropdown .option`);
+  } else {
+    await select.locator('xpath=following-sibling::span[contains(@class,"select2")][1]')
+      .locator('.select2-selection').click();
+    if (search !== undefined) {
+      await page.locator('.select2-container--open .select2-search__field').pressSequentially(search, { delay: 20 });
+    }
+    options = page.locator('.select2-container--open .select2-results__option');
+  }
+  const option = options.filter({ hasText: optionText }).first();
   await expect(option).toBeVisible();
   await option.click();
-  await expect(page.locator('.q-menu')).toHaveCount(0);
+  await expect(select).not.toHaveValue('');
 }
 
 /** Click a submit or hidden-form link button and wait for the screen it lands on. */
