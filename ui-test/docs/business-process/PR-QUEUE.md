@@ -38,7 +38,7 @@ Earlier, separate: #68 (on fix/login-history), #51, #50, #29, #20.
 | #752 | fix/deterministic-screen-test-lane | Run joined screen-test renders in the holder's lane |
 | #753 | fix/deterministic-startup-index | Index empty DataFeeds inline in deterministic mode |
 
-## java-regression-test (harness): one stack, #24 → #30
+## java-regression-test (harness): one stack, #24 → #31
 
 | PR | Branch | What |
 |----|--------|------|
@@ -49,9 +49,11 @@ Earlier, separate: #68 (on fix/login-history), #51, #50, #29, #20.
 | #28 | feat/java-opensearch | `--java-opensearch` for Java's search facade |
 | #29 | test/sales-order-create-parity | Type Tom Select searches reliably and pick Joe Q Public |
 | #30 | fix/activity-loading-bar-settle | Functional parity; place and approve a sales order end to end |
+| #31 | test/create-sales-account | Create a sales account and contact; close the focus tooltip before opening a dialog |
 
 ## Business processes passing in lockstep
 
 | Process | Steps | Paired writes | Run |
 |---------|-------|---------------|-----|
 | place-and-approve-sales-order | 10/10 | 17 | 2026-10-23_11-06-21.976725Z |
+| create-sales-account, then find-and-create-customer, then place-and-approve-sales-order | 6/6, 5/5, 10/10 | 10, 15, 29 (cumulative, 0 unpaired) | 2026-10-23_11-43-49.456151Z |
