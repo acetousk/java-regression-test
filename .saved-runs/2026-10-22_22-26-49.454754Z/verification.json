@@ -1,0 +1,98 @@
+{
+  "deterministic_requested": true,
+  "servers_started": true,
+  "shutdown_verified": false,
+  "activity_tests_passed": null,
+  "final_databases_equal": null,
+  "passed": false,
+  "approved_differences_sha256": "e19f9d1aea4a2dc361db919e509cefac7e95b0c95c8ccdf8a5f39ee8af8808dd",
+  "loading_equality_checked": false,
+  "deterministic": {
+    "protocol_version": 2,
+    "run_id": "2026-10-22_22-26-49.454754Z",
+    "start_epoch_ms": 1792708014719,
+    "write_transactions": 3,
+    "database_comparisons": 3,
+    "error": "Database mismatch after write 4",
+    "transaction_counts": {
+      "java": {
+        "begin": 647,
+        "committed": 646,
+        "rolled_back": 0,
+        "begin_failed": 0
+      },
+      "rust": {
+        "begin": 3241,
+        "committed": 3240,
+        "rolled_back": 0,
+        "begin_failed": 0
+      }
+    },
+    "rust_only_writes": 0,
+    "exempt_writes": {
+      "java": 0,
+      "rust": 0
+    },
+    "unpaired_writes": {
+      "java": 1,
+      "rust": 1
+    },
+    "operation_trace_counts": {
+      "java": {
+        "phase": 2,
+        "coordinator": 647,
+        "metadata": 3128,
+        "AT_ENTITY": 44882,
+        "cache": 2912,
+        "jdbc": 50908,
+        "AT_OTHER": 1,
+        "data": 13890,
+        "AT_SERVICE": 4850,
+        "AT_XML_SCREEN": 16,
+        "AT_XML_SCREEN_TRANS": 2
+      },
+      "rust": {
+        "coordinator": 3241,
+        "phase": 4,
+        "metadata": 900,
+        "AT_ENTITY": 86616,
+        "jdbc": 268500,
+        "cache": 27471,
+        "AT_OTHER": 2,
+        "data": 16890,
+        "AT_SERVICE": 4932,
+        "AT_XML_SCREEN": 16,
+        "AT_XML_SCREEN_TRANS": 2
+      }
+    },
+    "random_algorithm": "hmac-sha256-v1",
+    "random_draw_counts": {
+      "java": {
+        "loading:eeca-location": 54,
+        "loading:seca-location": 120,
+        "loading:llm-node": 2,
+        "activity:session-id": 2,
+        "activity:session-token": 2,
+        "activity:entity:moqui.server.Visitor": 1
+      },
+      "rust": {
+        "loading:notification-origin": 1,
+        "loading:cluster-invalidation": 12001,
+        "loading:data-feed-row": 77,
+        "activity:session-id": 2,
+        "activity:session-token": 2,
+        "activity:entity:moqui.server.Visitor": 1,
+        "activity:cluster-invalidation": 5,
+        "activity:argon2-salt": 2,
+        "activity:data-feed-row": 1
+      }
+    },
+    "operation_checks_enabled": false,
+    "operation_order_equal": null,
+    "operation_database_comparisons": 0,
+    "uncommitted_state_verified": false,
+    "final_incremental_equal": null,
+    "operations": [],
+    "per_transaction_databases_equal": false
+  }
+}

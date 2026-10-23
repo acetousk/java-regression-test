@@ -1,0 +1,128 @@
+{
+  "protocol_version": 2,
+  "run_id": "2026-10-20_00-04-53.084062Z",
+  "start_epoch_ms": 1792454703077,
+  "write_transactions": 3,
+  "database_comparisons": 3,
+  "error": "rust did not commit write 4",
+  "transaction_counts": {
+    "java": {
+      "begin": 662,
+      "committed": 661,
+      "rolled_back": 0,
+      "begin_failed": 0
+    },
+    "rust": {
+      "begin": 3234,
+      "committed": 3234,
+      "rolled_back": 0,
+      "begin_failed": 0
+    }
+  },
+  "rust_only_writes": 0,
+  "exempt_writes": {
+    "java": 0,
+    "rust": 0
+  },
+  "unpaired_writes": {
+    "java": 1,
+    "rust": 0
+  },
+  "operation_trace_counts": {
+    "java": {
+      "phase": 2,
+      "coordinator": 662,
+      "metadata": 2453,
+      "AT_ENTITY": 45052,
+      "cache": 2958,
+      "jdbc": 51056,
+      "AT_OTHER": 1,
+      "data": 13974,
+      "AT_SERVICE": 4842,
+      "AT_XML_SCREEN": 12
+    },
+    "rust": {
+      "coordinator": 3235,
+      "phase": 4,
+      "metadata": 900,
+      "AT_ENTITY": 86588,
+      "jdbc": 268388,
+      "cache": 27459,
+      "AT_OTHER": 2,
+      "data": 16890,
+      "AT_SERVICE": 4932,
+      "AT_XML_SCREEN": 12
+    }
+  },
+  "random_algorithm": "hmac-sha256-v1",
+  "random_draw_counts": {
+    "java": {
+      "loading:eeca-location": 54,
+      "loading:seca-location": 120,
+      "loading:llm-node": 2,
+      "activity:session-id": 1,
+      "activity:session-token": 1,
+      "activity:entity:moqui.server.Visitor": 1
+    },
+    "rust": {
+      "loading:notification-origin": 1,
+      "loading:cluster-invalidation": 12001,
+      "loading:data-feed-row": 77,
+      "activity:session-id": 1,
+      "activity:session-token": 1,
+      "activity:entity:moqui.server.Visitor": 1,
+      "activity:cluster-invalidation": 2
+    }
+  },
+  "operation_checks_enabled": false,
+  "operation_order_equal": null,
+  "operation_database_comparisons": 0,
+  "uncommitted_state_verified": false,
+  "final_incremental_equal": null,
+  "operations": [],
+  "per_transaction_databases_equal": false,
+  "pairs": [
+    {
+      "index": 1,
+      "time_epoch_ms": 1792454703077,
+      "transactions": 1,
+      "cdc_equal": true,
+      "java": {
+        "operation_id": "java-00000552",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00003173",
+        "changes": 2
+      }
+    },
+    {
+      "index": 2,
+      "time_epoch_ms": 1792454703078,
+      "transactions": 1,
+      "cdc_equal": true,
+      "java": {
+        "operation_id": "java-00000554",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00003175",
+        "changes": 2
+      }
+    },
+    {
+      "index": 3,
+      "time_epoch_ms": 1792454703079,
+      "transactions": 1,
+      "cdc_equal": false,
+      "java": {
+        "operation_id": "java-00000553",
+        "changes": 2
+      },
+      "rust": {
+        "operation_id": "rust-00003176",
+        "changes": 2
+      }
+    }
+  ]
+}

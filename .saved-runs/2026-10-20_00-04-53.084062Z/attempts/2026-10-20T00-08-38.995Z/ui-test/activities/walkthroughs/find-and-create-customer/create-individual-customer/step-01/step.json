@@ -1,0 +1,57 @@
+{
+  "name": "open Login",
+  "writes": true,
+  "passed": false,
+  "before": {
+    "error": null,
+    "write_transactions": 0,
+    "database_comparisons": 0,
+    "rust_only_writes": 0,
+    "unpaired_writes": {
+      "java": 0,
+      "rust": 0
+    },
+    "waiting_at_barrier": {
+      "java": false,
+      "rust": false
+    }
+  },
+  "after": {
+    "error": null,
+    "write_transactions": 3,
+    "database_comparisons": 3,
+    "rust_only_writes": 0,
+    "unpaired_writes": {
+      "java": 0,
+      "rust": 0
+    },
+    "waiting_at_barrier": {
+      "java": false,
+      "rust": false
+    }
+  },
+  "pairedWrites": 3,
+  "urls": {
+    "java": "http://127.0.0.1:28080/Login#login",
+    "rust": "http://127.0.0.1:28081/Login"
+  },
+  "visual": {
+    "status": "compared",
+    "equal": false,
+    "differentPixels": 39460,
+    "comparedPixels": 1440000,
+    "differencePercent": 2.7402777777777776,
+    "threshold": 0.1,
+    "dimensions": {
+      "java": [
+        1440,
+        1000
+      ],
+      "rust": [
+        1440,
+        1000
+      ]
+    }
+  },
+  "error": "Java/Rust screenshots differ: 39460 pixels"
+}

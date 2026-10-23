@@ -1,0 +1,1800 @@
+{
+  "mode": "activity-delta",
+  "comparison_passed": true,
+  "compared_relations": [
+    "public.artifact_hit",
+    "public.artifact_hit_bin",
+    "public.data_document_field",
+    "public.enumeration",
+    "public.enumeration_type",
+    "public.llm_conversation",
+    "public.llm_skill",
+    "public.localized_message",
+    "public.notification_topic",
+    "public.sequence_value_item",
+    "public.service_job",
+    "public.service_job_parameter",
+    "public.system_message_remote",
+    "public.system_message_type",
+    "public.test_fts",
+    "public.user_group_permission",
+    "public.user_permission",
+    "public.visit"
+  ],
+  "schema_equal_after_approved_differences": true,
+  "unapproved_record_byte_differences": [],
+  "approved_differences_applied": [
+    {
+      "kind": "rust_only_table",
+      "table": "public.auth_flow",
+      "rows": 0
+    },
+    {
+      "kind": "rust_only_table",
+      "table": "public.auth_flow_field_map",
+      "rows": 0
+    },
+    {
+      "kind": "rust_only_table",
+      "table": "public.auth_flow_role_map",
+      "rows": 0
+    },
+    {
+      "kind": "rust_only_table",
+      "table": "public.cluster_member",
+      "rows": 1
+    },
+    {
+      "kind": "rust_only_table",
+      "table": "public.cluster_message",
+      "rows": 0
+    },
+    {
+      "kind": "rust_only_table",
+      "table": "public.data_feed_pending",
+      "rows": 0
+    },
+    {
+      "kind": "rust_only_table",
+      "table": "public.http_session",
+      "rows": 0
+    },
+    {
+      "kind": "rust_only_table",
+      "table": "public.oauth_flow",
+      "rows": 0
+    },
+    {
+      "kind": "rust_only_table",
+      "table": "public.oidc_flow",
+      "rows": 0
+    },
+    {
+      "kind": "rust_only_table",
+      "table": "public.saml_flow",
+      "rows": 0
+    },
+    {
+      "kind": "rust_only_table",
+      "table": "public.user_ssh_key",
+      "rows": 0
+    },
+    {
+      "kind": "rust_only_table",
+      "table": "search.document_index",
+      "rows": 8
+    },
+    {
+      "kind": "rust_only_table",
+      "table": "search.moqui_http_log",
+      "rows": 0
+    },
+    {
+      "kind": "rust_only_table",
+      "table": "search.moqui_logs",
+      "rows": 0
+    },
+    {
+      "kind": "template_difference",
+      "table": "public.localized_message",
+      "key": {
+        "original": "StatusFlowTransitionNotFoundTemplate",
+        "locale": "default"
+      },
+      "field": "localized",
+      "validator": "elvis_or",
+      "java": "Status change not allowed from ${lookedUpStatusName?:lookedUpStatusId} to ${parameterStatusName?:parameterStatusId}"
+    },
+    {
+      "kind": "template_difference",
+      "table": "public.localized_message",
+      "key": {
+        "original": "UomNameTemplate",
+        "locale": "default"
+      },
+      "field": "localized",
+      "validator": "elvis_or",
+      "java": "${description?:''} (${abbreviation?:uomId})"
+    },
+    {
+      "kind": "template_difference",
+      "table": "public.localized_message",
+      "key": {
+        "original": "UsernameTemplate",
+        "locale": "default"
+      },
+      "field": "localized",
+      "validator": "elvis_or",
+      "java": "${userFullName ?: (lastName ? (firstName ? firstName + ' ' : '') + lastName : '')} [${username?:userId?:''}]"
+    },
+    {
+      "kind": "template_difference",
+      "table": "public.notification_topic",
+      "key": {
+        "topic": "ServiceJobError"
+      },
+      "field": "title_template",
+      "validator": "elvis_or",
+      "java": "Job Error ${serviceCallRun.jobName?:''} [${serviceCallRun.jobRunId?:''}] ${serviceCallRun.errors?:'N/A'}"
+    },
+    {
+      "kind": "template_difference",
+      "table": "public.notification_topic",
+      "key": {
+        "topic": "WebServletError"
+      },
+      "field": "title_template",
+      "validator": "elvis_or",
+      "java": "Web Error ${errorCode?:''} (${username?:'no user'}) ${path?:''} ${message?:'N/A'}"
+    },
+    {
+      "kind": "template_difference",
+      "table": "public.notification_topic",
+      "key": {
+        "topic": "ServiceJobError"
+      },
+      "field": "link_template",
+      "java": "/vapps/system/ServiceJob/JobRuns/JobRunDetail?jobRunId=${serviceCallRun.jobRunId}",
+      "rust": "/qapps/System/ServiceJob/JobRuns/JobRunDetail?jobRunId=${serviceCallRun.jobRunId}"
+    },
+    {
+      "kind": "rust_only_column",
+      "table": "public.system_message_remote",
+      "name": "ssh_host_key_fingerprint",
+      "type": "text"
+    },
+    {
+      "kind": "rust_only_ddl",
+      "object_type": "SCHEMA",
+      "name": "search"
+    },
+    {
+      "kind": "rust_only_ddl",
+      "object_type": "EXTENSION",
+      "name": "pg_trgm"
+    },
+    {
+      "kind": "theme_resource",
+      "theme": "DEFAULT",
+      "sequence": 1,
+      "java": [
+        "STRT_STYLESHEET",
+        null
+      ],
+      "rust": [
+        "STRT_STYLESHEET",
+        "/libs/fontawesome/css/font-awesome.min.css"
+      ]
+    },
+    {
+      "kind": "theme_resource",
+      "theme": "DEFAULT",
+      "sequence": 2,
+      "java": [
+        "STRT_STYLESHEET",
+        "/libs/font-awesome/css/font-awesome.min.css"
+      ],
+      "rust": null
+    },
+    {
+      "kind": "theme_resource",
+      "theme": "DEFAULT",
+      "sequence": 3,
+      "java": [
+        "STRT_STYLESHEET",
+        "/libs/twitter-bootstrap/css/bootstrap.min.css"
+      ],
+      "rust": null
+    },
+    {
+      "kind": "theme_resource",
+      "theme": "DEFAULT",
+      "sequence": 4,
+      "java": [
+        "STRT_STYLESHEET",
+        "/libs/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css"
+      ],
+      "rust": null
+    },
+    {
+      "kind": "theme_resource",
+      "theme": "DEFAULT",
+      "sequence": 5,
+      "java": [
+        "STRT_STYLESHEET",
+        "/libs/select2/select2.min.css"
+      ],
+      "rust": null
+    },
+    {
+      "kind": "theme_resource",
+      "theme": "DEFAULT",
+      "sequence": 6,
+      "java": [
+        "STRT_STYLESHEET",
+        "/libs/select2-bootstrap-theme/select2-bootstrap.min.css"
+      ],
+      "rust": null
+    },
+    {
+      "kind": "theme_resource",
+      "theme": "DEFAULT",
+      "sequence": 7,
+      "java": [
+        "STRT_STYLESHEET",
+        "/libs/Selectivity.js/selectivity-full.min.css"
+      ],
+      "rust": null
+    },
+    {
+      "kind": "theme_resource",
+      "theme": "DEFAULT",
+      "sequence": 8,
+      "java": [
+        "STRT_STYLESHEET",
+        "/libs/jstree/themes/default/style.min.css"
+      ],
+      "rust": null
+    },
+    {
+      "kind": "theme_resource",
+      "theme": "DEFAULT",
+      "sequence": 20,
+      "java": [
+        "STRT_STYLESHEET",
+        "/css/webroot-layout.css"
+      ],
+      "rust": [
+        "STRT_STYLESHEET",
+        "/css/moqui-html.css"
+      ]
+    },
+    {
+      "kind": "theme_resource",
+      "theme": "DEFAULT",
+      "sequence": 21,
+      "java": [
+        "STRT_STYLESHEET",
+        "/css/webroot-theme.css"
+      ],
+      "rust": null
+    },
+    {
+      "kind": "theme_resource",
+      "theme": "DEFAULT",
+      "sequence": 30,
+      "java": null,
+      "rust": [
+        "STRT_SCRIPT",
+        "/js/moqui-html.js"
+      ]
+    },
+    {
+      "kind": "theme_resource",
+      "theme": "DEFAULT",
+      "sequence": 102,
+      "java": [
+        "STRT_BODY_CLASS",
+        "bg-light"
+      ],
+      "rust": null
+    },
+    {
+      "kind": "theme_resource",
+      "theme": "DEFAULT",
+      "sequence": 201,
+      "java": [
+        "STRT_FOOTER_ITEM",
+        "<p><a href=\"/vapps/ScreenTree\">${ec.l10n.localize('Site Map')}</a></p>"
+      ],
+      "rust": [
+        "STRT_FOOTER_ITEM",
+        "<p><a href=\"/apps/ScreenTree\">${ec.l10n.localize('Site Map')}</a></p>"
+      ]
+    },
+    {
+      "kind": "theme_resource",
+      "theme": "DEFAULT_QUASAR",
+      "sequence": 1,
+      "java": [
+        "STRT_STYLESHEET",
+        null
+      ],
+      "rust": [
+        "STRT_STYLESHEET",
+        "/libs/fontawesome/css/font-awesome.min.css"
+      ]
+    },
+    {
+      "kind": "theme_resource",
+      "theme": "DEFAULT_QUASAR",
+      "sequence": 2,
+      "java": [
+        "STRT_STYLESHEET",
+        "/libs/font-awesome/css/font-awesome.min.css"
+      ],
+      "rust": null
+    },
+    {
+      "kind": "theme_resource",
+      "theme": "DEFAULT_QUASAR",
+      "sequence": 3,
+      "java": [
+        "STRT_STYLESHEET",
+        "https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons"
+      ],
+      "rust": [
+        "STRT_STYLESHEET",
+        "/libs/material-icons/material-icons.css"
+      ]
+    },
+    {
+      "kind": "theme_resource",
+      "theme": "DEFAULT_QUASAR",
+      "sequence": 4,
+      "java": [
+        "STRT_STYLESHEET",
+        "/libs/quasar/quasar.min.css"
+      ],
+      "rust": [
+        "STRT_STYLESHEET",
+        "/libs/quasar/quasar.prod.css"
+      ]
+    },
+    {
+      "kind": "rust_seed_addition",
+      "table": "public.enumeration",
+      "rows": 33
+    },
+    {
+      "kind": "rust_seed_addition",
+      "table": "public.enumeration_type",
+      "rows": 4
+    },
+    {
+      "kind": "rust_seed_addition",
+      "table": "public.user_permission",
+      "rows": 2
+    },
+    {
+      "kind": "rust_seed_addition",
+      "table": "public.user_group_permission",
+      "rows": 2
+    },
+    {
+      "kind": "rust_seed_addition",
+      "table": "public.service_job",
+      "rows": 1
+    },
+    {
+      "kind": "rust_seed_addition",
+      "table": "public.service_job",
+      "rows": 1
+    },
+    {
+      "kind": "rust_seed_addition",
+      "table": "public.service_job_parameter",
+      "rows": 2
+    },
+    {
+      "kind": "rust_seed_addition",
+      "table": "public.system_message_type",
+      "rows": 1
+    },
+    {
+      "kind": "rust_seed_addition",
+      "table": "public.system_message_remote",
+      "rows": 1
+    },
+    {
+      "kind": "java_seed_addition",
+      "table": "public.service_job",
+      "rows": 1
+    },
+    {
+      "kind": "java_seed_addition",
+      "table": "public.service_job_parameter",
+      "rows": 2
+    },
+    {
+      "kind": "rust_only_statistics",
+      "rows": [
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "fk-check",
+          "artifact_name": "mantle.account.financial.FinancialAccountType",
+          "hit_count": 15
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "fk-check",
+          "artifact_name": "mantle.account.invoice.SettlementTerm",
+          "hit_count": 2
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "fk-check",
+          "artifact_name": "mantle.account.method.PaymentGatewayConfig",
+          "hit_count": 1
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "fk-check",
+          "artifact_name": "mantle.account.method.PaymentMethod",
+          "hit_count": 9
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "fk-check",
+          "artifact_name": "mantle.facility.Facility",
+          "hit_count": 41
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "fk-check",
+          "artifact_name": "mantle.humanres.employment.PayrollAdjustment",
+          "hit_count": 148
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "fk-check",
+          "artifact_name": "mantle.humanres.position.EmplPositionClass",
+          "hit_count": 3
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "fk-check",
+          "artifact_name": "mantle.ledger.account.GlAccount",
+          "hit_count": 1567
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "fk-check",
+          "artifact_name": "mantle.ledger.transaction.GlJournal",
+          "hit_count": 2
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "fk-check",
+          "artifact_name": "mantle.other.tax.TaxAuthority",
+          "hit_count": 51
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "fk-check",
+          "artifact_name": "mantle.other.tax.TaxGatewayConfig",
+          "hit_count": 1
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "fk-check",
+          "artifact_name": "mantle.party.Party",
+          "hit_count": 1211
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "fk-check",
+          "artifact_name": "mantle.party.PartyClassification",
+          "hit_count": 2
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "fk-check",
+          "artifact_name": "mantle.party.PartySettingType",
+          "hit_count": 42
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "fk-check",
+          "artifact_name": "mantle.party.RoleType",
+          "hit_count": 269
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "fk-check",
+          "artifact_name": "mantle.party.contact.ContactMech",
+          "hit_count": 70
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "fk-check",
+          "artifact_name": "mantle.party.contact.ContactMechPurpose",
+          "hit_count": 44
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "fk-check",
+          "artifact_name": "mantle.party.contact.PostalAddress",
+          "hit_count": 5
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "fk-check",
+          "artifact_name": "mantle.party.contact.TelecomNumber",
+          "hit_count": 7
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "fk-check",
+          "artifact_name": "mantle.party.time.TimePeriod",
+          "hit_count": 7
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "fk-check",
+          "artifact_name": "mantle.party.time.TimePeriodType",
+          "hit_count": 71
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "fk-check",
+          "artifact_name": "mantle.product.Product",
+          "hit_count": 142
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "fk-check",
+          "artifact_name": "mantle.product.ProductDimensionType",
+          "hit_count": 3
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "fk-check",
+          "artifact_name": "mantle.product.asset.Asset",
+          "hit_count": 10
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "fk-check",
+          "artifact_name": "mantle.product.asset.AssetPool",
+          "hit_count": 3
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "fk-check",
+          "artifact_name": "mantle.product.asset.Container",
+          "hit_count": 3
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "fk-check",
+          "artifact_name": "mantle.product.category.ProductCategory",
+          "hit_count": 37
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "fk-check",
+          "artifact_name": "mantle.product.feature.ProductFeature",
+          "hit_count": 31
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "fk-check",
+          "artifact_name": "mantle.product.store.ProductStore",
+          "hit_count": 20
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "fk-check",
+          "artifact_name": "mantle.product.store.ProductStorePromoCode",
+          "hit_count": 1
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "fk-check",
+          "artifact_name": "mantle.product.store.ProductStorePromotion",
+          "hit_count": 6
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "fk-check",
+          "artifact_name": "mantle.shipment.carrier.ShippingGatewayConfig",
+          "hit_count": 1
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "fk-check",
+          "artifact_name": "moqui.basic.Enumeration",
+          "hit_count": 4959
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "fk-check",
+          "artifact_name": "moqui.basic.EnumerationType",
+          "hit_count": 1887
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "fk-check",
+          "artifact_name": "moqui.basic.Geo",
+          "hit_count": 1058
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "fk-check",
+          "artifact_name": "moqui.basic.StatusFlow",
+          "hit_count": 464
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "fk-check",
+          "artifact_name": "moqui.basic.StatusItem",
+          "hit_count": 930
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "fk-check",
+          "artifact_name": "moqui.basic.StatusType",
+          "hit_count": 203
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "fk-check",
+          "artifact_name": "moqui.basic.Uom",
+          "hit_count": 445
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "fk-check",
+          "artifact_name": "moqui.basic.UomDimensionType",
+          "hit_count": 16
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "fk-check",
+          "artifact_name": "moqui.basic.email.EmailServer",
+          "hit_count": 6
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "fk-check",
+          "artifact_name": "moqui.basic.email.EmailTemplate",
+          "hit_count": 10
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "fk-check",
+          "artifact_name": "moqui.entity.feed.DataFeed",
+          "hit_count": 27
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "fk-check",
+          "artifact_name": "moqui.resource.DbResource",
+          "hit_count": 9
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "fk-check",
+          "artifact_name": "moqui.resource.DbResourceFile",
+          "hit_count": 9
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "fk-check",
+          "artifact_name": "moqui.resource.wiki.WikiPage",
+          "hit_count": 9
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "fk-check",
+          "artifact_name": "moqui.resource.wiki.WikiSpace",
+          "hit_count": 12
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "fk-check",
+          "artifact_name": "moqui.screen.ScreenTheme",
+          "hit_count": 23
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "fk-check",
+          "artifact_name": "moqui.screen.form.DbForm",
+          "hit_count": 76
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "fk-check",
+          "artifact_name": "moqui.screen.form.DbFormField",
+          "hit_count": 81
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "fk-check",
+          "artifact_name": "moqui.screen.form.FormConfig",
+          "hit_count": 76
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "fk-check",
+          "artifact_name": "moqui.screen.form.FormListFind",
+          "hit_count": 27
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "fk-check",
+          "artifact_name": "moqui.security.ArtifactAuthz",
+          "hit_count": 3
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "fk-check",
+          "artifact_name": "moqui.security.ArtifactGroup",
+          "hit_count": 68
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "fk-check",
+          "artifact_name": "moqui.security.EntityFilterSet",
+          "hit_count": 30
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "fk-check",
+          "artifact_name": "moqui.security.UserGroup",
+          "hit_count": 51
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "fk-check",
+          "artifact_name": "moqui.server.instance.DatabaseType",
+          "hit_count": 1
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "fk-check",
+          "artifact_name": "moqui.server.instance.InstanceHostType",
+          "hit_count": 6
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "fk-check",
+          "artifact_name": "moqui.server.instance.InstanceImageType",
+          "hit_count": 22
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "fk-check",
+          "artifact_name": "moqui.service.ServiceRegister",
+          "hit_count": 3
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "fk-check",
+          "artifact_name": "moqui.service.job.ServiceJob",
+          "hit_count": 22
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "fk-check",
+          "artifact_name": "moqui.service.message.SystemMessageRemote",
+          "hit_count": 4
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "fk-check",
+          "artifact_name": "moqui.service.message.SystemMessageType",
+          "hit_count": 4
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "load-report",
+          "artifact_name": "moqui.basic.Enumeration",
+          "hit_count": 1
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "load-report",
+          "artifact_name": "moqui.security.UserGroupPermission",
+          "hit_count": 1
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.account.financial.FinancialAccountType",
+          "hit_count": 9
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.account.invoice.SettlementTerm",
+          "hit_count": 14
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.account.method.BankAccount",
+          "hit_count": 3
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.account.method.CreditCard",
+          "hit_count": 2
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.account.method.PaymentGatewayConfig",
+          "hit_count": 3
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.account.method.PaymentMethodFileType",
+          "hit_count": 4
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.facility.FacilityContactMech",
+          "hit_count": 2
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.humanres.employment.BenefitType",
+          "hit_count": 3
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.humanres.employment.PayrollAdjustment",
+          "hit_count": 18
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.humanres.employment.PayrollAdjustmentDetail",
+          "hit_count": 100
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.humanres.employment.PayrollAdjustmentExempt",
+          "hit_count": 34
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.humanres.employment.PayrollAdjustmentFedStts",
+          "hit_count": 4
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.humanres.employment.PayrollAdjustmentStateStts",
+          "hit_count": 10
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.humanres.employment.PayrollAllowance",
+          "hit_count": 21
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.humanres.employment.PayrollGarnishMinWage",
+          "hit_count": 4
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.humanres.employment.PayrollStdDeduction",
+          "hit_count": 12
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.humanres.position.EmplPositionClass",
+          "hit_count": 3
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.humanres.position.EmplPositionClassWorkType",
+          "hit_count": 3
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.humanres.rate.RateAmount",
+          "hit_count": 5
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.ledger.account.GlAccountOrganization",
+          "hit_count": 188
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.ledger.config.AssetTypeGlAccount",
+          "hit_count": 11
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.ledger.config.FinancialAccountReasonGlAccount",
+          "hit_count": 8
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.ledger.config.FinancialAccountTypeGlAccount",
+          "hit_count": 6
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.ledger.config.GlAccountTypeDefault",
+          "hit_count": 36
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.ledger.config.InvoiceTypeTransType",
+          "hit_count": 10
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.ledger.config.ItemTypeGlAccount",
+          "hit_count": 178
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.ledger.config.PartyAcctgPreference",
+          "hit_count": 1
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.ledger.config.PaymentInstrumentGlAccount",
+          "hit_count": 17
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.ledger.config.PaymentTypeGlAccount",
+          "hit_count": 17
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.ledger.config.ProductCategoryGlAccount",
+          "hit_count": 1
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.ledger.transaction.GlJournal",
+          "hit_count": 1
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.other.tax.TaxAuthority",
+          "hit_count": 2
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.other.tax.TaxGatewayConfig",
+          "hit_count": 1
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.party.Organization",
+          "hit_count": 20
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.party.PartyClassification",
+          "hit_count": 14
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.party.PartyClassificationAppl",
+          "hit_count": 2
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.party.PartyRole",
+          "hit_count": 34
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.party.PartySetting",
+          "hit_count": 2
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.party.PartySettingType",
+          "hit_count": 40
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.party.PartySettingTypeRole",
+          "hit_count": 40
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.party.RoleGroupMember",
+          "hit_count": 155
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.party.RoleType",
+          "hit_count": 100
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.party.communication.CommunicationEventType",
+          "hit_count": 9
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.party.contact.ContactMechPurpose",
+          "hit_count": 51
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.party.contact.PostalAddress",
+          "hit_count": 8
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.party.contact.TelecomNumber",
+          "hit_count": 8
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.party.time.TimePeriodType",
+          "hit_count": 18
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.product.ProductAssoc",
+          "hit_count": 8
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.product.ProductContent",
+          "hit_count": 4
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.product.ProductDimension",
+          "hit_count": 3
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.product.ProductDimensionType",
+          "hit_count": 12
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.product.asset.AssetDetail",
+          "hit_count": 10
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.product.asset.AssetPoolParty",
+          "hit_count": 1
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.product.asset.AssetPoolStore",
+          "hit_count": 1
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.product.category.ProductCategoryMember",
+          "hit_count": 22
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.product.category.ProductCategoryRollup",
+          "hit_count": 3
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.product.feature.ProductFeatureAppl",
+          "hit_count": 7
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.product.maintenance.ProductMeterType",
+          "hit_count": 13
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.product.store.ProductStore",
+          "hit_count": 1
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.product.store.ProductStoreCategory",
+          "hit_count": 8
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.product.store.ProductStorePaymentGateway",
+          "hit_count": 1
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.product.store.ProductStorePromoCode",
+          "hit_count": 2
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.product.store.ProductStorePromoCodeParty",
+          "hit_count": 1
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.product.store.ProductStorePromoParameter",
+          "hit_count": 4
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.product.store.ProductStorePromotion",
+          "hit_count": 2
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.product.store.ProductStoreShippingGateway",
+          "hit_count": 1
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.product.store.ProductStoreWikiContent",
+          "hit_count": 2
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.product.store.ProductStoreWikiSpace",
+          "hit_count": 2
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.shipment.carrier.CarrierShipmentMethod",
+          "hit_count": 19
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.shipment.carrier.ShippingGatewayConfig",
+          "hit_count": 1
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.work.effort.WorkEffortCategory",
+          "hit_count": 2
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.work.effort.WorkEffortCategoryAppl",
+          "hit_count": 61
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "mantle.work.measurement.MeasurementType",
+          "hit_count": 9
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "moqui.basic.EnumGroupMember",
+          "hit_count": 211
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "moqui.basic.Enumeration",
+          "hit_count": 1864
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "moqui.basic.EnumerationType",
+          "hit_count": 211
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "moqui.basic.Geo",
+          "hit_count": 659
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "moqui.basic.GeoAssoc",
+          "hit_count": 518
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "moqui.basic.LocalizedEntityField",
+          "hit_count": 12
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "moqui.basic.LocalizedMessage",
+          "hit_count": 98
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "moqui.basic.StatusFlow",
+          "hit_count": 5
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "moqui.basic.StatusType",
+          "hit_count": 42
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "moqui.basic.Uom",
+          "hit_count": 351
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "moqui.basic.UomConversion",
+          "hit_count": 182
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "moqui.basic.UomDimTypeGroupMember",
+          "hit_count": 16
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "moqui.basic.UomDimensionType",
+          "hit_count": 13
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "moqui.entity.document.DataDocumentLink",
+          "hit_count": 16
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "moqui.entity.feed.DataFeed",
+          "hit_count": 4
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "moqui.entity.feed.DataFeedDocument",
+          "hit_count": 27
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "moqui.resource.DbResource",
+          "hit_count": 30
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "moqui.resource.DbResourceFile",
+          "hit_count": 9
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "moqui.resource.DbResourceFileHistory",
+          "hit_count": 9
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "moqui.resource.wiki.WikiPage",
+          "hit_count": 8
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "moqui.resource.wiki.WikiPageAlias",
+          "hit_count": 1
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "moqui.resource.wiki.WikiPageHistory",
+          "hit_count": 8
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "moqui.resource.wiki.WikiSpace",
+          "hit_count": 2
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "moqui.screen.ScreenDocument",
+          "hit_count": 13
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "moqui.screen.ScreenPathAlias",
+          "hit_count": 1
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "moqui.screen.ScreenTheme",
+          "hit_count": 3
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "moqui.screen.ScreenThemeResource",
+          "hit_count": 23
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "moqui.screen.form.DbFormFieldAttribute",
+          "hit_count": 74
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "moqui.screen.form.FormConfig",
+          "hit_count": 7
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "moqui.screen.form.FormConfigField",
+          "hit_count": 69
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "moqui.screen.form.FormListFind",
+          "hit_count": 7
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "moqui.screen.form.FormListFindField",
+          "hit_count": 20
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "moqui.screen.form.FormListFindUserGroup",
+          "hit_count": 7
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "moqui.security.ArtifactAuthz",
+          "hit_count": 18
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "moqui.security.ArtifactAuthzFilter",
+          "hit_count": 3
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "moqui.security.ArtifactGroup",
+          "hit_count": 37
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "moqui.security.ArtifactGroupMember",
+          "hit_count": 48
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "moqui.security.ArtifactTarpit",
+          "hit_count": 2
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "moqui.security.EntityFilter",
+          "hit_count": 27
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "moqui.security.EntityFilterSet",
+          "hit_count": 2
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "moqui.security.UserAuthcFactor",
+          "hit_count": 1
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "moqui.security.UserGroup",
+          "hit_count": 6
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "moqui.security.UserGroupPreference",
+          "hit_count": 5
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "moqui.security.UserLoginHistory",
+          "hit_count": 1
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "moqui.security.UserPermission",
+          "hit_count": 18
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "moqui.security.user.NotificationTopic",
+          "hit_count": 12
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "moqui.server.instance.DatabaseHost",
+          "hit_count": 1
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "moqui.server.instance.DatabaseType",
+          "hit_count": 2
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "moqui.server.instance.InstanceHost",
+          "hit_count": 1
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "moqui.server.instance.InstanceHostType",
+          "hit_count": 1
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "moqui.server.instance.InstanceImage",
+          "hit_count": 5
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "moqui.server.instance.InstanceImageType",
+          "hit_count": 1
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "moqui.server.instance.InstanceImageTypeEnv",
+          "hit_count": 11
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "moqui.server.instance.InstanceImageTypeLink",
+          "hit_count": 1
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "moqui.server.instance.InstanceImageTypeVolume",
+          "hit_count": 5
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "moqui.service.ServiceRegister",
+          "hit_count": 5
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "moqui.service.job.ServiceJobParameter",
+          "hit_count": 22
+        },
+        {
+          "artifact_type": "AT_ENTITY",
+          "artifact_sub_type": "update-probe",
+          "artifact_name": "moqui.service.message.SystemMessageType",
+          "hit_count": 5
+        }
+      ],
+      "hit_count": 20560
+    },
+    {
+      "kind": "seed_statistics",
+      "artifact_name": "moqui.basic.Enumeration",
+      "artifact_sub_type": "create",
+      "java_hit_count": 1831,
+      "rust_hit_count": 1864
+    },
+    {
+      "kind": "seed_statistics",
+      "artifact_name": "moqui.basic.Enumeration",
+      "artifact_sub_type": "refresh",
+      "java_hit_count": 1831,
+      "rust_hit_count": 1864
+    },
+    {
+      "kind": "seed_statistics",
+      "artifact_name": "moqui.basic.EnumerationType",
+      "artifact_sub_type": "create",
+      "java_hit_count": 207,
+      "rust_hit_count": 211
+    },
+    {
+      "kind": "seed_statistics",
+      "artifact_name": "moqui.basic.EnumerationType",
+      "artifact_sub_type": "refresh",
+      "java_hit_count": 207,
+      "rust_hit_count": 211
+    },
+    {
+      "kind": "seed_statistics",
+      "artifact_name": "moqui.screen.ScreenThemeResource",
+      "artifact_sub_type": "create",
+      "java_hit_count": 32,
+      "rust_hit_count": 23
+    },
+    {
+      "kind": "seed_statistics",
+      "artifact_name": "moqui.screen.ScreenThemeResource",
+      "artifact_sub_type": "refresh",
+      "java_hit_count": 32,
+      "rust_hit_count": 23
+    },
+    {
+      "kind": "seed_statistics",
+      "artifact_name": "moqui.security.UserGroupPermission",
+      "artifact_sub_type": "create",
+      "java_hit_count": 20,
+      "rust_hit_count": 22
+    },
+    {
+      "kind": "seed_statistics",
+      "artifact_name": "moqui.security.UserGroupPermission",
+      "artifact_sub_type": "refresh",
+      "java_hit_count": 20,
+      "rust_hit_count": 22
+    },
+    {
+      "kind": "seed_statistics",
+      "artifact_name": "moqui.security.UserPermission",
+      "artifact_sub_type": "create",
+      "java_hit_count": 16,
+      "rust_hit_count": 18
+    },
+    {
+      "kind": "seed_statistics",
+      "artifact_name": "moqui.security.UserPermission",
+      "artifact_sub_type": "refresh",
+      "java_hit_count": 16,
+      "rust_hit_count": 18
+    },
+    {
+      "kind": "seed_statistics",
+      "artifact_name": "moqui.service.job.ServiceJob",
+      "artifact_sub_type": "create",
+      "java_hit_count": 24,
+      "rust_hit_count": 25
+    },
+    {
+      "kind": "seed_statistics",
+      "artifact_name": "moqui.service.job.ServiceJob",
+      "artifact_sub_type": "refresh",
+      "java_hit_count": 24,
+      "rust_hit_count": 25
+    },
+    {
+      "kind": "seed_statistics",
+      "artifact_name": "moqui.service.message.SystemMessageRemote",
+      "artifact_sub_type": "create",
+      "java_hit_count": 1,
+      "rust_hit_count": 2
+    },
+    {
+      "kind": "seed_statistics",
+      "artifact_name": "moqui.service.message.SystemMessageRemote",
+      "artifact_sub_type": "refresh",
+      "java_hit_count": 1,
+      "rust_hit_count": 2
+    },
+    {
+      "kind": "seed_statistics",
+      "artifact_name": "moqui.service.message.SystemMessageType",
+      "artifact_sub_type": "create",
+      "java_hit_count": 4,
+      "rust_hit_count": 5
+    },
+    {
+      "kind": "seed_statistics",
+      "artifact_name": "moqui.service.message.SystemMessageType",
+      "artifact_sub_type": "refresh",
+      "java_hit_count": 4,
+      "rust_hit_count": 5
+    },
+    {
+      "kind": "java_servlet_session_fields",
+      "approved_by": "user",
+      "description": "Java-only servlet/Jetty session metadata and Visit date differences; other Visit fields remain strict.",
+      "table": "public.visit",
+      "fields": [
+        "webapp_name",
+        "from_date",
+        "last_updated_stamp"
+      ],
+      "java_rows": 1,
+      "rust_rows": 1
+    },
+    {
+      "kind": "url_port_differences",
+      "approved_by": "user",
+      "description": "Java and Rust test servers use different ports. Ignore only URL ports; scheme, host, path, query and fragment remain strict.",
+      "table": "public.visit",
+      "fields": [
+        "initial_request",
+        "initial_referrer"
+      ],
+      "java_fields": 1,
+      "rust_fields": 1
+    },
+    {
+      "kind": "statistics_timing",
+      "table": "public.artifact_hit_bin",
+      "fields": [
+        "bin_start_date_time",
+        "bin_end_date_time",
+        "total_time_millis",
+        "total_squared_time",
+        "min_time_millis",
+        "max_time_millis",
+        "slow_hit_count",
+        "last_updated_stamp"
+      ],
+      "java_rows": 378,
+      "rust_rows": 396
+    },
+    {
+      "kind": "statistics_timing",
+      "table": "public.artifact_hit",
+      "fields": [
+        "start_date_time",
+        "running_time_millis",
+        "is_slow_hit",
+        "last_updated_stamp"
+      ],
+      "java_rows": 2313,
+      "rust_rows": 2361
+    },
+    {
+      "kind": "full_text_storage",
+      "table": "public.llm_conversation",
+      "field": "search_text",
+      "java_index": "fts_llm_conversation_search_text",
+      "rust_index": "llm_conversation_searchtext_fts"
+    },
+    {
+      "kind": "full_text_storage",
+      "table": "public.llm_skill",
+      "field": "description",
+      "java_index": "fts_llm_skill_description",
+      "rust_index": "llm_skill_description_fts"
+    },
+    {
+      "kind": "full_text_storage",
+      "table": "public.llm_skill",
+      "field": "body",
+      "java_index": "fts_llm_skill_body",
+      "rust_index": "llm_skill_body_fts"
+    },
+    {
+      "kind": "full_text_storage",
+      "table": "public.test_fts",
+      "field": "body",
+      "java_index": "fts_test_fts_body",
+      "rust_index": "test_fts_body_fts"
+    }
+  ],
+  "transactions_replayed": {
+    "java": 3,
+    "rust": 3
+  },
+  "uncommitted_state_verified": false
+}

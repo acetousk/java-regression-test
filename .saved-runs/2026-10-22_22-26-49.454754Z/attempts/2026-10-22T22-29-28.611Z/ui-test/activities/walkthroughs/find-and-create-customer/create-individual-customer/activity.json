@@ -1,0 +1,120 @@
+{
+  "source": "walkthroughs/find-and-create-customer.md",
+  "activity": "Create Individual Customer",
+  "mode": "apps",
+  "steps": [
+    {
+      "name": "open Login",
+      "writes": true,
+      "passed": true,
+      "before": {
+        "error": null,
+        "write_transactions": 0,
+        "database_comparisons": 0,
+        "rust_only_writes": 0,
+        "unpaired_writes": {
+          "java": 0,
+          "rust": 0
+        },
+        "waiting_at_barrier": {
+          "java": false,
+          "rust": false
+        }
+      },
+      "after": {
+        "error": null,
+        "write_transactions": 3,
+        "database_comparisons": 3,
+        "rust_only_writes": 0,
+        "unpaired_writes": {
+          "java": 0,
+          "rust": 0
+        },
+        "waiting_at_barrier": {
+          "java": false,
+          "rust": false
+        }
+      },
+      "pairedWrites": 3,
+      "urls": {
+        "java": "http://127.0.0.1:28080/Login#login",
+        "rust": "http://127.0.0.1:28081/Login"
+      },
+      "visual": {
+        "status": "compared",
+        "equal": true,
+        "differentPixels": 0,
+        "comparedPixels": 1440000,
+        "differencePercent": 0,
+        "threshold": 0.1,
+        "dimensions": {
+          "java": [
+            1440,
+            1000
+          ],
+          "rust": [
+            1440,
+            1000
+          ]
+        }
+      }
+    },
+    {
+      "name": "log in",
+      "writes": true,
+      "passed": false,
+      "before": {
+        "error": null,
+        "write_transactions": 3,
+        "database_comparisons": 3,
+        "rust_only_writes": 0,
+        "unpaired_writes": {
+          "java": 0,
+          "rust": 0
+        },
+        "waiting_at_barrier": {
+          "java": false,
+          "rust": false
+        }
+      },
+      "error": "java: locator.click: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#login_form').locator('button[type=\"submit\"]')\u001b[22m\n\u001b[2m    - locator resolved to <button type=\"submit\" class=\"btn btn-lg btn-primary btn-block\">Sign in</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m    - element is visible, enabled and stable\u001b[22m\n\u001b[2m    - scrolling into view if needed\u001b[22m\n\u001b[2m    - done scrolling\u001b[22m\n\u001b[2m    - performing click action\u001b[22m\n\u001b[2m    - click action done\u001b[22m\n\u001b[2m    - waiting for scheduled navigations to finish\u001b[22m\n\nrust: locator.click: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#login_form').locator('button[type=\"submit\"]')\u001b[22m\n\u001b[2m    - locator resolved to <button type=\"submit\" data-size=\"lg\" data-btn=\"primary\">Sign in</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m    - element is visible, enabled and stable\u001b[22m\n\u001b[2m    - scrolling into view if needed\u001b[22m\n\u001b[2m    - done scrolling\u001b[22m\n\u001b[2m    - performing click action\u001b[22m\n\u001b[2m    - click action done\u001b[22m\n\u001b[2m    - waiting for scheduled navigations to finish\u001b[22m\n",
+      "after": {
+        "error": null,
+        "write_transactions": 3,
+        "database_comparisons": 3,
+        "rust_only_writes": 0,
+        "unpaired_writes": {
+          "java": 1,
+          "rust": 0
+        },
+        "waiting_at_barrier": {
+          "java": true,
+          "rust": false
+        }
+      },
+      "urls": {
+        "java": "http://127.0.0.1:28080/Login/login",
+        "rust": "http://127.0.0.1:28081/Login/login"
+      },
+      "visual": {
+        "status": "compared",
+        "equal": false,
+        "differentPixels": 42574,
+        "comparedPixels": 1440000,
+        "differencePercent": 2.9565277777777776,
+        "threshold": 0.1,
+        "dimensions": {
+          "java": [
+            1440,
+            1000
+          ],
+          "rust": [
+            1440,
+            1000
+          ]
+        }
+      }
+    }
+  ],
+  "passed": false
+}

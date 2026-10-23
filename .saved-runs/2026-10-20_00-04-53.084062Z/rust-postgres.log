@@ -1,0 +1,2 @@
+Emulate Docker CLI using podman. Create /etc/containers/nodocker to quiet msg.
+Error: no container with name or ID "moqui-regression-2026-10-20_00-04-53.084062Z-rust" found: no such container

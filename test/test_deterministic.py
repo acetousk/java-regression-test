@@ -186,6 +186,8 @@ class DeterministicTests(unittest.TestCase):
             request = urllib.request.Request(url, json.dumps(payload).encode(),
                                              {"Content-Type": "application/json"})
             with urllib.request.urlopen(request, timeout=2) as response:
+                # The JDK client pools any connection whose reply does not say close.
+                self.assertEqual(response.headers["Connection"], "close")
                 return json.load(response)
 
         for side in ("java", "rust"):

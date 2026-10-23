@@ -1,0 +1,6 @@
+{
+  "MOQUI_RUN_DIR": "/home/user/.herdr/worktrees/java-regression-test/match-screen-logic/.runs/2026-10-20_00-04-53.084062Z",
+  "MOQUI_HARNESS_STATUS_URL": "http://127.0.0.1:37381/status",
+  "JAVA_BASE_URL": "http://127.0.0.1:28080",
+  "RUST_BASE_URL": "http://127.0.0.1:28081"
+}

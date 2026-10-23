@@ -1,0 +1,384 @@
+diff --git i/framework/build.gradle w/framework/build.gradle
+index b924860a..149f9f5c 100644
+--- i/framework/build.gradle
++++ w/framework/build.gradle
+@@ -256,6 +256,7 @@ tasks.register('deterministicTest', Test) {
+     classpath = sourceSets.test.runtimeClasspath + files(projectDir.absolutePath)
+     useJUnitPlatform()
+     include '**/Deterministic*Tests.class'
++    maxHeapSize = '1g'
+     maxParallelForks = 1
+     systemProperty 'moqui.runtime', rootProject.file('runtime').absolutePath
+     testLogging { events 'passed', 'failed'; showStandardStreams = true }
+diff --git i/framework/src/main/groovy/org/moqui/impl/context/ArtifactExecutionFacadeImpl.groovy w/framework/src/main/groovy/org/moqui/impl/context/ArtifactExecutionFacadeImpl.groovy
+index 3dc7e7ea..a6a8a0a2 100644
+--- i/framework/src/main/groovy/org/moqui/impl/context/ArtifactExecutionFacadeImpl.groovy
++++ w/framework/src/main/groovy/org/moqui/impl/context/ArtifactExecutionFacadeImpl.groovy
+@@ -81,6 +81,7 @@ class ArtifactExecutionFacadeImpl implements ArtifactExecutionFacade {
+         pushInternal(aeii, requiresAuthz, true)
+     }
+     void pushInternal(ArtifactExecutionInfoImpl aeii, boolean requiresAuthz, boolean countTarpit) {
++        org.moqui.util.DeterministicClock.trace(aeii.internalTypeEnum.name(), aeii.actionDetail ?: aeii.internalActionEnum.name(), aeii.nameInternal, 'enter')
+         ArtifactExecutionInfoImpl lastAeii = (ArtifactExecutionInfoImpl) artifactExecutionInfoStack.peekFirst()
+ 
+         // always do this regardless of the authz checks, etc; keep a history of artifacts run
+@@ -127,6 +128,7 @@ class ArtifactExecutionFacadeImpl implements ArtifactExecutionFacade {
+             }
+             // set end time
+             lastAeii.setEndTime()
++            org.moqui.util.DeterministicClock.trace(lastAeii.internalTypeEnum.name(), lastAeii.actionDetail ?: lastAeii.internalActionEnum.name(), lastAeii.nameInternal, 'exit')
+             // count artifact hit (now done here instead of by each caller)
+             // NOTE DEJ 20191229 removed condition where only artifacts requiring authz are counted: && lastAeii.internalAuthzWasRequired
+             if (lastAeii.trackArtifactHit && lastAeii.isAccess)
+diff --git i/framework/src/main/groovy/org/moqui/impl/context/ExecutionContextFactoryImpl.groovy w/framework/src/main/groovy/org/moqui/impl/context/ExecutionContextFactoryImpl.groovy
+index 6d3201dd..4d226fa5 100644
+--- i/framework/src/main/groovy/org/moqui/impl/context/ExecutionContextFactoryImpl.groovy
++++ w/framework/src/main/groovy/org/moqui/impl/context/ExecutionContextFactoryImpl.groovy
+@@ -166,6 +166,7 @@ class ExecutionContextFactoryImpl implements ExecutionContextFactory {
+      * or by init methods in a servlet or context filter or OSGi component or Spring component or whatever.
+      */
+     ExecutionContextFactoryImpl() {
++        DeterministicClock.trace('phase', 'initialize', 'factory', 'requested')
+         DeterministicClock.Operation bootstrap = DeterministicClock.bootstrap()
+         boolean initialized = false
+         try {
+@@ -269,6 +270,7 @@ class ExecutionContextFactoryImpl implements ExecutionContextFactory {
+ 
+     /** This constructor takes the runtime directory path and conf file path directly. */
+     ExecutionContextFactoryImpl(String runtimePathParm, String confPathParm) {
++        DeterministicClock.trace('phase', 'initialize', 'factory', 'requested')
+         DeterministicClock.Operation bootstrap = DeterministicClock.bootstrap()
+         boolean initialized = false
+         try {
+diff --git i/framework/src/main/groovy/org/moqui/impl/entity/EntityDataLoaderImpl.groovy w/framework/src/main/groovy/org/moqui/impl/entity/EntityDataLoaderImpl.groovy
+index 150b2b87..1c58a6df 100644
+--- i/framework/src/main/groovy/org/moqui/impl/entity/EntityDataLoaderImpl.groovy
++++ w/framework/src/main/groovy/org/moqui/impl/entity/EntityDataLoaderImpl.groovy
+@@ -346,6 +346,7 @@ class EntityDataLoaderImpl implements EntityDataLoader {
+     }
+ 
+     void loadSingleFile(String location, EntityXmlHandler exh, EntityCsvHandler ech, EntityJsonHandler ejh) {
++        org.moqui.util.DeterministicClock.trace('data', 'load', location, 'requested')
+         TransactionFacade tf = efi.ecfi.transactionFacade
+         boolean beganTransaction = tf.begin(transactionTimeout)
+         try {
+@@ -437,7 +438,9 @@ class EntityDataLoaderImpl implements EntityDataLoader {
+             } finally {
+                 if (inputStream != null) inputStream.close()
+             }
++            org.moqui.util.DeterministicClock.trace('data', 'load', location, 'succeeded')
+         } catch (Throwable t) {
++            org.moqui.util.DeterministicClock.trace('data', 'load', location, 'failed')
+             tf.rollback(beganTransaction, "Error loading entity data", t)
+             throw new BaseException("Error loading entity data from ${location}", t)
+         } finally {
+@@ -540,6 +543,7 @@ class EntityDataLoaderImpl implements EntityDataLoader {
+         }
+ 
+         void handleValue(EntityValue value, String location) {
++            org.moqui.util.DeterministicClock.trace('data', 'record', value.resolveEntityName(), 'requested')
+             if (edli.restrictSensitiveEntities && WebUtilities.isRestrictedGenericEntity(value.resolveEntityName())) {
+                 throw new EntityException("Entity ${value.resolveEntityName()} is not allowed in this data load")
+             }
+@@ -578,8 +582,10 @@ class EntityDataLoaderImpl implements EntityDataLoader {
+                 if (edli.dummyFks) value.checkFks(true)
+                 value.createOrUpdate()
+             }
++            org.moqui.util.DeterministicClock.trace('data', 'record', value.resolveEntityName(), 'succeeded')
+         }
+         void handlePlainMap(String entityName, Map value, String location) {
++            org.moqui.util.DeterministicClock.trace('data', 'record', entityName, 'requested')
+             if (edli.restrictSensitiveEntities && WebUtilities.isRestrictedGenericEntity(entityName)) {
+                 throw new EntityException("Entity ${entityName} is not allowed in this data load")
+             }
+@@ -611,6 +617,7 @@ class EntityDataLoaderImpl implements EntityDataLoader {
+                     throw new BaseException("Error handling data load plain Map: ${errStr}")
+                 }
+             }
++            org.moqui.util.DeterministicClock.trace('data', 'record', entityName, 'succeeded')
+         }
+         void handleService(ServiceCallSync scs, String location) {
+             if (edli.onlyCreate) {
+diff --git i/framework/src/main/groovy/org/moqui/impl/entity/EntityFacadeImpl.groovy w/framework/src/main/groovy/org/moqui/impl/entity/EntityFacadeImpl.groovy
+index d70c2a2b..fb21c10f 100644
+--- i/framework/src/main/groovy/org/moqui/impl/entity/EntityFacadeImpl.groovy
++++ w/framework/src/main/groovy/org/moqui/impl/entity/EntityFacadeImpl.groovy
+@@ -627,6 +627,7 @@ class EntityFacadeImpl implements EntityFacade {
+ 
+ 
+     protected EntityDefinition loadEntityDefinition(String entityName) {
++        org.moqui.util.DeterministicClock.trace('metadata', 'load-definition', entityName, 'requested')
+         if (entityName.contains("#")) {
+             // this is a relationship name, definitely not an entity name so just return null; this happens because we
+             //    check if a name is an entity name or not in various places including where relationships are checked
+@@ -2131,6 +2132,7 @@ class EntityFacadeImpl implements EntityFacade {
+         } else {
+             newCon = ds.getConnection()
+         }
++        newCon = org.moqui.util.DeterministicJdbc.wrap(newCon)
+         if (newCon != null) newCon = tfi.stashTxConnection(groupToUse, newCon)
+         return newCon
+     }
+diff --git i/framework/src/main/groovy/org/moqui/impl/entity/EntityFindBase.groovy w/framework/src/main/groovy/org/moqui/impl/entity/EntityFindBase.groovy
+index d54ed188..9c6749e3 100644
+--- i/framework/src/main/groovy/org/moqui/impl/entity/EntityFindBase.groovy
++++ w/framework/src/main/groovy/org/moqui/impl/entity/EntityFindBase.groovy
+@@ -850,6 +850,7 @@ abstract class EntityFindBase implements EntityFind {
+                 ed.getCacheOne(efi.getEntityCache()) : (Cache<EntityCondition, EntityValueBase>) null
+         EntityValueBase cacheHit = (EntityValueBase) null
+         if (doCache && txcValue == null && !forUpdate) cacheHit = (EntityValueBase) entityOneCache.get(whereCondition)
++        org.moqui.util.DeterministicClock.trace('cache', txcValue != null || cacheHit != null ? 'hit' : (doCache ? 'miss' : 'bypass'), entityInfo.fullEntityName, 'succeeded')
+ 
+         // we always want fieldInfoArray populated so that we know the order of the results coming back
+         int ftsSize = fieldsToSelect != null ? fieldsToSelect.size() : 0
+@@ -1109,6 +1110,7 @@ abstract class EntityFindBase implements EntityFind {
+         EntityListImpl cacheList = (EntityListImpl) null
+         if (doEntityCache && txcEli == null && !forUpdate)
+             cacheList = efi.getEntityCache().getFromListCache(ed, whereCondition, orderByExpanded, entityListCache)
++        org.moqui.util.DeterministicClock.trace('cache', txcEli != null || cacheList != null ? 'hit' : (doEntityCache ? 'miss' : 'bypass'), entityInfo.fullEntityName, 'succeeded')
+ 
+         EntityListImpl el
+         if (txcEli != null) {
+@@ -1383,6 +1385,7 @@ abstract class EntityFindBase implements EntityFind {
+         Cache<EntityCondition, Long> entityCountCache = doCache ? ed.getCacheCount(efi.getEntityCache()) : (Cache) null
+         Long cacheCount = (Long) null
+         if (doCache) cacheCount = (Long) entityCountCache.get(whereCondition)
++        org.moqui.util.DeterministicClock.trace('cache', cacheCount != null ? 'hit' : (doCache ? 'miss' : 'bypass'), entityInfo.fullEntityName, 'succeeded')
+ 
+         long count
+         if (cacheCount != null) {
+diff --git i/framework/src/main/java/org/moqui/util/DeterministicClock.java w/framework/src/main/java/org/moqui/util/DeterministicClock.java
+index ef6e6da0..ab984e50 100644
+--- i/framework/src/main/java/org/moqui/util/DeterministicClock.java
++++ w/framework/src/main/java/org/moqui/util/DeterministicClock.java
+@@ -28,15 +28,17 @@ public final class DeterministicClock {
+     private final URI hook;
+     private final String run, engine;
+     private final BufferedWriter log;
++    private long traceSequence;
+     private final HttpClient client;
+     private final int timeoutSeconds;
++    private final boolean operationChecks;
+     private final ThreadLocal<Deque<Operation>> operations = ThreadLocal.withInitial(ArrayDeque::new);
+     private volatile boolean failed;
+ 
+     private static Map<String, String> settings() {
+         Map<String, String> settings = new HashMap<>(System.getenv());
+         for (String key : List.of("MOQUI_DETERMINISTIC", "MOQUI_DETERMINISTIC_HOOK", "MOQUI_DETERMINISTIC_RUN",
+-                "MOQUI_DETERMINISTIC_ENGINE", "MOQUI_DETERMINISTIC_LOG", "MOQUI_DETERMINISTIC_TIMEOUT_SECONDS")) {
++                "MOQUI_DETERMINISTIC_ENGINE", "MOQUI_DETERMINISTIC_LOG", "MOQUI_DETERMINISTIC_TIMEOUT_SECONDS", "MOQUI_DETERMINISTIC_OPERATIONS")) {
+             if (System.getProperty(key) != null) settings.put(key, System.getProperty(key));
+         }
+         return settings;
+@@ -89,6 +91,7 @@ public final class DeterministicClock {
+             timeoutSeconds = Integer.parseInt(settings.getOrDefault("MOQUI_DETERMINISTIC_TIMEOUT_SECONDS", "120"));
+             if (timeoutSeconds < 1 || timeoutSeconds > 3600)
+                 throw new IllegalArgumentException("MOQUI_DETERMINISTIC_TIMEOUT_SECONDS must be between 1 and 3600");
++            operationChecks = "true".equals(settings.get("MOQUI_DETERMINISTIC_OPERATIONS"));
+             run = required(settings, "MOQUI_DETERMINISTIC_RUN");
+             engine = required(settings, "MOQUI_DETERMINISTIC_ENGINE");
+             if (!"java".equals(engine)) throw new IllegalArgumentException("MOQUI_DETERMINISTIC_ENGINE must be java");
+@@ -129,6 +132,7 @@ public final class DeterministicClock {
+             event.put("parent_sequence", parent == null ? null : parent.sequence);
+             event.put("artifact", stack.get(0)); // innermost first, as in Moqui's artifact stack
+             event.put("artifact_stack", stack);
++            observe("coordinator", "begin", stack.get(0).get("name"), "requested");
+             JsonNode response = post(event);
+             JsonNode id = response.get("operation_id"), time = response.get("time_epoch_ms");
+             if (response.size() != 2 || id == null || !id.isTextual() || !id.asText().matches("[A-Za-z0-9._:-]{1,128}") ||
+@@ -196,7 +200,39 @@ public final class DeterministicClock {
+             throw new IllegalStateException("Deterministic hook transport/JSON failure");
+         }
+     }
+-    private void append(Map<String, Object> event) {
++    /** Diagnostic observations, not coordinator acknowledgements. Never include bound values. */
++    public static void trace(String kind, String action, String name, String outcome) {
++        if (!isEnabled()) return;
++        get().observe(kind, action, name, outcome);
++    }
++    void observe(String kind, String action, String name, String outcome) {
++        DeterministicClock clock = this;
++        synchronized (clock) {
++            Map<String, Object> event = clock.event(0, "trace");
++            event.remove("sequence");
++            event.put("trace_sequence", ++clock.traceSequence);
++            event.put("kind", kind); event.put("action", action);
++            event.put("name", name); event.put("outcome", outcome);
++            Operation parent = clock.operations.get().peek();
++            event.put("parent_sequence", parent == null ? null : parent.sequence);
++            event.put("time_epoch_ms", clock.operations.get().stream()
++                    .filter(op -> !op.suspended).findFirst().map(op -> op.time).orElse(null));
++            try {
++                clock.append(event);
++                if (clock.operationChecks && ((kind.startsWith("AT_") && outcome.equals("exit")) ||
++                        (kind.equals("jdbc") && (outcome.equals("succeeded") || outcome.equals("failed"))) ||
++                        (kind.equals("data") && !outcome.equals("requested")))) {
++                    Map<String, Object> request = clock.event(clock.traceSequence, "operation");
++                    request.put("kind", kind); request.put("action", action); request.put("name", name);
++                    request.put("outcome", outcome);
++                    request.put("transaction_sequence", parent == null ? null : parent.sequence);
++                    if (!clock.post(request).path("ok").asBoolean(false))
++                        throw new IllegalStateException("Operation database comparison rejected");
++                }
++            } catch (RuntimeException e) { clock.failed = true; throw e; }
++        }
++    }
++    private synchronized void append(Map<String, Object> event) {
+         try { log.write(JSON.writeValueAsString(event)); log.newLine(); log.flush(); }
+         catch (IOException e) { throw new IllegalStateException("Deterministic log write failed"); }
+     }
+diff --git i/framework/src/test/groovy/DeterministicIntegrationTests.groovy w/framework/src/test/groovy/DeterministicIntegrationTests.groovy
+index 9332a769..0d94abe3 100644
+--- i/framework/src/test/groovy/DeterministicIntegrationTests.groovy
++++ w/framework/src/test/groovy/DeterministicIntegrationTests.groovy
+@@ -203,6 +203,24 @@ class DeterministicIntegrationTests extends Specification {
+         factory.destroy(); factory = null
+         then:
+         log.readLines().size() > linesBeforeRestart
++        // Stream large trace evidence instead of retaining every parsed SQL/metadata event in the test heap.
++        long traceSequence = 0
++        Set<String> observed = []
++        def traceScan = log.eachLine { line ->
++            def trace = new JsonSlurper().parseText(line)
++            if (trace.event == 'trace') {
++                assert trace.trace_sequence == ++traceSequence
++                if (trace.kind == 'AT_ENTITY') observed.add('entity:' + trace.outcome)
++                if (trace.kind == 'jdbc') {
++                    if (trace.outcome == 'failed') observed.add('jdbc:failed')
++                    if (trace.outcome == 'succeeded' && trace.name.toUpperCase().contains('CREATE TABLE')) observed.add('jdbc:create')
++                    if (trace.outcome == 'succeeded' && trace.name.toUpperCase().contains('INSERT INTO')) observed.add('jdbc:insert')
++                }
++                if (trace.kind == 'data' && trace.action == 'load' && trace.outcome == 'succeeded') observed.add('data:load')
++                if (trace.kind == 'data' && trace.action == 'record') observed.add('data:record')
++            }
++        }
++        observed.containsAll(['entity:enter', 'entity:exit', 'jdbc:create', 'jdbc:insert', 'jdbc:failed', 'data:load', 'data:record'])
+         events.findAll { it.event == 'begin' && it.sequence > lastSequence }.size() > 0
+         events.findAll { it.event == 'begin' }.any { it.artifact == [type:'AT_SERVICE', sub_type:'sync', name:'deterministic-test'] }
+         events.findAll { it.event == 'begin' }.any { it.artifact.name == 'update#moqui.basic.EnumerationType' && it.artifact.type == 'AT_SERVICE' }
+diff --git i/framework/src/test/groovy/org/moqui/util/DeterministicClockTests.groovy w/framework/src/test/groovy/org/moqui/util/DeterministicClockTests.groovy
+index 5b2491c6..80d7d603 100644
+--- i/framework/src/test/groovy/org/moqui/util/DeterministicClockTests.groovy
++++ w/framework/src/test/groovy/org/moqui/util/DeterministicClockTests.groovy
+@@ -89,7 +89,7 @@ class DeterministicClockTests extends Specification {
+         requests[0].artifact == [type:'AT_SERVICE', sub_type:'sync', name:'example']
+         requests[1].artifact == DeterministicClock.bootstrapArtifact()
+         !log.text.contains('SECRET')
+-        log.readLines().size() == 4
++        log.readLines().collect { new JsonSlurper().parseText(it) }.count { it.event != 'trace' } == 4
+         !clock.hasTime()
+         !clock.hasTransaction()
+     }
+@@ -101,7 +101,7 @@ class DeterministicClockTests extends Specification {
+         b.complete('begin_failed')
+         then:
+         b.sequence > a.sequence
+-        log.readLines().size() == 4
++        log.readLines().collect { new JsonSlurper().parseText(it) }.count { it.event != 'trace' } == 4
+         requests.last().outcome == 'begin_failed'
+     }
+     @Unroll
+@@ -114,7 +114,7 @@ class DeterministicClockTests extends Specification {
+         then:
+         thrown(IllegalStateException)
+         !clock.hasTime()
+-        log.text == ''
++        new JsonSlurper().parseText(log.readLines().last()).outcome == 'requested'
+         when:
+         clock.begin([], true)
+         then:
+@@ -137,7 +137,7 @@ class DeterministicClockTests extends Specification {
+         then:
+         thrown(IllegalStateException)
+         !clock.hasTime()
+-        log.readLines().size() == 2 // actual DB outcome is retained
++        log.readLines().collect { new JsonSlurper().parseText(it) }.count { it.event != 'trace' } == 2 // actual DB outcome is retained
+         when:
+         status = 503
+         new DeterministicClock(settings()).begin([], true)
+@@ -156,8 +156,23 @@ class DeterministicClockTests extends Specification {
+         (System.nanoTime() - start) / 1000000L >= 1800
+         (System.nanoTime() - start) / 1000000L < 8000
+         !clock.hasTime()
+-        log.text.empty
++        new JsonSlurper().parseText(log.readLines().last()).outcome == 'requested'
+     }
++    def 'operation completion synchronously calls the Python comparison hook'() {
++        given:
++        def clock = new DeterministicClock(settings() + [MOQUI_DETERMINISTIC_OPERATIONS:'true'])
++        def operation = clock.begin([], true)
++        when:
++        clock.observe('AT_ENTITY', 'list', 'moqui.example.Thing', 'exit')
++        operation.complete('committed')
++        then:
++        requests*.event == ['begin', 'operation', 'complete']
++        requests[1].kind == 'AT_ENTITY'
++        requests[1].name == 'moqui.example.Thing'
++        requests[1].transaction_sequence == operation.sequence
++        requests[1].outcome == 'exit'
++    }
++
+     def 'random bytes use the coordinator without manufacturing a transaction or local fallback'() {
+         given:
+         def clock = new DeterministicClock(settings())
+diff --git i/framework/test/deterministic-server-smoke.py w/framework/test/deterministic-server-smoke.py
+index b8643267..57f40b02 100644
+--- i/framework/test/deterministic-server-smoke.py
++++ w/framework/test/deterministic-server-smoke.py
+@@ -5,6 +5,8 @@ Run from the framework checkout, with Java 21 on PATH. --postgres uses a fresh d
+ import argparse
+ import collections
+ import http.server
++import hashlib
++import hmac
+ import json
+ import os
+ from pathlib import Path
+@@ -34,6 +36,7 @@ def main():
+     evidence.mkdir(parents=True, exist_ok=True)
+     events = []
+     active = set()
++    random_counts = collections.Counter()
+     errors = []
+     lock = threading.Lock()
+ 
+@@ -47,7 +50,17 @@ def main():
+                 event = json.loads(self.rfile.read(int(self.headers['Content-Length'])))
+                 assert event['version'] == 1 and event['engine'] == 'java'
+                 with lock:
+-                    if event['event'] == 'begin':
++                    if event['event'] == 'random':
++                        domain, length = event['domain'], event['length']
++                        assert 1 <= length <= 4096
++                        index = random_counts[domain]
++                        data = b''.join(hmac.digest(bytes(32), json.dumps(
++                            ['moqui-random-v1', 'activity', domain, index, block],
++                            separators=(',', ':')).encode('ascii'), hashlib.sha256)
++                            for block in range((length + 31) // 32))
++                        response = {'bytes': data[:length].hex()}
++                        random_counts[domain] += 1
++                    elif event['event'] == 'begin':
+                         assert event['sequence'] not in active
+                         assert event['artifact_stack'] and event['artifact'] == event['artifact_stack'][0]
+                         assert all(set(a) == {'type', 'sub_type', 'name'} for a in event['artifact_stack'])
+@@ -129,6 +142,11 @@ def main():
+         assert not errors, errors
+         assert not active, f'uncompleted operations: {sorted(active)}'
+         records = [json.loads(line) for line in (evidence / 'deterministic.log').read_text().splitlines()]
++        traces = [record for record in records if record['event'] == 'trace']
++        assert [record['trace_sequence'] for record in traces] == list(range(1, len(traces) + 1))
++        assert any(record['kind'] == 'jdbc' and 'CREATE TABLE' in record['name'].upper() for record in traces)
++        assert any(record['kind'] == 'data' and record['action'] == 'record' for record in traces)
++        records = [record for record in records if record['event'] != 'trace']
+         assert len(records) == len(events), (len(records), len(events))
+         begins = [e for e in events if e['event'] == 'begin']
+         assert len({e['sequence'] for e in begins}) == len(begins)
+@@ -148,7 +166,7 @@ def main():
+         summary = {'database': 'postgres18' if args.postgres else 'h2-memory', 'http': statuses,
+                    'operations': len(begins), 'outcomes': dict(collections.Counter(
+                        e['outcome'] for e in events if e['event'] == 'complete')), 'uncompleted': len(active),
+-                   'persisted_statistics': statistics}
++                   'persisted_statistics': statistics, 'random_draw_counts': dict(random_counts)}
+         (evidence / 'summary.json').write_text(json.dumps(summary, indent=2) + '\n')
+         print(json.dumps(summary))
+     finally:

@@ -114,5 +114,6 @@
     "approved_by": "user",
     "description": "Rust reads each related row to check a foreign key before a write (Java leaves that to the database), counts Enumeration and UserGroupPermission for its load report, and tries an UPDATE before create-or-update reads the row (Java reads first). Rust counts these as artifact hits under sub types of their own (an UPDATE probe only when it matched no row; one that updates a row is a real update); these bins are listed in the report and not compared with Java.",
     "artifact_sub_types": ["fk-check", "load-report", "update-probe"]
-  }
+  },
+  "visual_differences": []
 }

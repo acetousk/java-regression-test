@@ -1,0 +1,747 @@
+{
+  "transaction_exemptions": [
+    {
+      "engine": "rust",
+      "when": {
+        "approved_difference": "seed_statistics"
+      }
+    },
+    {
+      "engine": "rust",
+      "when": {
+        "approved_difference": "rust_only_statistics"
+      }
+    },
+    {
+      "engine": "rust",
+      "when": {
+        "all": [
+          {
+            "path": "kind",
+            "in": [
+              "insert",
+              "update",
+              "delete",
+              "truncate"
+            ]
+          },
+          {
+            "path": "table",
+            "in": {
+              "ref": "rust_only_tables"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "engine": "rust",
+      "when": {
+        "all": [
+          {
+            "path": "kind",
+            "equals": "insert"
+          },
+          {
+            "keyed_rows": {
+              "ref": "rust_seed_additions"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "engine": "rust",
+      "when": {
+        "all": [
+          {
+            "path": "kind",
+            "equals": "schema"
+          },
+          {
+            "path": "table_only",
+            "equals": true
+          },
+          {
+            "path": "tag",
+            "in": [
+              "CREATE TABLE",
+              "CREATE INDEX"
+            ]
+          },
+          {
+            "path": "tables",
+            "all_in": {
+              "ref": "rust_only_tables"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "engine": "rust",
+      "when": {
+        "all": [
+          {
+            "path": "kind",
+            "equals": "schema"
+          },
+          {
+            "path": "table_only",
+            "equals": true
+          },
+          {
+            "path": "tag",
+            "equals": "DROP TABLE"
+          },
+          {
+            "path": "tables",
+            "empty": true
+          }
+        ]
+      }
+    }
+  ],
+  "rust_only_tables": [
+    "public.auth_flow",
+    "public.auth_flow_field_map",
+    "public.auth_flow_role_map",
+    "public.cluster_member",
+    "public.cluster_message",
+    "public.data_feed_pending",
+    "public.http_session",
+    "public.oauth_flow",
+    "public.oidc_flow",
+    "public.saml_flow",
+    "public.user_ssh_key",
+    "search.document_index",
+    "search.moqui_http_log",
+    "search.moqui_logs"
+  ],
+  "rust_only_columns": [
+    {
+      "table": "public.data_document_field",
+      "name": "search_role",
+      "type": "character varying(63)"
+    },
+    {
+      "table": "public.data_document_field",
+      "name": "search_weight",
+      "type": "character(1)"
+    },
+    {
+      "table": "public.system_message_remote",
+      "name": "ssh_host_key_fingerprint",
+      "type": "text"
+    }
+  ],
+  "rust_only_ddl": [
+    {
+      "kind": "SCHEMA",
+      "name": "search",
+      "blocks": [
+        "--\n-- Name: search; Type: SCHEMA; Schema: -; Owner: moqui\n--\n\nCREATE SCHEMA search;\n\n\nALTER SCHEMA search OWNER TO moqui;\n\n"
+      ]
+    },
+    {
+      "kind": "EXTENSION",
+      "name": "pg_trgm",
+      "blocks": [
+        "--\n-- Name: pg_trgm; Type: EXTENSION; Schema: -; Owner: -\n--\n\nCREATE EXTENSION IF NOT EXISTS pg_trgm WITH SCHEMA public;\n\n\n",
+        "--\n-- Name: EXTENSION pg_trgm; Type: COMMENT; Schema: -; Owner: \n--\n\nCOMMENT ON EXTENSION pg_trgm IS 'text similarity measurement and index searching based on trigrams';\n\n\n"
+      ]
+    }
+  ],
+  "template_differences": [
+    {
+      "table": "public.localized_message",
+      "key": {
+        "original": "StatusFlowTransitionNotFoundTemplate",
+        "locale": "default"
+      },
+      "field": "localized",
+      "validator": "elvis_or",
+      "java": "Status change not allowed from ${lookedUpStatusName?:lookedUpStatusId} to ${parameterStatusName?:parameterStatusId}"
+    },
+    {
+      "table": "public.localized_message",
+      "key": {
+        "original": "UomNameTemplate",
+        "locale": "default"
+      },
+      "field": "localized",
+      "validator": "elvis_or",
+      "java": "${description?:''} (${abbreviation?:uomId})"
+    },
+    {
+      "table": "public.localized_message",
+      "key": {
+        "original": "UsernameTemplate",
+        "locale": "default"
+      },
+      "field": "localized",
+      "validator": "elvis_or",
+      "java": "${userFullName ?: (lastName ? (firstName ? firstName + ' ' : '') + lastName : '')} [${username?:userId?:''}]"
+    },
+    {
+      "table": "public.notification_topic",
+      "key": {
+        "topic": "ServiceJobError"
+      },
+      "field": "title_template",
+      "validator": "elvis_or",
+      "java": "Job Error ${serviceCallRun.jobName?:''} [${serviceCallRun.jobRunId?:''}] ${serviceCallRun.errors?:'N/A'}"
+    },
+    {
+      "table": "public.notification_topic",
+      "key": {
+        "topic": "WebServletError"
+      },
+      "field": "title_template",
+      "validator": "elvis_or",
+      "java": "Web Error ${errorCode?:''} (${username?:'no user'}) ${path?:''} ${message?:'N/A'}"
+    },
+    {
+      "table": "public.notification_topic",
+      "key": {
+        "topic": "ServiceJobError"
+      },
+      "field": "link_template",
+      "java": "/vapps/system/ServiceJob/JobRuns/JobRunDetail?jobRunId=${serviceCallRun.jobRunId}",
+      "rust": "/qapps/System/ServiceJob/JobRuns/JobRunDetail?jobRunId=${serviceCallRun.jobRunId}"
+    }
+  ],
+  "theme_resources": [
+    {
+      "theme": "DEFAULT",
+      "sequence": 1,
+      "java": [
+        "STRT_STYLESHEET",
+        null
+      ],
+      "rust": [
+        "STRT_STYLESHEET",
+        "/libs/fontawesome/css/font-awesome.min.css"
+      ]
+    },
+    {
+      "theme": "DEFAULT",
+      "sequence": 2,
+      "java": [
+        "STRT_STYLESHEET",
+        "/libs/font-awesome/css/font-awesome.min.css"
+      ],
+      "rust": null
+    },
+    {
+      "theme": "DEFAULT",
+      "sequence": 3,
+      "java": [
+        "STRT_STYLESHEET",
+        "/libs/twitter-bootstrap/css/bootstrap.min.css"
+      ],
+      "rust": null
+    },
+    {
+      "theme": "DEFAULT",
+      "sequence": 4,
+      "java": [
+        "STRT_STYLESHEET",
+        "/libs/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css"
+      ],
+      "rust": null
+    },
+    {
+      "theme": "DEFAULT",
+      "sequence": 5,
+      "java": [
+        "STRT_STYLESHEET",
+        "/libs/select2/select2.min.css"
+      ],
+      "rust": null
+    },
+    {
+      "theme": "DEFAULT",
+      "sequence": 6,
+      "java": [
+        "STRT_STYLESHEET",
+        "/libs/select2-bootstrap-theme/select2-bootstrap.min.css"
+      ],
+      "rust": null
+    },
+    {
+      "theme": "DEFAULT",
+      "sequence": 7,
+      "java": [
+        "STRT_STYLESHEET",
+        "/libs/Selectivity.js/selectivity-full.min.css"
+      ],
+      "rust": null
+    },
+    {
+      "theme": "DEFAULT",
+      "sequence": 8,
+      "java": [
+        "STRT_STYLESHEET",
+        "/libs/jstree/themes/default/style.min.css"
+      ],
+      "rust": null
+    },
+    {
+      "theme": "DEFAULT",
+      "sequence": 20,
+      "java": [
+        "STRT_STYLESHEET",
+        "/css/webroot-layout.css"
+      ],
+      "rust": [
+        "STRT_STYLESHEET",
+        "/css/moqui-html.css"
+      ]
+    },
+    {
+      "theme": "DEFAULT",
+      "sequence": 21,
+      "java": [
+        "STRT_STYLESHEET",
+        "/css/webroot-theme.css"
+      ],
+      "rust": null
+    },
+    {
+      "theme": "DEFAULT",
+      "sequence": 30,
+      "java": null,
+      "rust": [
+        "STRT_SCRIPT",
+        "/js/moqui-html.js"
+      ]
+    },
+    {
+      "theme": "DEFAULT",
+      "sequence": 102,
+      "java": [
+        "STRT_BODY_CLASS",
+        "bg-light"
+      ],
+      "rust": null
+    },
+    {
+      "theme": "DEFAULT",
+      "sequence": 201,
+      "java": [
+        "STRT_FOOTER_ITEM",
+        "<p><a href=\"/vapps/ScreenTree\">${ec.l10n.localize('Site Map')}</a></p>"
+      ],
+      "rust": [
+        "STRT_FOOTER_ITEM",
+        "<p><a href=\"/apps/ScreenTree\">${ec.l10n.localize('Site Map')}</a></p>"
+      ]
+    },
+    {
+      "theme": "DEFAULT_QUASAR",
+      "sequence": 1,
+      "java": [
+        "STRT_STYLESHEET",
+        null
+      ],
+      "rust": [
+        "STRT_STYLESHEET",
+        "/libs/fontawesome/css/font-awesome.min.css"
+      ]
+    },
+    {
+      "theme": "DEFAULT_QUASAR",
+      "sequence": 2,
+      "java": [
+        "STRT_STYLESHEET",
+        "/libs/font-awesome/css/font-awesome.min.css"
+      ],
+      "rust": null
+    },
+    {
+      "theme": "DEFAULT_QUASAR",
+      "sequence": 3,
+      "java": [
+        "STRT_STYLESHEET",
+        "https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons"
+      ],
+      "rust": [
+        "STRT_STYLESHEET",
+        "/libs/material-icons/material-icons.css"
+      ]
+    },
+    {
+      "theme": "DEFAULT_QUASAR",
+      "sequence": 4,
+      "java": [
+        "STRT_STYLESHEET",
+        "/libs/quasar/quasar.min.css"
+      ],
+      "rust": [
+        "STRT_STYLESHEET",
+        "/libs/quasar/quasar.prod.css"
+      ]
+    }
+  ],
+  "statistics_bin_boundaries": {
+    "approved_by": "user",
+    "description": "Different time-based bin splits are okay when operation identities, host values, all other non-timing fields, and aggregate hit counts match. Collapse split bins in the comparison copy and close only the id gaps caused by those bins. Sequence states remain strict."
+  },
+  "url_port_differences": [
+    {
+      "approved_by": "user",
+      "description": "Java and Rust test servers use different ports. Ignore only URL ports; scheme, host, path, query and fragment remain strict.",
+      "table": "public.visit",
+      "fields": [
+        "initial_request",
+        "initial_referrer"
+      ]
+    }
+  ],
+  "java_servlet_session_fields": [
+    {
+      "approved_by": "user",
+      "description": "Java-only servlet/Jetty session metadata and Visit date differences; other Visit fields remain strict.",
+      "table": "public.visit",
+      "fields": [
+        "webapp_name",
+        "from_date",
+        "last_updated_stamp"
+      ]
+    }
+  ],
+  "statistics_timing": [
+    {
+      "table": "public.artifact_hit_bin",
+      "fields": [
+        "bin_start_date_time",
+        "bin_end_date_time",
+        "total_time_millis",
+        "total_squared_time",
+        "min_time_millis",
+        "max_time_millis",
+        "slow_hit_count",
+        "last_updated_stamp"
+      ]
+    },
+    {
+      "table": "public.artifact_hit",
+      "fields": [
+        "start_date_time",
+        "running_time_millis",
+        "is_slow_hit",
+        "last_updated_stamp"
+      ]
+    }
+  ],
+  "full_text_indexes": [
+    {
+      "table": "public.llm_conversation",
+      "field": "search_text",
+      "java_index": "fts_llm_conversation_search_text",
+      "rust_index": "llm_conversation_searchtext_fts"
+    },
+    {
+      "table": "public.llm_skill",
+      "field": "description",
+      "java_index": "fts_llm_skill_description",
+      "rust_index": "llm_skill_description_fts"
+    },
+    {
+      "table": "public.llm_skill",
+      "field": "body",
+      "java_index": "fts_llm_skill_body",
+      "rust_index": "llm_skill_body_fts"
+    },
+    {
+      "table": "public.test_fts",
+      "field": "body",
+      "java_index": "fts_test_fts_body",
+      "rust_index": "test_fts_body_fts"
+    }
+  ],
+  "rust_seed_additions": [
+    {
+      "reason": "Rust SSO: authentication flow and client type enumerations for the Rust-only auth_flow/oauth_flow/oidc_flow/saml_flow tables",
+      "table": "public.enumeration",
+      "entity": "moqui.basic.Enumeration",
+      "key": [
+        "enum_id"
+      ],
+      "values": [
+        [
+          "AftOauth"
+        ],
+        [
+          "AftOidc"
+        ],
+        [
+          "AftSaml"
+        ],
+        [
+          "OctBitBucket"
+        ],
+        [
+          "OctDropBox"
+        ],
+        [
+          "OctFacebook"
+        ],
+        [
+          "OctFoursquare"
+        ],
+        [
+          "OctGitHub"
+        ],
+        [
+          "OctLinkedIn"
+        ],
+        [
+          "OctOauth10"
+        ],
+        [
+          "OctOauth20"
+        ],
+        [
+          "OctPaypal"
+        ],
+        [
+          "OctTwitter"
+        ],
+        [
+          "OctWordPress"
+        ],
+        [
+          "OctYahoo"
+        ],
+        [
+          "OctApple"
+        ],
+        [
+          "OctAzureAd"
+        ],
+        [
+          "OctGoogle"
+        ],
+        [
+          "OctKeycloak"
+        ],
+        [
+          "OctOther"
+        ],
+        [
+          "OjaEdDSA"
+        ],
+        [
+          "OjaES256"
+        ],
+        [
+          "OjaES384"
+        ],
+        [
+          "OjaES512"
+        ],
+        [
+          "OjaHS256"
+        ],
+        [
+          "OjaHS384"
+        ],
+        [
+          "OjaHS512"
+        ],
+        [
+          "OjaPS256"
+        ],
+        [
+          "OjaPS384"
+        ],
+        [
+          "OjaPS512"
+        ],
+        [
+          "OjaRS256"
+        ],
+        [
+          "OjaRS384"
+        ],
+        [
+          "OjaRS512"
+        ]
+      ]
+    },
+    {
+      "reason": "Rust SSO enumeration types",
+      "table": "public.enumeration_type",
+      "entity": "moqui.basic.EnumerationType",
+      "key": [
+        "enum_type_id"
+      ],
+      "values": [
+        [
+          "AuthFlowType"
+        ],
+        [
+          "OauthClientType"
+        ],
+        [
+          "OidcClientType"
+        ],
+        [
+          "OidcJwsAlgorithm"
+        ]
+      ]
+    },
+    {
+      "reason": "Rust built-in SSH server permissions",
+      "table": "public.user_permission",
+      "entity": "moqui.security.UserPermission",
+      "key": [
+        "user_permission_id"
+      ],
+      "values": [
+        [
+          "SSH_SFTP"
+        ],
+        [
+          "SSH_SHELL"
+        ]
+      ]
+    },
+    {
+      "reason": "Rust built-in SSH server permission grants",
+      "table": "public.user_group_permission",
+      "entity": "moqui.security.UserGroupPermission",
+      "key": [
+        "user_group_id",
+        "user_permission_id"
+      ],
+      "values": [
+        [
+          "ADMIN",
+          "SSH_SFTP"
+        ],
+        [
+          "ADMIN_ADV",
+          "SSH_SHELL"
+        ]
+      ]
+    },
+    {
+      "reason": "Rust DataFeedPending delivery job (MoquiSetupData.xml)",
+      "table": "public.service_job",
+      "entity": "moqui.service.job.ServiceJob",
+      "key": [
+        "job_name"
+      ],
+      "values": [
+        [
+          "process_DataFeedPending_frequent"
+        ]
+      ]
+    },
+    {
+      "reason": "moqui-sftp example job bundled in the Rust framework (SftpDemoData.xml)",
+      "table": "public.service_job",
+      "entity": "moqui.service.job.ServiceJob",
+      "key": [
+        "job_name"
+      ],
+      "values": [
+        [
+          "ExampleSftpLocal_poll"
+        ]
+      ]
+    },
+    {
+      "reason": "moqui-sftp example job parameters bundled in the Rust framework",
+      "table": "public.service_job_parameter",
+      "entity": "moqui.service.job.ServiceJobParameter",
+      "key": [
+        "job_name",
+        "parameter_name"
+      ],
+      "values": [
+        [
+          "ExampleSftpLocal_poll",
+          "systemMessageRemoteId"
+        ],
+        [
+          "ExampleSftpLocal_poll",
+          "systemMessageTypeId"
+        ]
+      ]
+    },
+    {
+      "reason": "moqui-sftp example message type bundled in the Rust framework",
+      "table": "public.system_message_type",
+      "entity": "moqui.service.message.SystemMessageType",
+      "key": [
+        "system_message_type_id"
+      ],
+      "values": [
+        [
+          "ExampleSftp"
+        ]
+      ]
+    },
+    {
+      "reason": "moqui-sftp example remote bundled in the Rust framework",
+      "table": "public.system_message_remote",
+      "entity": "moqui.service.message.SystemMessageRemote",
+      "key": [
+        "system_message_remote_id"
+      ],
+      "values": [
+        [
+          "ExampleSftpLocal"
+        ]
+      ]
+    }
+  ],
+  "java_seed_additions": [
+    {
+      "reason": "Java's LLM data cleanup job; Rust has no clean#LlmData service",
+      "table": "public.service_job",
+      "entity": "moqui.service.job.ServiceJob",
+      "key": [
+        "job_name"
+      ],
+      "values": [
+        [
+          "clean_LlmData_daily"
+        ]
+      ]
+    },
+    {
+      "reason": "Java's LLM data cleanup job parameters",
+      "table": "public.service_job_parameter",
+      "entity": "moqui.service.job.ServiceJobParameter",
+      "key": [
+        "job_name",
+        "parameter_name"
+      ],
+      "values": [
+        [
+          "clean_LlmData_daily",
+          "contentDaysToKeep"
+        ],
+        [
+          "clean_LlmData_daily",
+          "daysToKeep"
+        ]
+      ]
+    }
+  ],
+  "rust_only_statistics": {
+    "approved_by": "user",
+    "description": "Rust reads each related row to check a foreign key before a write (Java leaves that to the database), counts Enumeration and UserGroupPermission for its load report, and tries an UPDATE before create-or-update reads the row (Java reads first). Rust counts these as artifact hits under sub types of their own (an UPDATE probe only when it matched no row; one that updates a row is a real update); these bins are listed in the report and not compared with Java.",
+    "artifact_sub_types": [
+      "fk-check",
+      "load-report",
+      "update-probe"
+    ]
+  },
+  "visual_differences": []
+}

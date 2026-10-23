@@ -330,6 +330,8 @@ class DeterministicCoordinator:
                 self.send_response(status)
                 self.send_header("Content-Type", "application/json")
                 self.send_header("Content-Length", str(len(body)))
+                # The server closes after each reply; say so, or the JDK client pools the dead socket.
+                self.send_header("Connection", "close")
                 self.end_headers()
                 self.wfile.write(body)
 
@@ -352,6 +354,8 @@ class DeterministicCoordinator:
                 self.send_response(status)
                 self.send_header("Content-Type", "application/json")
                 self.send_header("Content-Length", str(len(body)))
+                # The server closes after each reply; say so, or the JDK client pools the dead socket.
+                self.send_header("Connection", "close")
                 self.end_headers()
                 try:
                     self.wfile.write(body)
