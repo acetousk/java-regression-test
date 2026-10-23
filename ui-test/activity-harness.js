@@ -11,9 +11,18 @@ const BARRIER_TIMEOUT = 120000;
 // Visual differences the user approved, read at run time so approvals recorded during a held session apply
 // to the next attempt. Each entry names an activity step and the largest difference it may show.
 const approvedDifferencesFile = process.env.MOQUI_APPROVED_DIFFERENCES || path.resolve(__dirname, '../approved-differences.json');
+function visualApprovals() {
+  return JSON.parse(fs.readFileSync(approvedDifferencesFile, 'utf8')).visual_differences || [];
+}
 function visualApproval(activity, step) {
-  const approvals = JSON.parse(fs.readFileSync(approvedDifferencesFile, 'utf8')).visual_differences || [];
-  return approvals.find(approval => approval.activity === activity && approval.step === step);
+  return visualApprovals().find(approval => approval.activity === activity && approval.step === step);
+}
+// An approval with a selector names an element one engine renders and the other deliberately does not, such as
+// Java's link to the Bootstrap UI. It is hidden on that engine for the screenshot only, so the rest of the page
+// still compares pixel for pixel.
+function hiddenSelectors(engine) {
+  return visualApprovals().filter(approval => approval.selector && approval.engine === engine)
+    .map(approval => approval.selector);
 }
 
 function baseURL(engine) {
@@ -126,8 +135,27 @@ function registerActivity({ source, activity, mode = 'apps', steps }) {
           fs.mkdirSync(stepDir, { recursive: true });
           // A Vue page renders after its own requests; an unsettled page is caught by the screenshot diff.
           await Promise.all(engines.map(engine => pages[engine]?.waitForLoadState('networkidle').catch(() => {})));
-          await Promise.all(engines.map(engine => pages[engine]?.screenshot({
-            path: path.join(stepDir, `${engine}.png`), fullPage: true }).catch(() => {})));
+          // Quasar's loading bar fades out about a second after its last request, later than networkidle.
+          await Promise.all(engines.map(engine => pages[engine]?.waitForFunction(() =>
+            [...document.querySelectorAll('.q-loading-bar')].every(bar => getComputedStyle(bar).opacity === '0'),
+          null, { timeout: 5000 }).catch(() => {})));
+          entry.hidden = {};
+          await Promise.all(engines.map(async engine => {
+            const page = pages[engine];
+            if (!page) return;
+            const selectors = hiddenSelectors(engine);
+            entry.hidden[engine] = selectors.length ? await page.evaluate(selectors => selectors.filter(selector => {
+              const elements = [...document.querySelectorAll(selector)];
+              elements.forEach(element => element.setAttribute('data-moqui-hidden', element.style.display));
+              elements.forEach(element => { element.style.display = 'none'; });
+              return elements.length > 0;
+            }), selectors).catch(() => []) : [];
+            await page.screenshot({ path: path.join(stepDir, `${engine}.png`), fullPage: true }).catch(() => {});
+            if (selectors.length) await page.evaluate(() => document.querySelectorAll('[data-moqui-hidden]').forEach(element => {
+              element.style.display = element.getAttribute('data-moqui-hidden');
+              element.removeAttribute('data-moqui-hidden');
+            })).catch(() => {});
+          }));
           entry.urls = Object.fromEntries(engines.map(engine => [engine, pages[engine]?.url()]));
           // Retain unmodified screenshots and fail this step on an unapproved visual difference.
           entry.visual = await diffScreenshots(stepDir).catch(error => ({ status: 'failed', reason: error.message }));
