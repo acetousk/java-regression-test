@@ -30,7 +30,7 @@ registerActivity({
       writes: true,
       run: async page => {
         const form = page.locator('#CreateSalesOrderDialog form');
-        await choose(page, 'CreateSalesOrder_customerPartyId', 'Joe', 'Joe');
+        await choose(page, 'CreateSalesOrder_customerPartyId', 'Joe Q Public', 'Joe');
         await submitTo(page, form.locator('[type="submit"]'), orderDetail);
         await expect(page.getByText('Joe Q Public').first()).toBeVisible();
         return urlParam(page, 'orderId');
