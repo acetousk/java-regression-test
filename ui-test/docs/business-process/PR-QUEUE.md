@@ -2,7 +2,7 @@
 
 These PRs make the business-process activities pass on Java and Rust in lockstep. Merge each stack bottom-up.
 
-## mr-moqui (Rust): one stack, #95 → #128
+## mr-moqui (Rust): one stack, #95 → #129
 
 | PR | Branch | What |
 |----|--------|------|
@@ -28,6 +28,7 @@ These PRs make the business-process activities pass on Java and Rust in lockstep
 | #125 | fix/date-time-minute-step | Start a date-time field on its minute step |
 | #126 | fix/temporal-format-as-java | Show a timestamp from a `from` path, or formatted with no pattern, as Java does (Shipment Detail) |
 | #128 | fix/string-masker | StringUtilities.masker for GL account codes (Edit Invoice GL Transactions) |
+| #129 | fix/form-pass-through-skips-fields | A form's pass-through hidden inputs skip its own fields, as Java (Pack Item posted shipmentId twice) |
 
 Earlier, separate: #68 (on fix/login-history), #51, #50, #29, #20.
 
@@ -36,6 +37,7 @@ Earlier, separate: #68 (on fix/login-history), #51, #50, #29, #20.
 | PR | Branch | What |
 |----|--------|------|
 | #1 | fix/order-item-total-decimal-scale | get#OrderItemTotal keeps the scale of Java's 0.0 and 1.0 literals |
+| #2 | fix/shipment-item-source-status-default | create#ShipmentItem leaves the source status null as Java (stacked on #1) |
 
 ## MrSimpleScreens (Rust's SimpleScreens)
 
@@ -51,7 +53,7 @@ Earlier, separate: #68 (on fix/login-history), #51, #50, #29, #20.
 | #752 | fix/deterministic-screen-test-lane | Run joined screen-test renders in the holder's lane |
 | #753 | fix/deterministic-startup-index | Index empty DataFeeds inline in deterministic mode |
 
-## java-regression-test (harness): one stack, #24 → #40
+## java-regression-test (harness): one stack, #24 → #41
 
 | PR | Branch | What |
 |----|--------|------|
@@ -72,6 +74,7 @@ Earlier, separate: #68 (on fix/login-history), #51, #50, #29, #20.
 | #38 | test/receive-inventory-direct | Receive inventory directly, without a purchase order |
 | #39 | test/stock-move | Move part of an asset to another location; shared Receive Direct steps |
 | #40 | test/physical-inventory | Record a physical inventory count with a variance reason |
+| #41 | test/transfer-shipment | Transfer stock between facilities: schedule, pack from an asset, ship, receive, deliver |
 
 ## Business processes passing in lockstep
 
@@ -88,3 +91,4 @@ Earlier, separate: #68 (on fix/login-history), #51, #50, #29, #20.
 | receive-inventory-direct (5 DEMO_2_1 into Ziziwork Retail Warehouse at 7.50, no purchase order) | 5/5 | 44 cumulative, 0 unpaired | 2026-10-23_17-14-21.830766Z |
 | inventory-mover-does-stock-move (receive 10 DEMO_2_1 at bulk 01010102, move 4 to pick 01010101) | 8/8 | 18 cumulative, 0 unpaired | 2026-10-23_17-41-28.777761Z |
 | inventory-mover-checks-physical-inventory (receive 8 DEMO_2_1 at 01010202, count 2 less, Damaged) | 8/8 | 32 cumulative, 0 unpaired; same variance row on both DBs | 2026-10-23_17-41-28.777761Z |
+| transfer-shipments (receive 6 DEMO_2_1, add the back room facility, transfer 4 there: schedule, pack and issue from the asset, pack, ship, receive, deliver) | 17/17 | 25, 0 unpaired | 2026-10-23_18-26-01.084676Z (with mr-mantle-usl #2, #129) |
