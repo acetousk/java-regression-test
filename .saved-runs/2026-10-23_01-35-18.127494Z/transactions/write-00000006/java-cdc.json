@@ -1,0 +1,13 @@
+{
+  "operation_id": "java-00001086",
+  "transactions": [
+    {
+      "operation_id": "java-00001086",
+      "outcome": "committed",
+      "changes": [
+        "table public.sequence_value_item: UPDATE: seq_name[text]:'moqui.server.ArtifactHit' seq_num[numeric]:102423 last_updated_stamp[timestamp without time zone]:'2026-10-23 01:35:30.64'",
+        "table moqui_regression.events: INSERT: payload[text]:'{\"kind\" : \"update\", \"table\" : \"public.sequence_value_item\", \"old\" : \"{\\\"seq_name\\\":\\\"moqui.server.ArtifactHit\\\",\\\"seq_num\\\":102322,\\\"last_updated_stamp\\\":\\\"2026-10-23T01:35:30.635\\\"}\", \"new\" : \"{\\\"seq_name\\\":\\\"moqui.server.ArtifactHit\\\",\\\"seq_num\\\":102423,\\\"last_updated_stamp\\\":\\\"2026-10-23T01:35:30.64\\\"}\"}'"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "name": "log in",
+  "writes": true,
+  "passed": false,
+  "before": {
+    "error": null,
+    "write_transactions": 3,
+    "database_comparisons": 3,
+    "rust_only_writes": 0,
+    "unpaired_writes": {
+      "java": 0,
+      "rust": 0
+    },
+    "waiting_at_barrier": {
+      "java": false,
+      "rust": false
+    }
+  },
+  "after": {
+    "error": null,
+    "write_transactions": 5,
+    "database_comparisons": 5,
+    "rust_only_writes": 0,
+    "unpaired_writes": {
+      "java": 0,
+      "rust": 0
+    },
+    "waiting_at_barrier": {
+      "java": false,
+      "rust": false
+    }
+  },
+  "pairedWrites": 2,
+  "urls": {
+    "java": "http://127.0.0.1:28080/qapps",
+    "rust": "http://127.0.0.1:28081/qapps"
+  },
+  "visual": {
+    "status": "compared",
+    "equal": false,
+    "differentPixels": 77311,
+    "comparedPixels": 1501920,
+    "differencePercent": 5.147477894961116,
+    "threshold": 0.1,
+    "dimensions": {
+      "java": [
+        1440,
+        1043
+      ],
+      "rust": [
+        1440,
+        1000
+      ]
+    }
+  },
+  "error": "Java/Rust screenshots differ: 77311 pixels"
+}
