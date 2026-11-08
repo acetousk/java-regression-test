@@ -2,6 +2,7 @@
 	path = moqui-framework
 	url = https://github.com/moqui/moqui-framework.git
 	branch = llm-client
+# Change 6: The Rust gitlink pins the current framework with shutdown completion evidence.
 [submodule "mr-moqui"]
 	path = mr-moqui
 	url = https://github.com/moqui/mr-moqui.git
