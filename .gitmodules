@@ -5,6 +5,7 @@
 # Phase 2, Change 5: Pin opt-in supplied entity timestamps with real elapsed timeouts.
 # Change 6: The Rust gitlink pins the current framework with shutdown completion evidence.
 # Phase 2, Change 4: Pin verified framework fixtures, simulation bookkeeping and script runtime fixes.
+# Phase 3, Change 4: Pin verified navigation and message-frame rendering fixes.
 [submodule "mr-moqui"]
 	path = mr-moqui
 	url = https://github.com/moqui/mr-moqui.git
