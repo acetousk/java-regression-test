@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Change 2: reproduce the 43 selected Rust business/acceptance specs without building."""
+"""Change 2: reproduce the 45 selected Rust business/acceptance specs without building."""
 import argparse
 import hashlib
 import json
@@ -14,7 +14,7 @@ EXPANDED = {
                   'SipDevice', 'RingGroup', 'ResourceSearchExclusions', 'RecentAuth', 'PushDevice',
                   'Ivr', 'EdgeVoice', 'DocumentExpression', 'ChatKeyBackup', 'Calls', 'CallRecording',
                   'CallQueue', 'CallHandling', 'CallEncryption', 'CallCaptions', 'BusinessDatasets', 'AdminSessions'],
-    'tools': ['Etl', 'DocumentExport'],
+    'tools': ['Etl', 'DocumentExport', 'ConfReload', 'Constitution'],
     'example': ['Files', 'Wiki', 'GitHosting', 'Chat', 'MailClient'],
     'basic-comms': ['BasicComms', 'BasicCommsTexts', 'BasicCommsSync', 'BasicCommsInbox',
                     'BasicCommsFiles', 'BasicCommsEncrypted', 'BasicCommsChat', 'BasicCommsCalls'],

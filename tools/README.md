@@ -22,7 +22,7 @@ projections explicitly omit `last_updated_stamp` and preserve decimal precision.
 row multisets and native sequences are compared after graceful shutdown with the
 existing harness. Raw and existing-approval verdicts remain separate.
 
-Change 2 reproduces all 43 selected Rust specs (42 regression specs plus the explicitly
+Change 2 reproduces all 45 selected Rust specs (44 regression specs plus the explicitly
 requested ETL acceptance scenario) without rebuilding:
 
 ```sh
@@ -33,7 +33,7 @@ python tools/phase_two_rust.py --output .runs/phase-two-db \
 The tracked runner includes every selector, runs three independent scratch
 PostgreSQL databases sequentially, retains JUnit/logs and records exact commands,
 exit codes and the binary hash in `rust-commands.json`. It refuses to overwrite
-existing Rust results. The observed 271 feature assertions depend on the pinned
+existing Rust results. The feature assertion count is recorded in the report and depends on the pinned
 current source; later source changes can change that count. Call-count coverage is
 plain text in `rust-service-coverage.txt`; counts include refusals and nested calls,
 not per-service success proof. Rust suites are not Java parity tests.
