@@ -133,13 +133,42 @@ def cleanup(processes, logs, containers, evidence):
         (evidence/'cleanup.json').write_text(json.dumps({'errors':failures},indent=2))
     return shutdown_valid(report) and not failures
 
+def validate_operation_inputs(selection_path, plan_path):
+    # Change 6: reject accidental sample drift before creating any runtime.
+    selection = json.loads(selection_path.read_text())
+    plan = json.loads(plan_path.read_text())
+    selected = selection.get('selected', [])
+    keys = [row['key'] for row in selected]
+    ranked = sorted(selection['eligible'], key=lambda key: hashlib.sha256(
+        (selection['seed']+'\0'+key).encode()).hexdigest())
+    if (selection.get('frozen') is not True or len(set(selection['eligible'])) != len(selection['eligible'])
+            or len(set(keys)) != 25 or keys != ranked[:25]):
+        raise ValueError('Operation sample is not the frozen reproducible 25-screen selection')
+    if len(plan.get('screens', [])) != 25 or set(row['key'] for row in plan.get('screens', [])) != set(keys):
+        raise ValueError('Operation plan does not inventory all 25 selected screens')
+    for row in selected:
+        if not row.get('routes') or any(not route.startswith(('/apps/', '/qapps/')) for route in row['routes']):
+            raise ValueError('Invalid sample route')
+    return selection, plan
+
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--boot-gate',type=Path,help='Passed gate.json produced by check_boot.py')
     parser.add_argument('--inventory-only',action='store_true')
+    # Change 6: sample operation execution shares the boot-gated disposable lifecycle.
+    parser.add_argument('--operation-plan',type=Path)
+    parser.add_argument('--selection',type=Path)
+    parser.add_argument('--java-port',type=int,default=38080)
+    parser.add_argument('--rust-port',type=int,default=38081)
     args=parser.parse_args()
+    if not args.operation_plan and (args.java_port,args.rust_port)!=(38080,38081):
+        parser.error('Custom ports require --operation-plan')
     if not args.inventory_only and args.boot_gate is None:
         parser.error('--boot-gate is required for capture')
+    if args.operation_plan and not args.selection:
+        parser.error('--selection is required with --operation-plan')
+    if args.operation_plan:
+        validate_operation_inputs(args.selection, args.operation_plan)
     gate=validate_boot_gate(args.boot_gate) if not args.inventory_only else None
     evidence = ROOT / '.runs/phase-three-ui' / time.strftime('%Y%m%d-%H%M%S')
     evidence.mkdir(parents=True, mode=0o700)
@@ -151,7 +180,10 @@ def main():
     (evidence/'boot-gate.json').write_text(json.dumps(gate,indent=2))
     (evidence/'boot-gate-source.txt').write_text(str(args.boot_gate.resolve()))
     (evidence/'runner-provenance.json').write_text(json.dumps(runner_provenance(),indent=2))
-    ports = {'java': 38080, 'rust': 38081}
+    ports = {'java': args.java_port, 'rust': args.rust_port}
+    if len(set(ports.values())) != 2 or any(not 1 <= p <= 65535 for p in ports.values()):
+        parser.error('Engine ports must be distinct and between 1 and 65535')
+    (evidence/'ports.json').write_text(json.dumps(ports))
     containers, processes, logs = {}, {}, {}
     password, crypt = secrets.token_hex(24), secrets.token_hex(32)
     result = None
@@ -192,8 +224,20 @@ def main():
         from fixtures import create_document
         create_document(ports, containers, evidence)
         print('CAPTURE '+str(evidence),flush=True)
-        result=subprocess.run(['node',str(ROOT/'acceptance/ui/capture.cjs'),str(evidence)],env=os.environ)
+        if args.operation_plan:
+            from operation_fixtures import setup_operation_fixtures
+            selection=json.loads(args.selection.read_text())
+            shutil.copyfile(args.selection,evidence/'selection.json')
+            shutil.copyfile(args.operation_plan,evidence/'operation-plan.json')
+            (evidence/'operation-containers.json').write_text(json.dumps(containers))
+            setup_operation_fixtures(ports,containers,evidence,selection,disposable=True)
+            capture_script='operations.cjs'
+        else:
+            capture_script='capture.cjs'
+        result=subprocess.run(['node',str(ROOT/'acceptance/ui'/capture_script),str(evidence)],env={**os.environ,'OPERATION_PYTHON':sys.executable})
         (evidence/'capture-exit.json').write_text(json.dumps({'exit_code':result.returncode}))
+        if (evidence/'operations-result.json').exists():
+            subprocess.run([sys.executable,str(ROOT/'acceptance/ui/summarize_operations.py'),str(evidence)],check=True)
         if (evidence/'summary.json').exists():
             with (evidence/'result-output.json').open('w') as report:
                 subprocess.run([sys.executable,str(ROOT/'acceptance/ui/summarize.py'),str(evidence)],stdout=report,check=True)

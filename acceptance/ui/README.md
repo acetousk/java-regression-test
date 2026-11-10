@@ -67,3 +67,48 @@ an explicit failed `verdict.json` after cleanup.
 For Qapps, fetched `.qvt` response bodies are also retained and compared byte for
 byte, paired by path/query and request index; unmatched resources fail equality.
 The initial document comparison remains separate from these screen fragments.
+
+6. Reproducible 25-screen sampling and operation evidence.
+
+```sh
+NODE_PATH=/path/to/existing/node_modules mise exec -- python acceptance/ui/run.py \
+  --boot-gate .runs/boot-check/gate.json \
+  --selection acceptance/ui/sample25.json \
+  --operation-plan acceptance/ui/operation_plan.json
+node --test acceptance/ui/operations*.test.cjs
+```
+
+The frozen sample uses SHA-256(seed + NUL + screen key), taking the first 25
+ranked keys from 44 distinct previously reachable shared screen definitions.
+Default-navigation aliases were removed before freezing the selection; equality
+was not an eligibility criterion. The manifest retains the seed, population,
+excluded aliases and both rendering modes. This does not sample every installed
+screen or establish coverage of previously unreachable screens.
+
+The operation plan inventories controls, transitions, embedded dialogs and
+list features. Executable cases use representative inputs. Arbitrary service
+dispatch, data-dependent navigation and input domains are not exhaustively
+covered by a finite plan. Explicit unresolved cases fail coverage. An input edit
+is labeled as such; it does not count as submitting the form or persisting data.
+Fixture SQL establishes disposable records and is never counted as exercising
+application behavior. Fixture proofs must pass on both engines before dependent
+cases run. No actual external printer or delivery provider is configured.
+
+Each attempted operation retains decoded HTTP response bodies, DOM, decoded
+RGBA, QVT and download evidence, plus full database snapshots before and after.
+Interaction cases require explicit success postconditions. Missing evidence,
+errors, missing controls, missing prerequisites and unexercised cases fail.
+The complete expected-case list is recorded before execution, so interruption
+cannot turn a partial run into a pass. Optional same-session reload diagnostics
+are reported separately and cannot waive cross-engine differences.
+
+Database snapshots compare the literal bytes of unfiltered plain `pg_dump`
+exports, including every application schema, row, sequence and large object.
+PostgreSQL system catalogs are outside the export scope. Each engine has a
+consistent snapshot, but the pair has no synchronized transaction barrier;
+background writes, row order and schema differences can cause mismatches.
+Earlier exploratory runs used the controller snapshot format, which excludes
+fixed harness tracking infrastructure; their provenance retains that distinction. HTTP evidence covers
+browser-decoded document/XHR/fetch bodies, not raw wire frames or all headers.
+No claim of exact operation parity is made unless every required comparison and
+coverage check passes. Private evidence remains under `.runs/`.

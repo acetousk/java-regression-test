@@ -1,0 +1,459 @@
+{
+  "change": 6,
+  "seed": "47d1abb4fe2c99ea4279cb4e4e127caaacd1e8f1e3fe5bd8a48fc45d8f7907a7",
+  "method": "Select first 25 unique keys ranked by SHA256(seed + NUL + key); seed generated once before operation inspection",
+  "population": "44 distinct visible shared screens after removing default-navigation aliases from 70 previously reachable screen definitions; no equality-based exclusions",
+  "source": "Previously retained paired screen inventory; aliases audited before final selection",
+  "eligible": [
+    "tools/System/AuditLog.xml",
+    "tools/System/Cache/CacheElements.xml",
+    "tools/System/Cache/CacheList.xml",
+    "tools/System/DataDocument/Edit/DataDocFields.xml",
+    "tools/System/DataDocument/Edit/EditDataDocument.xml",
+    "tools/System/DataDocument/Edit/FindDataDocument.xml",
+    "tools/System/DataDocument/Edit/ViewDataDocument.xml",
+    "tools/System/DataDocument/Index.xml",
+    "tools/System/EntitySync/EntitySyncList.xml",
+    "tools/System/Instance/InstanceList.xml",
+    "tools/System/Localization/EntityFields.xml",
+    "tools/System/Localization/Messages.xml",
+    "tools/System/Print/PrintJob/PrintJobList.xml",
+    "tools/System/Print/Printer/PrinterList.xml",
+    "tools/System/Resource.xml",
+    "tools/System/Security/ActiveUsers.xml",
+    "tools/System/Security/ArtifactGroup/ArtifactGroupDetail.xml",
+    "tools/System/Security/ArtifactGroup/ArtifactGroupList.xml",
+    "tools/System/Security/UserAccount/UserAccountDetail.xml",
+    "tools/System/Security/UserAccount/UserAccountList.xml",
+    "tools/System/Security/UserGroup/GroupUsers.xml",
+    "tools/System/Security/UserGroup/UserGroupDetail.xml",
+    "tools/System/Security/UserGroup/UserGroupList.xml",
+    "tools/System/ServiceJob/JobRuns/JobRunList.xml",
+    "tools/System/ServiceJob/Jobs/ServiceJobDetail.xml",
+    "tools/System/ServiceJob/Jobs/ServiceJobList.xml",
+    "tools/System/SystemMessage/Message/SystemMessageList.xml",
+    "tools/System/SystemMessage/Remote/MessageRemoteList.xml",
+    "tools/System/SystemMessage/Type/MessageTypeList.xml",
+    "tools/System/ThreadList.xml",
+    "tools/System/Visit/VisitDetail.xml",
+    "tools/System/Visit/VisitList.xml",
+    "tools/System/dashboard.xml",
+    "tools/Tools/ArtifactStats.xml",
+    "tools/Tools/Service/ServiceDetail.xml",
+    "tools/Tools/Service/ServiceLoadRunner.xml",
+    "tools/Tools/Service/ServiceReference.xml",
+    "tools/Tools/Service/ServiceRun.xml",
+    "tools/Tools/StatusFlows.xml",
+    "tools/Tools/dashboard.xml",
+    "webroot/webroot/Login.xml",
+    "webroot/webroot/apps/AppList.xml",
+    "webroot/webroot/apps/ScreenTree.xml",
+    "webroot/webroot/echopath.xml"
+  ],
+  "selected": [
+    {
+      "key": "tools/System/Print/PrintJob/PrintJobList.xml",
+      "routes": [
+        "/apps/system/Print/PrintJob/PrintJobList",
+        "/qapps/system/Print/PrintJob/PrintJobList"
+      ]
+    },
+    {
+      "key": "tools/System/DataDocument/Edit/DataDocFields.xml",
+      "routes": [
+        "/apps/system/DataDocument/Edit/DataDocFields?dataDocumentId=UiAcceptanceDocument",
+        "/qapps/system/DataDocument/Edit/DataDocFields?dataDocumentId=UiAcceptanceDocument"
+      ]
+    },
+    {
+      "key": "tools/System/Print/Printer/PrinterList.xml",
+      "routes": [
+        "/apps/system/Print/Printer/PrinterList",
+        "/qapps/system/Print/Printer/PrinterList"
+      ]
+    },
+    {
+      "key": "tools/System/DataDocument/Edit/FindDataDocument.xml",
+      "routes": [
+        "/apps/system/DataDocument/Edit/FindDataDocument",
+        "/qapps/system/DataDocument/Edit/FindDataDocument"
+      ]
+    },
+    {
+      "key": "tools/System/Security/UserAccount/UserAccountDetail.xml",
+      "routes": [
+        "/apps/system/Security/UserAccount/UserAccountDetail?userId=EX_JOHN_DOE",
+        "/qapps/system/Security/UserAccount/UserAccountDetail?userId=EX_JOHN_DOE"
+      ]
+    },
+    {
+      "key": "tools/Tools/Service/ServiceRun.xml",
+      "routes": [
+        "/apps/tools/Service/ServiceRun",
+        "/qapps/tools/Service/ServiceRun"
+      ]
+    },
+    {
+      "key": "tools/System/Visit/VisitList.xml",
+      "routes": [
+        "/apps/system/Visit/VisitList",
+        "/qapps/system/Visit/VisitList"
+      ]
+    },
+    {
+      "key": "tools/System/Resource.xml",
+      "routes": [
+        "/apps/system/Resource",
+        "/qapps/system/Resource"
+      ]
+    },
+    {
+      "key": "tools/Tools/Service/ServiceDetail.xml",
+      "routes": [
+        "/apps/tools/Service/ServiceDetail?serviceName=org.moqui.EmailServices.process%23EmailEca",
+        "/qapps/tools/Service/ServiceDetail?serviceName=org.moqui.EmailServices.process%23EmailEca"
+      ]
+    },
+    {
+      "key": "tools/System/SystemMessage/Message/SystemMessageList.xml",
+      "routes": [
+        "/apps/system/SystemMessage/Message/SystemMessageList",
+        "/qapps/system/SystemMessage/Message/SystemMessageList"
+      ]
+    },
+    {
+      "key": "tools/System/Security/ArtifactGroup/ArtifactGroupDetail.xml",
+      "routes": [
+        "/apps/system/Security/ArtifactGroup/ArtifactGroupDetail?artifactGroupId=ALL_SCREENS",
+        "/qapps/system/Security/ArtifactGroup/ArtifactGroupDetail?artifactGroupId=ALL_SCREENS"
+      ]
+    },
+    {
+      "key": "tools/System/ServiceJob/JobRuns/JobRunList.xml",
+      "routes": [
+        "/apps/system/ServiceJob/JobRuns/JobRunList",
+        "/qapps/system/ServiceJob/JobRuns/JobRunList"
+      ]
+    },
+    {
+      "key": "tools/System/Localization/Messages.xml",
+      "routes": [
+        "/apps/system/Localization/Messages",
+        "/qapps/system/Localization/Messages"
+      ]
+    },
+    {
+      "key": "webroot/webroot/apps/ScreenTree.xml",
+      "routes": [
+        "/apps/ScreenTree",
+        "/qapps/ScreenTree"
+      ]
+    },
+    {
+      "key": "tools/System/Security/UserAccount/UserAccountList.xml",
+      "routes": [
+        "/apps/system/Security/UserAccount/UserAccountList",
+        "/qapps/system/Security/UserAccount/UserAccountList"
+      ]
+    },
+    {
+      "key": "tools/System/dashboard.xml",
+      "routes": [
+        "/apps/system/dashboard",
+        "/qapps/system/dashboard"
+      ]
+    },
+    {
+      "key": "tools/System/ServiceJob/Jobs/ServiceJobDetail.xml",
+      "routes": [
+        "/apps/system/ServiceJob/Jobs/ServiceJobDetail?jobName=IndexDataFeedDocuments",
+        "/qapps/system/ServiceJob/Jobs/ServiceJobDetail?jobName=IndexDataFeedDocuments"
+      ]
+    },
+    {
+      "key": "webroot/webroot/apps/AppList.xml",
+      "routes": [
+        "/apps/AppList",
+        "/qapps/AppList"
+      ]
+    },
+    {
+      "key": "tools/System/Instance/InstanceList.xml",
+      "routes": [
+        "/apps/system/Instance/InstanceList",
+        "/qapps/system/Instance/InstanceList"
+      ]
+    },
+    {
+      "key": "tools/System/DataDocument/Edit/EditDataDocument.xml",
+      "routes": [
+        "/apps/system/DataDocument/Edit/EditDataDocument?dataDocumentId=UiAcceptanceDocument",
+        "/qapps/system/DataDocument/Edit/EditDataDocument?dataDocumentId=UiAcceptanceDocument"
+      ]
+    },
+    {
+      "key": "tools/System/Cache/CacheList.xml",
+      "routes": [
+        "/apps/system/Cache/CacheList",
+        "/qapps/system/Cache/CacheList"
+      ]
+    },
+    {
+      "key": "tools/Tools/ArtifactStats.xml",
+      "routes": [
+        "/apps/tools/ArtifactStats",
+        "/qapps/tools/ArtifactStats"
+      ]
+    },
+    {
+      "key": "tools/System/Localization/EntityFields.xml",
+      "routes": [
+        "/apps/system/Localization/EntityFields",
+        "/qapps/system/Localization/EntityFields"
+      ]
+    },
+    {
+      "key": "tools/Tools/dashboard.xml",
+      "routes": [
+        "/apps/tools/dashboard",
+        "/qapps/tools/dashboard"
+      ]
+    },
+    {
+      "key": "tools/System/Security/UserGroup/UserGroupList.xml",
+      "routes": [
+        "/apps/system/Security/UserGroup/UserGroupList",
+        "/qapps/system/Security/UserGroup/UserGroupList"
+      ]
+    }
+  ],
+  "exclusions": [
+    {
+      "key": "tools/System.xml",
+      "retain": "tools/System/dashboard.xml",
+      "reason": "default navigation alias resolves to same visible screen on both engines",
+      "resolved_pair": [
+        "tools/System/dashboard.xml",
+        "tools/System/dashboard.xml"
+      ]
+    },
+    {
+      "key": "tools/System/Cache.xml",
+      "retain": "tools/System/Cache/CacheList.xml",
+      "reason": "default navigation alias resolves to same visible screen on both engines",
+      "resolved_pair": [
+        "tools/System/Cache/CacheList.xml",
+        "tools/System/Cache/CacheList.xml"
+      ]
+    },
+    {
+      "key": "tools/System/DataDocument/Edit.xml",
+      "retain": "tools/System/DataDocument/Edit/FindDataDocument.xml",
+      "reason": "default navigation alias resolves to same visible screen on both engines",
+      "resolved_pair": [
+        "tools/System/DataDocument/Edit/FindDataDocument.xml",
+        "tools/System/DataDocument/Edit/FindDataDocument.xml"
+      ]
+    },
+    {
+      "key": "tools/System/EntitySync.xml",
+      "retain": "tools/System/EntitySync/EntitySyncList.xml",
+      "reason": "default navigation alias resolves to same visible screen on both engines",
+      "resolved_pair": [
+        "tools/System/EntitySync/EntitySyncList.xml",
+        "tools/System/EntitySync/EntitySyncList.xml"
+      ]
+    },
+    {
+      "key": "tools/System/Instance.xml",
+      "retain": "tools/System/Instance/InstanceList.xml",
+      "reason": "default navigation alias resolves to same visible screen on both engines",
+      "resolved_pair": [
+        "tools/System/Instance/InstanceList.xml",
+        "tools/System/Instance/InstanceList.xml"
+      ]
+    },
+    {
+      "key": "tools/System/Localization.xml",
+      "retain": "tools/System/Localization/Messages.xml",
+      "reason": "default navigation alias resolves to same visible screen on both engines",
+      "resolved_pair": [
+        "tools/System/Localization/Messages.xml",
+        "tools/System/Localization/Messages.xml"
+      ]
+    },
+    {
+      "key": "tools/System/Print.xml",
+      "retain": "tools/System/Print/Printer/PrinterList.xml",
+      "reason": "default navigation alias resolves to same visible screen on both engines",
+      "resolved_pair": [
+        "tools/System/Print/Printer/PrinterList.xml",
+        "tools/System/Print/Printer/PrinterList.xml"
+      ]
+    },
+    {
+      "key": "tools/System/Print/Printer.xml",
+      "retain": "tools/System/Print/Printer/PrinterList.xml",
+      "reason": "default navigation alias resolves to same visible screen on both engines",
+      "resolved_pair": [
+        "tools/System/Print/Printer/PrinterList.xml",
+        "tools/System/Print/Printer/PrinterList.xml"
+      ]
+    },
+    {
+      "key": "tools/System/Print/PrintJob.xml",
+      "retain": "tools/System/Print/PrintJob/PrintJobList.xml",
+      "reason": "default navigation alias resolves to same visible screen on both engines",
+      "resolved_pair": [
+        "tools/System/Print/PrintJob/PrintJobList.xml",
+        "tools/System/Print/PrintJob/PrintJobList.xml"
+      ]
+    },
+    {
+      "key": "tools/System/Security.xml",
+      "retain": "tools/System/Security/UserAccount/UserAccountList.xml",
+      "reason": "default navigation alias resolves to same visible screen on both engines",
+      "resolved_pair": [
+        "tools/System/Security/UserAccount/UserAccountList.xml",
+        "tools/System/Security/UserAccount/UserAccountList.xml"
+      ]
+    },
+    {
+      "key": "tools/System/Security/UserAccount.xml",
+      "retain": "tools/System/Security/UserAccount/UserAccountList.xml",
+      "reason": "default navigation alias resolves to same visible screen on both engines",
+      "resolved_pair": [
+        "tools/System/Security/UserAccount/UserAccountList.xml",
+        "tools/System/Security/UserAccount/UserAccountList.xml"
+      ]
+    },
+    {
+      "key": "tools/System/Security/ArtifactGroup.xml",
+      "retain": "tools/System/Security/ArtifactGroup/ArtifactGroupList.xml",
+      "reason": "default navigation alias resolves to same visible screen on both engines",
+      "resolved_pair": [
+        "tools/System/Security/ArtifactGroup/ArtifactGroupList.xml",
+        "tools/System/Security/ArtifactGroup/ArtifactGroupList.xml"
+      ]
+    },
+    {
+      "key": "tools/System/Security/UserGroup.xml",
+      "retain": "tools/System/Security/UserGroup/UserGroupList.xml",
+      "reason": "default navigation alias resolves to same visible screen on both engines",
+      "resolved_pair": [
+        "tools/System/Security/UserGroup/UserGroupList.xml",
+        "tools/System/Security/UserGroup/UserGroupList.xml"
+      ]
+    },
+    {
+      "key": "tools/System/ServiceJob.xml",
+      "retain": "tools/System/ServiceJob/Jobs/ServiceJobList.xml",
+      "reason": "default navigation alias resolves to same visible screen on both engines",
+      "resolved_pair": [
+        "tools/System/ServiceJob/Jobs/ServiceJobList.xml",
+        "tools/System/ServiceJob/Jobs/ServiceJobList.xml"
+      ]
+    },
+    {
+      "key": "tools/System/ServiceJob/Jobs.xml",
+      "retain": "tools/System/ServiceJob/Jobs/ServiceJobList.xml",
+      "reason": "default navigation alias resolves to same visible screen on both engines",
+      "resolved_pair": [
+        "tools/System/ServiceJob/Jobs/ServiceJobList.xml",
+        "tools/System/ServiceJob/Jobs/ServiceJobList.xml"
+      ]
+    },
+    {
+      "key": "tools/System/ServiceJob/JobRuns.xml",
+      "retain": "tools/System/ServiceJob/JobRuns/JobRunList.xml",
+      "reason": "default navigation alias resolves to same visible screen on both engines",
+      "resolved_pair": [
+        "tools/System/ServiceJob/JobRuns/JobRunList.xml",
+        "tools/System/ServiceJob/JobRuns/JobRunList.xml"
+      ]
+    },
+    {
+      "key": "tools/System/SystemMessage.xml",
+      "retain": "tools/System/SystemMessage/Message/SystemMessageList.xml",
+      "reason": "default navigation alias resolves to same visible screen on both engines",
+      "resolved_pair": [
+        "tools/System/SystemMessage/Message/SystemMessageList.xml",
+        "tools/System/SystemMessage/Message/SystemMessageList.xml"
+      ]
+    },
+    {
+      "key": "tools/System/SystemMessage/Message.xml",
+      "retain": "tools/System/SystemMessage/Message/SystemMessageList.xml",
+      "reason": "default navigation alias resolves to same visible screen on both engines",
+      "resolved_pair": [
+        "tools/System/SystemMessage/Message/SystemMessageList.xml",
+        "tools/System/SystemMessage/Message/SystemMessageList.xml"
+      ]
+    },
+    {
+      "key": "tools/System/SystemMessage/Remote.xml",
+      "retain": "tools/System/SystemMessage/Remote/MessageRemoteList.xml",
+      "reason": "default navigation alias resolves to same visible screen on both engines",
+      "resolved_pair": [
+        "tools/System/SystemMessage/Remote/MessageRemoteList.xml",
+        "tools/System/SystemMessage/Remote/MessageRemoteList.xml"
+      ]
+    },
+    {
+      "key": "tools/System/SystemMessage/Type.xml",
+      "retain": "tools/System/SystemMessage/Type/MessageTypeList.xml",
+      "reason": "default navigation alias resolves to same visible screen on both engines",
+      "resolved_pair": [
+        "tools/System/SystemMessage/Type/MessageTypeList.xml",
+        "tools/System/SystemMessage/Type/MessageTypeList.xml"
+      ]
+    },
+    {
+      "key": "tools/System/Visit.xml",
+      "retain": "tools/System/Visit/VisitList.xml",
+      "reason": "default navigation alias resolves to same visible screen on both engines",
+      "resolved_pair": [
+        "tools/System/Visit/VisitList.xml",
+        "tools/System/Visit/VisitList.xml"
+      ]
+    },
+    {
+      "key": "tools/Tools.xml",
+      "retain": "tools/Tools/dashboard.xml",
+      "reason": "default navigation alias resolves to same visible screen on both engines",
+      "resolved_pair": [
+        "tools/Tools/dashboard.xml",
+        "tools/Tools/dashboard.xml"
+      ]
+    },
+    {
+      "key": "tools/Tools/Service.xml",
+      "retain": "tools/Tools/Service/ServiceReference.xml",
+      "reason": "default navigation alias resolves to same visible screen on both engines",
+      "resolved_pair": [
+        "tools/Tools/Service/ServiceReference.xml",
+        "tools/Tools/Service/ServiceReference.xml"
+      ]
+    },
+    {
+      "key": "webroot/webroot/qapps.xml",
+      "retain": "webroot/webroot/apps/AppList.xml",
+      "reason": "Qapps empty path renders AppList; prior captures107/113 share titles and response sizes on both engines"
+    },
+    {
+      "key": "webroot/webroot/apps/ScreenTree/ScreenTreeNested.xml",
+      "retain": "webroot/webroot/apps/ScreenTree.xml",
+      "reason": "Embedded include; parent has no subscreens-active/panel so direct child navigation renders parent site-map view again; Qapps cannot activate child"
+    },
+    {
+      "key": "tools/System/DataDocument.xml",
+      "side": "rust",
+      "same_visible_as": "tools/System/DataDocument/Edit/FindDataDocument.xml",
+      "resolved_pair": [
+        "tools/System/DataDocument/Search.xml",
+        "tools/System/DataDocument/Edit/FindDataDocument.xml"
+      ]
+    }
+  ],
+  "frozen": true
+}
