@@ -42,3 +42,17 @@ class ReviewedDifferencesTests(unittest.TestCase):
         self.assertNotIn('public.agent_definition', approved['rust_only_tables'])
         self.assertFalse(any(r['name'] in ('password_used', 'last_updated_stamp')
                              for r in approved['rust_only_columns']))
+
+    def test_shared_statistic_timestamps_remain_strict(self):
+        import json
+        for rule in controller.APPROVED_STARTUP_DIFFERENCES['statistics_timing']:
+            self.assertNotIn('last_updated_stamp', rule['fields'])
+            row = {field: ('2026-01-01T00:00:00' if field.endswith('_date_time') else
+                           'N' if field == 'is_slow_hit' else 0) for field in rule['fields']}
+            row['hit_count'] = 1
+            snapshots = [{'schema': '', 'records': [json.dumps({'table': rule['table'],
+                         'row': {**row, 'last_updated_stamp': stamp}})]}
+                         for stamp in ['2026-01-01T00:00:00', '2026-01-01T00:00:01']]
+            compared, _ = controller.apply_approved_differences(*snapshots, {
+                'theme_resources': [], 'full_text_indexes': [], 'statistics_timing': [rule]})
+            self.assertNotEqual(compared[0]['records'], compared[1]['records'])
