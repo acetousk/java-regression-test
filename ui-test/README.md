@@ -26,20 +26,20 @@ mise exec -- python java-regression-test.py --skip-step-4
 `--skip-step-4` loads all demo data in fresh isolated databases (the existing
 startup default), collects evidence while both servers are alive, then shuts
 them down and cleans up, including after visual failures. It skips database
-snapshots/comparison, not browser diagnostics. It cannot be combined with
-`--deterministic`. Without this flag the existing database regression workflow
-is unchanged. Both runtimes need application dependencies, including Java's
+snapshots/comparison, not browser diagnostics. With `--deterministic` it skips the
+visual sweep (which would block at transaction barriers) and runs only Step 5, then
+skips Step 4. Without this flag the existing database regression workflow is unchanged. Both runtimes need application dependencies, including Java's
 `moqui-fop`. `--visual-spec` limits execution; the default runs all specs.
 
 ## Step 5: activities performed like a user
 
 `*.activity.spec.js` specs submit real data through the UI. They run as Step 5 of
-every deterministic run (the default) while both engines are up, before shutdown:
+every `--deterministic` run while both engines are up, before shutdown:
 
 ```sh
-mise exec -- python java-regression-test.py            # all activity specs
-mise exec -- python java-regression-test.py --activity-spec find-and-create-customer
-mise exec -- python java-regression-test.py --activity-spec ''   # skip Step 5
+mise exec -- python java-regression-test.py --deterministic            # all activity specs
+mise exec -- python java-regression-test.py --deterministic --activity-spec find-and-create-customer
+mise exec -- python java-regression-test.py --deterministic --activity-spec ''   # skip Step 5
 ```
 
 `activity-harness.js` issues every action to Java and Rust **at the same time**. A
@@ -51,6 +51,20 @@ must also produce at least one paired write. Steps run serially, so a failed
 step skips the rest of the activity. A failed Step 5 also skips Step 4. Evidence:
 `.runs/<run-id>/ui-test/activities/<document>/<activity>/step-NN/{java,rust}.png, step.json`.
 Activity specs refuse to run without `MOQUI_HARNESS_STATUS_URL`.
+
+For test-writing iterations, boot once with `--deterministic --skip-build --hold` using
+**transaction-instrumented** builds. Then run only the browser, like the frontend
+screen runner, without rebuilding, rebooting or resetting databases:
+
+```sh
+node ui-test/run-activity.js .runs/<run-id>/activity-session.json find-and-create-customer
+```
+
+Each invocation preserves new screenshots, diffs and results under the held run's
+`attempts/<timestamp>/`. A failed coordinator is rejected, never bypassed. A UI
+assertion failure with a healthy coordinator does not require a restart. Successful
+activities leave their records in these isolated databases; reruns do not start
+with empty data. Read-only frontend probes are not activity or transaction proof.
 
 Implemented: `walkthroughs/find-and-create-customer.md` → Create Individual Customer.
 

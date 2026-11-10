@@ -3,6 +3,7 @@
 const { test, expect } = require('@playwright/test');
 const fs = require('node:fs');
 const path = require('node:path');
+const { PNG } = require('pngjs');
 
 const engines = ['java', 'rust'];
 
@@ -12,6 +13,27 @@ function baseURL(engine) {
 function writeJSON(file, value) {
   fs.mkdirSync(path.dirname(file), { recursive: true });
   fs.writeFileSync(file, JSON.stringify(value, null, 2) + '\n');
+}
+
+// Pixel diff of the two engines' screenshots for a step, written next to them as diff.png.
+async function diffScreenshots(directory) {
+  const files = engines.map(engine => path.join(directory, `${engine}.png`));
+  if (!files.every(file => fs.existsSync(file))) return { status: 'unavailable', reason: 'Missing screenshot' };
+  const images = files.map(file => PNG.sync.read(fs.readFileSync(file)));
+  const width = Math.max(...images.map(image => image.width));
+  const height = Math.max(...images.map(image => image.height));
+  const padded = images.map(image => {
+    const canvas = new PNG({ width, height, fill: true });
+    PNG.bitblt(image, canvas, 0, 0, image.width, image.height, 0, 0);
+    return canvas;
+  });
+  const diff = new PNG({ width, height });
+  const pixelmatch = (await import('pixelmatch')).default;
+  const differentPixels = pixelmatch(padded[0].data, padded[1].data, diff.data, width, height, { threshold: 0.1 });
+  fs.writeFileSync(path.join(directory, 'diff.png'), PNG.sync.write(diff));
+  return { status: 'compared', equal: differentPixels === 0, differentPixels, comparedPixels: width * height,
+    differencePercent: differentPixels * 100 / (width * height), threshold: 0.1,
+    dimensions: Object.fromEntries(engines.map((engine, index) => [engine, [images[index].width, images[index].height]])) };
 }
 
 async function harnessStatus() {
@@ -52,6 +74,8 @@ function registerActivity({ source, activity, mode = 'apps', steps }) {
       if (status.error) throw new Error(`Transaction harness already failed: ${status.error}`);
       for (const engine of engines) {
         contexts[engine] = await browser.newContext({ baseURL: `${baseURL(engine)}/${mode}/` });
+        contexts[engine].setDefaultTimeout(15000);
+        contexts[engine].setDefaultNavigationTimeout(120000);
         pages[engine] = await contexts[engine].newPage();
       }
     });
@@ -63,6 +87,7 @@ function registerActivity({ source, activity, mode = 'apps', steps }) {
 
     steps.forEach((step, index) => {
       test(`${String(index + 1).padStart(2, '0')} ${step.name}`, async () => {
+        test.setTimeout(180000);
         const entry = { name: step.name, writes: Boolean(step.writes), passed: false };
         record.steps.push(entry);
         const stepDir = path.join(directory, `step-${String(index + 1).padStart(2, '0')}`);
@@ -86,13 +111,25 @@ function registerActivity({ source, activity, mode = 'apps', steps }) {
           entry.passed = true;
         } catch (error) {
           entry.error = error.message;
+          entry.after = await harnessStatus().catch(statusError => ({ statusError: statusError.message }));
           throw error;
         } finally {
           fs.mkdirSync(stepDir, { recursive: true });
           await Promise.all(engines.map(engine => pages[engine]?.screenshot({
             path: path.join(stepDir, `${engine}.png`), fullPage: true }).catch(() => {})));
           entry.urls = Object.fromEntries(engines.map(engine => [engine, pages[engine]?.url()]));
+          // Retain unmodified screenshots and fail this step on an unapproved visual difference.
+          entry.visual = await diffScreenshots(stepDir).catch(error => ({ status: 'failed', reason: error.message }));
+          if (entry.visual.status !== 'compared') {
+            entry.passed = false;
+            entry.error ||= `Screenshot comparison unavailable: ${entry.visual.reason}`;
+          }
+          if (entry.visual.status === 'compared' && !entry.visual.equal) {
+            entry.passed = false;
+            entry.error ||= `Java/Rust screenshots differ: ${entry.visual.differentPixels} pixels`;
+          }
           writeJSON(path.join(stepDir, 'step.json'), entry);
+          if (!entry.passed) throw new Error(entry.error);
         }
       });
     });
@@ -100,7 +137,6 @@ function registerActivity({ source, activity, mode = 'apps', steps }) {
 }
 
 async function login(page) {
-  await page.goto('../Login', { waitUntil: 'domcontentloaded' });
   const form = page.locator('#login_form');
   await form.locator('[name="username"]').fill(process.env.VISUAL_USERNAME || 'john.doe');
   await form.locator('[name="password"]').fill(process.env.VISUAL_PASSWORD || 'moqui');

@@ -29,8 +29,26 @@ BEGIN
     'new', CASE WHEN TG_OP IN ('UPDATE', 'INSERT') THEN row_to_json(NEW)::text END)::text);
   RETURN NULL;
 END $$;
+CREATE FUNCTION moqui_regression.attach_triggers() RETURNS void LANGUAGE plpgsql AS $$
+DECLARE r record;
+BEGIN
+  FOR r IN SELECT c.oid, n.nspname, c.relname FROM pg_class c
+      JOIN pg_namespace n ON n.oid = c.relnamespace
+      WHERE c.relkind IN ('r', 'p') AND n.nspname !~ '^pg_'
+        AND n.nspname NOT IN ('information_schema', 'moqui_regression')
+  LOOP
+    IF NOT EXISTS (SELECT FROM pg_trigger WHERE tgrelid = r.oid AND tgname = 'moqui_regression_row') THEN
+      EXECUTE format('CREATE TRIGGER moqui_regression_row AFTER INSERT OR UPDATE OR DELETE ON %I.%I '
+                     'FOR EACH ROW EXECUTE FUNCTION moqui_regression.row_change()', r.nspname, r.relname);
+    END IF;
+    IF NOT EXISTS (SELECT FROM pg_trigger WHERE tgrelid = r.oid AND tgname = 'moqui_regression_truncate') THEN
+      EXECUTE format('CREATE TRIGGER moqui_regression_truncate AFTER TRUNCATE ON %I.%I '
+                     'FOR EACH STATEMENT EXECUTE FUNCTION moqui_regression.row_change()', r.nspname, r.relname);
+    END IF;
+  END LOOP;
+END $$;
 CREATE FUNCTION moqui_regression.schema_change() RETURNS event_trigger LANGUAGE plpgsql AS $$
-DECLARE r record; affected_tables json; table_only boolean;
+DECLARE affected_tables json; table_only boolean;
 BEGIN
   -- Do not recurse when attaching the observation triggers themselves.
   IF TG_TAG = 'CREATE TRIGGER' THEN RETURN; END IF;
@@ -51,20 +69,7 @@ BEGIN
        JOIN pg_namespace n ON n.oid=c.relnamespace
        WHERE c.relkind IN ('r','p') AND n.nspname !~ '^pg_'
          AND n.nspname NOT IN ('information_schema','moqui_regression')) END)::text);
-  FOR r IN SELECT c.oid, n.nspname, c.relname FROM pg_class c
-      JOIN pg_namespace n ON n.oid = c.relnamespace
-      WHERE c.relkind IN ('r', 'p') AND n.nspname !~ '^pg_'
-        AND n.nspname NOT IN ('information_schema', 'moqui_regression')
-  LOOP
-    IF NOT EXISTS (SELECT FROM pg_trigger WHERE tgrelid = r.oid AND tgname = 'moqui_regression_row') THEN
-      EXECUTE format('CREATE TRIGGER moqui_regression_row AFTER INSERT OR UPDATE OR DELETE ON %I.%I '
-                     'FOR EACH ROW EXECUTE FUNCTION moqui_regression.row_change()', r.nspname, r.relname);
-    END IF;
-    IF NOT EXISTS (SELECT FROM pg_trigger WHERE tgrelid = r.oid AND tgname = 'moqui_regression_truncate') THEN
-      EXECUTE format('CREATE TRIGGER moqui_regression_truncate AFTER TRUNCATE ON %I.%I '
-                     'FOR EACH STATEMENT EXECUTE FUNCTION moqui_regression.row_change()', r.nspname, r.relname);
-    END IF;
-  END LOOP;
+  PERFORM moqui_regression.attach_triggers();
 END $$;
 CREATE FUNCTION moqui_regression.schema_drop() RETURNS event_trigger LANGUAGE plpgsql AS $$
 BEGIN

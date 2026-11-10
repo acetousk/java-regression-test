@@ -10,7 +10,16 @@ registerActivity({
   activity: 'Create Individual Customer',
   steps: [
     {
+      name: 'open Login',
+      writes: true,
+      run: async page => {
+        await page.goto('../Login', { waitUntil: 'domcontentloaded' });
+        await expect(page.locator('#login_form')).toBeVisible();
+      },
+    },
+    {
       name: 'log in',
+      writes: true,
       run: async page => login(page),
     },
     {

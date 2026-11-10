@@ -7,7 +7,8 @@ const runDir = process.env.MOQUI_RUN_DIR
 
 module.exports = defineConfig({
   testDir: './docs/business-process',
-  testMatch: ['**/*.visual.spec.js', '**/*.activity.spec.js'],
+  // Activity specs submit data, so they are collected only when the transaction harness runs them (Step 5).
+  testMatch: process.env.MOQUI_HARNESS_STATUS_URL ? '**/*.activity.spec.js' : '**/*.visual.spec.js',
   workers: 1,
   globalTeardown: './summarize-run.js',
   retries: 0,
