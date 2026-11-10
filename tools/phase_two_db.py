@@ -2,8 +2,9 @@
 """Change 1: isolated current-checkout business probes and strict database comparison.
 
 The whole-database comparator retains raw and pre-existing approval verdicts.
-Business projections explicitly omit generated last_updated_stamp; they are not
-whole-database equality. No checkout, build manifest, or approval file is edited.
+Business projections remain diagnostic and omit generated last_updated_stamp.
+With --data-clock, supplied timestamp proof and raw selected-row equality are
+required as well; projections alone never establish whole-database equality. No checkout, build manifest, or approval file is edited.
 """
 import argparse
 import contextlib
@@ -19,6 +20,7 @@ import re
 import shutil
 import subprocess
 import sys
+import time
 from types import SimpleNamespace
 import xml.etree.ElementTree as ET
 
@@ -111,7 +113,7 @@ def invoke(side, port, name, params, directory):
             'service_outputs': dict(re.findall(r'^==> ([^:]+): (.*)$', service_log, re.M))}
 
 
-def business(ports, containers, output, canonical):
+def business(ports, containers, output, canonical, clock=None):
     # Explicit IDs preserve row correspondence. Neither clocks nor whole DBs are normalized.
     cases = [
         ('create-type', 'create#moqui.basic.EnumerationType', {'enumTypeId': 'PHASE2_TYPE', 'description': 'Phase two enum type'}, 'enumeration_type', 'enum_type_id', 'PHASE2_TYPE', 'description', 'Phase two enum type'),
@@ -133,6 +135,9 @@ def business(ports, containers, output, canonical):
     ]
     results = []
     for label, service, params, table, pk, key, field, expected in cases:
+        # Change 5: only advance after the previous pair and its SQL readback have completed.
+        if clock is not None:
+            clock.advance(clock.epoch_ms + 1)
         record = {'case': label, 'service': service, 'engines': {}}
         for side in ('java', 'rust'):
             dest = output / 'business' / label / side
@@ -154,7 +159,13 @@ def business(ports, containers, output, canonical):
                     ok = ok and before_bytes == after_bytes and bool(response['service_errors'] or response['http_status'] >= 400)
                 else:
                     ok = ok and response['request_succeeded']
-                record['engines'][side] = {'before': before, 'after': after, 'before_utf8': before_bytes.decode('utf-8'), 'after_utf8': after_bytes.decode('utf-8'), 'before_sha256': hashlib.sha256(before_bytes).hexdigest(), 'after_sha256': hashlib.sha256(after_bytes).hexdigest(), 'expected_state_passed': ok, **response}
+                stamp_proof = None
+                if clock is not None and (label.startswith(('create-', 'update-', 'store-'))):
+                    persisted = sql(containers[side], f"SELECT extract(epoch FROM last_updated_stamp)*1000 FROM {table} WHERE {pk}='{key}'").decode().strip()
+                    stamp_proof = {'expected_epoch_ms': clock.epoch_ms, 'persisted_epoch_ms': persisted,
+                                   'passed': bool(persisted) and Decimal(persisted) == clock.epoch_ms}
+                    ok = ok and stamp_proof['passed']
+                record['engines'][side] = {'data_clock_proof': stamp_proof, 'before': before, 'after': after, 'before_utf8': before_bytes.decode('utf-8'), 'after_utf8': after_bytes.decode('utf-8'), 'before_sha256': hashlib.sha256(before_bytes).hexdigest(), 'after_sha256': hashlib.sha256(after_bytes).hexdigest(), 'expected_state_passed': ok, **response}
             except Exception as error:
                 record['engines'][side] = {'error': str(error), 'expected_state_passed': False, 'after': []}
         a, b = [record['engines'][s]['after'] for s in ('java', 'rust')]
@@ -172,7 +183,9 @@ def business(ports, containers, output, canonical):
             before, after = bag(detail.get('before', [])), bag(detail['after'])
             record['business_deltas'][side] = {'removed': sorted((before-after).elements()), 'added': sorted((after-before).elements())}
         record['projected_deltas_equal'] = record['business_deltas']['java'] == record['business_deltas']['rust']
-        record['passed'] = all(r['expected_state_passed'] for r in record['engines'].values()) and record['projected_selected_rows_equal'] and record['projected_deltas_equal']
+        record['passed'] = all(r['expected_state_passed'] for r in record['engines'].values()) and record['projected_selected_rows_equal'] and record['projected_deltas_equal'] and (clock is None or record['raw_selected_rows_equal'])
+        record['data_clock_enabled'] = clock is not None
+        record['raw_rows_required_for_pass'] = clock is not None
         record['exact_row_diff'] = ''.join(difflib.unified_diff((raw[0] or '').splitlines(True), (raw[1] or '').splitlines(True), fromfile='java', tofile='rust'))
         results.append(record)
         dump(output / 'business-results.json', results)
@@ -182,6 +195,8 @@ def business(ports, containers, output, canonical):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--data-clock', action='store_true', help='Change 5: supply and prove shared file data time; require raw selected-row equality')
+    parser.add_argument('--data-clock-epoch-ms', type=int, help='Initial supplied time; defaults to one real UTC epoch sampled before both boots')
     parser.add_argument('--java-home', help='Java 21+ home; otherwise run with mise exec')
     args = parser.parse_args()
     output = args.output.resolve()
@@ -197,6 +212,28 @@ def main():
     provenance['approvals_sha256'] = hashlib.sha256((ROOT / 'approved-differences.json').read_bytes()).hexdigest()
     dump(output / 'provenance.json', provenance)
     c = load_controller()
+    clock = None
+    if args.data_clock:
+        from acceptance.ui.data_clock import SuppliedDataClock
+        clock = SuppliedDataClock(output / 'supplied-data-clock', args.data_clock_epoch_ms if args.data_clock_epoch_ms is not None else time.time_ns() // 1_000_000)
+        original_demo_conf = c.demo_conf
+        def isolated_clock_conf(source, destination, *values):
+            original_demo_conf(source, destination, *values)
+            tree = ET.parse(destination)
+            root = tree.getroot()
+            for name, value in {**clock.environment(), 'scheduled_job_check_time': '0'}.items():
+                node = root.find(f"default-property[@name='{name}']")
+                if node is None:
+                    node = ET.SubElement(root, 'default-property', {'name': name})
+                node.set('value', value)
+            service = root.find('service-facade')
+            if service is None:
+                service = ET.SubElement(root, 'service-facade')
+            service.set('scheduled-job-check-time', '0')
+            tree.write(destination)
+        c.demo_conf = isolated_clock_conf
+    elif args.data_clock_epoch_ms is not None:
+        parser.error('--data-clock-epoch-ms requires --data-clock')
     # Change 1: imported harness gets a private ROOT; never replace .runs/build.json.
     c.ROOT = output
     (output / '.runs').mkdir(exist_ok=True)
@@ -217,7 +254,10 @@ def main():
             if len(matches) != 1:
                 raise RuntimeError(f'Expected exactly one disposable {side} DB for this run')
             containers[side] = matches[0]
-        summary['business'] = business(ports, containers, output, c.canonical)
+        if clock is not None:
+            from acceptance.ui.data_clock_proof import prove_data_clock
+            summary['data_clock_proof'] = prove_data_clock(ports, containers, evidence, clock, disposable=True)
+        summary['business'] = business(ports, containers, output, c.canonical, clock)
     options = SimpleNamespace(java_port=28080, rust_port=28081, boot_timeout=600, shutdown_timeout=120, java_home=args.java_home,
                               java_checkout=checkouts['java'], rust_checkout=checkouts['rust'], deterministic=False,
                               keep_databases=False, exclude_rust_only=False, source_root=ROOT)

@@ -1,7 +1,8 @@
 [submodule "moqui-framework"]
 	path = moqui-framework
 	url = https://github.com/moqui/moqui-framework.git
-	branch = llm-client
+	branch = fix/phase-two-data-clock
+# Phase 2, Change 5: Pin opt-in supplied entity timestamps with real elapsed timeouts.
 # Change 6: The Rust gitlink pins the current framework with shutdown completion evidence.
 # Phase 2, Change 4: Pin verified framework fixtures, simulation bookkeeping and script runtime fixes.
 [submodule "mr-moqui"]

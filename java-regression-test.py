@@ -174,6 +174,9 @@ def apply_approved_differences(java, rust, approved):
         for snapshot in (java, rust)
     ]
     applied = apply_rust_only_tables(snapshots, approved.get("rust_only_tables", []))
+    # Change 6: apply only the user's enumerated asymmetries; raw evidence stays intact.
+    applied.extend(apply_java_only_tables(snapshots, approved.get("java_only_tables", [])))
+    applied.extend(apply_reviewed_seed_rows(snapshots, approved.get("reviewed_seed_rows", [])))
     applied.extend(apply_template_differences(snapshots, approved.get("template_differences", [])))
     applied.extend(apply_rust_only_columns(snapshots, approved.get("rust_only_columns", [])))
     applied.extend(apply_rust_only_ddl(snapshots, approved.get("rust_only_ddl", [])))
@@ -461,6 +464,34 @@ def apply_rust_only_ddl(snapshots, rules):
         for block in rule["blocks"]:
             rust["schema"] = rust["schema"].replace(block, "", 1)
         applied.append({"kind": "rust_only_ddl", "object_type": kind, "name": name})
+    return applied
+
+
+def apply_java_only_tables(snapshots, tables):
+    """Use the same absence/metadata/DDL guards for explicitly approved Java relations."""
+    applied = apply_rust_only_tables([snapshots[1], snapshots[0]], tables)
+    return [{**item, "kind": "java_only_table"} for item in applied]
+
+
+def apply_reviewed_seed_rows(snapshots, rules):
+    """Exclude a reviewed asymmetric row only with exact non-generated values."""
+    applied = []
+    for rule in rules:
+        if rule.get("engine") not in ("java", "rust") or not rule.get("key"):
+            continue
+        side = 0 if rule["engine"] == "java" else 1
+        matches = [[item for item in snapshot["records"]
+                    if item.get("table") == rule["table"] and "row" in item
+                    and all(item["row"].get(k) == v for k, v in rule["key"].items())]
+                   for snapshot in snapshots]
+        if matches[1 - side] or len(matches[side]) != 1:
+            continue
+        item = matches[side][0]
+        if {k: v for k, v in item["row"].items() if k != "last_updated_stamp"} != rule["expected"]:
+            continue
+        snapshots[side]["records"].remove(item)
+        applied.append({"kind": "reviewed_seed_row", "engine": rule["engine"],
+                        "table": rule["table"], "key": deepcopy(rule["key"])})
     return applied
 
 
