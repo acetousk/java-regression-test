@@ -52,3 +52,18 @@ When Rust rerun evidence is retained in a separate directory, select it explicit
 python tools/phase_two_report.py --run .runs/phase-two-db --paired paired-05 \
   --rust-results .runs/phase-two-db/reproduced
 ```
+
+For the supplied-data-time check, use rebuilt engines containing
+`MOQUI_TEST_DATA_CLOCK_FILE` support and a passing boot gate, then run:
+
+```sh
+mise exec -- python tools/phase_two_db.py --data-clock --output .runs/phase-two-clock
+```
+
+Change 5 supplies a private shared clock file, disables automatic schedules in
+these disposable runtimes, and verifies startup/create/update stored timestamps
+against the supplied assignment. Each completed business pair advances time;
+clock mode additionally requires literal selected-row byte equality, including
+`last_updated_stamp`. The whole-database raw and reviewed verdicts remain
+independent. This is not transaction pairing or a test of optimistic locking.
+Disabled clock mode preserves the original diagnostic projection behavior.
