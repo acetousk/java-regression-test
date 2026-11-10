@@ -8,6 +8,9 @@ const write=(name,data)=>fs.writeFileSync(path.join(out,name),typeof data==='str
 async function main(){
  const browser=await chromium.launch({headless:true});
  const contexts={}, pages={}, parameterValues={java:{},rust:{}};
+ // Change 5: only verified records created in these two isolated databases enter selection.
+ const fixtures=JSON.parse(fs.readFileSync(path.join(out,'fixture-parameters.json')));
+ for(const side of ['java','rust']) for(const [name,values] of Object.entries(fixtures)) parameterValues[side][name]=new Set(values);
  const summary={contract:'raw equality; no normalization, masks, tolerance or approvals',browser:browser.version(),viewport:{width:1440,height:900},captures:[],unroutable:[]};
  try {
  for(const side of ['java','rust']) {
@@ -89,13 +92,16 @@ async function main(){
   const params=new URLSearchParams();
   const missing=[];
   for(const name of record.required_parameters){
-   const common=[...(parameterValues.java[name]||[])].filter(v=>parameterValues.rust[name]?.has(v)).sort();
+   // Change 5: directories are not callable service definitions.
+   const common=name==='serviceName' ? inventory.shared_services : [...(parameterValues.java[name]||[])].filter(v=>parameterValues.rust[name]?.has(v)).sort();
    if(common.length) params.set(name,common[0]); else missing.push(name);
   }
   const route=record.route+(params.size?'?'+params:'');
   if(missing.length) {summary.unroutable.push({key,reason:'no common record parameter in rendered links',missing});continue;}
-  await capture(key,route,index++);
-  summary.captures.at(-1).missingParameters=missing;
+  // Change 2: unsupported HTML is uncovered, never a successful error-page capture.
+  const htmlSides=['java','rust'].filter(side=>{const modes=inventory.screens[side][key].render_modes;return modes?.[0] && !modes.includes('html');});
+  if(htmlSides.length) summary.unroutable.push({key,route,reason:'HTML render mode unsupported',sides:htmlSides});
+  else {await capture(key,route,index++);summary.captures.at(-1).missingParameters=missing;}
   if(record.route.startsWith('/apps/')) {await capture(key,route.replace('/apps/','/qapps/'),index++);summary.captures.at(-1).missingParameters=missing;}
  }
  summary.parameterValues=Object.fromEntries(Object.entries(parameterValues).map(([side,values])=>[side,Object.fromEntries(Object.entries(values).map(([k,v])=>[k,[...v].sort()]))]));

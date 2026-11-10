@@ -56,7 +56,7 @@ def summarize(run):
               'usable_raw_equal': {kind:sum(c.get(kind,{}).get('equal',False) for c in valid_captures) for kind in ('html','dom','pixels')},
               'pixel_equal_routes': [c['route'] for c in captures if c.get('pixels',{}).get('equal')],
               'coverage_problems':problems, 'uncovered_screens':uncovered,
-              'limitations':['No business fixtures created; detail IDs are chosen from values in rendered links shared by both engines.',
+              'limitations':[('One isolated DataDocument fixture is created through existing services and verified in both databases; other detail IDs use shared rendered links or actual shared service definitions.' if (run/'fixture-evidence.json').exists() else 'No fixture evidence retained; detail IDs use shared rendered links.'),
                              'A successful capture does not establish complete business workflow coverage.',
                              'Response bodies are browser transport-decoded bytes; DOM is browser serialization.',
                              'No tolerances, masks, approvals or normalizations. UI evolution and infrastructure/session entropy remain raw mismatches.',

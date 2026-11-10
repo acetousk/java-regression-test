@@ -3,6 +3,8 @@
 1. Exact response, DOM and decoded RGBA comparison and browser capture.
 2. Isolated boot-gated lifecycle runner, inventory and guard tests.
 3. Evidence and usable-screen coverage reporting.
+4. Updated engine revision pin.
+5. Verified isolated document fixtures and shared service-definition selection.
 
 `run.py` inventories screens in the two current runtimes, copies runtimes into a
 private run directory, starts fresh PostgreSQL containers and cached engines on
@@ -28,8 +30,13 @@ Do not publish that directory. No application components are installed by this
 runner. Current-only and Java-only screen inventories remain explicit.
 
 This is an acceptance sweep, not a regression screen test. It performs GET
-navigation and seeded login, not business transactions or fixture creation.
-Detail parameters use the first sorted common value discovered in rendered links.
+navigation and seeded login after creating one `UiAcceptanceDocument` record through
+each engine’s existing entity service in its disposable database. The two-request
+session/CSRF flow and a database read verify fixture creation; evidence is retained.
+Detail parameters use verified fixture IDs or the first sorted common value discovered
+in rendered links. Service names come from actual shared XML service definitions,
+never directory links. Screens that explicitly exclude HTML are reported as uncovered
+for that mode; Qapps is still captured separately.
 Screens lacking shared record parameters are recorded as uncovered; other screens may still fail or redirect; HTTP status, final URL
 and capture errors must be reviewed before counting screen coverage. Email and
 special-purpose screens need dedicated scenarios and are listed as uncovered.

@@ -14,6 +14,22 @@ r=importlib.util.module_from_spec(spec)
 spec.loader.exec_module(r)
 
 class RunnerGuards(unittest.TestCase):
+    def test_inventory_distinguishes_service_definitions_and_render_modes(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp)
+            for repo in ('moqui-framework','mr-moqui'):
+                component=root/repo/'runtime/base-component/tools'
+                screen=component/'screen/Tools/Service/Runner.xml'
+                screen.parent.mkdir(parents=True)
+                screen.write_text('<screen render-modes="vue,qvue"><parameter name="serviceName" required="true"/></screen>')
+                service=component/'service/example/Services.xml'
+                service.parent.mkdir(parents=True)
+                service.write_text('<services><service verb="get" noun="Example"/></services>')
+            with patch.object(r,'ROOT',root):
+                result=r.inventory()
+            self.assertEqual(result['shared_services'],['example.Services.get#Example'])
+            self.assertEqual(result['screens']['rust']['tools/Tools/Service/Runner.xml']['render_modes'],['vue','qvue'])
+
     def good_gate(self):
         shutdown={side:{'errors':[],'forced_kill':False,'missing_shutdown_markers':[], 'returncode':0} for side in ('java','rust')}
         return {'passed':True,'http_ready':True,'verification':{'servers_started':True,'shutdown_verified':True},'shutdown':shutdown,

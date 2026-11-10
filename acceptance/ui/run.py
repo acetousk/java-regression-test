@@ -46,10 +46,30 @@ def inventory():
                 parts[0] = parts[0].lower()
                 route = '/apps/' + '/'.join(parts)
             screens[key] = {'source': str(p.relative_to(ROOT)), 'route': route,
+                            'render_modes': [mode.strip() for mode in tree.get('render-modes', '').split(',') if mode.strip()],
                             'required_parameters': [n.get('name') for n in tree.findall('parameter') if n.get('required') == 'true']}
         found[side] = screens
+    # Change 5: select real shared service definitions, never service-directory links.
+    services = {}
+    for side, repo in [('java', 'moqui-framework'), ('rust', 'mr-moqui')]:
+        paths = list((ROOT/repo/'runtime').glob('*component/*/service/**/*.xml'))
+        if side == 'java':
+            paths += list((ROOT/repo/'framework/service').rglob('*.xml'))
+        names = set()
+        for path in paths:
+            try:
+                tree = ET.parse(path).getroot()
+            except ET.ParseError:
+                continue
+            if tree.tag != 'services':
+                continue
+            prefix = str(path).split('/service/', 1)[1][:-4].replace('/', '.')
+            names.update(prefix+'.'+node.get('verb')+'#'+node.get('noun', '')
+                         for node in tree.findall('service') if node.get('verb'))
+        services[side] = names
     shared = sorted(found['rust'].keys() & found['java'].keys())
     return {'screens': found, 'shared': shared,
+            'shared_services': sorted(services['java'] & services['rust']),
             'rust_only': sorted(found['rust'].keys() - found['java'].keys()),
             'java_only': sorted(found['java'].keys() - found['rust'].keys())}
 
@@ -169,6 +189,8 @@ def main():
             logs[side]=(evidence/(side+'-boot.log')).open('wb')
             processes[side]=subprocess.Popen(cmd,cwd=evidence/side,env={**os.environ,**overrides,'MOQUI_RUNTIME':str(runtime),'MOQUI_CONF':str(conf),'MOQUI_FRAMEWORK':str(runtime/'base-component/framework'),'TZ':'UTC'},stdout=logs[side],stderr=subprocess.STDOUT,start_new_session=True)
         c.wait_for_ports(processes,ports,600,{s:evidence/(s+'-boot.log') for s in processes})
+        from fixtures import create_document
+        create_document(ports, containers, evidence)
         print('CAPTURE '+str(evidence),flush=True)
         result=subprocess.run(['node',str(ROOT/'acceptance/ui/capture.cjs'),str(evidence)],env=os.environ)
         (evidence/'capture-exit.json').write_text(json.dumps({'exit_code':result.returncode}))
