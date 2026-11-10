@@ -3,7 +3,7 @@
 	url = https://github.com/moqui/moqui-framework.git
 	branch = llm-client
 # Change 6: The Rust gitlink pins the current framework with shutdown completion evidence.
-# Phase 2, Change 4: Pin isolated authorization fixtures and nested execution-context restoration.
+# Phase 2, Change 4: Pin verified framework fixtures, simulation bookkeeping and script runtime fixes.
 [submodule "mr-moqui"]
 	path = mr-moqui
 	url = https://github.com/moqui/mr-moqui.git
