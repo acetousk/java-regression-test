@@ -202,6 +202,11 @@ def main():
     password, crypt = secrets.token_hex(24), secrets.token_hex(32)
     result = None
     failure = None
+    # Change 7: both disposable engines consume the same data-time assignment.
+    # This is not a transaction barrier and never normalizes retained timestamps.
+    from data_clock import SuppliedDataClock
+    clock = SuppliedDataClock(evidence/'data-clock.millis', int(time.time() * 1000)) if args.operation_plan else None
+    clock_env = clock.environment() if clock else {}
     try:
         for port in ports.values():
             with socket.socket() as s:
@@ -238,8 +243,11 @@ def main():
             else:
                 cmd=[str(artifact),'--conf',str(conf),'--port',str(ports[side]),'--https-port','off','--no-run-es','-D','create-or-update=true']
             logs[side]=(evidence/(side+'-boot.log')).open('wb')
-            processes[side]=subprocess.Popen(cmd,cwd=evidence/side,env={**os.environ,**overrides,'MOQUI_RUNTIME':str(runtime),'MOQUI_CONF':str(conf),'MOQUI_FRAMEWORK':str(runtime/'base-component/framework'),'TZ':'UTC'},stdout=logs[side],stderr=subprocess.STDOUT,start_new_session=True)
+            processes[side]=subprocess.Popen(cmd,cwd=evidence/side,env={**os.environ,**overrides,**clock_env,'MOQUI_RUNTIME':str(runtime),'MOQUI_CONF':str(conf),'MOQUI_FRAMEWORK':str(runtime/'base-component/framework'),'TZ':'UTC'},stdout=logs[side],stderr=subprocess.STDOUT,start_new_session=True)
         c.wait_for_ports(processes,ports,600,{s:evidence/(s+'-boot.log') for s in processes})
+        if clock:
+            from acceptance.ui.data_clock_proof import prove_data_clock
+            prove_data_clock(ports, containers, evidence, clock, disposable=True)
         from fixtures import create_document
         create_document(ports, containers, evidence)
         print('CAPTURE '+str(evidence),flush=True)

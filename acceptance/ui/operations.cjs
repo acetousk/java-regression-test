@@ -2,6 +2,9 @@
 const fs=require('node:fs'),path=require('node:path'),{spawnSync}=require('node:child_process');
 
 const {contentErrors}=require('./compare.cjs');
+const functional=require('./functional_actions.cjs');
+const {approvedPresentation}=require('./approved_presentation.cjs');
+const isAssertion=action=>['visible','text','value'].includes(action)||functional.assertions.has(action);
 const {compareOperation,compareRepeatability,operationReport}=require('./operations_compare.cjs');
 let out,plan,selection;
 const write=(p,data)=>fs.writeFileSync(p,Buffer.isBuffer(data)||typeof data==='string'?data:JSON.stringify(data,null,2));
@@ -17,7 +20,7 @@ function buildCases(selection,plan){
    const mode=route.startsWith('/qapps')?'qapps':'html';
    const applicable=operations.filter(op=>!op.modes||op.modes.includes(mode));
    if(!applicable.length)applicable.push({id:'missing-mode-inventory',unverifiedReason:'No operation inventory for selected mode'});
-   for(const op of applicable)cases.push({id:selected.key+':'+mode+':'+op.id,route,op:route?op:{...op,unverifiedReason:'Missing selected route'}});
+   for(const op of applicable)cases.push({id:selected.key+':'+mode+':'+op.id,route,op:{...op,selectedScreenKey:selected.key,selectedMode:mode,selectedRoute:route,...(!route?{unverifiedReason:'Missing selected route'}:{})}});
   }
  }
  return cases;
@@ -26,10 +29,15 @@ function operationIssues(op,metadata){
  const issues=[];
  if(op.unverifiedReason)issues.push(op.unverifiedReason);
  if(!Array.isArray(op.steps))issues.push('missing explicit steps');
- const steps=op.steps||[],lastAction=steps.findLastIndex(s=>!['visible','text','value'].includes(s.action));
- const assertions=[...steps.slice(lastAction+1),...(op.postconditions||[])].filter(s=>['visible','text','value'].includes(s.action)&&!(s.action==='visible'&&['body','html',':root'].includes(s.selector)));
+ const steps=op.steps||[],lastAction=steps.findLastIndex(s=>!isAssertion(s.action));
+ const assertions=[...steps.slice(lastAction+1),...(op.postconditions||[])].filter(s=>isAssertion(s.action)&&!(s.action==='visible'&&['body','html',':root'].includes(s.selector)));
  if(lastAction>=0&&!assertions.length)issues.push('interactive operation has no success postcondition');
- if(op.postconditions&&!op.postconditions.every(s=>['visible','text','value'].includes(s.action)))issues.push('unsupported postcondition');
+ if(op.postconditions&&!op.postconditions.every(s=>isAssertion(s.action)))issues.push('unsupported postcondition');
+ if(op.functionalSuiteId){
+  const scope=op.functionalScope;
+  if(!scope||scope.screen!==op.selectedScreenKey||scope.mode!==op.selectedMode||scope.path!==new URL(operationRoute(op.selectedRoute||'/',op),'http://local.invalid').pathname)issues.push('functional suite scope does not match selected screen/mode/route');
+  if(!(op.steps||[]).some(s=>isAssertion(s.action)))issues.push('functional suite has no explicit assertion');
+ }
  for(const fixture of op.fixturePrerequisites||[])for(const side of ['java','rust'])
   if(!metadata?.sides?.[side]?.fixtures?.some(f=>f.name===fixture&&f.status==='verified'))issues.push(side+': fixture not verified: '+fixture);
  return issues;
@@ -94,26 +102,31 @@ function finalizeDownloadEvidence(evidence,failedRequests,bodyFailures,op){
  if(op.expectedDownloadUtf8!==undefined&&!evidence.downloads.some(d=>d.body.equals(Buffer.from(op.expectedDownloadUtf8))))evidence.errors.push('download content does not match expected fixture bytes');
 }
 async function capture(page,side,route,op,id,dir){
- const evidence={id,engine:side,exercised:false,complete:false,errors:[],http:[],qvt:[],downloads:[]},jobs=[],failedRequests=[],bodyFailures=[];
+ const evidence={id,engine:side,exercised:false,complete:false,errors:[],http:[],qvt:[],downloads:[],functionalSuiteId:op.functionalSuiteId||null,functionalComplete:false,functionalObservations:[],functionalRawObservations:[]},jobs=[],failedRequests=[],bodyFailures=[];
+ let expectedConfirmation=false;
  const onError=e=>evidence.errors.push(e.message);
  const onResponse=r=>{
   const u=new URL(r.url()),type=r.request().resourceType();
   if(u.origin!==bases[side])return;
   if(r.status()>=400)evidence.errors.push('HTTP '+r.status()+' '+u.pathname);
   if(!['document','xhr','fetch'].includes(type))return;
-  const item={key:u.pathname+u.search,method:r.request().method(),status:r.status(),body:null};evidence.http.push(item);
-  const qvt=u.pathname.endsWith('.qvt')?{key:item.key,body:null}:null;if(qvt)evidence.qvt.push(qvt);
+  const item={key:u.pathname+u.search,method:r.request().method(),status:r.status(),contentType:r.headers()['content-type']||'',body:null};evidence.http.push(item);
+  const qvt=u.pathname.endsWith('.qvt')?{key:item.key,contentType:item.contentType,body:null}:null;if(qvt)evidence.qvt.push(qvt);
   jobs.push(r.body().then(body=>{item.body=body;if(qvt)qvt.body=body;}).catch(e=>bodyFailures.push({item,qvt,error:e.message})));
  };
  const onRequestFailed=r=>failedRequests.push({key:new URL(r.url()).pathname+new URL(r.url()).search,error:r.failure()?.errorText});
- const onDialog=d=>{evidence.errors.push('unexpected dialog: '+d.type());d.dismiss().catch(e=>evidence.errors.push(e.message));};
+ const onDialog=d=>{if(expectedConfirmation)return;evidence.errors.push('unexpected dialog: '+d.type());d.dismiss().catch(e=>evidence.errors.push(e.message));};
  const onDownload=d=>jobs.push((async()=>{const file=await d.path();if(!file)throw Error('download unavailable');evidence.downloads.push({key:d.url().replace(bases[side],''),filename:d.suggestedFilename(),body:fs.readFileSync(file)});})().catch(e=>evidence.errors.push(e.message)));
  page.on('requestfailed',onRequestFailed);page.on('dialog',onDialog);page.on('response',onResponse);page.on('pageerror',onError);page.on('download',onDownload);
  try{
   await page.goto(bases[side]+route,{waitUntil:'load',timeout:25000});await ready(page,route);
   const requested=new URL(route,bases[side]),landed=new URL(page.url());
   if(!initialTargetMatches(requested,landed))throw Error('unexpected initial screen redirect');
-  for(const step of [...(op.steps||[]),...(op.postconditions||[])])await perform(page,step);
+  for(const step of [...(op.steps||[]),...(op.postconditions||[])]){
+    expectedConfirmation=step.action==='confirmClick';
+    try{if(op.functionalSuiteId)await functional.performFunctional(page,step,perform,evidence.functionalObservations,evidence.functionalRawObservations);else await perform(page,step);}finally{expectedConfirmation=false;}
+  }
+  evidence.functionalComplete=Boolean(op.functionalSuiteId&&evidence.functionalObservations.length);
   await page.waitForLoadState('networkidle',{timeout:10000});await ready(page,route);evidence.exercised=true;
   evidence.dom=Buffer.from(await page.content());
   const screenshot=await page.screenshot({fullPage:true,caret:'initial',animations:'allow',timeout:15000});
@@ -138,6 +151,11 @@ async function main(){
  out=process.argv[2];
  const ports=JSON.parse(fs.readFileSync(path.join(out,'ports.json')));for(const side of ['java','rust'])bases[side]='http://127.0.0.1:'+ports[side];
  plan=JSON.parse(fs.readFileSync(path.join(out,'operation-plan.json')));selection=JSON.parse(fs.readFileSync(path.join(out,'selection.json')));
+ const rulesFile=path.join(__dirname,'../../approved-differences.json');
+ const approvalRules=fs.existsSync(rulesFile)?JSON.parse(fs.readFileSync(rulesFile)).ui_presentation||[]:[];
+ write(path.join(out,'approved-differences.json'),{ui_presentation:approvalRules});
+ const crypto=require('node:crypto');
+ write(path.join(out,'functional-provenance.json'),Object.fromEntries(['functional_actions.cjs','approved_presentation.cjs','../../approved-differences.json'].map(name=>{const file=path.join(__dirname,name);return [name,fs.existsSync(file)?crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex'):null];})));
  const cases=buildCases(selection,plan);expected=cases.map(c=>c.id);
  write(path.join(out,'operations-result.json'),operationReport(expected,comparisons,repeatability));
  const metadata=JSON.parse(fs.readFileSync(path.join(out,'operation-fixtures/metadata.json')));
@@ -164,9 +182,10 @@ async function main(){
      const rust=await capture(pages.rust,'rust',operationRoute(route,op),op,id,dir);
      const after=snapshot(path.join(dir,'after'));
      result=compareOperation(java,rust,after,{qvtRequired:route.startsWith('/qapps')||op.qvtRequired===true,downloadsRequired:op.downloadsRequired===true||(op.steps||[]).some(s=>s.action==='download')});result.beforeDatabase=before;result.evidence=path.relative(out,dir);
-     if(before.complete!==true||before.equal!==true)result.passed=false;
+     result.approvedPresentation=approvedPresentation(result,java,rust,{screen:op.selectedScreenKey,mode:op.selectedMode,route:operationRoute(route,op),suiteId:op.functionalSuiteId},approvalRules);
+     if(before.complete!==true||before.equal!==true){result.passed=false;result.approvedPresentation.passed=false;}
      if(op.repeatability===true){
-      if(op.readOnly!==true||(op.steps||[]).some(s=>!['visible','text','value'].includes(s.action)))
+      if(op.readOnly!==true||(op.steps||[]).some(s=>!isAssertion(s.action)))
        repeatability.push({kind:'same-engine',id,passed:false,issues:['repeatability requires explicit readOnly and assertion-only steps']});
       else for(const [side,first] of [['java',java],['rust',rust]]){
        const repeatDir=path.join(dir,'repeat-'+side);fs.mkdirSync(repeatDir,{recursive:true});

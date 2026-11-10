@@ -43,10 +43,10 @@ special-purpose screens need dedicated scenarios and are listed as uncovered.
 
 Response body bytes (after browser transport decoding), live DOM serialization
 UTF-8 bytes, and decoded PNG RGBA bytes are compared separately. PNG container
-bytes are not used for pixel equality. There are no masks, tolerances, string
-normalizations, approved differences, injected styles or frozen clocks. Session
-tokens, timestamps, ports, fonts, asynchronous rendering and intentional design
-changes can therefore cause raw mismatches. A matching error page is not screen
+bytes are not used for pixel equality. Raw comparisons use no masks, tolerances, string normalizations or injected
+styles. Operation mode supplies data time and reports reviewed presentation
+differences separately, as described below. Session tokens, ports, fonts,
+asynchronous rendering and intentional design changes can still cause raw mismatches. A matching error page is not screen
 parity, and equal pixels do not establish equal HTML or DOM.
 
 The runner exits nonzero for raw mismatch or incomplete coverage; this is expected
@@ -119,3 +119,35 @@ cleanup deleting the historical fixtures mid-run. This prevents that unrelated
 background mutation; it does not establish coverage of scheduled execution.
 Manual service/job worker behavior is not disabled. The generated configuration
 and `operation-environment.json` retain this choice explicitly.
+
+7. Reviewed differences and supplied data time.
+
+`approved-differences.json` at the repository root records the explicitly reviewed
+schema, seed and presentation differences. Database comparison retains its raw
+verdict and applies only named rules to a comparison copy. Newly reviewed seed
+rows require exact non-generated values and absence on the other engine. Added
+column rules remain restricted to nullable, default-free columns containing only
+nulls; populated values are still reported. Shared `last_updated_stamp` values
+are not exempted.
+
+Operation runs now supply both engines with `MOQUI_TEST_DATA_CLOCK_FILE`. The
+engines must include the corresponding opt-in clock implementation. Before UI
+fixtures, real service create and update calls prove that each database's stored
+stamp equals the supplied time at two successive instants. Failure stops the
+run. This controls data timestamps, not elapsed deadlines, randomness, asynchronous
+ordering, or transaction pairing. Consumers of user-now, including some security
+expiry and cooldown rules, follow explicit effective time or supplied test time. Automatic schedules
+remain disabled in these disposable runs. The clock proof's DataDocument entity
+does not declare optimistic locking, so it does not prove stale-update rejection.
+
+`approved_functional_plan.json` contains focused cases for the three reviewed
+screen/mode combinations. Merge them into a plan containing the frozen sample's
+25 keys to run through the existing lifecycle. Each applicable result includes
+an `approvedPresentation` verdict alongside the unchanged raw verdict. A scoped
+approval permits markup and pixels to differ only after functional observations
+complete and agree. Content text assertions are exact; control-label checks
+compare semantic words with presentation whitespace collapsed and retain raw
+visible labels separately. Request targets, statuses, submitted values and
+downloads remain strict. Database and coverage failures still fail the overall
+result. Resource's separately approved implementation difference is recorded
+without claiming function equivalence or successful coverage.

@@ -1,0 +1,2676 @@
+{
+  "version": 1,
+  "change": 7,
+  "purpose": "Functional qualification of explicitly approved presentation differences; raw exact comparisons remain separate.",
+  "fixtureContract": {
+    "print_jobs": {
+      "required_values": {
+        "statusId": "EsComplete",
+        "jobId": 100,
+        "duplex": "N",
+        "pageRanges": "1-2"
+      },
+      "record": "Sample25Print00"
+    },
+    "documents": "Sample25Document exists with primaryEntityName moqui.basic.Enumeration",
+    "document_field": "Exactly one initial enumId field on Sample25Document"
+  },
+  "screens": [
+    {
+      "key": "tools/System/Print/PrintJob/PrintJobList.xml",
+      "operations": [
+        {
+          "id": "exact-control-labels-html",
+          "modes": [
+            "html"
+          ],
+          "steps": [
+            {
+              "action": "exactLabel",
+              "selector": "#PrintJobList_find",
+              "value": "Find"
+            },
+            {
+              "action": "exactLabel",
+              "selector": "#PrintJobList_printJobId_0_printJobDetail",
+              "value": "View/Update"
+            },
+            {
+              "action": "exactLabel",
+              "selector": "button#PrintJobList_find_0_downloadDocument_button, a#PrintJobList_find_0_downloadDocument",
+              "value": "Download"
+            }
+          ],
+          "fixturePrerequisites": [
+            "print_jobs",
+            "printer"
+          ],
+          "routeParameters": {
+            "printJobId": "Sample25Print00"
+          },
+          "functionalSuiteId": "print-job-functional-v1",
+          "functionalScope": {
+            "screen": "tools/System/Print/PrintJob/PrintJobList.xml",
+            "mode": "html",
+            "path": "/apps/system/Print/PrintJob/PrintJobList"
+          }
+        },
+        {
+          "id": "options-statusId-html",
+          "modes": [
+            "html"
+          ],
+          "steps": [
+            {
+              "action": "options",
+              "expectedLabels": [
+                "",
+                "Complete",
+                "Not Started",
+                "Other Error",
+                "Running"
+              ],
+              "selector": "#PrintJobList_statusId"
+            }
+          ],
+          "fixturePrerequisites": [
+            "print_jobs",
+            "printer"
+          ],
+          "routeParameters": {
+            "printJobId": "Sample25Print00"
+          },
+          "functionalSuiteId": "print-job-functional-v1",
+          "functionalScope": {
+            "screen": "tools/System/Print/PrintJob/PrintJobList.xml",
+            "mode": "html",
+            "path": "/apps/system/Print/PrintJob/PrintJobList"
+          }
+        },
+        {
+          "id": "options-duplex-html",
+          "modes": [
+            "html"
+          ],
+          "steps": [
+            {
+              "action": "options",
+              "expectedLabels": [
+                "",
+                "N",
+                "Y"
+              ],
+              "selector": "#PrintJobList_duplex"
+            }
+          ],
+          "fixturePrerequisites": [
+            "print_jobs",
+            "printer"
+          ],
+          "routeParameters": {
+            "printJobId": "Sample25Print00"
+          },
+          "functionalSuiteId": "print-job-functional-v1",
+          "functionalScope": {
+            "screen": "tools/System/Print/PrintJob/PrintJobList.xml",
+            "mode": "html",
+            "path": "/apps/system/Print/PrintJob/PrintJobList"
+          }
+        },
+        {
+          "id": "filter-printJobId-match-html",
+          "modes": [
+            "html"
+          ],
+          "steps": [
+            {
+              "action": "fill",
+              "selector": "#PrintJobList_printJobId",
+              "value": "Sample25Print00"
+            },
+            {
+              "action": "click",
+              "selector": "#PrintJobList_find"
+            },
+            {
+              "action": "count",
+              "selector": "#PrintJobList_table tbody > tr",
+              "value": 1
+            }
+          ],
+          "fixturePrerequisites": [
+            "print_jobs",
+            "printer"
+          ],
+          "routeParameters": {
+            "printJobId": "Sample25Print00"
+          },
+          "functionalSuiteId": "print-job-functional-v1",
+          "functionalScope": {
+            "screen": "tools/System/Print/PrintJob/PrintJobList.xml",
+            "mode": "html",
+            "path": "/apps/system/Print/PrintJob/PrintJobList"
+          }
+        },
+        {
+          "id": "filter-printJobId-no-match-html",
+          "modes": [
+            "html"
+          ],
+          "steps": [
+            {
+              "action": "fill",
+              "selector": "#PrintJobList_printJobId",
+              "value": "Sample25NoMatch"
+            },
+            {
+              "action": "click",
+              "selector": "#PrintJobList_find"
+            },
+            {
+              "action": "count",
+              "selector": "#PrintJobList_table tbody > tr",
+              "value": 0
+            }
+          ],
+          "fixturePrerequisites": [
+            "print_jobs",
+            "printer"
+          ],
+          "routeParameters": {
+            "printJobId": "Sample25Print00"
+          },
+          "functionalSuiteId": "print-job-functional-v1",
+          "functionalScope": {
+            "screen": "tools/System/Print/PrintJob/PrintJobList.xml",
+            "mode": "html",
+            "path": "/apps/system/Print/PrintJob/PrintJobList"
+          }
+        },
+        {
+          "id": "filter-username-match-html",
+          "modes": [
+            "html"
+          ],
+          "steps": [
+            {
+              "action": "fill",
+              "selector": "#PrintJobList_username",
+              "value": "sample25.user"
+            },
+            {
+              "action": "click",
+              "selector": "#PrintJobList_find"
+            },
+            {
+              "action": "count",
+              "selector": "#PrintJobList_table tbody > tr",
+              "value": 1
+            }
+          ],
+          "fixturePrerequisites": [
+            "print_jobs",
+            "printer"
+          ],
+          "routeParameters": {
+            "printJobId": "Sample25Print00"
+          },
+          "functionalSuiteId": "print-job-functional-v1",
+          "functionalScope": {
+            "screen": "tools/System/Print/PrintJob/PrintJobList.xml",
+            "mode": "html",
+            "path": "/apps/system/Print/PrintJob/PrintJobList"
+          }
+        },
+        {
+          "id": "filter-username-no-match-html",
+          "modes": [
+            "html"
+          ],
+          "steps": [
+            {
+              "action": "fill",
+              "selector": "#PrintJobList_username",
+              "value": "Sample25NoMatch"
+            },
+            {
+              "action": "click",
+              "selector": "#PrintJobList_find"
+            },
+            {
+              "action": "count",
+              "selector": "#PrintJobList_table tbody > tr",
+              "value": 0
+            }
+          ],
+          "fixturePrerequisites": [
+            "print_jobs",
+            "printer"
+          ],
+          "routeParameters": {
+            "printJobId": "Sample25Print00"
+          },
+          "functionalSuiteId": "print-job-functional-v1",
+          "functionalScope": {
+            "screen": "tools/System/Print/PrintJob/PrintJobList.xml",
+            "mode": "html",
+            "path": "/apps/system/Print/PrintJob/PrintJobList"
+          }
+        },
+        {
+          "id": "filter-jobId-match-html",
+          "modes": [
+            "html"
+          ],
+          "steps": [
+            {
+              "action": "fill",
+              "selector": "#PrintJobList_jobId",
+              "value": "100"
+            },
+            {
+              "action": "click",
+              "selector": "#PrintJobList_find"
+            },
+            {
+              "action": "count",
+              "selector": "#PrintJobList_table tbody > tr",
+              "value": 1
+            }
+          ],
+          "fixturePrerequisites": [
+            "print_jobs",
+            "printer"
+          ],
+          "routeParameters": {
+            "printJobId": "Sample25Print00"
+          },
+          "functionalSuiteId": "print-job-functional-v1",
+          "functionalScope": {
+            "screen": "tools/System/Print/PrintJob/PrintJobList.xml",
+            "mode": "html",
+            "path": "/apps/system/Print/PrintJob/PrintJobList"
+          }
+        },
+        {
+          "id": "filter-jobId-no-match-html",
+          "modes": [
+            "html"
+          ],
+          "steps": [
+            {
+              "action": "fill",
+              "selector": "#PrintJobList_jobId",
+              "value": "999999"
+            },
+            {
+              "action": "click",
+              "selector": "#PrintJobList_find"
+            },
+            {
+              "action": "count",
+              "selector": "#PrintJobList_table tbody > tr",
+              "value": 0
+            }
+          ],
+          "fixturePrerequisites": [
+            "print_jobs",
+            "printer"
+          ],
+          "routeParameters": {
+            "printJobId": "Sample25Print00"
+          },
+          "functionalSuiteId": "print-job-functional-v1",
+          "functionalScope": {
+            "screen": "tools/System/Print/PrintJob/PrintJobList.xml",
+            "mode": "html",
+            "path": "/apps/system/Print/PrintJob/PrintJobList"
+          }
+        },
+        {
+          "id": "filter-jobName-match-html",
+          "modes": [
+            "html"
+          ],
+          "steps": [
+            {
+              "action": "fill",
+              "selector": "#PrintJobList_jobName",
+              "value": "Sample25 print 00"
+            },
+            {
+              "action": "click",
+              "selector": "#PrintJobList_find"
+            },
+            {
+              "action": "count",
+              "selector": "#PrintJobList_table tbody > tr",
+              "value": 1
+            }
+          ],
+          "fixturePrerequisites": [
+            "print_jobs",
+            "printer"
+          ],
+          "routeParameters": {
+            "printJobId": "Sample25Print00"
+          },
+          "functionalSuiteId": "print-job-functional-v1",
+          "functionalScope": {
+            "screen": "tools/System/Print/PrintJob/PrintJobList.xml",
+            "mode": "html",
+            "path": "/apps/system/Print/PrintJob/PrintJobList"
+          }
+        },
+        {
+          "id": "filter-jobName-no-match-html",
+          "modes": [
+            "html"
+          ],
+          "steps": [
+            {
+              "action": "fill",
+              "selector": "#PrintJobList_jobName",
+              "value": "Sample25NoMatch"
+            },
+            {
+              "action": "click",
+              "selector": "#PrintJobList_find"
+            },
+            {
+              "action": "count",
+              "selector": "#PrintJobList_table tbody > tr",
+              "value": 0
+            }
+          ],
+          "fixturePrerequisites": [
+            "print_jobs",
+            "printer"
+          ],
+          "routeParameters": {
+            "printJobId": "Sample25Print00"
+          },
+          "functionalSuiteId": "print-job-functional-v1",
+          "functionalScope": {
+            "screen": "tools/System/Print/PrintJob/PrintJobList.xml",
+            "mode": "html",
+            "path": "/apps/system/Print/PrintJob/PrintJobList"
+          }
+        },
+        {
+          "id": "filter-copies-match-html",
+          "modes": [
+            "html"
+          ],
+          "steps": [
+            {
+              "action": "fill",
+              "selector": "#PrintJobList_copies",
+              "value": "1"
+            },
+            {
+              "action": "click",
+              "selector": "#PrintJobList_find"
+            },
+            {
+              "action": "count",
+              "selector": "#PrintJobList_table tbody > tr",
+              "value": 1
+            }
+          ],
+          "fixturePrerequisites": [
+            "print_jobs",
+            "printer"
+          ],
+          "routeParameters": {
+            "printJobId": "Sample25Print00"
+          },
+          "functionalSuiteId": "print-job-functional-v1",
+          "functionalScope": {
+            "screen": "tools/System/Print/PrintJob/PrintJobList.xml",
+            "mode": "html",
+            "path": "/apps/system/Print/PrintJob/PrintJobList"
+          }
+        },
+        {
+          "id": "filter-copies-no-match-html",
+          "modes": [
+            "html"
+          ],
+          "steps": [
+            {
+              "action": "fill",
+              "selector": "#PrintJobList_copies",
+              "value": "999999"
+            },
+            {
+              "action": "click",
+              "selector": "#PrintJobList_find"
+            },
+            {
+              "action": "count",
+              "selector": "#PrintJobList_table tbody > tr",
+              "value": 0
+            }
+          ],
+          "fixturePrerequisites": [
+            "print_jobs",
+            "printer"
+          ],
+          "routeParameters": {
+            "printJobId": "Sample25Print00"
+          },
+          "functionalSuiteId": "print-job-functional-v1",
+          "functionalScope": {
+            "screen": "tools/System/Print/PrintJob/PrintJobList.xml",
+            "mode": "html",
+            "path": "/apps/system/Print/PrintJob/PrintJobList"
+          }
+        },
+        {
+          "id": "filter-pageRanges-match-html",
+          "modes": [
+            "html"
+          ],
+          "steps": [
+            {
+              "action": "fill",
+              "selector": "#PrintJobList_pageRanges",
+              "value": "1-2"
+            },
+            {
+              "action": "click",
+              "selector": "#PrintJobList_find"
+            },
+            {
+              "action": "count",
+              "selector": "#PrintJobList_table tbody > tr",
+              "value": 1
+            }
+          ],
+          "fixturePrerequisites": [
+            "print_jobs",
+            "printer"
+          ],
+          "routeParameters": {
+            "printJobId": "Sample25Print00"
+          },
+          "functionalSuiteId": "print-job-functional-v1",
+          "functionalScope": {
+            "screen": "tools/System/Print/PrintJob/PrintJobList.xml",
+            "mode": "html",
+            "path": "/apps/system/Print/PrintJob/PrintJobList"
+          }
+        },
+        {
+          "id": "filter-pageRanges-no-match-html",
+          "modes": [
+            "html"
+          ],
+          "steps": [
+            {
+              "action": "fill",
+              "selector": "#PrintJobList_pageRanges",
+              "value": "Sample25NoMatch"
+            },
+            {
+              "action": "click",
+              "selector": "#PrintJobList_find"
+            },
+            {
+              "action": "count",
+              "selector": "#PrintJobList_table tbody > tr",
+              "value": 0
+            }
+          ],
+          "fixturePrerequisites": [
+            "print_jobs",
+            "printer"
+          ],
+          "routeParameters": {
+            "printJobId": "Sample25Print00"
+          },
+          "functionalSuiteId": "print-job-functional-v1",
+          "functionalScope": {
+            "screen": "tools/System/Print/PrintJob/PrintJobList.xml",
+            "mode": "html",
+            "path": "/apps/system/Print/PrintJob/PrintJobList"
+          }
+        },
+        {
+          "id": "filter-contentType-match-html",
+          "modes": [
+            "html"
+          ],
+          "steps": [
+            {
+              "action": "fill",
+              "selector": "#PrintJobList_contentType",
+              "value": "text/plain"
+            },
+            {
+              "action": "click",
+              "selector": "#PrintJobList_find"
+            },
+            {
+              "action": "count",
+              "selector": "#PrintJobList_table tbody > tr",
+              "value": 1
+            }
+          ],
+          "fixturePrerequisites": [
+            "print_jobs",
+            "printer"
+          ],
+          "routeParameters": {
+            "printJobId": "Sample25Print00"
+          },
+          "functionalSuiteId": "print-job-functional-v1",
+          "functionalScope": {
+            "screen": "tools/System/Print/PrintJob/PrintJobList.xml",
+            "mode": "html",
+            "path": "/apps/system/Print/PrintJob/PrintJobList"
+          }
+        },
+        {
+          "id": "filter-contentType-no-match-html",
+          "modes": [
+            "html"
+          ],
+          "steps": [
+            {
+              "action": "fill",
+              "selector": "#PrintJobList_contentType",
+              "value": "Sample25NoMatch"
+            },
+            {
+              "action": "click",
+              "selector": "#PrintJobList_find"
+            },
+            {
+              "action": "count",
+              "selector": "#PrintJobList_table tbody > tr",
+              "value": 0
+            }
+          ],
+          "fixturePrerequisites": [
+            "print_jobs",
+            "printer"
+          ],
+          "routeParameters": {
+            "printJobId": "Sample25Print00"
+          },
+          "functionalSuiteId": "print-job-functional-v1",
+          "functionalScope": {
+            "screen": "tools/System/Print/PrintJob/PrintJobList.xml",
+            "mode": "html",
+            "path": "/apps/system/Print/PrintJob/PrintJobList"
+          }
+        },
+        {
+          "id": "select-filter-statusId-html",
+          "modes": [
+            "html"
+          ],
+          "steps": [
+            {
+              "action": "choose",
+              "label": "Complete",
+              "selector": "#PrintJobList_statusId",
+              "value": "EsComplete"
+            },
+            {
+              "action": "click",
+              "selector": "#PrintJobList_find"
+            },
+            {
+              "action": "count",
+              "selector": "#PrintJobList_table tbody > tr",
+              "value": 1
+            }
+          ],
+          "fixturePrerequisites": [
+            "print_jobs",
+            "printer"
+          ],
+          "routeParameters": {
+            "printJobId": "Sample25Print00"
+          },
+          "functionalSuiteId": "print-job-functional-v1",
+          "functionalScope": {
+            "screen": "tools/System/Print/PrintJob/PrintJobList.xml",
+            "mode": "html",
+            "path": "/apps/system/Print/PrintJob/PrintJobList"
+          }
+        },
+        {
+          "id": "select-filter-networkPrinterId-html",
+          "modes": [
+            "html"
+          ],
+          "steps": [
+            {
+              "action": "choose",
+              "label": "No real printer: emulator required before sending (127.0.0.1)",
+              "selector": "#PrintJobList_networkPrinterId",
+              "value": "Sample25Printer"
+            },
+            {
+              "action": "click",
+              "selector": "#PrintJobList_find"
+            },
+            {
+              "action": "count",
+              "selector": "#PrintJobList_table tbody > tr",
+              "value": 1
+            }
+          ],
+          "fixturePrerequisites": [
+            "print_jobs",
+            "printer"
+          ],
+          "routeParameters": {
+            "printJobId": "Sample25Print00"
+          },
+          "functionalSuiteId": "print-job-functional-v1",
+          "functionalScope": {
+            "screen": "tools/System/Print/PrintJob/PrintJobList.xml",
+            "mode": "html",
+            "path": "/apps/system/Print/PrintJob/PrintJobList"
+          }
+        },
+        {
+          "id": "select-filter-duplex-html",
+          "modes": [
+            "html"
+          ],
+          "steps": [
+            {
+              "action": "choose",
+              "label": "N",
+              "selector": "#PrintJobList_duplex",
+              "value": "N"
+            },
+            {
+              "action": "click",
+              "selector": "#PrintJobList_find"
+            },
+            {
+              "action": "count",
+              "selector": "#PrintJobList_table tbody > tr",
+              "value": 1
+            }
+          ],
+          "fixturePrerequisites": [
+            "print_jobs",
+            "printer"
+          ],
+          "routeParameters": {
+            "printJobId": "Sample25Print00"
+          },
+          "functionalSuiteId": "print-job-functional-v1",
+          "functionalScope": {
+            "screen": "tools/System/Print/PrintJob/PrintJobList.xml",
+            "mode": "html",
+            "path": "/apps/system/Print/PrintJob/PrintJobList"
+          }
+        },
+        {
+          "id": "download-exact-payload-html",
+          "modes": [
+            "html"
+          ],
+          "steps": [
+            {
+              "action": "exactLabel",
+              "selector": "button#PrintJobList_find_0_downloadDocument_button, a#PrintJobList_find_0_downloadDocument",
+              "value": "Download"
+            },
+            {
+              "action": "download",
+              "selector": "button#PrintJobList_find_0_downloadDocument_button, a#PrintJobList_find_0_downloadDocument"
+            },
+            {
+              "action": "count",
+              "selector": "#PrintJobList_table tbody > tr",
+              "value": 1
+            }
+          ],
+          "downloadsRequired": true,
+          "expectedDownloadUtf8": "Sample25 document 00\n",
+          "fixturePrerequisites": [
+            "print_jobs",
+            "printer"
+          ],
+          "routeParameters": {
+            "printJobId": "Sample25Print00"
+          },
+          "functionalSuiteId": "print-job-functional-v1",
+          "functionalScope": {
+            "screen": "tools/System/Print/PrintJob/PrintJobList.xml",
+            "mode": "html",
+            "path": "/apps/system/Print/PrintJob/PrintJobList"
+          }
+        },
+        {
+          "id": "detail-exact-target-html",
+          "modes": [
+            "html"
+          ],
+          "steps": [
+            {
+              "action": "exactLabel",
+              "selector": "#PrintJobList_printJobId_0_printJobDetail",
+              "value": "View/Update"
+            },
+            {
+              "action": "click",
+              "selector": "#PrintJobList_printJobId_0_printJobDetail"
+            },
+            {
+              "action": "visible",
+              "selector": "#PrintJobForm"
+            },
+            {
+              "action": "text",
+              "selector": "#PrintJobForm",
+              "value": "Sample25Print00"
+            }
+          ],
+          "fixturePrerequisites": [
+            "print_jobs",
+            "printer"
+          ],
+          "routeParameters": {
+            "printJobId": "Sample25Print00"
+          },
+          "functionalSuiteId": "print-job-functional-v1",
+          "functionalScope": {
+            "screen": "tools/System/Print/PrintJob/PrintJobList.xml",
+            "mode": "html",
+            "path": "/apps/system/Print/PrintJob/PrintJobList"
+          }
+        },
+        {
+          "id": "created-date-period-filter-2026-01-01-html",
+          "modes": [
+            "html"
+          ],
+          "steps": [
+            {
+              "action": "choose",
+              "label": "Last",
+              "selector": "#PrintJobList_createdDate_poffset",
+              "value": "-1"
+            },
+            {
+              "action": "choose",
+              "label": "30 Days",
+              "selector": "#PrintJobList_createdDate_period",
+              "value": "30d"
+            },
+            {
+              "action": "fill",
+              "selector": "input[name=\"createdDate_pdate\"]",
+              "value": "2026-01-01"
+            },
+            {
+              "action": "value",
+              "selector": "input[name=\"createdDate_pdate\"]",
+              "value": "2026-01-01"
+            },
+            {
+              "action": "click",
+              "selector": "#PrintJobList_find"
+            },
+            {
+              "action": "count",
+              "selector": "#PrintJobList_table tbody > tr",
+              "value": 1
+            }
+          ],
+          "fixturePrerequisites": [
+            "print_jobs",
+            "printer"
+          ],
+          "routeParameters": {
+            "printJobId": "Sample25Print00"
+          },
+          "functionalSuiteId": "print-job-functional-v1",
+          "functionalScope": {
+            "screen": "tools/System/Print/PrintJob/PrintJobList.xml",
+            "mode": "html",
+            "path": "/apps/system/Print/PrintJob/PrintJobList"
+          }
+        },
+        {
+          "id": "created-date-period-filter-2026-01-15-html",
+          "modes": [
+            "html"
+          ],
+          "steps": [
+            {
+              "action": "choose",
+              "label": "Last",
+              "selector": "#PrintJobList_createdDate_poffset",
+              "value": "-1"
+            },
+            {
+              "action": "choose",
+              "label": "30 Days",
+              "selector": "#PrintJobList_createdDate_period",
+              "value": "30d"
+            },
+            {
+              "action": "fill",
+              "selector": "input[name=\"createdDate_pdate\"]",
+              "value": "2026-01-15"
+            },
+            {
+              "action": "value",
+              "selector": "input[name=\"createdDate_pdate\"]",
+              "value": "2026-01-15"
+            },
+            {
+              "action": "click",
+              "selector": "#PrintJobList_find"
+            },
+            {
+              "action": "count",
+              "selector": "#PrintJobList_table tbody > tr",
+              "value": 1
+            }
+          ],
+          "fixturePrerequisites": [
+            "print_jobs",
+            "printer"
+          ],
+          "routeParameters": {
+            "printJobId": "Sample25Print00"
+          },
+          "functionalSuiteId": "print-job-functional-v1",
+          "functionalScope": {
+            "screen": "tools/System/Print/PrintJob/PrintJobList.xml",
+            "mode": "html",
+            "path": "/apps/system/Print/PrintJob/PrintJobList"
+          }
+        },
+        {
+          "id": "created-date-period-filter-2025-12-15-html",
+          "modes": [
+            "html"
+          ],
+          "steps": [
+            {
+              "action": "choose",
+              "label": "Last",
+              "selector": "#PrintJobList_createdDate_poffset",
+              "value": "-1"
+            },
+            {
+              "action": "choose",
+              "label": "30 Days",
+              "selector": "#PrintJobList_createdDate_period",
+              "value": "30d"
+            },
+            {
+              "action": "fill",
+              "selector": "input[name=\"createdDate_pdate\"]",
+              "value": "2025-12-15"
+            },
+            {
+              "action": "value",
+              "selector": "input[name=\"createdDate_pdate\"]",
+              "value": "2025-12-15"
+            },
+            {
+              "action": "click",
+              "selector": "#PrintJobList_find"
+            },
+            {
+              "action": "count",
+              "selector": "#PrintJobList_table tbody > tr",
+              "value": 0
+            }
+          ],
+          "fixturePrerequisites": [
+            "print_jobs",
+            "printer"
+          ],
+          "routeParameters": {
+            "printJobId": "Sample25Print00"
+          },
+          "functionalSuiteId": "print-job-functional-v1",
+          "functionalScope": {
+            "screen": "tools/System/Print/PrintJob/PrintJobList.xml",
+            "mode": "html",
+            "path": "/apps/system/Print/PrintJob/PrintJobList"
+          }
+        }
+      ]
+    },
+    {
+      "key": "tools/System/DataDocument/Edit/DataDocFields.xml",
+      "operations": [
+        {
+          "id": "dialog-AddCondition-open-close-html",
+          "modes": [
+            "html"
+          ],
+          "steps": [
+            {
+              "action": "exactLabel",
+              "selector": "button:has-text(\"Add Condition\"):visible",
+              "value": "Add Condition"
+            },
+            {
+              "action": "click",
+              "selector": "button:has-text(\"Add Condition\"):visible"
+            },
+            {
+              "action": "visible",
+              "selector": "#AddCondition"
+            },
+            {
+              "action": "exactLabel",
+              "selector": "#AddCondition_submitButton",
+              "value": "Add"
+            },
+            {
+              "action": "click",
+              "selector": ".modal.in:has(#AddCondition) button.close, dialog[open]:has(#AddCondition) button.close"
+            },
+            {
+              "action": "hidden",
+              "selector": "#AddCondition"
+            }
+          ],
+          "fixturePrerequisites": [
+            "documents",
+            "document_field"
+          ],
+          "routeParameters": {
+            "dataDocumentId": "Sample25Document"
+          },
+          "functionalSuiteId": "data-doc-fields-functional-v1",
+          "functionalScope": {
+            "screen": "tools/System/DataDocument/Edit/DataDocFields.xml",
+            "mode": "html",
+            "path": "/apps/system/DataDocument/Edit/DataDocFields"
+          }
+        },
+        {
+          "id": "dialog-AddField-open-close-html",
+          "modes": [
+            "html"
+          ],
+          "steps": [
+            {
+              "action": "exactLabel",
+              "selector": "button:has-text(\"Add Field Manual\"):visible",
+              "value": "Add Field Manual"
+            },
+            {
+              "action": "click",
+              "selector": "button:has-text(\"Add Field Manual\"):visible"
+            },
+            {
+              "action": "visible",
+              "selector": "#AddField"
+            },
+            {
+              "action": "exactLabel",
+              "selector": "#AddField_submitButton",
+              "value": "Create"
+            },
+            {
+              "action": "click",
+              "selector": ".modal.in:has(#AddField) button.close, dialog[open]:has(#AddField) button.close"
+            },
+            {
+              "action": "hidden",
+              "selector": "#AddField"
+            }
+          ],
+          "fixturePrerequisites": [
+            "documents",
+            "document_field"
+          ],
+          "routeParameters": {
+            "dataDocumentId": "Sample25Document"
+          },
+          "functionalSuiteId": "data-doc-fields-functional-v1",
+          "functionalScope": {
+            "screen": "tools/System/DataDocument/Edit/DataDocFields.xml",
+            "mode": "html",
+            "path": "/apps/system/DataDocument/Edit/DataDocFields"
+          }
+        },
+        {
+          "id": "enumerate-select-AddCondition-operator-html",
+          "modes": [
+            "html"
+          ],
+          "steps": [
+            {
+              "action": "click",
+              "selector": "button:has-text(\"Add Condition\"):visible"
+            },
+            {
+              "action": "options",
+              "control": "#AddCondition input[role=\"combobox\"][aria-label=\"Operator\"]",
+              "selector": "#AddCondition [name=\"operator\"]"
+            },
+            {
+              "action": "choose",
+              "control": "#AddCondition input[role=\"combobox\"][aria-label=\"Operator\"]",
+              "label": "equals",
+              "selector": "#AddCondition [name=\"operator\"]",
+              "value": "equals"
+            },
+            {
+              "action": "choose",
+              "control": "#AddCondition input[role=\"combobox\"][aria-label=\"Operator\"]",
+              "label": "not-equals",
+              "selector": "#AddCondition [name=\"operator\"]",
+              "value": "not-equals"
+            },
+            {
+              "action": "choose",
+              "control": "#AddCondition input[role=\"combobox\"][aria-label=\"Operator\"]",
+              "label": "less",
+              "selector": "#AddCondition [name=\"operator\"]",
+              "value": "less"
+            },
+            {
+              "action": "choose",
+              "control": "#AddCondition input[role=\"combobox\"][aria-label=\"Operator\"]",
+              "label": "greater",
+              "selector": "#AddCondition [name=\"operator\"]",
+              "value": "greater"
+            },
+            {
+              "action": "choose",
+              "control": "#AddCondition input[role=\"combobox\"][aria-label=\"Operator\"]",
+              "label": "less-equals",
+              "selector": "#AddCondition [name=\"operator\"]",
+              "value": "less-equals"
+            },
+            {
+              "action": "choose",
+              "control": "#AddCondition input[role=\"combobox\"][aria-label=\"Operator\"]",
+              "label": "greater-equals",
+              "selector": "#AddCondition [name=\"operator\"]",
+              "value": "greater-equals"
+            },
+            {
+              "action": "choose",
+              "control": "#AddCondition input[role=\"combobox\"][aria-label=\"Operator\"]",
+              "label": "in",
+              "selector": "#AddCondition [name=\"operator\"]",
+              "value": "in"
+            },
+            {
+              "action": "choose",
+              "control": "#AddCondition input[role=\"combobox\"][aria-label=\"Operator\"]",
+              "label": "not-in",
+              "selector": "#AddCondition [name=\"operator\"]",
+              "value": "not-in"
+            },
+            {
+              "action": "choose",
+              "control": "#AddCondition input[role=\"combobox\"][aria-label=\"Operator\"]",
+              "label": "between",
+              "selector": "#AddCondition [name=\"operator\"]",
+              "value": "between"
+            },
+            {
+              "action": "choose",
+              "control": "#AddCondition input[role=\"combobox\"][aria-label=\"Operator\"]",
+              "label": "not-between",
+              "selector": "#AddCondition [name=\"operator\"]",
+              "value": "not-between"
+            },
+            {
+              "action": "choose",
+              "control": "#AddCondition input[role=\"combobox\"][aria-label=\"Operator\"]",
+              "label": "like",
+              "selector": "#AddCondition [name=\"operator\"]",
+              "value": "like"
+            },
+            {
+              "action": "choose",
+              "control": "#AddCondition input[role=\"combobox\"][aria-label=\"Operator\"]",
+              "label": "not-like",
+              "selector": "#AddCondition [name=\"operator\"]",
+              "value": "not-like"
+            },
+            {
+              "action": "choose",
+              "control": "#AddCondition input[role=\"combobox\"][aria-label=\"Operator\"]",
+              "label": "is-null",
+              "selector": "#AddCondition [name=\"operator\"]",
+              "value": "is-null"
+            },
+            {
+              "action": "choose",
+              "control": "#AddCondition input[role=\"combobox\"][aria-label=\"Operator\"]",
+              "label": "is-not-null",
+              "selector": "#AddCondition [name=\"operator\"]",
+              "value": "is-not-null"
+            },
+            {
+              "action": "click",
+              "selector": ".modal.in:has(#AddCondition) button.close, dialog[open]:has(#AddCondition) button.close"
+            },
+            {
+              "action": "hidden",
+              "selector": "#AddCondition"
+            }
+          ],
+          "fixturePrerequisites": [
+            "documents",
+            "document_field"
+          ],
+          "routeParameters": {
+            "dataDocumentId": "Sample25Document"
+          },
+          "functionalSuiteId": "data-doc-fields-functional-v1",
+          "functionalScope": {
+            "screen": "tools/System/DataDocument/Edit/DataDocFields.xml",
+            "mode": "html",
+            "path": "/apps/system/DataDocument/Edit/DataDocFields"
+          }
+        },
+        {
+          "id": "enumerate-select-AddCondition-postQuery-html",
+          "modes": [
+            "html"
+          ],
+          "steps": [
+            {
+              "action": "click",
+              "selector": "button:has-text(\"Add Condition\"):visible"
+            },
+            {
+              "action": "options",
+              "control": "#AddCondition input[role=\"combobox\"][aria-label=\"PQ\"]",
+              "selector": "#AddCondition [name=\"postQuery\"]"
+            },
+            {
+              "action": "choose",
+              "control": "#AddCondition input[role=\"combobox\"][aria-label=\"PQ\"]",
+              "label": "N",
+              "selector": "#AddCondition [name=\"postQuery\"]",
+              "value": "N"
+            },
+            {
+              "action": "choose",
+              "control": "#AddCondition input[role=\"combobox\"][aria-label=\"PQ\"]",
+              "label": "Y",
+              "selector": "#AddCondition [name=\"postQuery\"]",
+              "value": "Y"
+            },
+            {
+              "action": "click",
+              "selector": ".modal.in:has(#AddCondition) button.close, dialog[open]:has(#AddCondition) button.close"
+            },
+            {
+              "action": "hidden",
+              "selector": "#AddCondition"
+            }
+          ],
+          "fixturePrerequisites": [
+            "documents",
+            "document_field"
+          ],
+          "routeParameters": {
+            "dataDocumentId": "Sample25Document"
+          },
+          "functionalSuiteId": "data-doc-fields-functional-v1",
+          "functionalScope": {
+            "screen": "tools/System/DataDocument/Edit/DataDocFields.xml",
+            "mode": "html",
+            "path": "/apps/system/DataDocument/Edit/DataDocFields"
+          }
+        },
+        {
+          "id": "enumerate-select-AddField-sortable-html",
+          "modes": [
+            "html"
+          ],
+          "steps": [
+            {
+              "action": "click",
+              "selector": "button:has-text(\"Add Field Manual\"):visible"
+            },
+            {
+              "action": "options",
+              "control": "#AddField input[role=\"combobox\"][aria-label=\"Sortable\"]",
+              "selector": "#AddField [name=\"sortable\"]"
+            },
+            {
+              "action": "choose",
+              "control": "#AddField input[role=\"combobox\"][aria-label=\"Sortable\"]",
+              "label": "N",
+              "selector": "#AddField [name=\"sortable\"]",
+              "value": "N"
+            },
+            {
+              "action": "choose",
+              "control": "#AddField input[role=\"combobox\"][aria-label=\"Sortable\"]",
+              "label": "Y",
+              "selector": "#AddField [name=\"sortable\"]",
+              "value": "Y"
+            },
+            {
+              "action": "click",
+              "selector": ".modal.in:has(#AddField) button.close, dialog[open]:has(#AddField) button.close"
+            },
+            {
+              "action": "hidden",
+              "selector": "#AddField"
+            }
+          ],
+          "fixturePrerequisites": [
+            "documents",
+            "document_field"
+          ],
+          "routeParameters": {
+            "dataDocumentId": "Sample25Document"
+          },
+          "functionalSuiteId": "data-doc-fields-functional-v1",
+          "functionalScope": {
+            "screen": "tools/System/DataDocument/Edit/DataDocFields.xml",
+            "mode": "html",
+            "path": "/apps/system/DataDocument/Edit/DataDocFields"
+          }
+        },
+        {
+          "id": "enumerate-select-AddField-functionName-html",
+          "modes": [
+            "html"
+          ],
+          "steps": [
+            {
+              "action": "click",
+              "selector": "button:has-text(\"Add Field Manual\"):visible"
+            },
+            {
+              "action": "options",
+              "control": "#AddField input[role=\"combobox\"][aria-label=\"Function\"]",
+              "selector": "#AddField [name=\"functionName\"]"
+            },
+            {
+              "action": "choose",
+              "control": "#AddField input[role=\"combobox\"][aria-label=\"Function\"]",
+              "label": "min",
+              "selector": "#AddField [name=\"functionName\"]",
+              "value": "min"
+            },
+            {
+              "action": "choose",
+              "control": "#AddField input[role=\"combobox\"][aria-label=\"Function\"]",
+              "label": "max",
+              "selector": "#AddField [name=\"functionName\"]",
+              "value": "max"
+            },
+            {
+              "action": "choose",
+              "control": "#AddField input[role=\"combobox\"][aria-label=\"Function\"]",
+              "label": "sum",
+              "selector": "#AddField [name=\"functionName\"]",
+              "value": "sum"
+            },
+            {
+              "action": "choose",
+              "control": "#AddField input[role=\"combobox\"][aria-label=\"Function\"]",
+              "label": "avg",
+              "selector": "#AddField [name=\"functionName\"]",
+              "value": "avg"
+            },
+            {
+              "action": "choose",
+              "control": "#AddField input[role=\"combobox\"][aria-label=\"Function\"]",
+              "label": "count",
+              "selector": "#AddField [name=\"functionName\"]",
+              "value": "count"
+            },
+            {
+              "action": "choose",
+              "control": "#AddField input[role=\"combobox\"][aria-label=\"Function\"]",
+              "label": "count-distinct",
+              "selector": "#AddField [name=\"functionName\"]",
+              "value": "count-distinct"
+            },
+            {
+              "action": "choose",
+              "control": "#AddField input[role=\"combobox\"][aria-label=\"Function\"]",
+              "label": "upper",
+              "selector": "#AddField [name=\"functionName\"]",
+              "value": "upper"
+            },
+            {
+              "action": "choose",
+              "control": "#AddField input[role=\"combobox\"][aria-label=\"Function\"]",
+              "label": "lower",
+              "selector": "#AddField [name=\"functionName\"]",
+              "value": "lower"
+            },
+            {
+              "action": "click",
+              "selector": ".modal.in:has(#AddField) button.close, dialog[open]:has(#AddField) button.close"
+            },
+            {
+              "action": "hidden",
+              "selector": "#AddField"
+            }
+          ],
+          "fixturePrerequisites": [
+            "documents",
+            "document_field"
+          ],
+          "routeParameters": {
+            "dataDocumentId": "Sample25Document"
+          },
+          "functionalSuiteId": "data-doc-fields-functional-v1",
+          "functionalScope": {
+            "screen": "tools/System/DataDocument/Edit/DataDocFields.xml",
+            "mode": "html",
+            "path": "/apps/system/DataDocument/Edit/DataDocFields"
+          }
+        },
+        {
+          "id": "field-create-persist-html",
+          "modes": [
+            "html"
+          ],
+          "steps": [
+            {
+              "action": "click",
+              "selector": "button:has-text(\"Add Field Manual\"):visible"
+            },
+            {
+              "action": "fill",
+              "selector": "#AddField [name=\"fieldPath\"]",
+              "value": "description"
+            },
+            {
+              "action": "fill",
+              "selector": "#AddField [name=\"fieldNameAlias\"]",
+              "value": "Sample Html"
+            },
+            {
+              "action": "choose",
+              "control": "#AddField input[role=\"combobox\"][aria-label=\"Sortable\"]",
+              "label": "Y",
+              "selector": "#AddField [name=\"sortable\"]",
+              "value": "Y"
+            },
+            {
+              "action": "choose",
+              "control": "#AddField input[role=\"combobox\"][aria-label=\"Function\"]",
+              "label": "upper",
+              "selector": "#AddField [name=\"functionName\"]",
+              "value": "upper"
+            },
+            {
+              "action": "fill",
+              "selector": "#AddField [name=\"sequenceNum\"]",
+              "value": "2"
+            },
+            {
+              "action": "submitValues",
+              "transition": "/createDataDocumentField",
+              "values": {
+                "dataDocumentId": "Sample25Document02",
+                "fieldPath": "description",
+                "fieldNameAlias": "Sample Html",
+                "sortable": "Y",
+                "functionName": "upper",
+                "sequenceNum": "2"
+              },
+              "selector": "#AddField_submitButton"
+            },
+            {
+              "action": "goto",
+              "route": "/apps/system/DataDocument/Edit/DataDocFields?dataDocumentId=Sample25Document02"
+            },
+            {
+              "action": "value",
+              "selector": "#FieldList [name=\"fieldNameAlias_1\"], [form=\"FieldList\"][name=\"fieldNameAlias_1\"]",
+              "value": "Sample Html"
+            },
+            {
+              "action": "value",
+              "selector": "#FieldList [name=\"sortable_1\"], [form=\"FieldList\"][name=\"sortable_1\"]",
+              "value": "Y"
+            },
+            {
+              "action": "value",
+              "selector": "#FieldList [name=\"functionName_1\"], [form=\"FieldList\"][name=\"functionName_1\"]",
+              "value": "upper"
+            }
+          ],
+          "fixturePrerequisites": [
+            "documents",
+            "document_field"
+          ],
+          "routeParameters": {
+            "dataDocumentId": "Sample25Document02"
+          },
+          "functionalSuiteId": "data-doc-fields-functional-v1",
+          "functionalScope": {
+            "screen": "tools/System/DataDocument/Edit/DataDocFields.xml",
+            "mode": "html",
+            "path": "/apps/system/DataDocument/Edit/DataDocFields"
+          }
+        },
+        {
+          "id": "field-update-delete-and-cancel-html",
+          "modes": [
+            "html"
+          ],
+          "steps": [
+            {
+              "action": "fill",
+              "selector": "#FieldList [name=\"fieldNameAlias_1\"], [form=\"FieldList\"][name=\"fieldNameAlias_1\"]",
+              "value": "Sample Html Updated"
+            },
+            {
+              "action": "fill",
+              "selector": "#FieldList [name=\"sequenceNum_1\"], [form=\"FieldList\"][name=\"sequenceNum_1\"]",
+              "value": "2"
+            },
+            {
+              "action": "submitValues",
+              "transition": "/updateDataDocumentField",
+              "values": {
+                "dataDocumentId_1": "Sample25Document02",
+                "fieldNameAlias_1": "Sample Html Updated",
+                "sequenceNum_1": "2"
+              },
+              "selector": "#FieldList_submitButton"
+            },
+            {
+              "action": "goto",
+              "route": "/apps/system/DataDocument/Edit/DataDocFields?dataDocumentId=Sample25Document02"
+            },
+            {
+              "action": "value",
+              "selector": "#FieldList [name=\"fieldNameAlias_1\"], [form=\"FieldList\"][name=\"fieldNameAlias_1\"]",
+              "value": "Sample Html Updated"
+            },
+            {
+              "action": "confirmClick",
+              "message": "Really remove?",
+              "accept": false,
+              "autoConfirmation": true,
+              "selector": "#FieldList_deleteButton_1_deleteDataDocumentField_button"
+            },
+            {
+              "action": "count",
+              "selector": "input[name^=\"fieldSeqId_\"]",
+              "value": 2
+            },
+            {
+              "action": "confirmClick",
+              "message": "Really remove?",
+              "accept": true,
+              "autoConfirmation": true,
+              "selector": "#FieldList_deleteButton_1_deleteDataDocumentField_button"
+            },
+            {
+              "action": "goto",
+              "route": "/apps/system/DataDocument/Edit/DataDocFields?dataDocumentId=Sample25Document02"
+            },
+            {
+              "action": "count",
+              "selector": "input[name^=\"fieldSeqId_\"]",
+              "value": 1
+            }
+          ],
+          "fixturePrerequisites": [
+            "documents",
+            "document_field"
+          ],
+          "routeParameters": {
+            "dataDocumentId": "Sample25Document02"
+          },
+          "functionalSuiteId": "data-doc-fields-functional-v1",
+          "functionalScope": {
+            "screen": "tools/System/DataDocument/Edit/DataDocFields.xml",
+            "mode": "html",
+            "path": "/apps/system/DataDocument/Edit/DataDocFields"
+          }
+        },
+        {
+          "id": "condition-create-persist-html",
+          "modes": [
+            "html"
+          ],
+          "steps": [
+            {
+              "action": "click",
+              "selector": "button:has-text(\"Add Condition\"):visible"
+            },
+            {
+              "action": "choose",
+              "control": "#AddCondition input[role=\"combobox\"][aria-label=\"Field\"]",
+              "label": "Enum ID",
+              "selector": "#AddCondition [name=\"fieldNameAlias\"]",
+              "value": "enumId"
+            },
+            {
+              "action": "choose",
+              "control": "#AddCondition input[role=\"combobox\"][aria-label=\"Operator\"]",
+              "label": "equals",
+              "selector": "#AddCondition [name=\"operator\"]",
+              "value": "equals"
+            },
+            {
+              "action": "fill",
+              "selector": "#AddCondition [name=\"fieldValue\"]",
+              "value": "Sample25Enum00"
+            },
+            {
+              "action": "choose",
+              "control": "#AddCondition input[role=\"combobox\"][aria-label=\"PQ\"]",
+              "label": "N",
+              "selector": "#AddCondition [name=\"postQuery\"]",
+              "value": "N"
+            },
+            {
+              "action": "submitValues",
+              "transition": "/createDataDocumentCondition",
+              "values": {
+                "dataDocumentId": "Sample25Document04",
+                "fieldNameAlias": "enumId",
+                "operator": "equals",
+                "fieldValue": "Sample25Enum00",
+                "postQuery": "N"
+              },
+              "selector": "#AddCondition_submitButton"
+            },
+            {
+              "action": "goto",
+              "route": "/apps/system/DataDocument/Edit/DataDocFields?dataDocumentId=Sample25Document04"
+            },
+            {
+              "action": "value",
+              "selector": "#ConditionList_fieldValue_0",
+              "value": "Sample25Enum00"
+            }
+          ],
+          "fixturePrerequisites": [
+            "documents",
+            "document_field"
+          ],
+          "routeParameters": {
+            "dataDocumentId": "Sample25Document04"
+          },
+          "functionalSuiteId": "data-doc-fields-functional-v1",
+          "functionalScope": {
+            "screen": "tools/System/DataDocument/Edit/DataDocFields.xml",
+            "mode": "html",
+            "path": "/apps/system/DataDocument/Edit/DataDocFields"
+          }
+        },
+        {
+          "id": "condition-update-delete-and-cancel-html",
+          "modes": [
+            "html"
+          ],
+          "steps": [
+            {
+              "action": "fill",
+              "selector": "#ConditionList_fieldValue_0",
+              "value": "Sample25Enum01"
+            },
+            {
+              "action": "submitValues",
+              "transition": "/updateDataDocumentCondition",
+              "values": {
+                "dataDocumentId": "Sample25Document04",
+                "fieldValue": "Sample25Enum01"
+              },
+              "selector": "#ConditionList_submitButton_0"
+            },
+            {
+              "action": "goto",
+              "route": "/apps/system/DataDocument/Edit/DataDocFields?dataDocumentId=Sample25Document04"
+            },
+            {
+              "action": "value",
+              "selector": "#ConditionList_fieldValue_0",
+              "value": "Sample25Enum01"
+            },
+            {
+              "action": "confirmClick",
+              "message": "Really remove?",
+              "accept": false,
+              "autoConfirmation": true,
+              "selector": "#ConditionList_deleteButton_0_deleteDataDocumentCondition_button"
+            },
+            {
+              "action": "count",
+              "selector": "input[id^=\"ConditionList_conditionSeqId_\"]",
+              "value": 1
+            },
+            {
+              "action": "confirmClick",
+              "message": "Really remove?",
+              "accept": true,
+              "autoConfirmation": true,
+              "selector": "#ConditionList_deleteButton_0_deleteDataDocumentCondition_button"
+            },
+            {
+              "action": "goto",
+              "route": "/apps/system/DataDocument/Edit/DataDocFields?dataDocumentId=Sample25Document04"
+            },
+            {
+              "action": "count",
+              "selector": "input[id^=\"ConditionList_conditionSeqId_\"]",
+              "value": 0
+            }
+          ],
+          "fixturePrerequisites": [
+            "documents",
+            "document_field"
+          ],
+          "routeParameters": {
+            "dataDocumentId": "Sample25Document04"
+          },
+          "functionalSuiteId": "data-doc-fields-functional-v1",
+          "functionalScope": {
+            "screen": "tools/System/DataDocument/Edit/DataDocFields.xml",
+            "mode": "html",
+            "path": "/apps/system/DataDocument/Edit/DataDocFields"
+          }
+        },
+        {
+          "id": "invalid-field-path-validation-html",
+          "modes": [
+            "html"
+          ],
+          "steps": [
+            {
+              "action": "count",
+              "selector": "input[name^=\"fieldSeqId_\"]",
+              "value": 1
+            },
+            {
+              "action": "click",
+              "selector": "button:has-text(\"Add Field Manual\"):visible"
+            },
+            {
+              "action": "fill",
+              "selector": "#AddField [name=\"fieldPath\"]",
+              "value": ""
+            },
+            {
+              "action": "click",
+              "selector": "#AddField_submitButton"
+            },
+            {
+              "action": "validationText",
+              "selector": "label.error:visible, .q-field--error .q-field__messages:visible, .alert-danger:visible, .help-block.error:visible"
+            },
+            {
+              "action": "goto",
+              "route": "/apps/system/DataDocument/Edit/DataDocFields?dataDocumentId=Sample25Document06"
+            },
+            {
+              "action": "count",
+              "selector": "input[name^=\"fieldSeqId_\"]",
+              "value": 1
+            }
+          ],
+          "fixturePrerequisites": [
+            "documents",
+            "document_field"
+          ],
+          "routeParameters": {
+            "dataDocumentId": "Sample25Document06"
+          },
+          "functionalSuiteId": "data-doc-fields-functional-v1",
+          "functionalScope": {
+            "screen": "tools/System/DataDocument/Edit/DataDocFields.xml",
+            "mode": "html",
+            "path": "/apps/system/DataDocument/Edit/DataDocFields"
+          },
+          "validationContract": "Empty required fieldPath; compare actual Java/Rust refusal text and unchanged seeded field count. Unknown nonempty paths are not assumed invalid."
+        },
+        {
+          "id": "tree-expand-and-add-field-html",
+          "modes": [
+            "html"
+          ],
+          "steps": [
+            {
+              "action": "exactLabel",
+              "selector": "#FieldTree a:has-text(\"+ Enum Type ID\")",
+              "value": "+ Enum Type ID"
+            },
+            {
+              "action": "clickResponse",
+              "selector": "#FieldTree a:has-text(\"+ Enum Type ID\")",
+              "path": "/apps/system/DataDocument/Edit/DataDocFields/FieldList/createFieldDynamic",
+              "method": "GET",
+              "status": 302,
+              "parameters": {
+                "dataDocumentId": "Sample25Document08",
+                "fieldPath": "enumTypeId"
+              }
+            },
+            {
+              "action": "count",
+              "selector": "input[name^=\"fieldSeqId_\"]",
+              "value": 2
+            },
+            {
+              "action": "goto",
+              "route": "/apps/system/DataDocument/Edit/DataDocFields?dataDocumentId=Sample25Document08"
+            },
+            {
+              "action": "exactLabel",
+              "selector": "#FieldList_fieldPath_1__",
+              "value": "Enum Type ID"
+            },
+            {
+              "action": "confirmClick",
+              "message": "Really remove?",
+              "accept": true,
+              "autoConfirmation": true,
+              "selector": "#FieldList_deleteButton_1_deleteDataDocumentField_button"
+            },
+            {
+              "action": "goto",
+              "route": "/apps/system/DataDocument/Edit/DataDocFields?dataDocumentId=Sample25Document08"
+            },
+            {
+              "action": "count",
+              "selector": "input[name^=\"fieldSeqId_\"]",
+              "value": 1
+            }
+          ],
+          "fixturePrerequisites": [
+            "documents",
+            "document_field"
+          ],
+          "routeParameters": {
+            "dataDocumentId": "Sample25Document08"
+          },
+          "functionalSuiteId": "data-doc-fields-functional-v1",
+          "functionalScope": {
+            "screen": "tools/System/DataDocument/Edit/DataDocFields.xml",
+            "mode": "html",
+            "path": "/apps/system/DataDocument/Edit/DataDocFields"
+          }
+        },
+        {
+          "id": "dialog-AddCondition-open-close-qapps",
+          "modes": [
+            "qapps"
+          ],
+          "steps": [
+            {
+              "action": "exactLabel",
+              "selector": "button:has-text(\"Add Condition\"):visible",
+              "value": "Add Condition"
+            },
+            {
+              "action": "click",
+              "selector": "button:has-text(\"Add Condition\"):visible"
+            },
+            {
+              "action": "visible",
+              "selector": "#AddCondition"
+            },
+            {
+              "action": "exactLabel",
+              "selector": "#AddCondition_submitButton",
+              "value": "Add"
+            },
+            {
+              "action": "click",
+              "selector": ".q-dialog:has(#AddCondition) button[aria-label=\"Close dialog\"], .q-dialog:has(#AddCondition) button:has(i:text-is(\"close\"))"
+            },
+            {
+              "action": "hidden",
+              "selector": "#AddCondition"
+            }
+          ],
+          "fixturePrerequisites": [
+            "documents",
+            "document_field"
+          ],
+          "routeParameters": {
+            "dataDocumentId": "Sample25Document01"
+          },
+          "functionalSuiteId": "data-doc-fields-functional-v1",
+          "functionalScope": {
+            "screen": "tools/System/DataDocument/Edit/DataDocFields.xml",
+            "mode": "qapps",
+            "path": "/qapps/system/DataDocument/Edit/DataDocFields"
+          }
+        },
+        {
+          "id": "dialog-AddField-open-close-qapps",
+          "modes": [
+            "qapps"
+          ],
+          "steps": [
+            {
+              "action": "exactLabel",
+              "selector": "button:has-text(\"Add Field Manual\"):visible",
+              "value": "Add Field Manual"
+            },
+            {
+              "action": "click",
+              "selector": "button:has-text(\"Add Field Manual\"):visible"
+            },
+            {
+              "action": "visible",
+              "selector": "#AddField"
+            },
+            {
+              "action": "exactLabel",
+              "selector": "#AddField_submitButton",
+              "value": "Create"
+            },
+            {
+              "action": "click",
+              "selector": ".q-dialog:has(#AddField) button[aria-label=\"Close dialog\"], .q-dialog:has(#AddField) button:has(i:text-is(\"close\"))"
+            },
+            {
+              "action": "hidden",
+              "selector": "#AddField"
+            }
+          ],
+          "fixturePrerequisites": [
+            "documents",
+            "document_field"
+          ],
+          "routeParameters": {
+            "dataDocumentId": "Sample25Document01"
+          },
+          "functionalSuiteId": "data-doc-fields-functional-v1",
+          "functionalScope": {
+            "screen": "tools/System/DataDocument/Edit/DataDocFields.xml",
+            "mode": "qapps",
+            "path": "/qapps/system/DataDocument/Edit/DataDocFields"
+          }
+        },
+        {
+          "id": "enumerate-select-AddCondition-operator-qapps",
+          "modes": [
+            "qapps"
+          ],
+          "steps": [
+            {
+              "action": "click",
+              "selector": "button:has-text(\"Add Condition\"):visible"
+            },
+            {
+              "action": "options",
+              "control": "#AddCondition input[role=\"combobox\"][aria-label=\"Operator\"]",
+              "selector": "#AddCondition [name=\"operator\"]"
+            },
+            {
+              "action": "choose",
+              "control": "#AddCondition input[role=\"combobox\"][aria-label=\"Operator\"]",
+              "label": "equals",
+              "selector": "#AddCondition [name=\"operator\"]",
+              "value": "equals"
+            },
+            {
+              "action": "choose",
+              "control": "#AddCondition input[role=\"combobox\"][aria-label=\"Operator\"]",
+              "label": "not-equals",
+              "selector": "#AddCondition [name=\"operator\"]",
+              "value": "not-equals"
+            },
+            {
+              "action": "choose",
+              "control": "#AddCondition input[role=\"combobox\"][aria-label=\"Operator\"]",
+              "label": "less",
+              "selector": "#AddCondition [name=\"operator\"]",
+              "value": "less"
+            },
+            {
+              "action": "choose",
+              "control": "#AddCondition input[role=\"combobox\"][aria-label=\"Operator\"]",
+              "label": "greater",
+              "selector": "#AddCondition [name=\"operator\"]",
+              "value": "greater"
+            },
+            {
+              "action": "choose",
+              "control": "#AddCondition input[role=\"combobox\"][aria-label=\"Operator\"]",
+              "label": "less-equals",
+              "selector": "#AddCondition [name=\"operator\"]",
+              "value": "less-equals"
+            },
+            {
+              "action": "choose",
+              "control": "#AddCondition input[role=\"combobox\"][aria-label=\"Operator\"]",
+              "label": "greater-equals",
+              "selector": "#AddCondition [name=\"operator\"]",
+              "value": "greater-equals"
+            },
+            {
+              "action": "choose",
+              "control": "#AddCondition input[role=\"combobox\"][aria-label=\"Operator\"]",
+              "label": "in",
+              "selector": "#AddCondition [name=\"operator\"]",
+              "value": "in"
+            },
+            {
+              "action": "choose",
+              "control": "#AddCondition input[role=\"combobox\"][aria-label=\"Operator\"]",
+              "label": "not-in",
+              "selector": "#AddCondition [name=\"operator\"]",
+              "value": "not-in"
+            },
+            {
+              "action": "choose",
+              "control": "#AddCondition input[role=\"combobox\"][aria-label=\"Operator\"]",
+              "label": "between",
+              "selector": "#AddCondition [name=\"operator\"]",
+              "value": "between"
+            },
+            {
+              "action": "choose",
+              "control": "#AddCondition input[role=\"combobox\"][aria-label=\"Operator\"]",
+              "label": "not-between",
+              "selector": "#AddCondition [name=\"operator\"]",
+              "value": "not-between"
+            },
+            {
+              "action": "choose",
+              "control": "#AddCondition input[role=\"combobox\"][aria-label=\"Operator\"]",
+              "label": "like",
+              "selector": "#AddCondition [name=\"operator\"]",
+              "value": "like"
+            },
+            {
+              "action": "choose",
+              "control": "#AddCondition input[role=\"combobox\"][aria-label=\"Operator\"]",
+              "label": "not-like",
+              "selector": "#AddCondition [name=\"operator\"]",
+              "value": "not-like"
+            },
+            {
+              "action": "choose",
+              "control": "#AddCondition input[role=\"combobox\"][aria-label=\"Operator\"]",
+              "label": "is-null",
+              "selector": "#AddCondition [name=\"operator\"]",
+              "value": "is-null"
+            },
+            {
+              "action": "choose",
+              "control": "#AddCondition input[role=\"combobox\"][aria-label=\"Operator\"]",
+              "label": "is-not-null",
+              "selector": "#AddCondition [name=\"operator\"]",
+              "value": "is-not-null"
+            },
+            {
+              "action": "click",
+              "selector": ".q-dialog:has(#AddCondition) button[aria-label=\"Close dialog\"], .q-dialog:has(#AddCondition) button:has(i:text-is(\"close\"))"
+            },
+            {
+              "action": "hidden",
+              "selector": "#AddCondition"
+            }
+          ],
+          "fixturePrerequisites": [
+            "documents",
+            "document_field"
+          ],
+          "routeParameters": {
+            "dataDocumentId": "Sample25Document01"
+          },
+          "functionalSuiteId": "data-doc-fields-functional-v1",
+          "functionalScope": {
+            "screen": "tools/System/DataDocument/Edit/DataDocFields.xml",
+            "mode": "qapps",
+            "path": "/qapps/system/DataDocument/Edit/DataDocFields"
+          }
+        },
+        {
+          "id": "enumerate-select-AddCondition-postQuery-qapps",
+          "modes": [
+            "qapps"
+          ],
+          "steps": [
+            {
+              "action": "click",
+              "selector": "button:has-text(\"Add Condition\"):visible"
+            },
+            {
+              "action": "options",
+              "control": "#AddCondition input[role=\"combobox\"][aria-label=\"PQ\"]",
+              "selector": "#AddCondition [name=\"postQuery\"]"
+            },
+            {
+              "action": "choose",
+              "control": "#AddCondition input[role=\"combobox\"][aria-label=\"PQ\"]",
+              "label": "N",
+              "selector": "#AddCondition [name=\"postQuery\"]",
+              "value": "N"
+            },
+            {
+              "action": "choose",
+              "control": "#AddCondition input[role=\"combobox\"][aria-label=\"PQ\"]",
+              "label": "Y",
+              "selector": "#AddCondition [name=\"postQuery\"]",
+              "value": "Y"
+            },
+            {
+              "action": "click",
+              "selector": ".q-dialog:has(#AddCondition) button[aria-label=\"Close dialog\"], .q-dialog:has(#AddCondition) button:has(i:text-is(\"close\"))"
+            },
+            {
+              "action": "hidden",
+              "selector": "#AddCondition"
+            }
+          ],
+          "fixturePrerequisites": [
+            "documents",
+            "document_field"
+          ],
+          "routeParameters": {
+            "dataDocumentId": "Sample25Document01"
+          },
+          "functionalSuiteId": "data-doc-fields-functional-v1",
+          "functionalScope": {
+            "screen": "tools/System/DataDocument/Edit/DataDocFields.xml",
+            "mode": "qapps",
+            "path": "/qapps/system/DataDocument/Edit/DataDocFields"
+          }
+        },
+        {
+          "id": "enumerate-select-AddField-sortable-qapps",
+          "modes": [
+            "qapps"
+          ],
+          "steps": [
+            {
+              "action": "click",
+              "selector": "button:has-text(\"Add Field Manual\"):visible"
+            },
+            {
+              "action": "options",
+              "control": "#AddField input[role=\"combobox\"][aria-label=\"Sortable\"]",
+              "selector": "#AddField [name=\"sortable\"]"
+            },
+            {
+              "action": "choose",
+              "control": "#AddField input[role=\"combobox\"][aria-label=\"Sortable\"]",
+              "label": "N",
+              "selector": "#AddField [name=\"sortable\"]",
+              "value": "N"
+            },
+            {
+              "action": "choose",
+              "control": "#AddField input[role=\"combobox\"][aria-label=\"Sortable\"]",
+              "label": "Y",
+              "selector": "#AddField [name=\"sortable\"]",
+              "value": "Y"
+            },
+            {
+              "action": "click",
+              "selector": ".q-dialog:has(#AddField) button[aria-label=\"Close dialog\"], .q-dialog:has(#AddField) button:has(i:text-is(\"close\"))"
+            },
+            {
+              "action": "hidden",
+              "selector": "#AddField"
+            }
+          ],
+          "fixturePrerequisites": [
+            "documents",
+            "document_field"
+          ],
+          "routeParameters": {
+            "dataDocumentId": "Sample25Document01"
+          },
+          "functionalSuiteId": "data-doc-fields-functional-v1",
+          "functionalScope": {
+            "screen": "tools/System/DataDocument/Edit/DataDocFields.xml",
+            "mode": "qapps",
+            "path": "/qapps/system/DataDocument/Edit/DataDocFields"
+          }
+        },
+        {
+          "id": "enumerate-select-AddField-functionName-qapps",
+          "modes": [
+            "qapps"
+          ],
+          "steps": [
+            {
+              "action": "click",
+              "selector": "button:has-text(\"Add Field Manual\"):visible"
+            },
+            {
+              "action": "options",
+              "control": "#AddField input[role=\"combobox\"][aria-label=\"Function\"]",
+              "selector": "#AddField [name=\"functionName\"]"
+            },
+            {
+              "action": "choose",
+              "control": "#AddField input[role=\"combobox\"][aria-label=\"Function\"]",
+              "label": "min",
+              "selector": "#AddField [name=\"functionName\"]",
+              "value": "min"
+            },
+            {
+              "action": "choose",
+              "control": "#AddField input[role=\"combobox\"][aria-label=\"Function\"]",
+              "label": "max",
+              "selector": "#AddField [name=\"functionName\"]",
+              "value": "max"
+            },
+            {
+              "action": "choose",
+              "control": "#AddField input[role=\"combobox\"][aria-label=\"Function\"]",
+              "label": "sum",
+              "selector": "#AddField [name=\"functionName\"]",
+              "value": "sum"
+            },
+            {
+              "action": "choose",
+              "control": "#AddField input[role=\"combobox\"][aria-label=\"Function\"]",
+              "label": "avg",
+              "selector": "#AddField [name=\"functionName\"]",
+              "value": "avg"
+            },
+            {
+              "action": "choose",
+              "control": "#AddField input[role=\"combobox\"][aria-label=\"Function\"]",
+              "label": "count",
+              "selector": "#AddField [name=\"functionName\"]",
+              "value": "count"
+            },
+            {
+              "action": "choose",
+              "control": "#AddField input[role=\"combobox\"][aria-label=\"Function\"]",
+              "label": "count-distinct",
+              "selector": "#AddField [name=\"functionName\"]",
+              "value": "count-distinct"
+            },
+            {
+              "action": "choose",
+              "control": "#AddField input[role=\"combobox\"][aria-label=\"Function\"]",
+              "label": "upper",
+              "selector": "#AddField [name=\"functionName\"]",
+              "value": "upper"
+            },
+            {
+              "action": "choose",
+              "control": "#AddField input[role=\"combobox\"][aria-label=\"Function\"]",
+              "label": "lower",
+              "selector": "#AddField [name=\"functionName\"]",
+              "value": "lower"
+            },
+            {
+              "action": "click",
+              "selector": ".q-dialog:has(#AddField) button[aria-label=\"Close dialog\"], .q-dialog:has(#AddField) button:has(i:text-is(\"close\"))"
+            },
+            {
+              "action": "hidden",
+              "selector": "#AddField"
+            }
+          ],
+          "fixturePrerequisites": [
+            "documents",
+            "document_field"
+          ],
+          "routeParameters": {
+            "dataDocumentId": "Sample25Document01"
+          },
+          "functionalSuiteId": "data-doc-fields-functional-v1",
+          "functionalScope": {
+            "screen": "tools/System/DataDocument/Edit/DataDocFields.xml",
+            "mode": "qapps",
+            "path": "/qapps/system/DataDocument/Edit/DataDocFields"
+          }
+        },
+        {
+          "id": "field-create-persist-qapps",
+          "modes": [
+            "qapps"
+          ],
+          "steps": [
+            {
+              "action": "click",
+              "selector": "button:has-text(\"Add Field Manual\"):visible"
+            },
+            {
+              "action": "fill",
+              "selector": "#AddField [name=\"fieldPath\"]",
+              "value": "description"
+            },
+            {
+              "action": "fill",
+              "selector": "#AddField [name=\"fieldNameAlias\"]",
+              "value": "Sample Qapps"
+            },
+            {
+              "action": "choose",
+              "control": "#AddField input[role=\"combobox\"][aria-label=\"Sortable\"]",
+              "label": "Y",
+              "selector": "#AddField [name=\"sortable\"]",
+              "value": "Y"
+            },
+            {
+              "action": "choose",
+              "control": "#AddField input[role=\"combobox\"][aria-label=\"Function\"]",
+              "label": "upper",
+              "selector": "#AddField [name=\"functionName\"]",
+              "value": "upper"
+            },
+            {
+              "action": "fill",
+              "selector": "#AddField [name=\"sequenceNum\"]",
+              "value": "2"
+            },
+            {
+              "action": "submitValues",
+              "transition": "/createDataDocumentField",
+              "values": {
+                "dataDocumentId": "Sample25Document03",
+                "fieldPath": "description",
+                "fieldNameAlias": "Sample Qapps",
+                "sortable": "Y",
+                "functionName": "upper",
+                "sequenceNum": "2"
+              },
+              "selector": "#AddField_submitButton"
+            },
+            {
+              "action": "goto",
+              "route": "/qapps/system/DataDocument/Edit/DataDocFields?dataDocumentId=Sample25Document03"
+            },
+            {
+              "action": "value",
+              "selector": "#FieldList [name=\"fieldNameAlias_1\"], [form=\"FieldList\"][name=\"fieldNameAlias_1\"]",
+              "value": "Sample Qapps"
+            },
+            {
+              "action": "value",
+              "selector": "#FieldList [name=\"sortable_1\"], [form=\"FieldList\"][name=\"sortable_1\"]",
+              "value": "Y"
+            },
+            {
+              "action": "value",
+              "selector": "#FieldList [name=\"functionName_1\"], [form=\"FieldList\"][name=\"functionName_1\"]",
+              "value": "upper"
+            }
+          ],
+          "fixturePrerequisites": [
+            "documents",
+            "document_field"
+          ],
+          "routeParameters": {
+            "dataDocumentId": "Sample25Document03"
+          },
+          "functionalSuiteId": "data-doc-fields-functional-v1",
+          "functionalScope": {
+            "screen": "tools/System/DataDocument/Edit/DataDocFields.xml",
+            "mode": "qapps",
+            "path": "/qapps/system/DataDocument/Edit/DataDocFields"
+          }
+        },
+        {
+          "id": "field-update-delete-and-cancel-qapps",
+          "modes": [
+            "qapps"
+          ],
+          "steps": [
+            {
+              "action": "fill",
+              "selector": "#FieldList [name=\"fieldNameAlias_1\"], [form=\"FieldList\"][name=\"fieldNameAlias_1\"]",
+              "value": "Sample Qapps Updated"
+            },
+            {
+              "action": "fill",
+              "selector": "#FieldList [name=\"sequenceNum_1\"], [form=\"FieldList\"][name=\"sequenceNum_1\"]",
+              "value": "2"
+            },
+            {
+              "action": "submitValues",
+              "transition": "/updateDataDocumentField",
+              "values": {
+                "dataDocumentId_1": "Sample25Document03",
+                "fieldNameAlias_1": "Sample Qapps Updated",
+                "sequenceNum_1": "2"
+              },
+              "selector": "#FieldList_submitButton"
+            },
+            {
+              "action": "goto",
+              "route": "/qapps/system/DataDocument/Edit/DataDocFields?dataDocumentId=Sample25Document03"
+            },
+            {
+              "action": "value",
+              "selector": "#FieldList [name=\"fieldNameAlias_1\"], [form=\"FieldList\"][name=\"fieldNameAlias_1\"]",
+              "value": "Sample Qapps Updated"
+            },
+            {
+              "action": "confirmClick",
+              "message": "Really remove?",
+              "accept": false,
+              "autoConfirmation": true,
+              "selector": "#FieldList_deleteButton_1_deleteDataDocumentField_button"
+            },
+            {
+              "action": "count",
+              "selector": "input[name^=\"fieldSeqId_\"]",
+              "value": 2
+            },
+            {
+              "action": "confirmClick",
+              "message": "Really remove?",
+              "accept": true,
+              "autoConfirmation": true,
+              "selector": "#FieldList_deleteButton_1_deleteDataDocumentField_button"
+            },
+            {
+              "action": "goto",
+              "route": "/qapps/system/DataDocument/Edit/DataDocFields?dataDocumentId=Sample25Document03"
+            },
+            {
+              "action": "count",
+              "selector": "input[name^=\"fieldSeqId_\"]",
+              "value": 1
+            }
+          ],
+          "fixturePrerequisites": [
+            "documents",
+            "document_field"
+          ],
+          "routeParameters": {
+            "dataDocumentId": "Sample25Document03"
+          },
+          "functionalSuiteId": "data-doc-fields-functional-v1",
+          "functionalScope": {
+            "screen": "tools/System/DataDocument/Edit/DataDocFields.xml",
+            "mode": "qapps",
+            "path": "/qapps/system/DataDocument/Edit/DataDocFields"
+          }
+        },
+        {
+          "id": "condition-create-persist-qapps",
+          "modes": [
+            "qapps"
+          ],
+          "steps": [
+            {
+              "action": "click",
+              "selector": "button:has-text(\"Add Condition\"):visible"
+            },
+            {
+              "action": "choose",
+              "control": "#AddCondition input[role=\"combobox\"][aria-label=\"Field\"]",
+              "label": "Enum ID",
+              "selector": "#AddCondition [name=\"fieldNameAlias\"]",
+              "value": "enumId"
+            },
+            {
+              "action": "choose",
+              "control": "#AddCondition input[role=\"combobox\"][aria-label=\"Operator\"]",
+              "label": "equals",
+              "selector": "#AddCondition [name=\"operator\"]",
+              "value": "equals"
+            },
+            {
+              "action": "fill",
+              "selector": "#AddCondition [name=\"fieldValue\"]",
+              "value": "Sample25Enum00"
+            },
+            {
+              "action": "choose",
+              "control": "#AddCondition input[role=\"combobox\"][aria-label=\"PQ\"]",
+              "label": "N",
+              "selector": "#AddCondition [name=\"postQuery\"]",
+              "value": "N"
+            },
+            {
+              "action": "submitValues",
+              "transition": "/createDataDocumentCondition",
+              "values": {
+                "dataDocumentId": "Sample25Document05",
+                "fieldNameAlias": "enumId",
+                "operator": "equals",
+                "fieldValue": "Sample25Enum00",
+                "postQuery": "N"
+              },
+              "selector": "#AddCondition_submitButton"
+            },
+            {
+              "action": "goto",
+              "route": "/qapps/system/DataDocument/Edit/DataDocFields?dataDocumentId=Sample25Document05"
+            },
+            {
+              "action": "value",
+              "selector": "#ConditionList_fieldValue_0",
+              "value": "Sample25Enum00"
+            }
+          ],
+          "fixturePrerequisites": [
+            "documents",
+            "document_field"
+          ],
+          "routeParameters": {
+            "dataDocumentId": "Sample25Document05"
+          },
+          "functionalSuiteId": "data-doc-fields-functional-v1",
+          "functionalScope": {
+            "screen": "tools/System/DataDocument/Edit/DataDocFields.xml",
+            "mode": "qapps",
+            "path": "/qapps/system/DataDocument/Edit/DataDocFields"
+          }
+        },
+        {
+          "id": "condition-update-delete-and-cancel-qapps",
+          "modes": [
+            "qapps"
+          ],
+          "steps": [
+            {
+              "action": "fill",
+              "selector": "#ConditionList_fieldValue_0",
+              "value": "Sample25Enum01"
+            },
+            {
+              "action": "submitValues",
+              "transition": "/updateDataDocumentCondition",
+              "values": {
+                "dataDocumentId": "Sample25Document05",
+                "fieldValue": "Sample25Enum01"
+              },
+              "selector": "#ConditionList_submitButton_0"
+            },
+            {
+              "action": "goto",
+              "route": "/qapps/system/DataDocument/Edit/DataDocFields?dataDocumentId=Sample25Document05"
+            },
+            {
+              "action": "value",
+              "selector": "#ConditionList_fieldValue_0",
+              "value": "Sample25Enum01"
+            },
+            {
+              "action": "confirmClick",
+              "message": "Really remove?",
+              "accept": false,
+              "autoConfirmation": true,
+              "selector": "#ConditionList_deleteButton_0_deleteDataDocumentCondition_button"
+            },
+            {
+              "action": "count",
+              "selector": "input[id^=\"ConditionList_conditionSeqId_\"]",
+              "value": 1
+            },
+            {
+              "action": "confirmClick",
+              "message": "Really remove?",
+              "accept": true,
+              "autoConfirmation": true,
+              "selector": "#ConditionList_deleteButton_0_deleteDataDocumentCondition_button"
+            },
+            {
+              "action": "goto",
+              "route": "/qapps/system/DataDocument/Edit/DataDocFields?dataDocumentId=Sample25Document05"
+            },
+            {
+              "action": "count",
+              "selector": "input[id^=\"ConditionList_conditionSeqId_\"]",
+              "value": 0
+            }
+          ],
+          "fixturePrerequisites": [
+            "documents",
+            "document_field"
+          ],
+          "routeParameters": {
+            "dataDocumentId": "Sample25Document05"
+          },
+          "functionalSuiteId": "data-doc-fields-functional-v1",
+          "functionalScope": {
+            "screen": "tools/System/DataDocument/Edit/DataDocFields.xml",
+            "mode": "qapps",
+            "path": "/qapps/system/DataDocument/Edit/DataDocFields"
+          }
+        },
+        {
+          "id": "invalid-field-path-validation-qapps",
+          "modes": [
+            "qapps"
+          ],
+          "steps": [
+            {
+              "action": "count",
+              "selector": "input[name^=\"fieldSeqId_\"]",
+              "value": 1
+            },
+            {
+              "action": "click",
+              "selector": "button:has-text(\"Add Field Manual\"):visible"
+            },
+            {
+              "action": "fill",
+              "selector": "#AddField [name=\"fieldPath\"]",
+              "value": ""
+            },
+            {
+              "action": "click",
+              "selector": "#AddField_submitButton"
+            },
+            {
+              "action": "validationText",
+              "selector": "label.error:visible, .q-field--error .q-field__messages:visible, .alert-danger:visible, .help-block.error:visible"
+            },
+            {
+              "action": "goto",
+              "route": "/qapps/system/DataDocument/Edit/DataDocFields?dataDocumentId=Sample25Document07"
+            },
+            {
+              "action": "count",
+              "selector": "input[name^=\"fieldSeqId_\"]",
+              "value": 1
+            }
+          ],
+          "fixturePrerequisites": [
+            "documents",
+            "document_field"
+          ],
+          "routeParameters": {
+            "dataDocumentId": "Sample25Document07"
+          },
+          "functionalSuiteId": "data-doc-fields-functional-v1",
+          "functionalScope": {
+            "screen": "tools/System/DataDocument/Edit/DataDocFields.xml",
+            "mode": "qapps",
+            "path": "/qapps/system/DataDocument/Edit/DataDocFields"
+          },
+          "validationContract": "Empty required fieldPath; compare actual Java/Rust refusal text and unchanged seeded field count. Unknown nonempty paths are not assumed invalid."
+        },
+        {
+          "id": "tree-expand-and-add-field-qapps",
+          "modes": [
+            "qapps"
+          ],
+          "steps": [
+            {
+              "action": "exactLabel",
+              "selector": "#FieldTree a:has-text(\"+ Enum Type ID\")",
+              "value": "+ Enum Type ID"
+            },
+            {
+              "action": "clickResponse",
+              "selector": "#FieldTree a:has-text(\"+ Enum Type ID\")",
+              "path": "/apps/system/DataDocument/Edit/DataDocFields/FieldList/createFieldDynamic.qvt",
+              "method": "GET",
+              "status": 302,
+              "parameters": {
+                "dataDocumentId": "Sample25Document09",
+                "fieldPath": "enumTypeId"
+              }
+            },
+            {
+              "action": "count",
+              "selector": "input[name^=\"fieldSeqId_\"]",
+              "value": 2
+            },
+            {
+              "action": "goto",
+              "route": "/qapps/system/DataDocument/Edit/DataDocFields?dataDocumentId=Sample25Document09"
+            },
+            {
+              "action": "exactLabel",
+              "selector": "#FieldList_fieldPath_1__",
+              "value": "Enum Type ID"
+            },
+            {
+              "action": "confirmClick",
+              "message": "Really remove?",
+              "accept": true,
+              "autoConfirmation": true,
+              "selector": "#FieldList_deleteButton_1_deleteDataDocumentField_button"
+            },
+            {
+              "action": "goto",
+              "route": "/qapps/system/DataDocument/Edit/DataDocFields?dataDocumentId=Sample25Document09"
+            },
+            {
+              "action": "count",
+              "selector": "input[name^=\"fieldSeqId_\"]",
+              "value": 1
+            }
+          ],
+          "fixturePrerequisites": [
+            "documents",
+            "document_field"
+          ],
+          "routeParameters": {
+            "dataDocumentId": "Sample25Document09"
+          },
+          "functionalSuiteId": "data-doc-fields-functional-v1",
+          "functionalScope": {
+            "screen": "tools/System/DataDocument/Edit/DataDocFields.xml",
+            "mode": "qapps",
+            "path": "/qapps/system/DataDocument/Edit/DataDocFields"
+          }
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "No renderer runs yet: gated live selector validation still required.",
+    "Unverified cases block functionalSuiteId approval; no whole-screen qualification from partial success.",
+    "Resource implementation exemption intentionally absent from this functional suite.",
+    "Raw HTML/DOM/RGBA/QVT comparisons remain retained; exact labels, values, requests and outcomes are not style exemptions."
+  ]
+}

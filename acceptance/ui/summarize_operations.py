@@ -13,12 +13,19 @@ def summarize(directory):
                       'postconditions_completed_both':0, 'exact_passes':0,
                       'unexercised_cases':0, 'capture_error_pairs':0,
                       'equal_response_pairs':0, 'equal_dom_pairs':0,
-                      'equal_rgba_pairs':0, 'equal_database_pairs':0} for s in selection['selected']}
+                      'equal_rgba_pairs':0, 'equal_database_pairs':0,
+                      'reviewed_functional_pairs':0, 'reviewed_presentation_pairs':0,
+                      'approved_operation_passes':0} for s in selection['selected']}
     for case in result['operations']:
         key = case['id'].split(':html:',1)[0].split(':qapps:',1)[0]
         row = rows[key]
         row['reported_cases'] += 1
         row['exact_passes'] += case.get('passed') is True
+        # Change 7: scoped functional evidence never replaces the raw or database verdict.
+        reviewed = case.get('approvedPresentation', {})
+        row['reviewed_functional_pairs'] += reviewed.get('functionalPassed') is True
+        row['reviewed_presentation_pairs'] += reviewed.get('presentationPassed') is True
+        row['approved_operation_passes'] += reviewed.get('passed') is True
         if not case.get('evidence'):
             row['unexercised_cases'] += 1
             continue
@@ -30,9 +37,10 @@ def summarize(directory):
         case_metadata = json.loads((directory/case['evidence']/'case.json').read_text())
         operation = case_metadata['operation']
         steps = operation.get('steps', []) + operation.get('postconditions', [])
-        interactive = any(step['action'] not in ('visible','text','value') for step in steps)
-        last_action = max((i for i, step in enumerate(steps) if step['action'] not in ('visible','text','value')), default=-1)
-        asserted = any(step['action'] in ('visible','text','value') and step.get('selector') != 'body' for step in steps[last_action+1:])
+        assertions = ('visible','text','value','exactLabel','exactText','count','hidden','options')
+        interactive = any(step['action'] not in assertions for step in steps)
+        last_action = max((i for i, step in enumerate(steps) if step['action'] not in assertions), default=-1)
+        asserted = any(step['action'] in assertions and step.get('selector') != 'body' for step in steps[last_action+1:])
         row['postconditions_completed_both'] += interactive and asserted and all(m.get('exercised') is True for m in metadata)
         row['capture_error_pairs'] += any(m.get('errors') for m in metadata)
         for counter, channel in [('equal_response_pairs','http'),('equal_dom_pairs','dom'),
