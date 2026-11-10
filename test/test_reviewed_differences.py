@@ -50,6 +50,8 @@ class ReviewedDifferencesTests(unittest.TestCase):
             row = {field: ('2026-01-01T00:00:00' if field.endswith('_date_time') else
                            'N' if field == 'is_slow_hit' else 0) for field in rule['fields']}
             row['hit_count'] = 1
+            row['hit_bin_id'] = '1'
+            row['artifact_hit_id'] = '1'
             snapshots = [{'schema': '', 'records': [json.dumps({'table': rule['table'],
                          'row': {**row, 'last_updated_stamp': stamp}})]}
                          for stamp in ['2026-01-01T00:00:00', '2026-01-01T00:00:01']]
