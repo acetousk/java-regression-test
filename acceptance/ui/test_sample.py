@@ -20,3 +20,17 @@ class SampleGuards(unittest.TestCase):
                                   ({'java':'phase-three-java','rust':'phase-three-rust'},False)]:
             with self.assertRaises(ValueError):
                 setup_operation_fixtures({'java':1,'rust':2},containers,Path('/unused'),{},disposable=owned)
+
+    def test_scheduler_isolation_preserves_other_configuration(self):
+        import tempfile
+        import xml.etree.ElementTree as ET
+        import run
+        with tempfile.TemporaryDirectory() as directory:
+            conf = Path(directory)/'conf.xml'
+            conf.write_text('<moqui-conf><default-property name="scheduled_job_check_time" value="60"/><service-facade job-pool-core="2"/><entity-facade marker="retained"/></moqui-conf>')
+            run.isolate_operation_scheduler(conf)
+            tree = ET.parse(conf).getroot()
+            self.assertEqual(tree.find('default-property').get('value'),'0')
+            self.assertEqual(tree.find('service-facade').get('scheduled-job-check-time'),'0')
+            self.assertEqual(tree.find('service-facade').get('job-pool-core'),'2')
+            self.assertEqual(tree.find('entity-facade').get('marker'),'retained')

@@ -151,6 +151,20 @@ def validate_operation_inputs(selection_path, plan_path):
             raise ValueError('Invalid sample route')
     return selection, plan
 
+def isolate_operation_scheduler(conf):
+    # Change 6: background retention must not delete paired operation fixtures mid-run.
+    tree = ET.parse(conf)
+    root = tree.getroot()
+    prop = root.find("default-property[@name='scheduled_job_check_time']")
+    if prop is None:
+        prop = ET.SubElement(root, 'default-property', {'name':'scheduled_job_check_time'})
+    prop.set('value', '0')
+    facade = root.find('service-facade')
+    if facade is None:
+        facade = ET.SubElement(root, 'service-facade')
+    facade.set('scheduled-job-check-time', '0')
+    tree.write(conf, encoding='unicode')
+
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--boot-gate',type=Path,help='Passed gate.json produced by check_boot.py')
@@ -207,6 +221,11 @@ def main():
                 time.sleep(.2)
             conf = evidence/(side+'-conf.xml')
             c.demo_conf(runtime/'conf/MoquiDevConf.xml', conf, dbport,password,ports[side],crypt)
+            if args.operation_plan:
+                isolate_operation_scheduler(conf)
+                (evidence/'operation-environment.json').write_text(json.dumps({
+                    'scheduled_job_check_time':0,
+                    'reason':'Keep fixture prestate stable; automatic scheduled execution is not covered by this run'}))
             overrides = {n.get('name'):n.get('value') for n in ET.parse(conf).getroot().findall('default-property')}
             artifact = checkout/('moqui.war' if side=='java' else 'target/debug/moqui')
             with artifact.open('rb') as stream:

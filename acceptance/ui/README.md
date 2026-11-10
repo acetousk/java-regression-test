@@ -112,3 +112,10 @@ fixed harness tracking infrastructure; their provenance retains that distinction
 browser-decoded document/XHR/fetch bodies, not raw wire frames or all headers.
 No claim of exact operation parity is made unless every required comparison and
 coverage check passes. Private evidence remains under `.runs/`.
+
+Automatic scheduled jobs are disabled in both disposable operation runtimes with
+`scheduled_job_check_time=0`. An earlier complete run demonstrated Java retention
+cleanup deleting the historical fixtures mid-run. This prevents that unrelated
+background mutation; it does not establish coverage of scheduled execution.
+Manual service/job worker behavior is not disabled. The generated configuration
+and `operation-environment.json` retain this choice explicitly.
