@@ -81,3 +81,15 @@ revision/diff fingerprints to match. Mismatched or missing provenance prevents a
 combined phase pass and suite/service attribution to the paired source inventory;
 independent suite results remain separately visible. Historical reports use only
 retained evidence, never mutable current checkout artifacts.
+
+Change 10 fingerprints the copied runtime actually executed. All files under
+base-component, dev-component, component and conf are source inputs (including
+resources and specs); only .git, target and Python bytecode cache directories are
+omitted. Root database/log/session/install/save/SFTP state and .env are outside
+these source trees. Generated connection and clock override configs are retained
+separately by the paired runner. Source directory symlinks are refused.
+Both runners require a matching current source copy before execution. Independent
+commands record the source-manifest digest and verify it before/after each run.
+The report requires matching retained runtime source manifests; it never reads
+current runtime files when assessing historical evidence. Missing legacy runtime
+identity cannot establish combined pass or inventory attribution.

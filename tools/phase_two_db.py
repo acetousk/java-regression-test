@@ -27,6 +27,7 @@ import xml.etree.ElementTree as ET
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from boot_gate import require_matching_boot_gate
+from runtime_identity import require_runtime_copy, runtime_manifest
 
 
 def load_controller():
@@ -246,6 +247,10 @@ def main():
     c.ROOT = output
     (output / '.runs').mkdir(exist_ok=True)
     checkouts = {side: private_checkout(side, output) for side in ('java', 'rust')}
+    # Change 10: retain identities of the copied executable runtime inputs.
+    dump(output / 'runtime-manifests.json', {side: require_runtime_copy(
+        checkouts[side] / 'runtime', ROOT / repo / 'runtime')
+        for side, repo in [('java', 'moqui-framework'), ('rust', 'mr-moqui')]})
     c.rust_artifact = lambda _: ROOT / 'mr-moqui/target/debug/moqui'
     evidence = output / 'database'
     summary = {'phase': 2, 'scope': 'installed framework only; no Mantle or ERP components installed', 'raw_whole_database_equal': False}
@@ -274,6 +279,9 @@ def main():
             c.boot_and_stop(options, evidence_dir=evidence, readiness_check=ready)
     except (Exception, SystemExit) as error:
         summary['controller_result'] = f'{type(error).__name__}: {error}'
+    after_manifests = {side: runtime_manifest(checkout / 'runtime') for side, checkout in checkouts.items()}
+    dump(output / 'runtime-manifests-after.json', after_manifests)
+    summary['runtime_source_unchanged'] = after_manifests == json.loads((output / 'runtime-manifests.json').read_text())
     if 'evidence' in summary:
         evidence = Path(summary['evidence'])
         report = json.loads((evidence / 'comparison.json').read_text()) if (evidence / 'comparison.json').exists() else {}
@@ -283,7 +291,7 @@ def main():
     summary['business_all_passed'] = bool(summary.get('business')) and all(x['passed'] for x in summary['business'])
     dump(output / 'result.json', summary)
     print(json.dumps({k:v for k,v in summary.items() if k not in ('business',)}, indent=2))
-    return 0 if summary['raw_whole_database_equal'] and summary['business_all_passed'] else 1
+    return 0 if summary['raw_whole_database_equal'] and summary['business_all_passed'] and summary['runtime_source_unchanged'] else 1
 
 
 if __name__ == '__main__':

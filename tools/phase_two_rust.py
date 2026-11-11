@@ -11,6 +11,7 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from boot_gate import require_matching_boot_gate
+from runtime_identity import require_runtime_copy, runtime_manifest, manifest_digest
 
 INITIAL = ['Units', 'ResourceOwners', 'ChatKeys', 'AdminAccessServices']
 EXPANDED = {
@@ -66,6 +67,8 @@ def main():
         parser.error('runtime must contain conf/MoquiDevConf.xml')
     if runtime == (ROOT / 'mr-moqui/runtime').resolve():
         parser.error('Use a private copied runtime, not the shared checkout runtime')
+    # Change 10: fingerprint what MOQUI_RUNTIME will execute, not just its checkout.
+    runtime_source = require_runtime_copy(runtime, ROOT / 'mr-moqui/runtime')
     output.mkdir(parents=True, exist_ok=True, mode=0o700)
     binary = ROOT / 'mr-moqui/target/debug/moqui'
     with binary.open('rb') as stream:
@@ -74,16 +77,21 @@ def main():
     for name, junit, _ in plans:
         if (output / (name + '.log')).exists() or (output / junit).exists():
             parser.error('Existing Rust run evidence would be overwritten; choose a new output directory')
-    provenance = {'source': source_fingerprint(ROOT / 'mr-moqui'),
+    provenance = {'runtime_manifest': runtime_source, 'runtime_source_sha256': manifest_digest(runtime_source),
+                  'source': source_fingerprint(ROOT / 'mr-moqui'),
                   'binary_sha256': checksum, 'expected_suites': expected_suites(),
                   'boot_gate': gate, 'boot_gate_source': str(args.boot_gate.resolve())}
     (output / 'rust-provenance.json').write_text(json.dumps(provenance, indent=2) + '\n')
     results = []
     for name, junit, selectors in plans:
+        if runtime_manifest(runtime) != runtime_source:
+            raise ValueError('Runtime source changed before suite launch')
         command = [str(binary), 'test', *selectors, '--junit', str(output / junit), '--keep']
         with (output / (name + '.log')).open('w') as log:
             run = subprocess.run(command, env={**os.environ, 'MOQUI_RUNTIME': str(runtime)}, stdout=log, stderr=subprocess.STDOUT)
-        results.append({'command': command, 'runtime': str(runtime), 'binary_sha256': checksum,
+        if runtime_manifest(runtime) != runtime_source:
+            raise ValueError('Runtime source changed during suite execution')
+        results.append({'runtime_source_sha256': manifest_digest(runtime_source), 'command': command, 'runtime': str(runtime), 'binary_sha256': checksum,
                         'junit_sha256': {p.name: sha256(p) for p in sorted((output / junit).glob('TEST-*.xml'))},
                         'expected_suites': expected_suites()[junit],
                         'returncode': run.returncode, 'log': str(output / (name + '.log'))})

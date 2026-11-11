@@ -17,7 +17,8 @@ class EvidenceTests(unittest.TestCase):
                     for side in ('java', 'rust')}
         gate = {'passed': True, 'http_ready': True, 'verification': {'servers_started': True, 'shutdown_verified': True},
                 'shutdown': shutdown, 'rust': {'artifact_sha256': digest}, 'java': {'artifact_sha256': 'd' * 64}}
-        provenance = {'binary_sha256': digest, 'source': {'revision': 'b' * 40, 'tracked_diff_sha256': 'c' * 64},
+        runtime_source = {'base-component/framework/test/Units.spec.js': 'e' * 64}
+        provenance = {'runtime_manifest': runtime_source, 'runtime_source_sha256': report.manifest_digest(runtime_source), 'binary_sha256': digest, 'source': {'revision': 'b' * 40, 'tracked_diff_sha256': 'c' * 64},
                       'expected_suites': report.expected_suites(), 'boot_gate': gate}
         (root / 'rust-provenance.json').write_text(json.dumps(provenance))
         commands = []
@@ -27,7 +28,7 @@ class EvidenceTests(unittest.TestCase):
             for suite in report.expected_suites()[directory]:
                 (target / ('TEST-' + suite + '.xml')).write_text(
                     f'<testsuite name="{suite}" tests="1" failures="0" errors="0" skipped="0"><testcase name="rule"/></testsuite>')
-            commands.append({'command': ['/artifact/moqui', 'test', *selectors, '--junit', str(target), '--keep'],
+            commands.append({'runtime_source_sha256': report.manifest_digest(runtime_source), 'command': ['/artifact/moqui', 'test', *selectors, '--junit', str(target), '--keep'],
                              'runtime': '/private/runtime', 'binary_sha256': digest, 'returncode': 0,
                              'expected_suites': report.expected_suites()[directory], 'log': str(root / (name + '.log')),
                              'junit_sha256': {p.name: report.sha256(p) for p in target.glob('TEST-*.xml')}})
@@ -73,7 +74,7 @@ class EvidenceTests(unittest.TestCase):
         import io
         import sys
         from unittest.mock import patch
-        for mutation in (None, 'rust_artifact', 'java_artifact', 'revision', 'diff', 'missing_source', 'missing_gate', 'failed_gate'):
+        for mutation in (None, 'rust_artifact', 'java_artifact', 'revision', 'diff', 'missing_source', 'missing_gate', 'failed_gate', 'stale_runtime', 'missing_runtime', 'changed_runtime'):
             with self.subTest(mutation=mutation), tempfile.TemporaryDirectory() as directory:
                 root = Path(directory)
                 rust = root / 'independent'
@@ -86,6 +87,11 @@ class EvidenceTests(unittest.TestCase):
                 database.mkdir()
                 provenance = {side: {'artifact_sha256': independent['boot_gate'][side]['artifact_sha256'],
                                      'revision': 'b' * 40, 'tracked_diff_sha256': 'c' * 64} for side in ('java', 'rust')}
+                runtime_manifests = {side: independent['runtime_manifest'] for side in ('java', 'rust')}
+                if mutation == 'stale_runtime': runtime_manifests['rust'] = {'base-component/framework/test/Units.spec.js': 'f' * 64}
+                if mutation != 'missing_runtime':
+                    (paired / 'runtime-manifests.json').write_text(json.dumps(runtime_manifests))
+                    (paired / 'runtime-manifests-after.json').write_text(json.dumps(runtime_manifests if mutation != 'changed_runtime' else {}))
                 gate = independent['boot_gate']
                 if mutation == 'rust_artifact': provenance['rust']['artifact_sha256'] = 'f' * 64
                 if mutation == 'java_artifact': provenance['java']['artifact_sha256'] = 'e' * 64

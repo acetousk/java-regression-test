@@ -11,6 +11,7 @@ import xml.etree.ElementTree as ET
 import sys
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from phase_two_rust import expected_suites, run_plans, sha256
+from runtime_identity import manifest_digest
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 
@@ -18,6 +19,9 @@ def rust_evidence_complete(root):
     try:
         commands = json.loads((root / 'rust-commands.json').read_text())
         provenance = json.loads((root / 'rust-provenance.json').read_text())
+        runtime_source = provenance['runtime_manifest']
+        if not runtime_source or provenance['runtime_source_sha256'] != manifest_digest(runtime_source):
+            return False
         expected = expected_suites()
         if provenance['expected_suites'] != expected or len(commands) != 3:
             return False
@@ -33,7 +37,7 @@ def rust_evidence_complete(root):
             return False
         for item, (name, directory, selectors) in zip(commands, run_plans(root)):
             command = item['command']
-            if (item['returncode'] != 0 or Path(item['log']).resolve() != (root / (name + '.log')).resolve()
+            if (item['runtime_source_sha256'] != provenance['runtime_source_sha256'] or item['returncode'] != 0 or Path(item['log']).resolve() != (root / (name + '.log')).resolve()
                     or item['binary_sha256'] != digest or not Path(item['runtime']).is_absolute()
                     or item['expected_suites'] != expected[directory]
                     or command[1:] != ['test', *selectors, '--junit', str(root / directory), '--keep']
@@ -62,10 +66,15 @@ def evidence_context_matches(paired, rust_root):
     """Change 9: never attribute another build's suite results to this inventory."""
     try:
         from boot_gate import validate_boot_gate_data
+        manifests = json.loads((paired / 'runtime-manifests.json').read_text())
+        if manifests != json.loads((paired / 'runtime-manifests-after.json').read_text()):
+            return False
         paired_source = json.loads((paired / 'provenance.json').read_text())
         paired_gate = validate_boot_gate_data(json.loads((paired / 'boot-gate.json').read_text()))
         independent = json.loads((rust_root / 'rust-provenance.json').read_text())
         rust_gate = validate_boot_gate_data(independent['boot_gate'])
+        if not manifests['rust'] or manifests['rust'] != independent['runtime_manifest']:
+            return False
         for side in ('java', 'rust'):
             source = paired_source[side]
             if (not re.fullmatch('[0-9a-f]{40}', source['revision'])
