@@ -151,3 +151,8 @@ visible labels separately. Request targets, statuses, submitted values and
 downloads remain strict. Database and coverage failures still fail the overall
 result. Resource's separately approved implementation difference is recorded
 without claiming function equivalence or successful coverage.
+
+Change 10 validates both current artifact hashes against the successful boot gate
+before inventory, runtime copies, database creation or engine startup. Inventory-only
+mode remains available without built artifacts or a gate. Per-launch hash checks
+remain additional safeguards.

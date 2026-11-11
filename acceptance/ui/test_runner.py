@@ -72,6 +72,7 @@ class RunnerGuards(unittest.TestCase):
             gate.write_text(json.dumps(self.good_gate()))
             with patch.object(r, 'ROOT', root), patch.object(r, 'inventory', return_value={}), \
                     patch.object(r, 'runner_provenance', return_value={}), \
+                    patch.object(r, 'require_matching_boot_gate', return_value=self.good_gate()), \
                     patch.object(r.time, 'strftime', return_value='injected-startup-failure'), \
                     patch.object(r.socket, 'socket'), \
                     patch.object(r.shutil, 'copytree', side_effect=OSError('injected copy failure')), \
@@ -85,5 +86,34 @@ class RunnerGuards(unittest.TestCase):
             self.assertFalse(verdict['shutdown_passed'])
             self.assertIsNone(verdict['capture_exit_code'])
             self.assertIn('injected copy failure', verdict['error'])
+
+    def test_both_artifacts_checked_before_inventory_copy_database_or_engine(self):
+        import hashlib
+        for mismatch in (None, 'java', 'rust'):
+            with self.subTest(mismatch=mismatch), tempfile.TemporaryDirectory() as tmp:
+                root = Path(tmp)
+                gate = self.good_gate()
+                for side, relative in [('java', 'moqui-framework/moqui.war'), ('rust', 'mr-moqui/target/debug/moqui')]:
+                    artifact = root / relative
+                    artifact.parent.mkdir(parents=True)
+                    artifact.write_bytes(side.encode())
+                    gate[side]['artifact_sha256'] = hashlib.sha256(side.encode()).hexdigest()
+                    if side == mismatch: artifact.write_bytes(b'rebuilt')
+                path = root / 'gate.json'
+                path.write_text(json.dumps(gate))
+                with patch.object(r, 'ROOT', root), patch.object(sys, 'argv', ['runner', '--boot-gate', str(path)]), \
+                        patch.object(r, 'inventory', side_effect=RuntimeError('matching pair reached inventory')) as inventory, \
+                        patch.object(r.shutil, 'copytree') as copy_runtime, \
+                        patch.object(r.subprocess, 'run') as database, patch.object(r.subprocess, 'Popen') as engine:
+                    if mismatch:
+                        with self.assertRaisesRegex(ValueError, 'Artifact differs from boot gate: ' + mismatch): r.main()
+                        inventory.assert_not_called()
+                        self.assertFalse((root / '.runs').exists())
+                    else:
+                        with self.assertRaisesRegex(RuntimeError, 'matching pair reached inventory'): r.main()
+                        inventory.assert_called_once()
+                    copy_runtime.assert_not_called()
+                    database.assert_not_called()
+                    engine.assert_not_called()
 
 if __name__=='__main__':unittest.main()

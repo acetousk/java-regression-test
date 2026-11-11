@@ -74,7 +74,7 @@ def inventory():
             'java_only': sorted(found['java'].keys() - found['rust'].keys())}
 
 # Change 9: share readiness/shutdown validation with phase-two entry points.
-from boot_gate import shutdown_valid, validate_boot_gate
+from boot_gate import shutdown_valid, validate_boot_gate, require_matching_boot_gate
 
 def runner_provenance():
     # Change 2: capture the acceptance implementation as well as engine diffs.
@@ -165,7 +165,10 @@ def main():
         parser.error('--selection is required with --operation-plan')
     if args.operation_plan:
         validate_operation_inputs(args.selection, args.operation_plan)
-    gate=validate_boot_gate(args.boot_gate) if not args.inventory_only else None
+    # Change 10: reject either artifact mismatch before any lifecycle work.
+    gate = require_matching_boot_gate(args.boot_gate, {
+        'java': ROOT / 'moqui-framework/moqui.war',
+        'rust': ROOT / 'mr-moqui/target/debug/moqui'}) if not args.inventory_only else None
     evidence = ROOT / '.runs/phase-three-ui' / time.strftime('%Y%m%d-%H%M%S')
     evidence.mkdir(parents=True, mode=0o700)
     inv = inventory()
