@@ -74,3 +74,10 @@ gate and its source path. Change 8 records the selected suite inventory, source
 fingerprint and per-file JUnit hashes; reporting rejects incomplete, unrelated,
 empty, failed, skipped, altered or wrong-selector results. Historical evidence
 without this manifest remains historical and cannot satisfy the new guard.
+
+Change 9 requires the paired provenance and both retained boot contexts to agree
+on Java/Rust artifact hashes, and requires the paired and independent Rust source
+revision/diff fingerprints to match. Mismatched or missing provenance prevents a
+combined phase pass and suite/service attribution to the paired source inventory;
+independent suite results remain separately visible. Historical reports use only
+retained evidence, never mutable current checkout artifacts.

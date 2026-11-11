@@ -58,6 +58,28 @@ def rust_evidence_complete(root):
         return False
 
 
+def evidence_context_matches(paired, rust_root):
+    """Change 9: never attribute another build's suite results to this inventory."""
+    try:
+        from boot_gate import validate_boot_gate_data
+        paired_source = json.loads((paired / 'provenance.json').read_text())
+        paired_gate = validate_boot_gate_data(json.loads((paired / 'boot-gate.json').read_text()))
+        independent = json.loads((rust_root / 'rust-provenance.json').read_text())
+        rust_gate = validate_boot_gate_data(independent['boot_gate'])
+        for side in ('java', 'rust'):
+            source = paired_source[side]
+            if (not re.fullmatch('[0-9a-f]{40}', source['revision'])
+                    or not re.fullmatch('[0-9a-f]{64}', source['tracked_diff_sha256'])
+                    or source['artifact_sha256'] != paired_gate[side]['artifact_sha256']
+                    or source['artifact_sha256'] != rust_gate[side]['artifact_sha256']):
+                return False
+        return (paired_source['rust']['artifact_sha256'] == independent['binary_sha256']
+                and all(paired_source['rust'][key] == independent['source'][key]
+                        for key in ('revision', 'tracked_diff_sha256')))
+    except (OSError, ValueError, KeyError, TypeError):
+        return False
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--run', type=Path, required=True)
@@ -69,6 +91,9 @@ def main():
     rust_root = args.rust_results.resolve() if args.rust_results else root
     result = json.loads((paired / 'result.json').read_text())
     inventory = json.loads((paired / 'inventory.json').read_text())
+    context_matches = evidence_context_matches(paired, rust_root)
+    rust_complete = rust_evidence_complete(rust_root)
+    attributable = context_matches and rust_complete
     suites = []
     for directory in ['rust-junit', 'rust-expanded-junit', 'rust-acceptance-junit']:
         for path in sorted((rust_root / directory).glob('TEST-*.xml')):
@@ -83,7 +108,7 @@ def main():
             suites.append({'name': suite.get('name'), 'evidence': str(path), 'cases': cases,
                            'java_comparison': 'not run as paired Java spec; Rust assertions only',
                            'suite': 'acceptance' if 'acceptance' in directory else 'regression'})
-    for suite in suites:
+    for suite in suites if attributable else []:
         if not suite['name'] or '.' not in suite['name']:
             continue
         component, name = suite['name'].split('.', 1)
@@ -92,7 +117,7 @@ def main():
                 item['status'] = 'pass' if all(c['status'] == 'pass' for c in suite['cases']) else 'fail_or_skip'
                 item['executed_evidence'] = suite['evidence']
     coverage = rust_root / 'rust-service-coverage.txt'
-    for line in coverage.read_text().splitlines() if coverage.exists() else []:
+    for line in coverage.read_text().splitlines() if attributable and coverage.exists() else []:
         match = re.match(r'\s+called\s+(\d+)\s+(\S+)', line)
         if match and match[2] in inventory['rust']['services']:
             inventory['rust']['services'][match[2]].update(status='called_in_rust_specs', count=int(match[1]), evidence=str(coverage),
@@ -104,13 +129,15 @@ def main():
     evidence = Path(result['evidence'])
     db_summary = json.loads((evidence / 'summary.json').read_text())
     counts = {state: sum(c['status'] == state for s in suites for c in s['cases']) for state in ['pass', 'fail', 'skip']}
-    rust_complete = rust_evidence_complete(rust_root) and counts['pass'] > 0
+    rust_complete = rust_complete and counts['pass'] > 0
     budgets = []
     for file in rust_root.glob('rust-*.log'):
         budgets.extend({'log': str(file), 'line': line.strip()} for line in file.read_text().splitlines() if 'over its budget' in line)
     summary = {
-        'phase': 2, 'phase_passed': bool(result['raw_whole_database_equal'] and result['business_all_passed'] and rust_complete and counts['fail'] == 0 and counts['skip'] == 0),
+        'phase': 2, 'phase_passed': bool(result['raw_whole_database_equal'] and result['business_all_passed'] and rust_complete and context_matches and counts['fail'] == 0 and counts['skip'] == 0),
         'rust_execution_evidence_complete': rust_complete,
+        'paired_and_rust_evidence_context_matches': context_matches,
+        'rust_results_attributed_to_paired_inventory': attributable,
         'reason': 'See separate raw whole-database, existing-approval, business projection and independent Rust-suite verdicts; no approvals added.',
         'paired_run': str(paired),
         'rust_results': str(rust_root),
