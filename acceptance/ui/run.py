@@ -73,26 +73,8 @@ def inventory():
             'rust_only': sorted(found['rust'].keys() - found['java'].keys()),
             'java_only': sorted(found['java'].keys() - found['rust'].keys())}
 
-def shutdown_valid(report):
-    return (set(report) == {'java', 'rust'} and all(
-        item.get('errors') == [] and item.get('forced_kill') is False
-        and item.get('missing_shutdown_markers') == []
-        and item.get('returncode') in ((0, 143, -15) if side == 'java' else (0,))
-        for side, item in report.items()))
-
-def validate_boot_gate(path):
-    gate = json.loads(path.read_text())
-    verification = gate.get('verification', {})
-    if not (gate.get('passed') is True and gate.get('http_ready') is True
-            and verification.get('servers_started') is True
-            and verification.get('shutdown_verified') is True
-            and shutdown_valid(gate.get('shutdown', {}))):
-        raise ValueError('Boot gate does not prove readiness and graceful shutdown')
-    for side in ('java', 'rust'):
-        digest = gate.get(side, {}).get('artifact_sha256', '')
-        if len(digest) != 64 or any(c not in '0123456789abcdef' for c in digest):
-            raise ValueError('Boot gate lacks artifact checksum: '+side)
-    return gate
+# Change 9: share readiness/shutdown validation with phase-two entry points.
+from boot_gate import shutdown_valid, validate_boot_gate
 
 def runner_provenance():
     # Change 2: capture the acceptance implementation as well as engine diffs.
