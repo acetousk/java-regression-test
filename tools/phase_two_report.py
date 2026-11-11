@@ -7,17 +7,55 @@ import re
 import xml.etree.ElementTree as ET
 
 
+# Change 8: require the exact selected executions, not merely three XML files.
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from phase_two_rust import expected_suites, run_plans, sha256
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+
+
 def rust_evidence_complete(root):
-    commands_path = root / 'rust-commands.json'
-    if not commands_path.exists():
+    try:
+        commands = json.loads((root / 'rust-commands.json').read_text())
+        provenance = json.loads((root / 'rust-provenance.json').read_text())
+        expected = expected_suites()
+        if provenance['expected_suites'] != expected or len(commands) != 3:
+            return False
+        # Validate the retained gate directly, without consulting mutable live artifacts.
+        gate = provenance['boot_gate']
+        from boot_gate import validate_boot_gate_data
+        validate_boot_gate_data(gate)
+        digest = provenance['binary_sha256']
+        if not re.fullmatch('[0-9a-f]{64}', digest) or digest != gate['rust']['artifact_sha256']:
+            return False
+        source = provenance['source']
+        if not re.fullmatch('[0-9a-f]{40}', source['revision']) or not re.fullmatch('[0-9a-f]{64}', source['tracked_diff_sha256']):
+            return False
+        for item, (name, directory, selectors) in zip(commands, run_plans(root)):
+            command = item['command']
+            if (item['returncode'] != 0 or Path(item['log']).resolve() != (root / (name + '.log')).resolve()
+                    or item['binary_sha256'] != digest or not Path(item['runtime']).is_absolute()
+                    or item['expected_suites'] != expected[directory]
+                    or command[1:] != ['test', *selectors, '--junit', str(root / directory), '--keep']
+                    or Path(command[0]).name != 'moqui'):
+                return False
+            paths = sorted((root / directory).glob('TEST-*.xml'))
+            if item['junit_sha256'] != {p.name: sha256(p) for p in paths}:
+                return False
+            names = []
+            for path in paths:
+                suite = ET.parse(path).getroot()
+                cases = suite.findall('testcase')
+                names.append(suite.get('name'))
+                if (suite.tag != 'testsuite' or not cases or int(suite.get('tests', '-1')) != len(cases)
+                        or any(int(suite.get(key, '-1')) != 0 for key in ('failures', 'errors', 'skipped'))
+                        or any(case.find(tag) is not None for case in cases for tag in ('failure', 'error', 'skipped'))):
+                    return False
+            if sorted(names) != sorted(expected[directory]):
+                return False
+        return True
+    except (OSError, ValueError, KeyError, TypeError, IndexError, ET.ParseError):
         return False
-    commands = json.loads(commands_path.read_text())
-    expected = {'rust-business.log', 'rust-expanded.log', 'rust-acceptance.log'}
-    return (len(commands) == 3
-            and {Path(item['log']).name for item in commands} == expected
-            and all(item['returncode'] == 0 for item in commands)
-            and all(any((root / directory).glob('TEST-*.xml')) for directory in
-                    ('rust-junit', 'rust-expanded-junit', 'rust-acceptance-junit')))
 
 
 def main():
@@ -46,6 +84,8 @@ def main():
                            'java_comparison': 'not run as paired Java spec; Rust assertions only',
                            'suite': 'acceptance' if 'acceptance' in directory else 'regression'})
     for suite in suites:
+        if not suite['name'] or '.' not in suite['name']:
+            continue
         component, name = suite['name'].split('.', 1)
         for item in inventory['rust']['specs']:
             if f'/{component}/' in item['path'] and item['path'].endswith('/' + name + '.spec.js'):

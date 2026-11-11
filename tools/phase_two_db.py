@@ -26,6 +26,7 @@ import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
+from boot_gate import require_matching_boot_gate
 
 
 def load_controller():
@@ -194,14 +195,21 @@ def business(ports, containers, output, canonical, clock=None):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--boot-gate', type=Path, required=True)
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--data-clock', action='store_true', help='Change 5: supply and prove shared file data time; require raw selected-row equality')
     parser.add_argument('--data-clock-epoch-ms', type=int, help='Initial supplied time; defaults to one real UTC epoch sampled before both boots')
     parser.add_argument('--java-home', help='Java 21+ home; otherwise run with mise exec')
     args = parser.parse_args()
+    # Change 7: fail before inventory, runtime copies or engine/database launch.
+    gate = require_matching_boot_gate(args.boot_gate, {
+        'java': ROOT / 'moqui-framework/moqui.war',
+        'rust': ROOT / 'mr-moqui/target/debug/moqui'})
     output = args.output.resolve()
     output.mkdir(parents=True, exist_ok=True, mode=0o700)
     os.chmod(output, 0o700)
+    dump(output / 'boot-gate.json', gate)
+    dump(output / 'boot-gate-source.json', str(args.boot_gate.resolve()))
     inventory(output)
     provenance = {}
     for side, repo, artifact in [('java', 'moqui-framework', 'moqui.war'), ('rust', 'mr-moqui', 'target/debug/moqui')]:

@@ -5,7 +5,7 @@ It copies both runtimes, starts disposable PostgreSQL containers and uses HTTP
 ports 28080 and 28081. It never edits the shared build manifest or checkouts.
 
 ```sh
-mise exec -- python tools/phase_two_db.py --output .runs/phase-two-db/paired-new
+mise exec -- python tools/phase_two_db.py --boot-gate .runs/boot-check/gate.json --output .runs/phase-two-db/paired-new
 ```
 
 Use a new output directory each time. Java 21+ is required; `--java-home` can
@@ -26,7 +26,7 @@ Change 2 reproduces all 45 selected Rust specs (44 regression specs plus the exp
 requested ETL acceptance scenario) without rebuilding:
 
 ```sh
-python tools/phase_two_rust.py --output .runs/phase-two-db \
+python tools/phase_two_rust.py --boot-gate .runs/boot-check/gate.json --output .runs/phase-two-db \
   --runtime .runs/phase-two-db/paired-new/engines/rust/runtime
 ```
 
@@ -57,7 +57,7 @@ For the supplied-data-time check, use rebuilt engines containing
 `MOQUI_TEST_DATA_CLOCK_FILE` support and a passing boot gate, then run:
 
 ```sh
-mise exec -- python tools/phase_two_db.py --data-clock --output .runs/phase-two-clock
+mise exec -- python tools/phase_two_db.py --boot-gate .runs/boot-check/gate.json --data-clock --output .runs/phase-two-clock
 ```
 
 Change 5 supplies a private shared clock file, disables automatic schedules in
@@ -67,3 +67,10 @@ clock mode additionally requires literal selected-row byte equality, including
 `last_updated_stamp`. The whole-database raw and reviewed verdicts remain
 independent. This is not transaction pairing or a test of optimistic locking.
 Disabled clock mode preserves the original diagnostic projection behavior.
+
+Change 7 requires a successful readiness/graceful-shutdown boot gate matching both
+current artifact hashes before either phase-two runner launches. Both retain the
+gate and its source path. Change 8 records the selected suite inventory, source
+fingerprint and per-file JUnit hashes; reporting rejects incomplete, unrelated,
+empty, failed, skipped, altered or wrong-selector results. Historical evidence
+without this manifest remains historical and cannot satisfy the new guard.
