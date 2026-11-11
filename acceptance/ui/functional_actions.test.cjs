@@ -1,3 +1,4 @@
+// Change 7: fail closed on changed labels, submitted values, targets and fixture scope.
 const {test}=require('node:test'),assert=require('node:assert/strict');
 const {performFunctional,compareFunctional}=require('./functional_actions.cjs');
 const {operationIssues,buildCases}=require('./operations.cjs');
@@ -65,4 +66,14 @@ test('mutation payloads and reloads stay on each scenario document fixture',()=>
   if(op.id.startsWith('invalid-field')){assert.ok(!isolated.has(document));isolated.set(document,op.id);}
  }
  for(const screen of plan.screens)for(const op of screen.operations)if(isolated.has(op.routeParameters?.dataDocumentId))assert.equal(op.id,isolated.get(op.routeParameters.dataDocumentId),'Validation must not poison another scenario');
+});
+test('native constraint refusal preserves browser text and cannot pass valid input',async()=>{
+ const page={locator:()=>({evaluate:async()=>({valid:false,valueMissing:true,message:'Please fill out this field.',value:''})})};
+ const out=[];await performFunctional(page,{action:'validationText',selector:'.error',fieldSelector:'input'},null,out,[]);
+ assert.deepEqual(out[0].value,['Please fill out this field.']);
+ await assert.rejects(()=>performFunctional(page,{action:'validationText',selector:'.error',fieldSelector:'input',expected:['different']},null,[],[]),/validation refusal/);
+});
+test('keyboard editing requires real focus obtained through visible control',async()=>{
+ const page={locator:()=>({click:async()=>{},evaluate:async()=>false}),keyboard:{press:async()=>{throw Error('must not type without focus');}}};
+ await assert.rejects(()=>performFunctional(page,{action:'focusFill',selector:'input',control:'label',value:'2'},null,[]),/focus its input/);
 });

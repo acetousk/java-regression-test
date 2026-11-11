@@ -2,6 +2,7 @@
 const fs=require('node:fs'),path=require('node:path'),{spawnSync}=require('node:child_process');
 
 const {contentErrors}=require('./compare.cjs');
+// Change 7: functional evidence qualifies only explicitly reviewed presentation scopes.
 const functional=require('./functional_actions.cjs');
 const {approvedPresentation}=require('./approved_presentation.cjs');
 const isAssertion=action=>['visible','text','value'].includes(action)||functional.assertions.has(action);

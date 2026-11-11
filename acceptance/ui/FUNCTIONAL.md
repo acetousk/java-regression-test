@@ -16,3 +16,5 @@ The driver stores:
 `confirmClick` accepts only the specified confirmation message and records the chosen button label. It never installs blanket auto-approval. Native confirmations use the browser's standard English OK/Cancel labels; custom confirmations record their visible labels, so an OK/Confirm difference remains a difference.
 
 Run `node --test acceptance/ui/functional_actions.test.cjs acceptance/ui/operations.test.cjs acceptance/ui/approved_presentation.test.cjs` for the focused harness checks. Live execution requires a matching boot gate and newly owned disposable runtimes. Never reuse another acceptance run's databases.
+
+`focusFill` clicks a visible field label, verifies real browser focus, then types through the keyboard and checks the resulting value. `validationText` can record a browser-native required-field refusal via `validity` and `validationMessage` after the scenario clicks submit; otherwise it requires visible framework refusal text. No unchanged database alone establishes that validation was exercised.

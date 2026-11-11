@@ -1,6 +1,6 @@
 // Change 7: approved presentation differences never exempt labels, inputs or outcomes.
 const assert = require('node:assert/strict');
-const actions = new Set(['exactLabel','exactText','count','hidden','options','choose','submitValues','confirmClick','validationText','clickResponse']);
+const actions = new Set(['exactLabel','exactText','count','hidden','options','choose','submitValues','confirmClick','validationText','clickResponse','focusFill']);
 const assertions = new Set(['exactLabel','exactText','count','hidden','options','validationText']);
 const labelText = raw => raw.replace(/\s+/g,' ').trim();
 async function observedLabel(locator) {
@@ -62,7 +62,17 @@ async function performFunctional(page,step,basePerform,observations=[],rawObserv
     const raw=await locator.innerText(),withoutIcons=await observedLabel(locator),actual=labelText(withoutIcons);
     rawObservations.push({id:step.id||step.selector,action:step.action,rawVisibleText:raw,visibleLabelWithoutIcons:withoutIcons,comparison:'Semantic words; presentation whitespace collapsed, raw text retained separately'});
     assert.equal(actual,step.value,'Exact visible control label');observe(actual);
+  } else if(step.action==='focusFill') {
+    await page.locator(step.control).click();
+    assert.equal(await locator.evaluate(node=>document.activeElement===node),true,'Visible label must focus its input');
+    await page.keyboard.press('ControlOrMeta+A');await page.keyboard.type(step.value);
+    assert.equal(await locator.inputValue(),step.value,'Keyboard-entered value');observe(step.value);
   } else if(step.action==='validationText') {
+    if(step.fieldSelector) {
+      const state=await page.locator(step.fieldSelector).evaluate(node=>({valid:node.validity.valid,valueMissing:node.validity.valueMissing,message:node.validationMessage,value:node.value}));
+      rawObservations.push({id:step.id||step.selector,action:step.action,nativeValidity:state});
+      if(!state.valid&&state.message) {assert.equal(state.value,'','Required empty field');if(step.expected)assert.deepEqual([state.message],step.expected,'Exact validation refusal');observe([state.message]);return;}
+    }
     await locator.first().waitFor({state:'visible'});const messages=(await locator.allInnerTexts()).filter(text=>text.trim().length);
     assert.ok(messages.length,'Expected explicit visible validation refusal');if(step.expected)assert.deepEqual(messages,step.expected,'Exact validation refusal');observe(messages);
   } else if(step.action==='exactText') {

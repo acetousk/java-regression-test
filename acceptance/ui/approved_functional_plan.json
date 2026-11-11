@@ -1510,7 +1510,7 @@
             },
             {
               "action": "count",
-              "selector": "input[name^=\"fieldSeqId_\"]",
+              "selector": "a[id^=\"FieldList_fieldPath_\"][id$=\"__\"]",
               "value": 2
             },
             {
@@ -1526,7 +1526,7 @@
             },
             {
               "action": "count",
-              "selector": "input[name^=\"fieldSeqId_\"]",
+              "selector": "a[id^=\"FieldList_fieldPath_\"][id$=\"__\"]",
               "value": 1
             }
           ],
@@ -1654,7 +1654,7 @@
             },
             {
               "action": "count",
-              "selector": "input[id^=\"ConditionList_conditionSeqId_\"]",
+              "selector": "button[id^=\"ConditionList_submitButton_\"]",
               "value": 1
             },
             {
@@ -1670,7 +1670,7 @@
             },
             {
               "action": "count",
-              "selector": "input[id^=\"ConditionList_conditionSeqId_\"]",
+              "selector": "button[id^=\"ConditionList_submitButton_\"]",
               "value": 0
             }
           ],
@@ -1696,7 +1696,7 @@
           "steps": [
             {
               "action": "count",
-              "selector": "input[name^=\"fieldSeqId_\"]",
+              "selector": "a[id^=\"FieldList_fieldPath_\"][id$=\"__\"]",
               "value": 1
             },
             {
@@ -1714,7 +1714,8 @@
             },
             {
               "action": "validationText",
-              "selector": "label.error:visible, .q-field--error .q-field__messages:visible, .alert-danger:visible, .help-block.error:visible"
+              "selector": "label.error:visible, .q-field--error .q-field__messages:visible, .alert-danger:visible, .help-block.error:visible",
+              "fieldSelector": "#AddField input[name=\"fieldPath\"]"
             },
             {
               "action": "goto",
@@ -1722,7 +1723,7 @@
             },
             {
               "action": "count",
-              "selector": "input[name^=\"fieldSeqId_\"]",
+              "selector": "a[id^=\"FieldList_fieldPath_\"][id$=\"__\"]",
               "value": 1
             }
           ],
@@ -1765,7 +1766,7 @@
             },
             {
               "action": "count",
-              "selector": "input[name^=\"fieldSeqId_\"]",
+              "selector": "a[id^=\"FieldList_fieldPath_\"][id$=\"__\"]",
               "value": 2
             },
             {
@@ -1790,7 +1791,7 @@
             },
             {
               "action": "count",
-              "selector": "input[name^=\"fieldSeqId_\"]",
+              "selector": "a[id^=\"FieldList_fieldPath_\"][id$=\"__\"]",
               "value": 1
             }
           ],
@@ -2334,9 +2335,10 @@
               "value": "Sample Qapps Updated"
             },
             {
-              "action": "fill",
+              "action": "focusFill",
               "selector": "#FieldList [name=\"sequenceNum_1\"], [form=\"FieldList\"][name=\"sequenceNum_1\"]",
-              "value": "2"
+              "value": "2",
+              "control": "#FieldList_table label:has(input[name=\"sequenceNum_1\"])"
             },
             {
               "action": "submitValues",
@@ -2366,7 +2368,7 @@
             },
             {
               "action": "count",
-              "selector": "input[name^=\"fieldSeqId_\"]",
+              "selector": "a[id^=\"FieldList_fieldPath_\"][id$=\"__\"]",
               "value": 2
             },
             {
@@ -2382,7 +2384,7 @@
             },
             {
               "action": "count",
-              "selector": "input[name^=\"fieldSeqId_\"]",
+              "selector": "a[id^=\"FieldList_fieldPath_\"][id$=\"__\"]",
               "value": 1
             }
           ],
@@ -2454,7 +2456,7 @@
             },
             {
               "action": "value",
-              "selector": "#ConditionList_fieldValue_0",
+              "selector": "#ConditionList_table input[name=\"fieldValue\"]",
               "value": "Sample25Enum00"
             }
           ],
@@ -2480,7 +2482,7 @@
           "steps": [
             {
               "action": "fill",
-              "selector": "#ConditionList_fieldValue_0",
+              "selector": "#ConditionList_table input[name=\"fieldValue\"]",
               "value": "Sample25Enum01"
             },
             {
@@ -2498,7 +2500,7 @@
             },
             {
               "action": "value",
-              "selector": "#ConditionList_fieldValue_0",
+              "selector": "#ConditionList_table input[name=\"fieldValue\"]",
               "value": "Sample25Enum01"
             },
             {
@@ -2510,7 +2512,7 @@
             },
             {
               "action": "count",
-              "selector": "input[id^=\"ConditionList_conditionSeqId_\"]",
+              "selector": "button[id^=\"ConditionList_submitButton_\"]",
               "value": 1
             },
             {
@@ -2526,7 +2528,7 @@
             },
             {
               "action": "count",
-              "selector": "input[id^=\"ConditionList_conditionSeqId_\"]",
+              "selector": "button[id^=\"ConditionList_submitButton_\"]",
               "value": 0
             }
           ],
@@ -2552,7 +2554,7 @@
           "steps": [
             {
               "action": "count",
-              "selector": "input[name^=\"fieldSeqId_\"]",
+              "selector": "a[id^=\"FieldList_fieldPath_\"][id$=\"__\"]",
               "value": 1
             },
             {
@@ -2570,7 +2572,8 @@
             },
             {
               "action": "validationText",
-              "selector": "label.error:visible, .q-field--error .q-field__messages:visible, .alert-danger:visible, .help-block.error:visible"
+              "selector": "label.error:visible, .q-field--error .q-field__messages:visible, .alert-danger:visible, .help-block.error:visible",
+              "fieldSelector": "#AddField input[name=\"fieldPath\"]"
             },
             {
               "action": "goto",
@@ -2578,7 +2581,7 @@
             },
             {
               "action": "count",
-              "selector": "input[name^=\"fieldSeqId_\"]",
+              "selector": "a[id^=\"FieldList_fieldPath_\"][id$=\"__\"]",
               "value": 1
             }
           ],
@@ -2621,7 +2624,7 @@
             },
             {
               "action": "count",
-              "selector": "input[name^=\"fieldSeqId_\"]",
+              "selector": "a[id^=\"FieldList_fieldPath_\"][id$=\"__\"]",
               "value": 2
             },
             {
@@ -2646,7 +2649,7 @@
             },
             {
               "action": "count",
-              "selector": "input[name^=\"fieldSeqId_\"]",
+              "selector": "a[id^=\"FieldList_fieldPath_\"][id$=\"__\"]",
               "value": 1
             }
           ],
