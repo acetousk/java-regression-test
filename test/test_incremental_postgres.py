@@ -184,6 +184,34 @@ class PostgresIncrementalTests(unittest.TestCase):
                 self.assertTrue(coordinator.report()['operation_order_equal'])
                 self.assertTrue(coordinator.report()['per_transaction_databases_equal'])
                 self.assertTrue(coordinator.report()['final_incremental_equal'])
+                # Phase2 Change20: exact observation semantics, not matching names/functions.
+                sql('java', 'CREATE TABLE integrity_probe (id integer);')
+                consume('java')
+                for definition in (
+                    'AFTER INSERT OR DELETE OR UPDATE ON public.integrity_probe FOR EACH ROW WHEN (false)',
+                    'AFTER INSERT ON public.integrity_probe FOR EACH ROW',
+                    'BEFORE INSERT OR DELETE OR UPDATE ON public.integrity_probe FOR EACH ROW',
+                    'AFTER INSERT OR DELETE OR UPDATE ON public.integrity_probe FOR EACH STATEMENT',
+                ):
+                    with self.subTest(trigger_definition=definition):
+                        sql('java', 'ALTER EVENT TRIGGER moqui_regression_ddl DISABLE; '
+                            'DROP TRIGGER moqui_regression_row ON public.integrity_probe; '
+                            f'CREATE TRIGGER moqui_regression_row {definition} '
+                            'EXECUTE FUNCTION moqui_regression.row_change(); '
+                            'ALTER EVENT TRIGGER moqui_regression_ddl ENABLE;')
+                        path = root / 'altered-trigger.json'
+                        controller.capture_snapshot(containers['java'], path)
+                        self.assertIn('CREATE TRIGGER moqui_regression_row', json.loads(path.read_text())['schema'])
+                        probe = DatabaseState(json.loads(path.read_text()))
+                        with self.assertRaises(subprocess.CalledProcessError):
+                            controller.refresh_incremental_catalog(containers['java'], probe, root / 'rejected.json')
+                        self.assertFalse(probe.healthy)
+                        sql('java', 'ALTER EVENT TRIGGER moqui_regression_ddl DISABLE; '
+                            'DROP TRIGGER moqui_regression_row ON public.integrity_probe; '
+                            'CREATE TRIGGER moqui_regression_row AFTER INSERT OR DELETE OR UPDATE '
+                            'ON public.integrity_probe FOR EACH ROW EXECUTE FUNCTION moqui_regression.row_change(); '
+                            'ALTER EVENT TRIGGER moqui_regression_ddl ENABLE;')
+                consume('java')
                 # Verify a bypass of capture fails instead of manufacturing equality.
                 sql('java', 'CREATE TABLE bypass (id int);')
                 consume('java')
