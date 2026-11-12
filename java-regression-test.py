@@ -651,6 +651,10 @@ def build_engines(java_home=None, directories=None):
         runtime = directory / "runtime"
         if runtime.is_symlink() or not (runtime / "conf" / "MoquiDevConf.xml").is_file():
             raise SystemExit(f"Missing private runtime configuration: {runtime}")
+        # Change 2: Recent hosts embed a locally prepared PostgreSQL archive at build time.
+        if name == "rust" and (directory / "scripts/pg-payload.sh").is_file():
+            subprocess.run(["bash", "scripts/pg-payload.sh", "strip"], cwd=directory,
+                           env=environment, check=True)
         print(f"Building {name}: {' '.join(command)}", flush=True)
         subprocess.run(command, cwd=directory, env=environment, check=True)
         executable = rust_artifact(directory) if name == "rust" else directory / artifact
@@ -688,6 +692,8 @@ def demo_conf(source, destination, db_port, password, http_port, crypt_pass):
         "webapp_http_port": str(http_port),
         "webapp_https_enabled": "false",
         "cluster_https_port": "0",
+        # Change 3: Auxiliary listeners must not collide with another local instance.
+        "ssh_port": "0",
         "opensearch_run": "false",
     }
     for name, value in properties.items():
@@ -695,6 +701,9 @@ def demo_conf(source, destination, db_port, password, http_port, crypt_pass):
         if node is None:
             node = ET.SubElement(root, "default-property", {"name": name})
         node.set("value", value)
+    receiver = root.find("telemetry/receiver")
+    if receiver is not None:
+        receiver.set("grpc-port", "0")
     # The generated configuration contains disposable database credentials.
     destination.touch(mode=0o600)
     tree.write(destination, encoding="utf-8", xml_declaration=True)
@@ -712,11 +721,14 @@ def wait_for_ports(processes, ports, timeout, boot_logs=None, failure_check=None
             if process.poll() is not None:
                 raise RuntimeError(f"{name} exited before readiness; see its boot log")
             if boot_logs:
-                markers = (("records (with types from empty-db-load:", "Moqui Framework initialized in")
-                           if name == "java" else
-                           ("Table check and empty-db load finished", "Listening for HTTP on"))
                 text = boot_logs[name].read_text(errors="replace")
-                if not all(marker in text for marker in markers):
+                # Phase 1, Change 1: Accept both HTTP listener messages after data initialization.
+                if name == "java":
+                    if not all(marker in text for marker in (
+                            "records (with types from empty-db-load:", "Moqui Framework initialized in")):
+                        continue
+                elif ("Table check and empty-db load finished" not in text
+                      or not re.search(r"Listening (?:for HTTP )?on [^\s]+:" + str(ports[name]) + r"(?:\s|$)", text)):
                     continue
                 # MoquiStart initializes the webapp before registering Jetty's shutdown hook.
                 if name == "java" and not re.search(r"Started (?:oejs\.)?Server@", text):
@@ -767,8 +779,11 @@ def stop_engines(processes, boot_logs, timeout):
         with boot_logs[name].open("rb") as stream:
             stream.seek(offsets[name])
             text = stream.read().decode("utf-8", errors="replace")
+        # Change 4: Current Rust uses telemetry instead of legacy artifact-bin persistence.
+        # Either version must supply fresh shutdown evidence, alongside a clean process exit.
         markers = (("ArtifactHitBins stored", "Moqui ExecutionContextFactory Destroyed")
-                   if name == "java" else ("ArtifactHitBins stored",))
+                   if name == "java" else
+                   (() if "Moqui server shutdown complete" in text else ("ArtifactHitBins stored",)))
         result["missing_shutdown_markers"] = [marker for marker in markers if marker not in text]
         if result["missing_shutdown_markers"]:
             result["errors"].append("Missing post-SIGTERM flush/completion evidence")
@@ -1263,14 +1278,15 @@ def catalog_row_readback(container, state, catalog):
     return rows
 
 
-def boot_and_stop(args):
+def boot_and_stop(args, *, evidence_dir=None, readiness_check=None):
     # Reject occupied HTTP ports so another application's listener cannot pass readiness.
     for port in (args.java_port, args.rust_port):
         with socket.socket() as probe:
             probe.bind(("127.0.0.1", port))
 
     run_id = datetime.now(timezone.utc).strftime("%Y-%m-%d_%H-%M-%S.%fZ")
-    evidence = ROOT / ".runs" / run_id
+    # Change 5: Boot-only validation supplies its evidence path and HTTP readiness check.
+    evidence = Path(evidence_dir) if evidence_dir is not None else ROOT / ".runs" / run_id
     evidence.mkdir(parents=True, mode=0o700)
     print(f"Startup evidence: {evidence}", flush=True)
     approved = getattr(args, "approved_differences", APPROVED_STARTUP_DIFFERENCES)
@@ -1407,11 +1423,19 @@ def boot_and_stop(args):
             directory = directories[name]
             runtime = directory / "runtime"
             conf = evidence / f"{name}-demo.xml"
+            # Phase 1, Change 4: the boot gate supplies immutable, checksum-bound launch copies.
+            frozen = getattr(args, "boot_artifacts", {})
+            artifact = Path(frozen.get(name, directory / "moqui.war" if name == "java" else rust_artifact(directory)))
+            if name in frozen:
+                with artifact.open('rb') as stream:
+                    digest = hashlib.file_digest(stream, 'sha256').hexdigest()
+                if digest != getattr(args, 'expected_artifact_sha256', {}).get(name):
+                    raise RuntimeError(f'{name} launch artifact differs from verified copy')
             if name == "java":
                 command = ["java", f"-Dmoqui.runtime={runtime}", f"-Dmoqui.conf={conf}",
-                           "-jar", str(directory / "moqui.war"), f"port={ports[name]}", "no-run-es"]
+                           "-jar", str(artifact), f"port={ports[name]}", "no-run-es"]
             else:
-                command = [str(rust_artifact(directory)), "--conf", str(conf),
+                command = [str(artifact), "--conf", str(conf),
                            "--port", str(ports[name]), "--https-port", "off", "--no-run-es",
                            "-D", "create-or-update=true"]
             log = (evidence / f"{name}-boot.log").open("wb")
@@ -1432,6 +1456,8 @@ def boot_and_stop(args):
         wait_for_ports(processes, ports, args.boot_timeout,
                        {name: evidence / f"{name}-boot.log" for name in processes},
                        failure_check=coordinator.check_health if coordinator else None)
+        if readiness_check is not None:
+            readiness_check(ports)
         started = True
         verification["servers_started"] = True
         print("Both engines started; stopping both processes.", flush=True)
@@ -1459,7 +1485,7 @@ def boot_and_stop(args):
                     raise RuntimeError(f"Deterministic verification failed; inspect {evidence / 'deterministic-report.json'}")
                 if any(result["errors"] for result in shutdown.values()):
                     raise RuntimeError(f"Graceful shutdown verification failed; inspect {evidence / 'shutdown.json'}")
-                print("Both engines shut down gracefully and flushed artifact bins.", flush=True)
+                print("Both engines shut down gracefully with verified completion evidence.", flush=True)
                 # Step 4: Snapshot and compare only after verified graceful shutdown.
                 for name, container in containers.items():
                     capture_snapshot(container, evidence / f"{name}-snapshot.json")

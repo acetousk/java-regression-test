@@ -34,6 +34,31 @@ mise install
 mise run build
 ```
 
+Current Rust framework revisions require Rust 1.99 (pinned in `mise.toml`). For
+revisions with `scripts/pg-payload.sh`, the harness prepares the embedded
+PostgreSQL archive before compiling. Generated test configs give SSH and the
+telemetry gRPC receiver ephemeral ports so they can coexist with local instances.
+
+To check already-built binaries without rebuilding or resetting either checkout:
+
+```sh
+mise exec -- python check_boot.py --java-port 18080 --rust-port 18081 \
+  --evidence-dir .runs/boot-check
+```
+
+This boot-only gate checks Java's `/status`, Rust's `/health`, both root pages,
+and graceful shutdown on fresh disposable databases. `gate.json` records source
+revisions, local-diff hashes, artifact hashes and HTTP/shutdown evidence. The
+ordinary snapshot comparison still runs and its result remains separate: a
+successful boot exit code does **not** establish database or UI parity. Optional
+`--java-checkout` and `--rust-checkout` select other prebuilt checkouts. The check
+holds the harness run lock before writing its manifest or evidence, and never
+resets an existing database.
+
+Phase 1, Change 1 accepts both Rust HTTP listener log formats after data loading.
+The listener must name the selected port. Live-process, socket, HTTP and shutdown
+checks remain required. Change 2 pins the matching compiler in `mise.toml`.
+
 Every run starts from the pinned source revisions (not upstream HEAD), builds
 Java with Gradle `clean build` and Rust incrementally with `cargo build --locked`,
 and creates new empty databases. Rust compiler caches are preserved. Existing database containers are never reused,
@@ -63,10 +88,14 @@ when missing. It never resets or connects to a pre-existing database.
 Step 3 waits for seed loading and completed application initialization, including
 Java's final Jetty server-start event (after shutdown-hook registration), as well
 as listening TCP ports. It sends SIGTERM to both process groups before waiting
-up to 120 seconds for shutdown. Each engine must log a new artifact-bin flush
-after SIGTERM; Java must also report final factory destruction. Forced kills,
+up to 120 seconds for shutdown. Java must log a new artifact-bin flush
+after SIGTERM and report final factory destruction. Forced kills,
 unexpected exits, or missing shutdown evidence fail the run before snapshots.
-Shutdown verification is recorded in `shutdown.json`. Run evidence uses UTC
+Current Rust revisions use telemetry instead of artifact bins; these must emit
+`Moqui server shutdown complete` after resource teardown and exit cleanly. Older
+Rust revisions still require their post-SIGTERM artifact-bin flush marker. Java's
+flush and destruction requirements remain unchanged. Shutdown verification is
+recorded in `shutdown.json`. Run evidence uses UTC
 timestamp directories: `.runs/YYYY-MM-DD_HH-MM-SS.ffffffZ/`.
 
 ### Step 4 — per-transaction incremental PostgreSQL verification

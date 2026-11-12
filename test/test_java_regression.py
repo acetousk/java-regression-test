@@ -64,6 +64,18 @@ class BuildTests(unittest.TestCase):
         with patch.dict(controller.os.environ, {"CARGO_TARGET_DIR": "cache"}):
             self.assertEqual(controller.rust_artifact(self.root / "rust"), self.root / "rust/cache/debug/moqui")
 
+    def test_current_rust_prepares_embedded_postgres_before_compiling(self):
+        script = self.root / "mr-moqui/scripts/pg-payload.sh"
+        script.parent.mkdir()
+        script.write_text("#!/bin/bash\n")
+        def build(command, **kwargs):
+            if command[0] != "bash":
+                self.fake_build(command, **kwargs)
+        with patch.object(controller.subprocess, "run", side_effect=build) as run:
+            controller.build_engines()
+        self.assertEqual(run.call_args_list[1].args[0], ["bash", "scripts/pg-payload.sh", "strip"])
+        self.assertEqual(run.call_args_list[2].args[0][0], "cargo")
+
     def test_missing_artifact_fails(self):
         with patch.object(controller.subprocess, "run"), self.assertRaises(SystemExit):
             controller.build_engines()
@@ -99,7 +111,8 @@ class StartupTests(unittest.TestCase):
             source = Path(directory) / "dev.xml"
             destination = Path(directory) / "demo.xml"
             source.write_text('<moqui-conf><default-property name="entity_ds_db_conf" value="mysql8"/>'
-                              '<cache-list warm-on-start="false"/></moqui-conf>')
+                              '<cache-list warm-on-start="false"/>'
+                              '<telemetry><receiver grpc-enabled="true"/></telemetry></moqui-conf>')
             controller.demo_conf(source, destination, 55432, "test-only-password", 8081, "test-only-key")
             root = controller.ET.parse(destination).getroot()
             values = {n.get("name"): n.get("value") for n in root.findall("default-property")}
@@ -108,6 +121,9 @@ class StartupTests(unittest.TestCase):
             self.assertEqual(values["entity_empty_db_load"], "all")
             self.assertEqual(values["webapp_http_port"], "8081")
             self.assertEqual(values["entity_ds_crypt_pass"], "test-only-key")
+            self.assertEqual(values["ssh_port"], "0")
+            self.assertEqual(root.find("telemetry/receiver").get("grpc-port"), "0")
+            self.assertEqual(root.find("telemetry/receiver").get("grpc-enabled"), "true")
             self.assertIsNotNone(root.find("cache-list"))
             self.assertEqual(destination.stat().st_mode & 0o777, 0o600)
 
@@ -143,6 +159,24 @@ class StartupTests(unittest.TestCase):
             controller.wait_for_ports({"java": process}, {"java": 8080}, 10, {"java": log})
         self.assertEqual(sleep.call_count, 2)
         connect.assert_called_once()
+
+    def test_rust_readiness_requires_loaded_data_and_the_selected_listener(self):
+        from unittest.mock import Mock
+        for message in ("Listening for HTTP on", "Listening on"):
+            with self.subTest(message=message):
+                process = Mock()
+                process.poll.return_value = None
+                log = Mock()
+                log.read_text.side_effect = [
+                    f"{message} 0.0.0.0:8081\n",
+                    f"Table check and empty-db load finished\n{message} 0.0.0.0:80810\n",
+                    f"Table check and empty-db load finished\n{message} 0.0.0.0:8081\n",
+                ]
+                with patch.object(controller.socket, "create_connection") as connect, \
+                        patch.object(controller.time, "sleep") as sleep:
+                    controller.wait_for_ports({"rust": process}, {"rust": 8081}, 10, {"rust": log})
+                self.assertEqual(sleep.call_count, 2)
+                connect.assert_called_once()
 
     def test_shutdown_signals_both_before_waiting_and_verifies_new_flush_evidence(self):
         from unittest.mock import Mock
@@ -192,6 +226,22 @@ class StartupTests(unittest.TestCase):
             self.assertTrue(result["forced_kill"])
             self.assertTrue(result["errors"])
             self.assertEqual(kill.call_args_list[-1].args, (123, controller.signal.SIGKILL))
+
+    def test_current_rust_requires_fresh_completion_and_clean_exit(self):
+        from unittest.mock import Mock
+        for fresh, returncode, succeeds in ((True, 0, True), (False, 0, False), (True, 1, False)):
+            with self.subTest(fresh=fresh, returncode=returncode), tempfile.TemporaryDirectory() as directory:
+                log = Path(directory) / "rust.log"
+                log.write_text("Moqui server shutdown complete\n")
+                process = Mock(pid=456, returncode=returncode)
+                process.poll.return_value = None
+                def signal_group(*_):
+                    if fresh:
+                        with log.open("a") as stream:
+                            stream.write("Moqui server shutdown complete\n")
+                with patch.object(controller.os, "killpg", side_effect=signal_group):
+                    report = controller.stop_engines({"rust": process}, {"rust": log}, 120)
+                self.assertEqual(not report["rust"]["errors"], succeeds)
 
     def test_readiness_timeout_fails(self):
         from unittest.mock import Mock
