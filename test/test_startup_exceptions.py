@@ -59,7 +59,7 @@ class ApprovedDifferencesTests(unittest.TestCase):
                "server_ip_address": "127.0.0.1", "server_host_name": "test",
                "bin_start_date_time": f"2026-01-01T00:00:0{offset}",
                "bin_end_date_time": f"2026-01-01T00:00:0{offset + 1}",
-               "last_updated_stamp": f"2026-01-01T00:00:0{offset + 1}",
+               "last_updated_stamp": "2026-01-01T00:00:01",  # Change 6: shared stamps are strict.
                "total_time_millis": 2 + offset, "total_squared_time": 4 + offset,
                "min_time_millis": 1 + offset, "max_time_millis": 2 + offset,
                "slow_hit_count": offset}
@@ -79,7 +79,7 @@ class ApprovedDifferencesTests(unittest.TestCase):
         self.assertEqual(report["approved_differences_applied"][0]["kind"], "statistics_timing")
 
     def test_statistics_counts_identity_duplicates_and_unknown_columns_still_fail(self):
-        for field, value in (("hit_count", 3), ("hit_bin_id", "100001"),
+        for field, value in (("hit_count", 3), ("last_updated_stamp", "2026-01-01T00:00:02"), ("hit_bin_id", "100001"),
                              ("artifact_sub_type", "list"), ("artifact_type", "AT_SERVICE"),
                              ("artifact_name", "other"), ("server_host_name", "other"),
                              ("unexpected_column", "anything")):
@@ -170,7 +170,7 @@ class ApprovedDifferencesTests(unittest.TestCase):
             return {"table": "public.artifact_hit", "row": {
                 "artifact_hit_id": "100000", "artifact_type": "AT_SERVICE", "artifact_name": "test",
                 "start_date_time": f"2026-01-01T00:00:0{offset}",
-                "last_updated_stamp": f"2026-01-01T00:00:0{offset}",
+                "last_updated_stamp": "2026-01-01T00:00:00",
                 "running_time_millis": 1 + offset, "is_slow_hit": "Y" if offset else "N",
                 "was_error": "N"}}
         self.assertTrue(self.compare([hit(0)], [hit(1)])[0])

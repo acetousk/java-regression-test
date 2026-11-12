@@ -52,3 +52,16 @@ class GateTests(unittest.TestCase):
             with self.assertRaises(ValueError): require_matching_boot_gate(path, artifacts)
             with self.assertRaises(FileNotFoundError): require_matching_boot_gate(root / 'missing', artifacts)
 
+    def test_entry_points_reject_before_any_launch_without_gate(self):
+        for name in ('phase_two_db', 'phase_two_rust'):
+            spec = importlib.util.spec_from_file_location(name, ROOT / 'tools' / (name + '.py'))
+            module = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(module)
+            argv = [name, '--output', '/unused']
+            if name.endswith('rust'): argv += ['--runtime', '/unused']
+            with self.subTest(name=name), patch.object(sys, 'argv', argv), patch.object(module.subprocess, 'run') as launch:
+                with self.assertRaises(SystemExit): module.main()
+                launch.assert_not_called()
+            with patch.object(sys, 'argv', argv + ['--boot-gate', '/missing/gate.json']), patch.object(module.subprocess, 'run') as launch:
+                with self.assertRaises(FileNotFoundError): module.main()
+                launch.assert_not_called()

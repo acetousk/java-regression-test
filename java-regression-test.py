@@ -6,6 +6,7 @@ Optional deterministic transaction barriers coordinate logical time and compare 
 """
 
 import argparse
+from bisect import bisect_right
 from collections import Counter
 from copy import deepcopy
 from datetime import datetime, timezone
@@ -166,16 +167,28 @@ def filter_snapshots(java, rust, manifest, source_root):
     return java, {**rust, "records": retained}, audit
 
 
-def apply_approved_differences(java, rust, approved):
+def apply_approved_differences(java, rust, approved, *, schema_proof=None):
     snapshots = [
         {"schema": snapshot["schema"], "records": [
             json.loads(record, parse_int=Decimal, parse_float=Decimal)
             for record in snapshot["records"]]}
         for snapshot in (java, rust)
     ]
-    applied = apply_rust_only_tables(snapshots, approved.get("rust_only_tables", []))
+    # Phase2 Change17: seed filtering must not hide populated keys from schema proof.
+    schema_original = deepcopy(snapshots) if schema_proof is None else [
+        {"schema": snapshot["schema"], "records": [
+            json.loads(record, parse_int=Decimal, parse_float=Decimal)
+            for record in snapshot["records"]]} for snapshot in schema_proof]
+    applied = apply_reviewed_event_sets(snapshots, schema_original, approved.get("reviewed_event_sets", []))
+    applied.extend(apply_rust_only_tables(snapshots, approved.get("rust_only_tables", [])))
+    # Change 6: apply only the user's enumerated asymmetries; raw evidence stays intact.
+    applied.extend(apply_java_only_tables(snapshots, approved.get("java_only_tables", [])))
+    applied.extend(apply_reviewed_seed_rows(snapshots, approved.get("reviewed_seed_rows", [])))
+    applied.extend(apply_extension_views(snapshots, approved.get("extension_views", [])))
     applied.extend(apply_template_differences(snapshots, approved.get("template_differences", [])))
-    applied.extend(apply_rust_only_columns(snapshots, approved.get("rust_only_columns", [])))
+    applied.extend(apply_rust_only_columns(snapshots, approved.get("rust_only_columns", []), original=schema_original))
+    applied.extend(apply_schema_additions(snapshots, schema_original, applied,
+                                         approved.get("schema_additions", [])))
     applied.extend(apply_rust_only_ddl(snapshots, approved.get("rust_only_ddl", [])))
     # Approved rows one engine has and the other does not, per entity: Rust rows minus Java rows. Each such
     # row is one refresh and one create during an empty-database load, which the statistics rule below uses.
@@ -315,12 +328,38 @@ def apply_approved_differences(java, rust, approved):
         if (not all(index_blocks) or len(metadata) != 1 or
                 [c for c in metadata[0]["columns"] if c["name"] == column] != [expected_metadata]):
             continue
+        # Phase2 Change17: project only the exact catalog counterpart of this existing storage rule.
+        catalog_matches = []
+        relation_metadata = [[r for r in snapshot["records"] if r.get("relation") == table]
+                             for snapshot in snapshots]
+        has_catalog = any("schema_objects" in r for side in relation_metadata for r in side)
+        if has_catalog:
+            for side, relations in zip(("java", "rust"), relation_metadata):
+                target = column if side == "java" else f"to_tsvector('english'::regconfig, {field})"
+                name = rule[side + "_index"]
+                expected_object = {
+                    "kind": "index", "name": name, "method": "gin",
+                    "definition": f"CREATE INDEX {name} ON {table} USING gin ({target})",
+                    "columns": [column] if side == "java" else [None],
+                    "key_metadata": [{"opclass": "pg_catalog.tsvector_ops", "collation": None, "option": 0}],
+                    "key_count": 1, "attribute_count": 1, "unique": False, "primary": False,
+                    "exclusion": False, "valid": True, "ready": True, "live": True,
+                    "expressions": None if side == "java" else target, "predicate": None,
+                    "constraint_backed": False, "plain": side == "java", "options": None,
+                    "owner": "moqui", "partition": False, "table_inherits": False}
+                objects = relations[0].get("schema_objects", []) if len(relations) == 1 else []
+                found = [o for o in objects if o.get("name") == name]
+                catalog_matches.append((objects, found[0]) if found == [expected_object] else None)
+            if not all(catalog_matches):
+                continue
         # Both approved index definitions and the generated column must exist before accepting either.
         snapshots[0]["schema"] = table_pattern.sub(
             lambda m: m.group(1) + ",\n".join(c for c in m.group(2).split(",\n") if c != declaration)
             + m.group(3), snapshots[0]["schema"], count=1)
         for snapshot, block in zip(snapshots, index_blocks):
             snapshot["schema"] = snapshot["schema"].replace(block, "", 1)
+        for objects, obj in catalog_matches:
+            objects.remove(obj)
         metadata[0]["columns"].remove(expected_metadata)
         for item in snapshots[0]["records"]:
             if item.get("table") == table:
@@ -406,42 +445,321 @@ def apply_template_differences(snapshots, rules):
     return applied
 
 
-def apply_rust_only_columns(snapshots, rules):
-    """Approve exact nullable, default-free Rust columns only while they contain no data."""
+def seeded_column_rows_match(snapshots, original, rule):
+    """Phase2 Change22: select exact seed values only through the captured primary key."""
+    table, name, keys, seeds = (rule[k] for k in ('table', 'name', 'primary_key', 'seed_values'))
+    if (not isinstance(keys, list) or not keys or name in keys
+            or not all(isinstance(key, str) and re.fullmatch(r'[a-z_][a-z0-9_]*', key) for key in keys)
+            or len(set(keys)) != len(keys) or not isinstance(seeds, list) or not seeds):
+        return False
+    metadata = [[record for record in side['records'] if record.get('relation') == table] for side in original]
+    if any(len(items) != 1 or items[0].get('kind') != 'r' for items in metadata):
+        return False
+    for items in metadata:
+        relation = items[0]
+        objects = relation.get('schema_objects')
+        if not isinstance(objects, list) or any(not isinstance(obj, dict) for obj in objects):
+            return False
+        primary = [obj for obj in objects if obj.get('primary') is True]
+        if len(primary) != 1:
+            return False
+        obj = primary[0]
+        if (not complete_schema_object(obj) or obj['kind'] != 'index' or obj['columns'] != keys
+                or obj['method'] != 'btree' or obj['unique'] is not True or obj['exclusion'] is not False
+                or any(obj[key] is not True for key in ('valid', 'ready', 'live', 'plain', 'constraint_backed'))
+                or obj['key_count'] != len(keys) or obj['attribute_count'] != len(keys)
+                or not re.fullmatch(r'[a-z_][a-z0-9_]*', obj['name'])
+                or obj['definition'] != f"CREATE UNIQUE INDEX {obj['name']} ON {table} USING btree ({', '.join(keys)})"):
+            return False
+        for key in keys:
+            columns = [column for column in relation['columns'] if column.get('name') == key]
+            if (len(columns) != 1 or columns[0].get('not_null') is not True
+                    or not isinstance(columns[0].get('type'), str) or not columns[0]['type']):
+                return False
+    if any(next(c['type'] for c in metadata[0][0]['columns'] if c['name'] == key)
+           != next(c['type'] for c in metadata[1][0]['columns'] if c['name'] == key) for key in keys):
+        return False
+
+    def identity(value):
+        return json.dumps(canonical(json.loads(report_json(value), parse_int=Decimal, parse_float=Decimal)),
+                          separators=(',', ':'))
+
+    def valid_key(key):
+        return (isinstance(key, dict) and set(key) == set(keys)
+                and all(value is not None and not isinstance(value, (dict, list, bool)) for value in key.values()))
+
+    if any(not isinstance(seed, dict) or set(seed) != {'key', 'value'} or seed['value'] is None
+           or not valid_key(seed['key']) for seed in seeds):
+        return False
+    try:
+        expected = {identity(seed['key']): identity(seed['value']) for seed in seeds}
+        if len(expected) != len(seeds):
+            return False
+        inventories = []
+        for side in original + snapshots:
+            relation = next(record for record in side['records'] if record.get('relation') == table)
+            fields = [column.get('name') for column in relation['columns']]
+            if (not all(isinstance(field, str) and field for field in fields)
+                    or len(set(fields)) != len(fields)):
+                return False
+            rows = [record for record in side['records'] if record.get('table') == table]
+            values = {}
+            for record in rows:
+                if (set(record) != {'table', 'row'} or not isinstance(record['row'], dict)
+                        or set(record['row']) != set(fields)):
+                    return False
+                row = record['row']
+                key = {field: row.get(field) for field in keys}
+                if not valid_key(key):
+                    return False
+                token = identity(key)
+                if token in values:
+                    return False
+                values[token] = identity(row[name]) if name in row else None
+            inventories.append(values)
+        java_original, rust_original, java_current, rust_current = inventories
+        null = identity(None)
+        # Every listed seed remains present in raw evidence; every other value is null.
+        if (any(rust_original.get(key) != value for key, value in expected.items())
+                or any(value != expected.get(key, null) for key, value in rust_original.items())
+                or any(value is not None for value in java_original.values())
+                or any(value is not None for value in java_current.values())
+                or any(key not in rust_original or value != rust_original[key] for key, value in rust_current.items())):
+            return False
+    except (ValueError, TypeError, KeyError):
+        return False
+    return True
+
+
+def apply_rust_only_columns(snapshots, rules, *, original=None):
+    """Project exact added columns with null-only or explicitly bounded seed values."""
     java, rust = snapshots
+    original = deepcopy(snapshots) if original is None else original
     applied = []
     for rule in rules:
-        table, name = rule["table"], rule["name"]
-        metadata = [[item for item in snapshot["records"] if item.get("relation") == table]
-                    for snapshot in snapshots]
-        if any(len(items) != 1 for items in metadata):
+        if not isinstance(rule, dict):
             continue
-        java_columns, rust_columns = (items[0]["columns"] for items in metadata)
-        expected = {"name": name, "type": rule["type"], "not_null": False, "default": None}
-        if (any(column["name"] == name for column in java_columns)
-                or [column for column in rust_columns if column["name"] == name] != [expected]):
+        seeded = 'primary_key' in rule or 'seed_values' in rule
+        if set(rule) != ({'table', 'name', 'type', 'primary_key', 'seed_values'} if seeded else {'table', 'name', 'type'}):
             continue
-        rows = [[item["row"] for item in snapshot["records"] if item.get("table") == table]
-                for snapshot in snapshots]
-        if any(name in row for row in rows[0]) or any(row.get(name) is not None for row in rows[1]):
+        table, name = rule['table'], rule['name']
+        if (not isinstance(table, str) or not re.fullmatch(r'[a-z_][a-z0-9_]*\.[a-z_][a-z0-9_]*', table)
+                or not isinstance(name, str) or not re.fullmatch(r'[a-z_][a-z0-9_]*', name)
+                or not isinstance(rule['type'], str) or not rule['type']):
             continue
-        pattern = re.compile(r"(CREATE TABLE " + re.escape(table) + r" \(\n)(.*?)(\n\);)", re.S)
-        matches = [list(pattern.finditer(snapshot["schema"])) for snapshot in snapshots]
+        metadata = [[item for item in snapshot['records'] if item.get('relation') == table]
+                    for snapshot in snapshots + original]
+        if any(len(items) != 1 or not isinstance(items[0].get('columns'), list)
+               or any(not isinstance(column, dict) for column in items[0]['columns']) for items in metadata):
+            continue
+        expected = {'name': name, 'type': rule['type'], 'not_null': False, 'default': None}
+        # Phase2 Change22: numeric zero is not a captured boolean nullability flag.
+        if any(column.get('not_null') is not False
+               for side in (1, 3) for column in metadata[side][0]['columns']
+               if column.get('name') == name):
+            continue
+        if any((any(column.get('name') == name for column in items[0]['columns']) if side % 2 == 0 else
+                [column for column in items[0]['columns'] if column.get('name') == name] != [expected])
+               for side, items in enumerate(metadata)):
+            continue
+        rows = [[item.get('row') for item in snapshot['records'] if item.get('table') == table]
+                for snapshot in snapshots + original]
+        if any(not isinstance(row, dict) for side in rows for row in side):
+            continue
+        if seeded:
+            if not seeded_column_rows_match(snapshots, original, rule):
+                continue
+        elif (any(name in row for side in (rows[0], rows[2]) for row in side)
+                or any(name not in row or row[name] is not None for side in (rows[1], rows[3]) for row in side)):
+            continue
+        pattern = re.compile(r'(CREATE TABLE ' + re.escape(table) + r' \(\n)(.*?)(\n\);)', re.S)
+        matches = [list(pattern.finditer(snapshot['schema'])) for snapshot in snapshots + original]
         if any(len(items) != 1 for items in matches):
             continue
-        declaration = "    " + name + " " + rule["type"]
-        java_declarations, rust_declarations = (items[0].group(2).split(",\n") for items in matches)
-        if (any(re.match(r"\s*" + re.escape(name) + r"\s", column) for column in java_declarations)
-                or rust_declarations.count(declaration) != 1):
+        declaration = '    ' + name + ' ' + rule['type']
+        declarations = [items[0].group(2).split(',\n') for items in matches]
+        if any((any(re.match(r'\s*' + re.escape(name) + r'\s', column) for column in columns) if side % 2 == 0
+                else columns.count(declaration) != 1) for side, columns in enumerate(declarations)):
             continue
-        rust["schema"] = pattern.sub(
-            lambda match: match.group(1) + ",\n".join(
-                column for column in rust_declarations if column != declaration) + match.group(3),
-            rust["schema"], count=1)
-        rust_columns.remove(expected)
+        rust['schema'] = pattern.sub(lambda match: match.group(1) + ',\n'.join(
+            column for column in declarations[1] if column != declaration) + match.group(3), rust['schema'], count=1)
+        metadata[1][0]['columns'].remove(expected)
         for row in rows[1]:
             row.pop(name, None)
-        applied.append({"kind": "rust_only_column", **deepcopy(rule)})
+        applied.append({'kind': 'rust_only_column', **deepcopy(rule)})
+    return applied
+
+
+def complete_schema_object(obj):
+    """Phase2 Change17: matching two incomplete objects is not catalog proof."""
+    if not isinstance(obj, dict):
+        return False
+    common = {"kind", "name", "definition", "columns"}
+    if obj.get("kind") == "index":
+        strings = {"kind", "name", "definition", "method", "owner"}
+        flags = {"unique", "primary", "exclusion", "valid", "ready", "live",
+                 "constraint_backed", "plain", "partition", "table_inherits"}
+        integers = {"key_count", "attribute_count"}
+        fields = common | strings | flags | integers | {"key_metadata", "expressions", "predicate", "options"}
+    elif obj.get("kind") == "foreign_key":
+        strings = {"kind", "name", "definition", "target", "match", "update", "delete",
+                   "target_key_definition", "target_kind"}
+        flags = {"enforced", "validated", "deferrable", "deferred", "local", "parent_constraint",
+                 "target_key_valid", "target_key_unique", "target_key_plain", "target_partition", "table_inherits"}
+        integers = {"inherited"}
+        fields = common | strings | flags | integers | {"target_columns", "target_column_types", "trigger_states"}
+    else:
+        return False
+
+    def integer(value):
+        return type(value) is int or (isinstance(value, Decimal) and value.is_finite() and value == value.to_integral_value())
+
+    def text_list(value):
+        return isinstance(value, list) and bool(value) and all(isinstance(v, str) and v for v in value)
+
+    if (set(obj) != fields or any(not isinstance(obj[k], str) or not obj[k] for k in strings)
+            or any(type(obj[k]) is not bool for k in flags)
+            or any(not integer(obj[k]) for k in integers) or not text_list(obj["columns"])):
+        return False
+    if obj["kind"] == "index":
+        keys = obj["key_metadata"]
+        return (obj["expressions"] is None and obj["predicate"] is None and obj["options"] is None
+                and isinstance(keys, list) and len(keys) == len(obj["columns"])
+                and all(isinstance(k, dict) and set(k) == {"opclass", "collation", "option"}
+                        and isinstance(k["opclass"], str) and bool(k["opclass"])
+                        and (k["collation"] is None or isinstance(k["collation"], str) and bool(k["collation"]))
+                        and integer(k["option"]) and k["option"] == 0 for k in keys))
+    return (text_list(obj["target_columns"]) and text_list(obj["target_column_types"])
+            and len(obj["target_columns"]) == len(obj["columns"]) == len(obj["target_column_types"])
+            and text_list(obj["trigger_states"]))
+
+
+# Phase2 Change17: exact catalog-backed additions never waive shared constraints.
+def apply_schema_additions(snapshots, original, applied_columns, rules):
+    applied = []
+    approved_columns = {(r["table"], r["name"]) for r in applied_columns
+                        if r["kind"] == "rust_only_column"}
+    ident = r"[a-z_][a-z0-9_]*"
+
+    def relation(snapshot, table):
+        items = [r for r in snapshot["records"] if r.get("relation") == table]
+        return items[0] if len(items) == 1 and items[0].get("kind") == "r" else None
+
+    def bounded(type_name):
+        match = re.fullmatch(r"character(?: varying)?\(([1-9][0-9]*)\)", type_name)
+        if match:
+            return int(match[1]) * 4
+        return {"smallint": 2, "integer": 4, "bigint": 8, "boolean": 1,
+                "date": 4, "timestamp without time zone": 8}.get(type_name)
+
+    for rule in rules:
+        table, name, obj = rule.get("table", ""), rule.get("name", ""), rule.get("catalog", {})
+        if (not complete_schema_object(obj)
+                or not re.fullmatch(ident + r"\." + ident, table)
+                or not re.fullmatch(ident, name) or obj.get("name") != name):
+            continue
+        before = [relation(s, table) for s in original]
+        current = relation(snapshots[1], table)
+        if any(r is None or not isinstance(r.get("schema_objects"), list) for r in before) or current is None:
+            continue
+        matches = [[o for o in r["schema_objects"] if o.get("name") == name and o.get("kind") == obj["kind"]] for r in before]
+        if matches[0] or matches[1] != [obj]:
+            continue
+        columns = obj.get("columns", [])
+        if (not isinstance(columns, list) or not columns
+                or any(not isinstance(c, str) or not re.fullmatch(ident, c) for c in columns)
+                or len(set(columns)) != len(columns)):
+            continue
+        shared, extras, width, valid = [], [], 0, True
+        for column in columns:
+            definitions = [[c for c in r["columns"] if c["name"] == column] for r in before]
+            if len(definitions[1]) != 1:
+                valid = False
+                break
+            if definitions[0]:
+                if definitions[0] != definitions[1] or len(definitions[0]) != 1:
+                    valid = False
+                    break
+                size = bounded(definitions[0][0]["type"])
+                if size is None:
+                    valid = False
+                    break
+                shared.append(column)
+                width += size
+            else:
+                if (table, column) not in approved_columns:
+                    valid = False
+                    break
+                extras.append(column)
+                # Recheck raw rows: missing fields are not evidence of NULL.
+                if any(column not in r["row"] or r["row"][column] is not None
+                       for r in original[1]["records"] if r.get("table") == table):
+                    valid = False
+                    break
+        if not valid or width > 512:
+            continue
+        if obj.get("kind") == "index":
+            required = {"method": "btree", "unique": False, "primary": False,
+                        "exclusion": False, "valid": True, "ready": True, "live": True,
+                        "expressions": None, "predicate": None, "constraint_backed": False,
+                        "plain": True, "options": None, "partition": False, "table_inherits": False}
+            if (any(k not in obj or obj[k] != v for k, v in required.items())
+                    or obj.get("key_count") != len(columns) or obj.get("attribute_count") != len(columns)
+                    or (not extras and rule.get("shared_only") is not True)):
+                continue
+            ddl = f"CREATE INDEX {name} ON {table} USING btree ({', '.join(columns)});"
+            if obj.get("definition") != ddl[:-1]:
+                continue
+            dump_kind, dump_name = "INDEX", name
+        elif obj.get("kind") == "foreign_key":
+            if shared or not extras:
+                continue
+            required = {"validated": True, "deferrable": False, "deferred": False,
+                        "match": "s", "update": "a", "delete": "a", "local": True,
+                        "inherited": 0, "parent_constraint": False, "target_key_valid": True,
+                        "target_key_unique": True, "target_key_plain": True, "target_kind": "r",
+                        "target_partition": False, "table_inherits": False, "enforced": True,
+                        "trigger_states": ["O", "O", "O", "O"]}
+            if any(k not in obj or obj[k] != v for k, v in required.items()):
+                continue
+            parent, keys = obj.get("target", ""), obj.get("target_columns", [])
+            if (not re.fullmatch(ident + r"\." + ident, parent) or len(keys) != len(columns)
+                    or any(not isinstance(c, str) or not re.fullmatch(ident, c) for c in keys)):
+                continue
+            definition = f"FOREIGN KEY ({', '.join(columns)}) REFERENCES {parent}({', '.join(keys)})"
+            if obj.get("definition") != definition:
+                continue
+            ddl = f"ALTER TABLE ONLY {table}\n    ADD CONSTRAINT {name} {definition};"
+            dump_kind, dump_name = "FK CONSTRAINT", table.split(".")[1] + " " + name
+        else:
+            continue
+        if rule.get("ddl") != ddl:
+            continue
+        # Match complete statement lines. Extra SQL remains visible, even after a matching statement.
+        statement = re.compile(r"^" + re.escape(ddl) + r"$", re.M)
+        if obj["kind"] == "index":
+            # Index names belong to a schema; foreign-key names belong to a table.
+            schema = re.escape(table.split(".")[0])
+            identity = re.compile(r"^CREATE (?:UNIQUE )?INDEX (?:" + schema + r"\.)?" + re.escape(name)
+                                  + r"\s+ON (?:ONLY )?" + schema + r"\." + ident + r"(?=\s|\()", re.M)
+        else:
+            identity = re.compile(r"^ALTER TABLE (?:ONLY )?" + re.escape(table)
+                                  + r"\s+ADD CONSTRAINT " + re.escape(name) + r"(?=\s)", re.M)
+        if (identity.search(original[0]["schema"])
+                or len(identity.findall(original[1]["schema"])) != 1
+                or len(statement.findall(snapshots[1]["schema"])) != 1):
+            continue
+        objects = current.get("schema_objects", [])
+        if [o for o in objects if o.get("name") == name and o.get("kind") == obj["kind"]] != [obj]:
+            continue
+        # Header removal is restricted to the exact object, never a whole pg_dump block.
+        header = (r"--\n-- Name: " + re.escape(dump_name) + "; Type: " + dump_kind
+                  + "; Schema: " + re.escape(table.split(".")[0]) + r"; Owner: (?:[a-z_][a-z0-9_]*|-)\n--\n\n")
+        snapshots[1]["schema"] = re.sub(
+            r"^(?:" + header + r")?" + re.escape(ddl) + r"(?:\n{1,3}|$)",
+            "", snapshots[1]["schema"], count=1, flags=re.M)
+        objects.remove(obj)
+        applied.append({"kind": "schema_addition", **deepcopy(rule), "null_only_columns": extras})
     return applied
 
 
@@ -464,6 +782,186 @@ def apply_rust_only_ddl(snapshots, rules):
     return applied
 
 
+def apply_extension_views(snapshots, rules):
+    """Phase 2 Change 13: require captured ownership and exact absent-view metadata."""
+    applied = []
+    for rule in rules:
+        side = rule.get("engine")
+        expected = rule.get("metadata", {})
+        owner = expected.get("extension")
+        name = expected.get("relation")
+        if (side not in ("java", "rust") or expected.get("kind") != "v"
+                or not name or not expected.get("view_definition") or not isinstance(owner, dict)
+                or set(owner) != {"name", "version"} or not all(owner.values())):
+            continue
+        current, other = snapshots if side == "java" else reversed(snapshots)
+        matches = [record for record in current["records"] if record.get("relation") == name]
+        if matches != [expected]:
+            continue
+        if any(record.get("relation") == name or record.get("table") == name
+               for record in other["records"]):
+            continue
+        # Extension-owned views have no independent pg_dump view block or stored rows.
+        declaration = re.compile(r"^CREATE (?:OR REPLACE )?(?:MATERIALIZED )?VIEW "
+                                 + re.escape(name) + r"(?=[\s;(])", re.M)
+        if any(declaration.search(snapshot["schema"]) for snapshot in snapshots):
+            continue
+        if any(record.get("table") == name for record in current["records"]):
+            continue
+        current["records"].remove(matches[0])
+        applied.append({"kind": "extension_view", "engine": side, "metadata": deepcopy(expected)})
+    return applied
+
+
+def apply_java_only_tables(snapshots, tables):
+    """Use the same absence/metadata/DDL guards for explicitly approved Java relations."""
+    applied = apply_rust_only_tables([snapshots[1], snapshots[0]], tables)
+    return [{**item, "kind": "java_only_table"} for item in applied]
+
+
+def apply_reviewed_seed_rows(snapshots, rules):
+    """Exclude a reviewed asymmetric row only with exact non-generated values."""
+    applied = []
+    for rule in rules:
+        if rule.get("engine") not in ("java", "rust") or not rule.get("key"):
+            continue
+        side = 0 if rule["engine"] == "java" else 1
+        matches = [[item for item in snapshot["records"]
+                    if item.get("table") == rule["table"] and "row" in item
+                    and all(item["row"].get(k) == v for k, v in rule["key"].items())]
+                   for snapshot in snapshots]
+        if matches[1 - side] or len(matches[side]) != 1:
+            continue
+        item = matches[side][0]
+        if {k: v for k, v in item["row"].items() if k != "last_updated_stamp"} != rule["expected"]:
+            continue
+        snapshots[side]["records"].remove(item)
+        applied.append({"kind": "reviewed_seed_row", "engine": rule["engine"],
+                        "table": rule["table"], "key": deepcopy(rule["key"])})
+    return applied
+
+
+def apply_reviewed_event_sets(snapshots, original, rules):
+    """Phase2 Change21: exact reviewed event correspondence never hides later events."""
+    applied = []
+    tables = Counter(rule.get('table') for rule in rules if isinstance(rule, dict)
+                     and isinstance(rule.get('table'), str))
+
+    def identity(value):
+        # Match JSON numeric types without conflating booleans, strings, or rounded floats.
+        return json.dumps(canonical(json.loads(report_json(value), parse_int=Decimal, parse_float=Decimal)),
+                          separators=(',', ':'))
+
+    for rule in rules:
+        if not isinstance(rule, dict) or set(rule) != {'table', 'primary_key', 'shared_pairs', 'rust_only'}:
+            continue
+        table, keys = rule['table'], rule['primary_key']
+        pairs, extra = rule['shared_pairs'], rule['rust_only']
+        if (not isinstance(table, str) or not re.fullmatch(r'[a-z_][a-z0-9_]*\.[a-z_][a-z0-9_]*', table)
+                or tables[table] != 1 or not isinstance(keys, list) or not keys
+                or not all(isinstance(key, str) and key for key in keys) or len(set(keys)) != len(keys)
+                or not isinstance(pairs, list) or not isinstance(extra, list) or not (pairs or extra)
+                or any(not isinstance(pair, dict) or set(pair) != {'java', 'rust'} for pair in pairs)):
+            continue
+        selected = [[pair[side] for pair in pairs] + (extra if side == 'rust' else [])
+                    for side in ('java', 'rust')]
+        metadata = [[record for record in snapshot['records'] if record.get('relation') == table]
+                    for snapshot in original]
+        if any(len(items) != 1 or items[0].get('kind') != 'r'
+               or not isinstance(items[0].get('columns'), list)
+               or any(not isinstance(column, dict) for column in items[0]['columns']) for items in metadata):
+            continue
+        fields = [[column.get('name') for column in items[0]['columns'] if isinstance(column, dict)]
+                  for items in metadata]
+        if (not fields[0] or fields[0] != fields[1]
+                or any(not isinstance(field, str) or not field for field in fields[0])
+                or len(set(fields[0])) != len(fields[0]) or not set(keys) < set(fields[0])):
+            continue
+        rows = [[record for record in snapshot['records'] if record.get('table') == table]
+                for snapshot in original]
+        current = [[record for record in snapshot['records'] if record.get('table') == table]
+                   for snapshot in snapshots]
+        if (any(set(record) != {'table', 'row'} or not isinstance(record['row'], dict)
+                or set(record['row']) != set(fields[0])
+                or any(record['row'][key] is None or isinstance(record['row'][key], (dict, list, bool)) for key in keys)
+                for side in rows + current for record in side)
+                or any(not isinstance(row, dict) or set(row) != set(fields[0])
+                       or any(row[key] is None or isinstance(row[key], (dict, list, bool)) for key in keys)
+                       for side in selected for row in side)):
+            continue
+        try:
+            def primary(row):
+                return identity({key: row[key] for key in keys})
+
+            def payload(row):
+                return identity({key: value for key, value in row.items() if key not in keys})
+
+            originals = [[record['row'] for record in side] for side in rows]
+            primary_counts = [Counter(primary(row) for row in side) for side in originals]
+            payload_counts = [Counter(payload(row) for row in side) for side in originals]
+            row_counts = [Counter(identity(row) for row in side) for side in originals]
+            current_counts = [Counter(identity(record['row']) for record in side) for side in current]
+            selected_ids = [[primary(row) for row in side] for side in selected]
+            selected_payloads = [[payload(row) for row in side] for side in selected]
+            valid = (all(count == 1 for counts in primary_counts for count in counts.values())
+                and all(len(set(side)) == len(side) for side in selected_ids + selected_payloads)
+                and all(payload(pair['java']) == payload(pair['rust']) for pair in pairs)
+                and all(payload_counts[0][payload(row)] == 0 for row in extra)
+                and all(row_counts[side][identity(row)] == current_counts[side][identity(row)] == 1
+                        and payload_counts[side][payload(row)] == 1
+                        for side in (0, 1) for row in selected[side]))
+            tokens = [set(identity(row) for row in side) for side in selected]
+        except (TypeError, ValueError, KeyError):
+            continue
+        if not valid:
+            continue
+        for side in (0, 1):
+            snapshots[side]['records'] = [record for record in snapshots[side]['records']
+                if not (record.get('table') == table and identity(record['row']) in tokens[side])]
+        applied.append({'kind': 'reviewed_event_set', **deepcopy(rule),
+                        'java_rows': len(selected[0]), 'rust_rows': len(selected[1])})
+    return applied
+
+
+def owned_table_dump_block(block, table):
+    """Phase2 Change19: require complete owned statements before excluding a dump block."""
+    header = re.match(r"--\n-- Name: [^\n]+; Type: (?:TABLE|INDEX|CONSTRAINT|FK CONSTRAINT); "
+                      r"Schema: [^\n]+; Owner: [^\n]+\n--\n\n", block)
+    if not header:
+        return False
+    body = block[header.end():]
+    # Standard pg_dump quotes can contain semicolons and newlines. Unsupported SQL
+    # remains visible, including dollar quotes, escape strings and inline comments.
+    tokens = re.findall(r"'(?:''|[^'])*'|\"(?:\"\"|[^\"])*\"|[^'\";]+|;", body)
+    if ''.join(tokens) != body:
+        return False
+    statements, current = [], ''
+    for token in tokens:
+        if token == ';':
+            statements.append(current.strip())
+            current = ''
+        else:
+            if not token.startswith(("'", '"')) and any(marker in token for marker in ('--', '/*', '$', '\\')):
+                return False
+            if token.startswith("'") and re.search(r"\b[Ee]$", current):
+                return False
+            current += token
+    if current.strip() or not statements:
+        return False
+    target = re.escape(table)
+    identifier = r'(?:[a-z_][a-z0-9_]*|"(?:[^"]|"")+")'
+    patterns = [
+        r"CREATE TABLE " + target + r" \([\s\S]*\)",
+        r"ALTER TABLE (?:ONLY )?" + target + r" OWNER TO " + identifier,
+        r"ALTER TABLE ONLY " + target + r"\s+ADD CONSTRAINT " + identifier + " "
+        + r"(?:PRIMARY KEY|UNIQUE|FOREIGN KEY|CHECK|EXCLUDE)\b[\s\S]+",
+        r"CREATE (?:UNIQUE )?INDEX " + identifier + r" ON (?:ONLY )?" + target
+        + r" USING [a-z_][a-z0-9_]* \([\s\S]*\)(?: WHERE [\s\S]+)?",
+    ]
+    return (sum(bool(re.fullmatch(patterns[0], statement)) for statement in statements) <= 1
+            and all(any(re.fullmatch(pattern, statement) for pattern in patterns) for statement in statements))
+
+
 def apply_rust_only_tables(snapshots, tables):
     """Set aside listed Rust-only tables, retaining all raw evidence and shared objects."""
     java, rust = snapshots
@@ -475,11 +973,14 @@ def apply_rust_only_tables(snapshots, tables):
         if (any(item.get("relation") == table or item.get("table") == table
                 for item in java["records"]) or create.search(java["schema"])
                 or len(metadata) != 1 or metadata[0].get("kind") != "r"
-                or not create.search(rust["schema"])):
+                or len(create.findall(rust["schema"])) != 1):
             continue
         owned = re.compile(r"^(?:CREATE TABLE |ALTER TABLE (?:ONLY )?|"
                            r"CREATE (?:UNIQUE )?INDEX \S+ ON (?:ONLY )?)" + target, re.M)
-        blocks = re.split(r"(?=--\n-- Name: )", rust["schema"])
+        blocks = re.split(r"(?=--\n-- (?:Name: |PostgreSQL database dump complete\n))", rust["schema"])
+        selected = [block for block in blocks if owned.search(block)]
+        if not selected or not all(owned_table_dump_block(block, table) for block in selected):
+            continue
         rust["schema"] = "".join(block for block in blocks if not owned.search(block))
         rows = sum(item.get("table") == table for item in rust["records"])
         rust["records"] = [item for item in rust["records"]
@@ -804,6 +1305,26 @@ def canonical(value):
     return [type(value).__name__, value]
 
 
+def report_json(value):
+    """Phase2 Change17: retain exact JSON numbers in diagnostic catalogs and proofs."""
+    def encode(item, depth):
+        if isinstance(item, Decimal):
+            if not item.is_finite():
+                raise ValueError("Non-finite report number")
+            return str(item)
+        if isinstance(item, (dict, list)):
+            opening, closing = ("{", "}") if isinstance(item, dict) else ("[", "]")
+            if not item:
+                return opening + closing
+            indent = "  " * (depth + 1)
+            values = ([json.dumps(key) + ": " + encode(child, depth + 1)
+                       for key, child in item.items()] if isinstance(item, dict) else
+                      [encode(child, depth + 1) for child in item])
+            return opening + "\n" + indent + (",\n" + indent).join(values) + "\n" + "  " * depth + closing
+        return json.dumps(item, allow_nan=False)
+    return encode(value, 0)
+
+
 def startup_summary(java, rust):
     """Diagnostic inventory only: Rust-only objects are reported, never excluded."""
     relations, tables = [], []
@@ -894,11 +1415,12 @@ def statistics_equal(normalized):
 
 
 def snapshot_compare(left, right, report_dir, *, rust_only_manifest=None, source_root=None,
-                     approved_differences=None):
+                     approved_differences=None, emit_report=True):
     """Compare complete captured row multisets, retaining duplicate rows."""
     java, rust = (json.loads(path.read_text()) for path in (left, right))
-    (report_dir / "summary.json").write_text(json.dumps(startup_summary(java, rust), indent=2) + "\n")
+    (report_dir / "summary.json").write_text(report_json(startup_summary(java, rust)) + "\n")
     exclusions = None
+    schema_proof = (java, rust)  # Phase2 Change17: retain rows before source exclusions.
     if rust_only_manifest is not None:
         java, rust, exclusions = filter_snapshots(
             java, rust, rust_only_manifest, ROOT if source_root is None else source_root,
@@ -910,7 +1432,8 @@ def snapshot_compare(left, right, report_dir, *, rust_only_manifest=None, source
         )), ensure_ascii=True, separators=(",", ":")) for record in snapshot["records"]))
     java_rows, rust_rows = rows
     normalized, applied = apply_approved_differences(
-        java, rust, APPROVED_STARTUP_DIFFERENCES if approved_differences is None else approved_differences)
+        java, rust, APPROVED_STARTUP_DIFFERENCES if approved_differences is None else approved_differences,
+        schema_proof=schema_proof)
     accepted_rows = [Counter(json.dumps(canonical(record), ensure_ascii=True, separators=(",", ":"))
                              for record in snapshot["records"]) for snapshot in normalized]
     accepted_schema_equal = normalized[0]["schema"] == normalized[1]["schema"]
@@ -962,7 +1485,7 @@ def snapshot_compare(left, right, report_dir, *, rust_only_manifest=None, source
     }
     if exclusions is not None:
         report["rust_only_exclusions"] = exclusions
-    (report_dir / "comparison.json").write_text(json.dumps(report, indent=2) + "\n")
+    (report_dir / "comparison.json").write_text(report_json(report) + "\n")
     (report_dir / "schema.diff").write_text("".join(difflib.unified_diff(
         java["schema"].splitlines(keepends=True), rust["schema"].splitlines(keepends=True),
         fromfile="java-schema", tofile="rust-schema",
@@ -971,8 +1494,8 @@ def snapshot_compare(left, right, report_dir, *, rust_only_manifest=None, source
         normalized[0]["schema"].splitlines(keepends=True), normalized[1]["schema"].splitlines(keepends=True),
         fromfile="java-schema-after-approved-differences", tofile="rust-schema-after-approved-differences",
     )))
-    if not equal:
-        print(json.dumps(report, indent=2), flush=True)
+    if not equal and emit_report:
+        print(report_json(report), flush=True)
     return equal
 
 
@@ -1025,7 +1548,7 @@ def diff_compare(left, right, report_dir, *, approved_differences=None):
               "unapproved_record_byte_differences": differences, "approved_differences_applied": applied,
               "transactions_replayed": {side: state.transactions for side, state in (("java", left), ("rust", right))},
               "uncommitted_state_verified": False}
-    (report_dir / "comparison.json").write_text(json.dumps(report, indent=2) + "\n")
+    (report_dir / "comparison.json").write_text(report_json(report) + "\n")
     if not schema_equal:
         (report_dir / "unapproved-schema.diff").write_text("".join(difflib.unified_diff(
             normalized[0]["schema"].splitlines(keepends=True), normalized[1]["schema"].splitlines(keepends=True),
@@ -1033,21 +1556,73 @@ def diff_compare(left, right, report_dir, *, approved_differences=None):
     left.dirty.clear()
     right.dirty.clear()
     if not equal:
-        print(json.dumps(report, indent=2), flush=True)
+        print(report_json(report), flush=True)
     return equal
 
 
-def capture_snapshot(container, destination, *, include_rows=True):
+def remove_observation_triggers(schema):
+    """Phase2 Change20: remove only exact generated observation trigger definitions."""
+    identifier = r"[a-z_][a-z0-9_]*"
+    pattern = re.compile(
+        r"^--\n-- Name: (?P<table>" + identifier + r") (?P<trigger>moqui_regression_(?:row|truncate)); "
+        r"Type: TRIGGER; Schema: (?P<schema>" + identifier + r"); Owner: (?:" + identifier + r"|-)\n--\n\n"
+        r"(?P<statement>[^\n]+);(?:\n{1,3}|$)", re.M)
+
+    # A matching-looking header inside a function body or SQL literal is not a dump object.
+    token = re.compile(r"--[^\n]*(?:\n|$)|/\*|\b[Ee]'(?:\\.|''|[^'\\])*'|"
+                       r"'(?:''|[^'])*'|\"(?:\"\"|[^\"])*\"|"
+                       r"(?P<tag>\$(?:[a-zA-Z_][a-zA-Z_0-9]*)?\$).*?(?P=tag)", re.S)
+    protected, position = [], 0
+    while found := token.search(schema, position):
+        start, end = found.span()
+        if found[0] == '/*':
+            depth = 1
+            while depth:
+                boundary = re.search(r"/\*|\*/", schema[end:])
+                if boundary is None:
+                    end = len(schema)
+                    break
+                end += boundary.end()
+                depth += 1 if boundary[0] == '/*' else -1
+        if not found[0].startswith('--'):
+            protected.append((start, end))
+        position = end
+    starts = [start for start, _ in protected]
+
+    def remove(match):
+        interval = bisect_right(starts, match.start()) - 1
+        if interval >= 0 and match.start() < protected[interval][1]:
+            return match[0]
+        table = match['schema'] + '.' + match['table']
+        trigger = match['trigger']
+        events, level = (('INSERT OR DELETE OR UPDATE', 'ROW') if trigger.endswith('_row')
+                         else ('TRUNCATE', 'STATEMENT'))
+        expected = (f"CREATE TRIGGER {trigger} AFTER {events} ON {table} FOR EACH {level} "
+                    "EXECUTE FUNCTION moqui_regression.row_change()")
+        # Altered enable states remain application-visible even when CREATE is unchanged.
+        altered_state = re.compile(r"^ALTER TABLE (?:ONLY )?" + re.escape(table)
+            + r"\s+(?:ENABLE(?: REPLICA| ALWAYS)?|DISABLE) TRIGGER (?:"
+            + re.escape(trigger) + r"|ALL|USER);$", re.M)
+        if (match['statement'] != expected or schema.count(expected + ';') != 1
+                or altered_state.search(schema)):
+            return match[0]
+        return ''
+
+    return pattern.sub(remove, schema)
+
+
+def capture_snapshot(container, destination, *, include_rows=True, snapshot_id=None):
     """Capture schema and committed records while application execution is paused."""
+    # Phase 2, Change 13: callers may share an exported row snapshot with pg_dump.
+    if snapshot_id is not None and not re.fullmatch(r"[0-9A-Fa-f]+-[0-9A-Fa-f]+-[0-9]+", snapshot_id):
+        raise ValueError("Invalid exported PostgreSQL snapshot ID")
+    snapshot_options = ["--snapshot=" + snapshot_id] if snapshot_id else []
     schema = subprocess.check_output([
         "docker", "exec", container, "pg_dump", "-U", "moqui", "-d", "moqui",
         "--schema-only", "--restrict-key=MoquiRegression", "--lock-wait-timeout=5000",
         f"--exclude-schema={TRACKING_SCHEMA}",
-    ], text=True, timeout=60)
-    # Observation triggers are harness infrastructure, not application schema.
-    schema = ''.join(block for block in re.split(r'(?=--\n-- Name: )', schema)
-                     if not re.search(r'^CREATE TRIGGER moqui_regression_(?:row|truncate) .*'
-                                      r'EXECUTE FUNCTION moqui_regression\.row_change\(\);$', block, re.M))
+    ] + snapshot_options, text=True, timeout=60)
+    schema = remove_observation_triggers(schema)
     sql = r"""
 BEGIN ISOLATION LEVEL REPEATABLE READ READ ONLY;
 SET LOCAL statement_timeout = '10s';
@@ -1055,8 +1630,74 @@ SET LOCAL timezone = 'UTC';
 SET LOCAL datestyle = 'ISO, YMD';
 SET LOCAL intervalstyle = 'postgres';
 SET LOCAL extra_float_digits = 3;
+SET LOCAL search_path = pg_catalog;
 SELECT json_build_object(
   'relation', n.nspname || '.' || c.relname, 'kind', c.relkind,
+  'view_definition', CASE WHEN c.relkind IN ('v', 'm') THEN pg_get_viewdef(c.oid, false) END,
+  'extension', (SELECT json_build_object('name', e.extname, 'version', e.extversion)
+    FROM pg_depend dep JOIN pg_extension e ON e.oid=dep.refobjid
+    WHERE dep.classid='pg_class'::regclass AND dep.objid=c.oid AND dep.objsubid=0
+      AND dep.refclassid='pg_extension'::regclass AND dep.deptype='e'),
+  -- Phase2 Change17: capture object proof in the same row snapshot.
+  'schema_objects', COALESCE((SELECT json_agg(objects.value ORDER BY objects.value->>'name', objects.value->>'kind') FROM (
+    SELECT json_build_object(
+      'kind', 'index', 'name', ic.relname, 'method', am.amname,
+      'definition', pg_get_indexdef(i.indexrelid),
+      'columns', (SELECT json_agg(a.attname ORDER BY k.ord)
+        FROM unnest(i.indkey) WITH ORDINALITY k(num, ord)
+        LEFT JOIN pg_attribute a ON a.attrelid=c.oid AND a.attnum=k.num),
+      'key_metadata', (SELECT json_agg(json_build_object(
+          'opclass', ons.nspname || '.' || op.opcname, 'collation', cn.nspname || '.' || coll.collname,
+          'option', k.opt) ORDER BY k.ord)
+        FROM unnest(i.indclass, i.indcollation, i.indoption) WITH ORDINALITY AS k(cls, coll, opt, ord)
+        JOIN pg_opclass op ON op.oid=k.cls JOIN pg_namespace ons ON ons.oid=op.opcnamespace
+        LEFT JOIN pg_collation coll ON coll.oid=k.coll LEFT JOIN pg_namespace cn ON cn.oid=coll.collnamespace),
+      'key_count', i.indnkeyatts, 'attribute_count', i.indnatts,
+      'unique', i.indisunique, 'primary', i.indisprimary, 'exclusion', i.indisexclusion,
+      'valid', i.indisvalid, 'ready', i.indisready, 'live', i.indislive,
+      'expressions', pg_get_expr(i.indexprs, i.indrelid),
+      'predicate', pg_get_expr(i.indpred, i.indrelid),
+      'constraint_backed', EXISTS(SELECT 1 FROM pg_constraint co WHERE co.conindid=i.indexrelid),
+      'plain', NOT EXISTS(SELECT 1 FROM unnest(i.indkey, i.indclass, i.indcollation, i.indoption)
+          AS k(num, cls, coll, opt)
+        LEFT JOIN pg_attribute a ON a.attrelid=c.oid AND a.attnum=k.num
+        LEFT JOIN pg_opclass op ON op.oid=k.cls
+        LEFT JOIN pg_namespace ons ON ons.oid=op.opcnamespace
+        WHERE k.num <= 0 OR k.opt IS DISTINCT FROM 0 OR op.opcdefault IS DISTINCT FROM true
+          OR ons.nspname IS DISTINCT FROM 'pg_catalog' OR k.coll IS DISTINCT FROM a.attcollation),
+      'options', ic.reloptions, 'owner', pg_get_userbyid(ic.relowner),
+      'partition', ic.relispartition,
+      'table_inherits', EXISTS(SELECT 1 FROM pg_inherits inh WHERE inh.inhrelid=c.oid OR inh.inhparent=c.oid)
+    ) AS value
+    FROM pg_index i JOIN pg_class ic ON ic.oid=i.indexrelid JOIN pg_am am ON am.oid=ic.relam
+    WHERE i.indrelid=c.oid
+    UNION ALL
+    SELECT json_build_object(
+      'kind', 'foreign_key', 'name', co.conname, 'definition', pg_get_constraintdef(co.oid, false),
+      'columns', (SELECT json_agg(a.attname ORDER BY k.ord) FROM unnest(co.conkey) WITH ORDINALITY k(num, ord)
+        JOIN pg_attribute a ON a.attrelid=co.conrelid AND a.attnum=k.num),
+      'target_column_types', (SELECT json_agg(format_type(a.atttypid, a.atttypmod) ORDER BY k.ord)
+        FROM unnest(co.confkey) WITH ORDINALITY k(num, ord)
+        JOIN pg_attribute a ON a.attrelid=co.confrelid AND a.attnum=k.num),
+      'target', tn.nspname || '.' || tc.relname,
+      'target_columns', (SELECT json_agg(a.attname ORDER BY k.ord) FROM unnest(co.confkey) WITH ORDINALITY k(num, ord)
+        JOIN pg_attribute a ON a.attrelid=co.confrelid AND a.attnum=k.num),
+      'enforced', COALESCE((to_jsonb(co)->>'conenforced')::boolean, true),
+      'trigger_states', (SELECT json_agg(t.tgenabled ORDER BY t.tgenabled) FROM pg_trigger t WHERE t.tgconstraint=co.oid),
+      'validated', co.convalidated, 'deferrable', co.condeferrable, 'deferred', co.condeferred,
+      'match', co.confmatchtype, 'update', co.confupdtype, 'delete', co.confdeltype,
+      'local', co.conislocal, 'inherited', co.coninhcount, 'parent_constraint', co.conparentid <> 0,
+      'target_key_valid', ti.indisvalid, 'target_key_unique', ti.indisunique,
+      'target_key_plain', ti.indexprs IS NULL AND ti.indpred IS NULL AND ti.indnkeyatts=cardinality(co.confkey),
+      'target_key_definition', pg_get_indexdef(co.conindid),
+      'target_kind', tc.relkind, 'target_partition', tc.relispartition,
+      'table_inherits', EXISTS(SELECT 1 FROM pg_inherits inh WHERE inh.inhrelid=c.oid OR inh.inhparent=c.oid
+        OR inh.inhrelid=tc.oid OR inh.inhparent=tc.oid)
+    ) AS value
+    FROM pg_constraint co JOIN pg_class tc ON tc.oid=co.confrelid
+    JOIN pg_namespace tn ON tn.oid=tc.relnamespace JOIN pg_index ti ON ti.indexrelid=co.conindid
+    WHERE co.conrelid=c.oid AND co.contype='f'
+  ) objects), '[]'::json),
   'columns', (SELECT json_agg(json_build_object(
     'name', a.attname, 'type', format_type(a.atttypid, a.atttypmod),
     'not_null', a.attnotnull, 'default', pg_get_expr(d.adbin, d.adrelid)) ORDER BY a.attnum)
@@ -1085,6 +1726,9 @@ ORDER BY n.nspname, c.relname
 \gexec
 COMMIT;
 """
+    if snapshot_id:
+        sql = sql.replace("BEGIN ISOLATION LEVEL REPEATABLE READ READ ONLY;",
+            "BEGIN ISOLATION LEVEL REPEATABLE READ READ ONLY;\nSET TRANSACTION SNAPSHOT '" + snapshot_id + "';", 1)
     records = subprocess.check_output([
         "docker", "exec", "-i", container, "psql", "-X", "-qAt",
         "--set", "ON_ERROR_STOP=1", "-U", "moqui", "-d", "moqui",
@@ -1207,7 +1851,7 @@ def _refresh_incremental_catalog(container, state, destination):
     integrity = r"""
 DO $$ BEGIN
   IF (SELECT count(*) FROM pg_event_trigger
-      WHERE evtenabled IN ('O','A') AND (
+      WHERE evtenabled='O' AND evttags IS NULL AND (
         (evtname='moqui_regression_ddl' AND evtevent='ddl_command_end'
          AND evtfoid='moqui_regression.schema_change'::regproc) OR
         (evtname='moqui_regression_drop' AND evtevent='sql_drop'
@@ -1217,8 +1861,13 @@ DO $$ BEGIN
     WHERE c.relkind IN ('r','p') AND n.nspname !~ '^pg_'
       AND n.nspname NOT IN ('information_schema','moqui_regression')
       AND (SELECT count(*) FROM pg_trigger t WHERE t.tgrelid=c.oid
-           AND t.tgname IN ('moqui_regression_row','moqui_regression_truncate')
-           AND t.tgenabled IN ('O','A') AND t.tgfoid='moqui_regression.row_change'::regproc) <> 2)
+           -- Phase2 Change20: matching names alone cannot prove complete observation.
+           AND ((t.tgname='moqui_regression_row' AND t.tgtype=29)
+             OR (t.tgname='moqui_regression_truncate' AND t.tgtype=32))
+           AND t.tgenabled='O' AND t.tgfoid='moqui_regression.row_change'::regproc
+           AND t.tgqual IS NULL AND t.tgnargs=0 AND t.tgattr=''::int2vector
+           AND octet_length(t.tgargs)=0 AND t.tgconstraint=0 AND NOT t.tgisinternal
+           AND NOT t.tgdeferrable AND NOT t.tginitdeferred) <> 2)
   THEN RAISE EXCEPTION 'Incremental observation trigger missing or disabled'; END IF;
 END $$;
 """

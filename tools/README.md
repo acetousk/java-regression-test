@@ -1,0 +1,122 @@
+# Phase-two database validation
+
+Change 1 runs isolated checks against the currently built Java and Rust artifacts.
+It copies both runtimes, starts disposable PostgreSQL containers and uses HTTP
+ports 28080 and 28081. It never edits the shared build manifest or checkouts.
+
+```sh
+mise exec -- python tools/phase_two_db.py --boot-gate .runs/boot-check/gate.json --output .runs/phase-two-db/paired-new
+```
+
+Use a new output directory each time. Java 21+ is required; `--java-home` can
+select it explicitly. The runner exits nonzero if whole-database identity fails,
+even when selected business scenarios pass. Evidence contains database values
+and session credentials and must remain private.
+
+The runner inventories current source services/specs (excluding disabled component
+templates), performs enumeration and unit/conversion scenarios through authenticated
+Tools service calls, and checks persisted state and selected business deltas.
+Raw selected-row verdicts compare the ordered SQL JSON output as actual UTF-8
+bytes, retaining before/after files and hashes. Separate semantic business
+projections explicitly omit `last_updated_stamp` and preserve decimal precision. Full schema, typed JSON
+row multisets and native sequences are compared after graceful shutdown with the
+existing harness. Raw and existing-approval verdicts remain separate.
+
+Change 2 reproduces all 45 selected Rust specs (44 regression specs plus the explicitly
+requested ETL acceptance scenario) without rebuilding:
+
+```sh
+python tools/phase_two_rust.py --boot-gate .runs/boot-check/gate.json --output .runs/phase-two-db \
+  --runtime .runs/phase-two-db/paired-new/engines/rust/runtime
+```
+
+The tracked runner includes every selector, runs three independent scratch
+PostgreSQL databases sequentially, retains JUnit/logs and records exact commands,
+exit codes and the binary hash in `rust-commands.json`. It refuses to overwrite
+existing Rust results. The feature assertion count is recorded in the report and depends on the pinned
+current source; later source changes can change that count. Call-count coverage is
+plain text in `rust-service-coverage.txt`; counts include refusals and nested calls,
+not per-service success proof. Rust suites are not Java parity tests.
+
+```sh
+python tools/phase_two_report.py --run .runs/phase-two-db --paired paired-new
+```
+
+Change 3 combines JUnit evidence and paired results, retaining budget warnings,
+unrun source coverage and noncomparable services. Historical ERP business specs
+are inapplicable when their components are absent; this runner installs none.
+
+When Rust rerun evidence is retained in a separate directory, select it explicitly:
+
+```sh
+python tools/phase_two_report.py --run .runs/phase-two-db --paired paired-05 \
+  --rust-results .runs/phase-two-db/reproduced
+```
+
+For the supplied-data-time check, use rebuilt engines containing
+`MOQUI_TEST_DATA_CLOCK_FILE` support and a passing boot gate, then run:
+
+```sh
+mise exec -- python tools/phase_two_db.py --boot-gate .runs/boot-check/gate.json --data-clock --output .runs/phase-two-clock
+```
+
+Change 5 supplies a private shared clock file, disables automatic schedules in
+these disposable runtimes, and verifies startup/create/update stored timestamps
+against the supplied assignment. Each completed business pair advances time;
+clock mode additionally requires literal selected-row byte equality, including
+`last_updated_stamp`. The whole-database raw and reviewed verdicts remain
+independent. This is not transaction pairing or a test of optimistic locking.
+Disabled clock mode preserves the original diagnostic projection behavior.
+
+Change 7 requires a successful readiness/graceful-shutdown boot gate matching both
+current artifact hashes before either phase-two runner launches. Both retain the
+gate and its source path. Change 8 records the selected suite inventory, source
+fingerprint and per-file JUnit hashes; reporting rejects incomplete, unrelated,
+empty, failed, skipped, altered or wrong-selector results. Historical evidence
+without this manifest remains historical and cannot satisfy the new guard.
+
+Change 9 requires the paired provenance and both retained boot contexts to agree
+on Java/Rust artifact hashes, and requires the paired and independent Rust source
+revision/diff fingerprints to match. Mismatched or missing provenance prevents a
+combined phase pass and suite/service attribution to the paired source inventory;
+independent suite results remain separately visible. Historical reports use only
+retained evidence, never mutable current checkout artifacts.
+
+Change 10 fingerprints the copied runtime actually executed. All files under
+base-component, dev-component, component and conf are source inputs (including
+resources and specs); only .git, target and Python bytecode cache directories are
+omitted. Root database/log/session/install/save/SFTP state and .env are outside
+these source trees. Generated connection and clock override configs are retained
+separately by the paired runner. Source directory symlinks are refused.
+Both runners require a matching current source copy before execution. Independent
+commands record the source-manifest digest and verify it before/after each run.
+The report requires matching retained runtime source manifests; it never reads
+current runtime files when assessing historical evidence. Missing legacy runtime
+identity cannot establish combined pass or inventory attribution.
+
+Change 11 accepts `--differences PATH` for a separately reviewed rules file.
+The runner retains the exact input and its hash. The controller also retains
+the rules used for comparison. Raw database comparison is unchanged.
+
+Change 12 excludes mutable runtime directories only at the runtime root.
+Nested source assets with names such as `save` remain in copied runtimes.
+The source identity guard remains strict.
+
+Phase 2 Change 14: both phase-two entry points check the Java and Rust runtime
+source digests against the boot gate. They copy both verified artifacts into the
+private run directory before launch. Commands use those copies. Provenance keeps
+the source path, launch path, and expected checksum. A source change requires a
+new boot gate even when the executable bytes have not changed.
+
+Phase 2 Change 18 keeps `phase_passed` as the raw equality gate. The separate
+`approved_compatibility_passed` result requires the retained active rules, all 16
+paired cases, literal selected-row bytes, supplied-clock proof, graceful shutdown,
+and the complete matching Rust suite evidence. `uncovered_operations` lists
+services without a successful paired probe. Independent Rust calls do not prove
+Java parity. Approved compatibility never changes the raw equality result.
+
+The approved result also requires `comparison-inputs.json` hashes for the final
+snapshots, rules, shutdown evidence, clock proof, and paired operation files.
+The report recomputes the database comparison in a temporary directory.
+It checks each recorded assignment against persisted milliseconds and retained
+row timestamps. Read and refused operations must preserve their selected rows.
