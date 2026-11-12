@@ -1,0 +1,6 @@
+{
+  "name": "exact-ui-acceptance",
+  "private": true,
+  "scripts": {"test": "node --test compare.test.cjs"},
+  "devDependencies": {"@playwright/test": "1.61.1", "pngjs": "7.0.0"}
+}
