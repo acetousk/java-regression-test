@@ -48,3 +48,14 @@ test('engine-specific plans reject missing or empty counterpart contracts',()=>{
   {...valid,engineSteps:{java:[null],rust:[{action:'click'}]}}])
   assert.throws(()=>resolveEngineOperation('/apps/old',op,'java'));
 });
+
+test('qapps exports use explicit HTML mappings and preserve exact POST contracts',()=>{
+ const path='/apps/old/DocumentExport.json?id=one';
+ const op={engineRoutes:{rust:{qapps:'/qapps/new',html:'/apps/new'}},coveredTransitions:[{name:'export',path,method:'POST'}],steps:[]};
+ const resolved=resolveEngineOperation('/qapps/old',op,'rust').operation;
+ assert.deepEqual(resolved.coveredTransitions,[{name:'export',path:'/apps/new/DocumentExport.json?id=one',method:'POST'}]);
+ assert.equal(op.coveredTransitions[0].path,path);
+ assert.equal(resolveEngineOperation('/qapps/old',{...op,coveredTransitions:[{name:'other',path:'/apps/older/export',method:'POST'}]},'rust').operation.coveredTransitions[0].path,'/apps/older/export');
+ assert.equal(resolveEngineOperation('/qapps/old',{...op,engineRoutes:{rust:{qapps:'/qapps/new'}}},'rust').operation.coveredTransitions[0].path,path);
+ assert.throws(()=>resolveEngineOperation('/qapps/old',{...op,engineRoutes:{rust:{qapps:'/qapps/new',html:'https://example.invalid/'}}},'rust'));
+});

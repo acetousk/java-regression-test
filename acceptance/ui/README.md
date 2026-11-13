@@ -324,3 +324,9 @@ proof and an exact start submission from this operation. It can click one owned
 control and require captured stop proof. Cleanup results remain separate from success
 observations. Missing ownership prevents action; cleanup failure fails the capture.
 Original failures remain recorded. Engine lifecycle cleanup still runs afterward.
+
+28. Exact HTML action mappings during qapps captures.
+
+When a qapps operation declares an engine's HTML screen route, action targets
+under that screen's `/apps/` path use the explicit HTML mapping. Queries and
+methods remain exact. Unrelated paths and raw captured requests stay unchanged.
