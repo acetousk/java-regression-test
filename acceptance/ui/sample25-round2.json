@@ -1,0 +1,787 @@
+{
+  "change": 8,
+  "round": 2,
+  "seed": "91e6459f73f302a0729db4e19687bde52e104b5db38d594c8df2933881d22901",
+  "method": "First 25 keys ranked by SHA256(seed + NUL + key), using one newly generated random seed before inspecting selection",
+  "population": "28 shared full application/authentication screens, excluding all prior 25, known navigation aliases, standalone fragments and infrastructure shells",
+  "eligible": [
+    "tools/System/AuditLog.xml",
+    "tools/System/Cache/CacheElements.xml",
+    "tools/System/DataDocument/Edit/ViewDataDocument.xml",
+    "tools/System/DataDocument/Index.xml",
+    "tools/System/EntitySync/EntitySyncDetail.xml",
+    "tools/System/EntitySync/EntitySyncHistory.xml",
+    "tools/System/EntitySync/EntitySyncList.xml",
+    "tools/System/Instance/InstanceDetail.xml",
+    "tools/System/Print/PrintJob/PrintJobDetail.xml",
+    "tools/System/Security/ActiveUsers.xml",
+    "tools/System/Security/ArtifactGroup/ArtifactGroupList.xml",
+    "tools/System/Security/UserGroup/GroupUsers.xml",
+    "tools/System/Security/UserGroup/UserGroupDetail.xml",
+    "tools/System/ServiceJob/JobRuns/JobRunDetail.xml",
+    "tools/System/ServiceJob/Jobs/ServiceJobList.xml",
+    "tools/System/SystemMessage/Message/SystemMessageDetail.xml",
+    "tools/System/SystemMessage/Remote/MessageRemoteDetail.xml",
+    "tools/System/SystemMessage/Remote/MessageRemoteList.xml",
+    "tools/System/SystemMessage/Type/MessageTypeDetail.xml",
+    "tools/System/SystemMessage/Type/MessageTypeList.xml",
+    "tools/System/ThreadList.xml",
+    "tools/System/Visit/VisitDetail.xml",
+    "tools/Tools/Service/ServiceLoadRunner.xml",
+    "tools/Tools/Service/ServiceReference.xml",
+    "tools/Tools/StatusFlows.xml",
+    "webroot/webroot/ChangePassword.xml",
+    "webroot/webroot/Login.xml",
+    "webroot/webroot/SecondFactor.xml"
+  ],
+  "selected": [
+    {
+      "key": "tools/System/DataDocument/Edit/ViewDataDocument.xml",
+      "routes": [
+        "/apps/system/DataDocument/Edit/ViewDataDocument",
+        "/qapps/system/DataDocument/Edit/ViewDataDocument"
+      ],
+      "modes": [
+        "html",
+        "qapps"
+      ],
+      "required_parameters": {
+        "java": [
+          "dataDocumentId"
+        ],
+        "rust": [
+          "dataDocumentId"
+        ]
+      },
+      "status": "selected; not yet exercised"
+    },
+    {
+      "key": "tools/System/Instance/InstanceDetail.xml",
+      "routes": [
+        "/apps/system/Instance/InstanceDetail",
+        "/qapps/system/Instance/InstanceDetail"
+      ],
+      "modes": [
+        "html",
+        "qapps"
+      ],
+      "required_parameters": {
+        "java": [
+          "appInstanceId"
+        ],
+        "rust": [
+          "appInstanceId"
+        ]
+      },
+      "status": "selected; not yet exercised"
+    },
+    {
+      "key": "webroot/webroot/SecondFactor.xml",
+      "routes": [
+        "/SecondFactor"
+      ],
+      "modes": [
+        "html"
+      ],
+      "required_parameters": {
+        "java": [],
+        "rust": []
+      },
+      "status": "selected; not yet exercised"
+    },
+    {
+      "key": "tools/System/Cache/CacheElements.xml",
+      "routes": [
+        "/apps/system/Cache/CacheElements",
+        "/qapps/system/Cache/CacheElements"
+      ],
+      "modes": [
+        "html",
+        "qapps"
+      ],
+      "required_parameters": {
+        "java": [
+          "cacheName"
+        ],
+        "rust": [
+          "cacheName"
+        ]
+      },
+      "status": "selected; not yet exercised"
+    },
+    {
+      "key": "tools/System/SystemMessage/Type/MessageTypeDetail.xml",
+      "routes": [
+        "/apps/system/SystemMessage/Type/MessageTypeDetail",
+        "/qapps/system/SystemMessage/Type/MessageTypeDetail"
+      ],
+      "modes": [
+        "html",
+        "qapps"
+      ],
+      "required_parameters": {
+        "java": [
+          "systemMessageTypeId"
+        ],
+        "rust": [
+          "systemMessageTypeId"
+        ]
+      },
+      "status": "selected; not yet exercised"
+    },
+    {
+      "key": "tools/System/EntitySync/EntitySyncDetail.xml",
+      "routes": [
+        "/apps/system/EntitySync/EntitySyncDetail",
+        "/qapps/system/EntitySync/EntitySyncDetail"
+      ],
+      "modes": [
+        "html",
+        "qapps"
+      ],
+      "required_parameters": {
+        "java": [
+          "entitySyncId"
+        ],
+        "rust": [
+          "entitySyncId"
+        ]
+      },
+      "status": "selected; not yet exercised"
+    },
+    {
+      "key": "tools/System/ThreadList.xml",
+      "routes": [
+        "/apps/system/ThreadList",
+        "/qapps/system/ThreadList"
+      ],
+      "modes": [
+        "html",
+        "qapps"
+      ],
+      "required_parameters": {
+        "java": [],
+        "rust": []
+      },
+      "status": "selected; not yet exercised"
+    },
+    {
+      "key": "tools/System/SystemMessage/Type/MessageTypeList.xml",
+      "routes": [
+        "/apps/system/SystemMessage/Type/MessageTypeList",
+        "/qapps/system/SystemMessage/Type/MessageTypeList"
+      ],
+      "modes": [
+        "html",
+        "qapps"
+      ],
+      "required_parameters": {
+        "java": [],
+        "rust": []
+      },
+      "status": "selected; not yet exercised"
+    },
+    {
+      "key": "tools/System/Print/PrintJob/PrintJobDetail.xml",
+      "routes": [
+        "/apps/system/Print/PrintJob/PrintJobDetail",
+        "/qapps/system/Print/PrintJob/PrintJobDetail"
+      ],
+      "modes": [
+        "html",
+        "qapps"
+      ],
+      "required_parameters": {
+        "java": [
+          "printJobId"
+        ],
+        "rust": [
+          "printJobId"
+        ]
+      },
+      "status": "selected; not yet exercised"
+    },
+    {
+      "key": "tools/System/Security/ActiveUsers.xml",
+      "routes": [
+        "/apps/system/Security/ActiveUsers",
+        "/qapps/system/Security/ActiveUsers"
+      ],
+      "modes": [
+        "html",
+        "qapps"
+      ],
+      "required_parameters": {
+        "java": [],
+        "rust": []
+      },
+      "status": "selected; not yet exercised"
+    },
+    {
+      "key": "tools/System/Visit/VisitDetail.xml",
+      "routes": [
+        "/apps/system/Visit/VisitDetail",
+        "/qapps/system/Visit/VisitDetail"
+      ],
+      "modes": [
+        "html",
+        "qapps"
+      ],
+      "required_parameters": {
+        "java": [
+          "visitId"
+        ],
+        "rust": [
+          "visitId"
+        ]
+      },
+      "status": "selected; not yet exercised"
+    },
+    {
+      "key": "webroot/webroot/ChangePassword.xml",
+      "routes": [
+        "/ChangePassword"
+      ],
+      "modes": [
+        "html"
+      ],
+      "required_parameters": {
+        "java": [],
+        "rust": []
+      },
+      "status": "selected; not yet exercised"
+    },
+    {
+      "key": "tools/Tools/Service/ServiceLoadRunner.xml",
+      "routes": [
+        "/qapps/tools/Service/ServiceLoadRunner"
+      ],
+      "modes": [
+        "qapps"
+      ],
+      "required_parameters": {
+        "java": [],
+        "rust": []
+      },
+      "status": "selected; not yet exercised"
+    },
+    {
+      "key": "tools/System/Security/ArtifactGroup/ArtifactGroupList.xml",
+      "routes": [
+        "/apps/system/Security/ArtifactGroup/ArtifactGroupList",
+        "/qapps/system/Security/ArtifactGroup/ArtifactGroupList"
+      ],
+      "modes": [
+        "html",
+        "qapps"
+      ],
+      "required_parameters": {
+        "java": [],
+        "rust": []
+      },
+      "status": "selected; not yet exercised"
+    },
+    {
+      "key": "tools/System/ServiceJob/Jobs/ServiceJobList.xml",
+      "routes": [
+        "/apps/system/ServiceJob/Jobs/ServiceJobList",
+        "/qapps/system/ServiceJob/Jobs/ServiceJobList"
+      ],
+      "modes": [
+        "html",
+        "qapps"
+      ],
+      "required_parameters": {
+        "java": [],
+        "rust": []
+      },
+      "status": "selected; not yet exercised"
+    },
+    {
+      "key": "tools/Tools/Service/ServiceReference.xml",
+      "routes": [
+        "/apps/tools/Service/ServiceReference",
+        "/qapps/tools/Service/ServiceReference"
+      ],
+      "modes": [
+        "html",
+        "qapps"
+      ],
+      "required_parameters": {
+        "java": [],
+        "rust": []
+      },
+      "status": "selected; not yet exercised"
+    },
+    {
+      "key": "tools/System/DataDocument/Index.xml",
+      "routes": [
+        "/apps/system/DataDocument/Index",
+        "/qapps/system/DataDocument/Index"
+      ],
+      "modes": [
+        "html",
+        "qapps"
+      ],
+      "required_parameters": {
+        "java": [],
+        "rust": []
+      },
+      "status": "selected; not yet exercised"
+    },
+    {
+      "key": "tools/System/EntitySync/EntitySyncList.xml",
+      "routes": [
+        "/apps/system/EntitySync/EntitySyncList",
+        "/qapps/system/EntitySync/EntitySyncList"
+      ],
+      "modes": [
+        "html",
+        "qapps"
+      ],
+      "required_parameters": {
+        "java": [],
+        "rust": []
+      },
+      "status": "selected; not yet exercised"
+    },
+    {
+      "key": "tools/System/ServiceJob/JobRuns/JobRunDetail.xml",
+      "routes": [
+        "/apps/system/ServiceJob/JobRuns/JobRunDetail",
+        "/qapps/system/ServiceJob/JobRuns/JobRunDetail"
+      ],
+      "modes": [
+        "html",
+        "qapps"
+      ],
+      "required_parameters": {
+        "java": [
+          "jobRunId"
+        ],
+        "rust": [
+          "jobRunId"
+        ]
+      },
+      "status": "selected; not yet exercised"
+    },
+    {
+      "key": "tools/System/EntitySync/EntitySyncHistory.xml",
+      "routes": [
+        "/apps/system/EntitySync/EntitySyncHistory",
+        "/qapps/system/EntitySync/EntitySyncHistory"
+      ],
+      "modes": [
+        "html",
+        "qapps"
+      ],
+      "required_parameters": {
+        "java": [
+          "entitySyncId"
+        ],
+        "rust": [
+          "entitySyncId"
+        ]
+      },
+      "status": "selected; not yet exercised"
+    },
+    {
+      "key": "tools/System/Security/UserGroup/UserGroupDetail.xml",
+      "routes": [
+        "/apps/system/Security/UserGroup/UserGroupDetail",
+        "/qapps/system/Security/UserGroup/UserGroupDetail"
+      ],
+      "modes": [
+        "html",
+        "qapps"
+      ],
+      "required_parameters": {
+        "java": [
+          "userGroupId"
+        ],
+        "rust": [
+          "userGroupId"
+        ]
+      },
+      "status": "selected; not yet exercised"
+    },
+    {
+      "key": "tools/System/SystemMessage/Message/SystemMessageDetail.xml",
+      "routes": [
+        "/apps/system/SystemMessage/Message/SystemMessageDetail",
+        "/qapps/system/SystemMessage/Message/SystemMessageDetail"
+      ],
+      "modes": [
+        "html",
+        "qapps"
+      ],
+      "required_parameters": {
+        "java": [
+          "systemMessageId"
+        ],
+        "rust": [
+          "systemMessageId"
+        ]
+      },
+      "status": "selected; not yet exercised"
+    },
+    {
+      "key": "tools/Tools/StatusFlows.xml",
+      "routes": [
+        "/apps/tools/StatusFlows",
+        "/qapps/tools/StatusFlows"
+      ],
+      "modes": [
+        "html",
+        "qapps"
+      ],
+      "required_parameters": {
+        "java": [],
+        "rust": []
+      },
+      "status": "selected; not yet exercised"
+    },
+    {
+      "key": "tools/System/AuditLog.xml",
+      "routes": [
+        "/apps/system/AuditLog",
+        "/qapps/system/AuditLog"
+      ],
+      "modes": [
+        "html",
+        "qapps"
+      ],
+      "required_parameters": {
+        "java": [],
+        "rust": []
+      },
+      "status": "selected; not yet exercised"
+    },
+    {
+      "key": "tools/System/Security/UserGroup/GroupUsers.xml",
+      "routes": [
+        "/apps/system/Security/UserGroup/GroupUsers",
+        "/qapps/system/Security/UserGroup/GroupUsers"
+      ],
+      "modes": [
+        "html",
+        "qapps"
+      ],
+      "required_parameters": {
+        "java": [
+          "userGroupId"
+        ],
+        "rust": [
+          "userGroupId"
+        ]
+      },
+      "status": "selected; not yet exercised"
+    }
+  ],
+  "exclusions": [
+    {
+      "key": "framework/AddedEmailAuthcFactor.xml",
+      "reason": "infrastructure, error page or shell outside application-screen population"
+    },
+    {
+      "key": "framework/EmailAuthcFactorSent.xml",
+      "reason": "infrastructure, error page or shell outside application-screen population"
+    },
+    {
+      "key": "framework/NotificationEmail.xml",
+      "reason": "infrastructure, error page or shell outside application-screen population"
+    },
+    {
+      "key": "framework/PasswordReset.xml",
+      "reason": "infrastructure, error page or shell outside application-screen population"
+    },
+    {
+      "key": "framework/ScreenRenderEmail.xml",
+      "reason": "infrastructure, error page or shell outside application-screen population"
+    },
+    {
+      "key": "framework/SingleUseCode.xml",
+      "reason": "infrastructure, error page or shell outside application-screen population"
+    },
+    {
+      "key": "tools/System.xml",
+      "reason": "previously audited navigation alias"
+    },
+    {
+      "key": "tools/System/Cache.xml",
+      "reason": "previously audited navigation alias"
+    },
+    {
+      "key": "tools/System/Cache/CacheList.xml",
+      "reason": "previous sample"
+    },
+    {
+      "key": "tools/System/DataDocument.xml",
+      "reason": "previously audited navigation alias"
+    },
+    {
+      "key": "tools/System/DataDocument/Edit.xml",
+      "reason": "previously audited navigation alias"
+    },
+    {
+      "key": "tools/System/DataDocument/Edit/DataDocFields.xml",
+      "reason": "previous sample"
+    },
+    {
+      "key": "tools/System/DataDocument/Edit/DataDocFields/FieldList.xml",
+      "reason": "standalone fragment/dialog; not counted as a separate full screen"
+    },
+    {
+      "key": "tools/System/DataDocument/Edit/EditDataDocument.xml",
+      "reason": "previous sample"
+    },
+    {
+      "key": "tools/System/DataDocument/Edit/FindDataDocument.xml",
+      "reason": "previous sample"
+    },
+    {
+      "key": "tools/System/DataDocument/ViewDocument.xml",
+      "reason": "standalone fragment/dialog; not counted as a separate full screen"
+    },
+    {
+      "key": "tools/System/EntitySync.xml",
+      "reason": "previously audited navigation alias"
+    },
+    {
+      "key": "tools/System/Instance.xml",
+      "reason": "previously audited navigation alias"
+    },
+    {
+      "key": "tools/System/Instance/InstanceList.xml",
+      "reason": "previous sample"
+    },
+    {
+      "key": "tools/System/Localization.xml",
+      "reason": "previously audited navigation alias"
+    },
+    {
+      "key": "tools/System/Localization/EntityFields.xml",
+      "reason": "previous sample"
+    },
+    {
+      "key": "tools/System/Localization/Messages.xml",
+      "reason": "previous sample"
+    },
+    {
+      "key": "tools/System/Print.xml",
+      "reason": "previously audited navigation alias"
+    },
+    {
+      "key": "tools/System/Print/PrintJob.xml",
+      "reason": "previously audited navigation alias"
+    },
+    {
+      "key": "tools/System/Print/PrintJob/PrintJobList.xml",
+      "reason": "previous sample"
+    },
+    {
+      "key": "tools/System/Print/Printer.xml",
+      "reason": "previously audited navigation alias"
+    },
+    {
+      "key": "tools/System/Print/Printer/PrinterList.xml",
+      "reason": "previous sample"
+    },
+    {
+      "key": "tools/System/Resource.xml",
+      "reason": "previous sample"
+    },
+    {
+      "key": "tools/System/Security.xml",
+      "reason": "previously audited navigation alias"
+    },
+    {
+      "key": "tools/System/Security/ArtifactGroup.xml",
+      "reason": "previously audited navigation alias"
+    },
+    {
+      "key": "tools/System/Security/ArtifactGroup/ArtifactGroupDetail.xml",
+      "reason": "previous sample"
+    },
+    {
+      "key": "tools/System/Security/UserAccount.xml",
+      "reason": "previously audited navigation alias"
+    },
+    {
+      "key": "tools/System/Security/UserAccount/UserAccountDetail.xml",
+      "reason": "previous sample"
+    },
+    {
+      "key": "tools/System/Security/UserAccount/UserAccountDetail/VerifyEmail.xml",
+      "reason": "standalone fragment/dialog; not counted as a separate full screen"
+    },
+    {
+      "key": "tools/System/Security/UserAccount/UserAccountDetail/VerifySms.xml",
+      "reason": "standalone fragment/dialog; not counted as a separate full screen"
+    },
+    {
+      "key": "tools/System/Security/UserAccount/UserAccountDetail/VerifyTotp.xml",
+      "reason": "standalone fragment/dialog; not counted as a separate full screen"
+    },
+    {
+      "key": "tools/System/Security/UserAccount/UserAccountList.xml",
+      "reason": "previous sample"
+    },
+    {
+      "key": "tools/System/Security/UserGroup.xml",
+      "reason": "previously audited navigation alias"
+    },
+    {
+      "key": "tools/System/Security/UserGroup/UserGroupList.xml",
+      "reason": "previous sample"
+    },
+    {
+      "key": "tools/System/ServiceJob.xml",
+      "reason": "previously audited navigation alias"
+    },
+    {
+      "key": "tools/System/ServiceJob/JobRuns.xml",
+      "reason": "previously audited navigation alias"
+    },
+    {
+      "key": "tools/System/ServiceJob/JobRuns/JobRunList.xml",
+      "reason": "previous sample"
+    },
+    {
+      "key": "tools/System/ServiceJob/Jobs.xml",
+      "reason": "previously audited navigation alias"
+    },
+    {
+      "key": "tools/System/ServiceJob/Jobs/ServiceJobDetail.xml",
+      "reason": "previous sample"
+    },
+    {
+      "key": "tools/System/SystemMessage.xml",
+      "reason": "previously audited navigation alias"
+    },
+    {
+      "key": "tools/System/SystemMessage/Message.xml",
+      "reason": "previously audited navigation alias"
+    },
+    {
+      "key": "tools/System/SystemMessage/Message/SystemMessageDetail/EditMessageText.xml",
+      "reason": "standalone fragment/dialog; not counted as a separate full screen"
+    },
+    {
+      "key": "tools/System/SystemMessage/Message/SystemMessageList.xml",
+      "reason": "previous sample"
+    },
+    {
+      "key": "tools/System/SystemMessage/Remote.xml",
+      "reason": "previously audited navigation alias"
+    },
+    {
+      "key": "tools/System/SystemMessage/Type.xml",
+      "reason": "previously audited navigation alias"
+    },
+    {
+      "key": "tools/System/Visit.xml",
+      "reason": "previously audited navigation alias"
+    },
+    {
+      "key": "tools/System/Visit/VisitList.xml",
+      "reason": "previous sample"
+    },
+    {
+      "key": "tools/System/dashboard.xml",
+      "reason": "previous sample"
+    },
+    {
+      "key": "tools/Tools.xml",
+      "reason": "previously audited navigation alias"
+    },
+    {
+      "key": "tools/Tools/ArtifactStats.xml",
+      "reason": "previous sample"
+    },
+    {
+      "key": "tools/Tools/Service.xml",
+      "reason": "previously audited navigation alias"
+    },
+    {
+      "key": "tools/Tools/Service/ServiceDetail.xml",
+      "reason": "previous sample"
+    },
+    {
+      "key": "tools/Tools/Service/ServiceRun.xml",
+      "reason": "previous sample"
+    },
+    {
+      "key": "tools/Tools/dashboard.xml",
+      "reason": "previous sample"
+    },
+    {
+      "key": "tools/toolstatic.xml",
+      "reason": "no derived application route"
+    },
+    {
+      "key": "webroot/webroot.xml",
+      "reason": "infrastructure, error page or shell outside application-screen population"
+    },
+    {
+      "key": "webroot/webroot/apps/AppList.xml",
+      "reason": "previous sample"
+    },
+    {
+      "key": "webroot/webroot/apps/ScreenTree.xml",
+      "reason": "previous sample"
+    },
+    {
+      "key": "webroot/webroot/apps/ScreenTree/ScreenTreeNested.xml",
+      "reason": "previously audited navigation alias"
+    },
+    {
+      "key": "webroot/webroot/echopath.xml",
+      "reason": "infrastructure, error page or shell outside application-screen population"
+    },
+    {
+      "key": "webroot/webroot/error.xml",
+      "reason": "infrastructure, error page or shell outside application-screen population"
+    },
+    {
+      "key": "webroot/webroot/error/Forbidden.xml",
+      "reason": "infrastructure, error page or shell outside application-screen population"
+    },
+    {
+      "key": "webroot/webroot/error/InternalError.xml",
+      "reason": "infrastructure, error page or shell outside application-screen population"
+    },
+    {
+      "key": "webroot/webroot/error/NotFound.xml",
+      "reason": "infrastructure, error page or shell outside application-screen population"
+    },
+    {
+      "key": "webroot/webroot/error/TooMany.xml",
+      "reason": "infrastructure, error page or shell outside application-screen population"
+    },
+    {
+      "key": "webroot/webroot/error/Unauthorized.xml",
+      "reason": "infrastructure, error page or shell outside application-screen population"
+    },
+    {
+      "key": "webroot/webroot/qapps.xml",
+      "reason": "previously audited navigation alias"
+    },
+    {
+      "key": "webroot/webroot/rest.xml",
+      "reason": "infrastructure, error page or shell outside application-screen population"
+    }
+  ],
+  "frozen": true,
+  "previous_sample": "acceptance/ui/sample25.json",
+  "previous_sample_sha256": "a6a13d6dd92b1ab7101942bcd21abb49340e4d7412c430619d50b5f5f8c497e8",
+  "previous_sample_overlap": [],
+  "verification": "Selection only. Route derivation and source metadata checked; reachability, required fixtures, actions and parity remain unverified.",
+  "runner_compatibility": {
+    "requires_route_support": [
+      "webroot/webroot/SecondFactor.xml",
+      "webroot/webroot/ChangePassword.xml"
+    ],
+    "note": "Current operation runner accepts only /apps/ and /qapps/ routes. Selected authentication routes require explicit runner support and authentication fixtures before execution."
+  }
+}
