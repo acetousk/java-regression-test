@@ -118,7 +118,12 @@ function initialTargetMatches(requested,landed){
 }
 function finalizeDownloadEvidence(evidence,failedRequests,bodyFailures,op){
  // Chromium reports a download navigation as aborted; positive downloaded bytes are the body evidence.
- for(const failure of bodyFailures){const download=evidence.downloads.find(d=>d.key===failure.item.key);if(download){failure.item.body=download.body;if(failure.qvt)failure.qvt.body=download.body;}else evidence.errors.push('response body: '+failure.error);}
+ for(const failure of bodyFailures){const download=evidence.downloads.find(d=>d.key===failure.item.key);if(download){failure.item.body=download.body;if(failure.qvt)failure.qvt.body=download.body;}
+  // Phase 3, Change 29: Chromium withholds redirect bodies; retain the gap after proven completion.
+  else if([301,302,303,307,308].includes(failure.item.status)&&failure.error==='response.body: Response body is unavailable for redirect responses'&&
+   (evidence.http||[]).some(item=>item.status>=200&&item.status<300&&Buffer.isBuffer(item.body)&&Array.isArray(item.redirectChain)&&item.redirectChain.every(prior=>prior.sameOrigin===true)&&item.redirectChain.some(prior=>prior.key===failure.item.key&&prior.method===failure.item.method))) {
+   failure.item.responseBodyUnavailable='browser-redirect';failure.item.responseBodyError=failure.error;
+  }else evidence.errors.push('response body: '+failure.error);}
  for(const failure of failedRequests)if(!(failure.error==='net::ERR_ABORTED'&&evidence.downloads.some(d=>d.key===failure.key)))evidence.errors.push('request failed: '+failure.error);
  if(op.expectedDownloadUtf8!==undefined&&!evidence.downloads.some(d=>d.body.equals(Buffer.from(op.expectedDownloadUtf8))))evidence.errors.push('download content does not match expected fixture bytes');
 }

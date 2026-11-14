@@ -120,3 +120,17 @@ test('repeatability refuses destructive actions in either actual sequence',()=>{
   op.engineSteps[side].push({action:'download',selector:'#export'});assert.ok(actualSteps(op).some(s=>s.action==='download'));
  }
 });
+test('only completed same-origin redirects separate a browser body gap from action failures',()=>{
+ const {finalizeDownloadEvidence}=require('./operations.cjs');
+ const error='response.body: Response body is unavailable for redirect responses';
+ const run=(status,chain,body=Buffer.from('done'),message=error)=>{
+  const item={key:'/save',method:'POST',status,body:null};
+  const evidence={errors:[],downloads:[],http:[item,{key:'/done',method:'GET',status:200,body,redirectChain:chain}]};
+  finalizeDownloadEvidence(evidence,[],[{item,error:message}],{});return {evidence,item};
+ };
+ const prior={key:'/save',method:'POST',sameOrigin:true};
+ const ok=run(303,[prior]);assert.deepEqual(ok.evidence.errors,[]);assert.equal(ok.item.body,null);
+ assert.equal(ok.item.responseBodyUnavailable,'browser-redirect');assert.equal(ok.item.responseBodyError,error);
+ for(const result of [run(200,[prior]),run(303,[]),run(303,[{...prior,sameOrigin:false}]),run(303,[{key:'/external',method:'GET',sameOrigin:false},prior]),run(303,[{key:'/unproven',method:'GET'},prior]),run(303,[{...prior,key:'/other'}]),run(303,[{...prior,method:'GET'}]),run(303,[prior],null),run(303,[prior],Buffer.from('done'),'connection reset')])
+  assert.equal(result.evidence.errors.length,1);
+});

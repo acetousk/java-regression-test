@@ -330,3 +330,11 @@ Original failures remain recorded. Engine lifecycle cleanup still runs afterward
 When a qapps operation declares an engine's HTML screen route, action targets
 under that screen's `/apps/` path use the explicit HTML mapping. Queries and
 methods remain exact. Unrelated paths and raw captured requests stay unchanged.
+
+29. Retained browser redirect-body gaps.
+
+Chromium may withhold a redirect response body. When the exact same-origin
+redirect chain reaches a captured successful terminal response, retain the
+unavailable body and browser error on the redirect metadata separately from
+functional action errors. Missing terminal bodies and other body failures still
+fail capture. This does not supply missing bytes or approve raw equality.
